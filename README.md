@@ -105,11 +105,11 @@ Requirements:
 Install:
 
 1- $ tar -jxvf kde-services-1.8.tar.bz2
-2- $ cd kde-services-1.7
+2- $ cd kde-services-1.8
 3- $ sudo make install
 
 Uninstall:
 
 1- $ tar -jxvf kde-services-1.8.tar.bz2
-2- $ cd kde-services-1.7
+2- $ cd kde-services-1.8
 3- $ sudo make uninstall
