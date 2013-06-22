@@ -1,44 +1,112 @@
 KDE-Services
 
-  This program extends the features of the right mouse click on the Dolphin File Manager for KDE-4 graphical environment.
-  Specially designed for OS based on Red Hat.
+Description:
 
+Enables the following functionalities on the Dolphin's right click menu of KDE-4.x:
 
+- Convert several video formats to MPEG-1, MPEG-4, AVI, VCD, SVCD,
+  DVD, 3GP, FLV.
+- Extract the audio track of several video formats and convert them to MP3.
+- Convert several audio files to MP3.
+- Send file to Thunderbird as email attachment. (This service need Thunderbird installed)
+- Burn ISO image; in place ISO image mounting and unmounting, as well as the
+  possibility of getting the MD5sum, SHA1sum, SHA256sum, SHA512sum of the ISO image.
+- Execution of scripts.
+- PDF tools.
+- AVI tools.
+- Low level information of video files.
+- Build an ISO image from a selected folder.
+- Text replacing.
+- Searching tools.
+- SSH tools.
+- CheckSum tools.
+- Dolphin tools.
+- Midnight tools (Midnight Commander).
+- Play videos from selected folder.
+- System Tools => Build Custom Kernel ( Now you can customize your own kernel easily, for create a system
+  with more performance, more fast and more hardware support ), Check Kernel Update and more.
+- Network Tools => Connect Sentry ( Now can see on your notification widget, every established connection ).
+- [Backup|Restore] Tools.
+- SaMBa Tools.
+- Extract subtitle from MKV video files.
+- YouTube Tools.
+- Multiplex subtitle into MPEG-2 video file.
+- DVD Tools.
+- Multimedia Tools.
+- GPG Tools.
+- Secure send file or directory to Mailx as email attachment. (Need SMTP service running in LocalHost)
+- Add Timestamp Prefix To [File|Dir]name(s).
+- Paranoid Shredder.
+- HTTP Publisher.
+- Image Resizer.
+- The Sizer.
 
-Features:
+Requirements:
 
-  Convert several video formats to MPEG-1, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV.
-  Extract the audio track of several video formats and convert them to MP3 and FLAC.
-  Convert several audio files to MP3 and FLAC.
-  Sending files to Thunderbird as email attachments. (This service need Thunderbird installed)
-  Burn ISO image; in place ISO image mounting and unmounting, as well as the possibility of getting the MD5sum, SHA1sum, SHA256sum, SHA512sum of the ISO image.
-  Execution of shell scripts and binary applications.
-  PDF tools.
-  AVI tools.
-  Low level information of video files.
-  Build an ISO image from a selected folder.
-  Text replacing.
-  Searching tools.
-  SSH tools.
-  CheckSum tools.
-  Dolphin tools.
-  Midnight tools (Midnight Commander).
-  Play videos from selected folder.
-  System tools.
-  Network tools.
-  [Backup|Restore] tools.
-  SaMBa Tools.
-  Extract subtitle from MKV video files.
-  YouTube Tools.
-  Multiplex subtitle into MPEG-2 video file.
-  DVD Tools.
-  Multimedia Tools.
-  GPG Tools.
-  Secure send file or directory to Mailx as email attachment. (Need SMTP service running in LocalHost)
-  Add Timestamp Prefix To [File|Dir]name(s).
-  Paranoid Shredder.
-  HTTP Publisher.
-  Image Resizer.
-  The Sizer.
-  Package Tools.
-  The Converter.
+- bash
+- bc
+- bzip2
+- cifs-utils
+- coreutils
+- diffutils
+- dmidecode
+- dvdauthor
+- festival
+- ffmpeg
+- file
+- fuse
+- fuseiso
+- fuse-sshfs
+- gawk
+- genisoimage
+- ghostscript
+- gnupg
+- htop
+- ImageMagick
+- iproute
+- isomd5sum
+- kde-baseapps
+- kde-runtime
+- kernel-tools
+- konsole
+- liberation-sans-fonts
+- lynx
+- mailx
+- mc
+- mkvtoolnix
+- mlocate
+- net-tools
+- pdftk
+- perl
+- perl-Image-ExifTool
+- poppler
+- poppler-utils
+- procps
+- psmisc
+- pv
+- recode
+- samba-client
+- sed
+- shared-mime-info
+- sox
+- tar
+- transcode
+- vlc
+- wodim
+- xdg-utils
+- xorg-x11-server-utils
+- xterm
+- youtube-dl
+- zip
+
+Install:
+
+1- $ tar -jxvf kde-services-1.7.tar.bz2
+2- $ cd kde-services-1.7
+3- $ sudo make install
+
+Uninstall:
+
+1- $ tar -jxvf kde-services-1.7.tar.bz2
+2- $ cd kde-services-1.7
+3- $ sudo make uninstall
