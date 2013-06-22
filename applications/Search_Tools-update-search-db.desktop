@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=Search-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/Search_Tools-update-search-db.sh
+GenericName[en_US]=
+GenericName=
+Icon=svn-update
+MimeType=
+Name[en_US]=Update Search DB
+Name=Update Search DB
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

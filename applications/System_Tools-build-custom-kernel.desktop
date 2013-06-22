@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=System-Tools;
+Comment[en_US]=
+Comment=
+Exec=xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh
+GenericName[en_US]=
+GenericName=
+Icon=code-block
+MimeType=
+Name[en_US]=Build Custom Kernel
+Name=Build Custom Kernel
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

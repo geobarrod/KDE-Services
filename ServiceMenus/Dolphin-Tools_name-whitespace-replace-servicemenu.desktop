@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+Actions=Name-Whitespace-Replace;
+Icon=system-file-manager
+X-KDE-StartupNotify=false
+
+[Desktop Action Name-Whitespace-Replace]
+Name=[File|Dir]name Whitespace Replace
+Name[en_US]=[File|Dir]name Whitespace Replace
+Name[es]=Reemplazar Espacio En Nombre De [Fichero|Directorio]
+Name[x-test]=xx[File|Dir]name Whitespace Replacexx
+Icon=edit-rename
+Exec=/usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh

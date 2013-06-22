@@ -1,0 +1,19 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+Icon=application-x-smb-server
+Actions=SaMBa-Tools;
+X-KDE-Submenu=SaMBa Tools
+X-KDE-Submenu[en_US]=SaMBa Tools
+X-KDE-Submenu[es]=SaMBa - Herramientas
+X-KDE-Submenu[x-test]=xxSaMBa Toolsxx
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+
+[Desktop Action SaMBa-Tools]
+Name=Samba Shares Mounter
+Name[en_US]=Samba Shares Mounter
+Name[es]=Montador de Compartidos Samba
+Name[x-test]=xxSamba Shares Mounterxx
+Icon=application-x-smb-server
+Exec=/usr/share/applications/SaMBa_Tools-mount-umount-share.sh

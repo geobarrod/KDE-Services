@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=Dolphin-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/Dolphin_Tools-connect.sh
+GenericName[en_US]=
+GenericName=
+Icon=connect-creating
+MimeType=
+Name[en_US]=Connect To
+Name=Connect To
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

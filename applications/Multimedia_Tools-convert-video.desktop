@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Multimedia-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/ffmpeg_multifile-convert-video.sh
+GenericName[en_US]=
+GenericName=
+Icon=video-x-generic
+MimeType=
+Name[en_US]=Convert Video Files
+Name=Convert Video Files
+Path=/usr/share/applications
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

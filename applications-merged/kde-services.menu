@@ -1,0 +1,90 @@
+<!DOCTYPE Menu
+  PUBLIC '-//freedesktop//DTD Menu 1.0//EN'
+  'http://standards.freedesktop.org/menu-spec/menu-1.0.dtd'>
+<Menu>
+	<Name>Applications</Name>
+	<Menu>
+		<Name>KDE-Services</Name>
+		<Directory>KDE-Services.directory</Directory>
+		<Include>
+			<Category>KDE-Services</Category>
+		</Include>
+			<Menu>
+				<Name>Dolphin Tools</Name>
+				<Directory>KDE-Services_Dolphin-Tools.directory</Directory>
+				<Include>
+					<Category>Dolphin-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>Network Tools</Name>
+				<Directory>KDE-Services_Network-Tools.directory</Directory>
+				<Include>
+					<Category>Network-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>SaMBa Tools</Name>
+				<Directory>KDE-Services_SaMBa-Tools.directory</Directory>
+				<Include>
+					<Category>SaMBa-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>SSH Tools</Name>
+				<Directory>KDE-Services_SSH-Tools.directory</Directory>
+				<Include>
+					<Category>SSH-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>YouTube Tools</Name>
+				<Directory>KDE-Services_YouTube-Tools.directory</Directory>
+				<Include>
+					<Category>YouTube-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>Search Tools</Name>
+				<Directory>KDE-Services_Search-Tools.directory</Directory>
+				<Include>
+					<Category>Search-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>System Tools</Name>
+				<Directory>KDE-Services_System-Tools.directory</Directory>
+				<Include>
+					<Category>System-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>Backup Tools</Name>
+				<Directory>KDE-Services_Backup-Tools.directory</Directory>
+				<Include>
+					<Category>Backup-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>Midnight Tools</Name>
+				<Directory>KDE-Services_Midnight-Tools.directory</Directory>
+				<Include>
+					<Category>Midnight-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>Multimedia Tools</Name>
+				<Directory>KDE-Services_Multimedia-Tools.directory</Directory>
+				<Include>
+					<Category>Multimedia-Tools</Category>
+				</Include>
+			</Menu>
+			<Menu>
+				<Name>Graphic Tools</Name>
+				<Directory>KDE-Services_Graphic-Tools.directory</Directory>
+				<Include>
+					<Category>Graphic-Tools</Category>
+				</Include>
+			</Menu>
+	</Menu>
+</Menu>

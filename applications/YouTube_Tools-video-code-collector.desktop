@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=YouTube-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh
+GenericName[en_US]=
+GenericName=
+Icon=youtube-video-download
+MimeType=
+Name[en_US]=Video List Code Collector
+Name=Video List Code Collector
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

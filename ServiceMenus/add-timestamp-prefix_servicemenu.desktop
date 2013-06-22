@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=all/allfiles;inode/directory;
+Icon=timeadjust
+Actions=add-timestamp;
+
+[Desktop Action add-timestamp]
+Name=Add Timestamp Prefix To [File|Dir]name
+Name[en_US]=Add Timestamp Prefix To [File|Dir]name
+Name[es]=Agregar Prefijo Fecha-Hora al Nombre del [Fichero|Directorio]
+Name[x-test]=xxAdd Timestamp Prefix To [File|Dir]namexx
+Icon=timeadjust
+Exec=cd $(dirname %u); /usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh %u; basename %u >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(basename "$i");done; rm -f .add-timestamp-prefix

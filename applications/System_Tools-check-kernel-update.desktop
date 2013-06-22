@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=System-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/System_Tools-check-kernel-update.sh
+GenericName[en_US]=
+GenericName=
+Icon=code-class
+MimeType=
+Name[en_US]=Check Kernel Update
+Name=Check Kernel Update
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

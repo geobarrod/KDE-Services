@@ -1,0 +1,60 @@
+[Desktop Entry]
+Actions=ShowPkgChangelog;ShowPkgInfo;_SEPARATOR_;ListPkgContent;ListPkgDeps;_SEPARATOR_;ExtractPkgFiles;_SEPARATOR_;IntegrityCheckPkg;
+Icon=package-x-generic
+MimeType=application/x-rpm;application/x-source-rpm;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+X-KDE-Submenu[en_US]=Package Tools
+X-KDE-Submenu=Package Tools
+X-KDE-Submenu[es]=Paquetes - Herramientas
+X-KDE-Submenu[x-test]=xxPackage Toolsxx
+
+[Desktop Action ShowPkgChangelog]
+Exec=rpm -qp --changelog %u > /tmp/pkgchangelog; kdialog --icon=package-x-generic --caption="Package Tools - Changelog" --textbox /tmp/pkgchangelog 800 300; rm -f /tmp/pkgchangelog
+Icon=package-x-generic
+Name[en_US]=Show Changelog
+Name=Show Changelog
+Name[es]=Mostrar Registro de Cambios
+Name[x-test]=xxShow Changelogxx
+
+[Desktop Action ShowPkgInfo]
+Exec=rpm -qip %u > /tmp/pkginfo; kdialog --icon=package-x-generic --caption="Package Tools - Info" --textbox /tmp/pkginfo 800 300; rm -f /tmp/pkginfo
+Icon=package-x-generic
+Name[en_US]=Show Info
+Name=Show Info
+Name[es]=Mostrar Información
+Name[x-test]=xxShow Infoxx
+
+[Desktop Action ListPkgContent]
+Exec=rpm -qlp %u > /tmp/pkgcontent; kdialog --icon=package-x-generic --caption="Package Tools - Content" --textbox /tmp/pkgcontent 800 300; rm -f /tmp/pkgcontent
+Icon=package-x-generic
+Name[en_US]=List Content
+Name=List Content
+Name[es]=Listar Contenido
+Name[x-test]=xxList Contentxx
+
+[Desktop Action ListPkgDeps]
+Exec=rpm -qRp %u > /tmp/pkgdeps; kdialog --icon=package-x-generic --caption="Package Tools - Dependencies" --textbox /tmp/pkgdeps 800 300; rm -f /tmp/pkgdeps
+Icon=package-x-generic
+Name[en_US]=List Dependencies
+Name=List Dependencies
+Name[es]=Listar Dependencias
+Name[x-test]=xxList Dependenciesxx
+
+[Desktop Action ExtractPkgFiles]
+Exec=cd $(dirname %u); mkdir $(basename -s .rpm %u); cd $(basename -s .rpm %u); DBUSREF=$(kdialog --icon=package-x-generic --caption="Extract Files Here" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting:  $(basename %u)"; rpm2cpio %u | cpio -id; qdbus $DBUSREF close; kdialog --icon=package-x-generic --title="Extract Files Here" --passivepopup="[Finished]    $(basename %u)"
+Icon=package-x-generic
+Name[en_US]=Extract Files Here
+Name=Extract Files Here
+Name[es]=Extraer Ficheros Aquí
+Name[x-test]=xxExtract Files Herexx
+
+[Desktop Action IntegrityCheckPkg]
+Exec=DBUSREF=$(kdialog --icon=package-x-generic --caption="Integrity Check" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Checking:  $(basename %u)"; rpm2cpio %u > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps %u 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then qdbus $DBUSREF close; kdialog --icon=package-x-generic --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename %u)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then qdbus $DBUSREF close; kdialog --icon=application-exit --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename %u)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg
+Icon=package-x-generic
+Name[en_US]=Integrity Check
+Name=Integrity Check
+Name[es]=Comprobar Integridad
+Name[x-test]=xxIntegrity Checkxx

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=YouTube-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/YouTube_Tools-download-video.sh
+GenericName[en_US]=
+GenericName=
+Icon=youtube-video-download
+MimeType=
+Name[en_US]=Video Downloader
+Name=Video Downloader
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

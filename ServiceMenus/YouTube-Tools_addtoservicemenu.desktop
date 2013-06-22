@@ -1,0 +1,27 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+Icon=youtube-video-download
+Actions=Video-Downloader;Code-Collector;
+X-KDE-Submenu=YouTube Tools
+X-KDE-Submenu[en_US]=YouTube Tools
+X-KDE-Submenu[es]=YouTube - Herramientas
+X-KDE-Submenu[x-test]=xxYouTube Toolsxx
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+
+[Desktop Action Video-Downloader]
+Name=Video Downloader
+Name[en_US]=Video Downloader
+Name[es]=Descargador de Video
+Name[x-test]=xxVideo Downloaderxx
+Icon=youtube-video-download
+Exec=/usr/share/applications/YouTube_Tools-download-video.sh
+
+[Desktop Action Code-Collector]
+Name=Video List Code Collector
+Name[en_US]=Video List Code Collector
+Name[es]=Colector de Códigos de Lista de Videos
+Name[x-test]=xxVideo List Code Collectorxx
+Icon=youtube-video-download
+Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh

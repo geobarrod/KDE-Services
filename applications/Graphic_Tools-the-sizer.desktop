@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Graphic-Tools
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/The_Sizer.sh
+GenericName[en_US]=
+GenericName=
+Icon=resizeimages
+MimeType=
+Name[en_US]=The Sizer
+Name=The Sizer
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

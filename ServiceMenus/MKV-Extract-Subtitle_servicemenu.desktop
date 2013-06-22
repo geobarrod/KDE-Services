@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=video/x-matroska;
+Actions=MKV-Extract-Subtitle;
+Icon=video-x-generic
+X-KDE-StartupNotify=false
+
+[Desktop Action MKV-Extract-Subtitle]
+Name=MKV Extract Subtitle
+Name[en_US]=MKV Extract Subtitle
+Name[es]=MKV Extraer Subtítulo
+Name[x-test]=xxMKV Extract Subtitlexx
+Icon=video-x-generic
+Exec=/usr/share/applications/MKV_Extract-subtitle.sh

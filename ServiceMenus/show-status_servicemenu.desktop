@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=all/allfiles;inode/directory;
+Icon=info
+Actions=show-status;
+
+[Desktop Action show-status]
+Name=Show [File|Directory] Status
+Name[en_US]=Show [File|Directory] Status
+Name[es]=Mostrar Estado del [Fichero|Directorio]
+Name[x-test]=xxShow [File|Directory] Statusxx
+Icon=info
+Exec=/usr/share/applications/Show_file-dir_status.sh

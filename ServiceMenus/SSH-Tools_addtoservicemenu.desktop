@@ -1,0 +1,60 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+MimeType=all/allfiles;
+Icon=sshfs
+Actions=SSH-keygen;SSH-copy-id;SSH;SCP;SSHfs;ViewMachine;
+X-KDE-Submenu=SSH Tools
+X-KDE-Submenu[en_US]=SSH Tools
+X-KDE-Submenu[es]=SSH - Herramientas
+X-KDE-Submenu[x-test]=xxSSH Toolsxx
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+
+[Desktop Action SSH-keygen]
+Name=Public Key Generation
+Name[en_US]=Public Key Generation
+Name[es]=Generar Llave Publica
+Name[x-test]=xxPublic Key Generationxx
+Icon=keyring
+Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh
+
+[Desktop Action SSH-copy-id]
+Name=Install Public Key
+Name[en_US]=Install Public Key
+Name[es]=Instalar Llave Publica
+Name[x-test]=xxInstall Public Keyxx
+Icon=keyring
+Exec=/usr/share/applications/SSH_Tools-copy-id.sh
+
+[Desktop Action SSH]
+Name=Connect To Remote Machine
+Name[en_US]=Connect To Remote Machine
+Name[es]=Conectar a Máquina Remota
+Name[x-test]=xxConnect To Remote Machinexx
+Icon=online
+Exec=/usr/share/applications/SSH_Tools-connect.sh
+
+[Desktop Action SCP]
+Name=Send To Remote Machine
+Name[en_US]=Send To Remote Machine
+Name[es]=Enviar a Máquina Remota
+Name[x-test]=xxSend To Remote Machinexx
+Icon=utilities-terminal
+Exec=xterm -T "Send To Remote Machine" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %u
+
+[Desktop Action SSHfs]
+Name=Mountpoint To Remote Directory
+Name[en_US]=Mountpoint To Remote Directory
+Name[es]=Montar Directorio Remoto
+Name[x-test]=xxMountpoint To Remote Directoryxx
+Icon=sshfs
+Exec=/usr/share/applications/SSH_Tools-sshfs.sh
+
+[Desktop Action ViewMachine]
+Name=Registered Machine
+Name[en_US]=Registered Machine
+Name[es]=Máquina Registrada
+Name[x-test]=xxRegistered Machinexx
+Icon=server
+Exec=/usr/share/applications/SSH_Tools-register-machine.sh

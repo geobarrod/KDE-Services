@@ -1,0 +1,51 @@
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+Icon=applications-system
+Actions=BuildKernel;CheckKernelUpdate;RebuildPackage;SysInfo;Htop;
+X-KDE-Submenu=System Tools
+X-KDE-Submenu[en_US]=System Tools
+X-KDE-Submenu[es]=Sistema - Herramientas
+X-KDE-Submenu[x-test]=xxSystem Toolsxx
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+
+[Desktop Action BuildKernel]
+Name=Build Custom Kernel
+Name[en_US]=Build Custom Kernel
+Name[es]=Construir Kernel Personalizado
+Name[x-test]=xxBuild Custom Kernelxx
+Icon=code-block
+Exec=xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh
+
+[Desktop Action CheckKernelUpdate]
+Name=Check Kernel Update
+Name[en_US]=Check Kernel Update
+Name[es]=Chequear Actualización del Kernel
+Name[x-test]=xxCheck Kernel Updatexx
+Icon=code-class
+Exec=/usr/share/applications/System_Tools-check-kernel-update.sh
+
+[Desktop Action RebuildPackage]
+Name=Rebuild RPM Package
+Name[en_US]=Rebuild RPM Package
+Name[es]=Reconstruir Paquete RPM
+Name[x-test]=xxRebuild RPM Packagexx
+Icon=code-context
+Exec=xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh
+
+[Desktop Action SysInfo]
+Name=System Information
+Name[en_US]=System Information
+Name[es]=Información del Sistema
+Name[x-test]=xxSystem Informationxx
+Icon=hwinfo
+Exec=/usr/share/applications/System_Tools-sys-info.sh
+
+[Desktop Action Htop]
+Name=Process Viewer
+Name[en_US]=Process Viewer
+Name[es]=Visor De Procesos
+Name[x-test]=xxProcess Viewerxx
+Icon=view-process-all
+Exec=/usr/share/applications/System_Tools-process-viewer.sh

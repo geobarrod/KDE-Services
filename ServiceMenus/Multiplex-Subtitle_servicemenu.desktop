@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=video/mpeg;
+Icon=list-add-font
+Actions=Multiplex-Subtitle;
+X-KDE-StartupNotify=false
+
+[Desktop Action Multiplex-Subtitle]
+Name=Multiplex Subtitle
+Name[en_US]=Multiplex Subtitle
+Name[es]=Multiplexar Subtítulo
+Name[x-test]=xxMultiplex Subtitlexx
+Icon=list-add-font
+Exec=/usr/share/applications/Multiplex_Subtitle.sh

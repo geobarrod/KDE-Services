@@ -1,0 +1,21 @@
+[Desktop Entry]
+Categories=SSH-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh
+GenericName[en_US]=
+GenericName=
+Icon=keyring
+MimeType=
+Name[en_US]=Public Key Generation
+Name=Public Key Generation
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

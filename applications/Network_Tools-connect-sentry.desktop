@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Network-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/Network_Tools-connect-sentry.sh
+GenericName[en_US]=
+GenericName=
+Icon=connect-sentry-on
+MimeType=
+Name[en_US]=Connect Sentry
+Name=Connect Sentry
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

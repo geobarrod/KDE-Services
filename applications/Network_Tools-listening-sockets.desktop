@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Network-Tools;
+Comment[en_US]=
+Comment=
+Exec=kdesu -d /usr/share/applications/Network_Tools-listening-sockets.sh
+GenericName[en_US]=
+GenericName=
+Icon=socket
+MimeType=
+Name[en_US]=Listening Sockets
+Name=Listening Sockets
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

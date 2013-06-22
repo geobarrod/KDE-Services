@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Multimedia-Tools;
+Comment[en_US]=
+Comment=
+Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh
+GenericName[en_US]=
+GenericName=
+Icon=media-tape
+MimeType=
+Name[en_US]=Record My Desktop
+Name=Record My Desktop
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

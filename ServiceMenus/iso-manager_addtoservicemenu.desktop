@@ -1,0 +1,84 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=application/x-cd-image;
+Icon=media-optical-burn
+Actions=MountCD-Image;UmountCD-Image;_SEPARATOR_;Integrity-Check;Insert-MD5sum;_SEPARATOR_;MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;Burn-Image;
+X-KDE-Submenu=ISO Image Tools
+X-KDE-Submenu[en_US]=ISO Image Tools
+X-KDE-Submenu[es]=Imagen ISO - Herramientas
+X-KDE-Submenu[x-test]=xxISO Image Toolsxx
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+
+[Desktop Action MountCD-Image]
+Name=Mount ISO Image
+Name[en_US]=Mount ISO Image
+Name[es]=Montar Imagen ISO
+Name[x-test]=xxMount ISO Imagexx
+Icon=media-optical-recordable
+Exec=/usr/share/applications/iso_manager-mount-image.sh
+
+[Desktop Action UmountCD-Image]
+Name=Umount ISO Image
+Name[en_US]=Umount ISO Image
+Name[es]=Desmontar Imagen ISO
+Name[x-test]=xxUmount ISO Imagexx
+Icon=media-optical-blu-ray
+Exec=fuser -k %u; fusermount -u $(ls %u|sed 's/.iso$//'); rm -fr $(ls %u|sed 's/.iso$//'); kdialog --icon=media-optical-blu-ray --title="Umount ISO Image" --passivepopup="[Finished]"
+
+[Desktop Action Integrity-Check]
+Name=Integrity Check
+Name[en_US]=Integrity Check
+Name[es]=Comprobar Integridad
+Name[x-test]=xxIntegrity Checkxx
+Icon=media-optical
+Exec=DBUSREF=$(kdialog --icon=media-optical --caption="Integrity Check" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Checking:  $(basename %u)"; checkisomd5 %u > /dev/null 2> /tmp/check-integrity; qdbus $DBUSREF close; kdialog --icon=media-optical --title="Integrity Check" --passivepopup="$(basename %u)   [Finished]   $(cat /tmp/check-integrity)"; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity
+
+[Desktop Action Insert-MD5sum]
+Name=Insert MD5sum
+Name[en_US]=Insert MD5sum
+Name[es]=Insertar MD5sum
+Name[x-test]=xxInsert MD5sumxx
+Icon=media-optical-data
+Exec=DBUSREF=$(kdialog --icon=media-optical-data --caption="Insert MD5sum" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Inserting:  $(basename %u)"; implantisomd5 %u > /tmp/insert-integrity 2>&1; qdbus $DBUSREF close; kdialog --icon=media-optical-data --title="Insert MD5sum" --passivepopup="$(basename %u)   [Finished]   $(cat /tmp/insert-integrity)"; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity
+
+[Desktop Action MD5-Sum]
+Name=MD5sum ISO Image
+Name[en_US]=MD5sum ISO Image
+Name[es]=MD5sum Imagen ISO
+Name[x-test]=xxMD5sum ISO Imagexx
+Icon=emblem-new
+Exec=DBUSREF=$(kdialog --icon=emblem-new --caption="MD5sum ISO Image" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=emblem-new --title="MD5sum $(basename %u)" --passivepopup=$(md5sum %u); qdbus $DBUSREF close; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+
+[Desktop Action SHA1-Sum]
+Name=SHA1sum ISO Image
+Name[en_US]=SHA1sum ISO Image
+Name[es]=SHA1sum Imagen ISO
+Name[x-test]=xxSHA1sum ISO Imagexx
+Icon=emblem-new
+Exec=DBUSREF=$(kdialog --icon=emblem-new --caption="SHA1sum ISO Image" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=emblem-new --title="SHA1sum $(basename %u)" --passivepopup=$(sha1sum %u); qdbus $DBUSREF close; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+
+[Desktop Action SHA256-Sum]
+Name=SHA256sum ISO Image
+Name[en_US]=SHA256sum ISO Image
+Name[es]=SHA256sum Imagen ISO
+Name[x-test]=xxSHA256sum ISO Imagexx
+Icon=emblem-new
+Exec=DBUSREF=$(kdialog --icon=emblem-new --caption="SHA256sum ISO Image" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=emblem-new --title="SHA256sum $(basename %u)" --passivepopup=$(sha256sum %u); qdbus $DBUSREF close; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+
+[Desktop Action SHA512-Sum]
+Name=SHA512sum ISO Image
+Name[en_US]=SHA512sum ISO Image
+Name[es]=SHA512sum Imagen ISO
+Name[x-test]=xxSHA512sum ISO Imagexx
+Icon=emblem-new
+Exec=DBUSREF=$(kdialog --icon=emblem-new --caption="SHA512sum ISO Image" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=emblem-new --title="SHA512sum $(basename %u)" --passivepopup=$(sha512sum %u); qdbus $DBUSREF close; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+
+[Desktop Action Burn-Image]
+Name=Burn ISO Image
+Name[en_US]=Burn ISO Image
+Name[es]=Quemar Imagen ISO
+Name[x-test]=xxBurn ISO Imagexx
+Icon=media-optical-burn
+Exec=/usr/share/applications/iso_manager-burn-image.sh
