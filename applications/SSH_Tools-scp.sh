@@ -36,7 +36,7 @@ if [ -s ~/.kde-services/machines ]; then
     PATHSEND=$(kdialog --icon=utilities-terminal --caption="SSH Tools - Send To $HOST" --inputbox="Enter Path To Send" ~/ 2> /dev/null)
     if-cancel-exit
     scp -2pr "$1" $LOGIN@$HOST:$PATHSEND
-    echo "Finish Send To Remote Machine" > /tmp/speak
+    echo "Finish Send To Remote Server" > /tmp/speak
     text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
     play /tmp/speak.wav 2> /dev/null
     rm -fr /tmp/speak*
@@ -44,6 +44,6 @@ if [ -s ~/.kde-services/machines ]; then
     exit 0
 else
     kdialog --icon=utilities-terminal --caption="SSH Tools - Send To $HOST by $LOGIN" \
-                       --sorry="No Find Machine: First Public Key Generation and Install Public Key in Remote Machine" 2> /dev/null
+                       --sorry="No Find Server: First Public Key Generation and Install Public Key in Remote Server" 2> /dev/null
     exit 1
 fi

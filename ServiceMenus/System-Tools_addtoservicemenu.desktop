@@ -2,7 +2,7 @@
 Type=Service
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 Icon=applications-system
-Actions=BuildKernel;CheckKernelUpdate;RebuildPackage;SysInfo;Htop;
+Actions=BuildKernel;CheckKernelUpdate;RebuildPackage;SysInfo;Htop;XorgConf;
 X-KDE-Submenu=System Tools
 X-KDE-Submenu[en_US]=System Tools
 X-KDE-Submenu[es]=Sistema - Herramientas
@@ -49,3 +49,11 @@ Name[es]=Visor De Procesos
 Name[x-test]=xxProcess Viewerxx
 Icon=view-process-all
 Exec=/usr/share/applications/System_Tools-process-viewer.sh
+
+[Desktop Action XorgConf]
+Name=Xorg Configure
+Name[en_US]=Xorg Configure
+Name[es]=Configurar Xorg
+Name[x-test]=xxXorg Configurexx
+Icon=xorg
+Exec=kdesu --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh

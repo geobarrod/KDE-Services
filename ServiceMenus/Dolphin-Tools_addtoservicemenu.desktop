@@ -2,7 +2,7 @@
 Type=Service
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 Icon=system-file-manager
-Actions=Connect;DiskUse;
+Actions=Connect;ViewMachine;DiskUse;
 X-KDE-Submenu=Dolphin Tools
 X-KDE-Submenu[en_US]=Dolphin Tools
 X-KDE-Submenu[es]=Dolphin - Herramientas
@@ -17,6 +17,14 @@ Name[es]=Conectar a
 Name[x-test]=xxConnect Toxx
 Icon=connect-creating
 Exec=/usr/share/applications/Dolphin_Tools-connect.sh
+
+[Desktop Action ViewMachine]
+Name=Registered Servers
+Name[en_US]=Registered Servers
+Name[es]=Servidores Registrados
+Name[x-test]=xxRegistered Serversxx
+Icon=server
+Exec=/usr/share/applications/SSH_Tools-register-machine.sh
 
 [Desktop Action DiskUse]
 Name=Disk Space Used

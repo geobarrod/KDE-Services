@@ -131,7 +131,7 @@ DESTINATION=$(kdialog --icon=image-x-generic --caption="Destination Image Files"
 if-cancel-exit
 
 FORMAT=$(kdialog --icon=image-x-generic --caption="Image Converter" \
-       --combobox="Select Format" BMP EPS GIF ICO JPEG "JPEG 2000" PBM PGM PNG PPM PSD SGI TGA TIFF XPM --default PNG)
+       --combobox="Select Format" BMP EPS GIF ICO JPEG "JPEG 2000" PBM PDF PGM PNG PPM PSD SGI TGA TIFF XPM --default PNG)
 if-cancel-exit
 
 BEGIN_TIME=$(date +%s)
@@ -184,6 +184,13 @@ elif [ "$FORMAT" = "PBM" ]; then
         COUNT=$(expr $COUNT + 1)
         qdbusinsert
         convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.pbm"
+        if-convert-cancel
+    done
+elif [ "$FORMAT" = "PDF" ]; then
+    for i in $FILES; do
+        COUNT=$(expr $COUNT + 1)
+        qdbusinsert
+        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.pdf"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PGM" ]; then

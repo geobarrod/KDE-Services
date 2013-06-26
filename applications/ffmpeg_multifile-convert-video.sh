@@ -139,8 +139,8 @@ else
     DIR=$(pwd)
 fi
 
-RENAMETMP=$(ls *.mpg *.mpeg *.mpeg4 *.mp4 *.mov *.flv *.3gp *.avi *.dat *.vob *.m2v *.m4v *.mkv *.wmv *.ogv *.MPG *.MPEG *.MPEG4 *.MP4 \
-          *.MOV *.FLV *.3GP *.AVI *.DAT *.VOB *.M2V *.M4V *.MKV *.WMV *.OGV 2> /dev/null|grep " " > /tmp/convert.rename)
+RENAMETMP=$(ls *.mpg *.mpeg *.mpeg4 *.mp4 *.mov *.flv *.3gp *.avi *.dat *.vob *.m2v *.m4v *.mkv *.wmv *.ogv *.dv *.MPG *.MPEG *.MPEG4 *.MP4 \
+          *.MOV *.FLV *.3GP *.AVI *.DAT *.VOB *.M2V *.M4V *.MKV *.WMV *.OGV *.DV 2> /dev/null|grep " " > /tmp/convert.rename)
 
 RENAME=$(cat /tmp/convert.rename)
 
@@ -166,8 +166,8 @@ elif [ "$PRIORITY" = "Lowest" ]; then
 fi
 
 FILES=$(kdialog --icon=video-x-generic --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
-      *.dat *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv \
-      *.VOB *.vob *.WMV *.wmv|All supported files" 2> /dev/null)
+      *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg \
+      *.OGV *.ogv *.VOB *.vob *.WMV *.wmv|All supported files" 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=video-x-generic --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
@@ -438,13 +438,13 @@ if [ "$MODE" = "standards" ]; then
     
     if [ "$STD" = "svcd" ] || [ "$STD" = "svcd-700" ];then
         FORMAT=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" \
-               --combobox="Enter Video Format" film-svcd ntsc-svcd pal-svcd --default film-vcd 2> /dev/null)
+               --combobox="Enter Video Format" film-svcd ntsc-svcd pal-svcd --default film-svcd 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "dvd" ] || [ "$STD" = "dvd-4.7" ] || [ "$STD" = "dvd-8.0" ];then
         FORMAT=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" \
-               --combobox="Enter Video Format" film-dvd ntsc-dvd pal-dvd --default film-vcd 2> /dev/null)
+               --combobox="Enter Video Format" film-dvd ntsc-dvd pal-dvd --default film-dvd 2> /dev/null)
         if-cancel-exit
     fi
     

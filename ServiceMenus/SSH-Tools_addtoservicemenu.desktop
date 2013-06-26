@@ -28,20 +28,20 @@ Icon=keyring
 Exec=/usr/share/applications/SSH_Tools-copy-id.sh
 
 [Desktop Action SSH]
-Name=Connect To Remote Machine
-Name[en_US]=Connect To Remote Machine
-Name[es]=Conectar a Máquina Remota
-Name[x-test]=xxConnect To Remote Machinexx
+Name=Connect To Remote Server
+Name[en_US]=Connect To Remote Server
+Name[es]=Conectar a Servidor Remoto
+Name[x-test]=xxConnect To Remote Serverxx
 Icon=online
 Exec=/usr/share/applications/SSH_Tools-connect.sh
 
 [Desktop Action SCP]
-Name=Send To Remote Machine
-Name[en_US]=Send To Remote Machine
-Name[es]=Enviar a Máquina Remota
-Name[x-test]=xxSend To Remote Machinexx
+Name=Send To Remote Server
+Name[en_US]=Send To Remote Server
+Name[es]=Enviar a Servidor Remoto
+Name[x-test]=xxSend To Remote Serverxx
 Icon=utilities-terminal
-Exec=xterm -T "Send To Remote Machine" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %u
+Exec=xterm -T "Send To Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %u
 
 [Desktop Action SSHfs]
 Name=Mountpoint To Remote Directory
@@ -52,9 +52,9 @@ Icon=sshfs
 Exec=/usr/share/applications/SSH_Tools-sshfs.sh
 
 [Desktop Action ViewMachine]
-Name=Registered Machine
-Name[en_US]=Registered Machine
-Name[es]=Máquina Registrada
-Name[x-test]=xxRegistered Machinexx
+Name=Registered Servers
+Name[en_US]=Registered Servers
+Name[es]=Servidores Registrados
+Name[x-test]=xxRegistered Serversxx
 Icon=server
 Exec=/usr/share/applications/SSH_Tools-register-machine.sh

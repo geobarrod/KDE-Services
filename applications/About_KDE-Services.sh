@@ -16,9 +16,9 @@ cat > /tmp/about_kde-services << EOF
     Description:
         Enables the following functionalities on the Dolphin's right click menu of KDE-4.x:
     
-        - Convert several video formats to MPEG-1, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV.
-        - Extract the audio track of several video formats and convert them to MP3.
-        - Convert several audio files to MP3.
+        - Convert several video formats to MPEG-1, MPEG-4, AVI, VCD, SVCD, DVD, 3GP or FLV.
+        - Extract the audio track of several video formats and convert them to MP3 or FLAC.
+        - Convert several audio files to MP3 or FLAC.
         - Send file to Thunderbird as email attachment. (This service need Thunderbird installed)
         - Burn ISO image; in place ISO image mounting and unmounting, as well as the
             possibility of getting the MD5sum, SHA1sum, SHA256sum, SHA512sum of the ISO image.
@@ -110,6 +110,7 @@ cat > /tmp/about_kde-services << EOF
         - wodim
         - xdg-utils
         - xorg-x11-server-utils
+        - xorg-x11-server-Xorg
         - xterm
         - youtube-dl
         - zip

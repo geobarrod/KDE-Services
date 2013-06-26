@@ -35,6 +35,6 @@ if [ -s ~/.kde-services/machines ]; then
     exit 0
 else
         kdialog --icon=online --caption="SSH Tools - Connect To" \
-                       --sorry="No Find Machine: First Public Key Generation and Install Public Key in Remote Machine" 2> /dev/null
+                       --sorry="No Find Server: First Public Key Generation and Install Public Key in Remote Server" 2> /dev/null
         exit 1
 fi

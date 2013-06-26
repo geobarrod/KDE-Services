@@ -21,8 +21,6 @@ install:
 	mkdir -p $(PREFIXdeskdir)
 	mkdir -p $(PREFIXdoc)
 
-	rm -f $(PREFIXmenu)/image-resizer_servicemenu.desktop
-
 	cp ServiceMenus/* $(PREFIXmenu)
 	cp applications/* $(PREFIXapp)
 	cp 256x256/apps/* $(PREFIX256apps)
@@ -133,6 +131,8 @@ uninstall:
 		$(PREFIXapp)/System_Tools-rebuild-package.sh \
 		$(PREFIXapp)/System_Tools-sys-info.desktop \
 		$(PREFIXapp)/System_Tools-sys-info.sh \
+		$(PREFIXapp)/System_Tools-Xorg-configure.desktop \
+		$(PREFIXapp)/System_Tools-Xorg-configure.sh \
 		$(PREFIXapp)/The_Converter.sh \
 		$(PREFIXapp)/The_Sizer.sh \
 		$(PREFIXapp)/YouTube_Tools-download-video.desktop \
@@ -165,6 +165,7 @@ uninstall:
 		$(PREFIX256apps)/folder-remote.png \
 		$(PREFIX256apps)/hwinfo.png \
 		$(PREFIX256apps)/image-x-generic.png \
+		$(PREFIX256apps)/info.png \
 		$(PREFIX256apps)/internet-mail.png \
 		$(PREFIX256apps)/kde-services.png \
 		$(PREFIX256apps)/keyring.png \
@@ -194,6 +195,7 @@ uninstall:
 		$(PREFIX256apps)/utilities-terminal-user.png \
 		$(PREFIX256apps)/video-x-generic.png \
 		$(PREFIX256apps)/view-process-all.png \
+		$(PREFIX256apps)/xorg.png \
 		$(PREFIX256apps)/youtube-video-download.png
 	
 	xdg-mime uninstall --mode system --novendor $(PREFIXmime)/hash.xml

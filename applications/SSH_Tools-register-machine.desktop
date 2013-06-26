@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=SSH-Tools;
+Categories=SSH-Tools;Dolphin-Tools;
 Comment[en_US]=
 Comment=
 Exec=/usr/share/applications/SSH_Tools-register-machine.sh
@@ -7,8 +7,8 @@ GenericName[en_US]=
 GenericName=
 Icon=server
 MimeType=
-Name[en_US]=Registered Machine
-Name=Registered Machine
+Name[en_US]=Registered Servers
+Name=Registered Servers
 NoDisplay=false
 Path=
 StartupNotify=true
