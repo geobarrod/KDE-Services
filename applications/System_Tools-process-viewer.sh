@@ -7,7 +7,7 @@
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 
-SYSUSER=$(kdialog --icon=view-process-all --caption="Process Viewer - Htop" --combobox="Choose System User" $USER root --default $USER 2> /dev/null)
+SYSUSER=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-system-process.png --caption="Process Viewer - Htop" --combobox="Choose System User" $USER root --default $USER 2> /dev/null)
 EXIT=$?
 
 if [ "$EXIT" != "0" ]; then

@@ -43,7 +43,7 @@ if-cancel-exit() {
     fi
     
     if [ "$FORMAT" = "" ]; then
-        kdialog --icon=application-exit --title="Convert Video From ($DIR/)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Convert Video From ($DIR/)" \
                        --passivepopup="[Canceled]   Please select video format. Try again"
         rm -fr /tmp/convert*
         exit 0
@@ -52,7 +52,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=application-exit --title="Converting video $(basename $i)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Converting video $(basename $i)" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -60,7 +60,7 @@ if-ffmpeg-cancel() {
 }
 
 time-position() {
-    TIMEPOSITION=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" \
+    TIMEPOSITION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
                  --inputbox="Enter time position in seconds or hh:mm:ss[.xxx]" 00:00:00.000)
     if-cancel-exit
 }
@@ -69,7 +69,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$(expr $COUNTFILES + 1)
-    DBUSREF=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --progressbar "                                " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --progressbar "                                " $COUNTFILES)
 }
 
 progressbar-close() {
@@ -85,13 +85,13 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=video-x-generic --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME s."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME s."
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=video-x-generic --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME m."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME m."
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=video-x-generic --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME h."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME h."
     fi
     rm -f $LOG
 }
@@ -148,7 +148,7 @@ for i in $RENAME; do
     mv *$i* $(ls *$i*|sed 's/ /_/g')
 done
 
-PRIORITY="$(kdialog --geometry=100x150+10240 --icon=video-x-generic --caption="Convert Video From Here" \
+PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off \
          2> /dev/null)"
 if-cancel-exit
@@ -165,21 +165,21 @@ elif [ "$PRIORITY" = "Lowest" ]; then
     kdesu --noignorebutton -d -c "renice 15 $PID" 2> /dev/null
 fi
 
-FILES=$(kdialog --icon=video-x-generic --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg \
       *.OGV *.ogv *.VOB *.vob *.WMV *.wmv|All supported files" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=video-x-generic --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-MODE=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Mode" mobile "Mobile Phones (3GP)" \
+MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Mode" mobile "Mobile Phones (3GP)" \
      1080 "Resolution 1080p" 720 "Resolution 720p" 480 "Resolution 480p" 240 "Resolution 240p" same "Same Resolution" standards \
      "Standards (VCD - SVCD - DVD)" web "Web (FLV)" --geometry 250x200+10240 2> /dev/null)
 if-cancel-exit
 ############################### Mobile ###############################
 if [ "$MODE" = "mobile" ]; then
-    RESOLUTION=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
+    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
                352x288 352x288 --geometry 100x100+10240 2> /dev/null)
     if-cancel-exit
     
@@ -200,7 +200,7 @@ if [ "$MODE" = "mobile" ]; then
 fi
 ############################### 1080p ###############################
 if [ "$MODE" = "1080" ]; then
-    CODEC=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
           "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
     if-cancel-exit
     
@@ -245,7 +245,7 @@ if [ "$MODE" = "1080" ]; then
 fi
 ############################### 720p ###############################
 if [ "$MODE" = "720" ]; then
-    CODEC=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
           "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
     if-cancel-exit
     
@@ -290,7 +290,7 @@ if [ "$MODE" = "720" ]; then
 fi
 ############################### 480p ###############################
 if [ "$MODE" = "480" ]; then
-    CODEC=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
           "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
     if-cancel-exit
     
@@ -335,7 +335,7 @@ if [ "$MODE" = "480" ]; then
 fi
 ############################### 240p ###############################
 if [ "$MODE" = "240" ]; then
-    CODEC=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
           "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
     if-cancel-exit
     
@@ -380,7 +380,7 @@ if [ "$MODE" = "240" ]; then
 fi
 ############################### same ###############################
 if [ "$MODE" = "same" ]; then
-    CODEC=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
           "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
     if-cancel-exit
     
@@ -425,53 +425,53 @@ if [ "$MODE" = "same" ]; then
 fi
 ############################### standards ###############################
 if [ "$MODE" = "standards" ]; then
-    STD=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" \
+    STD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
         --menu="Choose Video Standard" vcd "VCD" vcd-700 "VCD (700 MB)" svcd "SVCD" \
         svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x185+10240 2> /dev/null)
     if-cancel-exit
     
     if [ "$STD" = "vcd" ] || [ "$STD" = "vcd-700" ];then
-        FORMAT=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" \
+        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
                --combobox="Enter Video Format" film-vcd ntsc-vcd pal-vcd  --default film-vcd 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "svcd" ] || [ "$STD" = "svcd-700" ];then
-        FORMAT=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" \
+        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
                --combobox="Enter Video Format" film-svcd ntsc-svcd pal-svcd --default film-svcd 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "dvd" ] || [ "$STD" = "dvd-4.7" ] || [ "$STD" = "dvd-8.0" ];then
-        FORMAT=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" \
+        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
                --combobox="Enter Video Format" film-dvd ntsc-dvd pal-dvd --default film-dvd 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "vcd-700" ];then
         time-position
-        FILESIZE=$(kdialog --icon=video-x-generic --caption="Convert To VCD (700 MB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert To VCD (700 MB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 700 MB = 734003200" 734003200 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "svcd-700" ];then
         time-position
-        FILESIZE=$(kdialog --icon=video-x-generic --caption="Convert To SVCD (700 MB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert To SVCD (700 MB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 700 MB = 734003200" 734003200 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "dvd-4.7" ];then
         time-position
-        FILESIZE=$(kdialog --icon=video-x-generic --caption="Convert To DVD (4.7 GB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert To DVD (4.7 GB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 4.4 GB = 4724464025" 4724464025 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "dvd-8.0" ];then
         time-position
-        FILESIZE=$(kdialog --icon=video-x-generic --caption="Convert To DVD (8.0 GB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert To DVD (8.0 GB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 8.0 GB = 8589934592" 8589934592 2> /dev/null)
         if-cancel-exit
     fi
@@ -561,7 +561,7 @@ if [ "$MODE" = "standards" ]; then
 fi
 ############################### web ###############################
 if [ "$MODE" = "web" ]; then
-    RESOLUTION=$(kdialog --icon=video-x-generic --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
+    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
                352x288 352x288 --geometry 100x100+10240 2> /dev/null)
     if-cancel-exit
     

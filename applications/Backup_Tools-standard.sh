@@ -27,7 +27,7 @@ if-cancel-exit() {
     fi
     
     if [ "$MODE" = "" ]; then
-        kdialog --icon=application-exit --title="[Backup|Restore] Tools" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="[Backup|Restore] Tools" \
                        --passivepopup="[Canceled]   Please, select item. Try again" 2> /dev/null
         exit 0
     fi
@@ -37,7 +37,7 @@ beginning-backup() {
     COUNT="0"
     COUNTFILES=$(echo $TARGETBACKUP|wc -w)
     COUNTFILES=$(expr $COUNTFILES + 1)
-    DBUSREF=$(kdialog --icon=server-database --caption="[Backup|Restore] Tools" --progressbar "                             " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="[Backup|Restore] Tools" --progressbar "                             " $COUNTFILES)
     BEGIN_TIME=$(date +%s)
 }
 
@@ -50,22 +50,22 @@ finished-backup() {
     qdbus $DBUSREF close
     
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=server-database --title="Backup:   Saved on $HOME/Backups/" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Backup:   Saved on $HOME/Backups/" \
                        --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME s." 2> /dev/null
         
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=server-database --title="Backup:   Saved on $HOME/Backups/" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Backup:   Saved on $HOME/Backups/" \
                        --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME m." 2> /dev/null
         
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=server-database --title="Backup:   Saved on $HOME/Backups/" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Backup:   Saved on $HOME/Backups/" \
                        --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME h." 2> /dev/null
         
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=server-database --title="Backup:   Saved on $HOME/Backups/" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Backup:   Saved on $HOME/Backups/" \
                        --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME d." 2> /dev/null
     fi
     
@@ -79,7 +79,7 @@ beginning-restore() {
     COUNT="0"
     COUNTFILES=$(echo $MODE|wc -w)
     COUNTFILES=$(expr $COUNTFILES + 1)
-    DBUSREF=$(kdialog --icon=server-database --caption="[Backup|Restore] Tools" --progressbar "                             " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="[Backup|Restore] Tools" --progressbar "                             " $COUNTFILES)
     BEGIN_TIME=$(date +%s)
     COUNT=$(expr $COUNT + 1)
 }
@@ -93,19 +93,19 @@ finished-restore() {
     qdbus $DBUSREF close
     
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=server-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME s." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME s." 2> /dev/null
         
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=server-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME m." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME m." 2> /dev/null
         
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=server-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME h." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME h." 2> /dev/null
         
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=server-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME d." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: $ELAPSED_TIME d." 2> /dev/null
     fi
     
     echo "Finished All Restore" > /tmp/speak
@@ -128,7 +128,7 @@ restore-qdbusinsert() {
 ############ Main ############
 ##############################
 
-MODE=$(kdialog --icon=server-database --caption="[Backup|Restore] Tools" --combobox="Choose Mode" Backup Restore --default Backup 2> /dev/null)
+MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="[Backup|Restore] Tools" --combobox="Choose Mode" Backup Restore --default Backup 2> /dev/null)
 EXIT=$?
 if-cancel-exit
 
@@ -144,7 +144,7 @@ if [ "$MODE" = "Backup" ]; then
          $HOME/.thunderbird \
          $HOME/.config/xmoto
     "
-    TARGETBACKUP=$(kdialog --icon=server-database --caption="Backup Standard" --separate-output --checklist="Select For Backup" \
+    TARGETBACKUP=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Backup Standard" --separate-output --checklist="Select For Backup" \
          All "All List" off \
          $HOME/.filezilla FileZilla off \
          $HOME/.gnupg GnuPG off \
@@ -181,12 +181,12 @@ if [ "$MODE" = "Backup" ]; then
     fi
 else        
     if [ ! -d $BACKUP ]; then
-        kdialog --icon=application-exit --title="Restore Standard" --passivepopup="[Canceled]   Backup Not Found: Please, first create \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Restore Standard" --passivepopup="[Canceled]   Backup Not Found: Please, first create \
                        backup or paste your Backups directory on $HOME. Try again" 2> /dev/null
         exit 0
     fi
     
-    MODE=$(kdialog --icon=server-database --caption="Restore Standard" --menu="Select For Restore" \
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Restore Standard" --menu="Select For Restore" \
          $BACKUP/filezilla FileZilla \
          $BACKUP/firefox Firefox \
          $BACKUP/gnupg GnuPG \
@@ -201,7 +201,7 @@ else
     if-cancel-exit
     
     if [ ! -d $MODE ]; then
-        kdialog --icon=application-exit --title="Restore Standard" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Restore Standard" \
                        --passivepopup="[Canceled]   Backup Not Found: Please, first create backup or paste your backup on $MODE. Try again" \
                        2> /dev/null
         exit 0
@@ -209,7 +209,7 @@ else
     
     cd $MODE
     RESTORELIST=$(ls $MODE)
-    MODE=$(kdialog --icon=server-database --caption="Restore Standard" --combobox="Select For Restore" $RESTORELIST 2> /dev/null)
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Restore Standard" --combobox="Select For Restore" $RESTORELIST 2> /dev/null)
     EXIT=$?
     if-cancel-exit
     beginning-restore

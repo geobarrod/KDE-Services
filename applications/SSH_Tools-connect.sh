@@ -26,15 +26,15 @@ if-cancel-exit() {
 
 if [ -s ~/.kde-services/machines ]; then
     SERVER=$(cat ~/.kde-services/machines)
-    HOST=$(kdialog --icon=online --caption="SSH Tools - Connect To" --combobox="Select Hostname or IP Address" $SERVER \
+    HOST=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png --caption="SSH Tools - Connect To" --combobox="Select Hostname or IP Address" $SERVER \
                --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
     if-cancel-exit
-    LOGIN=$(kdialog --icon=online --caption="SSH Tools - Connect To $HOST" --combobox="Select User" $USER root --default $USER 2> /dev/null)
+    LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png --caption="SSH Tools - Connect To $HOST" --combobox="Select User" $USER root --default $USER 2> /dev/null)
     if-cancel-exit
     xterm -si -s -sl 1000000 -sb -bg black -fg white -e "ssh $LOGIN@$HOST"
     exit 0
 else
-        kdialog --icon=online --caption="SSH Tools - Connect To" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png --caption="SSH Tools - Connect To" \
                        --sorry="No Find Server: First Public Key Generation and Install Public Key in Remote Server" 2> /dev/null
         exit 1
 fi

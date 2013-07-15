@@ -1,3 +1,8 @@
+* Sun Jul 14 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-6
+- Added new and definitive icon theme.
+- YouTube Tools: Improved "Video List Code Collector".
+- Makefile: Updated.
+
 * Mon Jun 24 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-5
 - Trying to change the iconography.
 - Added new service menu "Xorg Configure" to "System Tools" submenu.

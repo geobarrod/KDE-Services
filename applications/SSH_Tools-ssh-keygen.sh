@@ -21,14 +21,14 @@ if-cancel-exit() {
 ############ Main ############
 ##############################
 
-LOGIN=$(kdialog --icon=keyring --caption="SSH Tools - Public Key Generation" --combobox="Select User" $USER root --default $USER 2> /dev/null)
+LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png --caption="SSH Tools - Public Key Generation" --combobox="Select User" $USER root --default $USER 2> /dev/null)
 if-cancel-exit
 
 if [ "$LOGIN" = "$USER" ]; then
     xterm -si -s -sl 1000000 -sb -T "SSH Tools - Public Key Generation For $LOGIN" -bg black -fg white -e ssh-keygen
-    kdialog --icon=keyring-root --title="SSH Tools - Public Key Generation For $LOGIN" --passivepopup="[Finished]"
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png --title="SSH Tools - Public Key Generation For $LOGIN" --passivepopup="[Finished]"
 elif [ "$LOGIN" = "root" ]; then
     kdesu --noignorebutton -d xterm -si -s -sl 1000000 -sb -T "SSH Tools - Public Key Generation For $LOGIN" -bg black -fg white -e ssh-keygen
-    kdialog --icon=keyring-root --title="SSH Tools - Public Key Generation For $LOGIN" --passivepopup="[Finished]"
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png --title="SSH Tools - Public Key Generation For $LOGIN" --passivepopup="[Finished]"
 fi
 exit 0

@@ -25,13 +25,13 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=application-exit --title="Record My Desktop" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Record My Desktop" \
                        --passivepopup="[Canceled] Check the path and filename not contain spaces. Try again"
     fi
 }
 
 record-cancel() {
-    kdialog --icon=media-tape --caption="Record My Desktop" --yes-label Stop --no-label Cancel \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --yes-label Stop --no-label Cancel \
                    --yesno="Record My Desktop is running, saving video to $DESTINATION/$FILENAME.$VCODEC" 2> /dev/null
     
     if [ "$?" = "0" ] || [ "$?" != "0" ]; then
@@ -48,14 +48,14 @@ DIR=$1
 cd "$DIR"
 DIR=$(pwd)
 
-FILENAME=$(kdialog --icon=media-tape --caption="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop" 2> /dev/null)
+FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop" 2> /dev/null)
 if-cancel-exit
 
-VCODEC=$(kdialog --icon=media-tape --caption="Record My Desktop" --menu="Choose Video Codec" mpg "MPEG-1" flv "FLV" avi "AVI" \
+VCODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --menu="Choose Video Codec" mpg "MPEG-1" flv "FLV" avi "AVI" \
        --geometry 100x100+10240 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=media-tape --caption="Destination Video" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Destination Video" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 

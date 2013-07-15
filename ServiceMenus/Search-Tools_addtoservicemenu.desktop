@@ -1,43 +1,43 @@
 [Desktop Entry]
-Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
-Icon=kfind
 Actions=UpdateSearchDB;StatisticsSearchDB;SearchByName;SearchByString;
-X-KDE-Submenu=Search Tools
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Search Tools
+X-KDE-Submenu=Search Tools
 X-KDE-Submenu[es]=Herramientas de Búsqueda
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
-X-KDE-StartupNotify=false
-X-KDE-Priority=TopLevel
-
-[Desktop Action UpdateSearchDB]
-Name=Update Search DB
-Name[en_US]=Update Search DB
-Name[es]=Actualizar BD de Búsqueda
-Name[x-test]=xxUpdate Search DBxx
-Icon=svn-update
-Exec=/usr/share/applications/Search_Tools-update-search-db.sh
-
-[Desktop Action StatisticsSearchDB]
-Name=Statistics Search DB
-Name[en_US]=Statistics Search DB
-Name[es]=Estadisticas BD de Búsqueda
-Name[x-test]=xxStatistics Search DBxx
-Icon=edit-find-replace
-Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh
 
 [Desktop Action SearchByName]
-Name=Search By Name
+Exec=/usr/share/applications/Search_Tools-search-by-name.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name[en_US]=Search By Name
+Name=Search By Name
 Name[es]=Búsqueda Por Nombre
 Name[x-test]=xxSearch By Namexx
-Icon=edit-find-project
-Exec=/usr/share/applications/Search_Tools-search-by-name.sh
 
 [Desktop Action SearchByString]
-Name=Search By String
+Exec=kdesu -d /usr/share/applications/Search_Tools-search-by-string.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
 Name[en_US]=Search By String
+Name=Search By String
 Name[es]=Búsqueda Por Palabra
 Name[x-test]=xxSearch By Stringxx
-Icon=edit-find-mail
-Exec=kdesu -d /usr/share/applications/Search_Tools-search-by-string.sh
+
+[Desktop Action StatisticsSearchDB]
+Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png
+Name[en_US]=Statistics Search DB
+Name=Statistics Search DB
+Name[es]=Estadisticas BD de Búsqueda
+Name[x-test]=xxStatistics Search DBxx
+
+[Desktop Action UpdateSearchDB]
+Exec=/usr/share/applications/Search_Tools-update-search-db.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png
+Name[en_US]=Update Search DB
+Name=Update Search DB
+Name[es]=Actualizar BD de Búsqueda
+Name[x-test]=xxUpdate Search DBxx

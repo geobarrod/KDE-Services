@@ -2,7 +2,7 @@
  <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="text/hash">
     <comment>CheckSum File</comment>
-     <icon name="emblem-new"/>
+     <icon name="/usr/share/icons/hicolor/512x512/apps/ks-checksum.png"/>
       <glob pattern="*.md5"/>
       <glob pattern="*.sha1"/>
       <glob pattern="*.sha224"/>

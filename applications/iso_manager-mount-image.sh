@@ -88,12 +88,12 @@ fuseiso -p $1 $(ls $1|sed 's/.iso$//')
 MOUNTEXIT=$?
 
 if [ "$MOUNTEXIT" = "0" ]; then
-    kdialog --icon=media-optical-recordable --title="Mount ISO Image" --passivepopup="[Finished]"
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --title="Mount ISO Image" --passivepopup="[Finished]"
 elif [ "$MOUNTEXIT" != "0" ] && [ "$MOVEXIT" != "0" ]; then
-    kdialog --icon=application-exit --title="Mount ISO Image" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount ISO Image" \
                    --passivepopup="[Error] Can't mount ISO image: Already mount or check image integrity."
 elif [ "$MOVEXIT" = "0" ]; then
-    kdialog --icon=dialog-warning --title="Mount ISO Image" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-warning.png --title="Mount ISO Image" \
                    --passivepopup="Renamed path or filename of ISO image, because contain whitespaces or uppercase extension. Please try again."
 fi
 

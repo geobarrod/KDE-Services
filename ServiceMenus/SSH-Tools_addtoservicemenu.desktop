@@ -1,60 +1,60 @@
 [Desktop Entry]
-Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
-MimeType=all/allfiles;
-Icon=sshfs
 Actions=SSH-keygen;SSH-copy-id;SSH;SCP;SSHfs;ViewMachine;
-X-KDE-Submenu=SSH Tools
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
+MimeType=all/allfiles;
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=SSH Tools
+X-KDE-Submenu=SSH Tools
 X-KDE-Submenu[es]=SSH - Herramientas
 X-KDE-Submenu[x-test]=xxSSH Toolsxx
-X-KDE-StartupNotify=false
-X-KDE-Priority=TopLevel
-
-[Desktop Action SSH-keygen]
-Name=Public Key Generation
-Name[en_US]=Public Key Generation
-Name[es]=Generar Llave Publica
-Name[x-test]=xxPublic Key Generationxx
-Icon=keyring
-Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh
-
-[Desktop Action SSH-copy-id]
-Name=Install Public Key
-Name[en_US]=Install Public Key
-Name[es]=Instalar Llave Publica
-Name[x-test]=xxInstall Public Keyxx
-Icon=keyring
-Exec=/usr/share/applications/SSH_Tools-copy-id.sh
-
-[Desktop Action SSH]
-Name=Connect To Remote Server
-Name[en_US]=Connect To Remote Server
-Name[es]=Conectar a Servidor Remoto
-Name[x-test]=xxConnect To Remote Serverxx
-Icon=online
-Exec=/usr/share/applications/SSH_Tools-connect.sh
 
 [Desktop Action SCP]
-Name=Send To Remote Server
+Exec=xterm -T "Send To Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %u
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png
 Name[en_US]=Send To Remote Server
+Name=Send To Remote Server
 Name[es]=Enviar a Servidor Remoto
 Name[x-test]=xxSend To Remote Serverxx
-Icon=utilities-terminal
-Exec=xterm -T "Send To Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %u
+
+[Desktop Action SSH]
+Exec=/usr/share/applications/SSH_Tools-connect.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
+Name[en_US]=Connect To Remote Server
+Name=Connect To Remote Server
+Name[es]=Conectar a Servidor Remoto
+Name[x-test]=xxConnect To Remote Serverxx
+
+[Desktop Action SSH-copy-id]
+Exec=/usr/share/applications/SSH_Tools-copy-id.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png
+Name[en_US]=Install Public Key
+Name=Install Public Key
+Name[es]=Instalar Llave Publica
+Name[x-test]=xxInstall Public Keyxx
+
+[Desktop Action SSH-keygen]
+Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png
+Name[en_US]=Public Key Generation
+Name=Public Key Generation
+Name[es]=Generar Llave Publica
+Name[x-test]=xxPublic Key Generationxx
 
 [Desktop Action SSHfs]
-Name=Mountpoint To Remote Directory
+Exec=/usr/share/applications/SSH_Tools-sshfs.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
 Name[en_US]=Mountpoint To Remote Directory
+Name=Mountpoint To Remote Directory
 Name[es]=Montar Directorio Remoto
 Name[x-test]=xxMountpoint To Remote Directoryxx
-Icon=sshfs
-Exec=/usr/share/applications/SSH_Tools-sshfs.sh
 
 [Desktop Action ViewMachine]
-Name=Registered Servers
+Exec=/usr/share/applications/SSH_Tools-register-machine.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
 Name[en_US]=Registered Servers
+Name=Registered Servers
 Name[es]=Servidores Registrados
 Name[x-test]=xxRegistered Serversxx
-Icon=server
-Exec=/usr/share/applications/SSH_Tools-register-machine.sh

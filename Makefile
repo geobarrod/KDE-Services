@@ -7,6 +7,7 @@
 PREFIXmenu=$(RPM_BUILD_ROOT)/usr/share/kde4/services/ServiceMenus
 PREFIXapp=$(RPM_BUILD_ROOT)/usr/share/applications
 PREFIX256apps=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/256x256/apps
+PREFIX512apps=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/512x512/apps
 PREFIXmime=$(RPM_BUILD_ROOT)/usr/share/mime/text
 PREFIXappmerge=$(RPM_BUILD_ROOT)/etc/xdg/menus/applications-merged
 PREFIXdeskdir=$(RPM_BUILD_ROOT)/usr/share/desktop-directories
@@ -15,15 +16,73 @@ PREFIXdoc=$(RPM_BUILD_ROOT)/usr/share/doc/kde-services
 install:
 	mkdir -p $(PREFIXmenu)
 	mkdir -p $(PREFIXapp)
-	mkdir -p $(PREFIX256apps)
+	mkdir -p $(PREFIX512apps)
 	mkdir -p $(PREFIXmime)
 	mkdir -p $(PREFIXappmerge)
 	mkdir -p $(PREFIXdeskdir)
 	mkdir -p $(PREFIXdoc)
 
+	rm -f $(PREFIX256apps)/application-exit.png \
+		$(PREFIX256apps)/application-pdf.png \
+		$(PREFIX256apps)/application-x-shellscript.png \
+		$(PREFIX256apps)/application-x-smb-server.png \
+		$(PREFIX256apps)/audio-x-generic.png \
+		$(PREFIX256apps)/code-block.png \
+		$(PREFIX256apps)/code-class.png \
+		$(PREFIX256apps)/code-context.png \
+		$(PREFIX256apps)/connect-creating.png \
+		$(PREFIX256apps)/connect-sentry-established.png \
+		$(PREFIX256apps)/connect-sentry-off.png \
+		$(PREFIX256apps)/connect-sentry-on.png \
+		$(PREFIX256apps)/dialog-warning.png \
+		$(PREFIX256apps)/disk-full.png \
+		$(PREFIX256apps)/document-decrypt.png \
+		$(PREFIX256apps)/document-encrypt.png \
+		$(PREFIX256apps)/edit-delete-shred.png \
+		$(PREFIX256apps)/edit-find-mail.png \
+		$(PREFIX256apps)/edit-find-project.png \
+		$(PREFIX256apps)/edit-find-replace.png \
+		$(PREFIX256apps)/edit-rename.png \
+		$(PREFIX256apps)/emblem-new.png \
+		$(PREFIX256apps)/folder-remote.png \
+		$(PREFIX256apps)/hwinfo.png \
+		$(PREFIX256apps)/image-x-generic.png \
+		$(PREFIX256apps)/info.png \
+		$(PREFIX256apps)/internet-mail.png \
+		$(PREFIX256apps)/kde-services.png \
+		$(PREFIX256apps)/keyring.png \
+		$(PREFIX256apps)/list-add-font.png \
+		$(PREFIX256apps)/mcedit.png \
+		$(PREFIX256apps)/mcedit-root.png \
+		$(PREFIX256apps)/mc.png \
+		$(PREFIX256apps)/mc-root.png \
+		$(PREFIX256apps)/media-optical-blu-ray.png \
+		$(PREFIX256apps)/media-optical-burn.png \
+		$(PREFIX256apps)/media-optical-data.png \
+		$(PREFIX256apps)/media-optical-dvd-video.png \
+		$(PREFIX256apps)/media-optical.png \
+		$(PREFIX256apps)/media-optical-recordable.png \
+		$(PREFIX256apps)/media-tape.png \
+		$(PREFIX256apps)/meeting-organizer.png \
+		$(PREFIX256apps)/online.png \
+		$(PREFIX256apps)/resizeimages.png \
+		$(PREFIX256apps)/server-database.png \
+		$(PREFIX256apps)/server.png \
+		$(PREFIX256apps)/socket.png \
+		$(PREFIX256apps)/sshfs.png \
+		$(PREFIX256apps)/svn-update.png \
+		$(PREFIX256apps)/text-x-plain.png \
+		$(PREFIX256apps)/timeadjust.png \
+		$(PREFIX256apps)/utilities-terminal.png \
+		$(PREFIX256apps)/utilities-terminal-user.png \
+		$(PREFIX256apps)/video-x-generic.png \
+		$(PREFIX256apps)/view-process-all.png \
+		$(PREFIX256apps)/xorg.png \
+		$(PREFIX256apps)/youtube-video-download.png	
+	
 	cp ServiceMenus/* $(PREFIXmenu)
 	cp applications/* $(PREFIXapp)
-	cp 256x256/apps/* $(PREFIX256apps)
+	cp 512x512/apps/* $(PREFIX512apps)
 	cp mime/text/* $(PREFIXmime)
 	cp applications-merged/* $(PREFIXappmerge)
 	cp desktop-directories/* $(PREFIXdeskdir)
@@ -197,7 +256,69 @@ uninstall:
 		$(PREFIX256apps)/view-process-all.png \
 		$(PREFIX256apps)/xorg.png \
 		$(PREFIX256apps)/youtube-video-download.png
-	
+
+	rm -f $(PREFIX512apps)/ks-audio.png \
+		$(PREFIX512apps)/ks-checksum.png \
+		$(PREFIX512apps)/ks-clock.png \
+		$(PREFIX512apps)/ks-connect-to.png \
+		$(PREFIX512apps)/ks-database.png \
+		$(PREFIX512apps)/ks-decrypt.png \
+		$(PREFIX512apps)/ks-disk-space-used.png \
+		$(PREFIX512apps)/ks-dolphin-file-manager.png \
+		$(PREFIX512apps)/ks-encrypt.png \
+		$(PREFIX512apps)/ks-error.png \
+		$(PREFIX512apps)/ks-extracting-subs.png \
+		$(PREFIX512apps)/ks-folder-public-web.png \
+		$(PREFIX512apps)/ks-folder-remote.png \
+		$(PREFIX512apps)/ks-hwinfo.png \
+		$(PREFIX512apps)/ks-image.png \
+		$(PREFIX512apps)/ks-info.png \
+		$(PREFIX512apps)/ks-kernel-rebuild.png \
+		$(PREFIX512apps)/ks-kernel-update.png \
+		$(PREFIX512apps)/ks-key.png \
+		$(PREFIX512apps)/ks-keygen.png \
+		$(PREFIX512apps)/ks-mc-root.png \
+		$(PREFIX512apps)/ks-mc-user.png \
+		$(PREFIX512apps)/ks-mcedit-root.png \
+		$(PREFIX512apps)/ks-mcedit-user.png \
+		$(PREFIX512apps)/ks-media-optical-burn.png \
+		$(PREFIX512apps)/ks-media-optical-integrity-check.png \
+		$(PREFIX512apps)/ks-media-optical-md5sum.png \
+		$(PREFIX512apps)/ks-media-optical-mount.png \
+		$(PREFIX512apps)/ks-media-optical-umount.png \
+		$(PREFIX512apps)/ks-media-optical-video.png \
+		$(PREFIX512apps)/ks-media-tape.png \
+		$(PREFIX512apps)/ks-menu.png \
+		$(PREFIX512apps)/ks-multiplexing-subs.png \
+		$(PREFIX512apps)/ks-owner.png \
+		$(PREFIX512apps)/ks-pdf.png \
+		$(PREFIX512apps)/ks-rebuild-rpm.png \
+		$(PREFIX512apps)/ks-resize-image.png \
+		$(PREFIX512apps)/ks-search-database-update.png \
+		$(PREFIX512apps)/ks-search-name.png \
+		$(PREFIX512apps)/ks-search-replace.png \
+		$(PREFIX512apps)/ks-search-stats.png \
+		$(PREFIX512apps)/ks-search-string.png \
+		$(PREFIX512apps)/ks-secure-mail.png \
+		$(PREFIX512apps)/ks-sentry-off.png \
+		$(PREFIX512apps)/ks-sentry-on.png \
+		$(PREFIX512apps)/ks-sentry-warning.png \
+		$(PREFIX512apps)/ks-server.png \
+		$(PREFIX512apps)/ks-shellscript.png \
+		$(PREFIX512apps)/ks-shredder.png \
+		$(PREFIX512apps)/ks-smbfs.png \
+		$(PREFIX512apps)/ks-socket.png \
+		$(PREFIX512apps)/ks-sshfs.png \
+		$(PREFIX512apps)/ks-system-process.png \
+		$(PREFIX512apps)/ks-terminal.png \
+		$(PREFIX512apps)/ks-text-plain.png \
+		$(PREFIX512apps)/ks-video.png \
+		$(PREFIX512apps)/ks-warning.png \
+		$(PREFIX512apps)/ks-whitespace-replace.png \
+		$(PREFIX512apps)/ks-xorg.png \
+		$(PREFIX512apps)/ks-youtube-download-video.png \
+		$(PREFIX512apps)/ks-youtube-video-code-collector.png
+
 	xdg-mime uninstall --mode system --novendor $(PREFIXmime)/hash.xml
 	
 	rm -f $(PREFIXmime)/hash.xml

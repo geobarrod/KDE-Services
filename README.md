@@ -1,14 +1,10 @@
 KDE-Services
 
-This program extends the features of the right mouse click on the Dolphin File Manager for KDE-4 graphical environment.
-Specially designed for OS based on Red Hat.
-
 Description:
 
 Enables the following functionalities on the Dolphin's right click menu of KDE-4.x:
 
-- Convert several video formats to MPEG-1, MPEG-4, AVI, VCD, SVCD,
-  DVD, 3GP or FLV.
+- Convert several video formats to MPEG-1, MPEG-4, AVI, VCD, SVCD, DVD, 3GP or FLV.
 - Extract the audio track of several video formats and convert them to MP3 or FLAC.
 - Convert several audio files to MP3 or FLAC.
 - Send file to Thunderbird as email attachment. (This service need Thunderbird installed)
@@ -41,8 +37,8 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Add Timestamp Prefix To [File|Dir]name(s).
 - Paranoid Shredder.
 - HTTP Publisher.
-- Image Resizer.
 - The Sizer.
+- Package Tools.
 - The Converter.
 
 Requirements:
@@ -98,8 +94,8 @@ Requirements:
 - vlc
 - wodim
 - xdg-utils
-- xorg-x11-server-Xorg
 - xorg-x11-server-utils
+- xorg-x11-server-Xorg
 - xterm
 - youtube-dl
 - zip

@@ -1,15 +1,15 @@
 [Desktop Entry]
-Type=Service
-ServiceTypes=KonqPopupMenu/Plugin
-MimeType=text/*;application/x-shellscript;application/x-desktop;
-Icon=text-x-plain
 Actions=TextReplace;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png
+MimeType=text/*;application/x-shellscript;application/x-desktop;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
 X-KDE-StartupNotify=false
 
 [Desktop Action TextReplace]
-Name=Text Replace
+Exec=sed -i -e "s;`kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png --caption="Text Replace" --inputbox="Enter text to replace"`;`kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png --caption="Text Replace" --inputbox="Replace by"`;g" %u; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png --title="Text Replace" --passivepopup="Finished"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png
 Name[en_US]=Text Replace
+Name=Text Replace
 Name[es]=Reemplazar Texto
 Name[x-test]=xxText Replacexx
-Icon=text-x-plain
-Exec=sed -i -e "s;`kdialog --icon=text-x-plain --caption="Text Replace" --inputbox="Enter text to replace"`;`kdialog --icon=text-x-plain --caption="Text Replace" --inputbox="Replace by"`;g" %u; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=text-x-plain --title="Text Replace" --passivepopup="Finished"

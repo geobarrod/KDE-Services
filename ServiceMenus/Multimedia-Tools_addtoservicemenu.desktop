@@ -1,59 +1,59 @@
 [Desktop Entry]
-Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
-Icon=media-tape
 Actions=DVD-Assembler;convert-video;extract-audio;ISOBuild;record-my-desktop;vlc-openfolder;
-X-KDE-Submenu=Multimedia Tools
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Multimedia Tools
+X-KDE-Submenu=Multimedia Tools
 X-KDE-Submenu[es]=Multimedia - Herramientas
 X-KDE-Submenu[x-test]=xxMultimedia Toolsxx
-X-KDE-StartupNotify=false
-X-KDE-Priority=TopLevel
 
 [Desktop Action DVD-Assembler]
-Name=D.V.D. Assembler
+Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
 Name[en_US]=D.V.D. Assembler
+Name=D.V.D. Assembler
 Name[es]=D.V.D. Assembler
 Name[x-test]=xxD.V.D. Assemblerxx
-Icon=media-optical-dvd-video
-Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh
-
-[Desktop Action convert-video]
-Name=Convert Video Files
-Name[en_US]=Convert Video Files
-Name[es]=Convertir Archivos de Video
-Name[x-test]=xxConvert Video Filesxx
-Icon=video-x-generic
-Exec=/usr/share/applications/ffmpeg_multifile-convert-video.sh
-
-[Desktop Action extract-audio]
-Name=[Extract|Convert] Audio Track
-Name[en_US]=[Extract|Convert] Audio Track
-Name[es]=[Extraer|Convertir] Pista De Audio
-Name[x-test]=xx[Extract|Convert] Audio Trackxx
-Icon=audio-x-generic
-Exec=/usr/share/applications/ffmpeg_multifile-extract-audio.sh
 
 [Desktop Action ISOBuild]
-Name=Build ISO Image From Here
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --caption="Build ISO Image From Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --title="Build ISO Image From Here" --passivepopup="[Finished]   $(basename %f.iso)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
 Name[en_US]=Build ISO Image From Here
+Name=Build ISO Image From Here
 Name[es]=Construir Imagen ISO Desde Aquí
 Name[x-test]=xxBuild ISO Image From Herexx
-Icon=media-optical
-Exec=DBUSREF=$(kdialog --icon=media-optical --caption="Build ISO Image From Here" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=media-optical --title="Build ISO Image From Here" --passivepopup="[Finished]   $(basename %f.iso)"
+
+[Desktop Action convert-video]
+Exec=/usr/share/applications/ffmpeg_multifile-convert-video.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+Name[en_US]=Convert Video Files
+Name=Convert Video Files
+Name[es]=Convertir Archivos de Video
+Name[x-test]=xxConvert Video Filesxx
+
+[Desktop Action extract-audio]
+Exec=/usr/share/applications/ffmpeg_multifile-extract-audio.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
+Name[en_US]=[Extract|Convert] Audio Track
+Name=[Extract|Convert] Audio Track
+Name[es]=[Extraer|Convertir] Pista De Audio
+Name[x-test]=xx[Extract|Convert] Audio Trackxx
 
 [Desktop Action record-my-desktop]
-Name=Record My Desktop
+Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
 Name[en_US]=Record My Desktop
+Name=Record My Desktop
 Name[es]=Graba Mi Escritorio
 Name[x-test]=xxRecord My Desktopxx
-Icon=media-tape
-Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh
 
 [Desktop Action vlc-openfolder]
-Name=Play Video From Here
+Exec=vlc -f %f 2> /dev/null
+Icon=vlc
 Name[en_US]=Play Video From Here
+Name=Play Video From Here
 Name[es]=Reproducir Video Aquí
 Name[x-test]=xxPlay Video From Herexx
-Icon=vlc
-Exec=vlc -f %f 2> /dev/null

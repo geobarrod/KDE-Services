@@ -50,17 +50,17 @@ fi
 
 if [ -s ~/.kde-services/machines ]; then
     SERVER=$(cat ~/.kde-services/machines)
-    PROTOCOL=$(kdialog --icon=connect-creating --caption="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
+    PROTOCOL=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-remote.png --caption="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
         exit 0
     fi
     
-    DIALOG=$(kdialog --icon=connect-creating --caption="Dolphin Tools" --combobox="Select Hostname or IP Address" $SERVER \
+    DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-remote.png --caption="Dolphin Tools" --combobox="Select Hostname or IP Address" $SERVER \
            --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
-        DIALOG=$(kdialog --icon=connect-creating --caption="Dolphin Tools" \
+        DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-remote.png --caption="Dolphin Tools" \
                --inputbox="Enter Hostname or IP Address" localhost.localdomain --default  2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
@@ -76,7 +76,7 @@ if [ -s ~/.kde-services/machines ]; then
     
     bookmark
 else
-    DIALOG=$(kdialog --icon=connect-creating --caption="Dolphin Tools" \
+    DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-remote.png --caption="Dolphin Tools" \
            --inputbox="Enter Hostname or IP Address" localhost.localdomain 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
@@ -88,7 +88,7 @@ else
     mv /tmp/machines ~/.kde-services/machines
     
     SERVER=$(cat ~/.kde-services/machines)
-    PROTOCOL=$(kdialog --icon=connect-creating --caption="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
+    PROTOCOL=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-remote.png --caption="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
 	exit 0

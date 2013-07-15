@@ -1,236 +1,236 @@
 [Desktop Entry]
-Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin
-MimeType=image/*;
-Icon=image-x-generic
 Actions=Converter;_SEPARATOR_;Sizer;16x16;32x32;48x48;64x64;128x128;qqvga;qcif;256x256;qvga;cif;512x512;vga;svga;wvga;xga;sxga;wxga;uxga;wuxga;qxga;qsxga;wqsxga;wquxga;hsxga;whsxga;whuxga;
-X-KDE-Submenu=Graphic Tools
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png
+MimeType=image/*;
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Graphic Tools
+X-KDE-Submenu=Graphic Tools
 X-KDE-Submenu[es]=Graficos - Herramientas
 X-KDE-Submenu[x-test]=xxGraphic Toolsxx
-X-KDE-StartupNotify=false
-X-KDE-Priority=TopLevel
-
-[Desktop Action Converter]
-Name=The Converter
-Name[en_US]=The Converter
-Name[es]=The Converter
-Name[x-test]=xxThe Converterxx
-Icon=image-x-generic
-Exec=/usr/share/applications/The_Converter.sh
 
 [Desktop Action Sizer]
-Name=The Sizer (custom sizes)
+Exec=/usr/share/applications/The_Sizer.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=The Sizer (custom sizes)
+Name=The Sizer (custom sizes)
 Name[es]=The Sizer (personalizar dimensiones)
 Name[x-test]=xxThe Sizer (custom sizes)xx
-Icon=resizeimages
-Exec=/usr/share/applications/The_Sizer.sh
 
-[Desktop Action 16x16]
-Name=16x16 (icon)
-Name[en_US]=16x16 (icon)
-Name[es]=16x16 (icon)
-Name[x-test]=xx16x16 (icon)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 16x16" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 16 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_16p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 16x16" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action 32x32]
-Name=32x32 (icon)
-Name[en_US]=32x32 (icon)
-Name[es]=32x32 (icon)
-Name[x-test]=xx32x32 (icon)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 32x32" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 32 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_32p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 32x32" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action 48x48]
-Name=48x48 (icon)
-Name[en_US]=48x48 (icon)
-Name[es]=48x48 (icon)
-Name[x-test]=xx48x48 (icon)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 48x48" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 48 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_48p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 48x48" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action 64x64]
-Name=64x64 (icon)
-Name[en_US]=64x64 (icon)
-Name[es]=64x64 (icon)
-Name[x-test]=xx64x64 (icon)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 64x64" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 64 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_64p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 64x64" --passivepopup="[Finished]    $(basename %u)"
+[Desktop Action Converter]
+Exec=/usr/share/applications/The_Converter.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png
+Name[en_US]=The Converter
+Name=The Converter
+Name[es]=The Converter
+Name[x-test]=xxThe Converterxx
 
 [Desktop Action 128x128]
-Name=128x128 (icon)
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 128x128" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 128 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_128p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 128x128" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=128x128 (icon)
+Name=128x128 (icon)
 Name[es]=128x128 (icon)
 Name[x-test]=xx128x128 (icon)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 128x128" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 128 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_128p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 128x128" --passivepopup="[Finished]    $(basename %u)"
+
+[Desktop Action 16x16]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 16x16" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 16 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_16p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 16x16" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=16x16 (icon)
+Name=16x16 (icon)
+Name[es]=16x16 (icon)
+Name[x-test]=xx16x16 (icon)xx
 
 [Desktop Action 256x256]
-Name=256x256 (icon)
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 256x256" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 256 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_256p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 256x256" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=256x256 (icon)
+Name=256x256 (icon)
 Name[es]=256x256 (icon)
 Name[x-test]=xx256x256 (icon)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 256x256" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 256 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_256p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 256x256" --passivepopup="[Finished]    $(basename %u)"
+
+[Desktop Action 32x32]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 32x32" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 32 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_32p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 32x32" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=32x32 (icon)
+Name=32x32 (icon)
+Name[es]=32x32 (icon)
+Name[x-test]=xx32x32 (icon)xx
+
+[Desktop Action 48x48]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 48x48" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 48 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_48p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 48x48" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=48x48 (icon)
+Name=48x48 (icon)
+Name[es]=48x48 (icon)
+Name[x-test]=xx48x48 (icon)xx
 
 [Desktop Action 512x512]
-Name=512x512 (icon)
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 512x512" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 512 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_512p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 512x512" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=512x512 (icon)
+Name=512x512 (icon)
 Name[es]=512x512 (icon)
 Name[x-test]=xx512x512 (icon)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 512x512" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 512 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_512p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 512x512" --passivepopup="[Finished]    $(basename %u)"
 
-[Desktop Action qcif]
-Name=176x144 (qcif)
-Name[en_US]=176x144 (qcif)
-Name[es]=176x144 (qcif)
-Name[x-test]=xx176x144 (qcif)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 176x144" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 176 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_176p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 176x144" --passivepopup="[Finished]    $(basename %u)"
+[Desktop Action 64x64]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 64x64" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 64 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_64p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 64x64" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=64x64 (icon)
+Name=64x64 (icon)
+Name[es]=64x64 (icon)
+Name[x-test]=xx64x64 (icon)xx
 
 [Desktop Action cif]
-Name=352x288 (cif)
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 352x288" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 352 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_352p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 352x288" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=352x288 (cif)
+Name=352x288 (cif)
 Name[es]=352x288 (cif)
 Name[x-test]=xx352x288 (cif)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 352x288" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 352 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_352p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 352x288" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action qqvga]
-Name=160x120 (qqvga)
-Name[en_US]=160x120 (qqvga)
-Name[es]=160x120 (qqvga)
-Name[x-test]=xx160x120 (qqvga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 160x120" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 160 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_160p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 160x120" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action qvga]
-Name=320x240 (qvga)
-Name[en_US]=320x240 (qvga)
-Name[es]=320x240 (qvga)
-Name[x-test]=xx320x240 (qvga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 320x240" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 320 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_320p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 320x240" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action vga]
-Name=640x480 (vga)
-Name[en_US]=640x480 (vga)
-Name[es]=640x480 (vga)
-Name[x-test]=xx640x480 (vga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 640x480" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 640 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_640p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 640x480" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action svga]
-Name=800x600 (svga)
-Name[en_US]=800x600 (svga)
-Name[es]=800x600 (svga)
-Name[x-test]=xx800x600 (svga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 800x600" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 800 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_800p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 800x600" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action xga]
-Name=1024x768 (xga)
-Name[en_US]=1024x768 (xga)
-Name[es]=1024x768 (xga)
-Name[x-test]=xx1024x768 (xga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 1024x768" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1024 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1024p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 1024x768" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action uxga]
-Name=1600x1200 (uxga)
-Name[en_US]=1600x1200 (uxga)
-Name[es]=1600x1200 (uxga)
-Name[x-test]=xx1600x1200 (uxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 1600x1200" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1600 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1600p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 1600x1200" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action qxga]
-Name=2048x1536 (qxga)
-Name[en_US]=2048x1536 (qxga)
-Name[es]=2048x1536 (qxga)
-Name[x-test]=xx2048x1536 (qxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 2048x1536" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 2048 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_2048p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 2048x1536" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action sxga]
-Name=1280x1024 (sxga)
-Name[en_US]=1280x1024 (sxga)
-Name[es]=1280x1024 (sxga)
-Name[x-test]=xx1280x1024 (sxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 1280x1024" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1280 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1280p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 1280x1024" --passivepopup="[Finished]    $(basename %u)"
-
-[Desktop Action qsxga]
-Name=2560x2048 (qsxga)
-Name[en_US]=2560x2048 (qsxga)
-Name[es]=2560x2048 (qsxga)
-Name[x-test]=xx2560x2048 (qsxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 2560x2048" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 2560 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_2560p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 2560x2048" --passivepopup="[Finished]    $(basename %u)"
 
 [Desktop Action hsxga]
-Name=5120x4096 (hsxga)
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 5120x4096" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 5120 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_5120p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 5120x4096" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=5120x4096 (hsxga)
+Name=5120x4096 (hsxga)
 Name[es]=5120x4096 (hsxga)
 Name[x-test]=xx5120x4096 (hsxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 5120x4096" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 5120 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_5120p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 5120x4096" --passivepopup="[Finished]    $(basename %u)"
 
-[Desktop Action wvga]
-Name=852x480 (wvga)
-Name[en_US]=852x480 (wvga)
-Name[es]=852x480 (wvga)
-Name[x-test]=xx852x480 (wvga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 852x480" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 852 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_852p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 852x480" --passivepopup="[Finished]    $(basename %u)"
+[Desktop Action qcif]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 176x144" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 176 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_176p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 176x144" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=176x144 (qcif)
+Name=176x144 (qcif)
+Name[es]=176x144 (qcif)
+Name[x-test]=xx176x144 (qcif)xx
 
-[Desktop Action wxga]
-Name=1366x768 (wxga)
-Name[en_US]=1366x768 (wxga)
-Name[es]=1366x768 (wxga)
-Name[x-test]=xx1366x768 (wxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 1366x768" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1366 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1366p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 1366x768" --passivepopup="[Finished]    $(basename %u)"
+[Desktop Action qqvga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 160x120" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 160 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_160p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 160x120" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=160x120 (qqvga)
+Name=160x120 (qqvga)
+Name[es]=160x120 (qqvga)
+Name[x-test]=xx160x120 (qqvga)xx
 
-[Desktop Action wuxga]
-Name=1920x1200 (wuxga)
-Name[en_US]=1920x1200 (wuxga)
-Name[es]=1920x1200 (wuxga)
-Name[x-test]=xx1920x1200 (wuxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 1920x1200" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1920 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1920p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 1920x1200" --passivepopup="[Finished]    $(basename %u)"
+[Desktop Action qsxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 2560x2048" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 2560 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_2560p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 2560x2048" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=2560x2048 (qsxga)
+Name=2560x2048 (qsxga)
+Name[es]=2560x2048 (qsxga)
+Name[x-test]=xx2560x2048 (qsxga)xx
 
-[Desktop Action wqsxga]
-Name=3200x2048 (wqsxga)
-Name[en_US]=3200x2048 (wqsxga)
-Name[es]=3200x2048 (wqsxga)
-Name[x-test]=xx3200x2048 (wqsxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 3200x2048" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 3200 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_3200p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 3200x2048" --passivepopup="[Finished]    $(basename %u)"
+[Desktop Action qvga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 320x240" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 320 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_320p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 320x240" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=320x240 (qvga)
+Name=320x240 (qvga)
+Name[es]=320x240 (qvga)
+Name[x-test]=xx320x240 (qvga)xx
 
-[Desktop Action wquxga]
-Name=3840x2400 (wquxga)
-Name[en_US]=3840x2400 (wquxga)
-Name[es]=3840x2400 (wquxga)
-Name[x-test]=xx3840x2400 (wquxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 3840x2400" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 3840 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_3840p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 3840x2400" --passivepopup="[Finished]    $(basename %u)"
+[Desktop Action qxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 2048x1536" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 2048 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_2048p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 2048x1536" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=2048x1536 (qxga)
+Name=2048x1536 (qxga)
+Name[es]=2048x1536 (qxga)
+Name[x-test]=xx2048x1536 (qxga)xx
+
+[Desktop Action svga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 800x600" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 800 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_800p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 800x600" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=800x600 (svga)
+Name=800x600 (svga)
+Name[es]=800x600 (svga)
+Name[x-test]=xx800x600 (svga)xx
+
+[Desktop Action sxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 1280x1024" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1280 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1280p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 1280x1024" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=1280x1024 (sxga)
+Name=1280x1024 (sxga)
+Name[es]=1280x1024 (sxga)
+Name[x-test]=xx1280x1024 (sxga)xx
+
+[Desktop Action uxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 1600x1200" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1600 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1600p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 1600x1200" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=1600x1200 (uxga)
+Name=1600x1200 (uxga)
+Name[es]=1600x1200 (uxga)
+Name[x-test]=xx1600x1200 (uxga)xx
+
+[Desktop Action vga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 640x480" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 640 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_640p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 640x480" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=640x480 (vga)
+Name=640x480 (vga)
+Name[es]=640x480 (vga)
+Name[x-test]=xx640x480 (vga)xx
 
 [Desktop Action whsxga]
-Name=6400x4096 (whsxga)
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 6400x4096" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 6400 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_6400p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 6400x4096" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=6400x4096 (whsxga)
+Name=6400x4096 (whsxga)
 Name[es]=6400x4096 (whsxga)
 Name[x-test]=xx6400x4096 (whsxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 6400x4096" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 6400 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_6400p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 6400x4096" --passivepopup="[Finished]    $(basename %u)"
 
 [Desktop Action whuxga]
-Name=7680x4800 (whuxga)
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 7680x4800" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 7680 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_7680p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 7680x4800" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=7680x4800 (whuxga)
+Name=7680x4800 (whuxga)
 Name[es]=7680x4800 (whuxga)
 Name[x-test]=xx7680x4800 (whuxga)xx
-Icon=resizeimages
-Exec=DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer - 7680x4800" --progressbar "							" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 7680 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_7680p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=resizeimages --title="Image Resizer - 7680x4800" --passivepopup="[Finished]    $(basename %u)"
+
+[Desktop Action wqsxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 3200x2048" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 3200 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_3200p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 3200x2048" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=3200x2048 (wqsxga)
+Name=3200x2048 (wqsxga)
+Name[es]=3200x2048 (wqsxga)
+Name[x-test]=xx3200x2048 (wqsxga)xx
+
+[Desktop Action wquxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 3840x2400" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 3840 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_3840p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 3840x2400" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=3840x2400 (wquxga)
+Name=3840x2400 (wquxga)
+Name[es]=3840x2400 (wquxga)
+Name[x-test]=xx3840x2400 (wquxga)xx
+
+[Desktop Action wuxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 1920x1200" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1920 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1920p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 1920x1200" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=1920x1200 (wuxga)
+Name=1920x1200 (wuxga)
+Name[es]=1920x1200 (wuxga)
+Name[x-test]=xx1920x1200 (wuxga)xx
+
+[Desktop Action wvga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 852x480" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 852 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_852p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 852x480" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=852x480 (wvga)
+Name=852x480 (wvga)
+Name[es]=852x480 (wvga)
+Name[x-test]=xx852x480 (wvga)xx
+
+[Desktop Action wxga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 1366x768" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1366 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1366p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 1366x768" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=1366x768 (wxga)
+Name=1366x768 (wxga)
+Name[es]=1366x768 (wxga)
+Name[x-test]=xx1366x768 (wxga)xx
+
+[Desktop Action xga]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 1024x768" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Resize:  $(basename %u)"; convert -resize 1024 %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_1024p.$(basename %u|cut -d. -f2)"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 1024x768" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name[en_US]=1024x768 (xga)
+Name=1024x768 (xga)
+Name[es]=1024x768 (xga)
+Name[x-test]=xx1024x768 (xga)xx

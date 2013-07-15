@@ -1,15 +1,15 @@
 [Desktop Entry]
-Type=Service
-ServiceTypes=KonqPopupMenu/Plugin
-MimeType=video/*;
-Icon=video-x-generic
 Actions=AVinfo;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+MimeType=video/*;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
 X-KDE-StartupNotify=false
 
 [Desktop Action AVinfo]
-Name=Video Info
+Exec=ffprobe %u 2> /tmp/info; grep -e Input -e Duration -e Stream /tmp/info > /tmp/info2; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Video Info" --textbox /tmp/info2 850 160; rm -f /tmp/info*
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name[en_US]=Video Info
+Name=Video Info
 Name[es]=Información de Video
 Name[x-test]=xxVideo Infoxx
-Icon=video-x-generic
-Exec=ffprobe %u 2> /tmp/info; grep -e Input -e Duration -e Stream /tmp/info > /tmp/info2; kdialog --icon=video-x-generic --caption="Video Info" --textbox /tmp/info2 850 160; rm -f /tmp/info*

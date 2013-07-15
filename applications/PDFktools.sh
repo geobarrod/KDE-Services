@@ -22,7 +22,7 @@
 
 ######### INITIALIZATION #########
 export TEXTDOMAIN=pdfktools
-KDE="--caption PDF_Tools --icon application-pdf"
+KDE="--caption PDF_Tools --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png"
 LOG="$(kde4-config --path tmp)pdfktools.log"
 
 action=''

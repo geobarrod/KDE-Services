@@ -31,14 +31,14 @@ if-cancel-exit() {
 
 if-dvdauthor-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=application-exit --title="D.V.D. Assembler ($DVD_NAME)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="D.V.D. Assembler ($DVD_NAME)" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check video format errors. Try again"
         exit 1
     fi
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=media-optical-dvd-video --caption="D.V.D. Assembler" --progressbar "			" /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --caption="D.V.D. Assembler" --progressbar "			" /ProcessDialog)
 }
 
 progressbar-close() {
@@ -104,7 +104,7 @@ for i in $RENAME; do
     mv *$i* $(ls *$i*|sed 's/ /_/g')
 done
 
-PRIORITY="$(kdialog --geometry=100x150+10240 --icon=media-optical-dvd-video \
+PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png \
          --caption="D.V.D. Assembler" --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off \
          Lowest Lowest off 2> /dev/null)"
 if-cancel-exit
@@ -121,7 +121,7 @@ elif [ "$PRIORITY" = "Lowest" ]; then
     kdesu --noignorebutton -d -c "renice 15 $PID" 2> /dev/null
 fi
 
-FILES=$(kdialog --icon=media-optical-dvd-video --caption="Source Video Files" --multiple \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --caption="Source Video Files" --multiple \
       --getopenfilename "$DIR" "*.mp2 *.mpe *.mpeg *.mpg *.vob *.MP2 *.MPE *.MPEG *.MPG *.VOB|MPEG-2 files" 2> /dev/null)
 if-cancel-exit
 
@@ -130,12 +130,12 @@ for VIDEO in $FILES; do
     CODEC=$(grep -o mpeg2video $VIDEOINFO)
     
     if [ "$CODEC" != "mpeg2video" ]; then
-        kdialog --icon=application-exit --title="D.V.D. Assembler" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="D.V.D. Assembler" \
                        --passivepopup="[Excluded]   The video file ($VIDEO) isn't MPEG-2 stream." 2> /dev/null
         FILES=$(echo $FILES|sed "s;$VIDEO;;")
         
         if [ "$(echo $FILES)" = "" ]; then
-            kdialog --icon=application-exit --title="D.V.D. Assembler" --passivepopup="[Canceled]   Nothing to do." 2> /dev/null
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="D.V.D. Assembler" --passivepopup="[Canceled]   Nothing to do." 2> /dev/null
             rm -fr $VIDEOINFO
             exit 1
         fi
@@ -144,10 +144,10 @@ for VIDEO in $FILES; do
     fi
 done
 
-DVD_NAME=$(kdialog --icon=media-optical-dvd-video --caption="D.V.D. Assembler" --inputbox="Enter DVD name without whitespaces." 2> /dev/null)
+DVD_NAME=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --caption="D.V.D. Assembler" --inputbox="Enter DVD name without whitespaces." 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=media-optical-dvd-video --caption="Destination DVD" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --caption="Destination DVD" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start
@@ -170,15 +170,15 @@ FINAL_TIME=$(date +%s)
 ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
 
 if [ "$ELAPSED_TIME" -lt "60" ]; then
-    kdialog --icon=media-optical-dvd-video --title="D.V.D. Assembler" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --title="D.V.D. Assembler" \
                    --passivepopup="[Finished]   $DVD_NAME.iso    Elapsed Time: $ELAPSED_TIME s."
 elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-    kdialog --icon=media-optical-dvd-video --title="D.V.D. Assembler" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --title="D.V.D. Assembler" \
                    --passivepopup="[Finished]   $DVD_NAME.iso   Elapsed Time: $ELAPSED_TIME m."
 elif [ "$ELAPSED_TIME" -gt "3599" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-    kdialog --icon=media-optical-dvd-video --title="D.V.D. Assembler" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --title="D.V.D. Assembler" \
                    --passivepopup="[Finished]   $DVD_NAME.iso   Elapsed Time: $ELAPSED_TIME h."
 fi
 

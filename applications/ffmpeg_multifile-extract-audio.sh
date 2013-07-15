@@ -39,7 +39,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=application-exit --title="Extracting audio track from $(basename $i) to $FORMAT" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Extracting audio track from $(basename $i) to $FORMAT" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -50,7 +50,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$(expr $COUNTFILES + 1)
-    DBUSREF=$(kdialog --icon=audio-x-generic --caption="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -66,15 +66,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=audio-x-generic --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
                        --passivepopup="[Finished]  $(basename $i)   Elapsed Time: $ELAPSED_TIME s."
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=audio-x-generic --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
                        --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME m."
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=audio-x-generic --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
                        --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME h."
     fi
     rm -f $LOG
@@ -133,7 +133,7 @@ for i in $RENAME; do
     mv *$i* $(ls *$i*|sed 's/ /_/g')
 done
 
-PRIORITY="$(kdialog --geometry=100x150+10240 --icon=audio-x-generic --caption="[Extract|Convert] Audio Track" \
+PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
 if-cancel-exit
 
@@ -149,20 +149,20 @@ elif [ "$PRIORITY" = "Lowest" ]; then
     kdesu --noignorebutton -d -c "renice 15 $PID" 2> /dev/null
 fi
 
-FILES=$(kdialog --icon=audio-x-generic --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 \
       *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav *.WMA *.wma *.WMV *.wmv|All supported files" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=audio-x-generic --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-FORMAT=$(kdialog --icon=audio-x-generic --caption="[Extract|Convert] Audio Track" \
+FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
        --combobox="Choose Audio Encoder" FLAC MP3 --default MP3 2> /dev/null)
 if-cancel-exit
     
 if [ "$FORMAT" = "MP3" ]; then
-    MODE=$(kdialog --icon=audio-x-generic --caption="[Extract|Convert] Audio Track" \
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
     progressbar-start

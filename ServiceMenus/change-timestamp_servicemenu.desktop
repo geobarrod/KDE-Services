@@ -1,14 +1,14 @@
 [Desktop Entry]
-Type=Service
-ServiceTypes=KonqPopupMenu/Plugin
-MimeType=all/allfiles;inode/directory;
-Icon=timeadjust
 Actions=change-timestamp;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
+MimeType=all/allfiles;inode/directory;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
 
 [Desktop Action change-timestamp]
-Name=Change Timestamp To [File|Directory]
+Exec=/usr/share/applications/Change_file-dir_timestamp.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
 Name[en_US]=Change Timestamp To [File|Directory]
+Name=Change Timestamp To [File|Directory]
 Name[es]=Cambiar Fecha del [Fichero|Directorio]
 Name[x-test]=xxChange Timestamp To [File|Directory]xx
-Icon=timeadjust
-Exec=/usr/share/applications/Change_file-dir_timestamp.sh

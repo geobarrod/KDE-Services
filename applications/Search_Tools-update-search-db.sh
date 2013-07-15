@@ -12,6 +12,6 @@ echo  "Finish Update Search Database" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav 2> /dev/null
 rm -f /tmp/speak*
-kdialog --icon=svn-update --title="Update Search DB" --passivepopup="Finished" 2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png --title="Update Search DB" --passivepopup="Finished" 2> /dev/null
 
 exit 0

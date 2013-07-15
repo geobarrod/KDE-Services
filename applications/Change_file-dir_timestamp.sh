@@ -26,7 +26,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$(expr $COUNTFILES + 1)
-    DBUSREF=$(kdialog --icon=timeadjust --caption="Change Timestamp To [File|Directory]" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp To [File|Directory]" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -47,14 +47,14 @@ qdbusinsert() {
 cd $DIR
 
 if [ -d "$1" ]; then
-  FILES=$(kdialog --icon=timeadjust --title="Select Directory" --caption="Change Timestamp To [File|Directory]" --multiple --getexistingdirectory "$1")
+  FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Select Directory" --caption="Change Timestamp To [File|Directory]" --multiple --getexistingdirectory "$1")
   exit-check
 elif [ -f "$1" ]; then
-  FILES=$(kdialog --icon=timeadjust --title="Select Files" --caption="Change Timestamp To [File|Directory]" --multiple --getopenfilename $DIR)
+  FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Select Files" --caption="Change Timestamp To [File|Directory]" --multiple --getopenfilename $DIR)
   exit-check
 fi
 
-TIMESTAMP=$(kdialog --icon=timeadjust --caption="Change Timestamp To [File|Directory]" --inputbox="Enter New Timestamp" \
+TIMESTAMP=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp To [File|Directory]" --inputbox="Enter New Timestamp" \
 	    "$(date "+%Y-%m-%d %H:%M:%S")")
 exit-check
 progressbar-start

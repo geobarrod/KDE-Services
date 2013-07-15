@@ -1,28 +1,28 @@
 [Desktop Entry]
-Type=Service
-ServiceTypes=KonqPopupMenu/Plugin
-MimeType=video/x-msvideo;
-Icon=video-x-generic
 Actions=AVIsplitSize;AVIsplitTime;
-X-KDE-Submenu=AVI Tools
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+MimeType=video/x-msvideo;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=AVI Tools
+X-KDE-Submenu=AVI Tools
 X-KDE-Submenu[es]=AVI - Herramientas
 X-KDE-Submenu[x-test]=xxAVI Toolsxx
-X-KDE-StartupNotify=false
-X-KDE-Priority=TopLevel
 
 [Desktop Action AVIsplitSize]
-Name=Split (to size)
+Exec=/usr/share/applications/AVI_Tools-avi-split-size.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name[en_US]=Split (to size)
+Name=Split (to size)
 Name[es]=Cortar (a medida)
 Name[x-test]=xxSplit (to size)xx
-Icon=video-x-generic
-Exec=/usr/share/applications/AVI_Tools-avi-split-size.sh
 
 [Desktop Action AVIsplitTime]
-Name=Split (by time range)
+Exec=/usr/share/applications/AVI_Tools-avi-split-time.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name[en_US]=Split (by time range)
+Name=Split (by time range)
 Name[es]=Cortar (por rango de tiempo)
 Name[x-test]=xxSplit (by time range)xx
-Icon=video-x-generic
-Exec=/usr/share/applications/AVI_Tools-avi-split-time.sh

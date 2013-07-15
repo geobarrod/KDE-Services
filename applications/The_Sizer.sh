@@ -31,7 +31,7 @@ if-cancel-exit() {
 
 if-convert-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=application-exit --title="Image Resizer" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Image Resizer" \
             --passivepopup="[Canceled]   $(basename $i)                                             \
             Check the path and filename not contain whitespaces. Check image format errors. Check if the file format support resize to $SIZE pixels. Try again."
         continue
@@ -42,7 +42,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$(expr $COUNTFILES + 1)
-    DBUSREF=$(kdialog --icon=resizeimages --caption="Image Resizer" --progressbar "                                         " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer" --progressbar "                                         " $COUNTFILES)
 }
 
 progressbar-close() {
@@ -58,16 +58,16 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=resizeimages --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME s."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME s."
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=resizeimages --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME m."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME m."
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=resizeimages --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME h."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME h."
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=resizeimages --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME d."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME d."
     fi
 }
 
@@ -122,16 +122,16 @@ for i in $RENAME; do
     mv *$i* $(ls *$i*|sed 's/ /_/g')
 done
 
-FILES=$(kdialog --icon=image-x-generic --caption="Source Image Files" --multiple \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Source Image Files" --multiple \
       --getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi \
       *.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.TGA \
       *.TIF *.TIFF *.XPM|All supported files" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=resizeimages --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-SIZE=$(kdialog --icon=resizeimages --caption="Image Resizer" --inputbox="Enter size in pixels for frame width")
+SIZE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer" --inputbox="Enter size in pixels for frame width")
 if-cancel-exit
 
 BEGIN_TIME=$(date +%s)

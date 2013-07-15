@@ -28,7 +28,7 @@ if-cancel-exit() {
 if-avisplit-cancel() {
     if [ "$?" != "0" ]; then
         qdbus $DBUSREF close
-        kdialog --icon=application-exit --title="AVI Split (By Time Range)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="AVI Split (By Time Range)" \
                        --passivepopup="[Canceled]   Check the path and filename not contain spaces. Check video format errors. Try again"
         exit 0
     fi
@@ -38,7 +38,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILE|wc -w)
     COUNTFILES=$(expr $COUNTFILES + 1)
-    DBUSREF=$(kdialog --icon=video-x-generic --caption="AVI Split (By Time Range)" --progressbar "                      " /ProgressDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="AVI Split (By Time Range)" --progressbar "                      " /ProgressDialog)
 }
 
 progressbar-close() {
@@ -54,22 +54,22 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=video-x-generic --title="AVI Split (By Time Range):  $(basename $FILE)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
                        --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME s."
         
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=video-x-generic --title="AVI Split (By Time Range):  $(basename $FILE)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
                        --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME m."
         
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=video-x-generic --title="AVI Split (By Time Range):  $(basename $FILE)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
                        --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME h."
         
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=video-x-generic --title="AVI Split (By Time Range):  $(basename $FILE)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
                        --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME d."
     fi
 }
@@ -78,7 +78,7 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-TIMERANGE=$(kdialog --icon=video-x-generic --caption="AVI Split (By Time Range)" \
+TIMERANGE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="AVI Split (By Time Range)" \
           --inputbox="Enter time range (One range: 00:10:00-00:11:00 or multi-range: 00:10:00-00:11:00,00:23:00-00:24:00)" 00:05:00-00:06:00 \
           2> /dev/null)
 if-cancel-exit

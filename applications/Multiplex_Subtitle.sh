@@ -28,7 +28,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=list-add-font --caption="Multiplex Subtitle" --progressbar "                                   " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --caption="Multiplex Subtitle" --progressbar "                                   " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -49,10 +49,10 @@ ffprobe "$VIDEO" 2> $VIDEOINFO
 CODEC=$(grep -o mpeg2video $VIDEOINFO)
 
 if [ "$CODEC" != "mpeg2video" ]; then
-    kdialog --icon=application-exit --title="Multiplex Subtitle" --passivepopup="[Canceled]   The video file isn't MPEG-2 stream."
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Multiplex Subtitle" --passivepopup="[Canceled]   The video file isn't MPEG-2 stream."
     rm -fr $VIDEOINFO
 else
-    PRIORITY="$(kdialog --geometry=100x150+10240 --icon=list-add-font --caption="Multiplex Subtitle" \
+    PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --caption="Multiplex Subtitle" \
              --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off \
              2> /dev/null)"
     if-cancel-exit
@@ -71,7 +71,7 @@ else
     
     DIR="$(pwd)"
     
-    SUBTITLE=$(kdialog --icon=list-add-font --caption="Text Based Subtitle" \
+    SUBTITLE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --caption="Text Based Subtitle" \
              --getopenfilename "$DIR" "*.aqt *.ass *.js *.jss *.rt *.smi *.srt *.ssa *.sub *.txt" 2> /dev/null)
     if-cancel-exit
     
@@ -110,15 +110,15 @@ EOF
         ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
         
         if [ "$ELAPSED_TIME" -lt "60" ]; then
-            kdialog --icon=list-add-font --title="Multiplex Subtitle" \
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --title="Multiplex Subtitle" \
                            --passivepopup="[Finished]   $(basename "$VIDEO")   Elapsed Time: $ELAPSED_TIME s."
         elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-            kdialog --icon=list-add-font --title="Multiplex Subtitle" \
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --title="Multiplex Subtitle" \
                            --passivepopup="[Finished]   $(basename "$VIDEO")   Elapsed Time: $ELAPSED_TIME m."
         elif [ "$ELAPSED_TIME" -gt "3599" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-            kdialog --icon=list-add-font --title="Multiplex Subtitle" \
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --title="Multiplex Subtitle" \
                            --passivepopup="[Finished]   $(basename "$VIDEO")   Elapsed Time: $ELAPSED_TIME h."
         fi
         
@@ -128,7 +128,7 @@ EOF
         rm -fr /tmp/speak* $TMPFILE $LOG $VIDEOINFO
     else
         progressbar-close
-        kdialog --icon=application-exit --title="Multiplex Subtitle" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Multiplex Subtitle" \
                        --passivepopup="[Canceled]   See $LOG file. The encoding of the subtitle file have to be UTF-8."
         rm -fr $TMPFILE $VIDEOINFO
     fi

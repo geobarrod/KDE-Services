@@ -1,28 +1,28 @@
 [Desktop Entry]
-Type=Service
-ServiceTypes=KonqPopupMenu/Plugin
-MimeType=application/x-shellscript;application/x-executable;
-Icon=application-x-shellscript
 Actions=ExecScript;RootExecScript;
-X-KDE-Submenu=Konsole
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
+MimeType=application/x-shellscript;application/x-executable;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Konsole
+X-KDE-Submenu=Konsole
 X-KDE-Submenu[es]=Konsole
 X-KDE-Submenu[x-test]=xxKonsolexx
-X-KDE-StartupNotify=false
-X-KDE-Priority=TopLevel
 
 [Desktop Action ExecScript]
-Name=Run Application
+Exec=chmod 755 %u; konsole --hold -e %u
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name[en_US]=Run Application
+Name=Run Application
 Name[es]=Ejecutar Programa
 Name[x-test]=xxRun Applicationxx
-Icon=application-x-shellscript
-Exec=chmod 755 %u; konsole --hold -e %u
 
 [Desktop Action RootExecScript]
-Name=Run Application (Root)
+Exec=kdesu --noignorebutton -d -c "chmod 755 %u; konsole --hold -e %u"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name[en_US]=Run Application (Root)
+Name=Run Application (Root)
 Name[es]=Ejecutar Programa como root
 Name[x-test]=xxRun Application (Root)xx
-Icon=application-x-shellscript
-Exec=kdesu --noignorebutton -d -c "chmod 755 %u; konsole --hold -e %u"

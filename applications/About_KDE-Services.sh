@@ -52,7 +52,6 @@ cat > /tmp/about_kde-services << EOF
         - Add Timestamp Prefix To [File|Dir]name(s).
         - Paranoid Shredder.
         - HTTP Publisher.
-        - Image Resizer.
         - The Sizer.
         - Package Tools.
         - The Converter.
@@ -128,6 +127,6 @@ cat > /tmp/about_kde-services << EOF
         
 EOF
 
-kdialog --icon=kde-services --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 800x600 2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 800x600 2> /dev/null
 rm -f /tmp/about_kde-services
 exit 0

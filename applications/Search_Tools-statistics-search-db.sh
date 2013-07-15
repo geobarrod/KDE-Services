@@ -10,7 +10,7 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bi
 export $(dbus-launch)
 
 locate -S > /tmp/StatisticsLocateDB
-kdialog --icon=edit-find-replace --caption="Statistics Search DB" --textbox /tmp/StatisticsLocateDB 400 155 2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png --caption="Statistics Search DB" --textbox /tmp/StatisticsLocateDB 400 155 2> /dev/null
 rm -f /tmp/StatisticsLocateDB
 
 exit 0

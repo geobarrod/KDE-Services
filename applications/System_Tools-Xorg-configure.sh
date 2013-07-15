@@ -22,7 +22,7 @@ if-cancel-exit() {
 ############ Main ############
 ##############################
 
-DRIVER=$(kdialog --icon=xorg --caption="Xorg Configure: ${VGA#*: }" \
+DRIVER=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png --caption="Xorg Configure: ${VGA#*: }" \
        --menu="Select a suitable video driver." glint "3DLabs, TI" \
                                     tdfx "3Dfx" \
                                     ast "ASpeedTech" \
@@ -71,7 +71,7 @@ Section "Screen"
     Monitor     "Configured Monitor"
 EOF
 
-DEPTH=$(kdialog --icon=xorg --caption="Xorg Configure: ${VGA#*: }" --combobox="Select a color depth." 4 8 16 24 32 --default 24 2> /dev/null)
+DEPTH=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png --caption="Xorg Configure: ${VGA#*: }" --combobox="Select a color depth." 4 8 16 24 32 --default 24 2> /dev/null)
 if-cancel-exit
 
 cat >> /tmp/xorg-configure << EOF
@@ -80,7 +80,7 @@ cat >> /tmp/xorg-configure << EOF
         Depth    $DEPTH
 EOF
 
-SCREEN=$(kdialog --icon=xorg --caption="Xorg Configure: ${VGA#*: }" --combobox="Select your screen resolution." 640x480 \
+SCREEN=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png --caption="Xorg Configure: ${VGA#*: }" --combobox="Select your screen resolution." 640x480 \
                                                                                                                 800x500 \
                                                                                                                 800x600 \
                                                                                                                 1024x600 \
@@ -108,7 +108,7 @@ SCREEN=$(kdialog --icon=xorg --caption="Xorg Configure: ${VGA#*: }" --combobox="
                                                                                                             --default 1024x768 2> /dev/null)
 if-cancel-exit
 
-FREQ=$(kdialog --icon=xorg --caption="Xorg Configure: ${VGA#*: }" --combobox="Select your screen vertical refresh frequency in Hz." 50 \
+FREQ=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png --caption="Xorg Configure: ${VGA#*: }" --combobox="Select your screen vertical refresh frequency in Hz." 50 \
                                                                                                                                     55 \
                                                                                                                                     60 \
                                                                                                                                     65 \
@@ -138,5 +138,5 @@ MODELINE=$(gtf $SCREEN_FREQ|grep -v "#"|sed "s;_$FREQ.00;;")
 sed -i "s;# Modeline;$(echo $MODELINE);" /tmp/xorg-configure
 mv -f /tmp/xorg-configure /etc/X11/xorg.conf
 
-kdialog --icon=xorg --caption="Xorg Configure: ${VGA#*: }" --msgbox="You must restart X-Windows session for the changes to be applied."  2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png --caption="Xorg Configure: ${VGA#*: }" --msgbox="You must restart X-Windows session for the changes to be applied."  2> /dev/null
 exit 0

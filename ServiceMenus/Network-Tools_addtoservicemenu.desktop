@@ -1,35 +1,35 @@
 [Desktop Entry]
-Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
-Icon=applications-internet
 Actions=ConnectSentry;HTTP-Publisher;ListeningSockets;
-X-KDE-Submenu=Network Tools
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Network Tools
+X-KDE-Submenu=Network Tools
 X-KDE-Submenu[es]=Internet - Herramientas
 X-KDE-Submenu[x-test]=xxNetwork Toolsxx
-X-KDE-StartupNotify=false
-X-KDE-Priority=TopLevel
 
 [Desktop Action ConnectSentry]
-Name=Connect Sentry
+Exec=/usr/share/applications/Network_Tools-connect-sentry.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
 Name[en_US]=Connect Sentry
+Name=Connect Sentry
 Name[es]=Centinela de Conexiones
 Name[x-test]=xxConnect Sentryxx
-Icon=connect-sentry-on
-Exec=/usr/share/applications/Network_Tools-connect-sentry.sh
 
 [Desktop Action HTTP-Publisher]
-Name=HTTP Publisher
+Exec=kdesu -d -c "/usr/share/applications/HTTP_Publisher.sh"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png
 Name[en_US]=HTTP Publisher
+Name=HTTP Publisher
 Name[es]=Publicador HTTP
 Name[x-test]=xxHTTP Publisherxx
-Icon=folder-remote
-Exec=kdesu -d -c "/usr/share/applications/HTTP_Publisher.sh"
 
 [Desktop Action ListeningSockets]
-Name=Listening Sockets
+Exec=kdesu -d /usr/share/applications/Network_Tools-listening-sockets.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
 Name[en_US]=Listening Sockets
+Name=Listening Sockets
 Name[es]=Puertos Escuchando
 Name[x-test]=xxListening Socketsxx
-Icon=socket
-Exec=kdesu -d /usr/share/applications/Network_Tools-listening-sockets.sh

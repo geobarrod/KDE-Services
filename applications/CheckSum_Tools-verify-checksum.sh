@@ -27,22 +27,22 @@ finished() {
         ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
         
         if [ "$ELAPSED_TIME" -lt "60" ]; then
-            kdialog --icon=emblem-new --title="Verify $HASH CheckSum" \
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="Verify $HASH CheckSum" \
                            --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: $ELAPSED_TIME s." 2> /dev/null
             
             elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-            kdialog --icon=emblem-new --title="Verify $HASH CheckSum" \
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="Verify $HASH CheckSum" \
                            --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: $ELAPSED_TIME m." 2> /dev/null
             
             elif [ "$ELAPSED_TIME" -gt "3599" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-            kdialog --icon=emblem-new --title="Verify $HASH CheckSum" \
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="Verify $HASH CheckSum" \
                            --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: $ELAPSED_TIME h." 2> /dev/null
         fi
         
     else
-        kdialog --icon=application-exit --title="Verify $HASH CheckSum" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Verify $HASH CheckSum" \
                        --passivepopup="[Error]   $(cat $TMP|awk -F : '{print $3}')." 2> /dev/null
     fi
     
@@ -57,7 +57,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILE=$(echo "$FILE"|wc -l)
     COUNTFILE=$(expr $COUNTFILE + 1)
-    DBUSREF=$(kdialog --icon=emblem-new --caption="Verify $HASH CheckSum" --progressbar "                        " /ProgressDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="Verify $HASH CheckSum" --progressbar "                        " /ProgressDialog)
 }
 
 qdbusinsert() {
@@ -73,7 +73,7 @@ cd $(dirname $1)
 
 if [ "$CHECKSUMFILE" != "md5" ] && [ "$CHECKSUMFILE" != "MD5" ] && [ "$CHECKSUMFILE" != "sha1" ] && [ "$CHECKSUMFILE" != "SHA1" ] && \
     [ "$CHECKSUMFILE" != "sha256" ] && [ "$CHECKSUMFILE" != "SHA256" ] && [ "$CHECKSUMFILE" != "sha512" ] && [ "$CHECKSUMFILE" != "SHA512" ]; then
-    kdialog --icon=application-exit --title="Verify CheckSum" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Verify CheckSum" \
                            --passivepopup="[Canceled]   Support only this checksum files: *.md5, *.sha1, *.sha256 and *.sha512" 2> /dev/null
     exit 1
 fi
