@@ -37,6 +37,7 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Add Timestamp Prefix To [File|Dir]name(s).
 - Paranoid Shredder.
 - HTTP Publisher.
+- Graphic Tools.
 - The Sizer.
 - Package Tools.
 - The Converter.
@@ -54,6 +55,7 @@ Requirements:
 - festival
 - ffmpeg
 - file
+- findutils
 - fuse
 - fuseiso
 - fuse-sshfs

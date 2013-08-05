@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE Services. 2013.					#
+# For KDE-Services. 2013.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -52,10 +52,11 @@ cat > /tmp/about_kde-services << EOF
         - Add Timestamp Prefix To [File|Dir]name(s).
         - Paranoid Shredder.
         - HTTP Publisher.
+        - Graphic Tools.
         - The Sizer.
         - Package Tools.
         - The Converter.
-
+        
     Requirements:
         - bash
         - bc
@@ -68,6 +69,7 @@ cat > /tmp/about_kde-services << EOF
         - festival
         - ffmpeg
         - file
+        - findutils
         - fuse
         - fuseiso
         - fuse-sshfs

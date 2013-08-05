@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=UpdateSearchDB;StatisticsSearchDB;SearchByName;SearchByString;
+Actions=SearchHere;SearchByName;SearchByString;_SEPARATOR_;StatisticsSearchDB;UpdateSearchDB;_SEPARATOR_;ModifiedFilesHere
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
 Type=Service
 X-KDE-Priority=TopLevel
@@ -41,3 +41,19 @@ Name[en_US]=Update Search DB
 Name=Update Search DB
 Name[es]=Actualizar BD de Búsqueda
 Name[x-test]=xxUpdate Search DBxx
+
+[Desktop Action SearchHere]
+Exec=kdesu -d /usr/share/applications/Search_Tools-search-here.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
+Name[en_US]=Search Here
+Name=Search Here
+Name[es]=Búscar Aquí
+Name[x-test]=xxSearch Herexx
+
+[Desktop Action ModifiedFilesHere]
+Exec=kdesu -d /usr/share/applications/Search_Tools-modified-files-here.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
+Name[en_US]=Modified Files Here
+Name=Modified Files Here
+Name[es]=Archivos Modificados Aquí
+Name[x-test]=xxModified Files Herexx

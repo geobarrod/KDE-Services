@@ -1,5 +1,5 @@
 #################################################################
-# Installing KDE Services, to appropriate directories.		#
+# Installing KDE-Services, to appropriate directories.		#
 # Author: Geovani Barzaga Rodriguez <igeo.cu@gmail.com>.	#
 # KDE-Services 2011-2013. GPLv3+				#
 #################################################################
@@ -21,64 +21,6 @@ install:
 	mkdir -p $(PREFIXappmerge)
 	mkdir -p $(PREFIXdeskdir)
 	mkdir -p $(PREFIXdoc)
-
-	rm -f $(PREFIX256apps)/application-exit.png \
-		$(PREFIX256apps)/application-pdf.png \
-		$(PREFIX256apps)/application-x-shellscript.png \
-		$(PREFIX256apps)/application-x-smb-server.png \
-		$(PREFIX256apps)/audio-x-generic.png \
-		$(PREFIX256apps)/code-block.png \
-		$(PREFIX256apps)/code-class.png \
-		$(PREFIX256apps)/code-context.png \
-		$(PREFIX256apps)/connect-creating.png \
-		$(PREFIX256apps)/connect-sentry-established.png \
-		$(PREFIX256apps)/connect-sentry-off.png \
-		$(PREFIX256apps)/connect-sentry-on.png \
-		$(PREFIX256apps)/dialog-warning.png \
-		$(PREFIX256apps)/disk-full.png \
-		$(PREFIX256apps)/document-decrypt.png \
-		$(PREFIX256apps)/document-encrypt.png \
-		$(PREFIX256apps)/edit-delete-shred.png \
-		$(PREFIX256apps)/edit-find-mail.png \
-		$(PREFIX256apps)/edit-find-project.png \
-		$(PREFIX256apps)/edit-find-replace.png \
-		$(PREFIX256apps)/edit-rename.png \
-		$(PREFIX256apps)/emblem-new.png \
-		$(PREFIX256apps)/folder-remote.png \
-		$(PREFIX256apps)/hwinfo.png \
-		$(PREFIX256apps)/image-x-generic.png \
-		$(PREFIX256apps)/info.png \
-		$(PREFIX256apps)/internet-mail.png \
-		$(PREFIX256apps)/kde-services.png \
-		$(PREFIX256apps)/keyring.png \
-		$(PREFIX256apps)/list-add-font.png \
-		$(PREFIX256apps)/mcedit.png \
-		$(PREFIX256apps)/mcedit-root.png \
-		$(PREFIX256apps)/mc.png \
-		$(PREFIX256apps)/mc-root.png \
-		$(PREFIX256apps)/media-optical-blu-ray.png \
-		$(PREFIX256apps)/media-optical-burn.png \
-		$(PREFIX256apps)/media-optical-data.png \
-		$(PREFIX256apps)/media-optical-dvd-video.png \
-		$(PREFIX256apps)/media-optical.png \
-		$(PREFIX256apps)/media-optical-recordable.png \
-		$(PREFIX256apps)/media-tape.png \
-		$(PREFIX256apps)/meeting-organizer.png \
-		$(PREFIX256apps)/online.png \
-		$(PREFIX256apps)/resizeimages.png \
-		$(PREFIX256apps)/server-database.png \
-		$(PREFIX256apps)/server.png \
-		$(PREFIX256apps)/socket.png \
-		$(PREFIX256apps)/sshfs.png \
-		$(PREFIX256apps)/svn-update.png \
-		$(PREFIX256apps)/text-x-plain.png \
-		$(PREFIX256apps)/timeadjust.png \
-		$(PREFIX256apps)/utilities-terminal.png \
-		$(PREFIX256apps)/utilities-terminal-user.png \
-		$(PREFIX256apps)/video-x-generic.png \
-		$(PREFIX256apps)/view-process-all.png \
-		$(PREFIX256apps)/xorg.png \
-		$(PREFIX256apps)/youtube-video-download.png	
 	
 	cp ServiceMenus/* $(PREFIXmenu)
 	cp applications/* $(PREFIXapp)
@@ -161,9 +103,11 @@ uninstall:
 		$(PREFIXapp)/PDFktools.sh \
 		$(PREFIXapp)/SaMBa_Tools-mount-umount-share.desktop \
 		$(PREFIXapp)/SaMBa_Tools-mount-umount-share.sh \
+		$(PREFIXapp)/Search_Tools-modified-files-here.sh \
 		$(PREFIXapp)/Search_Tools-search-by-name.desktop \
 		$(PREFIXapp)/Search_Tools-search-by-name.sh \
 		$(PREFIXapp)/Search_Tools-search-by-string.sh \
+		$(PREFIXapp)/Search_Tools-search-here.sh \
 		$(PREFIXapp)/Search_Tools-statistics-search-db.desktop \
 		$(PREFIXapp)/Search_Tools-statistics-search-db.sh \
 		$(PREFIXapp)/Search_Tools-update-search-db.desktop \
