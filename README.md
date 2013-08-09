@@ -41,6 +41,19 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - The Sizer.
 - Package Tools.
 - The Converter.
+- Dropbox Tools { > Copy [file|directory] to Dropbox folder.
+		  > Move [file|directory] to Dropbox folder.
+		  > Copy [file|directory] to Public Dropbox folder and public URL to clipboard
+		    (implicit encryption and credentials for web access to Public Dropbox folder).
+		  > Move [file|directory] to Public Dropbox folder and public URL to clipboard
+		    (implicit encryption and credentials for web access to Public Dropbox folder).
+		  > Get public URL and copy to clipboard
+		    (implicit encryption and credentials for web access to Public Dropbox folder).
+		  > Install Dropbox service.
+		  > Update Dropbox service.
+		  > Start Dropbox service.
+		  > Stop Dropbox service.
+		  > Enable autostart Dropbox service. }.
 
 Requirements:
 
@@ -94,6 +107,7 @@ Requirements:
 - tar
 - transcode
 - vlc
+- wget
 - wodim
 - xdg-utils
 - xorg-x11-server-utils

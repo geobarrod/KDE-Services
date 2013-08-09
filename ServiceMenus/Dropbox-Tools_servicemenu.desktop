@@ -1,0 +1,72 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=all/all;
+Actions=CopyToDropbox;MoveToDropbox;_SEPARATOR_;CopyToPublicAndGetURL;MoveToPublicAndGetURL;_SEPARATOR_;GetPublicURL;_SEPARATOR_;InstallService;UpdateService;_SEPARATOR_;StartService;StopService;_SEPARATOR_;AutoStart;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+X-KDE-Submenu=Dropbox Tools
+X-KDE-Submenu[en_US]=Dropbox Tools
+X-KDE-Submenu[es]=Dropbox - Herramientas
+X-KDE-Submenu[x-test]=xxDropbox Toolsxx
+X-KDE-StartupNotify=false
+X-KDE-Priority=TopLevel
+
+[Desktop Action CopyToDropbox]
+Name=Copy to Dropbox
+Name[es]=Copiar a Dropbox
+Exec=/usr/share/applications/Dropbox_Tools-main.sh copy %u
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+
+[Desktop Action MoveToDropbox]
+Name=Move to Dropbox
+Name[es]=Mover a Dropbox
+Exec=/usr/share/applications/Dropbox_Tools-main.sh move %u
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+
+[Desktop Action CopyToPublicAndGetURL]
+Name=Copy to Public Dropbox and get URL
+Name[es]=Copiar a Dropbox Público y obtener URL
+Exec=/usr/share/applications/Dropbox_Tools-main.sh copy_pub %u
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+
+[Desktop Action MoveToPublicAndGetURL]
+Name=Move to Public Dropbox and get URL
+Name[es]=Mover a Dropbox Público y obtener URL
+Exec=/usr/share/applications/Dropbox_Tools-main.sh move_pub %u
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+
+[Desktop Action GetPublicURL]
+Name=Get public URL
+Name[es]=Obtener URL pública
+Exec=/usr/share/applications/Dropbox_Tools-main.sh get_pub_url %u
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+
+[Desktop Action InstallService]
+Name=Install Dropbox service
+Name[es]=Instalar servicio Dropbox
+Exec=/usr/share/applications/Dropbox_Tools-main.sh install_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+
+[Desktop Action UpdateService]
+Name=Update Dropbox service
+Name[es]=Actualizar servicio Dropbox
+Exec=/usr/share/applications/Dropbox_Tools-main.sh update_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+
+[Desktop Action StartService]
+Name=Start Dropbox service
+Name[es]=Iniciar servicio Dropbox
+Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-on.png
+
+[Desktop Action StopService]
+Name=Stop Dropbox service
+Name[es]=Detener servicio Dropbox
+Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-off.png
+
+[Desktop Action AutoStart]
+Name=Enable autostart Dropbox service
+Name[es]=Habilitar autoarranque del servicio Dropbox
+Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png

@@ -6,7 +6,6 @@
 
 PREFIXmenu=$(RPM_BUILD_ROOT)/usr/share/kde4/services/ServiceMenus
 PREFIXapp=$(RPM_BUILD_ROOT)/usr/share/applications
-PREFIX256apps=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/256x256/apps
 PREFIX512apps=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/512x512/apps
 PREFIXmime=$(RPM_BUILD_ROOT)/usr/share/mime/text
 PREFIXappmerge=$(RPM_BUILD_ROOT)/etc/xdg/menus/applications-merged
@@ -44,7 +43,7 @@ uninstall:
 		$(PREFIXmenu)/Dolphin-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Dolphin-Tools_change-owner.desktop \
 		$(PREFIXmenu)/Dolphin-Tools_name-whitespace-replace-servicemenu.desktop \
-		$(PREFIXmenu)/image-resizer_servicemenu.desktop \
+		$(PREFIXmenu)/Dropbox-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Graphic-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/iso-manager_addtoservicemenu.desktop \
 		$(PREFIXmenu)/konsole-script_servicemenu.desktop \
@@ -79,6 +78,10 @@ uninstall:
 		$(PREFIXapp)/Dolphin_Tools-connect.sh \
 		$(PREFIXapp)/Dolphin_Tools-disk-use.sh \
 		$(PREFIXapp)/Dolphin_Tools-name-whitespace-replace.sh \
+		$(PREFIXapp)/Dropbox_Tools-frontend.py \
+		$(PREFIXapp)/Dropbox_Tools-frontend.pyc \
+		$(PREFIXapp)/Dropbox_Tools-frontend.pyo \
+		$(PREFIXapp)/Dropbox_Tools-main.sh \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.desktop \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.sh \
 		$(PREFIXapp)/ffmpeg_multifile-convert-video.sh \
@@ -143,64 +146,6 @@ uninstall:
 		$(PREFIXapp)/YouTube_Tools-video-code-collector.desktop \
 		$(PREFIXapp)/YouTube_Tools-video-code-collector.sh
 
-	rm -f $(PREFIX256apps)/application-exit.png \
-		$(PREFIX256apps)/application-pdf.png \
-		$(PREFIX256apps)/application-x-shellscript.png \
-		$(PREFIX256apps)/application-x-smb-server.png \
-		$(PREFIX256apps)/audio-x-generic.png \
-		$(PREFIX256apps)/code-block.png \
-		$(PREFIX256apps)/code-class.png \
-		$(PREFIX256apps)/code-context.png \
-		$(PREFIX256apps)/connect-creating.png \
-		$(PREFIX256apps)/connect-sentry-established.png \
-		$(PREFIX256apps)/connect-sentry-off.png \
-		$(PREFIX256apps)/connect-sentry-on.png \
-		$(PREFIX256apps)/dialog-warning.png \
-		$(PREFIX256apps)/disk-full.png \
-		$(PREFIX256apps)/document-decrypt.png \
-		$(PREFIX256apps)/document-encrypt.png \
-		$(PREFIX256apps)/edit-delete-shred.png \
-		$(PREFIX256apps)/edit-find-mail.png \
-		$(PREFIX256apps)/edit-find-project.png \
-		$(PREFIX256apps)/edit-find-replace.png \
-		$(PREFIX256apps)/edit-rename.png \
-		$(PREFIX256apps)/emblem-new.png \
-		$(PREFIX256apps)/folder-remote.png \
-		$(PREFIX256apps)/hwinfo.png \
-		$(PREFIX256apps)/image-x-generic.png \
-		$(PREFIX256apps)/info.png \
-		$(PREFIX256apps)/internet-mail.png \
-		$(PREFIX256apps)/kde-services.png \
-		$(PREFIX256apps)/keyring.png \
-		$(PREFIX256apps)/list-add-font.png \
-		$(PREFIX256apps)/mcedit.png \
-		$(PREFIX256apps)/mcedit-root.png \
-		$(PREFIX256apps)/mc.png \
-		$(PREFIX256apps)/mc-root.png \
-		$(PREFIX256apps)/media-optical-blu-ray.png \
-		$(PREFIX256apps)/media-optical-burn.png \
-		$(PREFIX256apps)/media-optical-data.png \
-		$(PREFIX256apps)/media-optical-dvd-video.png \
-		$(PREFIX256apps)/media-optical.png \
-		$(PREFIX256apps)/media-optical-recordable.png \
-		$(PREFIX256apps)/media-tape.png \
-		$(PREFIX256apps)/meeting-organizer.png \
-		$(PREFIX256apps)/online.png \
-		$(PREFIX256apps)/resizeimages.png \
-		$(PREFIX256apps)/server-database.png \
-		$(PREFIX256apps)/server.png \
-		$(PREFIX256apps)/socket.png \
-		$(PREFIX256apps)/sshfs.png \
-		$(PREFIX256apps)/svn-update.png \
-		$(PREFIX256apps)/text-x-plain.png \
-		$(PREFIX256apps)/timeadjust.png \
-		$(PREFIX256apps)/utilities-terminal.png \
-		$(PREFIX256apps)/utilities-terminal-user.png \
-		$(PREFIX256apps)/video-x-generic.png \
-		$(PREFIX256apps)/view-process-all.png \
-		$(PREFIX256apps)/xorg.png \
-		$(PREFIX256apps)/youtube-video-download.png
-
 	rm -f $(PREFIX512apps)/ks-audio.png \
 		$(PREFIX512apps)/ks-checksum.png \
 		$(PREFIX512apps)/ks-clock.png \
@@ -209,6 +154,9 @@ uninstall:
 		$(PREFIX512apps)/ks-decrypt.png \
 		$(PREFIX512apps)/ks-disk-space-used.png \
 		$(PREFIX512apps)/ks-dolphin-file-manager.png \
+		$(PREFIX512apps)/ks-dropbox-off.png \
+		$(PREFIX512apps)/ks-dropbox-on.png \
+		$(PREFIX512apps)/ks-dropbox.png \
 		$(PREFIX512apps)/ks-encrypt.png \
 		$(PREFIX512apps)/ks-error.png \
 		$(PREFIX512apps)/ks-extracting-subs.png \
