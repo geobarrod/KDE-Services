@@ -45,7 +45,7 @@ grep -e Stream /tmp/mkvinfo|awk -F : '{print $1,$2}' > /tmp/mkvinfo2
 cat /tmp/mkvinfo2|sed 's/^    //g' > /tmp/mkvinfo3
 cat /tmp/mkvinfo3|sed 's/ /_/g' > /tmp/mkvinfo4
 TID=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --caption="MKV Extract Subtitle" \
-    --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo4 |sed 's/$/ off/g'|grep Subtitle))
+    --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo4 |sed 's/$/ off/g'))
 if-cancel-exit
 
 PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --caption="[Extract|Convert] Audio Track" \

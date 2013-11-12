@@ -278,8 +278,8 @@ install-package() {
     done
     
     for i in $(ls *.log 2> /dev/null); do
-        grep "[w|W]rote" $i|awk -F : '{print $2}'|grep -v debuginfo|grep -v devel|grep -v noarch >> package.ins
-        grep "[w|W]rote" $i|awk -F : '{print $2}'|grep -e debuginfo -e devel -e noarch >> package.del
+        grep "[w|W]rote:" $i|awk -F : '{print $2}'|grep -v debuginfo|grep -v devel|grep -v noarch >> package.ins
+        grep "[w|W]rote:" $i|awk -F : '{print $2}'|grep -e debuginfo -e devel -e noarch >> package.del
     done
     
     for i in $(cat package.ins 2> /dev/null); do

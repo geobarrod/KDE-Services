@@ -37,8 +37,9 @@ DRIVER=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png --capt
                                     intel "Intel i8xx and up" \
                                     mga "Matrox Graphics" \
                                     i128 "Number Nine I128" \
+                                    nouveau "nVidia RIVA/GeForce (generic)" \
                                     nv "nVidia RIVA/GeForce (old)" \
-                                    nouveau "nVidia RIVA/GeForce" \
+                                    nvidia "nVidia RIVA/GeForce (new)" \
                                     rendition "Rendition" \
                                     savage "S3 Savage" \
                                     s3virge "S3 ViRGE" \

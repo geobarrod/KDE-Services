@@ -1,3 +1,10 @@
+* Mon Nov 11 2013  Geovani B. R. <igeo.cu@gmail.com> 1.9-2
+- "Xorg Configure": Added support for new nVidia video cards.
+
+* Sat Nov 09 2013  Geovani B. R. <igeo.cu@gmail.com> 1.9-1
+- "Rebuild RPM Package": Bugfix.
+- "MKV Extract Subtitle": Bugfix.
+
 * Fri Aug 09 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-9
 - Added new submenu "Dropbox Tools" on Dolphin's right click menu, with the following features:
   > Copy [file|directory] to Dropbox folder.

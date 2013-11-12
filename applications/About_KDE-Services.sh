@@ -56,6 +56,7 @@ cat > /tmp/about_kde-services << EOF
         - The Sizer.
         - Package Tools.
         - The Converter.
+        - Dropbox Tools.
         
     Requirements:
         - bash
@@ -108,6 +109,7 @@ cat > /tmp/about_kde-services << EOF
         - tar
         - transcode
         - vlc
+        - wget
         - wodim
         - xdg-utils
         - xorg-x11-server-utils
