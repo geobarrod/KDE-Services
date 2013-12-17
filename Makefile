@@ -137,6 +137,8 @@ uninstall:
 		$(PREFIXapp)/System_Tools-rebuild-package.sh \
 		$(PREFIXapp)/System_Tools-sys-info.desktop \
 		$(PREFIXapp)/System_Tools-sys-info.sh \
+		$(PREFIXapp)/System_Tools-system-monitor.desktop \
+		$(PREFIXapp)/System_Tools-system-monitor.sh \
 		$(PREFIXapp)/System_Tools-Xorg-configure.desktop \
 		$(PREFIXapp)/System_Tools-Xorg-configure.sh \
 		$(PREFIXapp)/The_Converter.sh \

@@ -140,12 +140,12 @@ sed -i 's/hyphen//g' $HOME/.kde-services/youtube-video-codes
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="Destination YouTube Video(s)" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-QUALITY=$(kdialog --geometry=100x100+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
+QUALITY=$(kdialog --geometry=100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
         --radiolist="Select Video Quality" 1080x1920 1080p on 720x1280 720p off 360x640 360p off 2> /dev/null)
 if-cancel-exit
 
 RATE_LIMIT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
-           --inputbox="Enter Download Rate Limit (e.g. 50k or 1.5m )" $(cat $HOME/.kde-services/youtube-download-rate-limit) 2> /dev/null)
+           --inputbox="Enter Download Rate Limit (e.g. 50K or 4.2M)" $(cat $HOME/.kde-services/youtube-download-rate-limit) 2> /dev/null)
 if-cancel-exit
 echo $RATE_LIMIT > $HOME/.kde-services/youtube-download-rate-limit
 

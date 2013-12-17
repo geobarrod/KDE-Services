@@ -148,7 +148,7 @@ for i in $RENAME; do
     mv *$i* $(ls *$i*|sed 's/ /_/g')
 done
 
-PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
+PRIORITY="$(kdialog --geometry=100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off \
          2> /dev/null)"
 if-cancel-exit
@@ -175,12 +175,12 @@ if-cancel-exit
 
 MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Mode" mobile "Mobile Phones (3GP)" \
      1080 "Resolution 1080p" 720 "Resolution 720p" 480 "Resolution 480p" 240 "Resolution 240p" same "Same Resolution" standards \
-     "Standards (VCD - SVCD - DVD)" web "Web (FLV)" --geometry 250x200+10240 2> /dev/null)
+     "Standards (VCD - SVCD - DVD)" web "Web (FLV)" --geometry 250x200 2> /dev/null)
 if-cancel-exit
 ############################### Mobile ###############################
 if [ "$MODE" = "mobile" ]; then
     RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
-               352x288 352x288 --geometry 100x100+10240 2> /dev/null)
+               352x288 352x288 --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -201,7 +201,7 @@ fi
 ############################### 1080p ###############################
 if [ "$MODE" = "1080" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
+          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -246,7 +246,7 @@ fi
 ############################### 720p ###############################
 if [ "$MODE" = "720" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
+          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -291,7 +291,7 @@ fi
 ############################### 480p ###############################
 if [ "$MODE" = "480" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
+          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -336,7 +336,7 @@ fi
 ############################### 240p ###############################
 if [ "$MODE" = "240" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
+          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -381,7 +381,7 @@ fi
 ############################### same ###############################
 if [ "$MODE" = "same" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100+10240 2> /dev/null)
+          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -427,7 +427,7 @@ fi
 if [ "$MODE" = "standards" ]; then
     STD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
         --menu="Choose Video Standard" vcd "VCD" vcd-700 "VCD (700 MB)" svcd "SVCD" \
-        svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x185+10240 2> /dev/null)
+        svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     if [ "$STD" = "vcd" ] || [ "$STD" = "vcd-700" ];then
@@ -562,7 +562,7 @@ fi
 ############################### web ###############################
 if [ "$MODE" = "web" ]; then
     RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
-               352x288 352x288 --geometry 100x100+10240 2> /dev/null)
+               352x288 352x288 --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start

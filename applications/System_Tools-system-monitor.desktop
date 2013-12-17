@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=System-Tools;
+Comment[en_US]=
+Comment=
+Exec=kdesu --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
+GenericName[en_US]=
+GenericName=
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png
+MimeType=
+Name[en_US]=System Monitor
+Name=System Monitor
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

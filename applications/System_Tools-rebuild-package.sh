@@ -366,7 +366,7 @@ fi
 
 sudo-no-timeout
 setterm -cursor off
-PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Rebuild RPM Package" \
+PRIORITY="$(kdialog --geometry=100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Rebuild RPM Package" \
     --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
 EXIT=$?
 if-cancel-exit2

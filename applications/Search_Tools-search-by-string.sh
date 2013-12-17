@@ -9,6 +9,11 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bi
 TMP=/tmp/SearchByString
 
 STRING=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png --caption='Search By String' --inputbox='Enter String To Search' 2> /dev/null)
+
+if [ "$?" != "0" ]; then
+  exit 1
+fi
+
 DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png --caption="Search By String" --progressbar "                                        " /ProgressDialog)
 qdbus $DBUSREF setLabelText "Searching string ($STRING) on $(basename $1) directory recursively..."
 grep -r "$STRING" $1/* > $TMP

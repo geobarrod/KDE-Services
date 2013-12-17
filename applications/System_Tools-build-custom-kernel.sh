@@ -233,7 +233,7 @@ sudo-no-timeout
 
 setterm -cursor off
 
-PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+PRIORITY="$(kdialog --geometry=100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
     --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
 EXIT=$?
 if-cancel-exit2

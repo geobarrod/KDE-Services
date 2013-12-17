@@ -1,3 +1,10 @@
+* Mon Dec 16 2013  Geovani B. R. <igeo.cu@gmail.com> 1.9-3
+- Bugfix some dialogs box screen position geometry.
+- "Search Tools": Bugfix Cancel button.
+- Added new service menu "System Monitor" to "System Tools" submenu.
+- Makefile: Updated.
+- and Happy New Year!.
+
 * Mon Nov 11 2013  Geovani B. R. <igeo.cu@gmail.com> 1.9-2
 - "Xorg Configure": Added support for new nVidia video cards.
 

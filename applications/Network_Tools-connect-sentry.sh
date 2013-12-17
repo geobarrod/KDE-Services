@@ -7,11 +7,11 @@
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 PID="/tmp/connect-sentry.pid"
-CHECKPID=$(ps -p $(cat $PID)|grep Network_Tools|awk -F " " '{print $1}')
+CHECKPID=$(ps -p $(cat $PID 2> /dev/null) 2> /dev/null|grep Network_Tools|awk -F " " '{print $1}')
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        exit 0
+        exit 1
     fi
 }
 

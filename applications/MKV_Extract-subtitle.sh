@@ -48,7 +48,7 @@ TID=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.pn
     --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo4 |sed 's/$/ off/g'))
 if-cancel-exit
 
-PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --caption="[Extract|Convert] Audio Track" \
+PRIORITY="$(kdialog --geometry=100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --caption="[Extract|Convert] Audio Track" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
 if-cancel-exit
 

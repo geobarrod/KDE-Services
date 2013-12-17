@@ -52,7 +52,7 @@ FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.pn
 if-cancel-exit
 
 VCODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --menu="Choose Video Codec" mpg "MPEG-1" flv "FLV" avi "AVI" \
-       --geometry 100x100+10240 2> /dev/null)
+       --geometry 100x100 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Destination Video" --getexistingdirectory "$DIR" 2> /dev/null)

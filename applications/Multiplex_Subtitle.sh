@@ -52,7 +52,7 @@ if [ "$CODEC" != "mpeg2video" ]; then
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Multiplex Subtitle" --passivepopup="[Canceled]   The video file isn't MPEG-2 stream."
     rm -fr $VIDEOINFO
 else
-    PRIORITY="$(kdialog --geometry=100x150+10240 --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --caption="Multiplex Subtitle" \
+    PRIORITY="$(kdialog --geometry=100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --caption="Multiplex Subtitle" \
              --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off \
              2> /dev/null)"
     if-cancel-exit

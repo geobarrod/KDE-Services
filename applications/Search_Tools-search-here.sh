@@ -9,6 +9,11 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bi
 TMP=/tmp/SearchHere
 
 PATTERN=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png --caption="Search Here" --inputbox="Enter Pattern To Search" 2> /dev/null)
+
+if [ "$?" != "0" ]; then
+  exit 1
+fi
+
 DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png --caption="Search Here" --progressbar "                                       " /ProgressDialog)
 qdbus $DBUSREF setLabelText "Searching [File|Dir]name...:  $PATTERN"
 find $1 -iname "*$PATTERN*" > $TMP
