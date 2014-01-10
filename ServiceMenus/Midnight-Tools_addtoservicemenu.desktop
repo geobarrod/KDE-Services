@@ -12,7 +12,7 @@ X-KDE-Submenu[es]=Midnight - Herramientas
 X-KDE-Submenu[x-test]=xxMidnight Toolsxx
 
 [Desktop Action Root-mc]
-Exec=kdesu --noignorebutton -d konsole --new-tab -e mc
+Exec=kdesu --caption="Midnight Commander" --noignorebutton -d konsole --new-tab -e mc
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-root.png
 Name[en_US]=[Root ~]# mc
 Name=[Root ~]# mc
@@ -20,7 +20,7 @@ Name[es]=[Root ~]# mc
 Name[x-test]=xx[Root ~]# mcxx
 
 [Desktop Action Root-mcedit]
-Exec=kdesu --noignorebutton -d konsole --new-tab -e mcedit
+Exec=kdesu --caption="Midnight Commander Editor" --noignorebutton -d konsole --new-tab -e mcedit
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-mcedit-root.png
 Name[en_US]=[Root ~]# mcedit
 Name=[Root ~]# mcedit

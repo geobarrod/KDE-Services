@@ -63,7 +63,8 @@ if [ "$STATE" == "Enabled" ]; then
 
   egrep $MODE /var/log/messages > $fERROR
   echo $$ > $PID_FILE
-  kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="System Monitor" --passivepopup="[Enabled]" 2> /dev/null
+  kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="System Monitor" \
+	    --passivepopup="[Enabled]   The messages of alert show up in /dev/pts/0, /dev/tty12 and root's mail" 2> /dev/null
 
   while true;do
     egrep $MODE /var/log/messages > $lERROR

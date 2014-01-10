@@ -7,7 +7,7 @@ X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
 
 [Desktop Action ChangeOwner]
-Exec=kdesu --noignorebutton -d /usr/share/applications/Dolphin_Tools-change-owner.sh
+Exec=kdesu --caption="Change Owner Here" --noignorebutton -d /usr/share/applications/Dolphin_Tools-change-owner.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png
 Name[en_US]=Change Owner Here
 Name=Change Owner Here

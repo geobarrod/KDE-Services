@@ -1,25 +1,14 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #################################################################
-# For KDE-Services. 2012-2013.					#
+# For KDE-Services. 2012-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
+# Improved by Victor Guardiola (vguardiola) Jan 5 2014		#
+# 	-Fixed the problem of [dir|file]name with whitespaces.	#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-DIR=""
 MOUNTEXIT=""
-MOVEXIT=""
-
-###################################
-############ Functions ############
-###################################
-
-check-exit() {
-    if [ "$?" = "0" ]; then
-        true
-        MOVEXIT=0
-    fi
-}
 
 ##############################
 ############ Main ############
@@ -28,73 +17,22 @@ check-exit() {
 DIR=$(dirname "$1")
 cd "$DIR"
 
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
-    sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname \
-    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
-    sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
-check-exit
-cd ./
-
-RENAMETMP=$(ls *.* 2> /dev/null|grep " " > /tmp/rename)
-RENAME=$(cat /tmp/rename)
-
-for i in $RENAME; do
-    mv *$i* $(ls *$i*|sed 's/ /_/g') 2> /dev/null
-    check-exit
-done
-
-RENAMETMP=$(ls *.ISO 2> /dev/null > /tmp/rename)
-RENAME=$(cat /tmp/rename)
-
-for i in $RENAME; do
-    mv *$i* $(ls *$i*|sed 's/.ISO$/.iso/g') 2> /dev/null
-    check-exit
-done
-
-rm -fr /tmp/rename
-
-fuseiso -p $1 $(ls $1|sed 's/.iso$//')
-MOUNTEXIT=$?
+if [ "$(basename "$1" .ISO)" == "${1##*/}" ]; then
+   fuseiso -p "$1" "${1%.iso}"
+   MOUNTEXIT=$?
+else
+   rename .ISO .iso *
+   kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount ISO Image" \
+                   --passivepopup="[Error] Can't mount ISO image: Renamed extension of ISO image, because contain uppercase characters. Please try again."
+   exit 1
+fi
 
 if [ "$MOUNTEXIT" = "0" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --title="Mount ISO Image" --passivepopup="[Finished]"
-elif [ "$MOUNTEXIT" != "0" ] && [ "$MOVEXIT" != "0" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount ISO Image" \
+   kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --title="Mount ISO Image" --passivepopup="[Finished]"
+else
+   kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount ISO Image" \
                    --passivepopup="[Error] Can't mount ISO image: Already mount or check image integrity."
-elif [ "$MOVEXIT" = "0" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-warning.png --title="Mount ISO Image" \
-                   --passivepopup="Renamed path or filename of ISO image, because contain whitespaces or uppercase extension. Please try again."
+   exit 1
 fi
 
 exit 0

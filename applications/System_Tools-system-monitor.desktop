@@ -2,7 +2,7 @@
 Categories=System-Tools;
 Comment[en_US]=
 Comment=
-Exec=kdesu --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
+Exec=kdesu --caption="System Monitor" --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
 GenericName[en_US]=
 GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png

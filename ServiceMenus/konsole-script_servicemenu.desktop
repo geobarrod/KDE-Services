@@ -20,7 +20,7 @@ Name[es]=Ejecutar Programa
 Name[x-test]=xxRun Applicationxx
 
 [Desktop Action RootExecScript]
-Exec=kdesu --noignorebutton -d -c "chmod 755 %u; konsole --hold -e %u"
+Exec=kdesu --caption="Run Application" --noignorebutton -d -c "chmod 755 %u; konsole --hold -e %u"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name[en_US]=Run Application (Root)
 Name=Run Application (Root)

@@ -1,3 +1,17 @@
+* Thu Jan 9 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-4
+- "Mount ISO Image" and "Umount ISO Image": Improved, fixed the problem of [dir|file]name with whitespaces.
+- "System Monitor": Enhancement.
+- "Xorg Configure": Enhancement.
+- "Change Owner Here": Enhancement.
+- "Run Application (Root)": Enhancement.
+- "Midnight Commander": Enhancement.
+- "Midnight Commander Editor": Enhancement.
+- "HTTP Publisher": Enhancement.
+- "Listening Sockets": Enhancement.
+- "Search By String": Enhancement.
+- "Search Here": Enhancement.
+- "Modified Files Here": Enhancement.
+
 * Mon Dec 16 2013  Geovani B. R. <igeo.cu@gmail.com> 1.9-3
 - Bugfix some dialogs box screen position geometry.
 - "Search Tools": Bugfix Cancel button.

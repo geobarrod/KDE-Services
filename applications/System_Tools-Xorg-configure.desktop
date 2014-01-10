@@ -2,7 +2,7 @@
 Categories=System-Tools;
 Comment[en_US]=
 Comment=
-Exec=kdesu --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
+Exec=kdesu --caption="Xorg Configure" --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
 GenericName[en_US]=
 GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png

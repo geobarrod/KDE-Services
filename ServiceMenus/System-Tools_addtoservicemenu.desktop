@@ -51,7 +51,7 @@ Name[es]=Información del Sistema
 Name[x-test]=xxSystem Informationxx
 
 [Desktop Action SysMonitor]
-Exec=kdesu --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
+Exec=kdesu --caption="System Monitor" --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png
 Name[en_US]=System Monitor
 Name=System Monitor
@@ -59,7 +59,7 @@ Name[es]=Monitor del Sistema
 Name[x-test]=xxSystem Monitorxx
 
 [Desktop Action XorgConf]
-Exec=kdesu --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
+Exec=kdesu --caption="Xorg Configure" --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png
 Name[en_US]=Xorg Configure
 Name=Xorg Configure

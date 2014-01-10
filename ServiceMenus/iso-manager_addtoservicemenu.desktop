@@ -76,7 +76,7 @@ Name[es]=SHA512sum Imagen ISO
 Name[x-test]=xxSHA512sum ISO Imagexx
 
 [Desktop Action UmountCD-Image]
-Exec=fuser -k %u; fusermount -u $(ls %u|sed 's/.iso$//'); rm -fr $(ls %u|sed 's/.iso$//'); kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png --title="Umount ISO Image" --passivepopup="[Finished]"
+Exec=fuser -k %u; fusermount -u "$(ls "%u"|sed 's/.iso$//')"; rm -fr "$(ls "%u"|sed 's/.iso$//')"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png --title="Umount ISO Image" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png
 Name[en_US]=Umount ISO Image
 Name=Umount ISO Image

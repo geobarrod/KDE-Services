@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013.					#
+# For KDE-Services. 2013-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -10,7 +10,7 @@ VERSION=$(head -n1 /usr/share/doc/kde-services*/ChangeLog |awk '{print $10}')
 
 cat > /tmp/about_kde-services << EOF
 
-			KDE-Services, version $VERSION, (C) 2011-2013.
+			KDE-Services, version $VERSION, (C) 2011-2014.
 			http://sourceforge.net/projects/kde-services/
 
     Description:
@@ -125,7 +125,8 @@ cat > /tmp/about_kde-services << EOF
         Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
         David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
                                         of ​​integrating PDFktools on "PDF Tools").
-                                        
+	Victor Guardiola (vguardiola) (Improved source code for "Mount ISO Image" and "Umount ISO Image" services menu;
+				        fixed the problem of [dir|file]name with whitespaces).
     License:
         GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)
         
