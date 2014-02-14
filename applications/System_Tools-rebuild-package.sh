@@ -366,7 +366,7 @@ fi
 
 sudo-no-timeout
 setterm -cursor off
-PRIORITY="$(kdialog --geometry=100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Rebuild RPM Package" \
+PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Rebuild RPM Package" \
     --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
 EXIT=$?
 if-cancel-exit2
@@ -397,7 +397,7 @@ fi
 if [ "$(yum list installed|grep -oe autoconf -oe automake -oe binutils -oe bison -oe flex -oe gcc -oe gcc-c++ -oe gdb -oe gettext \
     -oe libtool -oe make -oe pkgconfig -oe redhat-rpm-config -oe rpm-build -oe strace -oe ccache|awk -F . '{print $1}'|sort -u|xargs)" != \
     "autoconf automake binutils bison ccache flex gcc gcc-c++ gdb gettext libtool make pkgconfig redhat-rpm-config rpm-build strace" ]; then
-    sudo yum -y --nogpgcheck groupinstall "Development Tools"
+    sudo yum -y --nogpgcheck groupinstall "Development Tools" "C Development Tools and Libraries" "RPM Development Tools"
 fi
 
 sudo ln -fs /usr/bin/ccache /usr/local/bin/gcc

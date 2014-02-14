@@ -119,16 +119,16 @@ cat > /tmp/about_kde-services << EOF
         - zip
         
     Author: 
-        Geovani Bárzaga Rodríguez (geobarrod) <igeo.cu@gmail.com>, Developer and Fedora RPM Maintainer.
+      Geovani Bárzaga Rodríguez (geobarrod) <igeo.cu@gmail.com>, Developer and Fedora RPM Maintainer.
 
     Contributors:
-        Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
-        David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
-                                        of ​​integrating PDFktools on "PDF Tools").
-	Victor Guardiola (vguardiola) (Improved source code for "Mount ISO Image" and "Umount ISO Image" services menu;
-				        fixed the problem of [dir|file]name with whitespaces).
+      Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
+      David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
+	of ​​integrating PDFktools on "PDF Tools").
+      Victor Guardiola (vguardiola) (Improved source code for "Mount ISO Image" and "Umount ISO Image"
+	services menu; fixed the problem of [dir|file]name with whitespaces).
     License:
-        GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)
+      GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)
         
 EOF
 

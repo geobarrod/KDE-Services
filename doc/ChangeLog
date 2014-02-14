@@ -1,3 +1,9 @@
+* Wed Feb 12 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-5
+- "Convert Video Files": Added support for video resolution 2K and 4K.
+- "Connect Sentry": Enhancement.
+- "Build Custom Kernel": Enhancement.
+- "Rebuild RPM Package": Enhancement.
+
 * Thu Jan 9 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-4
 - "Mount ISO Image" and "Umount ISO Image": Improved, fixed the problem of [dir|file]name with whitespaces.
 - "System Monitor": Enhancement.

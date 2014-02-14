@@ -41,7 +41,7 @@ qdbusinsert() {
 
 cd "$(dirname "$1")"
 
-PRIORITY="$(kdialog --geometry=100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn ISO Image" \
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn ISO Image" \
          --radiolist="Choose Scheduling Priority" Highest Highest on High High off Normal Normal off 2> /dev/null)"
 if-cancel-exit
 

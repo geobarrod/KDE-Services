@@ -58,7 +58,7 @@ if [ "$STATE" = "Enabled" ]; then
         EST=$(cat /tmp/established|grep ">"|awk -F " " '{print $2,$3}')
         
         if [ "$EXIT" != "0" ]; then
-            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-warning.png --title="Connection Established" --passivepopup="$EST" 2> /dev/null
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-warning.png --title="Connection Established - $(date "+%b %d %H:%M %Y")" --passivepopup="$EST" 2> /dev/null
         fi
     done
     

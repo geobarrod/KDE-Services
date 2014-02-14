@@ -148,7 +148,7 @@ for i in $RENAME; do
     mv *$i* $(ls *$i*|sed 's/ /_/g')
 done
 
-PRIORITY="$(kdialog --geometry=100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
+PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off \
          2> /dev/null)"
 if-cancel-exit
@@ -174,8 +174,8 @@ DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png 
 if-cancel-exit
 
 MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Mode" mobile "Mobile Phones (3GP)" \
-     1080 "Resolution 1080p" 720 "Resolution 720p" 480 "Resolution 480p" 240 "Resolution 240p" same "Same Resolution" standards \
-     "Standards (VCD - SVCD - DVD)" web "Web (FLV)" --geometry 250x200 2> /dev/null)
+     4K "Resolution Ultra-HD (4K)" 2K "Resolution Ultra-HD (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 240 "Resolution 240p" \
+     same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV)" --geometry 250x225 2> /dev/null)
 if-cancel-exit
 ############################### Mobile ###############################
 if [ "$MODE" = "mobile" ]; then
@@ -198,6 +198,96 @@ if [ "$MODE" = "mobile" ]; then
         elapsedtime
     done
 fi
+############################### 4K ###############################
+if [ "$MODE" = "4K" ]; then
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    if-cancel-exit
+    
+    progressbar-start
+    
+    for i in $FILES; do
+        logs
+        COUNT=$(expr $COUNT + 1)
+        if [ "$CODEC" = "mpg" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 4095x2160 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_4K.mpg" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "mp4-h.264" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s 4k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_Ultra-HD_4K.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "avi" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 4k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_4K.avi" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            elapsedtime
+        fi
+    done
+fi
+############################### 2K ###############################
+if [ "$MODE" = "2K" ]; then
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    if-cancel-exit
+    
+    progressbar-start
+    
+    for i in $FILES; do
+        logs
+        COUNT=$(expr $COUNT + 1)
+        if [ "$CODEC" = "mpg" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_2K.mpg" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "mp4-h.264" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_Ultra-HD_2K.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "avi" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_2K.avi" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            elapsedtime
+        fi
+    done
+fi
 ############################### 1080p ###############################
 if [ "$MODE" = "1080" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
@@ -213,7 +303,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_1080p.mpg" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Full-HD_1080p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -224,7 +314,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_1080p.mp4" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_Full-HD_1080p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -235,7 +325,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_1080p.avi" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Full-HD_1080p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -258,7 +348,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_720p.mpg" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_HD_720p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -269,7 +359,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_720p.mp4" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_HD_720p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -280,7 +370,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_720p.avi" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_HD_720p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -303,7 +393,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_480p.mpg" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_ED_480p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -314,7 +404,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_480p.mp4" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_ED_480p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
@@ -325,7 +415,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_480p.avi" > $LOG 2>&1
+                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_ED_480p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)

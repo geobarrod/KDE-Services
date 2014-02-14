@@ -140,7 +140,7 @@ sed -i 's/hyphen//g' $HOME/.kde-services/youtube-video-codes
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="Destination YouTube Video(s)" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-QUALITY=$(kdialog --geometry=100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
+QUALITY=$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
         --radiolist="Select Video Quality" 1080x1920 1080p on 720x1280 720p off 360x640 360p off 2> /dev/null)
 if-cancel-exit
 
