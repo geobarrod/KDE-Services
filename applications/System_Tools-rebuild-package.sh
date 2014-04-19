@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -28,16 +28,16 @@ ELAPSED_TIME=""
 
 elapsed-time() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME s." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}s" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME m." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}m" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME h." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}h" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME d." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}d" 2> /dev/null
     fi
 }
 
@@ -207,9 +207,9 @@ check-builddep() {
 
 notify() {
     if [ "$EXIT" = "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package - Install $APPNAME" --passivepopup="[Finished]" 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Rebuild RPM Package" --passivepopup="Install $APPNAME   [Finished]" 2> /dev/null
     else
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Rebuild RPM Package - Install $APPNAME" --passivepopup="[Error]: See debug console." \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Rebuild RPM Package" --passivepopup="Install $APPNAME   [Error]: See debug console." \
                        2> /dev/null
     fi
 }
@@ -267,7 +267,7 @@ rebuild-package() {
     done
     
     FINAL_TIME=$(date +%s)
-    ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+    ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 }
 
 install-package() {
@@ -283,7 +283,7 @@ install-package() {
     done
     
     for i in $(cat package.ins 2> /dev/null); do
-        basename $i >> package.tmp
+        echo ${i##*/} >> package.tmp
     done
     
     if [ ! -s package.tmp ]; then
@@ -318,7 +318,7 @@ install-package() {
         echo -e "\n\n$GREEN> Installing RPM Packages...$WHITE\n"
         
         for i in $(cat ~/rpmbuild/TMP/package.ins 2> /dev/null); do
-            APPNAME=$(basename $i)
+            APPNAME=${i##*/}
             sudo rpm -Uvh --force $i
             EXIT=$?
             rpm-install-error
@@ -336,7 +336,7 @@ install-package() {
         echo $INSTALLPKG|xargs -n1 > ~/rpmbuild/TMP/package.ins
         
         for i in $(cat ~/rpmbuild/TMP/package.ins 2> /dev/null); do
-            APPNAME=$(basename $i)
+            APPNAME=${i##*/}
             sudo rpm -Uvh --force $i
             EXIT=$?
             rpm-install-error
@@ -420,7 +420,7 @@ if-cancel-exit
 if [ "$EXIT" = "1" ]; then
     if [ ! -s ~/.kde-services/source-packages ]; then
         mkdir ~/.kde-services 2> /dev/null
-        echo "thunderbird" > ~/.kde-services/source-packages
+        echo "kate" > ~/.kde-services/source-packages
     fi
     
     SHOWAPPNAME=$(cat ~/.kde-services/source-packages|xargs -n1|awk -F " " '{print $1,$1}'|sed 's/$/ off/g'|xargs)
@@ -460,8 +460,8 @@ if [ "$EXIT" = "1" ]; then
         sudo yum info $i > /dev/null 2>&1
         if [ "$?" != "0" ]; then
             echo -n "$i " >> /tmp/package-not-exist
-            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Rebuild RPM Package - $i" \
-                           --passivepopup="[Error]: This package not exist in your Repositories." 2> /dev/null
+            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Rebuild RPM Package" \
+                           --passivepopup="$i   [Error]: This package not exist in your Repositories." 2> /dev/null
             sed -i "s;$i;;g" ~/.kde-services/source-packages
             cat ~/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
             cat /tmp/source-packages > ~/.kde-services/source-packages
@@ -508,10 +508,10 @@ if [ "$EXIT" = "0" ]; then
     
     for i in $SOURCEFILE; do
         sudo chown $USER:$USER $i
-        echo -e "$GREEN> Installing RPMs Needed For Build $(basename $i)...$WHITE\n"
+        echo -e "$GREEN> Installing RPMs Needed For Build ${i##*/}...$WHITE\n"
         sudo yum-builddep -y --nogpgcheck $i
         check-builddep
-        echo -e "\n$GREEN> Installing Source RPM Package $(basename $i)...$WHITE\n"
+        echo -e "\n$GREEN> Installing Source RPM Package ${i##*/}...$WHITE\n"
         rpm -Uvh $i > /dev/null 2>&1
     done
     

@@ -2,6 +2,7 @@
 # Service menu for PDF Tools : script file
 # Adjusted for KDE-Services integration by Geovani Barzaga Rodriguez
 # <igeo.cu@gmail.com>, 2013-01-09
+# Improved bash script code by Geovani Barzaga Rodriguez <igeo.cu@gmail.com>, 2014-03-06
 
 # This file is part of PDFktools.
 # PDFktools was created by Sylvain Vidal < garion @ mailoo.org >
@@ -37,8 +38,8 @@ nbfiles=$#
 ######### FUNCTIONS #########
 directories_write(){
     for f in "$@"; do
-        if [ ! -w $(dirname "$f") ]; then
-            kdialog $KDE --error $"$(dirname $f) is not writable"
+        if [ ! -w "${f%/*}" ]; then
+            kdialog $KDE --error $"${f%/*} is not writable"
             exit 1
         fi
     done
@@ -119,12 +120,12 @@ init_files_dbus(){
 metadata_edit_all(){
     for typexmp in title subject author creator producer keywords ; do
         case $typexmp in
-            'title')    display_label=$"Title for $(basename $1)"    ;;
-            'subject')  display_label=$"Subject for $(basename $1)"  ;;
-            'author')   display_label=$"Author for $(basename $1)"   ;;
-            'creator')  display_label=$"Creator for $(basename $1)"  ;;
-            'producer') display_label=$"Producer for $(basename $1)" ;;
-            'keywords') display_label=$"Keywords for $(basename $1)" ;;
+            'title')    display_label=$"Title for ${1##*/}"    ;;
+            'subject')  display_label=$"Subject for ${1##*/}"  ;;
+            'author')   display_label=$"Author for ${1##*/}"   ;;
+            'creator')  display_label=$"Creator for ${1##*/}"  ;;
+            'producer') display_label=$"Producer for ${1##*/}" ;;
+            'keywords') display_label=$"Keywords for ${1##*/}" ;;
         esac
         oldmeta="$(exiftool -PDF:$typexmp "$1" | cut -b 35-)"
         meta="$(kdialog $KDE --textinputbox "$display_label" "$oldmeta")"
@@ -195,8 +196,8 @@ case $action in
         for f in "$@"; do
             echo "$f in progress..." | tee -a $LOG
             init_files_dbus
-            obj=$(basename "$f")
-            out=$(dirname "$f")/"`echo $obj | perl -pe 's/\\.[^.]+$//'`_compressed.pdf"
+            obj="${f##*/}"
+            out="${f%/*}"/"${obj%.*}_compressed.pdf"
 	    if [ "$quality" = "screen" ]; then
 		qdbus $dbusRef setLabelText $"Compressing $obj in low resolution"
 	    elif [ "$quality" = "ebook" ]; then
@@ -219,13 +220,13 @@ case $action in
         echo "Merge all selected files" | tee -a $LOG
         files_read "$@"
         for f in "$@"; do obj="$obj \"$f\""; done
-        out="$(kdialog $KDE --title "Destination" --getsavefilename "$(pwd)/New_File.pdf" $"*.pdf | PDF Files")"
+        out="$(kdialog $KDE --title "Destination" --getsavefilename "${f%/*}/New_File.pdf" $"*.pdf | PDF Files")"
         exit_silent
         directories_write "$out"
 	echo $obj
 	init_dbus
 	init_files_dbus
-	qdbus $dbusRef setLabelText $"Merging $nbfiles files in $(basename $out)"
+	qdbus $dbusRef setLabelText $"Merging $nbfiles files in ${out##*/}"
         ghostscript "$@" | tee -a $LOG
         error_log $"Error during the merge of $obj"
 	qdbus $dbusRef close
@@ -238,7 +239,7 @@ case $action in
         directories_write "$@"
         for f in "$@"; do
             echo "$f in progress..." | tee -a $LOG
-            obj=$(basename "$f")
+            obj="${f##*/}"
             out="$f"
             files_write "$out"
             metadata_edit_all "$out" | tee -a $LOG
@@ -250,7 +251,7 @@ case $action in
         files_read "$@"
         for f in "$@"; do
 	    echo "$f in progress..." | tee -a $LOG
-            obj=$(basename "$f")
+            obj="${f##*/}"
             out="$(kde4-config --path tmp)$obj.txt"
             file=$(file -bp "$f")
             echo -e "$f\n$file\n" > "${out}"
@@ -266,7 +267,7 @@ case $action in
         directories_write "$@"
         for f in "$@"; do
             echo "$f in progress..." | tee -a $LOG
-            obj=$(basename "$f")
+            obj="${f##*/}"
             totalpage=$(exiftool "$f" | grep "Page Count" | cut -d: -f 2-)
             firstpage=$(kdialog $KDE --combobox $"Splitting of $obj from the page..." $(seq 1 $totalpage) --default 1)
             exit_silent

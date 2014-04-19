@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013.					#
+# For KDE-Services. 2013-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -12,8 +12,8 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bi
 ############### Main ##############
 ###################################
 
-cd $(dirname $1)
-stat --printf "Name:\t\t %n\n" "$(basename "$1")" > /tmp/show-status
+cd "${1%/*}"
+stat --printf "Name:\t\t %n\n" "${1##*/}" > /tmp/show-status
 stat --printf "Location:\t\t %n\n" "$1" >> /tmp/show-status
 stat --printf "User name of owner:\t %U\n" "$1" >> /tmp/show-status
 stat --printf "User ID of owner:\t %u\n" "$1" >> /tmp/show-status

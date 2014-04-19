@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -36,24 +36,11 @@ mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep
 cd ./
 mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-DIR=$(pwd)
-
 mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+cd ./
 
-if [ "$?" != "0" ]; then
-    cd ./
-else
-    cd "$(pwd|grep " "|sed 's/ /_/g')"
-    DIR=$(pwd)
-fi
-
-RENAMETMP=$(ls -d * 2> /dev/null|grep " " > /tmp/rename)
-RENAME=$(cat /tmp/rename)
-
-for i in $RENAME; do
-    mv *$i* $(ls *$i*|sed 's/ /_/g') 2> /dev/null
+for i in *; do
+    mv "$i" "${i// /_}" 2> /dev/null
 done
 
-rm -fr /tmp/rename
-
-exit 0
+DIR="$(pwd)"

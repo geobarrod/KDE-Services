@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -37,7 +37,7 @@ if-avisplit-cancel() {
 progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILE|wc -w)
-    COUNTFILES=$(expr $COUNTFILES + 1)
+    COUNTFILES=$((++COUNTFILES))
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="AVI Split (By Time Range)" --progressbar "                      " /ProgressDialog)
 }
 
@@ -48,29 +48,29 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "AVI Split (By Time Range):  $(basename $FILE)"
+    qdbus $DBUSREF setLabelText "AVI Split (By Time Range):  ${FILE##*/}"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
-                       --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME s."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range)" \
+                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}s"
         
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
-                       --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME m."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range)" \
+                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}m"
         
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
-                       --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME h."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range)" \
+                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}h"
         
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range):  $(basename $FILE)" \
-                       --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME d."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (By Time Range)" \
+                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}d"
     fi
 }
 
@@ -79,20 +79,20 @@ elapsedtime() {
 ##############################
 
 TIMERANGE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="AVI Split (By Time Range)" \
-          --inputbox="Enter time range (One range: 00:10:00-00:11:00 or multi-range: 00:10:00-00:11:00,00:23:00-00:24:00)" 00:05:00-00:06:00 \
+          --inputbox="Enter time range in hh:mm:ss (One range: 00:10:00-00:11:00 or multi-range: 00:10:00-00:11:00,00:23:00-00:24:00)" 00:00:00-00:00:00 \
           2> /dev/null)
 if-cancel-exit
 
 BEGIN_TIME=$(date +%s)
 progressbar-start
-COUNT=$(expr $COUNT + 1)
+COUNT=$((++COUNT))
 qdbusinsert
 
-avisplit -i $1 -c -o "`echo $1 | perl -pe 's/\\.[^.]+$//'`_edit.avi" -t $TIMERANGE
+avisplit -i "$1" -c -o "${1%.*}_edit.avi" -t $TIMERANGE
 if-avisplit-cancel
 
 FINAL_TIME=$(date +%s)
-ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 elapsedtime
 
 progressbar-close

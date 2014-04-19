@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -73,7 +73,7 @@ cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
     "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname \
     "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
@@ -85,24 +85,14 @@ mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep
 cd ./
 mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-DIR=$(pwd)
-
 mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+cd ./
 
-if [ "$?" != "0" ]; then
-    cd ./
-else
-    cd "$(pwd|grep " "|sed 's/ /_/g')"
-    DIR=$(pwd)
-fi
-
-RENAMETMP=$(ls *.mp2 *.mpe *.mpeg *.mpg *.vob *.MP2 *.MPE *.MPEG *.MPG *.VOB 2> /dev/null|grep " " > /tmp/convert.rename)
-
-RENAME=$(cat /tmp/convert.rename)
-
-for i in $RENAME; do
-    mv *$i* $(ls *$i*|sed 's/ /_/g')
+for i in *; do
+    mv "$i" "${i// /_}" 2> /dev/null
 done
+
+DIR="$(pwd)"
 
 PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png \
          --caption="D.V.D. Assembler" --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off \
@@ -167,19 +157,19 @@ rm -fr $DESTINATION/$DVD_NAME
 progressbar-close
 
 FINAL_TIME=$(date +%s)
-ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 
 if [ "$ELAPSED_TIME" -lt "60" ]; then
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --title="D.V.D. Assembler" \
-                   --passivepopup="[Finished]   $DVD_NAME.iso    Elapsed Time: $ELAPSED_TIME s."
+                   --passivepopup="[Finished]   $DVD_NAME.iso    Elapsed Time: ${ELAPSED_TIME}s"
 elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --title="D.V.D. Assembler" \
-                   --passivepopup="[Finished]   $DVD_NAME.iso   Elapsed Time: $ELAPSED_TIME m."
+                   --passivepopup="[Finished]   $DVD_NAME.iso   Elapsed Time: ${ELAPSED_TIME}m"
 elif [ "$ELAPSED_TIME" -gt "3599" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png --title="D.V.D. Assembler" \
-                   --passivepopup="[Finished]   $DVD_NAME.iso   Elapsed Time: $ELAPSED_TIME h."
+                   --passivepopup="[Finished]   $DVD_NAME.iso   Elapsed Time: ${ELAPSED_TIME}h"
 fi
 
 echo "Finish DVD Assembler" > /tmp/speak

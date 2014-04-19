@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -31,8 +31,8 @@ LOGERROR=""
 ###################################
 
 logs() {
-    LOG="/tmp/$(basename $i).log"
-    LOGERROR="$(basename $i).err"
+    LOG="/tmp/${i##*/}.log"
+    LOGERROR="${i##*/}.err"
     rm -f $LOGERROR
 }
 
@@ -52,7 +52,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Converting video $(basename $i)" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Converting video ${i##*/}" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -68,7 +68,7 @@ time-position() {
 progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
-    COUNTFILES=$(expr $COUNTFILES + 1)
+    COUNTFILES=$((++COUNTFILES))
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --progressbar "                                " $COUNTFILES)
 }
 
@@ -79,19 +79,19 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Converting Video:  $(basename $i)  [$COUNT/$(expr $COUNTFILES - 1)]"
+    qdbus $DBUSREF setLabelText "Converting Video:  ${i##*/}  [$COUNT/$(($COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME s."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME m."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME h."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="Converting Video" --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
 }
@@ -104,8 +104,8 @@ DIR=$1
 cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
-    sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
+    's/ /_/g')" 2> /dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
     "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
@@ -119,8 +119,8 @@ cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
     "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
-    sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
+    |sed 's/ /_/g')" 2> /dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
@@ -128,25 +128,14 @@ mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep
 cd ./
 mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-DIR=$(pwd)
-
 mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+cd ./
 
-if [ "$?" != "0" ]; then
-    cd ./
-else
-    cd "$(pwd|grep " "|sed 's/ /_/g')"
-    DIR=$(pwd)
-fi
-
-RENAMETMP=$(ls *.mpg *.mpeg *.mpeg4 *.mp4 *.mov *.flv *.3gp *.avi *.dat *.vob *.m2v *.m4v *.mkv *.wmv *.ogv *.dv *.MPG *.MPEG *.MPEG4 *.MP4 \
-          *.MOV *.FLV *.3GP *.AVI *.DAT *.VOB *.M2V *.M4V *.MKV *.WMV *.OGV *.DV 2> /dev/null|grep " " > /tmp/convert.rename)
-
-RENAME=$(cat /tmp/convert.rename)
-
-for i in $RENAME; do
-    mv *$i* $(ls *$i*|sed 's/ /_/g')
+for i in *; do
+    mv "$i" "${i// /_}" 2> /dev/null
 done
+
+DIR="$(pwd)"
 
 PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off \
@@ -187,14 +176,15 @@ if [ "$MODE" = "mobile" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         BEGIN_TIME=$(date +%s)
         qdbusinsert
+        DST_FILE="${i%.*}"
         ffmpeg -y -i $i -qscale 0 -mbd 2 -s $RESOLUTION -strict experimental -acodec aac -vcodec mpeg4 -vb 1000k -trellis 1 -sn -g 12 \
-            "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$RESOLUTION.3gp" > $LOG 2>&1
+            "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.3gp" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
     done
 fi
@@ -208,37 +198,40 @@ if [ "$MODE" = "4K" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$CODEC" = "mpg" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s 4095x2160 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_4K.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "mp4-h.264" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s 4k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_Ultra-HD_4K.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_Ultra-HD_4K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s 4k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_4K.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -253,37 +246,40 @@ if [ "$MODE" = "2K" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$CODEC" = "mpg" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_2K.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_Ultra-HD_2K.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "mp4-h.264" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_Ultra-HD_2K.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_Ultra-HD_2K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Ultra-HD_2K.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_Ultra-HD_2K.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -298,37 +294,40 @@ if [ "$MODE" = "1080" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$CODEC" = "mpg" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Full-HD_1080p.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "mp4-h.264" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_Full-HD_1080p.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_Full-HD_1080p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_Full-HD_1080p.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -343,37 +342,40 @@ if [ "$MODE" = "720" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$CODEC" = "mpg" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_HD_720p.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_HD_720p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "mp4-h.264" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_HD_720p.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_HD_720p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_HD_720p.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_HD_720p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -388,37 +390,40 @@ if [ "$MODE" = "480" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$CODEC" = "mpg" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_ED_480p.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_ED_480p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "mp4-h.264" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_ED_480p.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_ED_480p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_ED_480p.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_ED_480p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -433,37 +438,40 @@ if [ "$MODE" = "240" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$CODEC" = "mpg" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s qvga -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_240p.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_240p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "mp4-h.264" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s qvga -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_240p.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_240p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -s qvga -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_240p.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_240p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -478,37 +486,40 @@ if [ "$MODE" = "same" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$CODEC" = "mpg" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_sr.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_sr.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "mp4-h.264" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_H.264_sr.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_sr.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -qscale 0 -mbd 2 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_sr.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_sr.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -570,81 +581,88 @@ if [ "$MODE" = "standards" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         if [ "$STD" = "vcd" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$FORMAT.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$STD" = "vcd-700" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
-            ffmpeg -y -ss $TIMEPOSITION -fs $FILESIZE -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$FORMAT.mpg" > $LOG 2>&1
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$STD" = "svcd" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$FORMAT.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$STD" = "svcd-700" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
-            ffmpeg -y -ss $TIMEPOSITION -fs $FILESIZE -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$FORMAT.mpg" > $LOG 2>&1
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$STD" = "dvd" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
+            DST_FILE="${i%.*}"
             ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$FORMAT.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$STD" = "dvd-4.7" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
-            ffmpeg -y -ss $TIMEPOSITION -fs $FILESIZE -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$FORMAT.mpg" > $LOG 2>&1
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
+                "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
         
         if [ "$STD" = "dvd-8.0" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
-            ffmpeg -y -ss $TIMEPOSITION -fs $FILESIZE -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
-                "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$FORMAT.mpg" > $LOG 2>&1
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
+                "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
     done
@@ -659,14 +677,15 @@ if [ "$MODE" = "web" ]; then
     
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         BEGIN_TIME=$(date +%s)
         qdbusinsert
+        DST_FILE="${i%.*}"
         ffmpeg -y -i $i -qscale 0 -mbd 2 -s $RESOLUTION -vcodec flv -vb 1000k -acodec libmp3lame -trellis 1 -sn -g 12 \
-            "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$RESOLUTION.flv" > $LOG 2>&1
+            "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.flv" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
     done
 fi

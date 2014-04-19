@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -26,16 +26,16 @@ ELAPSED_TIME=""
 
 elapsed-time() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME s." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}s" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME m." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}m" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME h." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}h" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: $ELAPSED_TIME d." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}d" 2> /dev/null
     fi
 }
 
@@ -103,14 +103,14 @@ make-config-kernel() {
 
 save-config-i686() {
     echo -e "\n$GREEN> Saving Kernel Config File In $HOME...$WHITE\n"
-    cp .config ~/rpmbuild/SOURCES/config-`uname -m`-PAE
-    cp .config ~/kernel-config-`uname -m`-PAE_$(date +%d-%m-%Y_%H-%M-%S)
+    cp .config ~/rpmbuild/SOURCES/config-$(uname -m)-PAE
+    cp .config ~/kernel-config-$(uname -m)-PAE_$(date +%d-%m-%Y_%H-%M-%S)
 }
 
 save-config-x86_64() {
     echo -e "\n$GREEN> Saving Kernel Config File In $HOME...$WHITE\n"
-    cp .config ~/rpmbuild/SOURCES/config-`uname -m`-generic
-    cp .config ~/kernel-config-`uname -m`-generic_$(date +%d-%m-%Y_%H-%M-%S)
+    cp .config ~/rpmbuild/SOURCES/config-$(uname -m)-generic
+    cp .config ~/kernel-config-$(uname -m)-generic_$(date +%d-%m-%Y_%H-%M-%S)
 }
 
 compile-i686() {
@@ -122,13 +122,13 @@ compile-i686() {
     BEGIN_TIME=$(date +%s)
     touch ~/rpmbuild/TMP/kernel.log
     tail -fn0 ~/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt > /dev/null &
-    rpmbuild -bb --quiet --with paeonly --without debug --without debuginfo --without backports --target=`uname -m` --clean --rmsource \
+    rpmbuild -bb --quiet --with paeonly --without debug --without debuginfo --without backports --target=$(uname -m) --clean --rmsource \
                     --rmspec kernel.spec >> ~/rpmbuild/TMP/kernel.log 2>&1
     rpmbuild-error
     kill -9 $(pidof -x tail) > /dev/null 2>&1
     kill -9 $(pidof -x tail) > /dev/null 2>&1
     FINAL_TIME=$(date +%s)
-    ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+    ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
     ccache -c > /dev/null
 }
 
@@ -141,13 +141,13 @@ compile-x86_64() {
     BEGIN_TIME=$(date +%s)
     touch ~/rpmbuild/TMP/kernel.log
     tail -fn0 ~/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt > /dev/null &
-    rpmbuild -bb --quiet --with baseonly --without debug --without debuginfo --without backports --target=`uname -m` --clean --rmsource \
+    rpmbuild -bb --quiet --with baseonly --without debug --without debuginfo --without backports --target=$(uname -m) --clean --rmsource \
                     --rmspec kernel.spec >> ~/rpmbuild/TMP/kernel.log 2>&1
     rpmbuild-error
     kill -9 $(pidof -x tail) > /dev/null 2>&1
     kill -9 $(pidof -x tail) > /dev/null 2>&1
     FINAL_TIME=$(date +%s)
-    ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+    ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
     ccache -c > /dev/null
 }
 
@@ -308,9 +308,9 @@ if [ "$EXIT" = "0" ]; then
     if-cancel-exit2
     
     sudo chown $USER:$USER $KERNELSOURCEPATH
-    cd $(dirname $KERNELSOURCEPATH 2> /dev/null)
-    KERNELFILE=$(basename $KERNELSOURCEPATH)
-    KERNELVERSION=$(basename $KERNELSOURCEPATH|sed 's/^.*kernel-//'|sed 's/.fc...src.rpm$//')
+    cd ${KERNELSOURCEPATH%/*} 2> /dev/null
+    KERNELFILE=${KERNELSOURCEPATH##*/}
+    KERNELVERSION=$(echo ${KERNELSOURCEPATH##*/}|sed 's/^.*kernel-//'|sed 's/.fc...src.rpm$//')
     echo -e "$GREEN> Checking update for kernel...$WHITE\n"
     INTERNETVERSION=$(yumdownloader --url --source kernel|grep kernel|grep -v "No source RPM found"|sed 's/^.*kernel-//'|sed 's/.fc...src.rpm$//')
     yumdownloader --url --source kernel > /dev/null 2>&1
@@ -427,9 +427,9 @@ if [ "$EXIT" = "0" ]; then
     KERNELCONFIG=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Kernel Config File" --getopenfilename ~/ 2> /dev/null)
     
     if [ "$(uname -m)" = "i686" ]; then
-        cp $KERNELCONFIG ~/rpmbuild/SOURCES/config-`uname -m`-PAE
+        cp $KERNELCONFIG ~/rpmbuild/SOURCES/config-$(uname -m)-PAE
     else
-        cp $KERNELCONFIG ~/rpmbuild/SOURCES/config-`uname -m`-generic
+        cp $KERNELCONFIG ~/rpmbuild/SOURCES/config-$(uname -m)-generic
     fi
     
     cp $KERNELCONFIG .config

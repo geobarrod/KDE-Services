@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 DESTINATION=""
 DIR=""
-CPUCORE=$(grep "cpu cores" /proc/cpuinfo|sort -u|awk -F : '{print $2}')
+CPUCORE=$(grep "cpu cores" /proc/cpuinfo|sort -u|awk -F: '{print $2}')
 PID="$$"
 BEGIN_TIME=""
 FINAL_TIME=""
@@ -25,8 +25,8 @@ FORMAT=""
 ###################################
 
 logs() {
-    LOG="/tmp/$(basename $i).log"
-    LOGERROR="$(basename $i).err"
+    LOG="/tmp/${i##*/}.log"
+    LOGERROR="${i##*/}.err"
     rm -f $LOGERROR
 }
 
@@ -39,7 +39,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Extracting audio track from $(basename $i) to $FORMAT" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Extracting audio track from ${i##*/} to $FORMAT" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -49,7 +49,7 @@ if-ffmpeg-cancel() {
 progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
-    COUNTFILES=$(expr $COUNTFILES + 1)
+    COUNTFILES=$((++COUNTFILES))
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
 }
 
@@ -60,22 +60,22 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "[Extract|Convert] Audio Track:  $(basename $i)  [$COUNT/$(expr $COUNTFILES - 1)]"
+    qdbus $DBUSREF setLabelText "[Extract|Convert] Audio Track:  ${i##*/}  [$COUNT/$((COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
-                       --passivepopup="[Finished]  $(basename $i)   Elapsed Time: $ELAPSED_TIME s."
+                       --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
-                       --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME m."
+                       --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
-                       --passivepopup="[Finished]   $(basename $i)   Elapsed Time: $ELAPSED_TIME h."
+                       --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
 }
@@ -88,8 +88,8 @@ DIR=$1
 cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
-    sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
+    's/ /_/g')" 2> /dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
     "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
@@ -100,11 +100,11 @@ cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
     "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname \
-    "$(dirname "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
+    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname \
-    "$(pwd|grep " ")")")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
+    |sed 's/ /_/g')" 2> /dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
@@ -112,26 +112,14 @@ mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep
 cd ./
 mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-DIR=$(pwd)
-
 mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+cd ./
 
-if [ "$?" != "0" ]; then
-    cd ./
-else
-    cd "$(pwd|grep " "|sed 's/ /_/g')"
-    DIR=$(pwd)
-fi
-
-RENAMETMP=$(ls *.mpg *.mpeg *.mpeg4 *.mp3 *.mp4 *.mov *.flv *.3gp *.avi *.dat *.vob *.m2v *.m4v *.mkv *.wmv *.wma *.flac *.ogg *.ogv *.wav \
-          *.MPG *.MPEG *.MPEG4 *.MP3 *.MP4 *.MOV *.FLV *.3GP *.AVI *.DAT *.VOB *.M2V *.M4V *.MKV *.WMV *.WMA *.FLAC *.OGG *.OGV *.WAV \
-          2> /dev/null|grep " " > /tmp/convert.rename)
-
-RENAME=$(cat /tmp/convert.rename)
-
-for i in $RENAME; do
-    mv *$i* $(ls *$i*|sed 's/ /_/g')
+for i in *; do
+    mv "$i" "${i// /_}" 2> /dev/null
 done
+
+DIR="$(pwd)"
 
 PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
@@ -169,13 +157,14 @@ if [ "$FORMAT" = "MP3" ]; then
 
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         BEGIN_TIME=$(date +%s)
         qdbusinsert
-        ffmpeg -y -i $i -acodec libmp3lame -ab $MODE "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`_$MODE.mp3" > $LOG 2>&1
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i -acodec libmp3lame -ab $MODE "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
     done
 elif [ "$FORMAT" = "FLAC" ]; then
@@ -183,13 +172,14 @@ elif [ "$FORMAT" = "FLAC" ]; then
 
     for i in $FILES; do
         logs
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         BEGIN_TIME=$(date +%s)
         qdbusinsert
-        ffmpeg -y -i $i -acodec flac "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.flac" > $LOG 2>&1
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i -acodec flac "$DESTINATION/${DST_FILE##*/}.flac" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
     done
 fi

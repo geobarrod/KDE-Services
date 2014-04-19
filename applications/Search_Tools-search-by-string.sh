@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -15,8 +15,8 @@ if [ "$?" != "0" ]; then
 fi
 
 DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png --caption="Search By String" --progressbar "                                        " /ProgressDialog)
-qdbus $DBUSREF setLabelText "Searching string ($STRING) on $(basename $1) directory recursively..."
-grep -r "$STRING" $1/* > $TMP
+qdbus $DBUSREF setLabelText "Searching string ($STRING) on ${1##*/} directory recursively..."
+egrep -r "$STRING" "$1"/* > $TMP
 qdbus $DBUSREF close
 kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png --caption="Search By String: $(cat $TMP|wc -l) matching entries with ($STRING)" \
                --textbox $TMP 900 300 2> /dev/null

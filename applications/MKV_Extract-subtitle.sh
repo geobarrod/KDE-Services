@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2013.					#
+# For KDE-Services. 2012-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-MKV=$1
+MKV="$1"
 PID="$$"
 BEGIN_TIME=""
 FINAL_TIME=""
@@ -32,14 +32,14 @@ qdbus $DBUSREF close
 }
 
 qdbusinsert() {
-qdbus $DBUSREF setLabelText "Extracting:  $(basename $MKV)"
+qdbus $DBUSREF setLabelText "Extracting:  ${MKV##*/}"
 }
 
 ##############################
 ############ Main ############
 ##############################
 
-cd $(dirname "$MKV")
+cd "${MKV%/*}"
 ffprobe "$MKV" 2> /tmp/mkvinfo
 grep -e Stream /tmp/mkvinfo|awk -F : '{print $1,$2}' > /tmp/mkvinfo2
 cat /tmp/mkvinfo2|sed 's/^    //g' > /tmp/mkvinfo3
@@ -68,20 +68,20 @@ progressbar-start
 qdbusinsert
 BEGIN_TIME=$(date +%s)
 
-mkvextract tracks "$MKV" $TID:"`echo $MKV | perl -pe 's/\\.[^.]+$//'`.srt"
+mkvextract tracks "$MKV" $TID:"${MKV%.*}.srt"
 
 progressbar-close
 FINAL_TIME=$(date +%s)
-ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 
 if [ "$ELAPSED_TIME" -lt "60" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   $(basename $MKV)   Elapsed Time: $ELAPSED_TIME s."
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}s"
 elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   $(basename $MKV)   Elapsed Time: $ELAPSED_TIME m."
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}m"
 elif [ "$ELAPSED_TIME" -gt "3599" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   $(basename $MKV)   Elapsed Time: $ELAPSED_TIME h."
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}h"
 fi
 
 echo "Finish Extracting Subtitle" > /tmp/speak

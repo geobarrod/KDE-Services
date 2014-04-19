@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -32,14 +32,14 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Burning:  $(basename $FILE)"
+    qdbus $DBUSREF setLabelText "Burning:  ${FILE##*/}"
 }
 
 ##############################
 ############ Main ############
 ##############################
 
-cd "$(dirname "$1")"
+cd "${1%/*}"
 
 PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn ISO Image" \
          --radiolist="Choose Scheduling Priority" Highest Highest on High High off Normal Normal off 2> /dev/null)"
@@ -63,19 +63,19 @@ wodim -v blank=fast > burn_image.log
 wodim -v speed=$BURNSPEED -eject "$1" >> burn_image.log
 progressbar-close
 FINAL_TIME=$(date +%s)
-ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 
 if [ "$ELAPSED_TIME" -lt "60" ]; then
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn ISO Image" \
-                   --passivepopup="[Finished]   $(basename $FILE)   Elapsed Time: $ELAPSED_TIME s." 2> /dev/null
+                   --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
 elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn ISO Image" \
-                   --passivepopup="[Finished]   $(basename $FILE)   Elapsed Time: $ELAPSED_TIME m." 2> /dev/null
+                   --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
 elif [ "$ELAPSED_TIME" -gt "3599" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn ISO Image" \
-                   --passivepopup="[Finished]   $(basename $FILE)   Elapsed Time: $ELAPSED_TIME h." 2> /dev/null
+                   --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
 fi
 
 echo "Finish Burn Image" > /tmp/speak

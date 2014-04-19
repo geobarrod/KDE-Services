@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013.					#
+# For KDE-Services. 2013-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -31,7 +31,7 @@ if-cancel-exit() {
 if-convert-cancel() {
     if [ "$?" != "0" ]; then
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Image Converter" \
-            --passivepopup="[Canceled]   $(basename $i)                                             \
+            --passivepopup="[Canceled]   ${i##*/}                                             \
             Check the path and filename not contain whitespaces. Check image format errors. Try again."
         continue
     fi
@@ -40,7 +40,7 @@ if-convert-cancel() {
 progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
-    COUNTFILES=$(expr $COUNTFILES + 1)
+    COUNTFILES=$((++COUNTFILES))
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --caption="Image Converter" --progressbar "                                         " $COUNTFILES)
 }
 
@@ -51,22 +51,22 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Converting:  $(basename $i) to $FORMAT [$COUNT/$(expr $COUNTFILES - 1)]"
+    qdbus $DBUSREF setLabelText "Converting:  ${i##*/} to $FORMAT [$COUNT/$(($COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME s."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME m."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME h."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}h"
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: $ELAPSED_TIME d."
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}d"
     fi
 }
 
@@ -74,7 +74,8 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-cd $(dirname "$1")
+DIR="${1%/*}"
+cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
     "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
@@ -101,25 +102,14 @@ mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep
 cd ./
 mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
 cd ./
-DIR=$(pwd)
 mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+cd ./
 
-if [ "$?" != "0" ]; then
-    cd ./
-else
-    cd "$(pwd|grep " "|sed 's/ /_/g')"
-    DIR=$(pwd)
-fi
-
-RENAMETMP=$(ls *.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi *.svg *.tga *.tif *.tiff *.xpm *.BMP *.EPS \
-          *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.SVG *.TGA *.TIF *.TIFF *.XPM 2> /dev/null|grep " " \
-          > /tmp/image-resize-convert.ren)
-
-RENAME=$(cat /tmp/image-resize-convert.ren)
-
-for i in $RENAME; do
-    mv *$i* $(ls *$i*|sed 's/ /_/g')
+for i in *; do
+    mv "$i" "${i// /_}" 2> /dev/null
 done
+
+DIR="$(pwd)"
 
 FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --caption="Source Image Files" --multiple \
       --getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi *.svg \
@@ -139,120 +129,136 @@ progressbar-start
 
 if [ "$FORMAT" = "BMP" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.bmp"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.bmp"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "EPS" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.eps"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.eps"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "GIF" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.gif"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.gif"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "ICO" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white -resize 128 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.ico"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white -resize 128 "$DESTINATION/${DST_FILE##*/}.ico"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "JPEG" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.jpg"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.jpg"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "JPEG 2000" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 75 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.jp2"
+        DST_FILE="${i%.*}"
+        convert $i -quality 75 "$DESTINATION/${DST_FILE##*/}.jp2"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PBM" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.pbm"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.pbm"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PDF" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.pdf"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.pdf"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PGM" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.pgm"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.pgm"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PNG" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.png"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.png"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PPM" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.ppm"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.ppm"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PSD" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.psd"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.psd"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "SGI" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.sgi"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.sgi"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "TGA" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.tga"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.tga"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "TIFF" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.tif"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.tif"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "XPM" ]; then
     for i in $FILES; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         qdbusinsert
-        convert $i -quality 100 -transparent white "`echo $DESTINATION/$(basename $i) | perl -pe 's/\\.[^.]+$//'`.xpm"
+        DST_FILE="${i%.*}"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.xpm"
         if-convert-cancel
     done
 fi
 
 FINAL_TIME=$(date +%s)
-ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 elapsedtime
 
 progressbar-close

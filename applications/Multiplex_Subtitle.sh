@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2013.					#
+# For KDE-Services. 2012-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-VIDEO=$1
+VIDEO="$1"
 TMPFILE=/tmp/multiplex-subtitle.xml
 LOG=multiplex-subtitle.log
 VIDEOINFO=/tmp/videoinfo
@@ -36,14 +36,14 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Multiplexing:  $(basename "$VIDEO")"
+    qdbus $DBUSREF setLabelText "Multiplexing:  ${VIDEO##*/}"
 }
 
 ##############################
 ############ Main ############
 ##############################
 
-cd $(dirname "$VIDEO")
+cd "${VIDEO%/*}"
 
 ffprobe "$VIDEO" 2> $VIDEOINFO
 CODEC=$(grep -o mpeg2video $VIDEOINFO)
@@ -95,31 +95,31 @@ else
 </subpictures>
 EOF
     
-    DESTINATION="`echo $VIDEO|perl -pe 's/\\.[^.]+$//'`_subtitled.mpg"
+    DESTINATION="${VIDEO%.*}_subtitled.mpg"
     
     progressbar-start
     qdbusinsert
     BEGIN_TIME=$(date +%s)
     
-    spumux "$TMPFILE" < "$VIDEO" > "`echo $VIDEO|perl -pe 's/\\.[^.]+$//'`_subtitled.mpg" 2> $LOG
+    spumux "$TMPFILE" < "$VIDEO" > "${VIDEO%.*}_subtitled.mpg" 2> $LOG
     EXIT=$?
     
     if [ "$EXIT" = "0" ];then
         progressbar-close
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         
         if [ "$ELAPSED_TIME" -lt "60" ]; then
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --title="Multiplex Subtitle" \
-                           --passivepopup="[Finished]   $(basename "$VIDEO")   Elapsed Time: $ELAPSED_TIME s."
+                           --passivepopup="[Finished]   ${VIDEO##*/}   Elapsed Time: ${ELAPSED_TIME}s"
         elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --title="Multiplex Subtitle" \
-                           --passivepopup="[Finished]   $(basename "$VIDEO")   Elapsed Time: $ELAPSED_TIME m."
+                           --passivepopup="[Finished]   ${VIDEO##*/}   Elapsed Time: ${ELAPSED_TIME}m"
         elif [ "$ELAPSED_TIME" -gt "3599" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png --title="Multiplex Subtitle" \
-                           --passivepopup="[Finished]   $(basename "$VIDEO")   Elapsed Time: $ELAPSED_TIME h."
+                           --passivepopup="[Finished]   ${VIDEO##*/}   Elapsed Time: ${ELAPSED_TIME}h"
         fi
         
         echo "Finish Multiplexing Subtitle" > /tmp/speak

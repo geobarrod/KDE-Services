@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2013.					#
+# For KDE-Services. 2012-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -57,11 +57,11 @@ if [ "$EXIT" != "0" ]; then
     
     if [ "$PORT" != "80" ]; then
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png --caption="HTTP Publisher" --yes-label Background --no-label Stop \
-                       --warningyesno="Published \"$(basename $1)\" directory. Access via web: http://$HOSTNAME:$PORT" 2> /dev/null
+                       --warningyesno="Published \"${1##*/}\" directory. Access via web: http://$HOSTNAME:$PORT" 2> /dev/null
         EXIT="$?"
     else
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png --caption="HTTP Publisher" --yes-label Background --no-label Stop \
-                       --warningyesno="Published \"$(basename $1)\" directory. Access via web: http://$HOSTNAME" 2> /dev/null
+                       --warningyesno="Published \"${1##*/}\" directory. Access via web: http://$HOSTNAME" 2> /dev/null
         EXIT="$?"
     fi
     

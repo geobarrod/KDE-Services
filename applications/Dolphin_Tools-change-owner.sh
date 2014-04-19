@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -28,7 +28,7 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Change Owner for:  $(basename $OBJECT)"
+    qdbus $DBUSREF setLabelText "Change Owner for:  ${OBJECT##*/}"
 }
 
 ##############################

@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 #################################################################
 # For KDE-Services. 2012-2014.					#
@@ -14,10 +14,10 @@ MOUNTEXIT=""
 ############ Main ############
 ##############################
 
-DIR=$(dirname "$1")
-cd "$DIR"
+DIR="${1%/*}"
+cd $DIR
 
-if [ "$(basename "$1" .ISO)" == "${1##*/}" ]; then
+if [ "$1" == "${1%.*}.iso" ]; then
    fuseiso -p "$1" "${1%.iso}"
    MOUNTEXIT=$?
 else

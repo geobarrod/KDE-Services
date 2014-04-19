@@ -1,3 +1,7 @@
+* Thu Apr 17 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-6
+- Improved Bash scripts code.
+- Backup Tools: Enhancement.
+
 * Wed Feb 12 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-5
 - "Convert Video Files": Added support for video resolution 2K and 4K.
 - "Connect Sentry": Enhancement.

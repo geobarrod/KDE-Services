@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-CHECKSUMFILE=$(basename "$1"|grep -ioe ".md5$" -ioe ".sha1$" -ioe ".sha256$" -ioe ".sha512$"|sed 's/.//'|sort -u)
+CHECKSUMFILE="${1##*.}"
 TMP=$(mktemp)
 BEGIN_TIME=""
 FINAL_TIME=""
@@ -24,21 +24,21 @@ FILE="$1"
 finished() {
     if [ "$?" = "0" ]; then
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         
         if [ "$ELAPSED_TIME" -lt "60" ]; then
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="Verify $HASH CheckSum" \
-                           --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: $ELAPSED_TIME s." 2> /dev/null
+                           --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
             
             elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="Verify $HASH CheckSum" \
-                           --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: $ELAPSED_TIME m." 2> /dev/null
+                           --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
             
             elif [ "$ELAPSED_TIME" -gt "3599" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="Verify $HASH CheckSum" \
-                           --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: $ELAPSED_TIME h." 2> /dev/null
+                           --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
         fi
         
     else
@@ -56,12 +56,12 @@ finished() {
 progressbar-start() {
     COUNT="0"
     COUNTFILE=$(echo "$FILE"|wc -l)
-    COUNTFILE=$(expr $COUNTFILE + 1)
+    COUNTFILE=$((++COUNTFILE))
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="Verify $HASH CheckSum" --progressbar "                        " /ProgressDialog)
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Verify $HASH CheckSum:  $(basename "$FILE")"
+    qdbus $DBUSREF setLabelText "Verify $HASH CheckSum:  ${FILE##*/}"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
@@ -69,7 +69,41 @@ qdbusinsert() {
 ############ Main ############
 ##############################
 
-cd $(dirname $1)
+cd "${1%/*}"
+
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
+    sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
+    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname \
+    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
+    sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
+cd ./
+mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+cd ./
+
+for i in *; do
+    mv "$i" "${i// /_}" 2> /dev/null
+done
+
+DIR="$(pwd)"
 
 if [ "$CHECKSUMFILE" != "md5" ] && [ "$CHECKSUMFILE" != "MD5" ] && [ "$CHECKSUMFILE" != "sha1" ] && [ "$CHECKSUMFILE" != "SHA1" ] && \
     [ "$CHECKSUMFILE" != "sha256" ] && [ "$CHECKSUMFILE" != "SHA256" ] && [ "$CHECKSUMFILE" != "sha512" ] && [ "$CHECKSUMFILE" != "SHA512" ]; then
@@ -82,28 +116,28 @@ progressbar-start
 
 if [ "$CHECKSUMFILE" = "md5" ] || [ "$CHECKSUMFILE" = "MD5" ]; then
     HASH=$(echo md5|tr a-z A-Z)
-    COUNT=$(expr $COUNT + 1)
+    COUNT=$((++COUNT))
     qdbusinsert
     BEGIN_TIME=$(date +%s)
     md5sum -c "$1" > $TMP 2>&1
     finished
 elif [ "$CHECKSUMFILE" = "sha1" ] || [ "$CHECKSUMFILE" = "SHA1" ]; then
     HASH=$(echo sha1|tr a-z A-Z)
-    COUNT=$(expr $COUNT + 1)
+    COUNT=$((++COUNT))
     qdbusinsert
     BEGIN_TIME=$(date +%s)
     sha1sum -c "$1" > $TMP 2>&1
     finished
 elif [ "$CHECKSUMFILE" = "sha256" ] || [ "$CHECKSUMFILE" = "SHA256" ]; then
     HASH=$(echo sha256|tr a-z A-Z)
-    COUNT=$(expr $COUNT + 1)
+    COUNT=$((++COUNT))
     qdbusinsert
     BEGIN_TIME=$(date +%s)
     sha256sum -c "$1" > $TMP 2>&1
     finished
 elif [ "$CHECKSUMFILE" = "sha512" ] || [ "$CHECKSUMFILE" = "SHA512" ]; then
     HASH=$(echo sha512|tr a-z A-Z)
-    COUNT=$(expr $COUNT + 1)
+    COUNT=$((++COUNT))
     qdbusinsert
     BEGIN_TIME=$(date +%s)
     sha512sum -c "$1" > $TMP 2>&1

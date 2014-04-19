@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2013.					#
+# For KDE-Services. 2012-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -32,7 +32,7 @@ TOTAL_TIME=""
 ###################################
 
 attempt-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Downloading:  $FILENAME $VID MP4 $SIZE  [$COUNT/$(expr $COUNTFILES - 1)] Reattempt: $ATTEMPT"
+    qdbus $DBUSREF setLabelText "Downloading:  $FILENAME $VID MP4 $SIZE  [$COUNT/$(($COUNTFILES-1))] Reattempt: $ATTEMPT"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
@@ -49,7 +49,7 @@ youtube-error() {
         echo "$VID" >> !!!_YouTube-Video-Code.err
         sed -i 's/hyphen//' !!!_YouTube-Video-Code.err
         
-        for ATTEMPT in {1..100}; do
+        for ATTEMPT in {1..10}; do
             attempt-qdbusinsert
             $PROGRAM
             EXIT=$?
@@ -71,19 +71,19 @@ finished() {
     if [ "$EXIT" = "0" ];then
         if [ "$ELAPSED_TIME" -lt "60" ];then
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: $ELAPSED_TIME s."
+                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: ${ELAPSED_TIME}s"
         elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ];then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: $ELAPSED_TIME m."
+                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: ${ELAPSED_TIME}m"
         elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ];then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: $ELAPSED_TIME h."
+                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: ${ELAPSED_TIME}h"
         elif [ "$ELAPSED_TIME" -gt "86399" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
             kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: $ELAPSED_TIME d."
+                           --passivepopup="[Finished]   $FILENAME $VID MP4 $SIZE   Elapsed Time: ${ELAPSED_TIME}d"
         fi
     fi
 }
@@ -91,7 +91,7 @@ finished() {
 progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $VCODE|wc -w)
-    COUNTFILES=$(expr $COUNTFILES + 1)
+    COUNTFILES=$((++COUNTFILES))
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="Download YouTube Video" --progressbar "                      " $COUNTFILES)
 }
 
@@ -102,17 +102,17 @@ progressbar-close() {
 }
 
 checking-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Checking Availability:  $VID  [$COUNT/$(expr $COUNTFILES - 1)]"
+    qdbus $DBUSREF setLabelText "Checking Availability:  $VID  [$COUNT/$(($COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 size-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Checking Frame Size:  $VID  [$COUNT/$(expr $COUNTFILES - 1)]"
+    qdbus $DBUSREF setLabelText "Checking Frame Size:  $VID  [$COUNT/$(($COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 download-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Downloading:  $FILENAME $VID MP4 $SIZE  [$COUNT/$(expr $COUNTFILES - 1)]"
+    qdbus $DBUSREF setLabelText "Downloading:  $FILENAME $VID MP4 $SIZE  [$COUNT/$(($COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
@@ -141,7 +141,7 @@ DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-do
 if-cancel-exit
 
 QUALITY=$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
-        --radiolist="Select Video Quality" 1080x1920 1080p on 720x1280 720p off 360x640 360p off 2> /dev/null)
+        --radiolist="Select Video Quality" 1920x1080 1080p on 1280x720 720p off 640x360 360p off 2> /dev/null)
 if-cancel-exit
 
 RATE_LIMIT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
@@ -157,7 +157,7 @@ progressbar-start
 VCODE=$(echo $VCODE|sed 's/hyphen//g')
 
 for VID in $VCODE; do
-    COUNT=$(expr $COUNT + 1)
+    COUNT=$((++COUNT))
     checking-qdbusinsert
     PROGRAM="youtube-dl -F http://www.youtube.com/watch?v=$VID"
     $PROGRAM
@@ -165,132 +165,132 @@ for VID in $VCODE; do
     youtube-error
 done
 
-if [ "$QUALITY" = "1080x1920" ];then
+if [ "$QUALITY" = "1920x1080" ];then
     COUNT="0"
     
     for VID in $VCODE; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         size-qdbusinsert
         
-        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 1080x1920)" = "1080x1920" ];then
-            FILENAME=$(youtube-dl -e http://www.youtube.com/watch?v=$VID|sed 's/ /_/g')
+        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 1920x1080)" = "1920x1080" ];then
+            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="1080p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(stitle\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 37 --max-quality 37 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 37 --max-quality 37 -c -i -R 1000000 \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
             youtube-error
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             finished
-        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 720x1280)" = "720x1280" ];then
-            FILENAME=$(youtube-dl -e http://www.youtube.com/watch?v=$VID|sed 's/ /_/g')
+        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 1280x720)" = "1280x720" ];then
+            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="720p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(stitle\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 22 --max-quality 22 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 22 --max-quality 22 -c -i -R 1000000 \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
             youtube-error
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             finished
-        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 360x640)" = "360x640" ];then
-            FILENAME=$(youtube-dl -e http://www.youtube.com/watch?v=$VID|sed 's/ /_/g')
+        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 640x360)" = "640x360" ];then
+            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="360p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(stitle\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
             youtube-error
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             finished
         fi
     done
-elif [ "$QUALITY" = "720x1280" ];then
+elif [ "$QUALITY" = "1280x720" ];then
     COUNT="0"
     
     for VID in $VCODE; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         size-qdbusinsert
         
-        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 720x1280)" = "720x1280" ];then
-            FILENAME=$(youtube-dl -e http://www.youtube.com/watch?v=$VID|sed 's/ /_/g')
+        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 1280x720)" = "1280x720" ];then
+            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="720p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(stitle\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 22 --max-quality 22 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 22 --max-quality 22 -c -i -R 1000000 \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
             youtube-error
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             finished
-        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 360x640)" = "360x640" ];then
-            FILENAME=$(youtube-dl -e http://www.youtube.com/watch?v=$VID|sed 's/ /_/g')
+        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 640x360)" = "640x360" ];then
+            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="360p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(stitle\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
             youtube-error
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             finished
         fi
     done
-elif [ "$QUALITY" = "360x640" ];then
+elif [ "$QUALITY" = "640x360" ];then
     COUNT="0"
     
     for VID in $VCODE; do
-        COUNT=$(expr $COUNT + 1)
+        COUNT=$((++COUNT))
         size-qdbusinsert
         
-        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 360x640)" = "360x640" ];then
-            FILENAME=$(youtube-dl -e http://www.youtube.com/watch?v=$VID|sed 's/ /_/g')
+        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 640x360)" = "640x360" ];then
+            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="360p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(stitle\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
             youtube-error
             FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             finished
         fi
     done
 fi
 
 LAST_TIME=$(date +%s)
-TOTAL_TIME=$(echo "$LAST_TIME-$INIT_TIME"|bc)
+TOTAL_TIME=$((LAST_TIME-INIT_TIME))
 progressbar-close
 
 if [ "$TOTAL_TIME" -lt "60" ];then
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
-                   --msgbox="The YouTube video(s) download to finished for $(basename $DESTINATION) directory.   Total time: $TOTAL_TIME s." &
+                   --msgbox="The YouTube video(s) download to finished for ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}s" &
 elif [ "$TOTAL_TIME" -gt "59" ] && [ "$TOTAL_TIME" -lt "3600" ];then
     TOTAL_TIME=$(echo "$TOTAL_TIME/60"|bc -l|sed 's/...................$//')
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
-                   --msgbox="The YouTube video(s) download to finished for $(basename $DESTINATION) directory.   Total time: $TOTAL_TIME m." &
+                   --msgbox="The YouTube video(s) download to finished for ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}m" &
 elif [ "$TOTAL_TIME" -gt "3599" ] && [ "$TOTAL_TIME" -lt "86400" ];then
     TOTAL_TIME=$(echo "$TOTAL_TIME/3600"|bc -l|sed 's/...................$//')
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
-                   --msgbox="The YouTube video(s) download to finished for $(basename $DESTINATION) directory.   Total time: $TOTAL_TIME h." &
+                   --msgbox="The YouTube video(s) download to finished for ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}h" &
 elif [ "$TOTAL_TIME" -gt "86399" ]; then
     TOTAL_TIME=$(echo "$TOTAL_TIME/86400"|bc -l|sed 's/...................$//')
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
-                   --msgbox="The YouTube video(s) download to finished for $(basename $DESTINATION) directory.   Total time: $TOTAL_TIME d." &
+                   --msgbox="The YouTube video(s) download to finished for ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}d" &
 fi
 
 echo "The YouTube videos download finished" > /tmp/speak

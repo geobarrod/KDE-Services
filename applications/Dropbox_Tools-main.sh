@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
+# For KDE-Services. 2011-2014.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -27,16 +27,16 @@ STRONGPASS=$(tr -dc a-z0-9 < /dev/urandom|head -c128|sed 's/[^ ]\+/\L\u&/g'|tr -
 
 elapsed-time() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-	ET="$ELAPSED_TIME s"
+	ET="${ELAPSED_TIME}s"
 	true
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
-        ET="$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//') m"
+        ET="$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')m"
 	true
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
-        ET="$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//') h"
+        ET="$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')h"
 	true
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
-        ET="$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//') d"
+        ET="$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')d"
 	true
     fi
 }
@@ -96,7 +96,7 @@ copy() {
 	BEGIN_TIME=$(date +%s)
         cp -rf $FILE $DROPBOX_PATH
 	FINAL_TIME=$(date +%s)
-	ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         qdbus $DBUSREF close
         elapsed-time
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png \
@@ -114,7 +114,7 @@ move() {
 	BEGIN_TIME=$(date +%s)
         mv -f $FILE $DROPBOX_PATH
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         qdbus $DBUSREF close
         elapsed-time
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png \
@@ -132,7 +132,7 @@ copy_pub() {
 	BEGIN_TIME=$(date +%s)
         cp -rf $FILE $DROPBOX_PATH/Public
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         qdbus $DBUSREF close
         clipboard_url
         elapsed-time
@@ -151,7 +151,7 @@ move_pub() {
 	BEGIN_TIME=$(date +%s)
         mv -f $FILE $DROPBOX_PATH/Public
         FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         qdbus $DBUSREF close
         clipboard_url
         elapsed-time
@@ -184,7 +184,7 @@ install_service() {
     $EXIT
     check_stderr
     FINAL_TIME=$(date +%s)
-    ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+    ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
     elapsed-time
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png \
                        --title="Dropbox Tools" \
@@ -202,7 +202,7 @@ start_service() {
 	BEGIN_TIME=$(date +%s)
 	$DROPBOX start
 	FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         qdbus $DBUSREF close
         elapsed-time
 	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-on.png \
@@ -220,7 +220,7 @@ stop_service() {
     BEGIN_TIME=$(date +%s)
     $DROPBOX stop
     FINAL_TIME=$(date +%s)
-    ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+    ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
     qdbus $DBUSREF close
     elapsed-time
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-off.png \
@@ -265,7 +265,7 @@ update_service() {
 	EXIT=$?
 	check_stderr
 	FINAL_TIME=$(date +%s)
-	ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 	qdbus $DBUSREF close
 	elapsed-time
 	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png \
@@ -284,7 +284,7 @@ update_service() {
 	EXIT=$?
 	check_stderr
 	FINAL_TIME=$(date +%s)
-	ELAPSED_TIME=$(echo "$FINAL_TIME-$BEGIN_TIME"|bc)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 	qdbus $DBUSREF close
 	elapsed-time
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png \
