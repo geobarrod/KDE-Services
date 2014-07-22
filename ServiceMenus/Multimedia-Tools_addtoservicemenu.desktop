@@ -8,6 +8,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Multimedia Tools
 X-KDE-Submenu=Multimedia Tools
 X-KDE-Submenu[es]=Multimedia - Herramientas
+X-KDE-Submenu[ru]=Инструменты Мультимедиа
+X-KDE-Submenu[uk]=Інструменти Мультимедіа
 X-KDE-Submenu[x-test]=xxMultimedia Toolsxx
 
 [Desktop Action DVD-Assembler]
@@ -16,6 +18,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
 Name[en_US]=D.V.D. Assembler
 Name=D.V.D. Assembler
 Name[es]=D.V.D. Assembler
+Name[ru]=D.V.D. Сборщик
+Name[uk]=D.V.D. Компанувальник
 Name[x-test]=xxD.V.D. Assemblerxx
 
 [Desktop Action ISOBuild]
@@ -24,6 +28,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
 Name[en_US]=Build ISO Image From Here
 Name=Build ISO Image From Here
 Name[es]=Construir Imagen ISO Desde Aquí
+Name[ru]=Собрать ISO-образ отсюда
+Name[uk]=Зібрати ISO-образ звідси
 Name[x-test]=xxBuild ISO Image From Herexx
 
 [Desktop Action convert-video]
@@ -32,6 +38,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name[en_US]=Convert Video Files
 Name=Convert Video Files
 Name[es]=Convertir Archivos de Video
+Name[ru]=Конвертировать файлы видео
+Name[uk]=Конвертувати файли відео
 Name[x-test]=xxConvert Video Filesxx
 
 [Desktop Action extract-audio]
@@ -40,6 +48,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
 Name[en_US]=[Extract|Convert] Audio Track
 Name=[Extract|Convert] Audio Track
 Name[es]=[Extraer|Convertir] Pista De Audio
+Name[ru]=[Извлечь|Конвертировать] аудио трек
+Name[uk]=[Видобути|Конвертувати] аудіо трек
 Name[x-test]=xx[Extract|Convert] Audio Trackxx
 
 [Desktop Action record-my-desktop]
@@ -48,6 +58,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
 Name[en_US]=Record My Desktop
 Name=Record My Desktop
 Name[es]=Graba Mi Escritorio
+Name[ru]=Record My Desktop (видеозахват экрана)
+Name[uk]=Record My Desktop (відеозахоплення екрану)
 Name[x-test]=xxRecord My Desktopxx
 
 [Desktop Action vlc-openfolder]
@@ -56,4 +68,6 @@ Icon=vlc
 Name[en_US]=Play Video From Here
 Name=Play Video From Here
 Name[es]=Reproducir Video Aquí
+Name[ru]=Проиграть видео отсюда
+Name[uk]=Програти відео звідси
 Name[x-test]=xxPlay Video From Herexx

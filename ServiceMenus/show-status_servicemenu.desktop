@@ -11,4 +11,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-info.png
 Name[en_US]=Show [File|Directory] Status
 Name=Show [File|Directory] Status
 Name[es]=Mostrar Estado del [Fichero|Directorio]
+Name[ru]=Показать статус [Файла|Папки]
+Name[uk]=Показати статус [Файлу|Теки]
 Name[x-test]=xxShow [File|Directory] Statusxx

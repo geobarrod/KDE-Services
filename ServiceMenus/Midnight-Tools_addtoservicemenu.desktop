@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Midnight Tools
 X-KDE-Submenu=Midnight Tools
 X-KDE-Submenu[es]=Midnight - Herramientas
+X-KDE-Submenu[ru]=Инструменты Midnight
+X-KDE-Submenu[uk]=Інструменти Midnight
 X-KDE-Submenu[x-test]=xxMidnight Toolsxx
 
 [Desktop Action Root-mc]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-root.png
 Name[en_US]=[Root ~]# mc
 Name=[Root ~]# mc
 Name[es]=[Root ~]# mc
+Name[ru]=[Root ~]# mc
+Name[uk]=[Root ~]# mc
 Name[x-test]=xx[Root ~]# mcxx
 
 [Desktop Action Root-mcedit]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-mcedit-root.png
 Name[en_US]=[Root ~]# mcedit
 Name=[Root ~]# mcedit
 Name[es]=[Root ~]# mcedit
+Name[ru]=[Root ~]# mcedit
+Name[uk]=[Root ~]# mcedit
 Name[x-test]=xx[Root ~]# mceditxx
 
 [Desktop Action User-mc]
@@ -33,6 +39,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-user.png
 Name[en_US]=[User ~]$ mc
 Name=[User ~]$ mc
 Name[es]=[User ~]$ mc
+Name[ru]=[User ~]$ mc
+Name[uk]=[User ~]$ mc
 Name[x-test]=xx[User ~]$ mcxx
 
 [Desktop Action User-mcedit]
@@ -41,4 +49,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-mcedit-user.png
 Name[en_US]=[User ~]$ mcedit
 Name=[User ~]$ mcedit
 Name[es]=[User ~]$ mcedit
+Name[ru]=[User ~]$ mcedit
+Name[uk]=[User ~]$ mcedit
 Name[x-test]=xx[User ~]$ mceditxx

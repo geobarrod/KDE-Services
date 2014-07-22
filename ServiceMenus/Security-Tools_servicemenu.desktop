@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Security Tools
 X-KDE-Submenu=Security Tools
 X-KDE-Submenu[es]=Herramientas de Seguridad
+X-KDE-Submenu[ru]=Инструменты безопасности
+X-KDE-Submenu[uk]=Інструменти безпеки
 X-KDE-Submenu[x-test]=xxSecurity Toolsxx
 
 [Desktop Action Decrypt]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-decrypt.png
 Name[en_US]=Decrypt
 Name=Decrypt
 Name[es]=Desencriptar
+Name[ru]=Расшифровать
+Name[uk]=Розшифрувати
 Name[x-test]=xxDecryptxx
 
 [Desktop Action Encrypt]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-encrypt.png
 Name[en_US]=Encrypt
 Name=Encrypt
 Name[es]=Encriptar
+Name[ru]=Зашифровать
+Name[uk]=Зашифрувати
 Name[x-test]=xxEncryptxx
 
 [Desktop Action sendto-mailx]
@@ -33,6 +39,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png
 Name[en_US]=Secure Send To Mailx
 Name=Secure Send To Mailx
 Name[es]=Envío seguro a Mailx
+Name[ru]=Безопасно отправить через Mailx
+Name[uk]=Безпечно надіслати через Mailx
 Name[x-test]=xxSecure Send To Mailxxx
 
 [Desktop Action shredder]
@@ -41,4 +49,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-shredder.png
 Name[en_US]=Paranoid Shredder
 Name=Paranoid Shredder
 Name[es]=Trituradora Paranoica
+Name[ru]=Надёжное удаление
+Name[uk]=Надійне видалення
 Name[x-test]=xxParanoid Shredderxx

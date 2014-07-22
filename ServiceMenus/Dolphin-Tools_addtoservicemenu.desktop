@@ -8,6 +8,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Dolphin Tools
 X-KDE-Submenu=Dolphin Tools
 X-KDE-Submenu[es]=Dolphin - Herramientas
+X-KDE-Submenu[ru]=Инструменты Dolphin
+X-KDE-Submenu[uk]=Інструменти Dolphin
 X-KDE-Submenu[x-test]=xxDolphin Toolsxx
 
 [Desktop Action Connect]
@@ -16,6 +18,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-remote.png
 Name[en_US]=Connect To
 Name=Connect To
 Name[es]=Conectar a
+Name[ru]=Подключиться к
+Name[uk]=Підключитися до
 Name[x-test]=xxConnect Toxx
 
 [Desktop Action DiskUse]
@@ -24,6 +28,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-disk-space-used.png
 Name[en_US]=Disk Space Used
 Name=Disk Space Used
 Name[es]=Espacio de Disco Usado
+Name[ru]=Использовние дискового пространства
+Name[uk]=Використання дискового простору
 Name[x-test]=xxDisk Space Usedxx
 
 [Desktop Action ViewMachine]
@@ -32,4 +38,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
 Name[en_US]=Registered Servers
 Name=Registered Servers
 Name[es]=Servidores Registrados
+Name[ru]=Зарегестрированные серверы
+Name[uk]=Зареєстровані сервери
 Name[x-test]=xxRegistered Serversxx

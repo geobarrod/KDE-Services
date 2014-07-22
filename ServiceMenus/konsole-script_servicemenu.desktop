@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Konsole
 X-KDE-Submenu=Konsole
 X-KDE-Submenu[es]=Konsole
+X-KDE-Submenu[ru]=Терминал Konsole
+X-KDE-Submenu[uk]=Термінал Konsole
 X-KDE-Submenu[x-test]=xxKonsolexx
 
 [Desktop Action ExecScript]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name[en_US]=Run Application
 Name=Run Application
 Name[es]=Ejecutar Programa
+Name[ru]=Запустить приложение
+Name[uk]=Запустити додаток
 Name[x-test]=xxRun Applicationxx
 
 [Desktop Action RootExecScript]
@@ -25,4 +29,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name[en_US]=Run Application (Root)
 Name=Run Application (Root)
 Name[es]=Ejecutar Programa como root
+Name[ru]=Запустить приложение (Root)
+Name[uk]=Запустити додаток (Root)
 Name[x-test]=xxRun Application (Root)xx

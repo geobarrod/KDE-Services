@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=CheckSum Tools
 X-KDE-Submenu=CheckSum Tools
 X-KDE-Submenu[es]=Herramientas - CheckSum
+X-KDE-Submenu[ru]=Инструменты Контрольных Сумм
+X-KDE-Submenu[uk]=Інструменти Контрольних Сум
 X-KDE-Submenu[x-test]=xxCheckSum Toolsxx
 
 [Desktop Action CheckSum]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=Verify CheckSum
 Name=Verify CheckSum
 Name[es]=Verificar CheckSum
+Name[ru]=Проверить контрольные суммы
+Name[uk]=Перевірити контрольні суми
 Name[x-test]=xxVerify CheckSumxx
 
 [Desktop Action MD5-Sum]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=MD5 (Strong)
 Name=MD5 (Strong)
 Name[es]=MD5 (Fuerte)
+Name[ru]=MD5 (Стойкий)
+Name[ua]=MD5 (Стійкий)
 Name[x-test]=xxMD5 (Strong)xx
 
 [Desktop Action SHA1-Sum]
@@ -33,6 +39,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=SHA1 (Good Strong)
 Name=SHA1 (Good Strong)
 Name[es]=SHA1 (Bien Fuerte)
+Name[ru]=SHA1 (Хорошая Стойкость)
+Name[ua]=SHA1 (Добра Стійкість)
 Name[x-test]=xxSHA1 (Good Strong)xx
 
 [Desktop Action SHA256-Sum]
@@ -41,6 +49,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=SHA256 (Very Strong)
 Name=SHA256 (Very Strong)
 Name[es]=SHA256 (Muy Fuerte)
+Name[ru]=SHA256 (Очень Стойкий)
+Name[ua]=SHA256 (Дуже Стійкий)
 Name[x-test]=xxSHA256 (Very Strong)xx
 
 [Desktop Action SHA512-Sum]
@@ -49,4 +59,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=SHA512 (High Strong)
 Name=SHA512 (High Strong)
 Name[es]=SHA512 (Super Fuerte)
+Name[ru]=SHA512 (Высокая Стойкость)
+Name[ua]=SHA512 (Висока Стійкість)
 Name[x-test]=xxSHA512 (High Strong)xx

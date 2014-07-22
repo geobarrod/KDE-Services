@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Package Tools
 X-KDE-Submenu=Package Tools
 X-KDE-Submenu[es]=Paquetes - Herramientas
+X-KDE-Submenu[ru]=Инструменты Архивирования
+X-KDE-Submenu[uk]=Інструменти Пакування
 X-KDE-Submenu[x-test]=xxPackage Toolsxx
 
 [Desktop Action ExtractPkgFiles]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name[en_US]=Extract Files Here
 Name=Extract Files Here
 Name[es]=Extraer Ficheros Aquí
+Name[ru]=Распаковать файлы сюда
+Name[uk]=Видобути файли сюди
 Name[x-test]=xxExtract Files Herexx
 
 [Desktop Action IntegrityCheckPkg]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name[en_US]=Integrity Check
 Name=Integrity Check
 Name[es]=Comprobar Integridad
+Name[ru]=Проверка целостности
+Name[uk]=Перевірка цілісності
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action ListPkgContent]
@@ -33,6 +39,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name[en_US]=List Content
 Name=List Content
 Name[es]=Listar Contenido
+Name[ru]=Список содержимого
+Name[uk]=Перелік вмісту
 Name[x-test]=xxList Contentxx
 
 [Desktop Action ListPkgDeps]
@@ -41,6 +49,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name[en_US]=List Dependencies
 Name=List Dependencies
 Name[es]=Listar Dependencias
+Name[ru]=Список зависимостей
+Name[uk]=Перелік залежностей
 Name[x-test]=xxList Dependenciesxx
 
 [Desktop Action ShowPkgChangelog]
@@ -49,6 +59,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name[en_US]=Show Changelog
 Name=Show Changelog
 Name[es]=Mostrar Registro de Cambios
+Name[ru]=Показать Changelog
+Name[uk]=Показати Changelog
 Name[x-test]=xxShow Changelogxx
 
 [Desktop Action ShowPkgInfo]
@@ -57,4 +69,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name[en_US]=Show Info
 Name=Show Info
 Name[es]=Mostrar Información
+Name[ru]=Показать информацию 
+Name[uk]=Показати інформацію
 Name[x-test]=xxShow Infoxx

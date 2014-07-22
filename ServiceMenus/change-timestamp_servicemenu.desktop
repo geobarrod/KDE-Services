@@ -11,4 +11,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
 Name[en_US]=Change Timestamp To [File|Directory]
 Name=Change Timestamp To [File|Directory]
 Name[es]=Cambiar Fecha del [Fichero|Directorio]
+Name[ru]=Изменить отметку времени [Файла|Папки]
+Name[uk]=Змінити відмітку часу [Файлу|Теки]
 Name[x-test]=xxChange Timestamp To [File|Directory]xx

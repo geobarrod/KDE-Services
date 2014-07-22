@@ -12,4 +12,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png
 Name[en_US]=Change Owner Here
 Name=Change Owner Here
 Name[es]=Cambiar Propietario Aquí
+Name[ru]=Изменить здесь владельца
+Name[uk]=Змінити тут власника
 Name[x-test]=xxChange Owner Herexx

@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=AVI Tools
 X-KDE-Submenu=AVI Tools
 X-KDE-Submenu[es]=AVI - Herramientas
+X-KDE-Submenu[ru]=Инструменты AVI
+X-KDE-Submenu[uk]=Інструменти AVI
 X-KDE-Submenu[x-test]=xxAVI Toolsxx
 
 [Desktop Action AVIsplitSize]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name[en_US]=Split (to size)
 Name=Split (to size)
 Name[es]=Cortar (a medida)
+Name[ru]=Разбить (по размеру)
+Name[uk]=Розбити (за розміром)
 Name[x-test]=xxSplit (to size)xx
 
 [Desktop Action AVIsplitTime]
@@ -25,4 +29,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name[en_US]=Split (by time range)
 Name=Split (by time range)
 Name[es]=Cortar (por rango de tiempo)
+Name[ru]=Разбить (по временным отрезкам)
+Name[uk]=Розбити (за часовими проміжками)
 Name[x-test]=xxSplit (by time range)xx

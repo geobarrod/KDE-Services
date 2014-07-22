@@ -8,6 +8,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Network Tools
 X-KDE-Submenu=Network Tools
 X-KDE-Submenu[es]=Internet - Herramientas
+X-KDE-Submenu[ru]=Инструменты Сети
+X-KDE-Submenu[uk]=Інструменти Мережі
 X-KDE-Submenu[x-test]=xxNetwork Toolsxx
 
 [Desktop Action ConnectSentry]
@@ -16,6 +18,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
 Name[en_US]=Connect Sentry
 Name=Connect Sentry
 Name[es]=Centinela de Conexiones
+Name[ru]=Сторож портов
+Name[uk]=Вартовий портів
 Name[x-test]=xxConnect Sentryxx
 
 [Desktop Action HTTP-Publisher]
@@ -24,6 +28,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png
 Name[en_US]=HTTP Publisher
 Name=HTTP Publisher
 Name[es]=Publicador HTTP
+Name[ru]=Открыть доступ по HTTP
+Name[uk]=Надати доступ через HTTP
 Name[x-test]=xxHTTP Publisherxx
 
 [Desktop Action ListeningSockets]
@@ -32,4 +38,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
 Name[en_US]=Listening Sockets
 Name=Listening Sockets
 Name[es]=Puertos Escuchando
+Name[ru]=Прослушиваемые сокеты
+Name[uk]=Сокети, що прослуховуються
 Name[x-test]=xxListening Socketsxx

@@ -12,4 +12,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name[en_US]=MKV Extract Subtitle
 Name=MKV Extract Subtitle
 Name[es]=MKV Extraer Subtítulo
+Name[ru]=MKV Извлечь субтитры
+Name[uk]=MKV Видобути субтитри
 Name[x-test]=xxMKV Extract Subtitlexx

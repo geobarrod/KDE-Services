@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=PDF Tools
 X-KDE-Submenu=PDF Tools
 X-KDE-Submenu[es]=PDF - Herramientas
+X-KDE-Submenu[ru]=Инструменты PDF
+X-KDE-Submenu[uk]=Інструменти PDF
 X-KDE-Submenu[x-test]=xxPDF Toolsxx
 
 [Desktop Action DRM-Encrypt]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Apply DRM + Encrypt
 Name=Apply DRM + Encrypt
 Name[es]=Aplicar DRM + Encriptación
+Name[ru]=Задействовать DRM + Шифрование
+Name[uk]=Задіяти DRM + Шифрування
 Name[x-test]=xxApply DRM + Encryptxx
 
 [Desktop Action ExtractAllImages]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Extract All Images
 Name=Extract All Images
 Name[es]=Extraer Todas Las Imagenes
+Name[ru]=Извлечь все изображения
+Name[uk]=Вилучити усі зображення
 Name[x-test]=xxExtract All Imagesxx
 
 [Desktop Action ExtractAllPages]
@@ -33,6 +39,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Extract All Pages
 Name=Extract All Pages
 Name[es]=Extraer Todas Las Páginas
+Name[ru]=Извлечь все страницы
+Name[uk]=Вилучити усі сторінки
 Name[x-test]=xxExtract All Pagesxx
 
 [Desktop Action ExtractPages]
@@ -41,6 +49,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Extract Select Pages
 Name=Extract Select Pages
 Name[es]=Extraer Páginas Seleccionadas
+Name[ru]=Извлечь выбранные страницы
+Name[uk]=Вилучити обрані сторінки
 Name[x-test]=xxExtract Select Pagesxx
 
 [Desktop Action PDFOptimizer]
@@ -49,6 +59,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Optimizer
 Name=Optimizer
 Name[es]=Optimizador
+Name[ru]=Оптимизатор
+Name[uk]=Оптимізатор
 Name[x-test]=xxOptimizerxx
 
 [Desktop Action PDFfix]
@@ -57,6 +69,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Fixer (if possible)
 Name=Fixer (if possible)
 Name[es]=Reparar (si es posible)
+Name[ru]=Исправить (если возможно)
+Name[uk]=Виправити (якщо можливо)
 Name[x-test]=xxFixer (if possible)xx
 
 [Desktop Action PDFinfo]
@@ -65,6 +79,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Info
 Name=Info
 Name[es]=Información
+Name[ru]=Информация
+Name[uk]=Інформація
 Name[x-test]=xxInfoxx
 
 [Desktop Action PDFownerPassword]
@@ -73,6 +89,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Apply Owner Password (DRM)
 Name=Apply Owner Password (DRM)
 Name[es]=Aplicar Contraseña De Propiedad (DRM)
+Name[ru]=Задействовать пароль владельца (DRM)
+Name[uk]=Задіяти пароль власника (DRM)
 Name[x-test]=xxApply Owner Password (DRM)xx
 
 [Desktop Action PDFunSecure]
@@ -81,6 +99,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Decrypt (DRM)
 Name=Decrypt (DRM)
 Name[es]=Desencriptar (DRM)
+Name[ru]=Расшифровать (DRM)
+Name[uk]=Розшифрувати (DRM)
 Name[x-test]=xxDecrypt (DRM)xx
 
 [Desktop Action PDFuserPassword]
@@ -89,6 +109,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name[en_US]=Apply User Password (Encrypt)
 Name=Apply User Password (Encrypt)
 Name[es]=Aplicar Contraseña De Usuario (Encriptar)
+Name[ru]=Задействовать пароль пользователя (Зашифровать)
+Name[uk]=Задіяти пароль користувача (Зашифрувати)
 Name[x-test]=xxApply User Password (Encrypt)xx
 
 [Desktop Action pdfcompress]
@@ -101,6 +123,8 @@ Name[es]=Comprimir
 Name[fr]=Compresser
 Name[hu]=Tömörítés
 Name[nl]=Comprimeren
+Name[ru]=Сжать
+Name[uk]=Стиснути
 
 [Desktop Action pdfmerge]
 Exec=/usr/share/applications/PDFktools.sh -m %F
@@ -112,6 +136,8 @@ Name[es]=Unir los archivos seleccionados
 Name[fr]=Assembler les fichiers sélectionnés
 Name[hu]=Kijelölt fájlok egyesítése
 Name[nl]=Samenvoegen van gekozen bestanden
+Name[ru]=Объединить выбранные файлы
+Name[uk]=З’єднати обрані файли
 
 [Desktop Action pdfmetaedit]
 Exec=/usr/share/applications/PDFktools.sh -me %F
@@ -123,6 +149,8 @@ Name[es]=Editar metadatos
 Name[fr]=Modifier les méta-données
 Name[hu]=Metaadat szerkesztése
 Name[nl]=Metadata bewerken
+Name[ru]=Редактировать метаданные
+Name[uk]=Редагувати метадані
 
 [Desktop Action pdfmetaview]
 Exec=/usr/share/applications/PDFktools.sh -mv %F
@@ -134,6 +162,8 @@ Name[es]=Ver metadatos
 Name[fr]=Afficher les méta-données
 Name[hu]=Metaadat megtekintése
 Name[nl]=Metadata tonen
+Name[ru]=Просмотреть метаданные
+Name[uk]=Переглянути метадані
 
 [Desktop Action pdfsplit]
 Exec=/usr/share/applications/PDFktools.sh -s %F
@@ -145,3 +175,5 @@ Name[es]=Cortar en archivos de una sola página
 Name[fr]=Découper en fichiers d'une seule page
 Name[hu]=Szétválasztás egyoldalas fájlokba
 Name[nl]=Elke pagina een apart bestand
+Name[ru]=Разбить постранично
+Name[uk]=Розбити посторінково

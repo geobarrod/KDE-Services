@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=ISO Image Tools
 X-KDE-Submenu=ISO Image Tools
 X-KDE-Submenu[es]=Imagen ISO - Herramientas
+X-KDE-Submenu[ru]=Инструменты ISO
+X-KDE-Submenu[uk]=Інструменти ISO
 X-KDE-Submenu[x-test]=xxISO Image Toolsxx
 
 [Desktop Action Burn-Image]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png
 Name[en_US]=Burn ISO Image
 Name=Burn ISO Image
 Name[es]=Quemar Imagen ISO
+Name[ru]=Записать ISO-образ
+Name[uk]=Записати ISO-образ
 Name[x-test]=xxBurn ISO Imagexx
 
 [Desktop Action Insert-MD5sum]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-md5sum.png
 Name[en_US]=Insert MD5sum
 Name=Insert MD5sum
 Name[es]=Insertar MD5sum
+Name[ru]=Вставить контрольную сумму MD5
+Name[uk]=Вставити контрольну суму MD5
 Name[x-test]=xxInsert MD5sumxx
 
 [Desktop Action Integrity-Check]
@@ -33,6 +39,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-integrity-check.png
 Name[en_US]=Integrity Check
 Name=Integrity Check
 Name[es]=Comprobar Integridad
+Name[ru]=Проверить целостность
+Name[uk]=Перевірити цілісність
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action MD5-Sum]
@@ -41,6 +49,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=MD5sum ISO Image
 Name=MD5sum ISO Image
 Name[es]=MD5sum Imagen ISO
+Name[ru]=Контрольная сумма MD5 ISO-образа
+Name[uk]=Контрольна сума MD5 ISO-образу
 Name[x-test]=xxMD5sum ISO Imagexx
 
 [Desktop Action MountCD-Image]
@@ -49,6 +59,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
 Name[en_US]=Mount ISO Image
 Name=Mount ISO Image
 Name[es]=Montar Imagen ISO
+Name[ru]=Смонтировать ISO-образ
+Name[uk]=Змонтувати ISO-образ
 Name[x-test]=xxMount ISO Imagexx
 
 [Desktop Action SHA1-Sum]
@@ -57,6 +69,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=SHA1sum ISO Image
 Name=SHA1sum ISO Image
 Name[es]=SHA1sum Imagen ISO
+Name[ru]=Контрольная сумма SHA1 ISO-образа
+Name[uk]=Контрольна сума SHA1 ISO-образу
 Name[x-test]=xxSHA1sum ISO Imagexx
 
 [Desktop Action SHA256-Sum]
@@ -65,6 +79,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=SHA256sum ISO Image
 Name=SHA256sum ISO Image
 Name[es]=SHA256sum Imagen ISO
+Name[ru]=Контрольная сумма SHA256 ISO-образа
+Name[uk]=Контрольна сума SHA256 ISO-образу
 Name[x-test]=xxSHA256sum ISO Imagexx
 
 [Desktop Action SHA512-Sum]
@@ -73,6 +89,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name[en_US]=SHA512sum ISO Image
 Name=SHA512sum ISO Image
 Name[es]=SHA512sum Imagen ISO
+Name[ru]=Контрольная сумма SHA512 ISO-образа
+Name[uk]=Контрольна сума SHA512 ISO-образу
 Name[x-test]=xxSHA512sum ISO Imagexx
 
 [Desktop Action UmountCD-Image]
@@ -81,4 +99,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png
 Name[en_US]=Umount ISO Image
 Name=Umount ISO Image
 Name[es]=Desmontar Imagen ISO
+Name[ru]=Размонтировать ISO-образ
+Name[uk]=Розмонтувати ISO-образ
 Name[x-test]=xxUmount ISO Imagexx

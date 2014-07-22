@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Graphic Tools
 X-KDE-Submenu=Graphic Tools
 X-KDE-Submenu[es]=Graficos - Herramientas
+X-KDE-Submenu[ru]=Инструменты Графики
+X-KDE-Submenu[uk]=Інструменти Графіки
 X-KDE-Submenu[x-test]=xxGraphic Toolsxx
 
 [Desktop Action Sizer]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name[en_US]=The Sizer (custom sizes)
 Name=The Sizer (custom sizes)
 Name[es]=The Sizer (personalizar dimensiones)
+Name[ru]=Изменение размера (настраиваемое)
+Name[uk]=Зміна розміру (власні параметри)
 Name[x-test]=xxThe Sizer (custom sizes)xx
 
 [Desktop Action Converter]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png
 Name[en_US]=The Converter
 Name=The Converter
 Name[es]=The Converter
+Name[ru]=Конвертер
+Name[uk]=Конвертер
 Name[x-test]=xxThe Converterxx
 
 [Desktop Action 128x128]

@@ -11,4 +11,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png
 Name[en_US]=[File|Dir]name Whitespace Replace
 Name=[File|Dir]name Whitespace Replace
 Name[es]=Reemplazar Espacio En Nombre De [Fichero|Directorio]
+Name[ru]=Заменить пробелы в имени [Файла|Папки]
+Name[uk]=Замінити пробіли у назві [Файлу|Теки]
 Name[x-test]=xx[File|Dir]name Whitespace Replacexx

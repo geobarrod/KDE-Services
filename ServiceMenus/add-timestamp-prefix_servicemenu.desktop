@@ -11,4 +11,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
 Name[en_US]=Add Timestamp Prefix To [File|Dir]name
 Name=Add Timestamp Prefix To [File|Dir]name
 Name[es]=Agregar Prefijo Fecha-Hora al Nombre del [Fichero|Directorio]
+Name[ru]=Приставить отметку времени к имени [Файла|Папки]
+Name[uk]=Приставити відмітку часу до назви [Файлу|Теки]
 Name[x-test]=xxAdd Timestamp Prefix To [File|Dir]namexx

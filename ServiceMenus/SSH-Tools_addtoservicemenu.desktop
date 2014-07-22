@@ -9,6 +9,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=SSH Tools
 X-KDE-Submenu=SSH Tools
 X-KDE-Submenu[es]=SSH - Herramientas
+X-KDE-Submenu[ru]=Инструменты SSH
+X-KDE-Submenu[uk]=Інструменти SSH
 X-KDE-Submenu[x-test]=xxSSH Toolsxx
 
 [Desktop Action SCP]
@@ -17,6 +19,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png
 Name[en_US]=Send To Remote Server
 Name=Send To Remote Server
 Name[es]=Enviar a Servidor Remoto
+Name[ru]=Отправить на удалённый сервер
+Name[uk]=Надіслати до віддаленого серверу
 Name[x-test]=xxSend To Remote Serverxx
 
 [Desktop Action SSH]
@@ -25,6 +29,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
 Name[en_US]=Connect To Remote Server
 Name=Connect To Remote Server
 Name[es]=Conectar a Servidor Remoto
+Name[ru]=Подключиться к удалённому серверу
+Name[uk]=Підключитися до віддаленого серверу
 Name[x-test]=xxConnect To Remote Serverxx
 
 [Desktop Action SSH-copy-id]
@@ -33,6 +39,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png
 Name[en_US]=Install Public Key
 Name=Install Public Key
 Name[es]=Instalar Llave Publica
+Name[ru]=Установить открытый ключ
+Name[uk]=Встановити відкритий ключ
 Name[x-test]=xxInstall Public Keyxx
 
 [Desktop Action SSH-keygen]
@@ -41,6 +49,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png
 Name[en_US]=Public Key Generation
 Name=Public Key Generation
 Name[es]=Generar Llave Publica
+Name[ru]=Генерировать открытый ключ
+Name[uk]=Генерувати відкритий ключ
 Name[x-test]=xxPublic Key Generationxx
 
 [Desktop Action SSHfs]
@@ -49,6 +59,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
 Name[en_US]=Mountpoint To Remote Directory
 Name=Mountpoint To Remote Directory
 Name[es]=Montar Directorio Remoto
+Name[ru]=Смонтировать удалённую папку
+Name[uk]=Змонтувати віддалену теку
 Name[x-test]=xxMountpoint To Remote Directoryxx
 
 [Desktop Action ViewMachine]
@@ -57,4 +69,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
 Name[en_US]=Registered Servers
 Name=Registered Servers
 Name[es]=Servidores Registrados
+Name[ru]=Зарегестрированные серверы
+Name[uk]=Зареєстровані сервери
 Name[x-test]=xxRegistered Serversxx

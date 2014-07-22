@@ -8,6 +8,8 @@ X-KDE-StartupNotify=false
 X-KDE-Submenu[en_US]=Search Tools
 X-KDE-Submenu=Search Tools
 X-KDE-Submenu[es]=Herramientas de Búsqueda
+X-KDE-Submenu[ru]=Инструменты поиска
+X-KDE-Submenu[uk]=Інструменти пошуку
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
@@ -16,6 +18,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name[en_US]=Search By Name
 Name=Search By Name
 Name[es]=Búsqueda Por Nombre
+Name[ru]=Поиск по имени
+Name[uk]=Пошук за ім’ям
 Name[x-test]=xxSearch By Namexx
 
 [Desktop Action SearchByString]
@@ -24,6 +28,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
 Name[en_US]=Search By String
 Name=Search By String
 Name[es]=Búsqueda Por Palabra
+Name[ru]=Поиск по содержимому
+Name[uk]=Пошук за вмістом
 Name[x-test]=xxSearch By Stringxx
 
 [Desktop Action StatisticsSearchDB]
@@ -32,6 +38,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png
 Name[en_US]=Statistics Search DB
 Name=Statistics Search DB
 Name[es]=Estadisticas BD de Búsqueda
+Name[ru]=Статистика поисковой БД
+Name[uk]=Статистика пошукової БД
 Name[x-test]=xxStatistics Search DBxx
 
 [Desktop Action UpdateSearchDB]
@@ -40,6 +48,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png
 Name[en_US]=Update Search DB
 Name=Update Search DB
 Name[es]=Actualizar BD de Búsqueda
+Name[ru]=Обновить поисковую БД
+Name[uk]=Оновити пошукову БД
 Name[x-test]=xxUpdate Search DBxx
 
 [Desktop Action SearchHere]
@@ -48,6 +58,8 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name[en_US]=Search Here
 Name=Search Here
 Name[es]=Búscar Aquí
+Name[ru]=Искать здесь
+Name[uk]=Шукати тут
 Name[x-test]=xxSearch Herexx
 
 [Desktop Action ModifiedFilesHere]
@@ -56,4 +68,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name[en_US]=Modified Files Here
 Name=Modified Files Here
 Name[es]=Archivos Modificados Aquí
+Name[ru]=Изменённые файлы в этой папке
+Name[uk]=Файли що були змінені в цій теці
 Name[x-test]=xxModified Files Herexx

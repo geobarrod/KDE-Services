@@ -12,4 +12,6 @@ Icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png
 Name[en_US]=Text Replace
 Name=Text Replace
 Name[es]=Reemplazar Texto
+Name[ru]=Заменить текст
+Name[uk]=Замінити текст
 Name[x-test]=xxText Replacexx
