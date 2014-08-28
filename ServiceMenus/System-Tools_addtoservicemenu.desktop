@@ -5,7 +5,6 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
-X-KDE-Submenu[en_US]=System Tools
 X-KDE-Submenu=System Tools
 X-KDE-Submenu[es]=Sistema - Herramientas
 X-KDE-Submenu[ru]=Инструменты системы
@@ -15,7 +14,6 @@ X-KDE-Submenu[x-test]=xxSystem Toolsxx
 [Desktop Action BuildKernel]
 Exec=xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png
-Name[en_US]=Build Custom Kernel
 Name=Build Custom Kernel
 Name[es]=Construir Kernel Personalizado
 Name[ru]=Собрать собственное ядро
@@ -25,7 +23,6 @@ Name[x-test]=xxBuild Custom Kernelxx
 [Desktop Action CheckKernelUpdate]
 Exec=/usr/share/applications/System_Tools-check-kernel-update.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-update.png
-Name[en_US]=Check Kernel Update
 Name=Check Kernel Update
 Name[es]=Chequear Actualización del Kernel
 Name[ru]=Проверить обновления ядра
@@ -35,7 +32,6 @@ Name[x-test]=xxCheck Kernel Updatexx
 [Desktop Action Htop]
 Exec=/usr/share/applications/System_Tools-process-viewer.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-system-process.png
-Name[en_US]=Process Viewer
 Name=Process Viewer
 Name[es]=Visor De Procesos
 Name[ru]=Обзор процессов
@@ -45,7 +41,6 @@ Name[x-test]=xxProcess Viewerxx
 [Desktop Action RebuildPackage]
 Exec=xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
-Name[en_US]=Rebuild RPM Package
 Name=Rebuild RPM Package
 Name[es]=Reconstruir Paquete RPM
 Name[ru]=Пересобрать пакет RPM
@@ -55,7 +50,6 @@ Name[x-test]=xxRebuild RPM Packagexx
 [Desktop Action SysInfo]
 Exec=/usr/share/applications/System_Tools-sys-info.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-hwinfo.png
-Name[en_US]=System Information
 Name=System Information
 Name[es]=Información del Sistema
 Name[ru]=Информация о системе
@@ -65,7 +59,6 @@ Name[x-test]=xxSystem Informationxx
 [Desktop Action SysMonitor]
 Exec=kdesu --caption="System Monitor" --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png
-Name[en_US]=System Monitor
 Name=System Monitor
 Name[es]=Monitor del Sistema
 Name[ru]=Системный монитор
@@ -75,7 +68,6 @@ Name[x-test]=xxSystem Monitorxx
 [Desktop Action XorgConf]
 Exec=kdesu --caption="Xorg Configure" --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png
-Name[en_US]=Xorg Configure
 Name=Xorg Configure
 Name[es]=Configurar Xorg
 Name[ru]=Конфигурация Xorg

@@ -8,7 +8,6 @@ Type=Service
 [Desktop Action change-timestamp]
 Exec=/usr/share/applications/Change_file-dir_timestamp.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
-Name[en_US]=Change Timestamp To [File|Directory]
 Name=Change Timestamp To [File|Directory]
 Name[es]=Cambiar Fecha del [Fichero|Directorio]
 Name[ru]=Изменить отметку времени [Файла|Папки]

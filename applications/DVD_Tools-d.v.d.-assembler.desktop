@@ -1,20 +1,13 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
-MimeType=
-Name[en_US]=D.V.D. Assembler
 Name=D.V.D. Assembler
+Name[es]=Ensamblador de D.V.D.
+Name[ru]=D.V.D. Сборщик
+Name[uk]=D.V.D. Компанувальник
 Path=/usr/share/applications
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

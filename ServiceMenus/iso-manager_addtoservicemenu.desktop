@@ -6,7 +6,6 @@ ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
-X-KDE-Submenu[en_US]=ISO Image Tools
 X-KDE-Submenu=ISO Image Tools
 X-KDE-Submenu[es]=Imagen ISO - Herramientas
 X-KDE-Submenu[ru]=Инструменты ISO
@@ -16,7 +15,6 @@ X-KDE-Submenu[x-test]=xxISO Image Toolsxx
 [Desktop Action Burn-Image]
 Exec=/usr/share/applications/iso_manager-burn-image.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png
-Name[en_US]=Burn ISO Image
 Name=Burn ISO Image
 Name[es]=Quemar Imagen ISO
 Name[ru]=Записать ISO-образ
@@ -26,7 +24,6 @@ Name[x-test]=xxBurn ISO Imagexx
 [Desktop Action Insert-MD5sum]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-md5sum.png --caption="Insert MD5sum" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Inserting:  $(basename %u)"; implantisomd5 %u > /tmp/insert-integrity 2>&1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-md5sum.png --title="Insert MD5sum" --passivepopup="$(basename %u)   [Finished]   $(cat /tmp/insert-integrity)"; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-md5sum.png
-Name[en_US]=Insert MD5sum
 Name=Insert MD5sum
 Name[es]=Insertar MD5sum
 Name[ru]=Вставить контрольную сумму MD5
@@ -36,7 +33,6 @@ Name[x-test]=xxInsert MD5sumxx
 [Desktop Action Integrity-Check]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-integrity-check.png --caption="Integrity Check" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Checking:  $(basename %u)"; checkisomd5 %u > /dev/null 2> /tmp/check-integrity; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-integrity-check.png --title="Integrity Check" --passivepopup="$(basename %u)   [Finished]   $(cat /tmp/check-integrity)"; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-integrity-check.png
-Name[en_US]=Integrity Check
 Name=Integrity Check
 Name[es]=Comprobar Integridad
 Name[ru]=Проверить целостность
@@ -46,7 +42,6 @@ Name[x-test]=xxIntegrity Checkxx
 [Desktop Action MD5-Sum]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="MD5sum ISO Image" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="MD5sum $(basename %u)" --passivepopup=$(md5sum %u); qdbus $DBUSREF close; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
-Name[en_US]=MD5sum ISO Image
 Name=MD5sum ISO Image
 Name[es]=MD5sum Imagen ISO
 Name[ru]=Контрольная сумма MD5 ISO-образа
@@ -56,7 +51,6 @@ Name[x-test]=xxMD5sum ISO Imagexx
 [Desktop Action MountCD-Image]
 Exec=/usr/share/applications/iso_manager-mount-image.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
-Name[en_US]=Mount ISO Image
 Name=Mount ISO Image
 Name[es]=Montar Imagen ISO
 Name[ru]=Смонтировать ISO-образ
@@ -66,7 +60,6 @@ Name[x-test]=xxMount ISO Imagexx
 [Desktop Action SHA1-Sum]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="SHA1sum ISO Image" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="SHA1sum $(basename %u)" --passivepopup=$(sha1sum %u); qdbus $DBUSREF close; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
-Name[en_US]=SHA1sum ISO Image
 Name=SHA1sum ISO Image
 Name[es]=SHA1sum Imagen ISO
 Name[ru]=Контрольная сумма SHA1 ISO-образа
@@ -76,7 +69,6 @@ Name[x-test]=xxSHA1sum ISO Imagexx
 [Desktop Action SHA256-Sum]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="SHA256sum ISO Image" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="SHA256sum $(basename %u)" --passivepopup=$(sha256sum %u); qdbus $DBUSREF close; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
-Name[en_US]=SHA256sum ISO Image
 Name=SHA256sum ISO Image
 Name[es]=SHA256sum Imagen ISO
 Name[ru]=Контрольная сумма SHA256 ISO-образа
@@ -86,7 +78,6 @@ Name[x-test]=xxSHA256sum ISO Imagexx
 [Desktop Action SHA512-Sum]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="SHA512sum ISO Image" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="SHA512sum $(basename %u)" --passivepopup=$(sha512sum %u); qdbus $DBUSREF close; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
-Name[en_US]=SHA512sum ISO Image
 Name=SHA512sum ISO Image
 Name[es]=SHA512sum Imagen ISO
 Name[ru]=Контрольная сумма SHA512 ISO-образа
@@ -96,7 +87,6 @@ Name[x-test]=xxSHA512sum ISO Imagexx
 [Desktop Action UmountCD-Image]
 Exec=fuser -k %u; fusermount -u "$(ls "%u"|sed 's/.iso$//')"; rm -fr "$(ls "%u"|sed 's/.iso$//')"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png --title="Umount ISO Image" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png
-Name[en_US]=Umount ISO Image
 Name=Umount ISO Image
 Name[es]=Desmontar Imagen ISO
 Name[ru]=Размонтировать ISO-образ

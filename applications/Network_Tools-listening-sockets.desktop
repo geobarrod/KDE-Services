@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=Network-Tools;
-Comment[en_US]=
-Comment=
 Exec=kdesu --caption="Listening Sockets" -d /usr/share/applications/Network_Tools-listening-sockets.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
-MimeType=
-Name[en_US]=Listening Sockets
 Name=Listening Sockets
-Path=
+Name[es]=Puertos Escuchando
+Name[ru]=Прослушиваемые сокеты
+Name[uk]=Сокети, що прослуховуються
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

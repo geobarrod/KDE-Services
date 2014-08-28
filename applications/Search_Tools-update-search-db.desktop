@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=Search-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/Search_Tools-update-search-db.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png
-MimeType=
-Name[en_US]=Update Search DB
 Name=Update Search DB
+Name[es]=Actualizar BD de Búsqueda
+Name[ru]=Обновить поисковую БД
+Name[uk]=Оновити пошукову БД
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

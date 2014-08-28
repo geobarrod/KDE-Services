@@ -1,9 +1,9 @@
 #!/bin/bash
 
-###################################################################
-# For KDE-Services. 2011.                                         #
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>                #
-###################################################################
+#################################################################
+# For KDE-Services. 2011.										#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+#################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 

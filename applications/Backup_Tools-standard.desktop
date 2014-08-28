@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=Backup-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/Backup_Tools-standard.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png
-MimeType=
-Name[en_US]=Standards
 Name=Standards
-Path=
+Name[es]=Estándares
+Name[ru]=Стандартные
+Name[uk]=Стандартні
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

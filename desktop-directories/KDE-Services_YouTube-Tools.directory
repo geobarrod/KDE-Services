@@ -2,4 +2,7 @@
 Encoding=UTF-8
 Type=Directory
 Name=YouTube Tools
+Name[es]=YouTube - Herramientas
+Name[ru]=Инструменты YouTube
+Name[uk]=Інструменти YouTube
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

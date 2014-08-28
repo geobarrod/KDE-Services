@@ -1,3 +1,13 @@
+* Wed Aug 27 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-8
+- Added new service menu "DiskCloner" to "Multimedia Tools" submenu.
+- "Convert Video Files": Added support for WebM video format and 360p video resolution.
+- "Record My Desktop": Bugfix.
+- Enhancement services menu languages translation ES, RU and UK.
+- Makefile: Updated.
+
+* Mon Jul 21 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-7
+- Added translation to Russian and Ukrainian languages.
+
 * Thu Apr 17 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-6
 - Improved Bash scripts code.
 - Backup Tools: Enhancement.

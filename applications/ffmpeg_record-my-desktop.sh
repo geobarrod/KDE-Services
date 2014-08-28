@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2013.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
+# For KDE-Services. 2012-2013.									#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -19,7 +19,7 @@ FFPID=""
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        exit 0
+        exit 1
     fi
 }
 
@@ -48,10 +48,10 @@ DIR=$1
 cd "$DIR"
 DIR=$(pwd)
 
-FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop" 2> /dev/null)
+FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop_$HOSTNAME" 2> /dev/null)
 if-cancel-exit
 
-VCODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --menu="Choose Video Codec" mpg "MPEG-1" flv "FLV" avi "AVI" \
+VCODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png --caption="Record My Desktop" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" webm "WebM" \
        --geometry 100x100 2> /dev/null)
 if-cancel-exit
 
@@ -59,7 +59,7 @@ DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape
 if-cancel-exit
 
 
-ffmpeg -y -f x11grab -s $DISRES -r 25 -sameq -mbd 2 -trellis 1 -sn -g 12 -i $DISPLAY $DESTINATION/$FILENAME.$VCODEC &
+ffmpeg -y -f x11grab -s $DISRES -i $DISPLAY -q:v 0 -b:v 1000k -mbd 2 -trellis 1 -sn -g 12 $DESTINATION/$FILENAME.$VCODEC &
 if-ffmpeg-cancel
 FFPID="$!"
 

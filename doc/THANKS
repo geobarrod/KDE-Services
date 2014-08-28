@@ -1,6 +1,7 @@
  
  Sylvain Vidal	<garion@mailoo.org>	(Author of service menu PDFktools)
  David Baum	<david.baum@naraesk.eu>	(Service menu PDFktools bugfixer and author of the good idea
-					 of ​​integrating PDFktools on "PDF Tools")
- Victor Guardiola (vguardiola) (Improved source code for "Mount ISO Image" and "Umount ISO Image" services menu;
-				        fixed the problem of [dir|file]name with whitespaces).
+									of ​​integrating PDFktools on "PDF Tools")
+ Victor Guardiola <victor.guardiola@gmail.com> (Improved source code for "Mount ISO Image" and "Umount ISO Image" services menu;
+												fixed the problem of [dir|file]name with whitespaces).
+ Vasyl V. Vercynskyj <fuckel@ukr.net> (Translation to Russian and Ukrainian languages).

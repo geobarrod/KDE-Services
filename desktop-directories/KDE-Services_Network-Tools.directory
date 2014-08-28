@@ -2,4 +2,7 @@
 Encoding=UTF-8
 Type=Directory
 Name=Network Tools
+Name[es]=Internet - Herramientas
+Name[ru]=Инструменты Сети
+Name[uk]=Інструменти Мережі
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

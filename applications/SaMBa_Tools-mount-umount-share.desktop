@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=SaMBa-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/SaMBa_Tools-mount-umount-share.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-smbfs.png
-MimeType=
-Name[en_US]=Samba Shares Mounter
 Name=Samba Shares Mounter
-Path=
+Name[es]=Montador de Compartidos Samba
+Name[ru]=Монтировать сетевые ресурсы Samba
+Name[uk]=Монтувати мережеві ресурси Samba
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

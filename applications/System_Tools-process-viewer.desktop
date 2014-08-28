@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=System-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/System_Tools-process-viewer.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-system-process.png
-MimeType=
-Name[en_US]=Process Viewer
 Name=Process Viewer
-Path=
+Name[es]=Visor De Procesos
+Name[ru]=Обзор процессов
+Name[uk]=Перегляд процесів
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

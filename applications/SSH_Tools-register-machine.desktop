@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=SSH-Tools;Dolphin-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/SSH_Tools-register-machine.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
-MimeType=
-Name[en_US]=Registered Servers
 Name=Registered Servers
+Name[es]=Servidores Registrados
+Name[ru]=Зарегестрированные серверы
+Name[uk]=Зареєстровані сервери
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

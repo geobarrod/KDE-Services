@@ -8,7 +8,6 @@ Type=Service
 [Desktop Action show-status]
 Exec=/usr/share/applications/Show_file-dir_status.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-info.png
-Name[en_US]=Show [File|Directory] Status
 Name=Show [File|Directory] Status
 Name[es]=Mostrar Estado del [Fichero|Directorio]
 Name[ru]=Показать статус [Файла|Папки]

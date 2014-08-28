@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
+# For KDE-Services. 2011-2013.									#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
 VGA=$(lspci |grep -i vga)

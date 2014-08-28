@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=Search-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/Search_Tools-search-by-name.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
-MimeType=
-Name[en_US]=Search By Name
 Name=Search By Name
+Name[es]=Búsqueda Por Nombre
+Name[ru]=Поиск по имени
+Name[uk]=Пошук за ім’ям
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

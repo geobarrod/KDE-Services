@@ -8,7 +8,6 @@ Type=Service
 [Desktop Action add-timestamp]
 Exec=cd $(dirname %u); /usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh %u; basename %u >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(basename "$i");done; rm -f .add-timestamp-prefix
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
-Name[en_US]=Add Timestamp Prefix To [File|Dir]name
 Name=Add Timestamp Prefix To [File|Dir]name
 Name[es]=Agregar Prefijo Fecha-Hora al Nombre del [Fichero|Directorio]
 Name[ru]=Приставить отметку времени к имени [Файла|Папки]

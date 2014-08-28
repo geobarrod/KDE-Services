@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=Search-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png
-MimeType=
-Name[en_US]=Statistics Search DB
 Name=Statistics Search DB
+Name[es]=Estadisticas BD de Búsqueda
+Name[ru]=Статистика поисковой БД
+Name[uk]=Статистика пошукової БД
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

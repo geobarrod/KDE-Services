@@ -2,4 +2,7 @@
 Encoding=UTF-8
 Type=Directory
 Name=Multimedia Tools
+Name[es]=Multimedia - Herramientas
+Name[ru]=Инструменты Мультимедиа
+Name[uk]=Інструменти Мультимедіа
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

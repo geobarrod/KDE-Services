@@ -1,5 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
 Type=Directory
-Name=Backup Tools
+Name=[Backup|Restore] Tools
+Name[es]=[Respaldar|Restaurar] - Herramientas
+Name[ru]=Инструменты резервного копирования
+Name[uk]=Інструменти резервного копіювання
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

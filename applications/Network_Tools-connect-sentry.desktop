@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=Network-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/Network_Tools-connect-sentry.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
-MimeType=
-Name[en_US]=Connect Sentry
 Name=Connect Sentry
-Path=
+Name[es]=Centinela de Conexiones
+Name[ru]=Сторож портов
+Name[uk]=Вартовий портів
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=Midnight-Tools;
-Comment[en_US]=
-Comment=
 Exec=konsole --new-tab -e mc
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-user.png
-MimeType=
-Name[en_US]=Midnight Commander
 Name=Midnight Commander
+Name[es]=Comandante Midnight
+Name[ru]=Командир Midnight
+Name[uk]=Командир Midnight
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

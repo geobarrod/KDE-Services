@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
-MimeType=
-Name[en_US]=Record My Desktop
 Name=Record My Desktop
-Path=
+Name[es]=Record My Desktop (grabar pantalla de video)
+Name[ru]=Record My Desktop (видеозахват экрана)
+Name[uk]=Record My Desktop (відеозахоплення екрану)
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

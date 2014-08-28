@@ -2,4 +2,7 @@
 Encoding=UTF-8
 Type=Directory
 Name=Search Tools
+Name[es]=Búsqueda - Herramientas
+Name[ru]=Инструменты поиска
+Name[uk]=Інструменти пошуку
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

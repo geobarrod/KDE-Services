@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
+# For KDE-Services. 2011-2014.									#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -121,6 +121,10 @@ done
 
 DIR="$(pwd)"
 
+if [ "$DIR" == "/usr/share/applications" ]; then
+    DIR="~/"
+fi
+
 PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
 if-cancel-exit
@@ -138,8 +142,8 @@ elif [ "$PRIORITY" = "Lowest" ]; then
 fi
 
 FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
-      *.dat *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 \
-      *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav *.WMA *.wma *.WMV *.wmv|All supported files" 2> /dev/null)
+      *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 \
+      *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|All supported files" 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
@@ -161,7 +165,7 @@ if [ "$FORMAT" = "MP3" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -acodec libmp3lame -ab $MODE "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
+        ffmpeg -y -i $i -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -176,7 +180,7 @@ elif [ "$FORMAT" = "FLAC" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -acodec flac "$DESTINATION/${DST_FILE##*/}.flac" > $LOG 2>&1
+        ffmpeg -y -i $i -c:a flac "$DESTINATION/${DST_FILE##*/}.flac" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

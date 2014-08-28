@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=SSH-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/SSH_Tools-connect.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
-MimeType=
-Name[en_US]=Connect To
-Name=Connect To
+Name=Connect To Remote Server
+Name[es]=Conectar a Servidor Remoto
+Name[ru]=Подключиться к удалённому серверу
+Name[uk]=Підключитися до віддаленого серверу
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

@@ -5,7 +5,6 @@ MimeType=all/all;
 Actions=CopyToDropbox;MoveToDropbox;_SEPARATOR_;CopyToPublicAndGetURL;MoveToPublicAndGetURL;_SEPARATOR_;GetPublicURL;_SEPARATOR_;InstallService;UpdateService;_SEPARATOR_;StartService;StopService;_SEPARATOR_;AutoStart;
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 X-KDE-Submenu=Dropbox Tools
-X-KDE-Submenu[en_US]=Dropbox Tools
 X-KDE-Submenu[es]=Dropbox - Herramientas
 X-KDE-Submenu[ru]=Инструменты Dropbox
 X-KDE-Submenu[uk]=Інструменти Dropbox

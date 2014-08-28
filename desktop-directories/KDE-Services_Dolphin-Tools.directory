@@ -2,4 +2,7 @@
 Encoding=UTF-8
 Type=Directory
 Name=Dolphin Tools
+Name[es]=Dolphin - Herramientas
+Name[ru]=Инструменты Dolphin
+Name[uk]=Інструменти Dolphin
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

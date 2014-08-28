@@ -6,9 +6,8 @@ ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
-X-KDE-Submenu[en_US]=Security Tools
 X-KDE-Submenu=Security Tools
-X-KDE-Submenu[es]=Herramientas de Seguridad
+X-KDE-Submenu[es]=Seguridad - Herramientas
 X-KDE-Submenu[ru]=Инструменты безопасности
 X-KDE-Submenu[uk]=Інструменти безпеки
 X-KDE-Submenu[x-test]=xxSecurity Toolsxx
@@ -16,7 +15,6 @@ X-KDE-Submenu[x-test]=xxSecurity Toolsxx
 [Desktop Action Decrypt]
 Exec=gpg --yes --passphrase "$(kdialog --caption="File Decryption" --password="Enter passphrase for decrypt")" %u && if [ "$?" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-decrypt.png --title="File Decryption" --passivepopup="[Finished]"; fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-decrypt.png
-Name[en_US]=Decrypt
 Name=Decrypt
 Name[es]=Desencriptar
 Name[ru]=Расшифровать
@@ -26,7 +24,6 @@ Name[x-test]=xxDecryptxx
 [Desktop Action Encrypt]
 Exec=gpg --yes -c --passphrase "$(kdialog --caption="File Encryption" --password="Enter passphrase for encrypt")" %u && if [ "$?" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-encrypt.png --title="File Encryption" --passivepopup="[Finished]"; fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-encrypt.png
-Name[en_US]=Encrypt
 Name=Encrypt
 Name[es]=Encriptar
 Name[ru]=Зашифровать
@@ -36,7 +33,6 @@ Name[x-test]=xxEncryptxx
 [Desktop Action sendto-mailx]
 Exec=zip -9reP $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --password="Enter password for encrypt:") %u.zip %u; mailx -s "$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --inputbox="Message Subject:")" -a $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --textinputbox="Message Body:" > /tmp/mailbody) /tmp/mailbody -a %u.zip $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --inputbox="Mail To:\t(For send to multiples mailbox enter comma separated list of address)") <.; rm -f %u.zip /tmp/mailbody; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --title="Secure Send To Mailx" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png
-Name[en_US]=Secure Send To Mailx
 Name=Secure Send To Mailx
 Name[es]=Envío seguro a Mailx
 Name[ru]=Безопасно отправить через Mailx
@@ -46,7 +42,6 @@ Name[x-test]=xxSecure Send To Mailxxx
 [Desktop Action shredder]
 Exec=/usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh %u; echo '%u' >> .shred; for i in $(cat .shred);do shred -f -n 5 --random-source=/dev/urandom -z "$i";done; for i in $(cat .shred);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g').shredder;done; rm -f *.shredder; shred -f -n 5 --random-source=/dev/urandom -z -u .shred
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-shredder.png
-Name[en_US]=Paranoid Shredder
 Name=Paranoid Shredder
 Name[es]=Trituradora Paranoica
 Name[ru]=Надёжное удаление

@@ -1,20 +1,12 @@
 [Desktop Entry]
-Categories=Graphic-Tools
-Comment[en_US]=
-Comment=
+Categories=Graphic-Tools;
 Exec=/usr/share/applications/The_Sizer.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
-MimeType=
-Name[en_US]=The Sizer
 Name=The Sizer
-Path=
+Name[es]=El Conversor
+Name[ru]=Конвертер
+Name[uk]=Конвертер
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

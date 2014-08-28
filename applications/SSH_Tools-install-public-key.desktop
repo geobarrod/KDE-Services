@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=SSH-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/SSH_Tools-copy-id.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png
-MimeType=
-Name[en_US]=Install Public Key
 Name=Install Public Key
+Name[es]=Instalar Llave Publica
+Name[ru]=Установить открытый ключ
+Name[uk]=Встановити відкритий ключ
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

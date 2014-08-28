@@ -1,21 +1,13 @@
 [Desktop Entry]
 Categories=SSH-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/SSH_Tools-sshfs.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
-MimeType=
-Name[en_US]=Mountpoint To Remote Directory
 Name=Mountpoint To Remote Directory
+Name[es]=Montar Directorio Remoto
+Name[ru]=Смонтировать удалённую папку
+Name[uk]=Змонтувати віддалену теку
 NoDisplay=false
-Path=
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

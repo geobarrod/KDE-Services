@@ -9,7 +9,6 @@ X-KDE-StartupNotify=false
 [Desktop Action Multiplex-Subtitle]
 Exec=/usr/share/applications/Multiplex_Subtitle.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png
-Name[en_US]=Multiplex Subtitle
 Name=Multiplex Subtitle
 Name[es]=Multiplexar Subtítulo
 Name[ru]=Мультиплексор субтитров

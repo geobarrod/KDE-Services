@@ -8,7 +8,6 @@ X-KDE-StartupNotify=false
 [Desktop Action Name-Whitespace-Replace]
 Exec=/usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png
-Name[en_US]=[File|Dir]name Whitespace Replace
 Name=[File|Dir]name Whitespace Replace
 Name[es]=Reemplazar Espacio En Nombre De [Fichero|Directorio]
 Name[ru]=Заменить пробелы в имени [Файла|Папки]

@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=System-Tools;
-Comment[en_US]=
-Comment=
 Exec=kdesu --caption="Xorg Configure" --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png
-MimeType=
-Name[en_US]=Xorg Configure
 Name=Xorg Configure
-Path=
+Name[es]=Configurar Xorg
+Name[ru]=Конфигурация Xorg
+Name[uk]=Конфігурація Xorg
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

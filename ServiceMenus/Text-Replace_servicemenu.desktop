@@ -9,7 +9,6 @@ X-KDE-StartupNotify=false
 [Desktop Action TextReplace]
 Exec=sed -i -e "s;`kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png --caption="Text Replace" --inputbox="Enter text to replace"`;`kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png --caption="Text Replace" --inputbox="Replace by"`;g" %u; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png --title="Text Replace" --passivepopup="Finished"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-whitespace-replace.png
-Name[en_US]=Text Replace
 Name=Text Replace
 Name[es]=Reemplazar Texto
 Name[ru]=Заменить текст

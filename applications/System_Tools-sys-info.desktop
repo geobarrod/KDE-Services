@@ -1,20 +1,12 @@
 [Desktop Entry]
 Categories=System-Tools;
-Comment[en_US]=
-Comment=
 Exec=/usr/share/applications/System_Tools-sys-info.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-hwinfo.png
-MimeType=
-Name[en_US]=System Information
 Name=System Information
-Path=
+Name[es]=Información del Sistema
+Name[ru]=Информация о системе
+Name[uk]=Інформація про систему
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

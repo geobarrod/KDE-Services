@@ -7,7 +7,6 @@ Actions=sendto;
 
 [Desktop Action sendto]
 Name=Send To ThunderBird
-Name[en_US]=Send To ThunderBird
 Name[es]=Enviar a ThunderBird
 Name[ru]=Отправить в ThunderBird
 Name[uk]=Відправити у ThunderBird

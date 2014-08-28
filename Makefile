@@ -1,7 +1,7 @@
 #################################################################
 # Installing KDE-Services, to appropriate directories.		#
 # Author: Geovani Barzaga Rodriguez <igeo.cu@gmail.com>.	#
-# KDE-Services 2011-2013. GPLv3+				#
+# KDE-Services 2011-2014. GPLv3+				#
 #################################################################
 
 PREFIXmenu=$(RPM_BUILD_ROOT)/usr/share/kde4/services/ServiceMenus
@@ -73,6 +73,7 @@ uninstall:
 		$(PREFIXapp)/Backup_Tools-standard.sh \
 		$(PREFIXapp)/Change_file-dir_timestamp.sh \
 		$(PREFIXapp)/CheckSum_Tools-verify-checksum.sh \
+		$(PREFIXapp)/DiskCloner.sh \
 		$(PREFIXapp)/Dolphin_Tools-change-owner.sh \
 		$(PREFIXapp)/Dolphin_Tools-connect.desktop \
 		$(PREFIXapp)/Dolphin_Tools-connect.sh \
@@ -96,6 +97,7 @@ uninstall:
 		$(PREFIXapp)/Midnight_Tools-mc-root.desktop \
 		$(PREFIXapp)/MKV_Extract-subtitle.sh \
 		$(PREFIXapp)/Multimedia_Tools-convert-video.desktop \
+		$(PREFIXapp)/Multimedia_Tools-diskcloner.desktop \
 		$(PREFIXapp)/Multimedia_Tools-extract-audio.desktop \
 		$(PREFIXapp)/Multimedia_Tools-record-my-desktop.desktop \
 		$(PREFIXapp)/Multiplex_Subtitle.sh \
@@ -176,6 +178,7 @@ uninstall:
 		$(PREFIX512apps)/ks-mcedit-root.png \
 		$(PREFIX512apps)/ks-mcedit-user.png \
 		$(PREFIX512apps)/ks-media-optical-burn.png \
+		$(PREFIX512apps)/ks-media-optical-clone.png \
 		$(PREFIX512apps)/ks-media-optical-integrity-check.png \
 		$(PREFIX512apps)/ks-media-optical-md5sum.png \
 		$(PREFIX512apps)/ks-media-optical-mount.png \

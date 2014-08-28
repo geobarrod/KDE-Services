@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2014.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
-# Improved by Victor Guardiola (vguardiola) Jan 5 2014		#
-# 	-Fixed the problem of [dir|file]name with whitespaces.	#
+# For KDE-Services. 2012-2014.									#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# Improved by Victor Guardiola (vguardiola) Jan 5 2014			#
+# 	-Fixed the problem of [dir|file]name with whitespaces.		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin

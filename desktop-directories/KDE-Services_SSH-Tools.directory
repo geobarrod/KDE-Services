@@ -2,4 +2,7 @@
 Encoding=UTF-8
 Type=Directory
 Name=SSH Tools
+Name[es]=SSH - Herramientas
+Name[ru]=Инструменты SSH
+Name[uk]=Інструменти SSH
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

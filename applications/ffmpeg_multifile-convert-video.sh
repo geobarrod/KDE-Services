@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
+# For KDE-Services. 2011-2014.									#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -137,6 +137,10 @@ done
 
 DIR="$(pwd)"
 
+if [ "$DIR" == "/usr/share/applications" ]; then
+    DIR="~/"
+fi
+
 PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off \
          2> /dev/null)"
@@ -156,20 +160,20 @@ fi
 
 FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg \
-      *.OGV *.ogv *.VOB *.vob *.WMV *.wmv|All supported files" 2> /dev/null)
+      *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|All supported files" 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Mode" mobile "Mobile Phones (3GP)" \
-     4K "Resolution Ultra-HD (4K)" 2K "Resolution Ultra-HD (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 240 "Resolution 240p" \
-     same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV)" --geometry 250x225 2> /dev/null)
+MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Resolution" mobile "Mobile Phones (3GP)" \
+     4K "Resolution Ultra-HD (4K)" 2K "Resolution Ultra-HD (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 360 "Resolution NHD (360p)" 240 "Resolution QVGA (240p)" \
+     same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV - WebM)" --geometry 250x240 2> /dev/null)
 if-cancel-exit
 ############################### Mobile ###############################
 if [ "$MODE" = "mobile" ]; then
-    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
-               352x288 352x288 --geometry 100x100 2> /dev/null)
+    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
+				352x288 "CIF (352x288)" --geometry 100x195 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -180,7 +184,7 @@ if [ "$MODE" = "mobile" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -qscale 0 -mbd 2 -s $RESOLUTION -strict experimental -acodec aac -vcodec mpeg4 -vb 1000k -trellis 1 -sn -g 12 \
+        ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -strict experimental -c:a aac -c:v mpeg4 -b:v 1000k -trellis 1 -sn -g 12 \
             "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.3gp" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
@@ -190,8 +194,8 @@ if [ "$MODE" = "mobile" ]; then
 fi
 ############################### 4K ###############################
 if [ "$MODE" = "4K" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -203,7 +207,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 4095x2160 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4095x2160 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -215,7 +219,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s 4k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 4k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_Ultra-HD_4K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -227,7 +231,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 4k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -238,8 +242,8 @@ if [ "$MODE" = "4K" ]; then
 fi
 ############################### 2K ###############################
 if [ "$MODE" = "2K" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -251,7 +255,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Ultra-HD_2K.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -263,7 +267,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_Ultra-HD_2K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -275,7 +279,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s 2k -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Ultra-HD_2K.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -286,8 +290,8 @@ if [ "$MODE" = "2K" ]; then
 fi
 ############################### 1080p ###############################
 if [ "$MODE" = "1080" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -299,7 +303,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -311,7 +315,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_Full-HD_1080p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -323,7 +327,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd1080 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -334,8 +338,8 @@ if [ "$MODE" = "1080" ]; then
 fi
 ############################### 720p ###############################
 if [ "$MODE" = "720" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -347,7 +351,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_HD_720p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -359,7 +363,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_HD_720p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -371,7 +375,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd720 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_HD_720p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -382,8 +386,8 @@ if [ "$MODE" = "720" ]; then
 fi
 ############################### 480p ###############################
 if [ "$MODE" = "480" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -395,7 +399,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_ED_480p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -407,7 +411,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_ED_480p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -419,7 +423,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s hd480 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_ED_480p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -428,10 +432,10 @@ if [ "$MODE" = "480" ]; then
         fi
     done
 fi
-############################### 240p ###############################
-if [ "$MODE" = "240" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+############################### 360p ###############################
+if [ "$MODE" = "360" ]; then
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -443,7 +447,55 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s qvga -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_NHD_360p.mpg" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "mp4-h.264" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.264_NHD_360p.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "avi" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_NHD_360p.avi" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+    done
+fi
+############################### 240p ###############################
+if [ "$MODE" = "240" ]; then
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+    if-cancel-exit
+    
+    progressbar-start
+    
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        if [ "$CODEC" = "mpg" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_240p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -455,7 +507,7 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -s qvga -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_240p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -467,7 +519,7 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -s qvga -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_240p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -478,8 +530,8 @@ if [ "$MODE" = "240" ]; then
 fi
 ############################### same ###############################
 if [ "$MODE" = "same" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" avi "AVI" --geometry 100x100 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" mpg2 "MPEG-2" mp4-h.264 \
+          "MPEG-4 (H.264)" webm "WebM" --geometry 100x165 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -491,7 +543,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_sr.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -503,7 +555,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -vcodec libx264 -qscale 0 -mbd 2 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_sr.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -515,8 +567,44 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -qscale 0 -mbd 2 -acodec libmp3lame -ab 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_sr.avi" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+
+        if [ "$CODEC" = "flv" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v flv -b:v 1000k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_sr.flv" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_sr.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+
+        if [ "$CODEC" = "mpg2" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v mpeg2video -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_sr.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -527,7 +615,7 @@ fi
 ############################### standards ###############################
 if [ "$MODE" = "standards" ]; then
     STD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
-        --menu="Choose Video Standard" vcd "VCD" vcd-700 "VCD (700 MB)" svcd "SVCD" \
+        --menu="Choose Standard Video Resolution" vcd "VCD" vcd-700 "VCD (700 MB)" svcd "SVCD" \
         svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
@@ -669,25 +757,46 @@ if [ "$MODE" = "standards" ]; then
 fi
 ############################### web ###############################
 if [ "$MODE" = "web" ]; then
-    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Resolution" 128x96 128x96 176x144 176x144 \
-               352x288 352x288 --geometry 100x100 2> /dev/null)
+    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
+				352x288 "CIF (352x288)" 640x360 "NHD (640x360)" 852x480 "ED (852x480)" 1280x720 "HD (1280x720)" 1920x1080 "Full-HD (1920x1080)" 2048x1080 "Ultra-HD 2K (2048x1080)" 4096x2160 "Ultra-HD 4K (4096x2160)" \
+				--geometry 200x225 2> /dev/null)
+    if-cancel-exit
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" flv "FLV" webm "WebM" --geometry 100x100 2> /dev/null)
     if-cancel-exit
     
-    progressbar-start
-    
-    for i in $FILES; do
-        logs
-        COUNT=$((++COUNT))
-        BEGIN_TIME=$(date +%s)
-        qdbusinsert
-        DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -qscale 0 -mbd 2 -s $RESOLUTION -vcodec flv -vb 1000k -acodec libmp3lame -trellis 1 -sn -g 12 \
-            "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.flv" > $LOG 2>&1
-        if-ffmpeg-cancel
-        FINAL_TIME=$(date +%s)
-        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-        elapsedtime
-    done
+    if [ "$CODEC" = "flv" ];then
+	  progressbar-start
+	  for i in $FILES; do
+            logs
+            COUNT=$((++COUNT))
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v flv -b:v 1000k -c:a libmp3lame -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.flv" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+	  done
+    fi
+
+	if [ "$CODEC" = "webm" ];then
+	  progressbar-start
+	  for i in $FILES; do
+            logs
+            COUNT=$((++COUNT))
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+	  done
+	fi
 fi
 
 progressbar-close

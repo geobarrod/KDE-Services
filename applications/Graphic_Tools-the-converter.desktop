@@ -1,20 +1,12 @@
 [Desktop Entry]
-Categories=Graphic-Tools
-Comment[en_US]=
-Comment=
+Categories=Graphic-Tools;
 Exec=/usr/share/applications/The_Converter.sh
-GenericName[en_US]=
-GenericName=
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png
-MimeType=
-Name[en_US]=The Converter
 Name=The Converter
-Path=
+Name[es]=El Dimensionador (personalizar dimensiones)
+Name[ru]=Изменение размера (настраиваемое)
+Name[uk]=Зміна розміру (власні параметри)
 StartupNotify=true
 Terminal=false
-TerminalOptions=
 Type=Application
-X-DBUS-ServiceName=
-X-DBUS-StartupType=
 X-KDE-SubstituteUID=false
-X-KDE-Username=

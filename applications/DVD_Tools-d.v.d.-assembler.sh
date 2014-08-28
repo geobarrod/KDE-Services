@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
+# For KDE-Services. 2011-2014.									#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -93,6 +93,10 @@ for i in *; do
 done
 
 DIR="$(pwd)"
+
+if [ "$DIR" == "/usr/share/applications" ]; then
+    DIR="~/"
+fi
 
 PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png \
          --caption="D.V.D. Assembler" --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off \
