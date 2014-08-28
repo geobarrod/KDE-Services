@@ -1,0 +1,13 @@
+[Desktop Entry]
+Categories=Multimedia-Tools;
+Exec=/usr/share/applications/DiskCloner.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-clone.png
+Name=DiskCloner
+Name[es]=DiskCloner (Clonador de Disco)
+Name[ru]=DiskCloner (Чтобы скопировать диск)
+Name[uk]=DiskCloner (Щоб скопіювати диск)
+Path=/usr/share/applications
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false
