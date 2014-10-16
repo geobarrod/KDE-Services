@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Android-Tools;
+Exec=/usr/share/applications/Android_Tools-push-pull.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png
+Name=Android File Manager
+Name[es]=Administrador de Ficheros para Android
+Name[ru]=Android Менеджер Файла
+Name[uk]=Android Реєструють Менеджера
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

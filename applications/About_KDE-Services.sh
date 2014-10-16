@@ -57,8 +57,10 @@ cat > /tmp/about_kde-services << EOF
         - Package Tools.
         - The Converter.
         - Dropbox Tools.
+        - Android Tools.
         
     Requirements:
+        - android-tools
         - bash
         - bc
         - bzip2

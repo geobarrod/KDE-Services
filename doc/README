@@ -42,9 +42,11 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Package Tools.
 - The Converter.
 - Dropbox Tools.
+- Android Tools.
 
 Requirements:
 
+- android-tools
 - bash
 - bc
 - bzip2

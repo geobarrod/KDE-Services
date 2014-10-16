@@ -1,0 +1,48 @@
+[Desktop Entry]
+Actions=ABM;AFM;APM;ARM;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-StartupNotify=false
+X-KDE-Submenu=Android Tools
+X-KDE-Submenu[es]=Android - Herramientas
+X-KDE-Submenu[ru]=Инструменты Android
+X-KDE-Submenu[uk]=Інструменти Android
+X-KDE-Submenu[x-test]=xxAndroid Toolsxx
+
+[Desktop Action ABM]
+Exec=/usr/share/applications/Android_Tools-backup-restore.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png
+Name=Android Backup Manager
+Name[es]=Administrador de Respaldo para Android
+Name[ru]=Android Backup Менеджер
+Name[uk]=Android Backup Менеджер
+Name[x-test]=xxAndroid Backup Managerxx
+
+[Desktop Action AFM]
+Exec=/usr/share/applications/Android_Tools-push-pull.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png
+Name=Android File Manager
+Name[es]=Administrador de Ficheros para Android
+Name[ru]=Android Менеджер Файла
+Name[uk]=Android Реєструють Менеджера
+Name[x-test]=xxAndroid File Managerxx
+
+[Desktop Action APM]
+Exec=/usr/share/applications/Android_Tools-apk-manager.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png
+Name=Android Package Manager
+Name[es]=Administrador de Paquetes para Android
+Name[ru]=Администратор Пакетов Android
+Name[uk]=Адміністратор Пакетів Android
+Name[x-test]=xxAndroid Package Managerxx
+
+[Desktop Action ARM]
+Exec=/usr/share/applications/Android_Tools-reboot.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png
+Name=Android Reboot Manager
+Name[es]=Administrador de Reinicio para Android
+Name[ru]=Android Reboot Менеджер
+Name[uk]=Android Reboot Менеджер
+Name[x-test]=xxAndroid Reboot Managerxx

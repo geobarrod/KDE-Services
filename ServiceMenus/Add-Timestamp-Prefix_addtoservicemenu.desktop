@@ -1,0 +1,18 @@
+[Desktop Entry]
+Actions=AddTimestamp;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
+MimeType=all/allfiles;inode/directory;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-StartupNotify=false
+X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
+
+[Desktop Action AddTimestamp]
+Exec=cd $(dirname %u); /usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh %u; basename %u >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(basename "$i");done; rm -f .add-timestamp-prefix
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
+Name=Add Timestamp Prefix To [File|Dir]name
+Name[es]=Agregar Prefijo Fecha-Hora al Nombre del [Fichero|Directorio]
+Name[ru]=Приставить отметку времени к имени [Файла|Папки]
+Name[uk]=Приставити відмітку часу до назви [Файлу|Теки]
+Name[x-test]=xxAdd Timestamp Prefix To [File|Dir]namexx

@@ -1,0 +1,18 @@
+[Desktop Entry]
+Actions=TextReplace;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
+MimeType=text/*;application/x-shellscript;application/x-desktop;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-StartupNotify=false
+X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
+
+[Desktop Action TextReplace]
+Exec=sed -i -e "s;`kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png --caption="Text Replace" --inputbox="Enter text to replace"`;`kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png --caption="Text Replace" --inputbox="Replace by"`;g" %u; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png --title="Text Replace" --passivepopup="Finished"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
+Name=Text Replace
+Name[es]=Reemplazar Texto
+Name[ru]=Заменить текст
+Name[uk]=Замінити текст
+Name[x-test]=xxText Replacexx

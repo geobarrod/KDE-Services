@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Android-Tools;
+Exec=/usr/share/applications/Android_Tools-backup-restore.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png
+Name=Android Backup Manager
+Name[es]=Administrador de Respaldo para Android
+Name[ru]=Android Backup Менеджер
+Name[uk]=Android Backup Менеджер
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

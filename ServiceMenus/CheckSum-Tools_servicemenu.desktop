@@ -1,0 +1,58 @@
+[Desktop Entry]
+Actions=MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;CheckSum;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+MimeType=all/allfiles;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+X-KDE-Submenu=CheckSum Tools
+X-KDE-Submenu[es]=CheckSum - Herramientas
+X-KDE-Submenu[ru]=Инструменты Контрольных Сумм
+X-KDE-Submenu[uk]=Інструменти Контрольних Сум
+X-KDE-Submenu[x-test]=xxCheckSum Toolsxx
+
+[Desktop Action CheckSum]
+Exec=/usr/share/applications/CheckSum_Tools-verify-checksum.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Name=Verify CheckSum
+Name[es]=Verificar CheckSum
+Name[ru]=Проверить контрольные суммы
+Name[uk]=Перевірити контрольні суми
+Name[x-test]=xxVerify CheckSumxx
+
+[Desktop Action MD5-Sum]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum MD5" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; md5sum "%u" > $(ls %u).md5; sed -i "s; $(dirname %u)/;*;" $(ls %u).md5; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum MD5" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Name=MD5 (Strong)
+Name[es]=MD5 (Fuerte)
+Name[ru]=MD5 (Стойкий)
+Name[ua]=MD5 (Стійкий)
+Name[x-test]=xxMD5 (Strong)xx
+
+[Desktop Action SHA1-Sum]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum SHA1" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; sha1sum "%u" > $(ls %u).sha1; sed -i "s; $(dirname %u)/;*;" $(ls %u).sha1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum SHA1" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Name=SHA1 (Good Strong)
+Name[es]=SHA1 (Bien Fuerte)
+Name[ru]=SHA1 (Хорошая Стойкость)
+Name[ua]=SHA1 (Добра Стійкість)
+Name[x-test]=xxSHA1 (Good Strong)xx
+
+[Desktop Action SHA256-Sum]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum SHA256" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; sha256sum "%u" > $(ls %u).sha256; sed -i "s; $(dirname %u)/;*;" $(ls %u).sha256; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum SHA256" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Name=SHA256 (Very Strong)
+Name[es]=SHA256 (Muy Fuerte)
+Name[ru]=SHA256 (Очень Стойкий)
+Name[ua]=SHA256 (Дуже Стійкий)
+Name[x-test]=xxSHA256 (Very Strong)xx
+
+[Desktop Action SHA512-Sum]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum SHA512" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Computing:  $(basename %u)"; sha512sum "%u" > $(ls %u).sha512; sed -i "s; $(dirname %u)/;*;" $(ls %u).sha512; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum SHA512" --passivepopup="[Finished]    $(basename %u)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Name=SHA512 (High Strong)
+Name[es]=SHA512 (Super Fuerte)
+Name[ru]=SHA512 (Высокая Стойкость)
+Name[ua]=SHA512 (Висока Стійкість)
+Name[x-test]=xxSHA512 (High Strong)xx

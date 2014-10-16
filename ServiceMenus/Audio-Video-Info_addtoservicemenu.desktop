@@ -1,0 +1,18 @@
+[Desktop Entry]
+Actions=AVinfo;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png
+MimeType=audio/*;video/*;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-StartupNotify=false
+X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
+
+[Desktop Action AVinfo]
+Exec=ffprobe %u 2> /tmp/info; grep -e Input -e Duration -e Stream /tmp/info > /tmp/info2; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png --caption="[Audio|Video] Info" --textbox /tmp/info2 850 160; rm -f /tmp/info*
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png
+Name=[Audio|Video] Info
+Name[es]=Información de [Audio|Video]
+Name[ru]=Информация о [Аудио|Видео]
+Name[uk]=Інформація про [Аудіо|Відео]
+Name[x-test]=xx[Audio|Video] Infoxx

@@ -1,0 +1,18 @@
+[Desktop Entry]
+Actions=MKVextractSubtitle;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+MimeType=video/x-matroska;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-StartupNotify=false
+X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
+
+[Desktop Action MKVextractSubtitle]
+Exec=/usr/share/applications/MKV_Extract-subtitle.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+Name=MKV Extract Subtitle
+Name[es]=MKV Extraer Subtítulo
+Name[ru]=MKV Извлечь субтитры
+Name[uk]=MKV Видобути субтитри
+Name[x-test]=xxMKV Extract Subtitlexx

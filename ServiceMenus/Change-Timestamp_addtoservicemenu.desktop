@@ -1,0 +1,18 @@
+[Desktop Entry]
+Actions=ChangeTimestamp;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
+MimeType=all/allfiles;inode/directory;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-StartupNotify=false
+X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
+
+[Desktop Action ChangeTimestamp]
+Exec=/usr/share/applications/Change_file-dir_timestamp.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
+Name=Change Timestamp To [File|Directory]
+Name[es]=Cambiar Fecha del [Fichero|Directorio]
+Name[ru]=Изменить отметку времени [Файла|Папки]
+Name[uk]=Змінити відмітку часу [Файлу|Теки]
+Name[x-test]=xxChange Timestamp To [File|Directory]xx

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Android-Tools;
+Exec=/usr/share/applications/Android_Tools-reboot.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png
+Name=Android Reboot Manager
+Name[es]=Administrador de Reinicio para Android
+Name[ru]=Android Reboot Менеджер
+Name[uk]=Android Reboot Менеджер
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

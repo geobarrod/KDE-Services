@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Android-Tools;
+Exec=/usr/share/applications/Android_Tools-apk-manager.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png
+Name=Android Package Manager
+Name[es]=Administrador de Paquetes para Android
+Name[ru]=Администратор Пакетов Android
+Name[uk]=Адміністратор Пакетів Android
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

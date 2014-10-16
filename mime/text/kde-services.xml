@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="text/abk">
+    <comment>Android Backup File</comment>
+     <icon name="/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png"/>
+      <glob pattern="*.ab"/>
+      <glob pattern="*.abk"/>
+  </mime-type>
+  <mime-type type="text/hash">
+    <comment>CheckSum File</comment>
+     <icon name="/usr/share/icons/hicolor/512x512/apps/ks-checksum.png"/>
+      <glob pattern="*.md5"/>
+      <glob pattern="*.sha1"/>
+      <glob pattern="*.sha224"/>
+      <glob pattern="*.sha256"/>
+      <glob pattern="*.sha384"/>
+      <glob pattern="*.sha512"/>
+  </mime-type>
+ </mime-info>

@@ -1,0 +1,75 @@
+[Desktop Entry]
+Actions=DVD-Assembler;convert-video;extract-audio;ISOBuild;DiskCloner;record-my-desktop;vlc-openfolder;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-StartupNotify=false
+X-KDE-Submenu=Multimedia Tools
+X-KDE-Submenu[es]=Multimedia - Herramientas
+X-KDE-Submenu[ru]=Инструменты Мультимедиа
+X-KDE-Submenu[uk]=Інструменти Мультимедіа
+X-KDE-Submenu[x-test]=xxMultimedia Toolsxx
+
+[Desktop Action DVD-Assembler]
+Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
+Name=D.V.D. Assembler
+Name[es]=Ensamblador de D.V.D.
+Name[ru]=D.V.D. Сборщик
+Name[uk]=D.V.D. Компанувальник
+Name[x-test]=xxD.V.D. Assemblerxx
+
+[Desktop Action ISOBuild]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --caption="Build ISO Image From Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --title="Build ISO Image From Here" --passivepopup="[Finished]   $(basename %f.iso)"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
+Name=Build ISO Image From Here
+Name[es]=Construir Imagen ISO Desde Aquí
+Name[ru]=Собрать ISO-образ отсюда
+Name[uk]=Зібрати ISO-образ звідси
+Name[x-test]=xxBuild ISO Image From Herexx
+
+[Desktop Action DiskCloner]
+Exec=/usr/share/applications/DiskCloner.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-clone.png
+Name=DiskCloner
+Name[es]=DiskCloner (Clonador de Disco)
+Name[ru]=DiskCloner (Чтобы скопировать диск)
+Name[uk]=DiskCloner (Щоб скопіювати диск)
+Name[x-test]=xxDiskClonerxx
+
+[Desktop Action convert-video]
+Exec=/usr/share/applications/ffmpeg_multifile-convert-video.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+Name=Convert Video Files
+Name[es]=Convertir Archivos de Video
+Name[ru]=Конвертировать файлы видео
+Name[uk]=Конвертувати файли відео
+Name[x-test]=xxConvert video filesxx
+
+[Desktop Action extract-audio]
+Exec=/usr/share/applications/ffmpeg_multifile-extract-audio.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
+Name=[Extract|Convert] Audio Track
+Name[es]=[Extraer|Convertir] Pista de Audio
+Name[ru]=[Извлечь|Конвертировать] аудио трек
+Name[uk]=[Видобути|Конвертувати] аудіо трек
+Name[x-test]=xx[Extract|Convert] Audio Trackxx
+
+[Desktop Action record-my-desktop]
+Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
+Name=Record My Desktop
+Name[es]=Record My Desktop (grabar pantalla de video)
+Name[ru]=Record My Desktop (видеозахват экрана)
+Name[uk]=Record My Desktop (відеозахоплення екрану)
+Name[x-test]=xxRecord My Desktopxx
+
+[Desktop Action vlc-openfolder]
+Exec=vlc -f %f 2> /dev/null
+Icon=vlc
+Name=Play Video From Here
+Name[es]=Reproducir Video Aquí
+Name[ru]=Проиграть видео отсюда
+Name[uk]=Програти відео звідси
+Name[x-test]=xxPlay Video From Herexx

@@ -1,0 +1,39 @@
+[Desktop Entry]
+Actions=ConnectSentry;HTTP-Publisher;ListeningSockets;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-StartupNotify=false
+X-KDE-Submenu=Network Tools
+X-KDE-Submenu[es]=Internet - Herramientas
+X-KDE-Submenu[ru]=Инструменты Сети
+X-KDE-Submenu[uk]=Інструменти Мережі
+X-KDE-Submenu[x-test]=xxNetwork Toolsxx
+
+[Desktop Action ConnectSentry]
+Exec=/usr/share/applications/Network_Tools-connect-sentry.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
+Name=Connect Sentry
+Name[es]=Centinela de Conexiones
+Name[ru]=Сторож портов
+Name[uk]=Вартовий портів
+Name[x-test]=xxConnect Sentryxx
+
+[Desktop Action HTTP-Publisher]
+Exec=kdesu --caption="HTTP Publisher" -d -c "/usr/share/applications/HTTP_Publisher.sh"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png
+Name=HTTP Publisher
+Name[es]=Publicador HTTP
+Name[ru]=Открыть доступ по HTTP
+Name[uk]=Надати доступ через HTTP
+Name[x-test]=xxHTTP Publisherxx
+
+[Desktop Action ListeningSockets]
+Exec=kdesu --caption="Listening Sockets" -d /usr/share/applications/Network_Tools-listening-sockets.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
+Name=Listening Sockets
+Name[es]=Puertos Escuchando
+Name[ru]=Прослушиваемые сокеты
+Name[uk]=Сокети, що прослуховуються
+Name[x-test]=xxListening Socketsxx
