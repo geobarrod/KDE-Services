@@ -29,33 +29,6 @@ install:
 	cp desktop-directories/* $(PREFIXdeskdir)
 	cp doc/* $(PREFIXdoc)
 
-# This block contains the servicemenu that have been renamed; this block will disappear in the next version 2.0-1.
-	rm -f $(PREFIXmenu)/add-timestamp-prefix_servicemenu.desktop \
-		$(PREFIXmenu)/Backup-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/CheckSum-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/change-timestamp_servicemenu.desktop \
-		$(PREFIXmenu)/Dolphin-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/Dolphin-Tools_change-owner.desktop \
-		$(PREFIXmenu)/Dolphin-Tools_name-whitespace-replace-servicemenu.desktop \
-		$(PREFIXmenu)/iso-manager_addtoservicemenu.desktop \
-		$(PREFIXmenu)/konsole-script_servicemenu.desktop \
-		$(PREFIXmenu)/Midnight-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/MKV-Extract-Subtitle_servicemenu.desktop \
-		$(PREFIXmenu)/Multimedia-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/Multiplex-Subtitle_servicemenu.desktop \
-		$(PREFIXmenu)/Network-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/SaMBa-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/Search-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/show-status_servicemenu.desktop \
-		$(PREFIXmenu)/SSH-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/System-Tools_addtoservicemenu.desktop \
-		$(PREFIXmenu)/Text-Replace_servicemenu.desktop \
-		$(PREFIXmenu)/thunderbird_addattachmentservicemenu.desktop \
-		$(PREFIXmenu)/Video-Info_servicemenu.desktop \
-		$(PREFIXmenu)/YouTube-Tools_addtoservicemenu.desktop \
-		$(PREFIXmime)/hash.xml \
-		/usr/share/mime/packages/hash.xml
-
 	xdg-mime install --mode system --novendor $(PREFIXmime)/kde-services.xml
 	update-mime-database /usr/share/mime > /dev/null
 	xdg-icon-resource forceupdate --theme hicolor
@@ -63,57 +36,34 @@ install:
 
 uninstall:
 	rm -f $(PREFIXmenu)/Add-Timestamp-Prefix_addtoservicemenu.desktop \
-		$(PREFIXmenu)/add-timestamp-prefix_servicemenu.desktop \
 		$(PREFIXmenu)/Android-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Audio-Video-Info_addtoservicemenu.desktop \
 		$(PREFIXmenu)/AVI-Tools_servicemenu.desktop \
-		$(PREFIXmenu)/Backup-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Backup-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Change-Owner_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Change-Timestamp_addtoservicemenu.desktop \
-		$(PREFIXmenu)/change-timestamp_servicemenu.desktop \
-		$(PREFIXmenu)/CheckSum-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/CheckSum-Tools_servicemenu.desktop \
-		$(PREFIXmenu)/Dolphin-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Dolphin-Tools_servicemenu.desktop \
-		$(PREFIXmenu)/Dolphin-Tools_change-owner.desktop \
-		$(PREFIXmenu)/Dolphin-Tools_name-whitespace-replace-servicemenu.desktop \
 		$(PREFIXmenu)/Dropbox-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Graphic-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/ISO-Image-Tools_servicemenu.desktop \
-		$(PREFIXmenu)/iso-manager_addtoservicemenu.desktop \
-		$(PREFIXmenu)/konsole-script_servicemenu.desktop \
-		$(PREFIXmenu)/Midnight-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Midnight-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/MKV-Extract-Subtitle_addtoservicemenu.desktop \
-		$(PREFIXmenu)/MKV-Extract-Subtitle_servicemenu.desktop \
-		$(PREFIXmenu)/Multimedia-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Multimedia-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Multiplex-Subtitle_addtoservicemenu.desktop \
-		$(PREFIXmenu)/Multiplex-Subtitle_servicemenu.desktop \
 		$(PREFIXmenu)/Name-Whitespace-Replace_addtoservicemenu.desktop \
-		$(PREFIXmenu)/Network-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Network-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Package-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/PDF-Tools_servicemenu.desktop \
-		$(PREFIXmenu)/SaMBa-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/SaMBa-Tools_servicemenu.desktop \
-		$(PREFIXmenu)/Search-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Search-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Security-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Send-By-Email_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Show-Status_addtoservicemenu.desktop \
-		$(PREFIXmenu)/show-status_servicemenu.desktop \
-		$(PREFIXmenu)/SSH-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/SSH-Tools_servicemenu.desktop \
-		$(PREFIXmenu)/System-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/System-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Terminal-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Text-Replace_addtoservicemenu.desktop \
-		$(PREFIXmenu)/Text-Replace_servicemenu.desktop \
-		$(PREFIXmenu)/thunderbird_addattachmentservicemenu.desktop \
-		$(PREFIXmenu)/Video-Info_servicemenu.desktop \
-		$(PREFIXmenu)/YouTube-Tools_addtoservicemenu.desktop \
 		$(PREFIXmenu)/YouTube-Tools_servicemenu.desktop
 
 	rm -f $(PREFIXapp)/About_KDE-Services.desktop \
@@ -280,9 +230,7 @@ uninstall:
 		$(PREFIX512apps)/ks-youtube-download-video.png \
 		$(PREFIX512apps)/ks-youtube-video-code-collector.png
 
-	rm -f $(PREFIXmime)/hash.xml \
-		/usr/share/mime/packages/hash.xml \
-		$(PREFIXmime)/kde-services.xml \
+	rm -f $(PREFIXmime)/kde-services.xml \
 		/usr/share/mime/packages/kde-services.xml
 
 	rm -f $(PREFIXappmerge)/kde-services.menu

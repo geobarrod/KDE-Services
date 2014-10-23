@@ -6,38 +6,41 @@
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-
-if [ "$(pidof adb)" = "" ]; then
-  kdesu --caption="Android Reboot Manager" --noignorebutton -d adb start-server
-fi
-
 BEGIN_TIME=""
 FINAL_TIME=""
 ELAPSED_TIME=""
 DBUSREF=""
 OPERATION=""
-SERIAL=$(adb get-serialno)
 
 ###################################
 ############ Functions ############
 ###################################
-
-check-device() {
-  if [ "$SERIAL" = "unknown" ]; then
-	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Android Reboot Manager" \
-			--passivepopup="[Canceled]   Check if your device with Android system is connected on your PC and NOT bootloader mode. \
-			[1]-Connect your device to PC USB. [2]-Go to device Settings. [3]-Go to Developer options. [4]-Enable USB debugging option. Try again."
-	exit 1
-  fi
-}
-
-check-device
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
 	  exit 1
     fi
 }
+
+if [ "$(pidof adb)" = "" ]; then
+  kdesu --caption="Android Reboot Manager" --noignorebutton -d adb start-server
+  if-cancel-exit
+fi
+
+SERIAL=$(adb get-serialno)
+
+check-device() {
+  if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" != "device" ] && \
+	 [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" != "recovery" ] && \
+	 [ "$(fastboot devices|awk -F" " '{print $3}')" != "fastboot" ]; then
+	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Android Reboot Manager" \
+			--passivepopup="[Canceled]   Check if your device with Android system is connected on your PC. \
+			[1]-Connect your device to PC USB. [2]-Go to device Settings. [3]-Go to Developer options. [4]-Enable USB debugging option. Try again."
+	exit 1
+  fi
+}
+
+check-device
 
 progressbar-start() {
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png --caption="Android Reboot Manager" --progressbar " " 0)
@@ -78,7 +81,12 @@ if [ "$OPERATION" = "System" ]; then
 	progressbar-start
     qdbusinsert-reboot
     BEGIN_TIME=$(date +%s)
-    adb reboot
+	if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "device" ] || [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "recovery" ]; then
+		adb reboot
+	elif [ "$(fastboot devices|awk -F" " '{print $3}')" = "fastboot" ]; then
+		kdesu --caption="Android Reboot Manager" --noignorebutton -d fastboot reboot
+		if-cancel-exit
+	fi
     FINAL_TIME=$(date +%s)
     ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
     elapsedtime
@@ -86,11 +94,16 @@ if [ "$OPERATION" = "System" ]; then
     progressbar-start
     qdbusinsert-reboot
 	BEGIN_TIME=$(date +%s)
-	adb reboot bootloader
+	if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "device" ] || [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "recovery" ]; then
+		adb reboot bootloader
+	elif [ "$(fastboot devices|awk -F" " '{print $3}')" = "fastboot" ]; then
+		kdesu --caption="Android Reboot Manager" --noignorebutton -d fastboot reboot-bootloader
+		if-cancel-exit
+	fi
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 	elapsedtime
-elif [ "$OPERATION" = "Recovery" ]; then
+elif [ "$OPERATION" = "Recovery" ] && [ "$SERIAL" != "" ] && [ "$(fastboot devices|awk -F" " '{print $1}')" = "" ]; then
     progressbar-start
     qdbusinsert-reboot
 	BEGIN_TIME=$(date +%s)
@@ -98,6 +111,10 @@ elif [ "$OPERATION" = "Recovery" ]; then
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 	elapsedtime
+else
+	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Android Reboot Manager" \
+			--passivepopup="[Canceled]   Check if your device with Android system is connected on your PC and NOT bootloader mode. \
+			[1]-Connect your device to PC USB. [2]-Go to device Settings. [3]-Go to Developer options. [4]-Enable USB debugging option. Try again."
 fi
 progressbar-close
 echo "Finish Android Reboot Manager Operation" > /tmp/speak

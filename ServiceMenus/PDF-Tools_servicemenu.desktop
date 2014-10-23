@@ -49,7 +49,7 @@ Name[uk]=Вилучити обрані сторінки
 Name[x-test]=xxExtract Select Pagesxx
 
 [Desktop Action PDFOptimizer]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Optimizing:  $(basename %u)"; pdfopt %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_opt.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Optimizer" --passivepopup="[Finished]"
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Optimizing:  $(basename %u)"; pdftops %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_opt.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Optimizer" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Optimizer
 Name[es]=Optimizador

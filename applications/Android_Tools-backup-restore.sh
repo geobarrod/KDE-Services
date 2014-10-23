@@ -6,40 +6,46 @@
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-
-if [ "$(pidof adb)" = "" ]; then
-  kdesu --caption="Android Backup Manager" --noignorebutton -d adb start-server
-fi
-
 DIR=""
 BEGIN_TIME=""
 FINAL_TIME=""
 ELAPSED_TIME=""
 DBUSREF=""
 OPERATION=""
+PARTITION=""
 FILE=""
-SERIAL=$(adb get-serialno)
+DATE=$(date +%Y-%m-%d--%H-%M-%S)
+LOG=/tmp/abm.log
 
 ###################################
 ############ Functions ############
 ###################################
-
-check-device() {
-  if [ "$SERIAL" = "unknown" ]; then
-	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Android Backup Manager" \
-			--passivepopup="[Canceled]   Check if your device with Android system is connected on your PC and NOT bootloader mode. \
-			[1]-Connect your device to PC USB. [2]-Go to device Settings. [3]-Go to Developer options. [4]-Enable USB debugging option. Try again."
-	exit 1
-  fi
-}
-
-check-device
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
 	  exit 1
     fi
 }
+
+if [ "$(pidof adb)" = "" ]; then
+  kdesu --caption="Android Backup Manager" --noignorebutton -d adb start-server
+  if-cancel-exit
+fi
+
+SERIAL=$(adb get-serialno)
+
+check-device() {
+  if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" != "device" ] && \
+	 [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" != "recovery" ] && \
+	 [ "$(fastboot devices|awk -F" " '{print $3}')" != "fastboot" ]; then
+	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Android Reboot Manager" \
+			--passivepopup="[Canceled]   Check if your device with Android system is connected on your PC. \
+			[1]-Connect your device to PC USB. [2]-Go to device Settings. [3]-Go to Developer options. [4]-Enable USB debugging option. Try again."
+	exit 1
+  fi
+}
+
+check-device
 
 if-adb-exit() {
     if [ "$?" = "141" ]; then
@@ -56,26 +62,26 @@ progressbar-close() {
     qdbus $DBUSREF close
 }
 
-qdbusinsert-backup() {
-    qdbus $DBUSREF setLabelText "Backup all device's data to $FILE"
+qdbusinsert-backup-data() {
+    qdbus $DBUSREF setLabelText "Backup all device's data to ${FILE##*/}..."
 }
 
-qdbusinsert-restore() {
-    qdbus $DBUSREF setLabelText "Restore all device's data from $FILE"
+qdbusinsert-restore-data() {
+    qdbus $DBUSREF setLabelText "Restore all device's data from ${FILE##*/}..."
 }
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --title="Android Backup Manager" \
-                       --passivepopup="[Finished]   $OPERATION device $SERIAL.   Elapsed Time: ${ELAPSED_TIME}s"
+                       --passivepopup="[Finished]   $OPERATION device $SERIAL. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --title="Android Backup Manager" \
-                       --passivepopup="[Finished]   $OPERATION device $SERIAL.   Elapsed Time: ${ELAPSED_TIME}m"
+                       --passivepopup="[Finished]   $OPERATION device $SERIAL. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --title="Android Backup Manager" \
-                       --passivepopup="[Finished]   $OPERATION device $SERIAL.   Elapsed Time: ${ELAPSED_TIME}h"
+                       --passivepopup="[Finished]   $OPERATION device $SERIAL. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}h"
     fi
 }
 
@@ -124,8 +130,8 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --caption="Android Backup Manager" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --caption="Android Backup Manager" \
+         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 if-cancel-exit
 
 if [ "$PRIORITY" = "Highest" ]; then
@@ -134,10 +140,6 @@ elif [ "$PRIORITY" = "High" ]; then
     kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
 elif [ "$PRIORITY" = "Normal" ]; then
     true
-elif [ "$PRIORITY" = "Low" ]; then
-    kdesu --noignorebutton -d -c "renice 10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Lowest" ]; then
-    kdesu --noignorebutton -d -c "renice 15 $PID" 2> /dev/null
 fi
 
 OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --caption="Android Backup Manager" \
@@ -149,10 +151,10 @@ if [ "$OPERATION" = "Backup" ]; then
 	if-cancel-exit
 	progressbar-start
 	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --title="Android Backup Manager" --passivepopup="Now unlock your device and confirm the backup operation."
-	FILE="Android_device_${SERIAL}_backup-$(date +%Y%m%d_%H%M%S).abk"
-	qdbusinsert-backup
+	FILE="Android_device_${SERIAL}_full-data-backup_${DATE}.abk"
+	qdbusinsert-backup-data
 	BEGIN_TIME=$(date +%s)
-	adb backup -all -shared -f $DESTINATION/$FILE
+	adb backup -all -shared -f $DESTINATION/$FILE 2> $LOG
 	check-device
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -161,10 +163,10 @@ elif [ "$OPERATION" = "Restore" ]; then
 	FILE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --title="Android Backup Manager" --caption="Select Android Backup File" --getopenfilename "$DIR" "*.AB *.ab *.ABK *.abk|*.ab, *.abk" 2> /dev/null)
 	if-cancel-exit
     progressbar-start
-	qdbusinsert-restore
+	qdbusinsert-restore-data
 	kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --title="Android Backup Manager" --passivepopup="Now unlock your device and confirm the restore operation."
 	BEGIN_TIME=$(date +%s)
-	adb restore $FILE
+	adb restore $FILE 2> $LOG
 	check-device
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -174,5 +176,5 @@ progressbar-close
 echo "Finish Android Backup Manager Operation" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
-rm -fr /tmp/speak*
+rm -fr /tmp/speak* $LOG
 exit 0

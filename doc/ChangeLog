@@ -1,3 +1,6 @@
+* Tue Oct 22 2014  Geovani B. R. <igeo.cu@gmail.com> 2.0-1
+- "Android Tools": Bugfix and enhancement.
+
 * Tue Oct 14 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-9
 - Added new submenu "Android Tools" on Dolphin's right click menu, with the following features:
   > Install or uninstall Android package(s) on device with Android system connected to PC USB.

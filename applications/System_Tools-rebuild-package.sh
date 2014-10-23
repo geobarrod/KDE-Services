@@ -366,8 +366,8 @@ fi
 
 sudo-no-timeout
 setterm -cursor off
-PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Rebuild RPM Package" \
-    --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Rebuild RPM Package" \
+    --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 EXIT=$?
 if-cancel-exit2
 
@@ -381,10 +381,6 @@ elif [ "$PRIORITY" = "High" ]; then
     sudo renice -10 $PID
 elif [ "$PRIORITY" = "Normal" ]; then
     true
-elif [ "$PRIORITY" = "Low" ]; then
-    sudo renice 10 $PID
-elif [ "$PRIORITY" = "Lowest" ]; then
-    sudo renice 15 $PID
 fi
 
 echo -e "\n$GREEN> Check Build Require Depends...$WHITE\n"

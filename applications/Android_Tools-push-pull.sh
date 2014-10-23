@@ -6,11 +6,6 @@
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-
-if [ "$(pidof adb)" = "" ]; then
-  kdesu --caption="Android File Manager" --noignorebutton -d adb start-server
-fi
-
 DIR=""
 BEGIN_TIME=""
 FINAL_TIME=""
@@ -22,11 +17,25 @@ OPERATION=""
 FILES=/tmp/afm.tmp
 DESTINATION=""
 KdialogPID=""
-SERIAL=$(adb get-serialno)
+LOG=/tmp/afm.log
 
 ###################################
 ############ Functions ############
 ###################################
+
+if-cancel-exit() {
+    if [ "$?" != "0" ]; then
+	  kill -9 $KdialogPID 2> /dev/null
+	  exit 1
+    fi
+}
+
+if [ "$(pidof adb)" = "" ]; then
+  kdesu --caption="Android File Manager" --noignorebutton -d adb start-server
+  if-cancel-exit
+fi
+
+SERIAL=$(adb get-serialno)
 
 check-device() {
   if [ "$SERIAL" = "unknown" ]; then
@@ -38,13 +47,6 @@ check-device() {
 }
 
 check-device
-
-if-cancel-exit() {
-    if [ "$?" != "0" ]; then
-	  kill -9 $KdialogPID 2> /dev/null
-	  exit 1
-    fi
-}
 
 progressbar-start() {
     COUNT="0"
@@ -72,15 +74,15 @@ qdbusinsert-pull() {
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --title="Android File Manager" \
-                       --passivepopup="[Finished]   $OPERATION ${i##*/}.   Elapsed Time: ${ELAPSED_TIME}s"
+                       --passivepopup="[Finished]   $OPERATION ${i##*/}. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --title="Android File Manager" \
-                       --passivepopup="[Finished]   $OPERATION ${i##*/}.   Elapsed Time: ${ELAPSED_TIME}m"
+                       --passivepopup="[Finished]   $OPERATION ${i##*/}. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --title="Android File Manager" \
-                       --passivepopup="[Finished]   $OPERATION ${i##*/}.   Elapsed Time: ${ELAPSED_TIME}h"
+                       --passivepopup="[Finished]   $OPERATION ${i##*/}. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}h"
     fi
 }
 
@@ -129,8 +131,8 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --caption="Android File Manager" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --caption="Android File Manager" \
+         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 if-cancel-exit
 
 if [ "$PRIORITY" = "Highest" ]; then
@@ -139,10 +141,6 @@ elif [ "$PRIORITY" = "High" ]; then
     kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
 elif [ "$PRIORITY" = "Normal" ]; then
     true
-elif [ "$PRIORITY" = "Low" ]; then
-    kdesu --noignorebutton -d -c "renice 10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Lowest" ]; then
-    kdesu --noignorebutton -d -c "renice 15 $PID" 2> /dev/null
 fi
 
 OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --caption="Android File Manager" \
@@ -158,13 +156,13 @@ if [ "$OPERATION" = "Push" ]; then
         COUNT=$((++COUNT))
         qdbusinsert-push
         BEGIN_TIME=$(date +%s)
-        adb push $i /mnt/sdcard/
+        adb push $i /mnt/sdcard/ 2> $LOG
         check-device
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
     done
- elif [ "$OPERATION" = "Pull" ]; then
+elif [ "$OPERATION" = "Pull" ]; then
 	adb shell ls /mnt/sdcard*/*.* > $FILES
 	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --title="Android File Manager" --caption="Files Destination" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
@@ -173,22 +171,23 @@ if [ "$OPERATION" = "Push" ]; then
  	FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png --caption="Android File Manager" --inputbox="Enter absolute path filenames from textbox separated by whitespace." 2> /dev/null)
  	if-cancel-exit
  	kill -9 $KdialogPID 2> /dev/null
-     progressbar-start
+    progressbar-start
      
-     for i in $FILES; do
-         COUNT=$((++COUNT))
-         qdbusinsert-pull
-         BEGIN_TIME=$(date +%s)
-         adb pull $i $DESTINATION/
-         check-device
-         FINAL_TIME=$(date +%s)
-         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-         elapsedtime
-     done
+    for i in $FILES; do
+        COUNT=$((++COUNT))
+        qdbusinsert-pull
+        BEGIN_TIME=$(date +%s)
+        adb pull $i $DESTINATION/ 2> $LOG
+        check-device
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+    rm -f $FILES
 fi
 progressbar-close
 echo "Finish Android File Manager Operation" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
-rm -fr /tmp/speak* $FILES
+rm -f /tmp/speak* $LOG
 exit 0

@@ -33,7 +33,7 @@ logs() {
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
         rm -fr /tmp/convert*
-        exit 0
+        exit 1
     fi
 }
 
@@ -125,8 +125,8 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
+         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 if-cancel-exit
 
 if [ "$PRIORITY" = "Highest" ]; then
@@ -135,10 +135,6 @@ elif [ "$PRIORITY" = "High" ]; then
     kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
 elif [ "$PRIORITY" = "Normal" ]; then
     true
-elif [ "$PRIORITY" = "Low" ]; then
-    kdesu --noignorebutton -d -c "renice 10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Lowest" ]; then
-    kdesu --noignorebutton -d -c "renice 15 $PID" 2> /dev/null
 fi
 
 FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \

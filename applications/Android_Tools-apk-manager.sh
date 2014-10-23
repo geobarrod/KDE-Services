@@ -6,11 +6,6 @@
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-
-if [ "$(pidof adb)" = "" ]; then
-  kdesu --caption="Android Package Manager" --noignorebutton -d adb start-server
-fi
-
 DIR=""
 BEGIN_TIME=""
 FINAL_TIME=""
@@ -23,11 +18,24 @@ FILES=""
 LOG=/tmp/apm.log
 MyAPKs=/tmp/my-apks
 KdialogPID=""
-SERIAL=$(adb get-serialno)
 
 ###################################
 ############ Functions ############
 ###################################
+
+if-cancel-exit() {
+    if [ "$?" != "0" ]; then
+	  kill -9 $KdialogPID 2> /dev/null
+	  exit 1
+    fi
+}
+
+if [ "$(pidof adb)" = "" ]; then
+  kdesu --caption="Android Package Manager" --noignorebutton -d adb start-server
+  if-cancel-exit
+fi
+
+SERIAL=$(adb get-serialno)
 
 check-device() {
   if [ "$SERIAL" = "unknown" ]; then
@@ -39,13 +47,6 @@ check-device() {
 }
 
 check-device
-
-if-cancel-exit() {
-    if [ "$?" != "0" ]; then
-	  kill -9 $KdialogPID 2> /dev/null
-	  exit 1
-    fi
-}
 
 progressbar-start() {
     COUNT="0"
@@ -131,8 +132,8 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x150 --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png --caption="Android Package Manager" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on Low Low off Lowest Lowest off 2> /dev/null)"
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png --caption="Android Package Manager" \
+         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 if-cancel-exit
 
 if [ "$PRIORITY" = "Highest" ]; then
@@ -141,10 +142,6 @@ elif [ "$PRIORITY" = "High" ]; then
     kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
 elif [ "$PRIORITY" = "Normal" ]; then
     true
-elif [ "$PRIORITY" = "Low" ]; then
-    kdesu --noignorebutton -d -c "renice 10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Lowest" ]; then
-    kdesu --noignorebutton -d -c "renice 15 $PID" 2> /dev/null
 fi
 
 OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png --caption="Android Package Manager" \
@@ -168,9 +165,9 @@ if [ "$OPERATION" = "Install" ]; then
     done
 elif [ "$OPERATION" = "Uninstall" ]; then
     adb shell su -c "ls -l /data/data/" > $MyAPKs
-    cat $MyAPKs|grep -e "app_*" -e nobody -e radio -e system|sort -k 6|awk -F" " '{print $6}' > ${MyAPKs}2
+    cat $MyAPKs|sort -k 6|awk -F" " '{print $6}' > ${MyAPKs}2
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png \
-			--caption="Android Package Manager - $(cat $MyAPKs|grep -e "app_*" -e nobody -e radio -e system|sort -k 6|awk -F" " '{print $6}'|wc -l) applications" --textbox=${MyAPKs}2 --geometry 450x450 2> /dev/null &
+			--caption="Android Package Manager - $(cat $MyAPKs|wc -l) applications" --textbox=${MyAPKs}2 --geometry 450x450 2> /dev/null &
 	KdialogPID=$(ps aux|grep "my-apks2"|grep -v grep|awk -F" " '{print $2}')
 	FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png --caption="Android Package Manager" --inputbox="Enter Android applications from textbox separated by whitespace." 2> /dev/null)
 	if-cancel-exit

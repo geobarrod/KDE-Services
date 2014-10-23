@@ -19,7 +19,7 @@ FILE="$1"
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        exit 0
+        exit 1
     fi
 }
 

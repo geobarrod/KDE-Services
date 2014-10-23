@@ -23,13 +23,15 @@ ALL=""
 
 if-cancel-exit() {
     if [ "$EXIT" != "0" ]; then
-        exit 0
+		qdbus $DBUSREF close
+        exit 1
     fi
     
     if [ "$MODE" = "" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="[Backup|Restore] Tools" \
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Backup Tools" \
                        --passivepopup="[Canceled]   Please, select item. Try again" 2> /dev/null
-        exit 0
+		qdbus $DBUSREF close
+        exit 1
     fi
 }
 
@@ -37,7 +39,7 @@ beginning-backup() {
     COUNT="0"
     COUNTFILES=$(echo $TARGETBACKUP|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="[Backup|Restore] Tools" --progressbar "                             " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Backup Tools" --progressbar "                             " $COUNTFILES)
     BEGIN_TIME=$(date +%s)
 }
 
@@ -80,7 +82,7 @@ beginning-restore() {
     COUNT="0"
     COUNTFILES=$(echo $MODE|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="[Backup|Restore] Tools" --progressbar "                             " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Backup Tools" --progressbar "                             " $COUNTFILES)
     BEGIN_TIME=$(date +%s)
     COUNT=$((++COUNT))
 }
@@ -130,7 +132,7 @@ restore-qdbusinsert() {
 ############ Main ############
 ##############################
 
-MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="[Backup|Restore] Tools" --combobox="Choose Mode" Backup Restore --default Backup 2> /dev/null)
+MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Backup Tools" --combobox="Choose Mode" Backup Restore --default Backup 2> /dev/null)
 EXIT=$?
 if-cancel-exit
 
@@ -169,6 +171,8 @@ if [ "$MODE" = "Backup" ]; then
             mkdir $BACKUP/${i##*/} > /dev/null 2>&1
             backup-qdbusinsert
             kdesu --caption="Backup Tools" --noignorebutton -d tar -jcPpf $BACKUP/${i##*/}/${i##*/}-backup-$(date +%d-%m-%Y_%H-%M).tar.bz2 $i
+			EXIT=$?
+			if-cancel-exit
         done
         finished-backup
     fi
@@ -232,6 +236,8 @@ else
         beginning-restore
         restore-qdbusinsert
         kdesu --caption="Backup Tools" --noignorebutton -d -c "rm -fr $(tar -tf $MODE 2> /dev/null|head -n1) && tar -jxPpf $MODE > /dev/null 2>&1"
+		EXIT=$?
+		if-cancel-exit
         finished-restore
     fi
     

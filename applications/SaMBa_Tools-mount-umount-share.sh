@@ -18,13 +18,13 @@ check_stderr() {
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Samba Shares Mounter" \
                        --passivepopup="[Error] 1-Samba share directory need authentication. 2-The samba username or password is wrong." \
                        2> /dev/null
-        exit 0
+        exit 1
     fi
 }
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        exit 0
+        exit 1
     fi
 }
 
