@@ -110,6 +110,7 @@ cat > /tmp/about_kde-services << EOF
         - sox
         - tar
         - transcode
+        - unar
         - util-linux
         - vlc
         - wget

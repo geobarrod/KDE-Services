@@ -1,0 +1,18 @@
+[Desktop Entry]
+Actions=CompressedFileIntegrityCheck;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-compressed-file.png
+MimeType=application/x-tar;application/x-compressed-tar;application/x-bzip-compressed-tar;application/x-tarz;application/x-xz-compressed-tar;application/x-lzma-compressed-tar;application/x-deb;application/x-cd-image;application/x-bcpio;application/x-cpio;application/x-cpio-compressed;application/x-sv4cpio;application/x-sv4crc;application/x-rpm;application/x-source-rpm;application/vnd.ms-cab-compressed;application/x-servicepack;application/x-rar;application/x-7z-compressed;application/x-java-archive;application/zip;application/x-compress;application/x-gzip;application/x-bzip;application/x-bzip2;application/x-lzma;application/x-xz;application/lha;application/x-lha;application/maclha;application/x-cd-image;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-StartupNotify=false
+X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
+
+[Desktop Action CompressedFileIntegrityCheck]
+Exec=/usr/share/applications/Compressed_file_integrity_check.sh
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-compressed-file.png
+Name=Compressed File Integrity Check
+Name[es]=Chequeo de Integridad de Archivo Comprimido
+Name[ru]=Сжал Проверку Целостности Файла
+Name[uk]=Стиснув Перевірку Цілісності Файлу
+Name[x-test]=xxCompressed File Integrity Checkxx

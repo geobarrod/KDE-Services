@@ -1,5 +1,10 @@
+* Fri Oct 31 2014  Geovani B. R. <igeo.cu@gmail.com> 2.0-2
+- Added new service menu "Compressed File Integrity Check" on Dolphin's right click menu.
+- Makefile: Updated.
+
 * Tue Oct 22 2014  Geovani B. R. <igeo.cu@gmail.com> 2.0-1
 - "Android Tools": Bugfix and enhancement.
+- Makefile: Updated.
 
 * Tue Oct 14 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-9
 - Added new submenu "Android Tools" on Dolphin's right click menu, with the following features:

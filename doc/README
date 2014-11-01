@@ -96,6 +96,7 @@ Requirements:
 - sox
 - tar
 - transcode
+- unar
 - util-linux
 - vlc
 - wget

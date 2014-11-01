@@ -43,6 +43,7 @@ uninstall:
 		$(PREFIXmenu)/Change-Owner_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Change-Timestamp_addtoservicemenu.desktop \
 		$(PREFIXmenu)/CheckSum-Tools_servicemenu.desktop \
+		$(PREFIXmenu)/Compressed-File-Integrity-Check_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Dolphin-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Dropbox-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Graphic-Tools_servicemenu.desktop \
@@ -82,6 +83,7 @@ uninstall:
 		$(PREFIXapp)/Backup_Tools-standard.sh \
 		$(PREFIXapp)/Change_file-dir_timestamp.sh \
 		$(PREFIXapp)/CheckSum_Tools-verify-checksum.sh \
+		$(PREFIXapp)/Compressed_file_integrity_check.sh \
 		$(PREFIXapp)/DiskCloner.sh \
 		$(PREFIXapp)/Dolphin_Tools-change-owner.sh \
 		$(PREFIXapp)/Dolphin_Tools-connect.desktop \
@@ -167,6 +169,7 @@ uninstall:
 		$(PREFIX512apps)/ks-audio.png \
 		$(PREFIX512apps)/ks-checksum.png \
 		$(PREFIX512apps)/ks-clock.png \
+		$(PREFIX512apps)/ks-compressed-file.png \
 		$(PREFIX512apps)/ks-connect-to.png \
 		$(PREFIX512apps)/ks-database.png \
 		$(PREFIX512apps)/ks-decrypt.png \
