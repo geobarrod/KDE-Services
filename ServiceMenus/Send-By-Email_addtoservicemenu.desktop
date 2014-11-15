@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action SendByEmail]
-Exec=xdg-email --utf8 --attach %u
+Exec=xdg-email --utf8 $(for file in %F;do echo "--attach $file";done)
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png
 Name=Send by Email
 Name[es]=Enviar por Correo Electrónico

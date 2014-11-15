@@ -58,8 +58,9 @@ cat > /tmp/about_kde-services << EOF
         - The Converter.
         - Dropbox Tools.
         - Android Tools.
+        - Compressed File Integrity Check.
         
-    Requirements:
+    Required dependencies:
         - android-tools
         - bash
         - bc

@@ -43,6 +43,7 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - The Converter.
 - Dropbox Tools.
 - Android Tools.
+- Compressed File Integrity Check.
 
 Requirements:
 
