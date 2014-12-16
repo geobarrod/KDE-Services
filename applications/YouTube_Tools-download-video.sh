@@ -141,7 +141,7 @@ DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-do
 if-cancel-exit
 
 QUALITY=$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
-        --radiolist="Select Video Quality" 1920x1080 1080p on 1280x720 720p off 640x360 360p off 2> /dev/null)
+        --radiolist="Select Video Quality" 1280x720 720p on 640x360 360p off 2> /dev/null)
 if-cancel-exit
 
 RATE_LIMIT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png --caption="YouTube Video Downloader" \
@@ -165,27 +165,14 @@ for VID in $VCODE; do
     youtube-error
 done
 
-if [ "$QUALITY" = "1920x1080" ];then
+if [ "$QUALITY" = "1280x720" ];then
     COUNT="0"
     
     for VID in $VCODE; do
         COUNT=$((++COUNT))
         size-qdbusinsert
         
-        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 1920x1080)" = "1920x1080" ];then
-            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
-            SIZE="1080p"
-            download-qdbusinsert
-            BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 37 --max-quality 37 -c -i -R 1000000 \
-                    -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
-            $PROGRAM
-            EXIT=$?
-            youtube-error
-            FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-            finished
-        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 1280x720)" = "1280x720" ];then
+        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 22|grep -o 1280x720)" = "1280x720" ];then
             FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="720p"
             download-qdbusinsert
@@ -198,42 +185,7 @@ if [ "$QUALITY" = "1920x1080" ];then
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             finished
-        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 640x360)" = "640x360" ];then
-            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
-            SIZE="360p"
-            download-qdbusinsert
-            BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
-                    -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
-            $PROGRAM
-            EXIT=$?
-            youtube-error
-            FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-            finished
-        fi
-    done
-elif [ "$QUALITY" = "1280x720" ];then
-    COUNT="0"
-    
-    for VID in $VCODE; do
-        COUNT=$((++COUNT))
-        size-qdbusinsert
-        
-        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 1280x720)" = "1280x720" ];then
-            FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
-            SIZE="720p"
-            download-qdbusinsert
-            BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 22 --max-quality 22 -c -i -R 1000000 \
-                    -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
-            $PROGRAM
-            EXIT=$?
-            youtube-error
-            FINAL_TIME=$(date +%s)
-            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-            finished
-        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 640x360)" = "640x360" ];then
+        elif [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 18|grep -o 640x360)" = "640x360" ];then
             FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="360p"
             download-qdbusinsert
@@ -255,7 +207,7 @@ elif [ "$QUALITY" = "640x360" ];then
         COUNT=$((++COUNT))
         size-qdbusinsert
         
-        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w mp4|grep -o 640x360)" = "640x360" ];then
+        if [ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 18|grep -o 640x360)" = "640x360" ];then
             FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
             SIZE="360p"
             download-qdbusinsert

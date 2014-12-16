@@ -162,7 +162,7 @@ DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png 
 if-cancel-exit
 
 MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Resolution" mobile "Mobile Phones (3GP)" \
-     4K "Resolution Ultra-HD (4K)" 2K "Resolution Ultra-HD (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 360 "Resolution NHD (360p)" 240 "Resolution QVGA (240p)" \
+     4K "Resolution Ultra-HD (4K)" 2K "Resolution DCI (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 360 "Resolution NHD (360p)" 240 "Resolution QVGA (240p)" \
      same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV - WebM)" --geometry 250x240 2> /dev/null)
 if-cancel-exit
 ############################### Mobile ###############################

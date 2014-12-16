@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=PDFownerPassword;PDFuserPassword;DRM-Encrypt;_SEPARATOR_;PDFunSecure;_SEPARATOR_;ExtractPages;ExtractAllPages;ExtractAllImages;_SEPARATOR_;PDFOptimizer;PDFfix;_SEPARATOR_;pdfcompress;_SEPARATOR_;pdfmetaview;pdfmetaedit;_SEPARATOR_;pdfmerge;pdfsplit;_SEPARATOR_;PDFinfo;
+Actions=_SEPARATOR_;PDFownerPassword;PDFuserPassword;DRM-Encrypt;PDFunSecure;_SEPARATOR_;PDFfix;_SEPARATOR_;ExtractPages;ExtractAllPages;
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 MimeType=application/pdf;
 ServiceTypes=KonqPopupMenu/Plugin
@@ -11,6 +11,7 @@ X-KDE-Submenu[es]=PDF - Herramientas
 X-KDE-Submenu[ru]=Инструменты PDF
 X-KDE-Submenu[uk]=Інструменти PDF
 X-KDE-Submenu[x-test]=xxPDF Toolsxx
+TryExec=pdftk
 
 [Desktop Action DRM-Encrypt]
 Exec=OPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner password (DRM)"); UPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF user password (Encrypt). Warning: Can't be same to owner password"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying DRM-Encrypt:  $(basename %u)"; pdftk %u output "`echo %u | perl -pe 's/\\.[^.]+$//'`_DRM-Enc128b.pdf" owner_pw $OPASSWORD user_pw $UPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply DRM + Encrypt" --passivepopup="[Finished]"
@@ -20,15 +21,6 @@ Name[es]=Aplicar DRM + Encriptación
 Name[ru]=Задействовать DRM + Шифрование
 Name[uk]=Задіяти DRM + Шифрування
 Name[x-test]=xxApply DRM + Encryptxx
-
-[Desktop Action ExtractAllImages]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting All Images:  $(basename %u)"; pdfimages -p %u `ls %u|awk -F . '{print $1}'`; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all images" --passivepopup="[Finished]"
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Extract All Images
-Name[es]=Extraer Todas Las Imagenes
-Name[ru]=Извлечь все изображения
-Name[uk]=Вилучити усі зображення
-Name[x-test]=xxExtract All Imagesxx
 
 [Desktop Action ExtractAllPages]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting All Pages:  $(basename %u)"; pdftk %u burst output "`echo %u | perl -pe 's/\\.[^.]+$//'`_%05d.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all pages" --passivepopup="[Finished]"
@@ -48,15 +40,6 @@ Name[ru]=Извлечь выбранные страницы
 Name[uk]=Вилучити обрані сторінки
 Name[x-test]=xxExtract Select Pagesxx
 
-[Desktop Action PDFOptimizer]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Optimizing:  $(basename %u)"; pdftops %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_opt.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Optimizer" --passivepopup="[Finished]"
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Optimizer
-Name[es]=Optimizador
-Name[ru]=Оптимизатор
-Name[uk]=Оптимізатор
-Name[x-test]=xxOptimizerxx
-
 [Desktop Action PDFfix]
 Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Fixing:  $(basename %u)"; pdftk %u output "`echo %u | perl -pe 's/\\.[^.]+$//'`_fixed.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Fixer" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
@@ -65,15 +48,6 @@ Name[es]=Reparar (si es posible)
 Name[ru]=Исправить (если возможно)
 Name[uk]=Виправити (якщо можливо)
 Name[x-test]=xxFixer (if possible)xx
-
-[Desktop Action PDFinfo]
-Exec=pdfinfo %u > /tmp/pdfinfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools - Info" --textbox /tmp/pdfinfo 350 350; rm -f /tmp/pdfinfo
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Info
-Name[es]=Información
-Name[ru]=Информация
-Name[uk]=Інформація
-Name[x-test]=xxInfoxx
 
 [Desktop Action PDFownerPassword]
 Exec=OPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner password (DRM)"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying Owner Password (DRM):  $(basename %u)"; pdftk %u output "`echo %u | perl -pe 's/\\.[^.]+$//'`_DRM.pdf" owner_pw $OPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply Owner Password (DRM)" --passivepopup="[Finished]"
@@ -101,43 +75,3 @@ Name[es]=Aplicar Contraseña De Usuario (Encriptar)
 Name[ru]=Задействовать пароль пользователя (Зашифровать)
 Name[uk]=Задіяти пароль користувача (Зашифрувати)
 Name[x-test]=xxApply User Password (Encrypt)xx
-
-[Desktop Action pdfcompress]
-Exec=/usr/share/applications/PDFktools.sh -c %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
-Name=Compress
-Name[es]=Comprimir
-Name[ru]=Сжать
-Name[uk]=Стиснути
-
-[Desktop Action pdfmerge]
-Exec=/usr/share/applications/PDFktools.sh -m %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Merge selected files
-Name[es]=Unir los archivos seleccionados
-Name[ru]=Объединить выбранные файлы
-Name[uk]=З’єднати обрані файли
-
-[Desktop Action pdfmetaedit]
-Exec=/usr/share/applications/PDFktools.sh -me %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
-Name=Edit metadata
-Name[es]=Editar metadatos
-Name[ru]=Редактировать метаданные
-Name[uk]=Редагувати метадані
-
-[Desktop Action pdfmetaview]
-Exec=/usr/share/applications/PDFktools.sh -mv %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
-Name=View metadata
-Name[es]=Ver metadatos
-Name[ru]=Просмотреть метаданные
-Name[uk]=Переглянути метадані
-
-[Desktop Action pdfsplit]
-Exec=/usr/share/applications/PDFktools.sh -s %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Split in single page per file
-Name[es]=Cortar en archivos de una sola página
-Name[ru]=Разбить постранично
-Name[uk]=Розбити посторінково

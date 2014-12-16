@@ -55,6 +55,7 @@ uninstall:
 		$(PREFIXmenu)/Name-Whitespace-Replace_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Network-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Package-Tools_servicemenu.desktop \
+		$(PREFIXmenu)/PDF-Tools2_servicemenu.desktop \
 		$(PREFIXmenu)/PDF-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/SaMBa-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Search-Tools_servicemenu.desktop \

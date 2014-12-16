@@ -1,3 +1,18 @@
+* Fri Dec 12 2014  Geovani B. R. <igeo.cu@gmail.com> 2.0-5
+- "YouTube Tools": Bugfix.
+- "PDF Tools" warning: Package "libgcj" removed from the repositories of Fedora 21 distro,
+  a required dependence by the "pdftk" (which also was eliminated) package.
+  Not will view the following services menu:
+	- "Apply DRM + Encrypt"
+	- "Apply Owner Password (DRM)"
+	- "Apply User Password (Encrypt)"
+	- "Decrypt (DRM)"
+	- "Extract Select Pages"
+	- "Extract All Pages"
+	- "Fixer (if possible)"
+  until you can manually install the pdftk application.
+- Makefile: Updated.
+
 * Fri Nov 14 2014  Geovani B. R. <igeo.cu@gmail.com> 2.0-4
 - "Send by Email": Improved.
 

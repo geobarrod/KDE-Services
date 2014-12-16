@@ -1,0 +1,80 @@
+[Desktop Entry]
+Actions=ExtractAllImages;_SEPARATOR_;PDFOptimizer;_SEPARATOR_;pdfcompress;_SEPARATOR_;pdfmetaview;pdfmetaedit;_SEPARATOR_;pdfmerge;pdfsplit;_SEPARATOR_;PDFinfo;
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
+MimeType=application/pdf;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+X-KDE-Submenu=PDF Tools
+X-KDE-Submenu[es]=PDF - Herramientas
+X-KDE-Submenu[ru]=Инструменты PDF
+X-KDE-Submenu[uk]=Інструменти PDF
+X-KDE-Submenu[x-test]=xxPDF Toolsxx
+
+[Desktop Action ExtractAllImages]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting All Images:  $(basename %u)"; pdfimages -p %u `ls %u|awk -F . '{print $1}'`; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all images" --passivepopup="[Finished]"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
+Name=Extract All Images
+Name[es]=Extraer Todas Las Imagenes
+Name[ru]=Извлечь все изображения
+Name[uk]=Вилучити усі зображення
+Name[x-test]=xxExtract All Imagesxx
+
+[Desktop Action PDFOptimizer]
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Optimizing:  $(basename %u)"; pdftops %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_opt.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Optimizer" --passivepopup="[Finished]"
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
+Name=Optimizer
+Name[es]=Optimizador
+Name[ru]=Оптимизатор
+Name[uk]=Оптимізатор
+Name[x-test]=xxOptimizerxx
+
+[Desktop Action PDFinfo]
+Exec=pdfinfo %u > /tmp/pdfinfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools - Info" --textbox /tmp/pdfinfo 350 350; rm -f /tmp/pdfinfo
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
+Name=Info
+Name[es]=Información
+Name[ru]=Информация
+Name[uk]=Інформація
+Name[x-test]=xxInfoxx
+
+[Desktop Action pdfcompress]
+Exec=/usr/share/applications/PDFktools.sh -c %F
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Name=Compress
+Name[es]=Comprimir
+Name[ru]=Сжать
+Name[uk]=Стиснути
+
+[Desktop Action pdfmerge]
+Exec=/usr/share/applications/PDFktools.sh -m %F
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
+Name=Merge selected files
+Name[es]=Unir los archivos seleccionados
+Name[ru]=Объединить выбранные файлы
+Name[uk]=З’єднати обрані файли
+
+[Desktop Action pdfmetaedit]
+Exec=/usr/share/applications/PDFktools.sh -me %F
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
+Name=Edit metadata
+Name[es]=Editar metadatos
+Name[ru]=Редактировать метаданные
+Name[uk]=Редагувати метадані
+
+[Desktop Action pdfmetaview]
+Exec=/usr/share/applications/PDFktools.sh -mv %F
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
+Name=View metadata
+Name[es]=Ver metadatos
+Name[ru]=Просмотреть метаданные
+Name[uk]=Переглянути метадані
+
+[Desktop Action pdfsplit]
+Exec=/usr/share/applications/PDFktools.sh -s %F
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
+Name=Split in single page per file
+Name[es]=Cortar en archivos de una sola página
+Name[ru]=Разбить постранично
+Name[uk]=Розбити посторінково
