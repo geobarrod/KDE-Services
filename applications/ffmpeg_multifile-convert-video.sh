@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2015.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -190,7 +190,7 @@ fi
 ############################### 4K ###############################
 if [ "$MODE" = "4K" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -222,6 +222,18 @@ if [ "$MODE" = "4K" ]; then
             elapsedtime
         fi
         
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s 4k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_Ultra-HD_4K.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
@@ -233,12 +245,24 @@ if [ "$MODE" = "4K" ]; then
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
+        
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
     done
 fi
 ############################### 2K ###############################
 if [ "$MODE" = "2K" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -251,7 +275,7 @@ if [ "$MODE" = "2K" ]; then
             qdbusinsert
             DST_FILE="${i%.*}"
             ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
-                "$DESTINATION/${DST_FILE##*/}_Ultra-HD_2K.mpg" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_DCI_2K.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -263,7 +287,19 @@ if [ "$MODE" = "2K" ]; then
             qdbusinsert
             DST_FILE="${i%.*}"
             ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
-                "$DESTINATION/${DST_FILE##*/}_H.264_Ultra-HD_2K.mp4" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_H.264_DCI_2K.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_DCI_2K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -275,7 +311,19 @@ if [ "$MODE" = "2K" ]; then
             qdbusinsert
             DST_FILE="${i%.*}"
             ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
-                "$DESTINATION/${DST_FILE##*/}_Ultra-HD_2K.avi" > $LOG 2>&1
+                "$DESTINATION/${DST_FILE##*/}_DCI_2K.avi" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_DCI_2K.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -286,7 +334,7 @@ fi
 ############################### 1080p ###############################
 if [ "$MODE" = "1080" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -318,6 +366,18 @@ if [ "$MODE" = "1080" ]; then
             elapsedtime
         fi
         
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_Full-HD_1080p.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
@@ -329,12 +389,24 @@ if [ "$MODE" = "1080" ]; then
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
+        
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
     done
 fi
 ############################### 720p ###############################
 if [ "$MODE" = "720" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -366,6 +438,18 @@ if [ "$MODE" = "720" ]; then
             elapsedtime
         fi
         
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_HD_720p.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
@@ -377,12 +461,24 @@ if [ "$MODE" = "720" ]; then
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
+        
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_HD_720p.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
     done
 fi
 ############################### 480p ###############################
 if [ "$MODE" = "480" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -414,6 +510,18 @@ if [ "$MODE" = "480" ]; then
             elapsedtime
         fi
         
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_ED_480p.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
@@ -425,12 +533,24 @@ if [ "$MODE" = "480" ]; then
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
+        
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_ED_480p.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
     done
 fi
 ############################### 360p ###############################
 if [ "$MODE" = "360" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -462,6 +582,18 @@ if [ "$MODE" = "360" ]; then
             elapsedtime
         fi
         
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_NHD_360p.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
@@ -473,12 +605,24 @@ if [ "$MODE" = "360" ]; then
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
+        
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_NHD_360p.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
     done
 fi
 ############################### 240p ###############################
 if [ "$MODE" = "240" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" --geometry 100x100 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -510,6 +654,18 @@ if [ "$MODE" = "240" ]; then
             elapsedtime
         fi
         
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_240p.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
         if [ "$CODEC" = "avi" ];then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
@@ -521,12 +677,24 @@ if [ "$MODE" = "240" ]; then
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
             elapsedtime
         fi
+        
+        if [ "$CODEC" = "webm" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_240p.webm" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
     done
 fi
 ############################### same ###############################
 if [ "$MODE" = "same" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" mpg2 "MPEG-2" mp4-h.264 \
-          "MPEG-4 (H.264)" webm "WebM" --geometry 100x165 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x180 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -552,6 +720,18 @@ if [ "$MODE" = "same" ]; then
             DST_FILE="${i%.*}"
             ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_sr.mp4" > $LOG 2>&1
+            if-ffmpeg-cancel
+            FINAL_TIME=$(date +%s)
+            ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+            elapsedtime
+        fi
+        
+        if [ "$CODEC" = "mp4-h.265" ];then
+            BEGIN_TIME=$(date +%s)
+            qdbusinsert
+            DST_FILE="${i%.*}"
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+                "$DESTINATION/${DST_FILE##*/}_H.265_sr.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
             ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
