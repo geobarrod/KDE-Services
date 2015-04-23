@@ -1,3 +1,7 @@
+* Tue Apr 21 2015  Geovani B. R. <igeo.cu@gmail.com> 2.0-7
+- Enhancement: Added batch processing of files for several service menu on Dolphin's right click.
+- Makefile: Updated.
+
 * Wed Jan 21 2015  Geovani B. R. <igeo.cu@gmail.com> 2.0-6
 - "Convert Video Files": Enhancement, added libx265 [H.265 or HEVC (High Efficiency Video Coding)] encoder.
 - Have a Happy New Year!.

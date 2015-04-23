@@ -12,7 +12,7 @@ X-KDE-Submenu[uk]=Інструменти пошуку
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
-Exec=/usr/share/applications/Search_Tools-search-by-name.sh
+Exec=/usr/share/applications/Search_Tools-search-by-name.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name=Search By Name
 Name[es]=Búsqueda Por Nombre
@@ -21,7 +21,7 @@ Name[uk]=Пошук за ім’ям
 Name[x-test]=xxSearch By Namexx
 
 [Desktop Action SearchByString]
-Exec=kdesu --caption="Search By String" -d /usr/share/applications/Search_Tools-search-by-string.sh
+Exec=kdesu --caption="Search By String" -d /usr/share/applications/Search_Tools-search-by-string.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
 Name=Search By String
 Name[es]=Búsqueda Por Palabra
@@ -30,7 +30,7 @@ Name[uk]=Пошук за вмістом
 Name[x-test]=xxSearch By Stringxx
 
 [Desktop Action StatisticsSearchDB]
-Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh
+Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png
 Name=Statistics Search DB
 Name[es]=Estadisticas BD de Búsqueda
@@ -39,7 +39,7 @@ Name[uk]=Статистика пошукової БД
 Name[x-test]=xxStatistics Search DBxx
 
 [Desktop Action UpdateSearchDB]
-Exec=/usr/share/applications/Search_Tools-update-search-db.sh
+Exec=/usr/share/applications/Search_Tools-update-search-db.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png
 Name=Update Search DB
 Name[es]=Actualizar BD de Búsqueda
@@ -48,7 +48,7 @@ Name[uk]=Оновити пошукову БД
 Name[x-test]=xxUpdate Search DBxx
 
 [Desktop Action SearchHere]
-Exec=kdesu --caption="Search Here" -d /usr/share/applications/Search_Tools-search-here.sh
+Exec=kdesu --caption="Search Here" -d /usr/share/applications/Search_Tools-search-here.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name=Search Here
 Name[es]=Búscar Aquí
@@ -57,7 +57,7 @@ Name[uk]=Шукати тут
 Name[x-test]=xxSearch Herexx
 
 [Desktop Action ModifiedFilesHere]
-Exec=kdesu --caption="Modified Files Here" -d /usr/share/applications/Search_Tools-modified-files-here.sh
+Exec=kdesu --caption="Modified Files Here" -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name=Modified Files Here
 Name[es]=Archivos Modificados Aquí

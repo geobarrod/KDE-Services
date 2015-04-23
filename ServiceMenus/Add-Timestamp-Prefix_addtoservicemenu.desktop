@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action AddTimestamp]
-Exec=cd $(dirname %u); /usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh %u; basename %u >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(basename "$i");done; rm -f .add-timestamp-prefix
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Add Timestamp Prefix To [File|Dir]name" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Adding timestamp prefix to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; echo ${file##*/} >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(echo "${i##*/}");done;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Add Timestamp Prefix To [File|Dir]name" --passivepopup="[Finished]"; rm -f .add-timestamp-prefix
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
 Name=Add Timestamp Prefix To [File|Dir]name
 Name[es]=Agregar Prefijo Fecha-Hora al Nombre del [Fichero|Directorio]

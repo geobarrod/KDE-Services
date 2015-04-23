@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=ShowPkgChangelog;ShowPkgInfo;_SEPARATOR_;ListPkgContent;ListPkgDeps;_SEPARATOR_;ExtractPkgFiles;_SEPARATOR_;IntegrityCheckPkg;
+Actions=ShowPkgChangelog;ShowPkgInfo;_SEPARATOR_;ListPkgContent;ListPkgConfFiles;ListPkgDeps;ListPkgScripts;_SEPARATOR_;ExtractPkgFiles;_SEPARATOR_;IntegrityCheckPkg;
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 MimeType=application/x-rpm;application/x-source-rpm;
 ServiceTypes=KonqPopupMenu/Plugin
@@ -13,7 +13,7 @@ X-KDE-Submenu[uk]=Інструменти Пакування
 X-KDE-Submenu[x-test]=xxPackage Toolsxx
 
 [Desktop Action ExtractPkgFiles]
-Exec=cd $(dirname %u); mkdir $(basename -s .rpm %u); cd $(basename -s .rpm %u); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Extract Files Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting:  $(basename %u)"; rpm2cpio %u | cpio -id; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Extract Files Here" --passivepopup="[Finished]    $(basename %u)"
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Extract Files Here" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd $(dirname $file); mkdir $(basename -s .rpm $file); cd $(basename -s .rpm $file); rpm2cpio $file | cpio -id; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Extract Files Here" --passivepopup="[Finished]    $(basename $file)";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Extract Files Here
 Name[es]=Extraer Ficheros Aquí
@@ -22,7 +22,7 @@ Name[uk]=Видобути файли сюди
 Name[x-test]=xxExtract Files Herexx
 
 [Desktop Action IntegrityCheckPkg]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Integrity Check" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Checking:  $(basename %u)"; rpm2cpio %u > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps %u 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename %u)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename %u)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; rpm2cpio $file > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps $file 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename $file)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename $file)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Integrity Check
 Name[es]=Comprobar Integridad
@@ -31,7 +31,7 @@ Name[uk]=Перевірка цілісності
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action ListPkgContent]
-Exec=rpm -qlp %u > /tmp/pkgcontent; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Content" --textbox /tmp/pkgcontent 800 300; rm -f /tmp/pkgcontent
+Exec=rpm -qlp %f > /tmp/pkgcontent; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List Content - $(basename %f)" --textbox /tmp/pkgcontent 800 300; rm -f /tmp/pkgcontent
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=List Content
 Name[es]=Listar Contenido
@@ -39,8 +39,17 @@ Name[ru]=Список содержимого
 Name[uk]=Перелік вмісту
 Name[x-test]=xxList Contentxx
 
+[Desktop Action ListPkgConfFiles]
+Exec=rpm -qcp %f > /tmp/pkgconfiles; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List Configuration Files - $(basename %f)" --textbox /tmp/pkgconfiles 800 300; rm -f /tmp/pkgconfiles
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
+Name=List Configuration Files
+Name[es]=Listar Ficheros de Configuración
+Name[ru]=Чтобы Перечислить Конфигурацию Файлы
+Name[uk]=Вносити до списку Файли Конфігурації
+Name[x-test]=xxList Configuration Filesxx
+
 [Desktop Action ListPkgDeps]
-Exec=rpm -qRp %u > /tmp/pkgdeps; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Dependencies" --textbox /tmp/pkgdeps 800 300; rm -f /tmp/pkgdeps
+Exec=rpm -qRp %f > /tmp/pkgdeps; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List Dependencies - $(basename %f)" --textbox /tmp/pkgdeps 800 300; rm -f /tmp/pkgdeps
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=List Dependencies
 Name[es]=Listar Dependencias
@@ -48,8 +57,17 @@ Name[ru]=Список зависимостей
 Name[uk]=Перелік залежностей
 Name[x-test]=xxList Dependenciesxx
 
+[Desktop Action ListPkgScripts]
+Exec=rpm -qp --scripts %f > /tmp/pkgscripts; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List [Ins|Unins]tallation Scripts - $(basename %f)" --textbox /tmp/pkgscripts 800 300; rm -f /tmp/pkgscripts
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
+Name=List [Ins|Unins]tallation Scripts
+Name[es]=Listar Ordenes de [Ins|Desins]talación
+Name[ru]=Чтобы перечислить шрифты
+Name[uk]=Щоб внести до списку оригінали документа
+Name[x-test]=xxList [Ins|Unins]tallation Scriptsxx
+
 [Desktop Action ShowPkgChangelog]
-Exec=rpm -qp --changelog %u > /tmp/pkgchangelog; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Changelog" --textbox /tmp/pkgchangelog 800 300; rm -f /tmp/pkgchangelog
+Exec=rpm -qp --changelog %f > /tmp/pkgchangelog; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Show Changelog - $(basename %f)" --textbox /tmp/pkgchangelog 800 300; rm -f /tmp/pkgchangelog
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Show Changelog
 Name[es]=Mostrar Registro de Cambios
@@ -58,7 +76,7 @@ Name[uk]=Показати Changelog
 Name[x-test]=xxShow Changelogxx
 
 [Desktop Action ShowPkgInfo]
-Exec=rpm -qip %u > /tmp/pkginfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Info" --textbox /tmp/pkginfo 800 300; rm -f /tmp/pkginfo
+Exec=rpm -qip %f > /tmp/pkginfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Show Info - $(basename %f)" --textbox /tmp/pkginfo 800 300; rm -f /tmp/pkginfo
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Show Info
 Name[es]=Mostrar Información

@@ -13,7 +13,7 @@ X-KDE-Submenu[uk]=Інструменти AVI
 X-KDE-Submenu[x-test]=xxAVI Toolsxx
 
 [Desktop Action AVIsplitSize]
-Exec=/usr/share/applications/AVI_Tools-avi-split-size.sh
+Exec=/usr/share/applications/AVI_Tools-avi-split-size.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name=Split (to size)
 Name[es]=Cortar (a medida)
@@ -22,7 +22,7 @@ Name[uk]=Розбити (за розміром)
 Name[x-test]=xxSplit (to size)xx
 
 [Desktop Action AVIsplitTime]
-Exec=/usr/share/applications/AVI_Tools-avi-split-time.sh
+Exec=/usr/share/applications/AVI_Tools-avi-split-time.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name=Split (by time range)
 Name[es]=Cortar (por rango de tiempo)

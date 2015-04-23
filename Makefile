@@ -1,7 +1,7 @@
 #################################################################
 # Installing KDE-Services, to appropriate directories.		#
 # Author: Geovani Barzaga Rodriguez <igeo.cu@gmail.com>.	#
-# KDE-Services 2011-2014. GPLv3+				#
+# KDE-Services 2011-2015. GPLv3+				#
 #################################################################
 
 PREFIXmenu=$(RPM_BUILD_ROOT)/usr/share/kde4/services/ServiceMenus
@@ -21,6 +21,8 @@ install:
 	mkdir -p $(PREFIXdeskdir)
 	mkdir -p $(PREFIXdoc)
 	
+	rm -f $(PREFIXapp)/Change_file-dir_timestamp.sh
+
 	cp ServiceMenus/* $(PREFIXmenu)
 	cp applications/* $(PREFIXapp)
 	cp 512x512/apps/* $(PREFIX512apps)

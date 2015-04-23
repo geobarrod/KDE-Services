@@ -13,7 +13,7 @@ X-KDE-Submenu[uk]=Інструменти PDF
 X-KDE-Submenu[x-test]=xxPDF Toolsxx
 
 [Desktop Action ExtractAllImages]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting All Images:  $(basename %u)"; pdfimages -p %u `ls %u|awk -F . '{print $1}'`; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all images" --passivepopup="[Finished]"
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting All Images:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; pdfimages -p "$file" $(ls "$file"|awk -F . '{print $1}'); kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all images" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Extract All Images
 Name[es]=Extraer Todas Las Imagenes
@@ -22,7 +22,7 @@ Name[uk]=Вилучити усі зображення
 Name[x-test]=xxExtract All Imagesxx
 
 [Desktop Action PDFOptimizer]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Optimizing:  $(basename %u)"; pdftops %u "`echo %u | perl -pe 's/\\.[^.]+$//'`_opt.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Optimizer" --passivepopup="[Finished]"
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Optimizing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; pdftops "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_opt.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Optimizer" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Optimizer
 Name[es]=Optimizador
@@ -31,7 +31,7 @@ Name[uk]=Оптимізатор
 Name[x-test]=xxOptimizerxx
 
 [Desktop Action PDFinfo]
-Exec=pdfinfo %u > /tmp/pdfinfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools - Info" --textbox /tmp/pdfinfo 350 350; rm -f /tmp/pdfinfo
+Exec=pdfinfo %f > /tmp/pdfinfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools - Info" --textbox /tmp/pdfinfo 350 350; rm -f /tmp/pdfinfo
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Info
 Name[es]=Información

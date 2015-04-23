@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action MKVextractSubtitle]
-Exec=/usr/share/applications/MKV_Extract-subtitle.sh
+Exec=/usr/share/applications/MKV_Extract-subtitle.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name=MKV Extract Subtitle
 Name[es]=MKV Extraer Subtítulo

@@ -13,7 +13,7 @@ X-KDE-Submenu[uk]=Інструменти Dropbox
 X-KDE-Submenu[x-test]=xxDropbox Toolsxx
 
 [Desktop Action CopyToDropbox]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh copy %u
+Exec=/usr/share/applications/Dropbox_Tools-main.sh copy %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Copy to Dropbox
 Name[es]=Copiar a Dropbox
@@ -21,7 +21,7 @@ Name[ru]=Копировать в Dropbox
 Name[uk]=Копіювати до Dropbox
 
 [Desktop Action MoveToDropbox]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh move %u
+Exec=/usr/share/applications/Dropbox_Tools-main.sh move %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Move to Dropbox
 Name[es]=Mover a Dropbox
@@ -29,7 +29,7 @@ Name[ru]=Переместить в Dropbox
 Name[uk]=Пересунути до Dropbox
 
 [Desktop Action CopyToPublicAndGetURL]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh copy_pub %u
+Exec=/usr/share/applications/Dropbox_Tools-main.sh copy_pub %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Copy to Public Dropbox and get URL
 Name[es]=Copiar a Dropbox Público y obtener URL
@@ -37,7 +37,7 @@ Name[ru]=Копировать в Dropbox с общим доступом и по�
 Name[uk]=Копіювати до Dropbox із публічним доступом і отримати посиланяя
 
 [Desktop Action MoveToPublicAndGetURL]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh move_pub %u
+Exec=/usr/share/applications/Dropbox_Tools-main.sh move_pub %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Move to Public Dropbox and get URL
 Name[es]=Mover a Dropbox Público y obtener URL
@@ -45,7 +45,7 @@ Name[ru]=Переместить в Dropbox с общим доступом и п�
 Name[uk]=Пересунути до Dropbox із публічним доступом і отримати посиланяя
 
 [Desktop Action GetPublicURL]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh get_pub_url %u
+Exec=/usr/share/applications/Dropbox_Tools-main.sh get_pub_url %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Get public URL
 Name[es]=Obtener URL pública
@@ -53,7 +53,7 @@ Name[ru]=Получить ссылку с общим доступом
 Name[uk]=Отримати публічне посиланяя
 
 [Desktop Action InstallService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh install_service
+Exec=/usr/share/applications/Dropbox_Tools-main.sh install_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Install Dropbox service
 Name[es]=Instalar servicio Dropbox
@@ -61,7 +61,7 @@ Name[ru]=Установить сервис Dropbox
 Name[uk]=Встановити сервіс Dropbox
 
 [Desktop Action UpdateService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh update_service
+Exec=/usr/share/applications/Dropbox_Tools-main.sh update_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Update Dropbox service
 Name[es]=Actualizar servicio Dropbox
@@ -69,7 +69,7 @@ Name[ru]=Обновить сервис Dropbox
 Name[uk]=Оновити сервіс Dropbox
 
 [Desktop Action StartService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service
+Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-on.png
 Name=Start Dropbox service
 Name[es]=Iniciar servicio Dropbox
@@ -77,7 +77,7 @@ Name[ru]=Запустить сервис Dropbox
 Name[uk]=Запустити сервіс Dropbox
 
 [Desktop Action StopService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service
+Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-off.png
 Name=Stop Dropbox service
 Name[es]=Detener servicio Dropbox
@@ -85,7 +85,7 @@ Name[ru]=Остановить сервис Dropbox
 Name[uk]=Зупинити сервіс Dropbox
 
 [Desktop Action AutoStart]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service
+Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Enable autostart Dropbox service
 Name[es]=Habilitar autoarranque del servicio Dropbox

@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action ChangeTimestamp]
-Exec=/usr/share/applications/Change_file-dir_timestamp.sh
+Exec=TIMESTAMP=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp To [File|Directory]" --inputbox="Enter New Timestamp" "$(date "+%0Y-%0m-%0d %0H:%0M:%0S")"); COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES));  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp To [File|Directory]" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Changing timestamp to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; touch -cd "$TIMESTAMP" "$file";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Change Timestamp To [File|Directory]" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
 Name=Change Timestamp To [File|Directory]
 Name[es]=Cambiar Fecha del [Fichero|Directorio]

@@ -13,7 +13,7 @@ X-KDE-Submenu[uk]=Інструменти Термінал
 X-KDE-Submenu[x-test]=xxTerminal Toolsxx
 
 [Desktop Action ExecScript]
-Exec=chmod 755 %u; konsole --hold -e %u
+Exec=chmod 755 %f; konsole --hold -e %f
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name=Run Application
 Name[es]=Ejecutar Programa
@@ -22,7 +22,7 @@ Name[uk]=Запустити додаток
 Name[x-test]=xxRun Applicationxx
 
 [Desktop Action RootExecScript]
-Exec=kdesu --caption="Run Application" --noignorebutton -d -c "chmod 755 %u; konsole --hold -e %u"
+Exec=kdesu --caption="Run Application" --noignorebutton -d -c "chmod 755 %f; konsole --hold -e %f"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name=Run Application (Root)
 Name[es]=Ejecutar Programa como root

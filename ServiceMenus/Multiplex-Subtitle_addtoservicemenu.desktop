@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action MultiplexSubtitle]
-Exec=/usr/share/applications/Multiplex_Subtitle.sh
+Exec=/usr/share/applications/Multiplex_Subtitle.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png
 Name=Multiplex Subtitle
 Name[es]=Multiplexar Subtítulo

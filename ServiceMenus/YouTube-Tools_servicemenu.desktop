@@ -12,7 +12,7 @@ X-KDE-Submenu[uk]=Інструменти YouTube
 X-KDE-Submenu[x-test]=xxYouTube Toolsxx
 
 [Desktop Action Code-Collector]
-Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh
+Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-video-code-collector.png
 Name=Video List Code Collector
 Name[es]=Colector de Códigos de Lista de Videos
@@ -21,7 +21,7 @@ Name[uk]=Збиральник відео за списком кодів
 Name[x-test]=xxVideo List Code Collectorxx
 
 [Desktop Action Video-Downloader]
-Exec=/usr/share/applications/YouTube_Tools-download-video.sh
+Exec=/usr/share/applications/YouTube_Tools-download-video.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png
 Name=Video Downloader
 Name[es]=Descargador de Video

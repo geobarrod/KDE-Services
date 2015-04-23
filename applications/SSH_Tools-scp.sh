@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2015.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -40,7 +40,7 @@ if [ -s ~/.kde-services/machines ]; then
     text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
     play /tmp/speak.wav 2> /dev/null
     rm -fr /tmp/speak*
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png --title="SSH Tools - Send ${1##*/} To $HOST by $LOGIN" --passivepopup="[Finished]" 2> /dev/null
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png --title="SSH Tools" --passivepopup="[Finished]   Send ${1##*/} To $HOST by $LOGIN" 2> /dev/null
     exit 0
 else
     kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png --caption="SSH Tools - Send To $HOST by $LOGIN" \

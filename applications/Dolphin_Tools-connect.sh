@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.									#
+# For KDE-Services. 2011-2015.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -43,7 +43,7 @@ EOF
 ############ Main ############
 ##############################
 
-if [ ! -s ~/.kde-services/machines ]; then
+if [ ! -s ~/.kde-services/machines ] || [ $(cat ~/.kde-services/machines|wc -w) == "0" ]; then
     mkdir ~/.kde-services 2> /dev/null
     echo localhost > ~/.kde-services/machines 2> /dev/null
 fi

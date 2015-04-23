@@ -12,7 +12,7 @@ X-KDE-Submenu[uk]=Інструменти SaMBa
 X-KDE-Submenu[x-test]=xxSaMBa Toolsxx
 
 [Desktop Action SaMBa-Tools]
-Exec=/usr/share/applications/SaMBa_Tools-mount-umount-share.sh
+Exec=/usr/share/applications/SaMBa_Tools-mount-umount-share.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-smbfs.png
 Name=Samba Shares Mounter
 Name[es]=Montador de Compartidos Samba

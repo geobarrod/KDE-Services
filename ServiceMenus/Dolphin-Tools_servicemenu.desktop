@@ -12,7 +12,7 @@ X-KDE-Submenu[uk]=Інструменти Dolphin
 X-KDE-Submenu[x-test]=xxDolphin Toolsxx
 
 [Desktop Action Connect]
-Exec=/usr/share/applications/Dolphin_Tools-connect.sh
+Exec=/usr/share/applications/Dolphin_Tools-connect.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-remote.png
 Name=Connect To
 Name[es]=Conectar a
@@ -21,7 +21,7 @@ Name[uk]=Підключитися до
 Name[x-test]=xxConnect Toxx
 
 [Desktop Action DiskUse]
-Exec=/usr/share/applications/Dolphin_Tools-disk-use.sh
+Exec=/usr/share/applications/Dolphin_Tools-disk-use.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-disk-space-used.png
 Name=Disk Space Used
 Name[es]=Espacio de Disco Usado
@@ -30,7 +30,7 @@ Name[uk]=Використання дискового простору
 Name[x-test]=xxDisk Space Usedxx
 
 [Desktop Action ViewMachine]
-Exec=/usr/share/applications/SSH_Tools-register-machine.sh
+Exec=/usr/share/applications/SSH_Tools-register-machine.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
 Name=Registered Servers
 Name[es]=Servidores Registrados

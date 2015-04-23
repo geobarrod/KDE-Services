@@ -1,22 +1,33 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2015.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-OBJECT=$1
+TARGET=$@
 OWNER=""
 MODE=""
 MODE2=""
 DBUSREF=""
+STDERR="/tmp/change-owner-here"
 SYSUSERS=$(awk -F : '{print $1}' /etc/passwd|sort)
 
 ###################################
 ############ Functions ############
 ###################################
 
+check-stderr() {
+    if [ -s "$STDERR" ]; then
+        su -c 'kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Change Owner Directory" \
+                              --passivepopup="[Error] $(cat $STDERR)" 2> /dev/null' $USER
+        rm -f $STDERR
+        qdbus $DBUSREF close
+        exit 1
+    fi
+}
+        
 progressbar-start() {
     DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --caption="Change Owner Here" --progressbar "                            " /ProgressDialog)
 }
@@ -28,13 +39,14 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Change Owner for:  ${OBJECT##*/}"
+    qdbus $DBUSREF setLabelText "Changing owner and mode bits..."
 }
 
 ##############################
 ############ Main ############
 ##############################
 
+rm -f $STDERR
 OWNER=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --caption="Change Owner Here" --combobox="Select Owner" $SYSUSERS --default $USER 2> /dev/null)
 
 if [ "$?" -gt "0" ]; then
@@ -42,7 +54,7 @@ if [ "$?" -gt "0" ]; then
     exit 0
 fi
 
-if [ -d "$1" ]; then
+if [ -d "$@" ]; then
     MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --caption="Change Owner Here" \
          --menu="Change Mode Bits (Owner-Group-Others)" 755 "755 (rwx-rx-rx)" 775 "775 (rwx-rwx-rx)" 777 "777 (rwx-rwx-rwx)" 700 "700 (rwx--)" \
          2> /dev/null)
@@ -64,27 +76,33 @@ if [ -d "$1" ]; then
     
     if [ "$EXIT" = "1" ]; then
         qdbusinsert
-        chown $OWNER:$OWNER $1
-        chmod $MODE $1
-        export OBJECT OWNER MODE
+        export TARGET OWNER MODE STDERR
+        chown $OWNER:$OWNER $@ 2>> $STDERR
+        check-stderr
+        chmod $MODE $@ 2>> $STDERR
+        check-stderr
         progressbar-close
-        su -c 'kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --title="Change Owner Directory ($OBJECT) To ($OWNER ($MODE))" \
-                              --passivepopup="[Finished]" 2> /dev/null' $USER
+        su -c 'kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --title="Change Owner Directory" \
+                              --passivepopup="[Finished] New directory owner: ($OWNER) with mode bits: ($MODE)." 2> /dev/null' $USER
+        rm -f $STDERR
+        unset TARGET OWNER MODE STDERR
         kill -9 $(pidof knotify4)
-        unset OBJECT OWNER MODE
         exit 0
     fi
     
     if [ "$EXIT" = "0" ]; then
         qdbusinsert
-        chown -R $OWNER:$OWNER $1
-        chmod -R $MODE $1
-        export OBJECT OWNER MODE
+        export TARGET OWNER MODE STDERR
+        chown -R $OWNER:$OWNER $@ 2>> $STDERR
+        check-stderr
+        chmod -R $MODE $@ 2>> $STDERR
+        check-stderr
         progressbar-close
-        su -c 'kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --title="Change Owner Directory ($OBJECT) To ($OWNER ($MODE)) Recursively" \
-                              --passivepopup="[Finished]" 2> /dev/null' $USER
+        su -c 'kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --title="Change Owner Directory" \
+                              --passivepopup="[Finished] New directory owner: ($OWNER) with mode bits: ($MODE) recursively." 2> /dev/null' $USER
+        rm -f $STDERR
+        unset TARGET OWNER MODE STDERR
         kill -9 $(pidof knotify4)
-        unset OBJECT OWNER MODE
         exit 0
     fi
 fi
@@ -100,12 +118,15 @@ fi
 
 progressbar-start
 qdbusinsert
-chown $OWNER:$OWNER $1
-chmod $MODE2 $1
-export OBJECT OWNER MODE2
+export TARGET OWNER MODE2 STDERR
+chown $OWNER:$OWNER $@ 2>> $STDERR
+check-stderr
+chmod $MODE2 $@ 2>> $STDERR
+check-stderr
 progressbar-close
-su -c 'kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --title="Change Owner File ($OBJECT) To ($OWNER ($MODE2))" \
-                      --passivepopup="[Finished]" 2> /dev/null' $USER
+su -c 'kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-owner.png --title="Change Owner File" \
+                      --passivepopup="[Finished] New file owner: ($OWNER) with mode bits: ($MODE2)." 2> /dev/null' $USER
+rm -f $STDERR
+unset TARGET OWNER MODE2 STDERR
 kill -9 $(pidof knotify4)
-unset OBJECT OWNER MODE2
 exit 0

@@ -12,7 +12,7 @@ X-KDE-Submenu[uk]=Інструменти Мережі
 X-KDE-Submenu[x-test]=xxNetwork Toolsxx
 
 [Desktop Action ConnectSentry]
-Exec=/usr/share/applications/Network_Tools-connect-sentry.sh
+Exec=/usr/share/applications/Network_Tools-connect-sentry.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
 Name=Connect Sentry
 Name[es]=Centinela de Conexiones
@@ -21,7 +21,7 @@ Name[uk]=Вартовий портів
 Name[x-test]=xxConnect Sentryxx
 
 [Desktop Action HTTP-Publisher]
-Exec=kdesu --caption="HTTP Publisher" -d -c "/usr/share/applications/HTTP_Publisher.sh"
+Exec=kdesu --caption="HTTP Publisher" -d -c "/usr/share/applications/HTTP_Publisher.sh" %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png
 Name=HTTP Publisher
 Name[es]=Publicador HTTP
@@ -30,7 +30,7 @@ Name[uk]=Надати доступ через HTTP
 Name[x-test]=xxHTTP Publisherxx
 
 [Desktop Action ListeningSockets]
-Exec=kdesu --caption="Listening Sockets" -d /usr/share/applications/Network_Tools-listening-sockets.sh
+Exec=kdesu --caption="Listening Sockets" -d /usr/share/applications/Network_Tools-listening-sockets.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
 Name=Listening Sockets
 Name[es]=Puertos Escuchando

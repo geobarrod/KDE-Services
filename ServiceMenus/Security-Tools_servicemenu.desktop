@@ -13,7 +13,7 @@ X-KDE-Submenu[uk]=Інструменти безпеки
 X-KDE-Submenu[x-test]=xxSecurity Toolsxx
 
 [Desktop Action Decrypt]
-Exec=gpg --yes --passphrase "$(kdialog --caption="File Decryption" --password="Enter passphrase for decrypt")" %u && if [ "$?" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-decrypt.png --title="File Decryption" --passivepopup="[Finished]"; fi
+Exec=gpg --yes --passphrase "$(kdialog --caption="File Decryption" --password="Enter passphrase for decrypt")" %f && if [ "$?" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-decrypt.png --title="File Decryption" --passivepopup="[Finished]"; fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-decrypt.png
 Name=Decrypt
 Name[es]=Desencriptar
@@ -22,7 +22,7 @@ Name[uk]=Розшифрувати
 Name[x-test]=xxDecryptxx
 
 [Desktop Action Encrypt]
-Exec=gpg --yes -c --passphrase "$(kdialog --caption="File Encryption" --password="Enter passphrase for encrypt")" %u && if [ "$?" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-encrypt.png --title="File Encryption" --passivepopup="[Finished]"; fi
+Exec=gpg --yes -c --passphrase "$(kdialog --caption="File Encryption" --password="Enter passphrase for encrypt")" %f && if [ "$?" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-encrypt.png --title="File Encryption" --passivepopup="[Finished]"; fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-encrypt.png
 Name=Encrypt
 Name[es]=Encriptar
@@ -31,7 +31,7 @@ Name[uk]=Зашифрувати
 Name[x-test]=xxEncryptxx
 
 [Desktop Action sendto-mailx]
-Exec=zip -9reP $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --password="Enter password for encrypt:") %u.zip %u; mailx -s "$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --inputbox="Message Subject:")" -a $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --textinputbox="Message Body:" > /tmp/mailbody) /tmp/mailbody -a %u.zip $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --inputbox="Mail To:\t(For send to multiples mailbox enter comma separated list of address)") <.; rm -f %u.zip /tmp/mailbody; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --title="Secure Send To Mailx" --passivepopup="[Finished]"
+Exec=zip -9reP $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --password="Enter password for encrypt:") %f.zip %f; mailx -s "$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --inputbox="Message Subject:")" -a $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --textinputbox="Message Body:" > /tmp/mailbody) /tmp/mailbody -a %f.zip $(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --caption="Secure Send To Mailx" --inputbox="Mail To:\t(For send to multiples mailbox enter comma separated list of address)") <.; rm -f %f.zip /tmp/mailbody; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png --title="Secure Send To Mailx" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png
 Name=Secure Send To Mailx
 Name[es]=Envío seguro a Mailx
@@ -40,7 +40,7 @@ Name[uk]=Безпечно надіслати через Mailx
 Name[x-test]=xxSecure Send To Mailxxx
 
 [Desktop Action shredder]
-Exec=/usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh %u; echo '%u' >> .shred; for i in $(cat .shred);do shred -f -n 5 --random-source=/dev/urandom -z "$i";done; for i in $(cat .shred);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g').shredder;done; rm -f *.shredder; shred -f -n 5 --random-source=/dev/urandom -z -u .shred
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-shredder.png --caption="Paranoid Shredder" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Shredding:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; shred -f -n 5 --random-source=/dev/urandom -u -z "$file"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-shredder.png --title="Paranoid Shredder" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-shredder.png
 Name=Paranoid Shredder
 Name[es]=Trituradora Paranoica

@@ -12,7 +12,7 @@ X-KDE-Submenu[uk]=Інструменти копіювання
 X-KDE-Submenu[x-test]=xxBackup Toolsxx
 
 [Desktop Action Backup-Restore-Standards]
-Exec=/usr/share/applications/Backup_Tools-standard.sh
+Exec=/usr/share/applications/Backup_Tools-standard.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png
 Name=Standards
 Name[es]=Estándares

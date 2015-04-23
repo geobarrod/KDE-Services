@@ -13,7 +13,7 @@ X-KDE-Submenu[uk]=Інструменти SSH
 X-KDE-Submenu[x-test]=xxSSH Toolsxx
 
 [Desktop Action SCP]
-Exec=xterm -T "Send To Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %u
+Exec=xterm -T "Send To Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %f
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png
 Name=Send To Remote Server
 Name[es]=Enviar a Servidor Remoto
@@ -22,7 +22,7 @@ Name[uk]=Надіслати до віддаленого серверу
 Name[x-test]=xxSend To Remote Serverxx
 
 [Desktop Action SSH]
-Exec=/usr/share/applications/SSH_Tools-connect.sh
+Exec=/usr/share/applications/SSH_Tools-connect.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
 Name=Connect To Remote Server
 Name[es]=Conectar a Servidor Remoto
@@ -31,7 +31,7 @@ Name[uk]=Підключитися до віддаленого серверу
 Name[x-test]=xxConnect To Remote Serverxx
 
 [Desktop Action SSH-copy-id]
-Exec=/usr/share/applications/SSH_Tools-copy-id.sh
+Exec=/usr/share/applications/SSH_Tools-copy-id.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png
 Name=Install Public Key
 Name[es]=Instalar Llave Publica
@@ -40,7 +40,7 @@ Name[uk]=Встановити відкритий ключ
 Name[x-test]=xxInstall Public Keyxx
 
 [Desktop Action SSH-keygen]
-Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh
+Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png
 Name=Public Key Generation
 Name[es]=Generar Llave Publica
@@ -49,7 +49,7 @@ Name[uk]=Генерувати відкритий ключ
 Name[x-test]=xxPublic Key Generationxx
 
 [Desktop Action SSHfs]
-Exec=/usr/share/applications/SSH_Tools-sshfs.sh
+Exec=/usr/share/applications/SSH_Tools-sshfs.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
 Name=Mountpoint To Remote Directory
 Name[es]=Montar Directorio Remoto
@@ -58,7 +58,7 @@ Name[uk]=Змонтувати віддалену теку
 Name[x-test]=xxMountpoint To Remote Directoryxx
 
 [Desktop Action ViewMachine]
-Exec=/usr/share/applications/SSH_Tools-register-machine.sh
+Exec=/usr/share/applications/SSH_Tools-register-machine.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
 Name=Registered Servers
 Name[es]=Servidores Registrados

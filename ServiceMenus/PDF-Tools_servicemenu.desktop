@@ -14,7 +14,7 @@ X-KDE-Submenu[x-test]=xxPDF Toolsxx
 TryExec=pdftk
 
 [Desktop Action DRM-Encrypt]
-Exec=OPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner password (DRM)"); UPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF user password (Encrypt). Warning: Can't be same to owner password"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying DRM-Encrypt:  $(basename %u)"; pdftk %u output "`echo %u | perl -pe 's/\\.[^.]+$//'`_DRM-Enc128b.pdf" owner_pw $OPASSWORD user_pw $UPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply DRM + Encrypt" --passivepopup="[Finished]"
+Exec=OPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner password (DRM)"); UPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF user password (Encrypt). Warning: Can't be same to owner password"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying DRM-Encrypt:  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_DRM-Enc128b.pdf" owner_pw $OPASSWORD user_pw $UPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply DRM + Encrypt" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Apply DRM + Encrypt
 Name[es]=Aplicar DRM + Encriptación
@@ -23,7 +23,7 @@ Name[uk]=Задіяти DRM + Шифрування
 Name[x-test]=xxApply DRM + Encryptxx
 
 [Desktop Action ExtractAllPages]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting All Pages:  $(basename %u)"; pdftk %u burst output "`echo %u | perl -pe 's/\\.[^.]+$//'`_%05d.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all pages" --passivepopup="[Finished]"
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting All Pages:  $(basename %f)"; pdftk %f burst output "`echo %f | perl -pe 's/\\.[^.]+$//'`_%05d.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all pages" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Extract All Pages
 Name[es]=Extraer Todas Las Páginas
@@ -32,7 +32,7 @@ Name[uk]=Вилучити усі сторінки
 Name[x-test]=xxExtract All Pagesxx
 
 [Desktop Action ExtractPages]
-Exec=PAGES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --inputbox="Enter pages number for extract (single: 1 7 12 | range: 3-12 | multi-range: 1-3 6-8 10-end)"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting Select Pages:  $(basename %u)"; pdftk %u cat $PAGES output "`echo %u | perl -pe 's/\\.[^.]+$//'`_extract-pages.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract select pages" --passivepopup="[Finished]"
+Exec=PAGES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --inputbox="Enter pages number for extract (single: 1 7 12 | range: 3-12 | multi-range: 1-3 6-8 10-end)"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting Select Pages:  $(basename %f)"; pdftk %f cat $PAGES output "`echo %f | perl -pe 's/\\.[^.]+$//'`_extract-pages.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract select pages" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Extract Select Pages
 Name[es]=Extraer Páginas Seleccionadas
@@ -41,7 +41,7 @@ Name[uk]=Вилучити обрані сторінки
 Name[x-test]=xxExtract Select Pagesxx
 
 [Desktop Action PDFfix]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Fixing:  $(basename %u)"; pdftk %u output "`echo %u | perl -pe 's/\\.[^.]+$//'`_fixed.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Fixer" --passivepopup="[Finished]"
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Fixing:  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_fixed.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Fixer" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Fixer (if possible)
 Name[es]=Reparar (si es posible)
@@ -50,7 +50,7 @@ Name[uk]=Виправити (якщо можливо)
 Name[x-test]=xxFixer (if possible)xx
 
 [Desktop Action PDFownerPassword]
-Exec=OPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner password (DRM)"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying Owner Password (DRM):  $(basename %u)"; pdftk %u output "`echo %u | perl -pe 's/\\.[^.]+$//'`_DRM.pdf" owner_pw $OPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply Owner Password (DRM)" --passivepopup="[Finished]"
+Exec=OPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner password (DRM)"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying Owner Password (DRM):  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_DRM.pdf" owner_pw $OPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply Owner Password (DRM)" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Apply Owner Password (DRM)
 Name[es]=Aplicar Contraseña De Propiedad (DRM)
@@ -59,7 +59,7 @@ Name[uk]=Задіяти пароль власника (DRM)
 Name[x-test]=xxApply Owner Password (DRM)xx
 
 [Desktop Action PDFunSecure]
-Exec=DPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner (DRM) password for decrypt"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Decrypting:  $(basename %u)"; pdftk %u input_pw $DPASSWORD output "`echo %u | perl -pe 's/\\.[^.]+$//'`_decrypted.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Decrypt" --passivepopup="[Finished]"
+Exec=DPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF owner (DRM) password for decrypt"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Decrypting:  $(basename %f)"; pdftk %f input_pw $DPASSWORD output "`echo %f | perl -pe 's/\\.[^.]+$//'`_decrypted.pdf"; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Decrypt" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Decrypt (DRM)
 Name[es]=Desencriptar (DRM)
@@ -68,7 +68,7 @@ Name[uk]=Розшифрувати (DRM)
 Name[x-test]=xxDecrypt (DRM)xx
 
 [Desktop Action PDFuserPassword]
-Exec=UPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF user password (Encrypt)"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying User Password (Encrypt):  $(basename %u)"; pdftk %u output "`echo %u | perl -pe 's/\\.[^.]+$//'`_Enc128b.pdf" user_pw $UPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply User Password (Encrypt)" --passivepopup="[Finished]"
+Exec=UPASSWORD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --password="Enter PDF user password (Encrypt)"); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying User Password (Encrypt):  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_Enc128b.pdf" user_pw $UPASSWORD; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Apply User Password (Encrypt)" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Apply User Password (Encrypt)
 Name[es]=Aplicar Contraseña De Usuario (Encriptar)

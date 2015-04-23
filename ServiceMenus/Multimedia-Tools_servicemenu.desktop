@@ -12,7 +12,7 @@ X-KDE-Submenu[uk]=Інструменти Мультимедіа
 X-KDE-Submenu[x-test]=xxMultimedia Toolsxx
 
 [Desktop Action DVD-Assembler]
-Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh
+Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
 Name=D.V.D. Assembler
 Name[es]=Ensamblador de D.V.D.
@@ -30,7 +30,7 @@ Name[uk]=Зібрати ISO-образ звідси
 Name[x-test]=xxBuild ISO Image From Herexx
 
 [Desktop Action DiskCloner]
-Exec=/usr/share/applications/DiskCloner.sh
+Exec=/usr/share/applications/DiskCloner.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-clone.png
 Name=DiskCloner
 Name[es]=DiskCloner (Clonador de Disco)
@@ -39,7 +39,7 @@ Name[uk]=DiskCloner (Щоб скопіювати диск)
 Name[x-test]=xxDiskClonerxx
 
 [Desktop Action convert-video]
-Exec=/usr/share/applications/ffmpeg_multifile-convert-video.sh
+Exec=/usr/share/applications/ffmpeg_multifile-convert-video.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name=Convert Video Files
 Name[es]=Convertir Archivos de Video
@@ -48,7 +48,7 @@ Name[uk]=Конвертувати файли відео
 Name[x-test]=xxConvert video filesxx
 
 [Desktop Action extract-audio]
-Exec=/usr/share/applications/ffmpeg_multifile-extract-audio.sh
+Exec=/usr/share/applications/ffmpeg_multifile-extract-audio.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
 Name=[Extract|Convert] Audio Track
 Name[es]=[Extraer|Convertir] Pista de Audio
@@ -57,7 +57,7 @@ Name[uk]=[Видобути|Конвертувати] аудіо трек
 Name[x-test]=xx[Extract|Convert] Audio Trackxx
 
 [Desktop Action record-my-desktop]
-Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh
+Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
 Name=Record My Desktop
 Name[es]=Record My Desktop (grabar pantalla de video)
@@ -66,7 +66,7 @@ Name[uk]=Record My Desktop (відеозахоплення екрану)
 Name[x-test]=xxRecord My Desktopxx
 
 [Desktop Action vlc-openfolder]
-Exec=vlc -f %f 2> /dev/null
+Exec=vlc -f %F 2> /dev/null
 Icon=vlc
 Name=Play Video From Here
 Name[es]=Reproducir Video Aquí

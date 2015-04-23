@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2015.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -12,7 +12,7 @@ ELAPSED_TIME=""
 DBUSREF=""
 COUNT=""
 COUNTFILES=""
-FILE="$1"
+FILE="$@"
 
 ###################################
 ############ Functions ############
@@ -21,7 +21,7 @@ FILE="$1"
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
         qdbus $DBUSREF close
-        exit 0
+        exit 1
     fi
 }
 
@@ -30,7 +30,7 @@ if-avisplit-cancel() {
         qdbus $DBUSREF close
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="AVI Split (To Size)" \
                        --passivepopup="[Canceled]   Check the path and filename not contain spaces. Check video format errors. Try again"
-        exit 0
+        exit 1
     fi
 }
 
@@ -38,7 +38,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILE|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="AVI Split (To Size)" --progressbar " " /ProgressDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="AVI Split (To Size)" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -48,29 +48,29 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "AVI Split (To Size):  ${FILE##*/}"
+    qdbus $DBUSREF setLabelText "AVI Split (To Size):  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (To Size)" \
-                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}s"
+                       --passivepopup="[Finished]	${file##*/}   Elapsed Time: ${ELAPSED_TIME}s"
         
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (To Size)" \
-                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}m"
+                       --passivepopup="[Finished]	${file##*/}   Elapsed Time: ${ELAPSED_TIME}m"
         
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (To Size)" \
-                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}h"
+                       --passivepopup="[Finished]	${file##*/}   Elapsed Time: ${ELAPSED_TIME}h"
         
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
         kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --title="AVI Split (To Size)" \
-                       --passivepopup="[Finished]	${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}d"
+                       --passivepopup="[Finished]	${file##*/}   Elapsed Time: ${ELAPSED_TIME}d"
     fi
 }
 
@@ -80,18 +80,18 @@ elapsedtime() {
 
 SIZE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="AVI Split (To Size)" --inputbox="Enter size in MBytes" 2> /dev/null)
 if-cancel-exit
-
-BEGIN_TIME=$(date +%s)
 progressbar-start
-COUNT=$((++COUNT))
-qdbusinsert
 
-avisplit -s $SIZE -i "$1" -o "${1%.*}"
-if-avisplit-cancel
-
-FINAL_TIME=$(date +%s)
-ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-elapsedtime
+for file in $FILE; do
+	COUNT=$((++COUNT))
+	qdbusinsert
+	BEGIN_TIME=$(date +%s)
+	avisplit -s $SIZE -i "$file" -o "${file%.*}"
+	if-avisplit-cancel
+	FINAL_TIME=$(date +%s)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+	elapsedtime
+done
 
 progressbar-close
 echo "Finish Splitting AVI" > /tmp/speak

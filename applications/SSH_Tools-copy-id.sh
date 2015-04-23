@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.									#
+# For KDE-Services. 2011-2015.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -32,5 +32,5 @@ sort -u ~/.kde-services/machines > /tmp/machines
 mv /tmp/machines ~/.kde-services/machines
 xterm -si -s -sl 1000000 -sb -T "SSH Tools - Install Public Key on $SERVER" -bg black -fg white -e "ssh-copy-id -i $LOGIN@$SERVER"
 if-cancel-exit
-kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png --title="SSH Tools - Install Public Key on $SERVER" --passivepopup="[Finished]"
+kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png --title="SSH Tools" --passivepopup="[Finished]   Install Public Key on $SERVER"
 exit 0
