@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Dropbox-Tools;
+Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Name=Enable autostart Dropbox service
+Name[es]=Habilitar autoarranque del servicio Dropbox
+Name[ru]=Автозапуск сервиса Dropbox
+Name[uk]=Автозапуск сервіса Dropbox
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

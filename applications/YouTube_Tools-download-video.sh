@@ -177,7 +177,7 @@ if [ "$QUALITY" = "1280x720" ];then
             SIZE="720p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 22 --max-quality 22 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 22 -c -i -R infinite \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
@@ -190,7 +190,7 @@ if [ "$QUALITY" = "1280x720" ];then
             SIZE="360p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 -c -i -R infinite \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?
@@ -212,7 +212,7 @@ elif [ "$QUALITY" = "640x360" ];then
             SIZE="360p"
             download-qdbusinsert
             BEGIN_TIME=$(date +%s)
-            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 --max-quality 18 -c -i -R 1000000 \
+            PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 18 -c -i -R infinite \
                     -r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
             $PROGRAM
             EXIT=$?

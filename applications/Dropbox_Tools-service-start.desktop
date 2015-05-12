@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Dropbox-Tools;
+Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-on.png
+Name=Start Dropbox service
+Name[es]=Iniciar servicio Dropbox
+Name[ru]=Запустить сервис Dropbox
+Name[uk]=Запустити сервіс Dropbox
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

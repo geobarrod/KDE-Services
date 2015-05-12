@@ -93,5 +93,12 @@
 					<Category>Android-Tools</Category>
 				</Include>
 			</Menu>
+			<Menu>
+				<Name>Dropbox Tools</Name>
+				<Directory>KDE-Services_Dropbox-Tools.directory</Directory>
+				<Include>
+					<Category>Dropbox-Tools</Category>
+				</Include>
+			</Menu>
 	</Menu>
 </Menu>

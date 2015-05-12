@@ -21,8 +21,6 @@ install:
 	mkdir -p $(PREFIXdeskdir)
 	mkdir -p $(PREFIXdoc)
 	
-	rm -f $(PREFIXapp)/Change_file-dir_timestamp.sh
-
 	cp ServiceMenus/* $(PREFIXmenu)
 	cp applications/* $(PREFIXapp)
 	cp 512x512/apps/* $(PREFIX512apps)
@@ -97,6 +95,11 @@ uninstall:
 		$(PREFIXapp)/Dropbox_Tools-frontend.pyc \
 		$(PREFIXapp)/Dropbox_Tools-frontend.pyo \
 		$(PREFIXapp)/Dropbox_Tools-main.sh \
+		$(PREFIXapp)/Dropbox_Tools-service-autostart.desktop \
+		$(PREFIXapp)/Dropbox_Tools-service-install.desktop \
+		$(PREFIXapp)/Dropbox_Tools-service-start.desktop \
+		$(PREFIXapp)/Dropbox_Tools-service-stop.desktop \
+		$(PREFIXapp)/Dropbox_Tools-service-update.desktop \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.desktop \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.sh \
 		$(PREFIXapp)/ffmpeg_multifile-convert-video.sh \
@@ -245,6 +248,7 @@ uninstall:
 		$(PREFIXdeskdir)/KDE-Services_Android-Tools.directory \
 		$(PREFIXdeskdir)/KDE-Services_Backup-Tools.directory \
 		$(PREFIXdeskdir)/KDE-Services_Dolphin-Tools.directory \
+		$(PREFIXdeskdir)/KDE-Services_Dropbox-Tools.directory \
 		$(PREFIXdeskdir)/KDE-Services_Graphic-Tools.directory \
 		$(PREFIXdeskdir)/KDE-Services_Midnight-Tools.directory \
 		$(PREFIXdeskdir)/KDE-Services_Multimedia-Tools.directory \

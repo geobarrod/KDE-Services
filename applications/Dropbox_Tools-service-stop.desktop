@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Dropbox-Tools;
+Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-off.png
+Name=Stop Dropbox service
+Name[es]=Detener servicio Dropbox
+Name[ru]=Остановить сервис Dropbox
+Name[uk]=Зупинити сервіс Dropbox
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

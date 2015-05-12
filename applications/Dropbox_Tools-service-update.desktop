@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Dropbox-Tools;
+Exec=/usr/share/applications/Dropbox_Tools-main.sh update_service
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Name=Update Dropbox service
+Name[es]=Actualizar servicio Dropbox
+Name[ru]=Обновить сервис Dropbox
+Name[uk]=Оновити сервіс Dropbox
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false
