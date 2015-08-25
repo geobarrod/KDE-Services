@@ -163,12 +163,12 @@ if-cancel-exit
 
 MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Resolution" mobile "Mobile Phones (3GP)" \
      4K "Resolution Ultra-HD (4K)" 2K "Resolution DCI (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 360 "Resolution NHD (360p)" 240 "Resolution QVGA (240p)" \
-     same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV - WebM)" --geometry 250x240 2> /dev/null)
+     same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV - WebM)" --geometry 245x330 2> /dev/null)
 if-cancel-exit
 ############################### Mobile ###############################
 if [ "$MODE" = "mobile" ]; then
     RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
-				352x288 "CIF (352x288)" --geometry 100x195 2> /dev/null)
+				352x288 "CIF (352x288)" --geometry 100x165 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -190,7 +190,7 @@ fi
 ############################### 4K ###############################
 if [ "$MODE" = "4K" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -262,7 +262,7 @@ fi
 ############################### 2K ###############################
 if [ "$MODE" = "2K" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -334,7 +334,7 @@ fi
 ############################### 1080p ###############################
 if [ "$MODE" = "1080" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -406,7 +406,7 @@ fi
 ############################### 720p ###############################
 if [ "$MODE" = "720" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -478,7 +478,7 @@ fi
 ############################### 480p ###############################
 if [ "$MODE" = "480" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -550,7 +550,7 @@ fi
 ############################### 360p ###############################
 if [ "$MODE" = "360" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -622,7 +622,7 @@ fi
 ############################### 240p ###############################
 if [ "$MODE" = "240" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x150 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -694,7 +694,7 @@ fi
 ############################### same ###############################
 if [ "$MODE" = "same" ]; then
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" mpg2 "MPEG-2" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x180 2> /dev/null)
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x225 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -791,7 +791,7 @@ fi
 if [ "$MODE" = "standards" ]; then
     STD=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" \
         --menu="Choose Standard Video Resolution" vcd "VCD" vcd-700 "VCD (700 MB)" svcd "SVCD" \
-        svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x185 2> /dev/null)
+        svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x225 2> /dev/null)
     if-cancel-exit
     
     if [ "$STD" = "vcd" ] || [ "$STD" = "vcd-700" ];then
@@ -934,7 +934,7 @@ fi
 if [ "$MODE" = "web" ]; then
     RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
 				352x288 "CIF (352x288)" 640x360 "NHD (640x360)" 852x480 "ED (852x480)" 1280x720 "HD (1280x720)" 1920x1080 "Full-HD (1920x1080)" 2048x1080 "Ultra-HD 2K (2048x1080)" 4096x2160 "Ultra-HD 4K (4096x2160)" \
-				--geometry 200x225 2> /dev/null)
+				--geometry 220x290 2> /dev/null)
     if-cancel-exit
     CODEC=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png --caption="Convert Video From Here" --menu="Choose Video Codec" flv "FLV" webm "WebM" --geometry 100x100 2> /dev/null)
     if-cancel-exit

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2015.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -145,11 +145,14 @@ if [ "$MODE" = "Backup" ]; then
         $HOME/.kde \
         $HOME/.kde-services \
         $HOME/.purple \
+        $HOME/.ssh \
         $HOME/.thunderbird \
+        $HOME/.wine \
         $HOME/.config/xmoto
     "
-    TARGETBACKUP=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Backup Standard" --separate-output --radiolist="Select For Backup" \
-        /etc "Editable Text Configuration (/etc)" off \
+    TARGETBACKUP=$(kdialog --geometry 410x350+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')/2-(410/2)))+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')/2-(350/2))) \
+		--icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Backup Standard" --separate-output --radiolist="Select For Backup" \
+        system "Editable Text Configuration (/etc) and Root Home (/root)" off \
         All "All Below List" off \
         $HOME/.filezilla FileZilla off \
         $HOME/.gnupg GnuPG off \
@@ -158,19 +161,21 @@ if [ "$MODE" = "Backup" ]; then
         $HOME/.kde "KDE User Configuration" off \
         $HOME/.kde-services KDE-Services off \
         $HOME/.purple Pidgin off \
+        $HOME/.ssh SSH off \
         $HOME/.thunderbird Thunderbird off \
+        $HOME/.wine Wine off \
         $HOME/.config/xmoto X-Moto off \
         2> /dev/null)
     EXIT=$?
     if-cancel-exit
     
-    if [ "$TARGETBACKUP" = "/etc" ]; then
+    if [ "$TARGETBACKUP" = "system" ]; then
         beginning-backup
         for i in $TARGETBACKUP; do
             COUNT=$((++COUNT))
             mkdir $BACKUP/${i##*/} > /dev/null 2>&1
             backup-qdbusinsert
-            kdesu --caption="Backup Tools" --noignorebutton -d tar -jcPpf $BACKUP/${i##*/}/${i##*/}-backup-$(date +%d-%m-%Y_%H-%M).tar.bz2 $i
+            kdesu --noignorebutton -d -c "tar -jcPpf $BACKUP/${i##*/}/${i##*/}-backup-$(date +%d-%m-%Y_%H-%M).tar.bz2 /etc/ /root/"
 			EXIT=$?
 			if-cancel-exit
         done
@@ -204,8 +209,9 @@ else
         exit 0
     fi
     
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Restore Standard" --menu="Select For Restore" \
-         $BACKUP/etc "Editable Text Configuration (/etc)" \
+    MODE=$(kdialog --geometry 410x350+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')/2-(410/2)))+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')/2-(350/2))) \
+		--icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png --caption="Restore Standard" --menu="Select For Restore" \
+         $BACKUP/system "Editable Text Configuration (/etc) and Root Home (/root)" \
          $BACKUP/filezilla FileZilla \
          $BACKUP/firefox Firefox \
          $BACKUP/gnupg GnuPG \
@@ -213,7 +219,9 @@ else
          $BACKUP/kde "KDE User Configuration" \
          $BACKUP/kde-services KDE-Services \
          $BACKUP/purple Pidgin \
+         $BACKUP/ssh SSH \
          $BACKUP/thunderbird Thunderbird \
+         $BACKUP/wine Wine \
          $BACKUP/xmoto X-Moto \
          2> /dev/null)
     EXIT=$?
@@ -232,10 +240,10 @@ else
     EXIT=$?
     if-cancel-exit
     
-    if [ "$PWD" = "$BACKUP/etc" ]; then
+    if [ "$PWD" = "$BACKUP/system" ]; then
         beginning-restore
         restore-qdbusinsert
-        kdesu --caption="Backup Tools" --noignorebutton -d -c "rm -fr $(tar -tf $MODE 2> /dev/null|head -n1) && tar -jxPpf $MODE > /dev/null 2>&1"
+        kdesu --noignorebutton -d -c "rm -fr /etc/ /root/ && tar -jxPpf $MODE > /dev/null 2>&1"
 		EXIT=$?
 		if-cancel-exit
         finished-restore
