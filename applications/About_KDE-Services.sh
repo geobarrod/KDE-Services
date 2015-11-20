@@ -14,7 +14,7 @@ cat > /tmp/about_kde-services << EOF
 			http://sourceforge.net/projects/kde-services/
 
     Description:
-        Enables the following functionalities on the Dolphin's right click menu of KDE-4.x:
+        Enables the following functionalities on the Dolphin's right click menu of KDE-4.x/5.x:
     
         - Convert several video formats to MPEG-1, MPEG-2, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV or WebM.
         - Extract the audio track of several video formats and convert them to MP3 or FLAC.
@@ -133,6 +133,7 @@ cat > /tmp/about_kde-services << EOF
       Victor Guardiola (vguardiola) (Improved source code for "Mount ISO Image" and "Umount ISO Image"
 	services menu; fixed the problem of [dir|file]name with whitespaces).
       Vasyl V. Vercynskyj <fuckel@ukr.net> (Translations to Russian and Ukrainian languages).
+      Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
     License:
       GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)
         

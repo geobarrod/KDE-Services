@@ -2,7 +2,7 @@ KDE-Services
 
 Description:
 
-Enables the following functionalities on the Dolphin's right click menu of KDE-4.x:
+Enables the following functionalities on the Dolphin's right click menu of KDE-4.x/5.x:
 
 - Convert several video formats to MPEG-1, MPEG-2, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV or WebM.
 - Extract the audio track of several video formats and convert them to MP3 or FLAC.
@@ -111,12 +111,12 @@ Required dependencies:
 
 Install:
 
-1- $ tar -jxvf kde-services-2.0.tar.bz2
-2- $ cd kde-services-2.0
+1- $ tar -jxvf kde-services-2.1.tar.bz2
+2- $ cd kde-services-2.1
 3- $ sudo make install
 
 Uninstall:
 
-1- $ tar -jxvf kde-services-2.0.tar.bz2
-2- $ cd kde-services-2.0
+1- $ tar -jxvf kde-services-2.1.tar.bz2
+2- $ cd kde-services-2.1
 3- $ sudo make uninstall

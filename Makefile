@@ -4,6 +4,8 @@
 # KDE-Services 2011-2015. GPLv3+				#
 #################################################################
 
+PREFIXmenu5=$(RPM_BUILD_ROOT)/usr/share/kservices5/ServiceMenus
+PREFIXservicetypes5=$(RPM_BUILD_ROOT)/usr/share/kservicetypes5
 PREFIXmenu=$(RPM_BUILD_ROOT)/usr/share/kde4/services/ServiceMenus
 PREFIXapp=$(RPM_BUILD_ROOT)/usr/share/applications
 PREFIX512apps=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/512x512/apps
@@ -13,6 +15,8 @@ PREFIXdeskdir=$(RPM_BUILD_ROOT)/usr/share/desktop-directories
 PREFIXdoc=$(RPM_BUILD_ROOT)/usr/share/doc/kde-services
 
 install:
+	mkdir -p $(PREFIXmenu5)
+	mkdir -p $(PREFIXservicetypes5)
 	mkdir -p $(PREFIXmenu)
 	mkdir -p $(PREFIXapp)
 	mkdir -p $(PREFIX512apps)
@@ -21,6 +25,8 @@ install:
 	mkdir -p $(PREFIXdeskdir)
 	mkdir -p $(PREFIXdoc)
 	
+	cp ServiceMenus/* $(PREFIXmenu5)
+	cp servicetypes/* $(PREFIXservicetypes5)
 	cp ServiceMenus/* $(PREFIXmenu)
 	cp applications/* $(PREFIXapp)
 	cp 512x512/apps/* $(PREFIX512apps)
@@ -35,6 +41,41 @@ install:
 	xdg-desktop-menu forceupdate
 
 uninstall:
+	rm -f $(PREFIXmenu5)/Add-Timestamp-Prefix_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Android-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Audio-Video-Info_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/AVI-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Backup-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Change-Owner_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Change-Timestamp_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/CheckSum-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Compressed-File-Integrity-Check_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Dolphin-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Dropbox-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Graphic-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/ISO-Image-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Midnight-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/MKV-Extract-Subtitle_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Multimedia-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Multiplex-Subtitle_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Name-Whitespace-Replace_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Network-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Package-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/PDF-Tools2_servicemenu.desktop \
+		$(PREFIXmenu5)/PDF-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/SaMBa-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Search-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Security-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Send-By-Email_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Show-Status_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/SSH-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/System-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Terminal-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Text-Replace_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/YouTube-Tools_servicemenu.desktop
+
+	rm -f $(PREFIXservicetypes5)/konqpopupmenuplugin.desktop
+
 	rm -f $(PREFIXmenu)/Add-Timestamp-Prefix_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Android-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Audio-Video-Info_addtoservicemenu.desktop \
