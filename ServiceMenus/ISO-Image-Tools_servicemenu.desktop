@@ -76,7 +76,7 @@ Name[uk]=Покажіть kонтрольна сума SHA512 ISO-образу
 Name[x-test]=xxShow SHA512sum ISO Imagexx
 
 [Desktop Action MountCD-Image]
-Exec=/usr/share/applications/iso_manager-mount-image.sh %F
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount ISO Image" --passivepopup="[Error] Please install fuseiso package and try again."; exit 1; else /usr/share/applications/iso_manager-mount-image.sh %F;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
 Name=Mount ISO Image
 Name[es]=Montar Imagen ISO

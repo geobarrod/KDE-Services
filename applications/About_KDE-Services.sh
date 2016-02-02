@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013-2015.									#
+# For KDE-Services. 2013-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -10,7 +10,7 @@ VERSION=$(head -n1 /usr/share/doc/kde-services*/ChangeLog |awk '{print $10}')
 
 cat > /tmp/about_kde-services << EOF
 
-			KDE-Services, version $VERSION, (C) 2011-2015.
+			KDE-Services, version $VERSION, (C) 2011-2016.
 			http://sourceforge.net/projects/kde-services/
 
     Description:

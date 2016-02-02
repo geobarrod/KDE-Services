@@ -1,7 +1,7 @@
 #################################################################
 # Installing KDE-Services, to appropriate directories.		#
 # Author: Geovani Barzaga Rodriguez <igeo.cu@gmail.com>.	#
-# KDE-Services 2011-2015. GPLv3+				#
+# KDE-Services 2011-2016. GPLv3+				#
 #################################################################
 
 PREFIXmenu5=$(RPM_BUILD_ROOT)/usr/share/kservices5/ServiceMenus
@@ -73,8 +73,6 @@ uninstall:
 		$(PREFIXmenu5)/Terminal-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/Text-Replace_addtoservicemenu.desktop \
 		$(PREFIXmenu5)/YouTube-Tools_servicemenu.desktop
-
-	rm -f $(PREFIXservicetypes5)/konqpopupmenuplugin.desktop
 
 	rm -f $(PREFIXmenu)/Add-Timestamp-Prefix_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Android-Tools_servicemenu.desktop \

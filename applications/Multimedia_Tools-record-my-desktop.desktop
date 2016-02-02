@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=/usr/share/applications/ffmpeg_record-my-desktop.sh
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg package from RPM Fusion repositories and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
 Name=Record My Desktop
 Name[es]=Record My Desktop (grabar pantalla de video)

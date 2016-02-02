@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=/usr/share/applications/ffmpeg_multifile-extract-audio.sh
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="[Extract|Convert] Audio Tracks" --passivepopup="[Error] Please install ffmpeg package from RPM Fusion repositories and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
 Name=[Extract|Convert] Audio Tracks
 Name[es]=[Extraer|Convertir] Pista de Audio
