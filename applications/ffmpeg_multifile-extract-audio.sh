@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -46,6 +46,15 @@ if-ffmpeg-cancel() {
     fi
 }
 
+if-sox-cancel() {
+    if [ "$?" != "0" ]; then
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Extracting audio track from ${i##*/} to $FORMAT" \
+                       --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+        mv $LOG $DESTINATION/$LOGERROR
+        continue
+    fi
+}
+
 progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
@@ -60,7 +69,7 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "[Extract|Convert] Audio Track:  ${i##*/}  [$COUNT/$((COUNTFILES-1))]"
+    qdbus $DBUSREF setLabelText "Extracting audio track from:  ${i##*/}  [$COUNT/$((COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
@@ -146,10 +155,33 @@ DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png 
 if-cancel-exit
 
 FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
-       --combobox="Choose Audio Encoder" FLAC MP3 --default MP3 2> /dev/null)
+       --combobox="Choose Audio Encoder" FLAC "FLAC (432Hz)" MP3 "MP3 (432Hz)" --default "MP3 (432Hz)" 2> /dev/null)
 if-cancel-exit
     
-if [ "$FORMAT" = "MP3" ]; then
+if [ "$FORMAT" = "MP3 (432Hz)" ]; then
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
+     --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
+    if-cancel-exit
+    progressbar-start
+
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i "/tmp/${DST_FILE##*/}_$MODE.wav" > $LOG 2>&1
+        if-ffmpeg-cancel
+        sox "/tmp/${DST_FILE##*/}_$MODE.wav" "/tmp/${DST_FILE##*/}_${MODE}_432Hz.wav" pitch -31 > $LOG 2>&1
+        if-sox-cancel
+        ffmpeg -y -i "/tmp/${DST_FILE##*/}_${MODE}_432Hz.wav" -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_${MODE}_432Hz.mp3" > $LOG 2>&1
+        if-ffmpeg-cancel
+        rm -f /tmp/${DST_FILE##*/}_${MODE}*.wav
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+elif [ "$FORMAT" = "MP3" ]; then
     MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
@@ -163,6 +195,26 @@ if [ "$FORMAT" = "MP3" ]; then
         DST_FILE="${i%.*}"
         ffmpeg -y -i $i -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
         if-ffmpeg-cancel
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+elif [ "$FORMAT" = "FLAC (432Hz)" ]; then
+    progressbar-start
+
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i "/tmp/${DST_FILE##*/}.wav" > $LOG 2>&1
+        if-ffmpeg-cancel
+        sox "/tmp/${DST_FILE##*/}.wav" "/tmp/${DST_FILE##*/}_432Hz.wav" pitch -31 > $LOG 2>&1
+        if-sox-cancel
+        ffmpeg -y -i "/tmp/${DST_FILE##*/}_432Hz.wav" -c:a flac "$DESTINATION/${DST_FILE##*/}_432Hz.flac" > $LOG 2>&1
+        if-ffmpeg-cancel
+        rm -f /tmp/${DST_FILE##*/}*.wav
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime

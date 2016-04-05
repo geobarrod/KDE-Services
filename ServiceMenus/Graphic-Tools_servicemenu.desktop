@@ -7,90 +7,160 @@ X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Graphic Tools
+X-KDE-Submenu[de]=Graphische Werkzeuge
 X-KDE-Submenu[es]=Graficos - Herramientas
+X-KDE-Submenu[fr]=Graphique - Outils
+X-KDE-Submenu[it]=Grafico - Attrezzi
+X-KDE-Submenu[ja]=グラフィック道具
+X-KDE-Submenu[ko]=그래픽 도구
+X-KDE-Submenu[pt]=Gráfico - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Графики
 X-KDE-Submenu[uk]=Інструменти Графіки
+X-KDE-Submenu[zh_CN]=图标工具
 X-KDE-Submenu[x-test]=xxGraphic Toolsxx
 
 [Desktop Action Sizer]
 Exec=/usr/share/applications/The_Sizer.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=The Sizer (custom sizes)
-Name[es]=El Dimensionador (personalizar dimensiones)
+Name[de]=Der Sizer
+Name[es]=El Dimensionador
+Name[fr]=Le Sizer
+Name[it]=Il Sizer
+Name[ja]=Sizer
+Name[ko]=Sizer
+Name[pt]=O Sizer
 Name[ru]=Изменение размера (настраиваемое)
 Name[uk]=Зміна розміру (власні параметри)
+Name[zh_CN]=大小测定器
 Name[x-test]=xxThe Sizer (custom sizes)xx
 
 [Desktop Action Converter]
 Exec=/usr/share/applications/The_Converter.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png
 Name=The Converter
+Name[de]=Der Konverter
 Name[es]=El Conversor
+Name[fr]=Le Conversor
+Name[it]=Il Conversor
+Name[ja]=変換器
+Name[ko]=변환기
+Name[pt]=O Convertedor
 Name[ru]=Конвертер
 Name[uk]=Конвертер
+Name[zh_CN]=转换器
 Name[x-test]=xxThe Converterxx
 
 [Desktop Action 128x128]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 128x128" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 128 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_128p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 128x128" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=128x128 (icon)
+Name[de]=128x128 (ikone)
 Name[es]=128x128 (icono)
+Name[fr]=128x128 (icône)
+Name[it]=128x128 (icona)
+Name[ja]=128x128 (アイコン)
+Name[ko]=128x128 (아이콘)
+Name[pt]=128x128 (ícone)
 Name[ru]=128x128 (Икона)
 Name[uk]=128x128 (Ікона)
+Name[zh_CN]=128x128 (圣像)
 Name[x-test]=xx128x128 (icon)xx
 
 [Desktop Action 16x16]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 16x16" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 16 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_16p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 16x16" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=16x16 (icon)
+Name[de]=16x16 (ikone)
 Name[es]=16x16 (icono)
+Name[fr]=16x16 (icône)
+Name[it]=16x16 (icona)
+Name[ja]=16x16 (アイコン)
+Name[ko]=16x16 (아이콘)
+Name[pt]=16x16 (ícone)
 Name[ru]=16x16 (Икона)
 Name[uk]=16x16 (Ікона)
+Name[zh_CN]=16x16 (圣像)
 Name[x-test]=xx16x16 (icon)xx
 
 [Desktop Action 256x256]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 256x256" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 256 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_256p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 256x256" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=256x256 (icon)
+Name[de]=256x256 (ikone)
 Name[es]=256x256 (icono)
+Name[fr]=256x256 (icône)
+Name[it]=256x256 (icona)
+Name[ja]=256x256 (アイコン)
+Name[ko]=256x256 (아이콘)
+Name[pt]=256x256 (ícone)
 Name[ru]=256x256 (Икона)
 Name[uk]=256x256 (Ікона)
+Name[zh_CN]=256x256 (圣像)
 Name[x-test]=xx256x256 (icon)xx
 
 [Desktop Action 32x32]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 32x32" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 32 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_32p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 32x32" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=32x32 (icon)
+Name[de]=32x32 (ikone)
 Name[es]=32x32 (icono)
+Name[fr]=32x32 (icône)
+Name[it]=32x32 (icona)
+Name[ja]=32x32 (アイコン)
+Name[ko]=32x32 (아이콘)
+Name[pt]=32x32 (ícone)
 Name[ru]=32x32 (Икона)
 Name[uk]=32x32 (Ікона)
+Name[zh_CN]=32x32 (圣像)
 Name[x-test]=xx32x32 (icon)xx
 
 [Desktop Action 48x48]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 48x48" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 48 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_48p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 48x48" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=48x48 (icon)
+Name[de]=48x48 (ikone)
 Name[es]=48x48 (icono)
+Name[fr]=48x48 (icône)
+Name[it]=48x48 (icona)
+Name[ja]=48x48 (アイコン)
+Name[ko]=48x48 (아이콘)
+Name[pt]=48x48 (ícone)
 Name[ru]=48x48 (Икона)
 Name[uk]=48x48 (Ікона)
+Name[zh_CN]=48x48 (圣像)
 Name[x-test]=xx48x48 (icon)xx
 
 [Desktop Action 512x512]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 512x512" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 512 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_512p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 512x512" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=512x512 (icon)
+Name[de]=512x512 (ikone)
 Name[es]=512x512 (icono)
+Name[fr]=512x512 (icône)
+Name[it]=512x512 (icona)
+Name[ja]=512x512 (アイコン)
+Name[ko]=512x512 (아이콘)
+Name[pt]=512x512 (ícone)
 Name[ru]=512x512 (Икона)
 Name[uk]=512x512 (Ікона)
+Name[zh_CN]=512x512 (圣像)
 Name[x-test]=xx512x512 (icon)xx
 
 [Desktop Action 64x64]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 64x64" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 64 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_64p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 64x64" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=64x64 (icon)
+Name[de]=64x64 (ikone)
 Name[es]=64x64 (icono)
+Name[fr]=64x64 (icône)
+Name[it]=64x64 (icona)
+Name[ja]=64x64 (アイコン)
+Name[ko]=64x64 (아이콘)
+Name[pt]=64x64 (ícone)
 Name[ru]=64x64 (Икона)
 Name[uk]=64x64 (Ікона)
+Name[zh_CN]=64x64 (圣像)
 Name[x-test]=xx64x64 (icon)xx
 
 [Desktop Action cif]
@@ -229,25 +299,46 @@ Name[x-test]=xx1440x900 (wxga)xx
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 532x532" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 532 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_532p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 532x532" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=532x532 (passport)
+Name[de]=532x532 (pass)
 Name[es]=532x532 (pasaporte)
+Name[fr]=532x532 (passeport)
+Name[it]=532x532 (passaporto)
+Name[ja]=532x532 (パスポート)
+Name[ko]=532x532 (여권)
+Name[pt]=532x532 (passaporte)
 Name[ru]=532x532 (Паспорт)
 Name[uk]=532x532 (Паспорт)
+Name[zh_CN]=532x532 (护照)
 Name[x-test]=xx532x532 (passport)xx
 
 [Desktop Action visa]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 414x532" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 414 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_414p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 414x532" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=414x532 (visa)
+Name[de]=414x532 (visum)
 Name[es]=414x532 (visa)
+Name[fr]=414x532 (vise)
+Name[it]=414x532 (vista)
+Name[ja]=414x532 (それは承認します)
+Name[ko]=414x532 (그것은 인정한다)
+Name[pt]=414x532 (aprova)
 Name[ru]=414x532 (Виза)
 Name[uk]=414x532 (Віза)
+Name[zh_CN]=414x532 (它赞同)
 Name[x-test]=xx414x532 (visa)xx
 
 [Desktop Action carnet]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --caption="Image Resizer - 300x300" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 300 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_300p.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png --title="Image Resizer - 300x300" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=300x300 (carnet)
+Name[de]=300x300 (identifikationskarte)
 Name[es]=300x300 (carnet)
+Name[fr]=300x300 (carnet)
+Name[it]=300x300 (carnet)
+Name[ja]=300x300 (身分証明書)
+Name[ko]=300x300 (신분 증명서)
+Name[pt]=300x300 (carteira de identidade)
 Name[ru]=300x300 (Идентификационная карточка)
 Name[uk]=300x300 (Карта ідентифікації)
+Name[zh_CN]=300x300 (识别证)
 Name[x-test]=xx300x300 (carnet)xx

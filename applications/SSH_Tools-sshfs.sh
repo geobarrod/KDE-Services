@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2013.									#
+# For KDE-Services. 2011-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -41,20 +41,20 @@ if [ ! -s ~/.kde-services/machines ]; then
     echo localhost > ~/.kde-services/machines 2> /dev/null
 fi
 
-OPTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mountpoint To Remote Directory" \
+OPTION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mount point to Remote Directory" \
        --combobox="Select Option" "Mount Remote Directory" "Umount Remote Directory" --default "Mount Remote Directory" 2> /dev/null)
 if-cancel-exit
 
 if [ "$OPTION" = "Mount Remote Directory" ]; then
     SERVER=$(cat ~/.kde-services/machines)
-    LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mountpoint To Remote Directory" --combobox="Select User" $USER root \
+    LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mount point to Remote Directory" --combobox="Select User" $USER root \
           --default $USER 2> /dev/null)
     if-cancel-exit
-    HOST=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mountpoint To Remote Directory" --combobox="Select Hostname or IP Address" $SERVER  \
+    HOST=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mount point to Remote Directory" --combobox="Select Hostname or IP Address" $SERVER  \
            --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
-        HOST=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mountpoint To Remote Directory" \
+        HOST=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mount point to Remote Directory" \
                --inputbox="Enter Hostname or IP Address" localhost.localdomain  2> /dev/null)
         if-cancel-exit
         connect
@@ -66,15 +66,15 @@ elif [ "$OPTION" = "Umount Remote Directory" ]; then
     MOUNTPOINT=$(mount |grep fuse.sshfs|awk -F " " '{print $3}')
     
     if [ "$MOUNTPOINT" = "" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mountpoint To Remote Directory" \
-                       --sorry="No Mountpoint: First Mount Remote Directory" 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mount point to Remote Directory" \
+                       --sorry="No Mount point: First Mount Remote Directory" 2> /dev/null
         exit 1
     fi
     
-    HOST=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mountpoint To Remote Directory" \
-           --combobox="Select Mountpoint" $MOUNTPOINT  \
+    HOST=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --caption="SSH Tools - Mount point to Remote Directory" \
+           --combobox="Select Mount point" $MOUNTPOINT  \
            --default $(echo $(mount |grep fuse.sshfs|awk -F " " '{print $3}')|xargs -n1 2> /dev/null|head -n1) 2> /dev/null)
     if-cancel-exit
     fusermount -zu $HOST && rm -rf $HOST
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --title="SSH Tools - Mountpoint To Remote Directory" --passivepopup="[Finished]" 2> /dev/null
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png --title="SSH Tools - Mount point to Remote Directory" --passivepopup="[Finished]" 2> /dev/null
 fi

@@ -1,11 +1,18 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=kdesu --caption="Xorg Configure" --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-xorg.png --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png
 Name=Xorg Configure
+Name[de]=Um Xorg zu Konfigurieren
 Name[es]=Configurar Xorg
+Name[fr]=Configurer Xorg
+Name[it]=Configurare Xorg
+Name[ja]=Xorg を配置するために
+Name[ko]=Xorg 를 형성한다
+Name[pt]=Configurar Xorg
 Name[ru]=Конфигурация Xorg
 Name[uk]=Конфігурація Xorg
+Name[zh_CN]=配置 Xorg
 StartupNotify=true
 Terminal=false
 Type=Application

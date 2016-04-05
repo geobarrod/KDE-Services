@@ -7,52 +7,94 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=CheckSum Tools
+X-KDE-Submenu[de]=CheckSum - Werkzeuge
 X-KDE-Submenu[es]=CheckSum - Herramientas
+X-KDE-Submenu[fr]=CheckSum - Outils
+X-KDE-Submenu[it]=CheckSum - Attrezzi
+X-KDE-Submenu[ja]=検査合計 道具
+X-KDE-Submenu[ko]=체크섬 도구
+X-KDE-Submenu[pt]=CheckSum - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Контрольных Сумм
 X-KDE-Submenu[uk]=Інструменти Контрольних Сум
+X-KDE-Submenu[zh_CN]=核对和 工具
 X-KDE-Submenu[x-test]=xxCheckSum Toolsxx
 
 [Desktop Action CheckSum]
 Exec=/usr/share/applications/CheckSum_Tools-verify-checksum.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name=Verify CheckSum
+Name[de]=Um CheckSum zu Verifizieren
 Name[es]=Verificar CheckSum
+Name[fr]=Vérifier CheckSum
+Name[it]=Verificare CheckSum
+Name[ja]=検査合計 を確認するために
+Name[ko]=체크섬을 증명한다
+Name[pt]=Verificar CheckSum
 Name[ru]=Проверить контрольные суммы
 Name[uk]=Перевірити контрольні суми
+Name[zh_CN]=查证核对和
 Name[x-test]=xxVerify CheckSumxx
 
 [Desktop Action MD5-Sum]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum MD5" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; md5sum "$file" > $(ls $file).md5; sed -i "s; ${file%/*}/;*;" $(ls $file).md5; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum MD5" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
-Name=MD5 (Strong)
-Name[es]=MD5 (Fuerte)
-Name[ru]=MD5 (Стойкий)
-Name[ua]=MD5 (Стійкий)
-Name[x-test]=xxMD5 (Strong)xx
+Name=MD5 (strong)
+Name[de]=MD5 (stark)
+Name[es]=MD5 (fuerte)
+Name[fr]=MD5 (fort)
+Name[it]=MD5 (forte)
+Name[ja]=MD5 (強いです)
+Name[ko]=MD5 (강한)
+Name[pt]=MD5 (forte)
+Name[ru]=MD5 (cтойкий)
+Name[uk]=MD5 (cтійкий)
+Name[zh_CN]=MD5 (强壮的)
+Name[x-test]=xxMD5 (strong)xx
 
 [Desktop Action SHA1-Sum]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum SHA1" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha1sum "$file" > $(ls $file).sha1; sed -i "s; ${file%/*}/;*;" $(ls $file).sha1; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum SHA1" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
 Name=SHA1 (Good Strong)
-Name[es]=SHA1 (Bien Fuerte)
-Name[ru]=SHA1 (Хорошая Стойкость)
-Name[ua]=SHA1 (Добра Стійкість)
-Name[x-test]=xxSHA1 (Good Strong)xx
+Name[de]=SHA1 (sehr stark)
+Name[es]=SHA1 (bien fuerte)
+Name[fr]=SHA1 (bien fort)
+Name[it]=SHA1 (ben forte)
+Name[ja]=SHA1 (非常に強いです)
+Name[ko]=SHA1 (매우 강한)
+Name[pt]=SHA1 (muito forte)
+Name[ru]=SHA1 (xорошая cтойкость)
+Name[uk]=SHA1 (добра стійкість)
+Name[zh_CN]=SHA1 (非常强壮的)
+Name[x-test]=xxSHA1 (good strong)xx
 
 [Desktop Action SHA256-Sum]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum SHA256" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha256sum "$file" > $(ls $file).sha256; sed -i "s; ${file%/*}/;*;" $(ls $file).sha256; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum SHA256" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
-Name=SHA256 (Very Strong)
-Name[es]=SHA256 (Muy Fuerte)
-Name[ru]=SHA256 (Очень Стойкий)
-Name[ua]=SHA256 (Дуже Стійкий)
-Name[x-test]=xxSHA256 (Very Strong)xx
+Name=SHA256 (very strong)
+Name[de]=SHA256 (sehr stark)
+Name[es]=SHA256 (muy fuerte)
+Name[fr]=SHA256 (très fort)
+Name[it]=SHA256 (molto forte)
+Name[ja]=SHA256 (非常に強いです)
+Name[ko]=SHA256 (매우 강한)
+Name[pt]=SHA256 (muito forte)
+Name[ru]=SHA256 (очень стойкий)
+Name[uk]=SHA256 (дуже стійкий)
+Name[zh_CN]=SHA256 (非常强壮的)
+Name[x-test]=xxSHA256 (very strong)xx
 
 [Desktop Action SHA512-Sum]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="CheckSum SHA512" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha512sum "$file" > $(ls $file).sha512; sed -i "s; ${file%/*}/;*;" $(ls $file).sha512; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="CheckSum SHA512" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
-Name=SHA512 (High Strong)
-Name[es]=SHA512 (Super Fuerte)
-Name[ru]=SHA512 (Высокая Стойкость)
-Name[ua]=SHA512 (Висока Стійкість)
-Name[x-test]=xxSHA512 (High Strong)xx
+Name=SHA512 (high strong)
+Name[de]=SHA512 (super stark)
+Name[es]=SHA512 (super fuerte)
+Name[fr]=SHA512 (super fort)
+Name[it]=SHA512 (super forte)
+Name[ja]=SHA512 (強い監督者)
+Name[ko]=SHA512 (강한 임시 고용)
+Name[pt]=SHA512 (super forte)
+Name[ru]=SHA512 (высокая стойкость)
+Name[uk]=SHA512 (висока стійкість)
+Name[zh_CN]=SHA512 (超级强壮的)
+Name[x-test]=xxSHA512 (high strong)xx

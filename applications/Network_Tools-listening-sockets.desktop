@@ -1,11 +1,18 @@
 [Desktop Entry]
 Categories=Network-Tools;
-Exec=kdesu --caption="Listening Sockets" -d /usr/share/applications/Network_Tools-listening-sockets.sh
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-socket.png -d /usr/share/applications/Network_Tools-listening-sockets.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
 Name=Listening Sockets
+Name[de]=Häfen die Zuhören
 Name[es]=Puertos Escuchando
+Name[fr]=Ports Écoutant
+Name[it]=Porti Ascoltando
+Name[ja]=港町が聞く
+Name[ko]=듣고 있는 항구
+Name[pt]=Portos Escutando
 Name[ru]=Прослушиваемые сокеты
 Name[uk]=Сокети, що прослуховуються
+Name[zh_CN]=港口听
 StartupNotify=true
 Terminal=false
 Type=Application

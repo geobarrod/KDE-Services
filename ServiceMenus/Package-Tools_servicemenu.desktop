@@ -7,79 +7,142 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Package Tools
+X-KDE-Submenu[de]=Pakete - Werkzeuge
 X-KDE-Submenu[es]=Paquetes - Herramientas
+X-KDE-Submenu[fr]=Paquets - Outils
+X-KDE-Submenu[it]=Pacchetti - Attrezzi
+X-KDE-Submenu[ja]=パッケージ 道具
+X-KDE-Submenu[ko]=꾸러미 도구
+X-KDE-Submenu[pt]=Pacotes - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Архивирования
 X-KDE-Submenu[uk]=Інструменти Пакування
+X-KDE-Submenu[zh_CN]=包裹 工具
 X-KDE-Submenu[x-test]=xxPackage Toolsxx
 
 [Desktop Action ExtractPkgFiles]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Extract Files Here" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd $(dirname $file); mkdir $(basename -s .rpm $file); cd $(basename -s .rpm $file); rpm2cpio $file | cpio -id; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Extract Files Here" --passivepopup="[Finished]    $(basename $file)";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Extract Files Here
+Name[de]=Um Akten Hier zu Ziehen
 Name[es]=Extraer Ficheros Aquí
+Name[fr]=Extraire Ici Fichiers
+Name[it]=Estrarre Qui Schedari
+Name[ja]=ここでファイルを引き抜くために
+Name[ko]=파일을 여기에서 빼낸다
+Name[pt]=Extrair Arquivos Aqui
 Name[ru]=Распаковать файлы сюда
 Name[uk]=Видобути файли сюди
+Name[zh_CN]=在这里吸取文件
 Name[x-test]=xxExtract Files Herexx
 
 [Desktop Action IntegrityCheckPkg]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; rpm2cpio $file > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps $file 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename $file)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename $file)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Integrity Check
+Name[de]=Um Integrität zu Überprüfen
 Name[es]=Comprobar Integridad
+Name[fr]=Vérifier Intégrité
+Name[it]=Comprovare Integrità
+Name[ja]=完全性をチェックするために
+Name[ko]=성실을 점검한다
+Name[pt]=Conferir Integridade
 Name[ru]=Проверка целостности
 Name[uk]=Перевірка цілісності
+Name[zh_CN]=检查正直
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action ListPkgContent]
 Exec=rpm -qlp %f > /tmp/pkgcontent; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List Content - $(basename %f)" --textbox /tmp/pkgcontent 800 300; rm -f /tmp/pkgcontent
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=List Content
+Name[de]=Um Inhalt Aufzuführen
 Name[es]=Listar Contenido
+Name[fr]=Enregistrer Contenu
+Name[it]=Elencare Contenuto
+Name[ja]=内容をリストするために
+Name[ko]=내용을 리스트한다
+Name[pt]=Listar Conteúdo
 Name[ru]=Список содержимого
 Name[uk]=Перелік вмісту
+Name[zh_CN]=列出内容
 Name[x-test]=xxList Contentxx
 
 [Desktop Action ListPkgConfFiles]
 Exec=rpm -qcp %f > /tmp/pkgconfiles; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List Configuration Files - $(basename %f)" --textbox /tmp/pkgconfiles 800 300; rm -f /tmp/pkgconfiles
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=List Configuration Files
+Name[de]=Um Konfigurationsakten Aufzuführen
 Name[es]=Listar Ficheros de Configuración
+Name[fr]=Enregistrer Fichiers de Configuration
+Name[it]=Elencare Schedari di Configurazione
+Name[ja]=コンフィギュレーション・ファイルをリストするために
+Name[ko]=형상 파일을 리스트한다
+Name[pt]=Listar Arquivos de Configuração
 Name[ru]=Чтобы Перечислить Конфигурацию Файлы
 Name[uk]=Вносити до списку Файли Конфігурації
+Name[zh_CN]=列出结构文件
 Name[x-test]=xxList Configuration Filesxx
 
 [Desktop Action ListPkgDeps]
 Exec=rpm -qRp %f > /tmp/pkgdeps; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List Dependencies - $(basename %f)" --textbox /tmp/pkgdeps 800 300; rm -f /tmp/pkgdeps
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=List Dependencies
+Name[de]=Um Dependences Aufzuführen
 Name[es]=Listar Dependencias
+Name[fr]=Enregistrer Dépendances
+Name[it]=Elencare Dipendenze
+Name[ja]=依存をリストしなさい
+Name[ko]=목록 의존
+Name[pt]=Listar Dependências
 Name[ru]=Список зависимостей
 Name[uk]=Перелік залежностей
+Name[zh_CN]=列出依赖
 Name[x-test]=xxList Dependenciesxx
 
 [Desktop Action ListPkgScripts]
 Exec=rpm -qp --scripts %f > /tmp/pkgscripts; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - List [Ins|Unins]tallation Scripts - $(basename %f)" --textbox /tmp/pkgscripts 800 300; rm -f /tmp/pkgscripts
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=List [Ins|Unins]tallation Scripts
+Name[de]=Um Anordnungen Davon Aufzuführen [Ins|Unins]tallation
 Name[es]=Listar Ordenes de [Ins|Desins]talación
+Name[fr]=Enregistrer Ordres de [Ins|Unins]tallation
+Name[it]=Elencare Ordini di Installazione
+Name[ja]=設置のオーダーをリストするために
+Name[ko]=설치의 주문한 물건을 리스트한다
+Name[pt]=Listar Ordens de Instalação
 Name[ru]=Чтобы перечислить шрифты
 Name[uk]=Щоб внести до списку оригінали документа
+Name[zh_CN]=列出安装的命令
 Name[x-test]=xxList [Ins|Unins]tallation Scriptsxx
 
 [Desktop Action ShowPkgChangelog]
 Exec=rpm -qp --changelog %f > /tmp/pkgchangelog; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Show Changelog - $(basename %f)" --textbox /tmp/pkgchangelog 800 300; rm -f /tmp/pkgchangelog
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Show Changelog
+Name[de]=Um Registrierung der Änderungen zu Zeigen
 Name[es]=Mostrar Registro de Cambios
+Name[fr]=Montrer Registre de Changements
+Name[it]=Mostrare Registro di Cambiamenti
+Name[ja]=変化の登録を見せるために
+Name[ko]=변경의 등록을 보여준다
+Name[pt]=Mostrar Inscrição de Mudanças
 Name[ru]=Показать Changelog
 Name[uk]=Показати Changelog
+Name[zh_CN]=表示变化的登记
 Name[x-test]=xxShow Changelogxx
 
 [Desktop Action ShowPkgInfo]
 Exec=rpm -qip %f > /tmp/pkginfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png --caption="Package Tools - Show Info - $(basename %f)" --textbox /tmp/pkginfo 800 300; rm -f /tmp/pkginfo
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
 Name=Show Info
+Name[de]=Um Informationen zu Zeigen
 Name[es]=Mostrar Información
+Name[fr]=Montrer Information
+Name[it]=Mostrare Informazione
+Name[ja]=インフォメーションを示すために
+Name[ko]=정보를 보여준다
+Name[pt]=Mostrar Informação
 Name[ru]=Показать информацию 
 Name[uk]=Показати інформацію
+Name[zh_CN]=表示数据
 Name[x-test]=xxShow Infoxx

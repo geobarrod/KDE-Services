@@ -1,3 +1,17 @@
+* Tue Apr 05 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-3
+- "[Extract|Convert] Audio Track": Enhancement. Added MP3(432Hz) and FLAC(432Hz) options.
+- Added new services menu:
+  "Rotate Video Files",
+  "Edit Time from Media Files",
+  "Attach Cover to MP3 Files",
+  "Clean Metadata from Media Files" and
+  "Concatenate Media Files with Same Codec"
+  to "Multimedia Tools" submenu.
+- Added translation to:
+  Chinese, French, German, Italian,
+  Japanese, Korean and Portuguese languages.
+- Makefile: Updated.
+
 * Thu Jan 28 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-2
 - "Convert Video Files": Enhancement.
 - Makefile: Updated.
@@ -91,7 +105,7 @@
 - "Run Application (Root)": Enhancement.
 - "Midnight Commander": Enhancement.
 - "Midnight Commander Editor": Enhancement.
-- "HTTP Publisher": Enhancement.
+- "HTTP Server": Enhancement.
 - "Listening Sockets": Enhancement.
 - "Search By String": Enhancement.
 - "Search Here": Enhancement.
@@ -225,14 +239,14 @@
 - Added new service menu  "The Sizer" to "Actions" submenu on Dolphin's right click menu.
 
 * Sun Dec 02 2012  Geovani B. R. <igeo.cu@gmail.com> 1.6-2
-- "HTTP Publisher", "Build Custom Kernel" and "Rebuild RPM Package": Enhancement.
+- "HTTP Server", "Build Custom Kernel" and "Rebuild RPM Package": Enhancement.
 - Bugfix: Not show elapsed time in hours, implemented on some services.
 
 * Mon Nov 26 2012  Geovani B. R. <igeo.cu@gmail.com> 1.6-1
 - "Image Resizer": Enhancement.
 
 * Sun Nov 25 2012  Geovani B. R. <igeo.cu@gmail.com> 1.5-9
-- Added new service menu "HTTP Publisher" to "Actions" submenu on Dolphin's right click menu.
+- Added new service menu "HTTP Server" to "Actions" submenu on Dolphin's right click menu.
 - Added new submenu "Image Resizer" on Dolphin's right click menu.
 
 * Sat Nov 24 2012  Geovani B. R. <igeo.cu@gmail.com> 1.5-8

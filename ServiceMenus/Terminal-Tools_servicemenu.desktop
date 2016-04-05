@@ -7,25 +7,46 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Terminal Tools
+X-KDE-Submenu[de]=Terminal - Werkzeuge
 X-KDE-Submenu[es]=Terminal - Herramientas
+X-KDE-Submenu[fr]=Terminale - Outils
+X-KDE-Submenu[it]=Terminale - Attrezzi
+X-KDE-Submenu[ja]=ターミナル 道具
+X-KDE-Submenu[ko]=말단 도구
+X-KDE-Submenu[pt]=Terminal - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Терминал
 X-KDE-Submenu[uk]=Інструменти Термінал
+X-KDE-Submenu[zh_CN]=终端机 工具
 X-KDE-Submenu[x-test]=xxTerminal Toolsxx
 
 [Desktop Action ExecScript]
 Exec=chmod 755 %f; konsole --hold -e %f
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name=Run Application
+Name[de]=Starten Sie Antrag
 Name[es]=Ejecutar Programa
+Name[fr]=Courir l'Application
+Name[it]=Eseguire Programma
+Name[ja]=出願を行ないなさい
+Name[ko]=움직이는 적용
+Name[pt]=Corra Aplicação
 Name[ru]=Запустить приложение
 Name[uk]=Запустити додаток
+Name[zh_CN]=奔跑申请
 Name[x-test]=xxRun Applicationxx
 
 [Desktop Action RootExecScript]
-Exec=kdesu --caption="Run Application" --noignorebutton -d -c "chmod 755 %f; konsole --hold -e %f"
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-shellscript.png --noignorebutton -d -c "chmod 755 %f; konsole --hold -e %f"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-shellscript.png
 Name=Run Application (Root)
+Name[de]=Starten Sie Antrag (Root)
 Name[es]=Ejecutar Programa como root
+Name[fr]=Courir l'Application (Root)
+Name[it]=Eseguire Programma (Root)
+Name[ja]=出願を行ないなさい (Root)
+Name[ko]=움직이는 적용 (Root)
+Name[pt]=Corra Aplicação (Root)
 Name[ru]=Запустить приложение (Root)
 Name[uk]=Запустити додаток (Root)
+Name[zh_CN]=奔跑申请 (Root)
 Name[x-test]=xxRun Application (Root)xx

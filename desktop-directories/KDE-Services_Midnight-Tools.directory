@@ -2,7 +2,14 @@
 Encoding=UTF-8
 Type=Directory
 Name=Midnight Tools
+Name[de]=Midnight Werkzeuge
 Name[es]=Midnight - Herramientas
+Name[fr]=Midnight - Outils
+Name[it]=Midnight - Attrezzi
+Name[ja]=Midnight 道具
+Name[ko]=Midnight 도구
+Name[pt]=Midnight - Ferramentas
 Name[ru]=Инструменты Midnight
 Name[uk]=Інструменти Midnight
+Name[zh_CN]=Midnight 工具
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

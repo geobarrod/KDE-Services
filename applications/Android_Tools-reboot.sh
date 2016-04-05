@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2014.										#
+# For KDE-Services. 2016.										#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -23,7 +23,7 @@ if-cancel-exit() {
 }
 
 if [ "$(pidof adb)" = "" ]; then
-  kdesu --caption="Android Reboot Manager" --noignorebutton -d adb start-server
+  kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png --noignorebutton -d adb start-server
   if-cancel-exit
 fi
 
@@ -84,7 +84,7 @@ if [ "$OPERATION" = "System" ]; then
 	if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "device" ] || [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "recovery" ]; then
 		adb reboot
 	elif [ "$(fastboot devices|awk -F" " '{print $3}')" = "fastboot" ]; then
-		kdesu --caption="Android Reboot Manager" --noignorebutton -d fastboot reboot
+		kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png --noignorebutton -d fastboot reboot
 		if-cancel-exit
 	fi
     FINAL_TIME=$(date +%s)
@@ -97,7 +97,7 @@ if [ "$OPERATION" = "System" ]; then
 	if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "device" ] || [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "recovery" ]; then
 		adb reboot bootloader
 	elif [ "$(fastboot devices|awk -F" " '{print $3}')" = "fastboot" ]; then
-		kdesu --caption="Android Reboot Manager" --noignorebutton -d fastboot reboot-bootloader
+		kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png --noignorebutton -d fastboot reboot-bootloader
 		if-cancel-exit
 	fi
 	FINAL_TIME=$(date +%s)

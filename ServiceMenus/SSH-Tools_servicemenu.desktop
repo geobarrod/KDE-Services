@@ -7,61 +7,110 @@ X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
 X-KDE-Submenu=SSH Tools
+X-KDE-Submenu[de]=SSH Werkzeuge
 X-KDE-Submenu[es]=SSH - Herramientas
+X-KDE-Submenu[fr]=SSH - Outils
+X-KDE-Submenu[it]=SSH - Attrezzi
+X-KDE-Submenu[ja]=SSH 道具
+X-KDE-Submenu[ko]=SSH 도구
+X-KDE-Submenu[pt]=SSH - Ferramentas
 X-KDE-Submenu[ru]=Инструменты SSH
 X-KDE-Submenu[uk]=Інструменти SSH
+X-KDE-Submenu[zh_CN]=SSH 工具
 X-KDE-Submenu[x-test]=xxSSH Toolsxx
 
 [Desktop Action SCP]
-Exec=xterm -T "Send To Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %f
+Exec=xterm -T "Send to Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %f
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png
-Name=Send To Remote Server
+Name=Send to Remote Server
+Name[de]=Schicken Sie zu Entferntem Server
 Name[es]=Enviar a Servidor Remoto
+Name[fr]=Envoyez à Serveur Éloigné
+Name[it]=Spedisca a Sistema di Servizio Remoto
+Name[ja]=遠い給仕人に注文しなさい
+Name[ko]=리모트한 서버에 보내라
+Name[pt]=Envie a Servidor Remoto
 Name[ru]=Отправить на удалённый сервер
 Name[uk]=Надіслати до віддаленого серверу
-Name[x-test]=xxSend To Remote Serverxx
+Name[zh_CN]=对遥远的伺候器送
+Name[x-test]=xxSend to Remote Serverxx
 
 [Desktop Action SSH]
 Exec=/usr/share/applications/SSH_Tools-connect.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
-Name=Connect To Remote Server
+Name=Connect to Remote Server
+Name[de]=Um Entfernten Diener in Verbindung zu Bringen
 Name[es]=Conectar a Servidor Remoto
+Name[fr]=Connecter à Serveur Remoto
+Name[it]=Collegare a Servitore Remoto
+Name[ja]=遠い使用人をつなぐために
+Name[ko]=먼 하인을 접속한다
+Name[pt]=Conectar o Servidor Remoto
 Name[ru]=Подключиться к удалённому серверу
 Name[uk]=Підключитися до віддаленого серверу
-Name[x-test]=xxConnect To Remote Serverxx
+Name[zh_CN]=连接遥远的仆人
+Name[x-test]=xxConnect to Remote Serverxx
 
 [Desktop Action SSH-copy-id]
 Exec=/usr/share/applications/SSH_Tools-copy-id.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png
 Name=Install Public Key
+Name[de]=Schlüssel zu Installieren Veröffentlicht
 Name[es]=Instalar Llave Publica
+Name[fr]=Installer Clef Publie
+Name[it]=Installare Chiave Pubblica
+Name[ja]=キーをインストールすることは出版します
+Name[ko]=Key Publishes 를 인스톨한다
+Name[pt]=Instalar Chave Publica
 Name[ru]=Установить открытый ключ
 Name[uk]=Встановити відкритий ключ
+Name[zh_CN]=安装钥匙出版
 Name[x-test]=xxInstall Public Keyxx
 
 [Desktop Action SSH-keygen]
 Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png
 Name=Public Key Generation
+Name[de]=Schlüssel zu Erzeugen Veröffentlicht
 Name[es]=Generar Llave Publica
+Name[fr]=Générer Clef Publie
+Name[it]=Generare Chiave Pubblica
+Name[ja]=キーを生成することは出版します
+Name[ko]=Key Publishes 를 생성한다
+Name[pt]=Gerar Chave Publica
 Name[ru]=Генерировать открытый ключ
 Name[uk]=Генерувати відкритий ключ
+Name[zh_CN]=产生钥匙出版
 Name[x-test]=xxPublic Key Generationxx
 
 [Desktop Action SSHfs]
 Exec=/usr/share/applications/SSH_Tools-sshfs.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
-Name=Mountpoint To Remote Directory
+Name=Mount point to Remote Directory
+Name[de]=Um Entfernt Verzeichnis zu Montieren
 Name[es]=Montar Directorio Remoto
+Name[fr]=Monter Directive Lointaine
+Name[it]=Montare Direttiva Remota
+Name[ja]=ディレクトリリモートコントロールを取り付けるために
+Name[ko]=멀리 떨어지는 디렉토리에 오른다
+Name[pt]=Montar Diretório Remoto
 Name[ru]=Смонтировать удалённую папку
 Name[uk]=Змонтувати віддалену теку
-Name[x-test]=xxMountpoint To Remote Directoryxx
+Name[zh_CN]=装目录遥远的
+Name[x-test]=xxMount point to Remote Directoryxx
 
 [Desktop Action ViewMachine]
 Exec=/usr/share/applications/SSH_Tools-register-machine.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
 Name=Registered Servers
+Name[de]=Registrierte Diener
 Name[es]=Servidores Registrados
+Name[fr]=Serveurs Enregistrés
+Name[it]=Servitori Registrati
+Name[ja]=登録された使用人
+Name[ko]=등록 하인
+Name[pt]=Servidores Registrados
 Name[ru]=Зарегестрированные серверы
 Name[uk]=Зареєстровані сервери
+Name[zh_CN]=注册的仆人
 Name[x-test]=xxRegistered Serversxx

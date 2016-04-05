@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2014.										#
+# For KDE-Services. 2016.										#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -28,7 +28,7 @@ if-cancel-exit() {
 }
 
 if [ "$(pidof adb)" = "" ]; then
-  kdesu --caption="Android Backup Manager" --noignorebutton -d adb start-server
+  kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png --noignorebutton -d adb start-server
   if-cancel-exit
 fi
 

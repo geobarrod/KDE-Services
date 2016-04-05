@@ -1,11 +1,18 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg package from RPM Fusion repositories and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh;fi
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
-Name=Record My Desktop
-Name[es]=Record My Desktop (grabar pantalla de video)
+Name=Record My Desktop (record video screen)
+Name[de]=Um Meinen Schreibtisch Aufzuzeichnen (um videobildschirm aufzuzeichnen)
+Name[es]=Grabar Mi Escritorio (grabar pantalla de video)
+Name[fr]=Graver Mon Bureau (graver écran de vidéo)
+Name[it]=Registrare la Mia Scrivania (registrare schermo di video)
+Name[ja]=私のデスクを記録するために (レコードビデオスクリーンに)
+Name[ko]=나의 책상을 기록한다 (ＣＲＴ 표시 화면 장치를 기록한다)
+Name[pt]=Registrar Minha Escrivaninha (registrar tela vídea)
 Name[ru]=Record My Desktop (видеозахват экрана)
 Name[uk]=Record My Desktop (відеозахоплення екрану)
+Name[zh_CN]=记录我的书桌 (记录电视的荧屏)
 StartupNotify=true
 Terminal=false
 Type=Application

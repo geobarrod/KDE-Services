@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Multimedia-Tools;
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-edit-media-time.sh;fi
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-edit-time.png
+Name=Edit Time from Media Files
+Name[de]=Um Time der Akten Multimedia zu Veröffentlichen
+Name[es]=Editar Tiempo de Ficheros Multimedia
+Name[fr]=Éditer Temps de Fichiers Multimédia
+Name[it]=Compili Tempo di Schedari Multimedia
+Name[ja]=マルチメディアファイルの時間を発表するために
+Name[ko]=파일 멀티미디어의 시간을 공포한다
+Name[pt]=Publicar Time de Arquivos de Multimídias
+Name[ru]=Отредактируйте Время из Мультимедиа Файлы
+Name[uk]=Відредагуйте Час з Мультимедійних Файлів
+Name[zh_CN]=出版文件多媒体的时候
+Path=/usr/share/applications
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

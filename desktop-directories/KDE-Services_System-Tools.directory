@@ -2,7 +2,14 @@
 Encoding=UTF-8
 Type=Directory
 Name=System Tools
+Name[de]=System - Werkzeuge
 Name[es]=Sistema - Herramientas
+Name[fr]=Système - Outils
+Name[it]=Sistema - Attrezzi
+Name[ja]=システム道具
+Name[ko]=시스템 도구
+Name[pt]=Sistema - Ferramentas
 Name[ru]=Инструменты системы
 Name[uk]=Інструменти системи
+Name[zh_CN]=系统工具
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

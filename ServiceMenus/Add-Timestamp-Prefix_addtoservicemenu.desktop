@@ -9,10 +9,17 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action AddTimestamp]
-Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Add Timestamp Prefix To [File|Dir]name" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Adding timestamp prefix to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; echo ${file##*/} >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(echo "${i##*/}");done;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Add Timestamp Prefix To [File|Dir]name" --passivepopup="[Finished]"; rm -f .add-timestamp-prefix
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Add Timestamp Prefix to [File|Dir]name" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Adding timestamp prefix to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; echo ${file##*/} >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(echo "${i##*/}");done;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Add Timestamp Prefix to [File|Dir]name" --passivepopup="[Finished]"; rm -f .add-timestamp-prefix
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
-Name=Add Timestamp Prefix To [File|Dir]name
+Name=Add Timestamp Prefix to [File|Dir]name
+Name[de]=Hinzuzufügen, stellt Datum-Stunde davon zum Namen vorein das [File|Verzeichnis]
 Name[es]=Agregar Prefijo Fecha-Hora al Nombre del [Fichero|Directorio]
+Name[fr]=Ajouter Préfixé Date-Heure au Nom du [Fichier|Directif]
+Name[it]=Aggregare Prefisso Data-Ora al Nome del [Schedario|Direttivo]
+Name[ja]=名前に Presets 日付時間を加えることの [ファイル|ディレクトリ]
+Name[ko]=더하는 것은 이름에 날짜 - 시간을 사전에 세트한다 의 [파일|디렉토리]
+Name[pt]=Somar Prefixa Data-Hora ao Nome do [Arquivo|Diretório]
 Name[ru]=Приставить отметку времени к имени [Файла|Папки]
 Name[uk]=Приставити відмітку часу до назви [Файлу|Теки]
-Name[x-test]=xxAdd Timestamp Prefix To [File|Dir]namexx
+Name[zh_CN]=增加预先设定日期-对 [文件|的名字小时目录]
+Name[x-test]=xxAdd Timestamp Prefix to [File|Dir]namexx

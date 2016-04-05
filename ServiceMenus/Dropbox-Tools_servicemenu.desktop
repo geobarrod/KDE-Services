@@ -7,87 +7,164 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Dropbox Tools
+X-KDE-Submenu[de]=Dropbox Werkzeuge
 X-KDE-Submenu[es]=Dropbox - Herramientas
+X-KDE-Submenu[fr]=Dropbox - Outils
+X-KDE-Submenu[it]=Dropbox - Attrezzi
+X-KDE-Submenu[ja]=Dropbox 道具
+X-KDE-Submenu[ko]=Dropbox 도구
+X-KDE-Submenu[pt]=Dropbox - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Dropbox
 X-KDE-Submenu[uk]=Інструменти Dropbox
+X-KDE-Submenu[zh_CN]=Dropbox 工具
 X-KDE-Submenu[x-test]=xxDropbox Toolsxx
 
 [Desktop Action CopyToDropbox]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh copy %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Copy to Dropbox
+Name[de]=Kopie zu Dropbox
 Name[es]=Copiar a Dropbox
+Name[fr]=Copier au Dropbox
+Name[it]=Copiare a Dropbox
+Name[ja]=Dropbox をコピーするために
+Name[ko]=복사한다 Dropbox
+Name[pt]=Copiar para Dropbox
 Name[ru]=Копировать в Dropbox
 Name[uk]=Копіювати до Dropbox
+Name[zh_CN]=复印 Dropbox
 
 [Desktop Action MoveToDropbox]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh move %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Move to Dropbox
+Name[de]=Umzug zu Dropbox
 Name[es]=Mover a Dropbox
+Name[fr]=Inciter au Dropbox
+Name[it]=Muovere a Dropbox
+Name[ja]=Dropbox に引っ越すために
+Name[ko]=움직인다 Dropbox
+Name[pt]=Se Mudar para Dropbox
 Name[ru]=Переместить в Dropbox
 Name[uk]=Пересунути до Dropbox
+Name[zh_CN]=移动到 Dropbox
 
 [Desktop Action CopyToPublicAndGetURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh copy_pub %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Copy to Public Dropbox and get URL
+Name[de]=Kopie zu Öffentlichem Dropbox und bekommt URL
 Name[es]=Copiar a Dropbox Público y obtener URL
+Name[fr]=Copier au Dropbox Public et obtenir URL
+Name[it]=Copiare a Dropbox Pubblico ed ottenere URL
+Name[ja]=公的な Dropbox をコピーして、そして URL を得るために
+Name[ko]=Dropbox 대중을 복사하고, URL를 얻는다
+Name[pt]=Copiar o Público de Dropbox e obter URL
 Name[ru]=Копировать в Dropbox с общим доступом и получить ссылку
 Name[uk]=Копіювати до Dropbox із публічним доступом і отримати посиланяя
+Name[zh_CN]=复印 Dropbox 民众并且获得网址
 
 [Desktop Action MoveToPublicAndGetURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh move_pub %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Move to Public Dropbox and get URL
+Name[de]=Umzug zu Öffentlichem Dropbox und bekommt URL
 Name[es]=Mover a Dropbox Público y obtener URL
+Name[fr]=Inciter au Dropbox Public et obtenir URL
+Name[it]=Muovere a Dropbox Pubblico ed ottenere URL
+Name[ja]=Dropbox Public に引っ越して、そして URL を得るために
+Name[ko]=Dropbox 대중을 움직이고, URL를 얻는다
+Name[pt]=Se Mudar para Público de Dropbox e obter URL
 Name[ru]=Переместить в Dropbox с общим доступом и получить ссылку
 Name[uk]=Пересунути до Dropbox із публічним доступом і отримати посиланяя
+Name[zh_CN]=移动到 Dropbox 民众并且获得网址
 
 [Desktop Action GetPublicURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh get_pub_url %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Get public URL
+Name[de]=Bekommen Sie Öffentlichen URL
 Name[es]=Obtener URL pública
+Name[fr]=Obtenir URL publique
+Name[it]=Ottenere URL pubblico
+Name[ja]=公開の URL を得るために
+Name[ko]=공공 URL를 얻는다
+Name[pt]=Obter URL pública
 Name[ru]=Получить ссылку с общим доступом
 Name[uk]=Отримати публічне посиланяя
+Name[zh_CN]=获得公众的网址
 
 [Desktop Action InstallService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh install_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Install Dropbox service
+Name[de]=Um Dienst Dropbox zu Installieren
 Name[es]=Instalar servicio Dropbox
+Name[fr]=Installer service Dropbox
+Name[it]=Installare servizio Dropbox
+Name[ja]=サービス Dropbox をインストールするために
+Name[ko]=서비스 Dropbox 를 구성한다
+Name[pt]=Instalar serviço Dropbox
 Name[ru]=Установить сервис Dropbox
 Name[uk]=Встановити сервіс Dropbox
+Name[zh_CN]=安装服务 Dropbox
 
 [Desktop Action UpdateService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh update_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Update Dropbox service
+Name[de]=Um Dienst Dropbox zu Befördern
 Name[es]=Actualizar servicio Dropbox
+Name[fr]=Actualiser service Dropbox
+Name[it]=Aggiornare servizio Dropbox
+Name[ja]=サービス Dropbox をアップグレードするために
+Name[ko]=서비스 Dropbox 를 개량한다
+Name[pt]=Atualizar serviço Dropbox
 Name[ru]=Обновить сервис Dropbox
 Name[uk]=Оновити сервіс Dropbox
+Name[zh_CN]=升级服务 Dropbox
 
 [Desktop Action StartService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-on.png
 Name=Start Dropbox service
+Name[de]=Um Dienst Dropbox anzufangen
 Name[es]=Iniciar servicio Dropbox
+Name[fr]=Initier service Dropbox
+Name[it]=Iniziare servizio Dropbox
+Name[ja]=サービス Dropbox を始めるために
+Name[ko]=서비스 Dropbox 를 시작한다
+Name[pt]=Começar serviço Dropbox
 Name[ru]=Запустить сервис Dropbox
 Name[uk]=Запустити сервіс Dropbox
+Name[zh_CN]=开始服务 Dropbox
 
 [Desktop Action StopService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-off.png
 Name=Stop Dropbox service
+Name[de]=Um Dienst Dropbox Anzuhalten
 Name[es]=Detener servicio Dropbox
+Name[fr]=Retarder service Dropbox
+Name[it]=Fermare servizio Dropbox
+Name[ja]=サービス Dropbox を止めるために
+Name[ko]=서비스 Dropbox 를 멈춘다
+Name[pt]=Parar serviço Dropbox
 Name[ru]=Остановить сервис Dropbox
 Name[uk]=Зупинити сервіс Dropbox
+Name[zh_CN]=停止服务 Dropbox
 
 [Desktop Action AutoStart]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
 Name=Enable autostart Dropbox service
+Name[de]=Um Anfängen vom Dienst Dropbox Aufwärts zu Ermöglichen
 Name[es]=Habilitar autoarranque del servicio Dropbox
+Name[fr]=Habiliter autoarranque du service Dropbox
+Name[it]=Abilitare autoarranque del servizio Dropbox
+Name[ja]=上へサービス Dropbox の始めを可能にするために
+Name[ko]=서비스 Dropbox 의 안에서 올라가고 있는 출발을 가능하게 한다
+Name[pt]=Habilitar começos para cima do serviço Dropbox
 Name[ru]=Автозапуск сервиса Dropbox
 Name[uk]=Автозапуск сервіса Dropbox
+Name[zh_CN]=服务 Dropbox 使开始能够增加

@@ -12,7 +12,14 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 Exec=STRING1=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png --caption="Text Replace" --inputbox="Enter text to replace"); STRING2=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png --caption="Text Replace" --inputbox="Replace by"); COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png --caption="Text Replace" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Replacing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sed -i -e "s;$STRING1;$STRING2;g" $file; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png --title="Text Replace" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* 
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
 Name=Text Replace
+Name[de]=Text Ersetzt
 Name[es]=Reemplazar Texto
+Name[fr]=Remplacer Texte
+Name[it]=Rimpiazzare Testo
+Name[ja]=テキストを置き換えるために
+Name[ko]=본문을 바꾼다
+Name[pt]=Substituir Texto
 Name[ru]=Заменить текст
 Name[uk]=Замінити текст
+Name[zh_CN]=代替本文
 Name[x-test]=xxText Replacexx

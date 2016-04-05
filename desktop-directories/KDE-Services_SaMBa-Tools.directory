@@ -2,7 +2,14 @@
 Encoding=UTF-8
 Type=Directory
 Name=SaMBa Tools
+Name[de]=SaMBa Werkzeuge
 Name[es]=SaMBa - Herramientas
+Name[fr]=SaMBa - Outils
+Name[it]=SaMBa - Attrezzi
+Name[ja]=SaMBa 道具
+Name[ko]=SaMBa 도구
+Name[pt]=SaMBa - Ferramentas
 Name[ru]=Инструменты SaMBa
 Name[uk]=Інструменти SaMBa
+Name[zh_CN]=SaMBa 工具
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

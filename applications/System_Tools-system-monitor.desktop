@@ -1,11 +1,18 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=kdesu --caption="System Monitor" --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-error.png --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png
 Name=System Monitor
+Name[de]=Monitor des Systemes
 Name[es]=Monitor del Sistema
+Name[fr]=Moniteur du Système
+Name[it]=Monitor del Sistema
+Name[ja]=システムのモニター
+Name[ko]=체내의 모니터
+Name[pt]=Monitor do Sistema
 Name[ru]=Системный монитор
 Name[uk]=Системний монітор
+Name[zh_CN]=系统的监视器
 StartupNotify=true
 Terminal=false
 Type=Application

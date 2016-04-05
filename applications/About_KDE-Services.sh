@@ -15,10 +15,10 @@ cat > /tmp/about_kde-services << EOF
 
     Description:
         Enables the following functionalities on the Dolphin's right click menu of KDE-4.x/5.x:
-    
+
         - Convert several video formats to MPEG-1, MPEG-2, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV or WebM.
-        - Extract the audio track of several video formats and convert them to MP3 or FLAC.
-        - Convert several audio files to MP3 or FLAC.
+        - Extract the audio track of several video formats and convert them to MP3, MP3(432Hz), FLAC or FLAC(432Hz).
+        - Convert several audio files to MP3, MP3(432Hz), FLAC or FLAC(432Hz).
         - Send file to Thunderbird as email attachment. (This service need Thunderbird installed)
         - Burn ISO image; in place ISO image mounting and unmounting, as well as the
             possibility of getting the MD5sum, SHA1sum, SHA256sum, SHA512sum of the ISO image.
@@ -59,7 +59,12 @@ cat > /tmp/about_kde-services << EOF
         - Dropbox Tools.
         - Android Tools.
         - Compressed File Integrity Check.
-        
+        - Rotate Video Files.
+        - Edit Time from Media Files.
+        - Attach Cover to MP3 Files.
+        - Clean Metadata from Media Files.
+        - Concatenate Media Files with Same Codec.
+
     Required dependencies:
         - android-tools
         - bash
@@ -122,7 +127,7 @@ cat > /tmp/about_kde-services << EOF
         - xterm
         - youtube-dl
         - zip
-        
+
     Author: 
       Geovani Bárzaga Rodríguez (geobarrod) <igeo.cu@gmail.com>, Developer and Fedora RPM Maintainer.
 
@@ -136,7 +141,7 @@ cat > /tmp/about_kde-services << EOF
       Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
     License:
       GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)
-        
+
 EOF
 
 kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 800x600 2> /dev/null

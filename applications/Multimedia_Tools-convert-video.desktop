@@ -1,11 +1,18 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Convert Video Files" --passivepopup="[Error] Please install ffmpeg package from RPM Fusion repositories and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-convert-video.sh;fi
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Convert Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-convert-video.sh;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name=Convert Video Files
+Name[de]=Um Videoakten zu Konvertieren
 Name[es]=Convertir Archivos de Video
+Name[fr]=Changer Archives de Vidéo
+Name[it]=Convertire Archivi di Video
+Name[ja]=ビデオファイルを変換するために
+Name[ko]=비디오 파일을 바꾼다
+Name[pt]=Converter Arquivos Vídeos
 Name[ru]=Конвертировать файлы видео
 Name[uk]=Конвертувати файли відео
+Name[zh_CN]=转换电视的文件
 Path=/usr/share/applications
 StartupNotify=true
 Terminal=false

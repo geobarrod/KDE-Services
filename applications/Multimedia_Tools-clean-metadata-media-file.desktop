@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Multimedia-Tools;
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Clean Metadata from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-clean-metadata-media-file.sh;fi
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-clean-metadata.png
+Name=Clean Metadata from Media Files
+Name[de]=Um Metadatos der Akten Multimedia zu Reinigen
+Name[es]=Limpiar Metadatos de Ficheros Multimedia
+Name[fr]=Nettoyer Metadatos de Fichiers Multimédia
+Name[it]=Pulire Metadatos di Schedari Multimedia
+Name[ja]=メディアのファイルからのきれいなメタデータ
+Name[ko]=미디어 파일로부터의 깨끗한 미터자료
+Name[pt]=Limpar Metadatos de Arquivos de Multimídias
+Name[ru]=Чистый Metadata из Мультимедиа Файлы
+Name[uk]=Почистіть Metadata з Мультимедійних Файлів
+Name[zh_CN]=清理来自媒体文件的 Metadata
+Path=/usr/share/applications
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

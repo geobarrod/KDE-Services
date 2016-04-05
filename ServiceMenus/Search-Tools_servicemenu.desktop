@@ -6,61 +6,110 @@ X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Search Tools
+X-KDE-Submenu[de]=Suche Werkzeuge
 X-KDE-Submenu[es]=Búsqueda - Herramientas
+X-KDE-Submenu[fr]=Recherche - Outils
+X-KDE-Submenu[it]=Ricerca - Attrezzi
+X-KDE-Submenu[ja]=サーチ道具
+X-KDE-Submenu[ko]=검색 도구
+X-KDE-Submenu[pt]=Procura - Ferramentas
 X-KDE-Submenu[ru]=Инструменты поиска
 X-KDE-Submenu[uk]=Інструменти пошуку
+X-KDE-Submenu[zh_CN]=搜寻工具
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
 Exec=/usr/share/applications/Search_Tools-search-by-name.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
-Name=Search By Name
-Name[es]=Búsqueda Por Nombre
+Name=Search by Name
+Name[de]=Suche von Namen
+Name[es]=Búsqueda por Nombre
+Name[fr]=Recherche par Nom
+Name[it]=Ricerca per Nome
+Name[ja]=名士を捜してください
+Name[ko]=이름의 검색
+Name[pt]=Procure Nome
 Name[ru]=Поиск по имени
 Name[uk]=Пошук за ім’ям
-Name[x-test]=xxSearch By Namexx
+Name[zh_CN]=为名字的搜寻
+Name[x-test]=xxSearch by Namexx
 
 [Desktop Action SearchByString]
-Exec=kdesu --caption="Search By String" -d /usr/share/applications/Search_Tools-search-by-string.sh %F
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-search-string.png -d /usr/share/applications/Search_Tools-search-by-string.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
-Name=Search By String
-Name[es]=Búsqueda Por Palabra
+Name=Search by String
+Name[de]=Suche um Schnur
+Name[es]=Búsqueda por Palabra
+Name[fr]=Recherche par Parole
+Name[it]=Ricerca per Parola
+Name[ja]=ストリングによって検索しなさい
+Name[ko]=단어의 검색
+Name[pt]=Procure Palavra
 Name[ru]=Поиск по содержимому
 Name[uk]=Пошук за вмістом
-Name[x-test]=xxSearch By Stringxx
+Name[zh_CN]=为字的搜寻
+Name[x-test]=xxSearch by Stringxx
 
 [Desktop Action StatisticsSearchDB]
 Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png
-Name=Statistics Search DB
-Name[es]=Estadisticas BD de Búsqueda
-Name[ru]=Статистика поисковой БД
-Name[uk]=Статистика пошукової БД
-Name[x-test]=xxStatistics Search DBxx
+Name=Statistics Search DataBase
+Name[de]=Statistisch von Suchdatenbank
+Name[es]=Estadisticas de Base de Datos de Búsqueda
+Name[fr]=Statistiques de Base de Données de Recherche
+Name[it]=Statistiche di Database di Ricerca
+Name[ja]=サーチデータベースについて統計上です
+Name[ko]=검색 데이터 베이스의 안에서 통계이다
+Name[pt]=Estatístico de Banco de Dados de Procura
+Name[ru]=Статистика поисковой База данных
+Name[uk]=Статистика пошукової База даних
+Name[zh_CN]=统计的搜寻数据库
+Name[x-test]=xxStatistics Search DataBasexx
 
 [Desktop Action UpdateSearchDB]
 Exec=/usr/share/applications/Search_Tools-update-search-db.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png
-Name=Update Search DB
-Name[es]=Actualizar BD de Búsqueda
-Name[ru]=Обновить поисковую БД
-Name[uk]=Оновити пошукову БД
-Name[x-test]=xxUpdate Search DBxx
+Name=Update Search DataBase
+Name[de]=Um Suchdatenbank zu Befördern
+Name[es]=Actualizar Base de Datos de Búsqueda
+Name[fr]=Actualiser Base de Données de Recherche
+Name[it]=Aggiornare Database di Ricerca
+Name[ja]=アップグレードサーチデータベースに
+Name[ko]=검색 데이터 베이스를 개량한다
+Name[pt]=Atualizar Banco de Dados de Procura
+Name[ru]=Обновить поисковую База данных
+Name[uk]=Оновити пошукову База даних
+Name[zh_CN]=升级搜寻数据库
+Name[x-test]=xxUpdate Search DataBasexx
 
 [Desktop Action SearchHere]
-Exec=kdesu --caption="Search Here" -d /usr/share/applications/Search_Tools-search-here.sh %F
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-search-name.png -d /usr/share/applications/Search_Tools-search-here.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name=Search Here
-Name[es]=Búscar Aquí
+Name[de]=Suchen Sie Hier
+Name[es]=Buscar Aquí
+Name[fr]=Chercher Ici
+Name[it]=Cercare Qui
+Name[ja]=ここでに見えるために
+Name[ko]=여기를 찾는다
+Name[pt]=Procurar Aqui
 Name[ru]=Искать здесь
 Name[uk]=Шукати тут
+Name[zh_CN]=找寻这里
 Name[x-test]=xxSearch Herexx
 
 [Desktop Action ModifiedFilesHere]
-Exec=kdesu --caption="Modified Files Here" -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-search-name.png -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
 Name=Modified Files Here
+Name[de]=Modifizierte Akten Hier
 Name[es]=Archivos Modificados Aquí
+Name[fr]=Archives Modifiés Ici
+Name[it]=Archivi Modificati Qui
+Name[ja]=ファイルがここで修正される
+Name[ko]=여기에서 수정되는 파일
+Name[pt]=Arquivos Modificaram Aqui
 Name[ru]=Изменённые файлы в этой папке
 Name[uk]=Файли що були змінені в цій теці
+Name[zh_CN]=在这里被修正的文件
 Name[x-test]=xxModified Files Herexx

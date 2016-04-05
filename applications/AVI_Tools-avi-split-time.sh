@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2015.									#
+# For KDE-Services. 2011-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -88,7 +88,7 @@ for file in $FILE; do
     COUNT=$((++COUNT))
     qdbusinsert
     BEGIN_TIME=$(date +%s)
-    avisplit -i "$file" -c -o "${file%.*}_edit.avi" -t $TIMERANGE
+    avisplit -i "$file" -c -o "${file%.*}_Time-Edited.avi" -t $TIMERANGE
     if-avisplit-cancel
     FINAL_TIME=$(date +%s)
     ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

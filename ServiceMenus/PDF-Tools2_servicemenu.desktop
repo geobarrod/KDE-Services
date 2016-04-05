@@ -7,74 +7,142 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=PDF Tools
+X-KDE-Submenu[de]=PDF - Werkzeuge
 X-KDE-Submenu[es]=PDF - Herramientas
+X-KDE-Submenu[fr]=PDF - Outils
+X-KDE-Submenu[it]=PDF - Attrezzi
+X-KDE-Submenu[ja]=PDF 道具
+X-KDE-Submenu[ko]=PDF 도구
+X-KDE-Submenu[pt]=PDF - Ferramentas
 X-KDE-Submenu[ru]=Инструменты PDF
 X-KDE-Submenu[uk]=Інструменти PDF
+X-KDE-Submenu[zh_CN]=PDF 工具
 X-KDE-Submenu[x-test]=xxPDF Toolsxx
 
 [Desktop Action ExtractAllImages]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting All Images:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; pdfimages -p "$file" $(ls "$file"|awk -F . '{print $1}'); kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Extract all images" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
 Name=Extract All Images
-Name[es]=Extraer Todas Las Imagenes
+Name[de]=Um Alle Bilder zu Ziehen
+Name[es]=Extraer Todas las Imagenes
+Name[fr]=Extraire Toutes les Images
+Name[it]=Estrarre Tutte le Immagini
+Name[ja]=すべてのイメージを引き抜くために
+Name[ko]=모든 이미지를 빼낸다
+Name[pt]=Extrair Todas as Imagens
 Name[ru]=Извлечь все изображения
 Name[uk]=Вилучити усі зображення
+Name[zh_CN]=吸取所有的图像
 Name[x-test]=xxExtract All Imagesxx
 
 [Desktop Action PDFOptimizer]
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Optimizing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; pdftops "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_opt.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --title="PDF Tools - Optimizer" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Optimizer
-Name[es]=Optimizador
+Name=Optimize
+Name[de]=Optimierer
+Name[es]=Optimizar
+Name[fr]=Optimiser
+Name[it]=Ottimizzare
+Name[ja]=最適化するために
+Name[ko]=낙관한다
+Name[pt]=Aperfeiçoar
 Name[ru]=Оптимизатор
 Name[uk]=Оптимізатор
+Name[zh_CN]=将
 Name[x-test]=xxOptimizerxx
 
 [Desktop Action PDFinfo]
 Exec=pdfinfo %f > /tmp/pdfinfo; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png --caption="PDF Tools - Info" --textbox /tmp/pdfinfo 350 350; rm -f /tmp/pdfinfo
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Info
+Name=Information
+Name[de]=Informationen
 Name[es]=Información
+Name[fr]=Information
+Name[it]=Informazione
+Name[ja]=インフォメーション
+Name[ko]=정보
+Name[pt]=Informação
 Name[ru]=Информация
 Name[uk]=Інформація
-Name[x-test]=xxInfoxx
+Name[zh_CN]=数据
+Name[x-test]=xxInformationxx
 
 [Desktop Action pdfcompress]
 Exec=/usr/share/applications/PDFktools.sh -c %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
 Name=Compress
+Name[de]=Um Zusammenzupressen
 Name[es]=Comprimir
+Name[fr]=Comprimer
+Name[it]=Comprimere
+Name[ja]=圧縮するために
+Name[ko]=압축한다
+Name[pt]=Comprimir
 Name[ru]=Сжать
 Name[uk]=Стиснути
+Name[zh_CN]=压缩
+Name[x-test]=xxCompressxx
 
 [Desktop Action pdfmerge]
 Exec=/usr/share/applications/PDFktools.sh -m %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Merge selected files
-Name[es]=Unir los archivos seleccionados
+Name=Merge Selected Files
+Name[de]=Um die ausgewählten Akten zu vereinigen
+Name[es]=Unir los Archivos Seleccionados
+Name[fr]=Unir les Archives Sélectionnés
+Name[it]=Unire gli Archivi Selezionati
+Name[ja]=選択されたファイルを結び付けるために
+Name[ko]=선택되었던 파일을 결합시킨다
+Name[pt]=Unir os Arquivos Selecionados
 Name[ru]=Объединить выбранные файлы
 Name[uk]=З’єднати обрані файли
+Name[zh_CN]=联合挑选的文件
+Name[x-test]=xxMerge Selected Filesxx
 
 [Desktop Action pdfmetaedit]
 Exec=/usr/share/applications/PDFktools.sh -me %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
-Name=Edit metadata
-Name[es]=Editar metadatos
+Name=Edit Metadata
+Name[de]=Um Metadatos zu Veröffentlichen
+Name[es]=Editar Metadatos
+Name[fr]=Éditer Metadatos
+Name[it]=Pubblicare Metadatos
+Name[ja]=メタデータを編集しなさい
+Name[ko]=미터자료를 편집해라
+Name[pt]=Publicar Metadatos
 Name[ru]=Редактировать метаданные
 Name[uk]=Редагувати метадані
+Name[zh_CN]=编辑 Metadata
+Name[x-test]=xxEdit Metadataxx
 
 [Desktop Action pdfmetaview]
 Exec=/usr/share/applications/PDFktools.sh -mv %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-text-plain.png
-Name=View metadata
-Name[es]=Ver metadatos
+Name=View Metadata
+Name[de]=Um Metadatos zu Sehen
+Name[es]=Ver Metadatos
+Name[fr]=Voir Metadatos
+Name[it]=Vedere Metadatos
+Name[ja]=メタデータを見なさい
+Name[ko]=보기 미터자료
+Name[pt]=Veja Metadata
 Name[ru]=Просмотреть метаданные
 Name[uk]=Переглянути метадані
+Name[zh_CN]=视野 Metadata
+Name[x-test]=xxview Metadataxx
 
 [Desktop Action pdfsplit]
 Exec=/usr/share/applications/PDFktools.sh -s %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-pdf.png
-Name=Split in single page per file
-Name[es]=Cortar en archivos de una sola página
+Name=Split in Single Page per File
+Name[de]=Um in Akten von einer Einzelnen Seite zu Schneiden
+Name[es]=Cortar en Archivos de Una Sola Página
+Name[fr]=Couper en Archives d'Une Seule Page
+Name[it]=Tagliare in Archivi di Una Sola Pagina
+Name[ja]=一つのページのファイルのカットに
+Name[ko]=하나의 페이지의 파일에 끼어든다
+Name[pt]=Cortar em Arquivos de uma Única Página
 Name[ru]=Разбить постранично
 Name[uk]=Розбити посторінково
+Name[zh_CN]=插入页的文件
+Name[x-test]=xxSplit in Single Page per Filexx

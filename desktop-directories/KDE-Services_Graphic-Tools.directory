@@ -2,7 +2,14 @@
 Encoding=UTF-8
 Type=Directory
 Name=Graphic Tools
+Name[de]=Graphische Werkzeuge
 Name[es]=Graficos - Herramientas
+Name[fr]=Graphique - Outils
+Name[it]=Grafico - Attrezzi
+Name[ja]=グラフィック道具
+Name[ko]=그래픽 도구
+Name[pt]=Gráfico - Ferramentas
 Name[ru]=Инструменты Графики
 Name[uk]=Інструменти Графіки
+Name[zh_CN]=图标工具
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

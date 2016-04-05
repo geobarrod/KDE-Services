@@ -36,7 +36,7 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Secure send file or directory to Mailx as email attachment. (Need SMTP service running in LocalHost)
 - Add Timestamp Prefix To [File|Dir]name(s).
 - Paranoid Shredder.
-- HTTP Publisher.
+- HTTP Server.
 - Graphic Tools.
 - The Sizer.
 - Package Tools.

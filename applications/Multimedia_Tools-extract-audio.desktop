@@ -1,11 +1,18 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="[Extract|Convert] Audio Tracks" --passivepopup="[Error] Please install ffmpeg package from RPM Fusion repositories and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh;fi
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="[Extract|Convert] Audio Tracks" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
 Name=[Extract|Convert] Audio Tracks
+Name[de]=[Auszug|Bekehrter] Audiofährten
 Name[es]=[Extraer|Convertir] Pista de Audio
+Name[fr]=[Extrait|Converti] Pistes Sonores
+Name[it]=[Estratto|Converta] Piste di Audio
+Name[ja]=[抜粋|コンバート]音声の痕跡
+Name[ko]=[엑스트랙트|바꾼다] 오디오 트랙
+Name[pt]=[Extrato|Converta] Rastos Auditivos
 Name[ru]=[Извлечь|Конвертировать] аудио трек
 Name[uk]=[Видобути|Конвертувати] аудіо трек
+Name[zh_CN]=[榨出物|皈依者] 声音轨道
 Path=/usr/share/applications
 StartupNotify=true
 Terminal=false

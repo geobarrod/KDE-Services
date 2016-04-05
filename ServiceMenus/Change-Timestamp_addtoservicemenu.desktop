@@ -9,10 +9,17 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action ChangeTimestamp]
-Exec=TIMESTAMP=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp To [File|Directory]" --inputbox="Enter New Timestamp" "$(date "+%0Y-%0m-%0d %0H:%0M:%0S")"); COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES));  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp To [File|Directory]" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Changing timestamp to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; touch -cd "$TIMESTAMP" "$file";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Change Timestamp To [File|Directory]" --passivepopup="[Finished]"
+Exec=TIMESTAMP=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp to [File|Directory]" --inputbox="Enter New Timestamp" "$(date "+%0Y-%0m-%0d %0H:%0M:%0S")"); COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES));  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp to [File|Directory]" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Changing timestamp to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; touch -cd "$TIMESTAMP" "$file";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Change Timestamp to [File|Directory]" --passivepopup="[Finished]"
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
-Name=Change Timestamp To [File|Directory]
+Name=Change Timestamp to [File|Directory]
+Name[de]=Um Datum Davon zu Verändern das [File|Verzeichnis]
 Name[es]=Cambiar Fecha del [Fichero|Directorio]
+Name[fr]=Changer Date du [Fichier|Directif]
+Name[it]=Cambiare Data il [Schedario|Direttivo]
+Name[ja]=日付を変えることの [ファイル|ディレクトリ]
+Name[ko]=날짜를 변한다 [파일|디렉토리]
+Name[pt]=Mudar Data do [Arquivo|Diretório]
 Name[ru]=Изменить отметку времени [Файла|Папки]
 Name[uk]=Змінити відмітку часу [Файлу|Теки]
-Name[x-test]=xxChange Timestamp To [File|Directory]xx
+Name[zh_CN]=改变日期的 [文件|目录]
+Name[x-test]=xxChange Timestamp to [File|Directory]xx

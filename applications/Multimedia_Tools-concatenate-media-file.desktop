@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Multimedia-Tools;
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Concatenate Media Files with Same Codec" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-concatenate-media-file.sh;fi
+Icon=/usr/share/icons/hicolor/512x512/apps/ks-concatenate-media-file.png
+Name=Concatenate Media Files with Same Codec
+Name[de]=Sich zu Verbinden Ordnet Multimedia mit Gleichem Codecs Ein
+Name[es]=Concatenar Ficheros Multimedia con Codecs Iguales
+Name[fr]=Enchaîner Fichiers Multimédia avec Codecs Égaux
+Name[it]=Concatenare Schedari Multimedia con Codecs Uguali
+Name[ja]=マルチメディアファイルを同じコーデックとリンクするために
+Name[ko]=파일 멀티미디어를 같은 코덱에 링크한다
+Name[pt]=Unir Arquiva Multimídias com Mesmo Codecs
+Name[ru]=Сливайтесь Файлы Мультимедиа с Таким же Codec
+Name[uk]=Злийте Мультимедію Файлів з Тим же самий Codec
+Name[zh_CN]=用相同的 Codecs 联编文件多媒体
+Path=/usr/share/applications
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

@@ -2,7 +2,14 @@
 Encoding=UTF-8
 Type=Directory
 Name=Dropbox Tools
+Name[de]=Dropbox Werkzeuge
 Name[es]=Dropbox - Herramientas
+Name[fr]=Dropbox - Outils
+Name[it]=Dropbox - Attrezzi
+Name[ja]=Dropbox 道具
+Name[ko]=Dropbox 도구
+Name[pt]=Dropbox - Ferramentas
 Name[ru]=Инструменты Dropbox
 Name[uk]=Інструменти Dropbox
+Name[zh_CN]=Dropbox 工具
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -24,7 +24,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn ISO Image" --progressbar "                                  " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn iso9660 Image" --progressbar "                                  " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -41,7 +41,7 @@ qdbusinsert() {
 
 cd "${1%/*}"
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn ISO Image" \
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn iso9660 Image" \
          --radiolist="Choose Scheduling Priority" Highest Highest on High High off Normal Normal off 2> /dev/null)"
 if-cancel-exit
 
@@ -53,7 +53,7 @@ elif [ "$PRIORITY" = "Normal" ]; then
     kdesu --noignorebutton -d -c "eject" 2> /dev/null
 fi
 
-BURNSPEED=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn ISO Image" \
+BURNSPEED=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --caption="Burn iso9660 Image" \
           --combobox="Select Burn Speed Factor" 2 4 8 10 12 16 24 32 48 --default 4 2> /dev/null)
 if-cancel-exit
 progressbar-start
@@ -66,15 +66,15 @@ FINAL_TIME=$(date +%s)
 ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 
 if [ "$ELAPSED_TIME" -lt "60" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn ISO Image" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn iso9660 Image" \
                    --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
 elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn ISO Image" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn iso9660 Image" \
                    --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
 elif [ "$ELAPSED_TIME" -gt "3599" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn ISO Image" \
+    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png --title="Burn iso9660 Image" \
                    --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
 fi
 

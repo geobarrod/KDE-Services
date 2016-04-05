@@ -141,21 +141,32 @@ uninstall:
 		$(PREFIXapp)/Dropbox_Tools-service-update.desktop \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.desktop \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.sh \
+		$(PREFIXapp)/ffmpeg_multifile-audio-mp3-attach-cover.sh \
+		$(PREFIXapp)/ffmpeg_multifile-clean-metadata-media-file.sh \
+		$(PREFIXapp)/ffmpeg_multifile-concatenate-media-file.sh \
 		$(PREFIXapp)/ffmpeg_multifile-convert-video.sh \
+		$(PREFIXapp)/ffmpeg_multifile-edit-media-time.sh \
 		$(PREFIXapp)/ffmpeg_multifile-extract-audio.sh \
+		$(PREFIXapp)/ffmpeg_multifile-video-rotate.sh \
 		$(PREFIXapp)/ffmpeg_record-my-desktop.sh \
 		$(PREFIXapp)/Graphic_Tools-the-converter.desktop \
 		$(PREFIXapp)/Graphic_Tools-the-sizer.desktop \
 		$(PREFIXapp)/HTTP_Publisher.sh \
+		$(PREFIXapp)/HTTP_Server.sh \
 		$(PREFIXapp)/iso_manager-burn-image.sh \
 		$(PREFIXapp)/iso_manager-mount-image.sh \
 		$(PREFIXapp)/Midnight_Tools-mc.desktop \
 		$(PREFIXapp)/Midnight_Tools-mc-root.desktop \
 		$(PREFIXapp)/MKV_Extract-subtitle.sh \
+		$(PREFIXapp)/Multimedia_Tools-audio-mp3-attach-cover.desktop \
+		$(PREFIXapp)/Multimedia_Tools-clean-metadata-media-file.desktop \
+		$(PREFIXapp)/Multimedia_Tools-concatenate-media-file.desktop \
 		$(PREFIXapp)/Multimedia_Tools-convert-video.desktop \
 		$(PREFIXapp)/Multimedia_Tools-diskcloner.desktop \
+		$(PREFIXapp)/Multimedia_Tools-edit-media-time.desktop \
 		$(PREFIXapp)/Multimedia_Tools-extract-audio.desktop \
 		$(PREFIXapp)/Multimedia_Tools-record-my-desktop.desktop \
+		$(PREFIXapp)/Multimedia_Tools-video-rotate.desktop \
 		$(PREFIXapp)/Multiplex_Subtitle.sh \
 		$(PREFIXapp)/Network_Tools-connect-sentry.desktop \
 		$(PREFIXapp)/Network_Tools-connect-sentry.sh \
@@ -210,11 +221,13 @@ uninstall:
 		$(PREFIX512apps)/ks-android-backup-restore.png \
 		$(PREFIX512apps)/ks-android-push-pull.png \
 		$(PREFIX512apps)/ks-android-reboot.png \
+		$(PREFIX512apps)/ks-audio-mp3-attach-cover.png \
 		$(PREFIX512apps)/ks-audio-video-info.png \
 		$(PREFIX512apps)/ks-audio.png \
 		$(PREFIX512apps)/ks-checksum.png \
 		$(PREFIX512apps)/ks-clock.png \
 		$(PREFIX512apps)/ks-compressed-file.png \
+		$(PREFIX512apps)/ks-concatenate-media-file.png \
 		$(PREFIX512apps)/ks-connect-to.png \
 		$(PREFIX512apps)/ks-database.png \
 		$(PREFIX512apps)/ks-decrypt.png \
@@ -239,6 +252,8 @@ uninstall:
 		$(PREFIX512apps)/ks-mc-user.png \
 		$(PREFIX512apps)/ks-mcedit-root.png \
 		$(PREFIX512apps)/ks-mcedit-user.png \
+		$(PREFIX512apps)/ks-media-clean-metadata.png \
+		$(PREFIX512apps)/ks-media-edit-time.png \
 		$(PREFIX512apps)/ks-media-optical-burn.png \
 		$(PREFIX512apps)/ks-media-optical-clone.png \
 		$(PREFIX512apps)/ks-media-optical-integrity-check.png \
@@ -271,6 +286,7 @@ uninstall:
 		$(PREFIX512apps)/ks-system-process.png \
 		$(PREFIX512apps)/ks-terminal.png \
 		$(PREFIX512apps)/ks-text-plain.png \
+		$(PREFIX512apps)/ks-video-rotate.png \
 		$(PREFIX512apps)/ks-video.png \
 		$(PREFIX512apps)/ks-warning.png \
 		$(PREFIX512apps)/ks-whitespace-replace.png \

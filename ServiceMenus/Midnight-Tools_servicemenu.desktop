@@ -7,19 +7,26 @@ X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Midnight Tools
+X-KDE-Submenu[de]=Midnight Werkzeuge
 X-KDE-Submenu[es]=Midnight - Herramientas
+X-KDE-Submenu[fr]=Midnight - Outils
+X-KDE-Submenu[it]=Midnight - Attrezzi
+X-KDE-Submenu[ja]=Midnight 道具
+X-KDE-Submenu[ko]=Midnight 도구
+X-KDE-Submenu[pt]=Midnight - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Midnight
 X-KDE-Submenu[uk]=Інструменти Midnight
+X-KDE-Submenu[zh_CN]=Midnight 工具
 X-KDE-Submenu[x-test]=xxMidnight Toolsxx
 
 [Desktop Action Root-mc]
-Exec=kdesu --caption="Midnight Commander" --noignorebutton -d konsole --new-tab -e mc
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-mc-root.png --noignorebutton -d konsole --new-tab -e mc
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-root.png
 Name=[Root ~]# mc
 Name[x-test]=xx[Root ~]# mcxx
 
 [Desktop Action Root-mcedit]
-Exec=kdesu --caption="Midnight Commander Editor" --noignorebutton -d konsole --new-tab -e mcedit
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-mcedit-root.png --noignorebutton -d konsole --new-tab -e mcedit
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-mcedit-root.png
 Name=[Root ~]# mcedit
 Name[x-test]=xx[Root ~]# mceditxx

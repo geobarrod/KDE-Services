@@ -12,7 +12,14 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 Exec=SERIAL=$(date +%s); for file in %F;do ffprobe $file 2> /tmp/info-$SERIAL; echo "File: ${file##*/}" >> /tmp/info2-$SERIAL; grep -e Duration -e Stream /tmp/info-$SERIAL >> /tmp/info2-$SERIAL; echo >> /tmp/info2-$SERIAL;done; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png --caption="[Audio|Video] Info" --textbox /tmp/info2-$SERIAL $(($(cat /tmp/info2-$SERIAL|wc -L)*7)) 137; rm -f /tmp/info*
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png
 Name=[Audio|Video] Info
+Name[de]=Informationen von [Audio|Video]
 Name[es]=Información de [Audio|Video]
+Name[fr]=Information de [Audio|Vidéo]
+Name[it]=Informazione di [Audio|Video]
+Name[ja]=インフォメーションの [オーディオ|ビデオ]
+Name[ko]=정보 의 [음성|비디오]
+Name[pt]=Informação de [Auditivo|Vídeo]
 Name[ru]=Информация о [Аудио|Видео]
 Name[uk]=Інформація про [Аудіо|Відео]
+Name[zh_CN]=数据 [声音|录象机]
 Name[x-test]=xx[Audio|Video] Infoxx

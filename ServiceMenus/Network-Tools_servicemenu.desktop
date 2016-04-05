@@ -1,39 +1,67 @@
 [Desktop Entry]
-Actions=ConnectSentry;HTTP-Publisher;ListeningSockets;
+Actions=ConnectSentry;HTTP-Server;ListeningSockets;
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Network Tools
+X-KDE-Submenu[de]=Netzwerk Werkzeuge
 X-KDE-Submenu[es]=Internet - Herramientas
+X-KDE-Submenu[fr]=Réseau - Outils
+X-KDE-Submenu[it]=Rete - Attrezzi
+X-KDE-Submenu[ja]=ネットワーク道具
+X-KDE-Submenu[ko]=네트워크 도구
+X-KDE-Submenu[pt]=Rede - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Сети
 X-KDE-Submenu[uk]=Інструменти Мережі
+X-KDE-Submenu[zh_CN]=网络工具
 X-KDE-Submenu[x-test]=xxNetwork Toolsxx
 
 [Desktop Action ConnectSentry]
 Exec=/usr/share/applications/Network_Tools-connect-sentry.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
 Name=Connect Sentry
+Name[de]=Wache der Verbindungen
 Name[es]=Centinela de Conexiones
+Name[fr]=Sentinelle de Connexions
+Name[it]=Sentinella di Connessioni
+Name[ja]=接続の衛兵
+Name[ko]=접속의 위병
+Name[pt]=Sentinela de Conexões
 Name[ru]=Сторож портов
 Name[uk]=Вартовий портів
+Name[zh_CN]=连接的步哨
 Name[x-test]=xxConnect Sentryxx
 
-[Desktop Action HTTP-Publisher]
-Exec=kdesu --caption="HTTP Publisher" -d -c "/usr/share/applications/HTTP_Publisher.sh" %F
+[Desktop Action HTTP-Server]
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png -d -c "/usr/share/applications/HTTP_Server.sh" %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png
-Name=HTTP Publisher
-Name[es]=Publicador HTTP
-Name[ru]=Открыть доступ по HTTP
-Name[uk]=Надати доступ через HTTP
-Name[x-test]=xxHTTP Publisherxx
+Name=HTTP Server
+Name[de]=HTTP Server
+Name[es]=Servidor HTTP
+Name[fr]=Serveur de HTTP
+Name[it]=Servizio di HTTP
+Name[ja]=HTTP サーバー
+Name[ko]=HTTP 서버
+Name[pt]=Servidor de HTTP
+Name[ru]=HTTP Сервер
+Name[uk]=HTTP Сервер
+Name[zh_CN]=HTTP 伺候器
+Name[x-test]=xxHTTP Serverxx
 
 [Desktop Action ListeningSockets]
-Exec=kdesu --caption="Listening Sockets" -d /usr/share/applications/Network_Tools-listening-sockets.sh %F
+Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-socket.png -d /usr/share/applications/Network_Tools-listening-sockets.sh %F
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
 Name=Listening Sockets
+Name[de]=Häfen die Zuhören
 Name[es]=Puertos Escuchando
+Name[fr]=Ports Écoutant
+Name[it]=Porti Ascoltando
+Name[ja]=港町が聞く
+Name[ko]=듣고 있는 항구
+Name[pt]=Portos Escutando
 Name[ru]=Прослушиваемые сокеты
 Name[uk]=Сокети, що прослуховуються
+Name[zh_CN]=港口听
 Name[x-test]=xxListening Socketsxx

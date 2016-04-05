@@ -7,25 +7,46 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=AVI Tools
+X-KDE-Submenu[de]=AVI - Werkzeuge
 X-KDE-Submenu[es]=AVI - Herramientas
+X-KDE-Submenu[fr]=AVI - Outils
+X-KDE-Submenu[it]=AVI - Attrezzi
+X-KDE-Submenu[ja]=AVI 道具
+X-KDE-Submenu[ko]=AVI 도구
+X-KDE-Submenu[pt]=AVI - Ferramentas
 X-KDE-Submenu[ru]=Инструменты AVI
 X-KDE-Submenu[uk]=Інструменти AVI
+X-KDE-Submenu[zh_CN]=AVI 工具
 X-KDE-Submenu[x-test]=xxAVI Toolsxx
 
 [Desktop Action AVIsplitSize]
-Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Split (to size)" --passivepopup="[Error] Please install transcode package from RPM Fusion repositories and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-size.sh %F;fi
+Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Split (to size)" --passivepopup="[Error] Please install avisplit command and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-size.sh %F;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name=Split (to size)
+Name[de]=Um zu Schneiden (um zu messen)
 Name[es]=Cortar (a medida)
+Name[fr]=Couper (à la mesure)
+Name[it]=Tagliare (a misura)
+Name[ja]=カットに (分量に)
+Name[ko]=자른다 (측정에)
+Name[pt]=Cortar (medir)
 Name[ru]=Разбить (по размеру)
 Name[uk]=Розбити (за розміром)
+Name[zh_CN]=减少 (测量)
 Name[x-test]=xxSplit (to size)xx
 
 [Desktop Action AVIsplitTime]
-Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Split (by time range)" --passivepopup="[Error] Please install transcode package from RPM Fusion repositories and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-time.sh %F;fi
+Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Split (by time range)" --passivepopup="[Error] Please install avisplit command and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-time.sh %F;fi
 Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
 Name=Split (by time range)
+Name[de]=Um zu Schneiden (für auswahl von zeit)
 Name[es]=Cortar (por rango de tiempo)
+Name[fr]=Couper (par rang de temps)
+Name[it]=Tagliare (per rango di tempo)
+Name[ja]=カットに (時間の範囲で)
+Name[ko]=자른다 (시간의 범위를 위해)
+Name[pt]=Cortar (para gama de tempo)
 Name[ru]=Разбить (по временным отрезкам)
 Name[uk]=Розбити (за часовими проміжками)
+Name[zh_CN]=减少 (因为拍子排列)
 Name[x-test]=xxSplit (by time range)xx
