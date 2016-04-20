@@ -5,9 +5,9 @@ Description:
 Enables the following functionalities on the Dolphin's right click menu of KDE-4.x/5.x:
 
 - Convert several video formats to MPEG-1, MPEG-2, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV or WebM.
-- Extract the audio track of several video formats and convert them to MP3 or FLAC.
-- Convert several audio files to MP3 or FLAC.
-- Send file to Thunderbird as email attachment. (This service need Thunderbird installed)
+- Extract the audio track of several video formats and convert them to MP3, MP3(432Hz), FLAC, FLAC(432Hz), OGG or OGG (432Hz).
+- Convert several audio files to MP3, MP3(432Hz), FLAC, FLAC(432Hz), OGG or OGG (432Hz).
+- Send file as email attachment.
 - Burn ISO image; in place ISO image mounting and unmounting, as well as the
   possibility of getting the MD5sum, SHA1sum, SHA256sum, SHA512sum of the ISO image.
 - Execution of scripts.
@@ -22,28 +22,33 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Dolphin tools.
 - Midnight tools (Midnight Commander).
 - Play videos from selected folder.
-- System Tools => Build Custom Kernel ( Now you can customize your own kernel easily, for create a system
-  with more performance, more fast and more hardware support ), Check Kernel Update and more.
-- Network Tools => Connect Sentry ( Now can see on your notification widget, every established connection ).
-- [Backup|Restore] Tools.
-- SaMBa Tools.
+- System tools => "Build Custom Kernel" ( Now you can customize your own kernel easily, for create a system
+  with more performance, more fast and more hardware support ), Check kernel update and more.
+- Network tools => "Connect Sentry" ( Now can see on your notification widget, every established connection ).
+- Backup and restore tools.
+- SaMBa tools.
 - Extract subtitle from MKV video files.
-- YouTube Tools.
+- YouTube tools.
 - Multiplex subtitle into MPEG-2 video file.
-- DVD Tools.
-- Multimedia Tools.
-- GPG Tools.
+- DVD tools.
+- Multimedia tools.
+- Security tools.
 - Secure send file or directory to Mailx as email attachment. (Need SMTP service running in LocalHost)
-- Add Timestamp Prefix To [File|Dir]name(s).
-- Paranoid Shredder.
-- HTTP Server.
-- Graphic Tools.
+- Add timestamp prefix to file|dir]name(s).
+- Paranoid shredder.
+- HTTP server.
+- Graphic tools.
 - The Sizer.
-- Package Tools.
+- Package tools.
 - The Converter.
-- Dropbox Tools.
-- Android Tools.
-- Compressed File Integrity Check.
+- Dropbox tools.
+- Android tools.
+- Compressed file integrity check.
+- Rotate video files.
+- Edit time from media files.
+- Attach cover to MP3 files.
+- Clean metadata from media files.
+- Concatenate media files with same codec.
 
 Required dependencies:
 

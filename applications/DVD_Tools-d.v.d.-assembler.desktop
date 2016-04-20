@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
 Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz
 Name=D.V.D. Assembler
 Name[de]=Assembler von D.V.D.
 Name[es]=Ensamblador de D.V.D.

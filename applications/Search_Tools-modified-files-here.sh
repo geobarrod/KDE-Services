@@ -8,11 +8,11 @@
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 TMP=/tmp/mfh
 
-DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png --caption="Modified Files Here" --progressbar "                                       " /ProgressDialog)
+DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz --caption="Modified Files Here" --progressbar "                                       " /ProgressDialog)
 qdbus $DBUSREF setLabelText "Searching..."
 find $1 -type f -newer "$HOME/.xsession-errors-:0" > $TMP; touch "$HOME/.xsession-errors-:0"
 qdbus $DBUSREF close
-kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png --caption="Modified Files Here: $(cat $TMP|wc -l) entries" \
+kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz --caption="Modified Files Here: $(cat $TMP|wc -l) entries" \
                --textbox $TMP 900 300 2> /dev/null
 rm -f $TMP
 

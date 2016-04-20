@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=YouTube-Tools;
 Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-video-code-collector.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz
 Name=Video List Code Collector
 Name[de]=Sammler der Codes der Liste der Videos
 Name[es]=Colector de Códigos de Lista de Videos

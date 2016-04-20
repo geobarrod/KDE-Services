@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=SendByEmail;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-secure-mail.svgz
 MimeType=all/allfiles;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -10,7 +10,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action SendByEmail]
 Exec=xdg-email --utf8 $(for file in %F;do echo "--attach $file";done)
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-secure-mail.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-secure-mail.svgz
 Name=Send by Email
 Name[de]=Schicken Sie Durch E-mail
 Name[es]=Enviar por Correo Electrónico

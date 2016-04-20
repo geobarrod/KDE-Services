@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Search-Tools;
 Exec=/usr/share/applications/Search_Tools-search-by-name.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
 Name=Search by Name
 Name[de]=Suche von Namen
 Name[es]=Búsqueda por Nombre

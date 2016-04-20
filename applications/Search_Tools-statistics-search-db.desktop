@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Search-Tools;
 Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-stats.svgz
 Name=Statistics Search DataBase
 Name[de]=Statistisch von Suchdatenbank
 Name[es]=Estadisticas de Base de Datos de Búsqueda

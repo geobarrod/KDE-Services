@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=SSH-Tools;
 Exec=/usr/share/applications/SSH_Tools-sshfs.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-sshfs.svgz
 Name=Mount point to Remote Directory
 Name[de]=Um Entfernt Verzeichnis zu Montieren
 Name[es]=Montar Directorio Remoto

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Network-Tools;
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-socket.png -d /usr/share/applications/Network_Tools-listening-sockets.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-socket.svgz -d /usr/share/applications/Network_Tools-listening-sockets.sh
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-socket.svgz
 Name=Listening Sockets
 Name[de]=Häfen die Zuhören
 Name[es]=Puertos Escuchando

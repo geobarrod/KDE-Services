@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=ConnectSentry;HTTP-Server;ListeningSockets;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-connect-to.svgz
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -20,7 +20,7 @@ X-KDE-Submenu[x-test]=xxNetwork Toolsxx
 
 [Desktop Action ConnectSentry]
 Exec=/usr/share/applications/Network_Tools-connect-sentry.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz
 Name=Connect Sentry
 Name[de]=Wache der Verbindungen
 Name[es]=Centinela de Conexiones
@@ -35,8 +35,8 @@ Name[zh_CN]=连接的步哨
 Name[x-test]=xxConnect Sentryxx
 
 [Desktop Action HTTP-Server]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png -d -c "/usr/share/applications/HTTP_Server.sh" %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-folder-public-web.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz -d -c "/usr/share/applications/HTTP_Server.sh" %F
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz
 Name=HTTP Server
 Name[de]=HTTP Server
 Name[es]=Servidor HTTP
@@ -51,8 +51,8 @@ Name[zh_CN]=HTTP 伺候器
 Name[x-test]=xxHTTP Serverxx
 
 [Desktop Action ListeningSockets]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-socket.png -d /usr/share/applications/Network_Tools-listening-sockets.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-socket.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-socket.svgz -d /usr/share/applications/Network_Tools-listening-sockets.sh %F
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-socket.svgz
 Name=Listening Sockets
 Name[de]=Häfen die Zuhören
 Name[es]=Puertos Escuchando

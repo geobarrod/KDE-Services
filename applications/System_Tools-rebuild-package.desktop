@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=System-Tools;
 Exec=xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
 Name=Rebuild RPM Package
 Name[de]=Um Paketdrehzahl zu Rekonstruieren
 Name[es]=Reconstruir Paquete RPM

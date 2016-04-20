@@ -8,7 +8,6 @@
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 DESTINATION=""
 DIR=""
-CPUCORE=$(grep "cpu cores" /proc/cpuinfo|sort -u|awk -F: '{print $2}')
 PID="$$"
 BEGIN_TIME=""
 FINAL_TIME=""
@@ -39,7 +38,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Extracting audio track from ${i##*/} to $FORMAT" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Extracting audio track from ${i##*/} to $FORMAT" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -48,7 +47,7 @@ if-ffmpeg-cancel() {
 
 if-sox-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Extracting audio track from ${i##*/} to $FORMAT" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Extracting audio track from ${i##*/} to $FORMAT" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -59,7 +58,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -75,15 +74,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Extract|Convert] Audio Track" \
                        --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Extract|Convert] Audio Track" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Extract|Convert] Audio Track" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -134,7 +133,7 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 if-cancel-exit
 
@@ -146,20 +145,20 @@ elif [ "$PRIORITY" = "Normal" ]; then
     true
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 \
       *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|All supported files" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
+FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
+       --combobox="Choose Audio Encoder" FLAC "FLAC (432Hz)" MP3 "MP3 (432Hz)" OGG "OGG (432Hz)" --default "MP3 (432Hz)" 2> /dev/null)
 if-cancel-exit
 
-FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
-       --combobox="Choose Audio Encoder" FLAC "FLAC (432Hz)" MP3 "MP3 (432Hz)" --default "MP3 (432Hz)" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
     
 if [ "$FORMAT" = "MP3 (432Hz)" ]; then
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
     progressbar-start
@@ -182,7 +181,7 @@ if [ "$FORMAT" = "MP3 (432Hz)" ]; then
         elapsedtime
     done
 elif [ "$FORMAT" = "MP3" ]; then
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png --caption="[Extract|Convert] Audio Track" \
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
     progressbar-start
@@ -229,6 +228,41 @@ elif [ "$FORMAT" = "FLAC" ]; then
         qdbusinsert
         DST_FILE="${i%.*}"
         ffmpeg -y -i $i -c:a flac "$DESTINATION/${DST_FILE##*/}.flac" > $LOG 2>&1
+        if-ffmpeg-cancel
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+elif [ "$FORMAT" = "OGG (432Hz)" ]; then
+    progressbar-start
+
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i "/tmp/${DST_FILE##*/}.wav" > $LOG 2>&1
+        if-ffmpeg-cancel
+        sox "/tmp/${DST_FILE##*/}.wav" "/tmp/${DST_FILE##*/}_432Hz.wav" pitch -31 > $LOG 2>&1
+        if-sox-cancel
+        ffmpeg -y -i "/tmp/${DST_FILE##*/}_432Hz.wav" "$DESTINATION/${DST_FILE##*/}_432Hz.ogg" > $LOG 2>&1
+        if-ffmpeg-cancel
+        rm -f /tmp/${DST_FILE##*/}*.wav
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+elif [ "$FORMAT" = "OGG" ]; then
+    progressbar-start
+
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i "$DESTINATION/${DST_FILE##*/}.ogg" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

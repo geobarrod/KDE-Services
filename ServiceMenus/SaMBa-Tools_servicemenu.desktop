@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=SaMBa-Tools;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-smbfs.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-smbfs.svgz
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -20,7 +20,7 @@ X-KDE-Submenu[x-test]=xxSaMBa Toolsxx
 
 [Desktop Action SaMBa-Tools]
 Exec=/usr/share/applications/SaMBa_Tools-mount-umount-share.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-smbfs.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-smbfs.svgz
 Name=SaMBa Shares Mounter
 Name[de]=Verbinder SaMBa Geteilt zu Haben
 Name[es]=Montador de Compartidos SaMBa

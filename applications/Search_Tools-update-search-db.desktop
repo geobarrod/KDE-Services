@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Search-Tools;
 Exec=/usr/share/applications/Search_Tools-update-search-db.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-database-update.svgz
 Name=Update Search DataBase
 Name[de]=Um Suchdatenbank zu Befördern
 Name[es]=Actualizar Base de Datos de Búsqueda

@@ -21,7 +21,7 @@ if-cancel-exit() {
 ############ Main ############
 ##############################
 
-SYSUSER=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-system-process.png --caption="Process Viewer - Htop" --combobox="Choose System User" $USER root --default $USER 2> /dev/null)
+SYSUSER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-system-process.svgz --caption="Process Viewer - Htop" --combobox="Choose System User" $USER root --default $USER 2> /dev/null)
 if-cancel-exit
 
 if [ "$SYSUSER" = "$USER" ]; then

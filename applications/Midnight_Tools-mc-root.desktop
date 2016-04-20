@@ -1,8 +1,8 @@
 [Desktop Entry]
 Categories=Midnight-Tools;
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-mc-root.png --noignorebutton -d konsole --new-tab -e mc
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz --noignorebutton -d konsole --new-tab -e mc
 GenericName=Root
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-root.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz
 Name=Midnight Commander
 Name[de]=Midnight Kommandant
 Name[es]=Comandante Midnight

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Android-Tools;
 Exec=/usr/share/applications/Android_Tools-apk-manager.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz
 Name=Android Package Manager
 Name[de]=Verwalter der Pakete für Android
 Name[es]=Administrador de Paquetes para Android

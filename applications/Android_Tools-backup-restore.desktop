@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Android-Tools;
 Exec=/usr/share/applications/Android_Tools-backup-restore.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz
 Name=Android Backup Manager
 Name[de]=Zurück Verwalter für Android
 Name[es]=Administrador de Respaldo para Android

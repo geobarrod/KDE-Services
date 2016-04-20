@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=ABM;AFM;APM;ARM;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -20,7 +20,7 @@ X-KDE-Submenu[x-test]=xxAndroid Toolsxx
 
 [Desktop Action ABM]
 Exec=/usr/share/applications/Android_Tools-backup-restore.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-backup-restore.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz
 Name=Android Backup Manager
 Name[de]=Zurück Verwalter für Android
 Name[es]=Administrador de Respaldo para Android
@@ -36,7 +36,7 @@ Name[x-test]=xxAndroid Backup Managerxx
 
 [Desktop Action AFM]
 Exec=/usr/share/applications/Android_Tools-push-pull.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz
 Name=Android File Manager
 Name[de]=Verwalter der Akten für Android
 Name[es]=Administrador de Ficheros para Android
@@ -52,7 +52,7 @@ Name[x-test]=xxAndroid File Managerxx
 
 [Desktop Action APM]
 Exec=/usr/share/applications/Android_Tools-apk-manager.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-apk-manager.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz
 Name=Android Package Manager
 Name[de]=Verwalter der Pakete für Android
 Name[es]=Administrador de Paquetes para Android
@@ -68,7 +68,7 @@ Name[x-test]=xxAndroid Package Managerxx
 
 [Desktop Action ARM]
 Exec=/usr/share/applications/Android_Tools-reboot.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz
 Name=Android Reboot Manager
 Name[de]=Verwalter von Mir Fängt Wieder für Android
 Name[es]=Administrador de Reinicio para Android

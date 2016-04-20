@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Graphic-Tools;
 Exec=/usr/share/applications/The_Sizer.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-resize-image.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz
 Name=The Sizer
 Name[de]=Der Sizer
 Name[es]=El Dimensionador

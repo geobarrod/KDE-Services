@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Graphic-Tools;
 Exec=/usr/share/applications/The_Converter.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz
 Name=The Converter
 Name[de]=Der Konverter
 Name[es]=El Conversor

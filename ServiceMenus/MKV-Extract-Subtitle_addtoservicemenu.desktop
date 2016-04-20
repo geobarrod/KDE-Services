@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=MKVextractSubtitle;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
 MimeType=video/x-matroska;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -10,7 +10,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action MKVextractSubtitle]
 Exec=/usr/share/applications/MKV_Extract-subtitle.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
 Name=MKV Extract Subtitle
 Name[de]=MKV um Untertitel zu Ziehen
 Name[es]=MKV Extraer Subtítulo

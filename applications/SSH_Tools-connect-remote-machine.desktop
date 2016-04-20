@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=SSH-Tools;
 Exec=/usr/share/applications/SSH_Tools-connect.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-connect-to.svgz
 Name=Connect to Remote Server
 Name[de]=Um Entfernten Diener in Verbindung zu Bringen
 Name[es]=Conectar a Servidor Remoto

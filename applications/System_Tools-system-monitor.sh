@@ -32,16 +32,16 @@ if-cancel-exit() {
 
 export $(dbus-launch)
 
-STATE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --caption="System Monitor" --combobox="Choose Status" Enabled Disabled --default Enabled 2> /dev/null)
+STATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --caption="System Monitor" --combobox="Choose Status" Enabled Disabled --default Enabled 2> /dev/null)
 if-cancel-exit
 
 if [ "$STATE" == "Enabled" ]; then
   if [ "$CHECKPID" == "$(cat $PID_FILE 2> /dev/null)" ] && [ -s $PID_FILE ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="System Monitor" --passivepopup="Service Already Running."
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="System Monitor" --passivepopup="Service Already Running."
     exit 1
   fi
 
-  SELECT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --caption="System Monitor" \
+  SELECT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --caption="System Monitor" \
 		    --combobox="Select mode" Error Fail Warning Error+Fail Error+Warning Error+Fail+Warning Fail+Warning --default Error+Fail+Warning)
   if-cancel-exit
 
@@ -63,13 +63,13 @@ if [ "$STATE" == "Enabled" ]; then
 
   egrep $MODE /var/log/messages > $fERROR
   echo $$ > $PID_FILE
-  kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="System Monitor" \
+  kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="System Monitor" \
 	    --passivepopup="[Enabled]   The messages of alert show up in /dev/pts/0, /dev/tty12 and root's mail" 2> /dev/null
 
   while true;do
     egrep $MODE /var/log/messages > $lERROR
     ERRORdiff=$(diff $fERROR $lERROR|egrep '>')
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="System Monitor" --passivepopup="$ERRORdiff" 2> /dev/null
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="System Monitor" --passivepopup="$ERRORdiff" 2> /dev/null
     if [ "$ERRORdiff" != "" ];then
       if [ -c /dev/pts/0 ];then
 	echo -e "\n$ERRORdiff\n" > /dev/pts/0
@@ -87,7 +87,7 @@ if [ "$STATE" == "Enabled" ]; then
 elif [ "$STATE" == "Disabled" ]; then
   kill -9 $(cat $PID_FILE 2> /dev/null) 2> /dev/null
   rm -f $PID_FILE $lERROR $fERROR $TMP
-  kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="System Monitor" --passivepopup="[Disabled]" 2> /dev/null
+  kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="System Monitor" --passivepopup="[Disabled]" 2> /dev/null
   exit 0
 fi
 exit 0

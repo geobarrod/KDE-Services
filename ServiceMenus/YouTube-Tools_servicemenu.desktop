@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=Video-Downloader;Code-Collector;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-download-video.svgz
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -20,7 +20,7 @@ X-KDE-Submenu[x-test]=xxYouTube Toolsxx
 
 [Desktop Action Code-Collector]
 Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-video-code-collector.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz
 Name=Video List Code Collector
 Name[de]=Sammler der Codes der Liste der Videos
 Name[es]=Colector de Códigos de Lista de Videos
@@ -36,7 +36,7 @@ Name[x-test]=xxVideo List Code Collectorxx
 
 [Desktop Action Video-Downloader]
 Exec=/usr/share/applications/YouTube_Tools-download-video.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-download-video.svgz
 Name=Video Downloader
 Name[de]=Videoentlader
 Name[es]=Descargador de Video

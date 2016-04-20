@@ -21,15 +21,15 @@ if [ "$1" == "${1%.*}.iso" ]; then
    MOUNTEXIT=$?
 else
    rename .ISO .iso *
-   kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount iso9660 Image" \
+   kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Mount iso9660 Image" \
                    --passivepopup="[Error] Can't mount ${1##*/}: Renamed extension of ISO image, because contain uppercase characters. Please try again."
    exit 1
 fi
 
 if [ "$MOUNTEXIT" = "0" ]; then
-   kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --title="Mount iso9660 Image" --passivepopup="[Finished] ${1##*/} mounted."
+   kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz --title="Mount iso9660 Image" --passivepopup="[Finished] ${1##*/} mounted."
 else
-   kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount iso9660 Image" \
+   kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Mount iso9660 Image" \
                    --passivepopup="[Error] Can't mount ${1##*/}: Already mount or check image integrity."
    exit 1
 fi

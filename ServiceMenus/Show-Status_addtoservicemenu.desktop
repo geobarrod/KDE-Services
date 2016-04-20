@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=ShowFileDirStatus;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-info.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-info.svgz
 MimeType=all/allfiles;inode/directory;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -10,7 +10,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action ShowFileDirStatus]
 Exec=/usr/share/applications/Show_file-dir_status.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-info.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-info.svgz
 Name=Show [File|Directory] Status
 Name[de]=Show [Akte|Verzeichnis] Status
 Name[es]=Mostrar Estado del [Fichero|Directorio]

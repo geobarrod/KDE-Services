@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=AVinfo;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-video-info.svgz
 MimeType=audio/*;video/*;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -9,8 +9,8 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action AVinfo]
-Exec=SERIAL=$(date +%s); for file in %F;do ffprobe $file 2> /tmp/info-$SERIAL; echo "File: ${file##*/}" >> /tmp/info2-$SERIAL; grep -e Duration -e Stream /tmp/info-$SERIAL >> /tmp/info2-$SERIAL; echo >> /tmp/info2-$SERIAL;done; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png --caption="[Audio|Video] Info" --textbox /tmp/info2-$SERIAL $(($(cat /tmp/info2-$SERIAL|wc -L)*7)) 137; rm -f /tmp/info*
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-video-info.png
+Exec=SERIAL=$(date +%s); for file in %F;do ffprobe $file 2> /tmp/info-$SERIAL; echo "File: ${file##*/}" >> /tmp/info2-$SERIAL; grep -e Duration -e Stream /tmp/info-$SERIAL >> /tmp/info2-$SERIAL; echo >> /tmp/info2-$SERIAL;done; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-video-info.svgz --caption="[Audio|Video] Info" --textbox /tmp/info2-$SERIAL $(($(cat /tmp/info2-$SERIAL|wc -L)*7)) 137; rm -f /tmp/info*
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-video-info.svgz
 Name=[Audio|Video] Info
 Name[de]=Informationen von [Audio|Video]
 Name[es]=Información de [Audio|Video]

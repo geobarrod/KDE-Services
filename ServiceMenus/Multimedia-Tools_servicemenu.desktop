@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=DVD-Assembler;convert-video;extract-audio;VideoRotate;TimeEditMediaFiles;AudioMP3AttachCover;CleanMetadataMediaFiles;ConcatenateMediaFiles;ISOBuild;DiskCloner;record-my-desktop;vlc-openfolder;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -20,7 +20,7 @@ X-KDE-Submenu[x-test]=xxMultimedia Toolsxx
 
 [Desktop Action DVD-Assembler]
 Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz
 Name=D.V.D. Assembler
 Name[de]=Assembler von D.V.D.
 Name[es]=Ensamblador de D.V.D.
@@ -35,8 +35,8 @@ Name[zh_CN]=组合器 D.V.D.
 Name[x-test]=xxD.V.D. Assemblerxx
 
 [Desktop Action ISOBuild]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --caption="Build iso9660 Image from Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png --title="Build iso9660 Image from Here" --passivepopup="[Finished]   $(basename %f.iso)"
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
+Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz --caption="Build iso9660 Image from Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz --title="Build iso9660 Image from Here" --passivepopup="[Finished]   $(basename %f.iso)"
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz
 Name=Build iso9660 Image from Here
 Name[de]=Bauen Sie von Hier iso9660-Bild
 Name[es]=Construir Imagen iso9660 Desde Aquí
@@ -52,7 +52,7 @@ Name[x-test]=xxBuild iso9660 Image from Herexx
 
 [Desktop Action DiskCloner]
 Exec=/usr/share/applications/DiskCloner.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-clone.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz
 Name=DiskCloner
 Name[de]=DiskCloner (diskette cloner)
 Name[es]=DiskCloner (clonador de disco)
@@ -67,8 +67,8 @@ Name[zh_CN]=DiskCloner (磁盘片复制)
 Name[x-test]=xxDiskClonerxx
 
 [Desktop Action convert-video]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Convert Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-convert-video.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-video.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Convert Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-convert-video.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
 Name=Convert Video Files
 Name[de]=Um Videoakten zu Konvertieren
 Name[es]=Convertir Archivos de Video
@@ -83,8 +83,8 @@ Name[zh_CN]=转换电视的文件
 Name[x-test]=xxConvert video filesxx
 
 [Desktop Action extract-audio]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="[Extract|Convert] Audio Track" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[Extract|Convert] Audio Track" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz
 Name=[Extract|Convert] Audio Track
 Name[de]=[Auszug|Bekehrter] Audiofährten
 Name[es]=[Extraer|Convertir] Pista de Audio
@@ -99,8 +99,8 @@ Name[zh_CN]=[榨出物|皈依者] 声音轨道
 Name[x-test]=xx[Extract|Convert] Audio Trackxx
 
 [Desktop Action record-my-desktop]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-tape.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz
 Name=Record My Desktop (record video screen)
 Name[de]=Um Meinen Schreibtisch Aufzuzeichnen (um videobildschirm aufzuzeichnen)
 Name[es]=Grabar Mi Escritorio (grabar pantalla de video)
@@ -115,7 +115,7 @@ Name[zh_CN]=记录我的书桌 (记录电视的荧屏)
 Name[x-test]=xxRecord My Desktop (record video screen)xx
 
 [Desktop Action vlc-openfolder]
-Exec=which vlc; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Play Video from Here" --passivepopup="[Error] Please install vlc command and try again."; exit 1; else vlc -f %F 2> /dev/null;fi
+Exec=which vlc; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Play Video from Here" --passivepopup="[Error] Please install vlc command and try again."; exit 1; else vlc -f %F 2> /dev/null;fi
 Icon=vlc
 Name=Play Video from Here
 Name[de]=Spielen Sie von Hier Video
@@ -131,8 +131,8 @@ Name[zh_CN]=在这里再生录象机
 Name[x-test]=xxPlay Video from Herexx
 
 [Desktop Action VideoRotate]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Rotate Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-video-rotate.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-video-rotate.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Rotate Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-video-rotate.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz
 Name=Rotate Video Files
 Name[de]=Um Videoakten zu Drehen
 Name[es]=Rotar Ficheros de Video
@@ -147,8 +147,8 @@ Name[zh_CN]=替换电视的文件
 Name[x-test]=xxRotate Video Filesxx
 
 [Desktop Action TimeEditMediaFiles]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-edit-media-time.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-edit-time.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-edit-media-time.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz
 Name=Edit Time from Media Files
 Name[de]=Um Time der Akten Multimedia zu Veröffentlichen
 Name[es]=Editar Tiempo de Ficheros Multimedia
@@ -163,8 +163,8 @@ Name[zh_CN]=出版文件多媒体的时候
 Name[x-test]=xxEdit Time from Media Filesxx
 
 [Desktop Action AudioMP3AttachCover]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Attach Cover to MP3 Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-audio-mp3-attach-cover.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Attach Cover to MP3 Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-audio-mp3-attach-cover.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz
 Name=Attach Cover to MP3 Files
 Name[de]=Zu Befestigen Deckte MP3 zu Akten
 Name[es]=Adjuntar Cubierta a Ficheros MP3
@@ -179,8 +179,8 @@ Name[zh_CN]=附上复盖到文件 MP3
 Name[x-test]=xxAttach Cover to MP3 Filesxx
 
 [Desktop Action CleanMetadataMediaFiles]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Clean Metadata from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-clean-metadata-media-file.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-clean-metadata.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Clean Metadata from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-clean-metadata-media-file.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz
 Name=Clean Metadata from Media Files
 Name[de]=Um Metadatos der Akten Multimedia zu Reinigen
 Name[es]=Limpiar Metadatos de Ficheros Multimedia
@@ -195,8 +195,8 @@ Name[zh_CN]=清理来自媒体文件的 Metadata
 Name[x-test]=xxClean Metadata from Media Filesxx
 
 [Desktop Action ConcatenateMediaFiles]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Concatenate Media Files with Same Codec" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-concatenate-media-file.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-concatenate-media-file.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Concatenate Media Files with Same Codec" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-concatenate-media-file.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz
 Name=Concatenate Media Files with Same Codec
 Name[de]=Sich zu Verbinden Ordnet Multimedia mit Gleichem Codecs Ein
 Name[es]=Concatenar Ficheros Multimedia con Codecs Iguales

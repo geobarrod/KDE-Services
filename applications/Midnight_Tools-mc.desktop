@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Midnight-Tools;
 Exec=konsole --new-tab -e mc
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-user.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-user.svgz
 Name=Midnight Commander
 Name[de]=Midnight Kommandant
 Name[es]=Comandante Midnight

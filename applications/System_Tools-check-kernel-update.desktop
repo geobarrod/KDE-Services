@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=System-Tools;
 Exec=/usr/share/applications/System_Tools-check-kernel-update.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-update.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-update.svgz
 Name=Check Kernel Update
 Name[de]=Scheck Kern Aktualisierung
 Name[es]=Chequear Actualización del Kernel

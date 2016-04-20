@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=YouTube-Tools;
 Exec=/usr/share/applications/YouTube_Tools-download-video.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-download-video.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-download-video.svgz
 Name=Video Downloader
 Name[de]=Videoentlader
 Name[es]=Descargador de Video

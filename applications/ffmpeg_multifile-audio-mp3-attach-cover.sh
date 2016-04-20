@@ -8,7 +8,6 @@
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 DESTINATION=""
 DIR=""
-CPUCORE=$(grep "cpu cores" /proc/cpuinfo|sort -u|awk -F: '{print $2}')
 PID="$$"
 BEGIN_TIME=""
 FINAL_TIME=""
@@ -38,7 +37,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Attaching ${COVER##*/} to ${i##*/}" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Attaching ${COVER##*/} to ${i##*/}" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -49,7 +48,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --caption="Attach Cover to MP3 Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Attach Cover to MP3 Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -65,15 +64,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --title="Attach Cover to MP3 Files" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --title="Attach Cover to MP3 Files" \
                        --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --title="Attach Cover to MP3 Files" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --title="Attach Cover to MP3 Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --title="Attach Cover to MP3 Files" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --title="Attach Cover to MP3 Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -124,7 +123,7 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --caption="Attach Cover to MP3 Files" \
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Attach Cover to MP3 Files" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 if-cancel-exit
 
@@ -136,14 +135,14 @@ elif [ "$PRIORITY" = "Normal" ]; then
     true
 fi
 
-COVER=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --caption="Picture File" \
-        --getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg *.png *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|All supported files" 2> /dev/null)
+COVER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Picture File" \
+        --getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg *.svgz *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|All supported files" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --caption="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|All supported files" 2> /dev/null)
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|All supported files" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start

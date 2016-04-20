@@ -30,7 +30,7 @@ if-cancel-exit() {
 
 if-convert-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Image Converter" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Image Converter" \
             --passivepopup="[Canceled]   ${i##*/}                                             \
             Check the path and filename not contain whitespaces. Check image format errors. Try again."
         continue
@@ -41,7 +41,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --caption="Image Converter" --progressbar "                                         " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --caption="Image Converter" --progressbar "                                         " $COUNTFILES)
 }
 
 progressbar-close() {
@@ -57,16 +57,16 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}s"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}m"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}h"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}h"
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}d"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --title="Image Converter" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}d"
     fi
 }
 
@@ -111,16 +111,16 @@ done
 
 DIR="$(pwd)"
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --caption="Source Image Files" --multiple \
-      --getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi *.svg \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --caption="Source Image Files" --multiple \
+      --getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.svgz *.ppm *.psd *.sgi *.svg \
       *.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.SVG *.TGA \
       *.TIF *.TIFF *.XPM|All supported files" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-image.png --caption="Image Converter" \
+FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz --caption="Image Converter" \
        --combobox="Select Format" BMP EPS GIF ICO JPEG "JPEG 2000" PBM PDF PGM PNG PPM PSD SGI TGA TIFF XPM --default PNG)
 if-cancel-exit
 
@@ -204,7 +204,7 @@ elif [ "$FORMAT" = "PNG" ]; then
         COUNT=$((++COUNT))
         qdbusinsert
         DST_FILE="${i%.*}"
-        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.png"
+        convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.svgz"
         if-convert-cancel
     done
 elif [ "$FORMAT" = "PPM" ]; then

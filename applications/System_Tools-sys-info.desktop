@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=System-Tools;
 Exec=/usr/share/applications/System_Tools-sys-info.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-hwinfo.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-hwinfo.svgz
 Name=System Information
 Name[de]=Informationen des Systemes
 Name[es]=Información del Sistema

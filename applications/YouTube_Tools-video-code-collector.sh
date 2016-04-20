@@ -9,7 +9,7 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bi
 VCODE=""
 DBUSREF=""
 
-URL=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-video-code-collector.png --caption="Youtube Video List Code Collector" --inputbox="Enter URL YouTube videos list." \
+URL=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz --caption="Youtube Video List Code Collector" --inputbox="Enter URL YouTube videos list." \
     2> /dev/null)
 
 if [ "$?" != "0" ]; then
@@ -21,7 +21,7 @@ fi
 ###################################
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-youtube-video-code-collector.png --caption="Youtube Video List Code Collector" --progressbar "           " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz --caption="Youtube Video List Code Collector" --progressbar "           " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -47,7 +47,7 @@ lynx -source "$URL"
 
 if [ "$?" != "0" ]; then
     progressbar-close
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Youtube Video List Code Collector" \
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Youtube Video List Code Collector" \
                    --passivepopup="[Error]   Check network connection to URL:  $URL"
     exit 0
 fi
@@ -62,7 +62,7 @@ if [ "$VCODE" != "" ]; then
     /usr/share/applications/YouTube_Tools-download-video.sh
 else
     progressbar-close
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-warning.png --title="Youtube Video List Code Collector" \
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-warning.svgz --title="Youtube Video List Code Collector" \
                    --passivepopup="[Warning]   Not find YouTube video codes on this URL:  $URL"
 fi
 

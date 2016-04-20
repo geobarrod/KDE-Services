@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=SSH-keygen;SSH-copy-id;SSH;SCP;SSHfs;ViewMachine;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-sshfs.svgz
 MimeType=all/allfiles;
 Type=Service
 X-KDE-Priority=TopLevel
@@ -21,7 +21,7 @@ X-KDE-Submenu[x-test]=xxSSH Toolsxx
 
 [Desktop Action SCP]
 Exec=xterm -T "Send to Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %f
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-terminal.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-terminal.svgz
 Name=Send to Remote Server
 Name[de]=Schicken Sie zu Entferntem Server
 Name[es]=Enviar a Servidor Remoto
@@ -37,7 +37,7 @@ Name[x-test]=xxSend to Remote Serverxx
 
 [Desktop Action SSH]
 Exec=/usr/share/applications/SSH_Tools-connect.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-connect-to.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-connect-to.svgz
 Name=Connect to Remote Server
 Name[de]=Um Entfernten Diener in Verbindung zu Bringen
 Name[es]=Conectar a Servidor Remoto
@@ -53,7 +53,7 @@ Name[x-test]=xxConnect to Remote Serverxx
 
 [Desktop Action SSH-copy-id]
 Exec=/usr/share/applications/SSH_Tools-copy-id.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-key.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-key.svgz
 Name=Install Public Key
 Name[de]=Schlüssel zu Installieren Veröffentlicht
 Name[es]=Instalar Llave Publica
@@ -69,7 +69,7 @@ Name[x-test]=xxInstall Public Keyxx
 
 [Desktop Action SSH-keygen]
 Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-keygen.svgz
 Name=Public Key Generation
 Name[de]=Schlüssel zu Erzeugen Veröffentlicht
 Name[es]=Generar Llave Publica
@@ -85,7 +85,7 @@ Name[x-test]=xxPublic Key Generationxx
 
 [Desktop Action SSHfs]
 Exec=/usr/share/applications/SSH_Tools-sshfs.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-sshfs.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-sshfs.svgz
 Name=Mount point to Remote Directory
 Name[de]=Um Entfernt Verzeichnis zu Montieren
 Name[es]=Montar Directorio Remoto
@@ -101,7 +101,7 @@ Name[x-test]=xxMount point to Remote Directoryxx
 
 [Desktop Action ViewMachine]
 Exec=/usr/share/applications/SSH_Tools-register-machine.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-server.svgz
 Name=Registered Servers
 Name[de]=Registrierte Diener
 Name[es]=Servidores Registrados

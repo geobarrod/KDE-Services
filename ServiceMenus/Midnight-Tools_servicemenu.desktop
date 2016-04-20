@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=Root-mc;Root-mcedit;User-mc;User-mcedit;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-user.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-user.svgz
 MimeType=all/allfiles;
 Type=Service
 X-KDE-Priority=TopLevel
@@ -20,25 +20,25 @@ X-KDE-Submenu[zh_CN]=Midnight 工具
 X-KDE-Submenu[x-test]=xxMidnight Toolsxx
 
 [Desktop Action Root-mc]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-mc-root.png --noignorebutton -d konsole --new-tab -e mc
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-root.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz --noignorebutton -d konsole --new-tab -e mc
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz
 Name=[Root ~]# mc
 Name[x-test]=xx[Root ~]# mcxx
 
 [Desktop Action Root-mcedit]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-mcedit-root.png --noignorebutton -d konsole --new-tab -e mcedit
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-mcedit-root.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-mcedit-root.svgz --noignorebutton -d konsole --new-tab -e mcedit
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-mcedit-root.svgz
 Name=[Root ~]# mcedit
 Name[x-test]=xx[Root ~]# mceditxx
 
 [Desktop Action User-mc]
 Exec=konsole --new-tab -e mc
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-mc-user.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-user.svgz
 Name=[User ~]$ mc
 Name[x-test]=xx[User ~]$ mcxx
 
 [Desktop Action User-mcedit]
 Exec=konsole --new-tab -e mcedit
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-mcedit-user.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-mcedit-user.svgz
 Name=[User ~]$ mcedit
 Name[x-test]=xx[User ~]$ mceditxx

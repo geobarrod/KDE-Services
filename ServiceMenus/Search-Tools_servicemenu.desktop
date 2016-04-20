@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=SearchHere;SearchByName;SearchByString;_SEPARATOR_;StatisticsSearchDB;UpdateSearchDB;_SEPARATOR_;ModifiedFilesHere
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-string.svgz
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -20,7 +20,7 @@ X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
 Exec=/usr/share/applications/Search_Tools-search-by-name.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
 Name=Search by Name
 Name[de]=Suche von Namen
 Name[es]=Búsqueda por Nombre
@@ -35,8 +35,8 @@ Name[zh_CN]=为名字的搜寻
 Name[x-test]=xxSearch by Namexx
 
 [Desktop Action SearchByString]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-search-string.png -d /usr/share/applications/Search_Tools-search-by-string.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-string.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-search-string.svgz -d /usr/share/applications/Search_Tools-search-by-string.sh %F
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-string.svgz
 Name=Search by String
 Name[de]=Suche um Schnur
 Name[es]=Búsqueda por Palabra
@@ -52,7 +52,7 @@ Name[x-test]=xxSearch by Stringxx
 
 [Desktop Action StatisticsSearchDB]
 Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-stats.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-stats.svgz
 Name=Statistics Search DataBase
 Name[de]=Statistisch von Suchdatenbank
 Name[es]=Estadisticas de Base de Datos de Búsqueda
@@ -68,7 +68,7 @@ Name[x-test]=xxStatistics Search DataBasexx
 
 [Desktop Action UpdateSearchDB]
 Exec=/usr/share/applications/Search_Tools-update-search-db.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-database-update.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-database-update.svgz
 Name=Update Search DataBase
 Name[de]=Um Suchdatenbank zu Befördern
 Name[es]=Actualizar Base de Datos de Búsqueda
@@ -83,8 +83,8 @@ Name[zh_CN]=升级搜寻数据库
 Name[x-test]=xxUpdate Search DataBasexx
 
 [Desktop Action SearchHere]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-search-name.png -d /usr/share/applications/Search_Tools-search-here.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz -d /usr/share/applications/Search_Tools-search-here.sh %F
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
 Name=Search Here
 Name[de]=Suchen Sie Hier
 Name[es]=Buscar Aquí
@@ -99,8 +99,8 @@ Name[zh_CN]=找寻这里
 Name[x-test]=xxSearch Herexx
 
 [Desktop Action ModifiedFilesHere]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-search-name.png -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-search-name.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
 Name=Modified Files Here
 Name[de]=Modifizierte Akten Hier
 Name[es]=Archivos Modificados Aquí

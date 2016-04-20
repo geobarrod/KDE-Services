@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=System-Tools;
 Exec=/usr/share/applications/System_Tools-process-viewer.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-system-process.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-system-process.svgz
 Name=Process Viewer
 Name[de]=Finder der Prozesse
 Name[es]=Visor de Procesos

@@ -35,6 +35,6 @@ stat --printf "Time of file birth:\t %w\n" "$1" >> /tmp/show-status
 stat --printf "Time of last access:\t %x\n" "$1" >> /tmp/show-status
 stat --printf "Time of last modification: %y\n" "$1" >> /tmp/show-status
 stat --printf "Time of last change:\t %z\n" "$1" >> /tmp/show-status
-kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-info.png --caption="Show [File|Directory] Status" --textbox /tmp/show-status 500 450
+kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-info.svgz --caption="Show [File|Directory] Status" --textbox /tmp/show-status 500 450
 rm -f /tmp/show-status
 exit 0

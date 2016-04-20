@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=SSH-Tools;Dolphin-Tools;
 Exec=/usr/share/applications/SSH_Tools-register-machine.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-server.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-server.svgz
 Name=Registered Servers
 Name[de]=Registrierte Diener
 Name[es]=Servidores Registrados

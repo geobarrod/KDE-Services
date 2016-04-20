@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Attach Cover to MP3 Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-audio-mp3-attach-cover.sh;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio-mp3-attach-cover.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Attach Cover to MP3 Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-audio-mp3-attach-cover.sh;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz
 Name=Attach Cover to MP3 Files
 Name[de]=Zu Befestigen Deckte MP3 zu Akten
 Name[es]=Adjuntar Cubierta a Ficheros MP3

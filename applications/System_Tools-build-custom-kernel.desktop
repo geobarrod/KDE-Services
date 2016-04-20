@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=System-Tools;
 Exec=xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz
 Name=Build Custom Kernel
 Name[de]=Um Eine Persönliche Note Gegebenen Kern zu Bauen
 Name[es]=Construir Kernel Personalizado

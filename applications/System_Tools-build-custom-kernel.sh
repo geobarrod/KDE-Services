@@ -26,16 +26,16 @@ ELAPSED_TIME=""
 
 elapsed-time() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}s" 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}s" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}m" 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}m" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}h" 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}h" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}d" 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --title="Build Custom Kernel" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}d" 2> /dev/null
     fi
 }
 
@@ -64,7 +64,7 @@ if-cancel-exit2() {
 }
 
 before-compile() {
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
         --yesno "You can change Spec file(s) or Source Code in this pause. Do you want continuing with the Kernel recompilation process?" \
         2> /dev/null
     
@@ -90,7 +90,7 @@ rpmbuild-error() {
         text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
         play /tmp/speak.wav 2> /dev/null
         rm -fr /tmp/speak*
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" --error="[Error]: See $HOME/rpmbuild/TMP/kernel.err. Try Again." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" --error="[Error]: See $HOME/rpmbuild/TMP/kernel.err. Try Again." 2> /dev/null
         exit 0
     fi
 }
@@ -166,7 +166,7 @@ install-packages() {
     text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
     play /tmp/speak.wav 2> /dev/null
     rm -fr /tmp/speak*
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --title="Build Custom Kernel" --passivepopup="Enter [root] password for bootloader update" 2> /dev/null
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --title="Build Custom Kernel" --passivepopup="Enter [root] password for bootloader update" 2> /dev/null
     setterm -cursor on
     echo -n "Enter Root "; su -c 'grub2-mkconfig -o /boot/grub2/grub.cfg'
     echo -e "\n$GREEN>($(date +%H"h":%M"m")) Finished.$WHITE\n"
@@ -182,7 +182,7 @@ finish-notify() {
 
 test-network() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
             --error="No Internet Communication: You have some network or repositories problem, can't download kernel source rpm package." \
             2> /dev/null
         kill -9 $(pidof xterm|awk -F " " '{print $1}') > /dev/null 2>&1
@@ -203,7 +203,7 @@ EOF'
 
 check-builddep() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
                     --error="Can't install all the RPMs needed to build the source rpm package. Check the packages repository." 2> /dev/null
         kill -9 $(pidof xterm|awk -F " " '{print $1}') > /dev/null 2>&1
         exit 0
@@ -215,7 +215,7 @@ check-builddep() {
 ##############################
 
 if [ "$(uname -m)" != "i686" ] && [ "$(uname -m)" != "x86_64" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
                    --sorry="No Find Compatible Arch: Only i686 or x86_64 arch is allowed. I apologize for any inconvenience." 2> /dev/null
     kill -9 $(pidof xterm|awk -F " " '{print $1}') > /dev/null 2>&1
     exit 0
@@ -224,7 +224,7 @@ fi
 echo -e "$GREEN> Running Build Custom Kernel For $(uname -m) Arch...$WHITE\n"
 
 if [ "$(id|grep -o wheel)" != "wheel" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
                    --sorry="Your user is not in the Administrators group (wheel), please add it. After relogin, try again." 2> /dev/null
     exit 0
 fi
@@ -233,7 +233,7 @@ sudo-no-timeout
 
 setterm -cursor off
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
     --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 EXIT=$?
 if-cancel-exit2
@@ -277,7 +277,7 @@ rm -fr ~/rpmbuild/TMP/* 2> /dev/null
 rpmdev-setuptree
 mkdir -p ~/rpmbuild/TMP > /dev/null 2>&1
 
-KERNELSOURCE=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" --yesnocancel "Have the kernel source RPM package?" 2> /dev/null)
+KERNELSOURCE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" --yesnocancel "Have the kernel source RPM package?" 2> /dev/null)
 EXIT=$?
 if-cancel-exit
 
@@ -298,7 +298,7 @@ if [ "$EXIT" = "1" ]; then
 fi
 
 if [ "$EXIT" = "0" ]; then
-    KERNELSOURCEPATH=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Kernel Source RPM File" \
+    KERNELSOURCEPATH=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Kernel Source RPM File" \
                      --getopenfilename ~/rpmbuild/SRPMS kernel-*.src.rpm 2> /dev/null)
     EXIT=$?
     if-cancel-exit2
@@ -313,7 +313,7 @@ if [ "$EXIT" = "0" ]; then
     EXIT=$?
     
     if [ "$EXIT" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
             --sorry="No Internet Communication: You have some network or repositories problem, can't check updates. Installing $KERNELFILE" \
             2> /dev/null &
         echo -e "$GREEN> Installing RPMs Needed For Build $KERNELFILE...$WHITE\n"
@@ -326,7 +326,7 @@ if [ "$EXIT" = "0" ]; then
     
     if [ "$EXIT" = "0" ]; then
         if [ "$KERNELVERSION" != "$INTERNETVERSION" ]; then
-            kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Kernel Source RPM File" \
+            kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Kernel Source RPM File" \
                     --yesnocancel "New kernel version available: kernel-$INTERNETVERSION, Do you want to download it and use it instead?" \
                     2> /dev/null
             EXIT=$?
@@ -375,13 +375,13 @@ fi
 
 BINOPT=$(cat ~/.kde-services/kernel-cflags 2> /dev/null)
 
-kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel | B.O.O.=\"$BINOPT\"" \
+kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel | B.O.O.=\"$BINOPT\"" \
                --yesnocancel="          Do you want to reconfigure Binary Optimization Option(s) of compilation?               " 2> /dev/null
 EXIT="$?"
 
 if [ "$EXIT" = "0" ]; then
     mkdir ~/.kde-services > /dev/null 2>&1
-    BINOPT=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" --combobox="Choose Binary Optimization Option(s)" \
+    BINOPT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" --combobox="Choose Binary Optimization Option(s)" \
            "Ofast -ffast-math -funroll-loops" "Ofast -funroll-loops" Ofast "O3 -ffast-math -funroll-loops" "O3 -funroll-loops" \
            O3 "O2 -ffast-math -funroll-loops" "O2 -funroll-loops" O2 O1 O0 Os --default "Ofast -ffast-math -funroll-loops" 2> /dev/null)
     EXIT=$?
@@ -397,7 +397,7 @@ fi
 
 cd ~/rpmbuild/BUILD/kernel-*/linux-*/
 
-kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" --yesnocancel "Have the kernel config file?" 2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" --yesnocancel "Have the kernel config file?" 2> /dev/null
 EXIT=$?
 if-cancel-exit
 
@@ -420,7 +420,7 @@ if [ "$EXIT" = "1" ]; then
 fi
 
 if [ "$EXIT" = "0" ]; then
-    KERNELCONFIG=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Kernel Config File" --getopenfilename ~/ 2> /dev/null)
+    KERNELCONFIG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Kernel Config File" --getopenfilename ~/ 2> /dev/null)
     
     if [ "$(uname -m)" = "i686" ]; then
         cp $KERNELCONFIG ~/rpmbuild/SOURCES/config-$(uname -m)-PAE
@@ -429,7 +429,7 @@ if [ "$EXIT" = "0" ]; then
     fi
     
     cp $KERNELCONFIG .config
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png --caption="Build Custom Kernel" --yesnocancel "Do you want to make changes in the kernel config file?" 2> /dev/null
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" --yesnocancel "Do you want to make changes in the kernel config file?" 2> /dev/null
     EXIT=$?
     if-cancel-exit
     

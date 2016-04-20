@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=ChangeTimestamp;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-clock.svgz
 MimeType=all/allfiles;inode/directory;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -9,8 +9,8 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action ChangeTimestamp]
-Exec=TIMESTAMP=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp to [File|Directory]" --inputbox="Enter New Timestamp" "$(date "+%0Y-%0m-%0d %0H:%0M:%0S")"); COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES));  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --caption="Change Timestamp to [File|Directory]" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Changing timestamp to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; touch -cd "$TIMESTAMP" "$file";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png --title="Change Timestamp to [File|Directory]" --passivepopup="[Finished]"
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-clock.png
+Exec=TIMESTAMP=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-clock.svgz --caption="Change Timestamp to [File|Directory]" --inputbox="Enter New Timestamp" "$(date "+%0Y-%0m-%0d %0H:%0M:%0S")"); COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES));  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-clock.svgz --caption="Change Timestamp to [File|Directory]" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Changing timestamp to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; touch -cd "$TIMESTAMP" "$file";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-clock.svgz --title="Change Timestamp to [File|Directory]" --passivepopup="[Finished]"
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-clock.svgz
 Name=Change Timestamp to [File|Directory]
 Name[de]=Um Datum Davon zu Verändern das [File|Verzeichnis]
 Name[es]=Cambiar Fecha del [Fichero|Directorio]

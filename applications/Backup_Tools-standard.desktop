@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Backup-Tools;
 Exec=/usr/share/applications/Backup_Tools-standard.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-database.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz
 Name=Standards
 Name[de]=Standards
 Name[es]=Estándares

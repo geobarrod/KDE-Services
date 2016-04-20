@@ -10,18 +10,18 @@ VERSION=$(head -n1 /usr/share/doc/kde-services*/ChangeLog |awk '{print $10}')
 
 cat > /tmp/about_kde-services << EOF
 
-			KDE-Services, version $VERSION, (C) 2011-2016.
-			http://sourceforge.net/projects/kde-services/
+			        KDE-Services, version $VERSION, (C) 2011-2016.
+			        http://sourceforge.net/projects/kde-services/
 
     Description:
         Enables the following functionalities on the Dolphin's right click menu of KDE-4.x/5.x:
 
         - Convert several video formats to MPEG-1, MPEG-2, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV or WebM.
-        - Extract the audio track of several video formats and convert them to MP3, MP3(432Hz), FLAC or FLAC(432Hz).
-        - Convert several audio files to MP3, MP3(432Hz), FLAC or FLAC(432Hz).
-        - Send file to Thunderbird as email attachment. (This service need Thunderbird installed)
+        - Extract the audio track of several video formats and convert them to MP3, MP3(432Hz), FLAC, FLAC(432Hz), OGG or OGG (432Hz).
+        - Convert several audio files to MP3, MP3(432Hz), FLAC, FLAC(432Hz), OGG or OGG (432Hz).
+        - Send file as email attachment.
         - Burn ISO image; in place ISO image mounting and unmounting, as well as the
-            possibility of getting the MD5sum, SHA1sum, SHA256sum, SHA512sum of the ISO image.
+          possibility of getting the MD5sum, SHA1sum, SHA256sum, SHA512sum of the ISO image.
         - Execution of scripts.
         - PDF tools.
         - AVI tools.
@@ -34,36 +34,33 @@ cat > /tmp/about_kde-services << EOF
         - Dolphin tools.
         - Midnight tools (Midnight Commander).
         - Play videos from selected folder.
-        - System Tools => Build Custom Kernel ( Now you can customize your own kernel easily,
-            for create a system with more performance, more fast and more hardware support ),
-            Check Kernel Update and more.
-        - Network Tools => Connect Sentry ( Now can see on your notification widget,
-            every established connection ).
-        - [Backup|Restore] Tools.
-        - SaMBa Tools.
+        - System tools => "Build Custom Kernel" ( Now you can customize your own kernel easily, for create a system
+          with more performance, more fast and more hardware support ), Check kernel update and more.
+        - Network tools => "Connect Sentry" ( Now can see on your notification widget, every established connection ).
+        - Backup and restore tools.
+        - SaMBa tools.
         - Extract subtitle from MKV video files.
-        - YouTube Tools.
+        - YouTube tools.
         - Multiplex subtitle into MPEG-2 video file.
-        - DVD Tools.
-        - Multimedia Tools.
-        - GPG Tools.
-        - Secure send file or directory to Mailx as email attachment. (Need SMTP service running
-            in LocalHost)
-        - Add Timestamp Prefix To [File|Dir]name(s).
-        - Paranoid Shredder.
-        - HTTP Publisher.
-        - Graphic Tools.
+        - DVD tools.
+        - Multimedia tools.
+        - Security tools.
+        - Secure send file or directory to Mailx as email attachment. (Need SMTP service running in LocalHost)
+        - Add timestamp prefix to file|dir]name(s).
+        - Paranoid shredder.
+        - HTTP server.
+        - Graphic tools.
         - The Sizer.
-        - Package Tools.
+        - Package tools.
         - The Converter.
-        - Dropbox Tools.
-        - Android Tools.
-        - Compressed File Integrity Check.
-        - Rotate Video Files.
-        - Edit Time from Media Files.
-        - Attach Cover to MP3 Files.
-        - Clean Metadata from Media Files.
-        - Concatenate Media Files with Same Codec.
+        - Dropbox tools.
+        - Android tools.
+        - Compressed file integrity check.
+        - Rotate video files.
+        - Edit time from media files.
+        - Attach cover to MP3 files.
+        - Clean metadata from media files.
+        - Concatenate media files with same codec.
 
     Required dependencies:
         - android-tools
@@ -144,6 +141,6 @@ cat > /tmp/about_kde-services << EOF
 
 EOF
 
-kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-menu.png --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 800x600 2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-menu.svgz --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 930x600 2> /dev/null
 rm -f /tmp/about_kde-services
 exit 0

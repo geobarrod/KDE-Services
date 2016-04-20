@@ -24,7 +24,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --caption="MKV Extract Subtitle" --progressbar "                               " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="MKV Extract Subtitle" --progressbar "                               " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -44,11 +44,11 @@ ffprobe "$MKV" 2> /tmp/mkvinfo
 grep -e Stream /tmp/mkvinfo|awk -F : '{print $1,$2}' > /tmp/mkvinfo2
 cat /tmp/mkvinfo2|sed 's/^    //g' > /tmp/mkvinfo3
 cat /tmp/mkvinfo3|sed 's/ /_/g' > /tmp/mkvinfo4
-TID=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --caption="MKV Extract Subtitle" \
+TID=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="MKV Extract Subtitle" \
     --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo4 |sed 's/$/ off/g'))
 if-cancel-exit
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --caption="[Extract|Convert] Audio Track" \
+PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="[Extract|Convert] Audio Track" \
          --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
 if-cancel-exit
 
@@ -71,13 +71,13 @@ FINAL_TIME=$(date +%s)
 ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 
 if [ "$ELAPSED_TIME" -lt "60" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}s"
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}s"
 elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}m"
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}m"
 elif [ "$ELAPSED_TIME" -gt "3599" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-extracting-subs.png --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}h"
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --title="MKV Extract Subtitle" --passivepopup="[Finished]   ${MKV##*/}   Elapsed Time: ${ELAPSED_TIME}h"
 fi
 
 echo "Finish Extracting Subtitle" > /tmp/speak

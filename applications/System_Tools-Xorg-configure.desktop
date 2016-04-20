@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-xorg.png --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-xorg.svgz --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-xorg.svgz
 Name=Xorg Configure
 Name[de]=Um Xorg zu Konfigurieren
 Name[es]=Configurar Xorg

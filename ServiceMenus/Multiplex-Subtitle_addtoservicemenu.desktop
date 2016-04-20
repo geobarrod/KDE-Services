@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=MultiplexSubtitle;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz
 MimeType=video/mpeg;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -10,7 +10,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action MultiplexSubtitle]
 Exec=/usr/share/applications/Multiplex_Subtitle.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-multiplexing-subs.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz
 Name=Multiplex Subtitle
 Name[de]=Zu Mehrfachem Untertitel
 Name[es]=Multiplexar Subtítulo

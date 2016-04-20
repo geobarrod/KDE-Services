@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Android-Tools;
 Exec=/usr/share/applications/Android_Tools-reboot.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-reboot.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz
 Name=Android Reboot Manager
 Name[de]=Verwalter von Mir Fängt Wieder für Android
 Name[es]=Administrador de Reinicio para Android

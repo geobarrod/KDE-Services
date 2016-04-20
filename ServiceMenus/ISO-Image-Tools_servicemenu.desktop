@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=MountCD-Image;UnmountCD-Image;_SEPARATOR_;Integrity-Check;Insert-MD5sum;_SEPARATOR_;MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;Burn-Image;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz
 MimeType=application/x-cd-image;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -21,7 +21,7 @@ X-KDE-Submenu[x-test]=xxiso9660 Image Toolsxx
 
 [Desktop Action Burn-Image]
 Exec=/usr/share/applications/iso_manager-burn-image.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-burn.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz
 Name=Burn iso9660 Image
 Name[de]=Verbrennen Sie iso9660-Bild
 Name[es]=Quemar Imagen iso9660
@@ -36,8 +36,8 @@ Name[zh_CN]=燃烧图像 iso9660
 Name[x-test]=xxBurn iso9660 Imagexx
 
 [Desktop Action Insert-MD5sum]
-Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-md5sum.png --caption="Insert MD5sum" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Inserting:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; implantisomd5 "$file" > /tmp/insert-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-md5sum.png --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-md5sum.png
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-md5sum.svgz --caption="Insert MD5sum" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Inserting:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; implantisomd5 "$file" > /tmp/insert-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-md5sum.svgz --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-md5sum.svgz
 Name=Insert MD5sum
 Name[de]=Legen Sie MD5sum Ein
 Name[es]=Insertar MD5sum
@@ -52,8 +52,8 @@ Name[zh_CN]=插入 MD5sum
 Name[x-test]=xxInsert MD5sumxx
 
 [Desktop Action Integrity-Check]
-Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-integrity-check.png --caption="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; checkisomd5 "$file" > /tmp/check-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";else kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-integrity-check.png --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";fi;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-integrity-check.png
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-integrity-check.svgz --caption="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; checkisomd5 "$file" > /tmp/check-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";else kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-integrity-check.svgz --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";fi;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-integrity-check.svgz
 Name=Integrity Check
 Name[de]=Integritätsscheck
 Name[es]=Comprobar Integridad
@@ -68,8 +68,8 @@ Name[zh_CN]=检查正直
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action MD5-Sum]
-Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="MD5sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --caption="MD5sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
 Name=Show MD5sum iso9660 Image
 Name[de]=Zeigen Sie MD5sum iso9660-Bild
 Name[es]=Mostrar MD5sum Imagen iso9660
@@ -84,8 +84,8 @@ Name[zh_CN]=表示 MD5sum 图像 iso9660
 Name[x-test]=xxShow MD5sum iso9660 Imagexx
 
 [Desktop Action SHA1-Sum]
-Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="SHA1sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --caption="SHA1sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
 Name=Show SHA1sum iso9660 Image
 Name[de]=Zeigen Sie SHA1sum iso9660-Bild
 Name[es]=Mostrar SHA1sum Imagen iso9660
@@ -100,8 +100,8 @@ Name[zh_CN]=表示 SHA1sum 图像 iso9660
 Name[x-test]=xxShow SHA1sum iso9660 Imagexx
 
 [Desktop Action SHA256-Sum]
-Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="SHA256sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --caption="SHA256sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
 Name=Show SHA256sum iso9660 Image
 Name[de]=Zeigen Sie SHA256sum iso9660-Bild
 Name[es]=Mostrar SHA256sum Imagen iso9660
@@ -116,8 +116,8 @@ Name[zh_CN]=表示 SHA256sum 图像 iso9660
 Name[x-test]=xxShow SHA256sum iso9660 Imagexx
 
 [Desktop Action SHA512-Sum]
-Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --caption="SHA512sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-checksum.png
+Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --caption="SHA512sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
 Name=Show SHA512sum iso9660 Image
 Name[de]=Zeigen Sie SHA512sum iso9660-Bild
 Name[es]=Mostrar SHA512sum Imagen iso9660
@@ -132,8 +132,8 @@ Name[zh_CN]=表示 SHA512sum 图像 iso9660
 Name[x-test]=xxShow SHA512sum iso9660 Imagexx
 
 [Desktop Action MountCD-Image]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="Mount iso9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else /usr/share/applications/iso_manager-mount-image.sh %F;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-mount.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Mount iso9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else /usr/share/applications/iso_manager-mount-image.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz
 Name=Mount iso9660 Image
 Name[de]=Montieren Sie iso9660-Bild
 Name[es]=Montar Imagen iso9660
@@ -148,8 +148,8 @@ Name[zh_CN]=装图像 iso9660
 Name[x-test]=xxMount iso9660 Imagexx
 
 [Desktop Action UnmountCD-Image]
-Exec=fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')"; rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png --title="Unmount iso9660 Image" --passivepopup="[Finished] $(basename %f) unmounted."
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-umount.png
+Exec=fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')"; rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-umount.svgz --title="Unmount iso9660 Image" --passivepopup="[Finished] $(basename %f) unmounted."
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-umount.svgz
 Name=Unmount iso9660 Image
 Name[de]=Unmount iso9660-Bild
 Name[es]=Desmontar Imagen iso9660

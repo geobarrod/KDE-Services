@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Network-Tools;
 Exec=/usr/share/applications/Network_Tools-connect-sentry.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-sentry-on.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz
 Name=Connect Sentry
 Name[de]=Wache der Verbindungen
 Name[es]=Centinela de Conexiones

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Android-Tools;
 Exec=/usr/share/applications/Android_Tools-push-pull.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-android-push-pull.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz
 Name=Android File Manager
 Name[de]=Verwalter der Akten für Android
 Name[es]=Administrador de Ficheros para Android

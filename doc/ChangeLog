@@ -1,3 +1,11 @@
+* Mon Apr 18 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-4
+- "[Extract|Convert] Audio Track": Enhancement. Added OGG and OGG(432Hz) options.
+- "Convert Video Files": Enhancement. Added "Video to Animated GIF", "Video to Images",
+  "Images to Video" and "Multiplex Audio File" options.
+- "YouTube Tools": Enhancement.
+- New icon theme in scalable (svgz) format.
+- Makefile: Updated.
+
 * Tue Apr 05 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-3
 - "[Extract|Convert] Audio Track": Enhancement. Added MP3(432Hz) and FLAC(432Hz) options.
 - Added new services menu:

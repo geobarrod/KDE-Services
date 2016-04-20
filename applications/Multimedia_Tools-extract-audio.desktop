@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png --title="[Extract|Convert] Audio Tracks" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh;fi
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-audio.png
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[Extract|Convert] Audio Tracks" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz
 Name=[Extract|Convert] Audio Tracks
 Name[de]=[Auszug|Bekehrter] Audiofährten
 Name[es]=[Extraer|Convertir] Pista de Audio

@@ -8,6 +8,7 @@ PREFIXmenu5=$(RPM_BUILD_ROOT)/usr/share/kservices5/ServiceMenus
 PREFIXservicetypes5=$(RPM_BUILD_ROOT)/usr/share/kservicetypes5
 PREFIXmenu=$(RPM_BUILD_ROOT)/usr/share/kde4/services/ServiceMenus
 PREFIXapp=$(RPM_BUILD_ROOT)/usr/share/applications
+PREFIXSVGicons=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/scalable/apps
 PREFIX512apps=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/512x512/apps
 PREFIXmime=$(RPM_BUILD_ROOT)/usr/share/mime/text
 PREFIXappmerge=$(RPM_BUILD_ROOT)/etc/xdg/menus/applications-merged
@@ -19,7 +20,7 @@ install:
 	mkdir -p $(PREFIXservicetypes5)
 	mkdir -p $(PREFIXmenu)
 	mkdir -p $(PREFIXapp)
-	mkdir -p $(PREFIX512apps)
+	mkdir -p $(PREFIXSVGicons)
 	mkdir -p $(PREFIXmime)
 	mkdir -p $(PREFIXappmerge)
 	mkdir -p $(PREFIXdeskdir)
@@ -29,7 +30,7 @@ install:
 	cp servicetypes/* $(PREFIXservicetypes5)
 	cp ServiceMenus/* $(PREFIXmenu)
 	cp applications/* $(PREFIXapp)
-	cp 512x512/apps/* $(PREFIX512apps)
+	cp scalable/apps/* $(PREFIXSVGicons)
 	cp mime/text/* $(PREFIXmime)
 	cp applications-merged/* $(PREFIXappmerge)
 	cp desktop-directories/* $(PREFIXdeskdir)
@@ -151,7 +152,6 @@ uninstall:
 		$(PREFIXapp)/ffmpeg_record-my-desktop.sh \
 		$(PREFIXapp)/Graphic_Tools-the-converter.desktop \
 		$(PREFIXapp)/Graphic_Tools-the-sizer.desktop \
-		$(PREFIXapp)/HTTP_Publisher.sh \
 		$(PREFIXapp)/HTTP_Server.sh \
 		$(PREFIXapp)/iso_manager-burn-image.sh \
 		$(PREFIXapp)/iso_manager-mount-image.sh \
@@ -216,6 +216,83 @@ uninstall:
 		$(PREFIXapp)/YouTube_Tools-download-video.sh \
 		$(PREFIXapp)/YouTube_Tools-video-code-collector.desktop \
 		$(PREFIXapp)/YouTube_Tools-video-code-collector.sh
+
+	rm -f $(PREFIXSVGicons)/ks-android-apk-manager.svgz \
+		$(PREFIXSVGicons)/ks-android-backup-restore.svgz \
+		$(PREFIXSVGicons)/ks-android-push-pull.svgz \
+		$(PREFIXSVGicons)/ks-android-reboot.svgz \
+		$(PREFIXSVGicons)/ks-audio-mp3-attach-cover.svgz \
+		$(PREFIXSVGicons)/ks-audio-video-info.svgz \
+		$(PREFIXSVGicons)/ks-audio.svgz \
+		$(PREFIXSVGicons)/ks-checksum.svgz \
+		$(PREFIXSVGicons)/ks-clock.svgz \
+		$(PREFIXSVGicons)/ks-compressed-file.svgz \
+		$(PREFIXSVGicons)/ks-concatenate-media-file.svgz \
+		$(PREFIXSVGicons)/ks-connect-to.svgz \
+		$(PREFIXSVGicons)/ks-database.svgz \
+		$(PREFIXSVGicons)/ks-decrypt.svgz \
+		$(PREFIXSVGicons)/ks-disk-space-used.svgz \
+		$(PREFIXSVGicons)/ks-dolphin-file-manager.svgz \
+		$(PREFIXSVGicons)/ks-dropbox-off.svgz \
+		$(PREFIXSVGicons)/ks-dropbox-on.svgz \
+		$(PREFIXSVGicons)/ks-dropbox.svgz \
+		$(PREFIXSVGicons)/ks-encrypt.svgz \
+		$(PREFIXSVGicons)/ks-error.svgz \
+		$(PREFIXSVGicons)/ks-extracting-subs.svgz \
+		$(PREFIXSVGicons)/ks-folder-public-web.svgz \
+		$(PREFIXSVGicons)/ks-folder-remote.svgz \
+		$(PREFIXSVGicons)/ks-hwinfo.svgz \
+		$(PREFIXSVGicons)/ks-image.svgz \
+		$(PREFIXSVGicons)/ks-info.svgz \
+		$(PREFIXSVGicons)/ks-kernel-rebuild.svgz \
+		$(PREFIXSVGicons)/ks-kernel-update.svgz \
+		$(PREFIXSVGicons)/ks-key.svgz \
+		$(PREFIXSVGicons)/ks-keygen.svgz \
+		$(PREFIXSVGicons)/ks-mc-root.svgz \
+		$(PREFIXSVGicons)/ks-mc-user.svgz \
+		$(PREFIXSVGicons)/ks-mcedit-root.svgz \
+		$(PREFIXSVGicons)/ks-mcedit-user.svgz \
+		$(PREFIXSVGicons)/ks-media-clean-metadata.svgz \
+		$(PREFIXSVGicons)/ks-media-edit-time.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-burn.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-clone.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-integrity-check.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-md5sum.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-mount.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-umount.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-video.svgz \
+		$(PREFIXSVGicons)/ks-media-tape.svgz \
+		$(PREFIXSVGicons)/ks-menu.svgz \
+		$(PREFIXSVGicons)/ks-multiplexing-subs.svgz \
+		$(PREFIXSVGicons)/ks-owner.svgz \
+		$(PREFIXSVGicons)/ks-pdf.svgz \
+		$(PREFIXSVGicons)/ks-rebuild-rpm.svgz \
+		$(PREFIXSVGicons)/ks-resize-image.svgz \
+		$(PREFIXSVGicons)/ks-search-database-update.svgz \
+		$(PREFIXSVGicons)/ks-search-name.svgz \
+		$(PREFIXSVGicons)/ks-search-replace.svgz \
+		$(PREFIXSVGicons)/ks-search-stats.svgz \
+		$(PREFIXSVGicons)/ks-search-string.svgz \
+		$(PREFIXSVGicons)/ks-secure-mail.svgz \
+		$(PREFIXSVGicons)/ks-sentry-off.svgz \
+		$(PREFIXSVGicons)/ks-sentry-on.svgz \
+		$(PREFIXSVGicons)/ks-sentry-warning.svgz \
+		$(PREFIXSVGicons)/ks-server.svgz \
+		$(PREFIXSVGicons)/ks-shellscript.svgz \
+		$(PREFIXSVGicons)/ks-shredder.svgz \
+		$(PREFIXSVGicons)/ks-smbfs.svgz \
+		$(PREFIXSVGicons)/ks-socket.svgz \
+		$(PREFIXSVGicons)/ks-sshfs.svgz \
+		$(PREFIXSVGicons)/ks-system-process.svgz \
+		$(PREFIXSVGicons)/ks-terminal.svgz \
+		$(PREFIXSVGicons)/ks-text-plain.svgz \
+		$(PREFIXSVGicons)/ks-video-rotate.svgz \
+		$(PREFIXSVGicons)/ks-video.svgz \
+		$(PREFIXSVGicons)/ks-warning.svgz \
+		$(PREFIXSVGicons)/ks-whitespace-replace.svgz \
+		$(PREFIXSVGicons)/ks-xorg.svgz \
+		$(PREFIXSVGicons)/ks-youtube-download-video.svgz \
+		$(PREFIXSVGicons)/ks-youtube-video-code-collector.svgz
 
 	rm -f $(PREFIX512apps)/ks-android-apk-manager.png \
 		$(PREFIX512apps)/ks-android-backup-restore.png \

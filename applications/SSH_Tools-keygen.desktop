@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=SSH-Tools;
 Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-keygen.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-keygen.svgz
 Name=Public Key Generation
 Name[de]=Schlüssel zu Erzeugen Veröffentlicht
 Name[es]=Generar Llave Publica

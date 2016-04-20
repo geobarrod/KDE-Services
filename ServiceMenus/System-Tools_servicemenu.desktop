@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=BuildKernel;CheckKernelUpdate;RebuildPackage;SysInfo;SysMonitor;Htop;XorgConf;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-hwinfo.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-hwinfo.svgz
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -20,7 +20,7 @@ X-KDE-Submenu[x-test]=xxSystem Toolsxx
 
 [Desktop Action BuildKernel]
 Exec=xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-rebuild.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz
 Name=Build Custom Kernel
 Name[de]=Um Eine Persönliche Note Gegebenen Kern zu Bauen
 Name[es]=Construir Kernel Personalizado
@@ -36,7 +36,7 @@ Name[x-test]=xxBuild Custom Kernelxx
 
 [Desktop Action CheckKernelUpdate]
 Exec=/usr/share/applications/System_Tools-check-kernel-update.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-kernel-update.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-update.svgz
 Name=Check Kernel Update
 Name[de]=Scheck Kern Aktualisierung
 Name[es]=Chequear Actualización del Kernel
@@ -52,7 +52,7 @@ Name[x-test]=xxCheck Kernel Updatexx
 
 [Desktop Action Htop]
 Exec=/usr/share/applications/System_Tools-process-viewer.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-system-process.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-system-process.svgz
 Name=Process Viewer
 Name[de]=Finder der Prozesse
 Name[es]=Visor de Procesos
@@ -68,7 +68,7 @@ Name[x-test]=xxProcess Viewerxx
 
 [Desktop Action RebuildPackage]
 Exec=xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-rebuild-rpm.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
 Name=Rebuild RPM Package
 Name[de]=Um Paketdrehzahl zu Rekonstruieren
 Name[es]=Reconstruir Paquete RPM
@@ -84,7 +84,7 @@ Name[x-test]=xxRebuild RPM Packagexx
 
 [Desktop Action SysInfo]
 Exec=/usr/share/applications/System_Tools-sys-info.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-hwinfo.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-hwinfo.svgz
 Name=System Information
 Name[de]=Informationen des Systemes
 Name[es]=Información del Sistema
@@ -99,8 +99,8 @@ Name[zh_CN]=系统的数据
 Name[x-test]=xxSystem Informationxx
 
 [Desktop Action SysMonitor]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-error.png --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-error.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-error.svgz --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh %F
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz
 Name=System Monitor
 Name[de]=Monitor des Systemes
 Name[es]=Monitor del Sistema
@@ -115,8 +115,8 @@ Name[zh_CN]=系统的监视器
 Name[x-test]=xxSystem Monitorxx
 
 [Desktop Action XorgConf]
-Exec=kdesu -i /usr/share/icons/hicolor/512x512/apps/ks-xorg.png --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-xorg.png
+Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-xorg.svgz --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh %F
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-xorg.svgz
 Name=Xorg Configure
 Name[de]=Um Xorg zu Konfigurieren
 Name[es]=Configurar Xorg

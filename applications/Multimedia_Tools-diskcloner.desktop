@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
 Exec=/usr/share/applications/DiskCloner.sh
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-media-optical-clone.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz
 Name=DiskCloner
 Name[de]=DiskCloner (diskette cloner)
 Name[es]=DiskCloner (clonador de disco)

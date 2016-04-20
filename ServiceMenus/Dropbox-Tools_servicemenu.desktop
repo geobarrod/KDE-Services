@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=CopyToDropbox;MoveToDropbox;_SEPARATOR_;CopyToPublicAndGetURL;MoveToPublicAndGetURL;_SEPARATOR_;GetPublicURL;_SEPARATOR_;InstallService;UpdateService;_SEPARATOR_;StartService;StopService;_SEPARATOR_;AutoStart;
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 MimeType=all/all;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -21,7 +21,7 @@ X-KDE-Submenu[x-test]=xxDropbox Toolsxx
 
 [Desktop Action CopyToDropbox]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh copy %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Copy to Dropbox
 Name[de]=Kopie zu Dropbox
 Name[es]=Copiar a Dropbox
@@ -36,7 +36,7 @@ Name[zh_CN]=复印 Dropbox
 
 [Desktop Action MoveToDropbox]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh move %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Move to Dropbox
 Name[de]=Umzug zu Dropbox
 Name[es]=Mover a Dropbox
@@ -51,7 +51,7 @@ Name[zh_CN]=移动到 Dropbox
 
 [Desktop Action CopyToPublicAndGetURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh copy_pub %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Copy to Public Dropbox and get URL
 Name[de]=Kopie zu Öffentlichem Dropbox und bekommt URL
 Name[es]=Copiar a Dropbox Público y obtener URL
@@ -66,7 +66,7 @@ Name[zh_CN]=复印 Dropbox 民众并且获得网址
 
 [Desktop Action MoveToPublicAndGetURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh move_pub %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Move to Public Dropbox and get URL
 Name[de]=Umzug zu Öffentlichem Dropbox und bekommt URL
 Name[es]=Mover a Dropbox Público y obtener URL
@@ -81,7 +81,7 @@ Name[zh_CN]=移动到 Dropbox 民众并且获得网址
 
 [Desktop Action GetPublicURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh get_pub_url %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Get public URL
 Name[de]=Bekommen Sie Öffentlichen URL
 Name[es]=Obtener URL pública
@@ -96,7 +96,7 @@ Name[zh_CN]=获得公众的网址
 
 [Desktop Action InstallService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh install_service %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Install Dropbox service
 Name[de]=Um Dienst Dropbox zu Installieren
 Name[es]=Instalar servicio Dropbox
@@ -111,7 +111,7 @@ Name[zh_CN]=安装服务 Dropbox
 
 [Desktop Action UpdateService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh update_service %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Update Dropbox service
 Name[de]=Um Dienst Dropbox zu Befördern
 Name[es]=Actualizar servicio Dropbox
@@ -126,7 +126,7 @@ Name[zh_CN]=升级服务 Dropbox
 
 [Desktop Action StartService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-on.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox-on.svgz
 Name=Start Dropbox service
 Name[de]=Um Dienst Dropbox anzufangen
 Name[es]=Iniciar servicio Dropbox
@@ -141,7 +141,7 @@ Name[zh_CN]=开始服务 Dropbox
 
 [Desktop Action StopService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox-off.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox-off.svgz
 Name=Stop Dropbox service
 Name[de]=Um Dienst Dropbox Anzuhalten
 Name[es]=Detener servicio Dropbox
@@ -156,7 +156,7 @@ Name[zh_CN]=停止服务 Dropbox
 
 [Desktop Action AutoStart]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service %F
-Icon=/usr/share/icons/hicolor/512x512/apps/ks-dropbox.png
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Enable autostart Dropbox service
 Name[de]=Um Anfängen vom Dienst Dropbox Aufwärts zu Ermöglichen
 Name[es]=Habilitar autoarranque del servicio Dropbox
