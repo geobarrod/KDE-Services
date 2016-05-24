@@ -61,6 +61,7 @@ cat > /tmp/about_kde-services << EOF
         - Attach cover to MP3 files.
         - Clean metadata from media files.
         - Concatenate media files with same codec.
+        - Encrypt directory.
 
     Required dependencies:
         - android-tools
@@ -78,6 +79,7 @@ cat > /tmp/about_kde-services << EOF
         - findutils
         - fuse
         - fuseiso
+        - fuse-encfs
         - fuse-sshfs
         - gawk
         - genisoimage
@@ -98,6 +100,7 @@ cat > /tmp/about_kde-services << EOF
         - mkvtoolnix
         - mlocate
         - net-tools
+        - openssh-askpass
         - pdftk
         - perl
         - perl-Image-ExifTool
@@ -141,6 +144,6 @@ cat > /tmp/about_kde-services << EOF
 
 EOF
 
-kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-menu.svgz --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 930x600 2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-menu.svgz --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 830x600 2> /dev/null
 rm -f /tmp/about_kde-services
 exit 0

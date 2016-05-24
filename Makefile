@@ -9,7 +9,6 @@ PREFIXservicetypes5=$(RPM_BUILD_ROOT)/usr/share/kservicetypes5
 PREFIXmenu=$(RPM_BUILD_ROOT)/usr/share/kde4/services/ServiceMenus
 PREFIXapp=$(RPM_BUILD_ROOT)/usr/share/applications
 PREFIXSVGicons=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/scalable/apps
-PREFIX512apps=$(RPM_BUILD_ROOT)/usr/share/icons/hicolor/512x512/apps
 PREFIXmime=$(RPM_BUILD_ROOT)/usr/share/mime/text
 PREFIXappmerge=$(RPM_BUILD_ROOT)/etc/xdg/menus/applications-merged
 PREFIXdeskdir=$(RPM_BUILD_ROOT)/usr/share/desktop-directories
@@ -66,6 +65,7 @@ uninstall:
 		$(PREFIXmenu5)/PDF-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/SaMBa-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/Search-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/Security-Tools2_servicemenu.desktop \
 		$(PREFIXmenu5)/Security-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/Send-By-Email_addtoservicemenu.desktop \
 		$(PREFIXmenu5)/Show-Status_addtoservicemenu.desktop \
@@ -99,6 +99,7 @@ uninstall:
 		$(PREFIXmenu)/PDF-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/SaMBa-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Search-Tools_servicemenu.desktop \
+		$(PREFIXmenu)/Security-Tools2_servicemenu.desktop \
 		$(PREFIXmenu)/Security-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Send-By-Email_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Show-Status_addtoservicemenu.desktop \
@@ -239,6 +240,9 @@ uninstall:
 		$(PREFIXSVGicons)/ks-encrypt.svgz \
 		$(PREFIXSVGicons)/ks-error.svgz \
 		$(PREFIXSVGicons)/ks-extracting-subs.svgz \
+		$(PREFIXSVGicons)/ks-folder-encrypt-mount.svgz \
+		$(PREFIXSVGicons)/ks-folder-encrypt-unmount.svgz \
+		$(PREFIXSVGicons)/ks-folder-encrypt.svgz \
 		$(PREFIXSVGicons)/ks-folder-public-web.svgz \
 		$(PREFIXSVGicons)/ks-folder-remote.svgz \
 		$(PREFIXSVGicons)/ks-hwinfo.svgz \
@@ -293,83 +297,6 @@ uninstall:
 		$(PREFIXSVGicons)/ks-xorg.svgz \
 		$(PREFIXSVGicons)/ks-youtube-download-video.svgz \
 		$(PREFIXSVGicons)/ks-youtube-video-code-collector.svgz
-
-	rm -f $(PREFIX512apps)/ks-android-apk-manager.png \
-		$(PREFIX512apps)/ks-android-backup-restore.png \
-		$(PREFIX512apps)/ks-android-push-pull.png \
-		$(PREFIX512apps)/ks-android-reboot.png \
-		$(PREFIX512apps)/ks-audio-mp3-attach-cover.png \
-		$(PREFIX512apps)/ks-audio-video-info.png \
-		$(PREFIX512apps)/ks-audio.png \
-		$(PREFIX512apps)/ks-checksum.png \
-		$(PREFIX512apps)/ks-clock.png \
-		$(PREFIX512apps)/ks-compressed-file.png \
-		$(PREFIX512apps)/ks-concatenate-media-file.png \
-		$(PREFIX512apps)/ks-connect-to.png \
-		$(PREFIX512apps)/ks-database.png \
-		$(PREFIX512apps)/ks-decrypt.png \
-		$(PREFIX512apps)/ks-disk-space-used.png \
-		$(PREFIX512apps)/ks-dolphin-file-manager.png \
-		$(PREFIX512apps)/ks-dropbox-off.png \
-		$(PREFIX512apps)/ks-dropbox-on.png \
-		$(PREFIX512apps)/ks-dropbox.png \
-		$(PREFIX512apps)/ks-encrypt.png \
-		$(PREFIX512apps)/ks-error.png \
-		$(PREFIX512apps)/ks-extracting-subs.png \
-		$(PREFIX512apps)/ks-folder-public-web.png \
-		$(PREFIX512apps)/ks-folder-remote.png \
-		$(PREFIX512apps)/ks-hwinfo.png \
-		$(PREFIX512apps)/ks-image.png \
-		$(PREFIX512apps)/ks-info.png \
-		$(PREFIX512apps)/ks-kernel-rebuild.png \
-		$(PREFIX512apps)/ks-kernel-update.png \
-		$(PREFIX512apps)/ks-key.png \
-		$(PREFIX512apps)/ks-keygen.png \
-		$(PREFIX512apps)/ks-mc-root.png \
-		$(PREFIX512apps)/ks-mc-user.png \
-		$(PREFIX512apps)/ks-mcedit-root.png \
-		$(PREFIX512apps)/ks-mcedit-user.png \
-		$(PREFIX512apps)/ks-media-clean-metadata.png \
-		$(PREFIX512apps)/ks-media-edit-time.png \
-		$(PREFIX512apps)/ks-media-optical-burn.png \
-		$(PREFIX512apps)/ks-media-optical-clone.png \
-		$(PREFIX512apps)/ks-media-optical-integrity-check.png \
-		$(PREFIX512apps)/ks-media-optical-md5sum.png \
-		$(PREFIX512apps)/ks-media-optical-mount.png \
-		$(PREFIX512apps)/ks-media-optical-umount.png \
-		$(PREFIX512apps)/ks-media-optical-video.png \
-		$(PREFIX512apps)/ks-media-tape.png \
-		$(PREFIX512apps)/ks-menu.png \
-		$(PREFIX512apps)/ks-multiplexing-subs.png \
-		$(PREFIX512apps)/ks-owner.png \
-		$(PREFIX512apps)/ks-pdf.png \
-		$(PREFIX512apps)/ks-rebuild-rpm.png \
-		$(PREFIX512apps)/ks-resize-image.png \
-		$(PREFIX512apps)/ks-search-database-update.png \
-		$(PREFIX512apps)/ks-search-name.png \
-		$(PREFIX512apps)/ks-search-replace.png \
-		$(PREFIX512apps)/ks-search-stats.png \
-		$(PREFIX512apps)/ks-search-string.png \
-		$(PREFIX512apps)/ks-secure-mail.png \
-		$(PREFIX512apps)/ks-sentry-off.png \
-		$(PREFIX512apps)/ks-sentry-on.png \
-		$(PREFIX512apps)/ks-sentry-warning.png \
-		$(PREFIX512apps)/ks-server.png \
-		$(PREFIX512apps)/ks-shellscript.png \
-		$(PREFIX512apps)/ks-shredder.png \
-		$(PREFIX512apps)/ks-smbfs.png \
-		$(PREFIX512apps)/ks-socket.png \
-		$(PREFIX512apps)/ks-sshfs.png \
-		$(PREFIX512apps)/ks-system-process.png \
-		$(PREFIX512apps)/ks-terminal.png \
-		$(PREFIX512apps)/ks-text-plain.png \
-		$(PREFIX512apps)/ks-video-rotate.png \
-		$(PREFIX512apps)/ks-video.png \
-		$(PREFIX512apps)/ks-warning.png \
-		$(PREFIX512apps)/ks-whitespace-replace.png \
-		$(PREFIX512apps)/ks-xorg.png \
-		$(PREFIX512apps)/ks-youtube-download-video.png \
-		$(PREFIX512apps)/ks-youtube-video-code-collector.png
 
 	rm -f $(PREFIXmime)/kde-services.xml \
 		/usr/share/mime/packages/kde-services.xml

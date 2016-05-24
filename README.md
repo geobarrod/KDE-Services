@@ -49,6 +49,7 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Attach cover to MP3 files.
 - Clean metadata from media files.
 - Concatenate media files with same codec.
+- Encrypt directory.
 
 Requirements:
 
@@ -67,6 +68,7 @@ Requirements:
 - findutils
 - fuse
 - fuseiso
+- fuse-encfs
 - fuse-sshfs
 - gawk
 - genisoimage
@@ -87,6 +89,7 @@ Requirements:
 - mkvtoolnix
 - mlocate
 - net-tools
+- openssh-askpass
 - pdftk
 - perl
 - perl-Image-ExifTool

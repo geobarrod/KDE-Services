@@ -1,3 +1,11 @@
+* Sun May 22 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-5
+- Added new services menu:
+  "Encrypt Directory",
+  "Mount Encrypted Directory" and
+  "Unmount Encrypted Directory"
+  to "Security Tools" submenu.
+- Makefile: Updated.
+
 * Mon Apr 18 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-4
 - "[Extract|Convert] Audio Track": Enhancement. Added OGG and OGG(432Hz) options.
 - "Convert Video Files": Enhancement. Added "Video to Animated GIF", "Video to Images",
