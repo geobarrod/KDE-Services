@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh
+Exec=which ffprobe dvdauthor genisoimage; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="D.V.D. Assembler" --passivepopup="[Error] Please install ffprobe, dvdauthor and genisoimage command and try again."; exit 1; else /usr/share/applications/DVD_Tools-d.v.d.-assembler.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz
 Name=D.V.D. Assembler
 Name[de]=Assembler von D.V.D.

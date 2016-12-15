@@ -31,7 +31,6 @@ logs() {
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        rm -fr /tmp/convert*
         exit 1
     fi
 }
@@ -46,6 +45,15 @@ if-ffmpeg-cancel() {
 }
 
 if-sox-cancel() {
+    if [ "$?" != "0" ]; then
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Extracting audio track from ${i##*/} to $FORMAT" \
+                       --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+        mv $LOG $DESTINATION/$LOGERROR
+        continue
+    fi
+}
+
+if-mp3gain-cancel() {
     if [ "$?" != "0" ]; then
         kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Extracting audio track from ${i##*/} to $FORMAT" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
@@ -133,21 +141,9 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
-if-cancel-exit
-
-if [ "$PRIORITY" = "Highest" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -15 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "High" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Normal" ]; then
-    true
-fi
-
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
-      *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 \
-      *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|All supported files" 2> /dev/null)
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv \
+	  *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav \
+	  *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
 FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
@@ -175,6 +171,8 @@ if [ "$FORMAT" = "MP3 (432Hz)" ]; then
         if-sox-cancel
         ffmpeg -y -i "/tmp/${DST_FILE##*/}_${MODE}_432Hz.wav" -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_${MODE}_432Hz.mp3" > $LOG 2>&1
         if-ffmpeg-cancel
+        mp3gain -c -r "$DESTINATION/${DST_FILE##*/}_${MODE}_432Hz.mp3" > $LOG 2>&1
+        if-mp3gain-cancel
         rm -f /tmp/${DST_FILE##*/}_${MODE}*.wav
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -194,6 +192,8 @@ elif [ "$FORMAT" = "MP3" ]; then
         DST_FILE="${i%.*}"
         ffmpeg -y -i $i -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
         if-ffmpeg-cancel
+        mp3gain -c -r "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
+        if-mp3gain-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
@@ -273,6 +273,6 @@ progressbar-close
 echo "Finish Extracting Audio Track From All Files" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
-rm -fr /tmp/speak* /tmp/convert*
+rm -fr /tmp/speak*
 
 exit 0

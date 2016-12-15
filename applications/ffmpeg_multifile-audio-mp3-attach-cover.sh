@@ -30,7 +30,6 @@ logs() {
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        rm -fr /tmp/convert*
         exit 1
     fi
 }
@@ -123,23 +122,11 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Attach Cover to MP3 Files" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
-if-cancel-exit
-
-if [ "$PRIORITY" = "Highest" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -15 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "High" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Normal" ]; then
-    true
-fi
-
 COVER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Picture File" \
-        --getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg *.svgz *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|All supported files" 2> /dev/null)
+        --getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg *.svgz *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|*.bmp *.gif *.jp2 *.jpeg *.jpg *.svgz *.tif *.tiff" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|All supported files" 2> /dev/null)
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
@@ -162,6 +149,6 @@ progressbar-close
 echo "Finish Attaching Cover to Audio Files" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
-rm -fr /tmp/speak* /tmp/convert*
+rm -fr /tmp/speak*
 
 exit 0

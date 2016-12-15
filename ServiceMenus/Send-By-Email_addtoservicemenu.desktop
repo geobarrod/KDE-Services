@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action SendByEmail]
-Exec=xdg-email --utf8 $(for file in %F;do echo "--attach $file";done)
+Exec=which xdg-email; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Send by Email" --passivepopup="[Error] Please install xdg-email command and try again."; exit 1; else xdg-email --utf8 $(for file in %F;do echo "--attach $file";done);fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-secure-mail.svgz
 Name=Send by Email
 Name[de]=Schicken Sie Durch E-mail

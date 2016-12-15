@@ -40,19 +40,6 @@ qdbusinsert() {
 ##############################
 
 cd "${1%/*}"
-
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --caption="Burn iso9660 Image" \
-         --radiolist="Choose Scheduling Priority" Highest Highest on High High off Normal Normal off 2> /dev/null)"
-if-cancel-exit
-
-if [ "$PRIORITY" = "Highest" ]; then
-    kdesu --noignorebutton -d -c "eject; ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -15 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "High" ]; then
-    kdesu --noignorebutton -d -c "eject; ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Normal" ]; then
-    kdesu --noignorebutton -d -c "eject" 2> /dev/null
-fi
-
 BURNSPEED=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --caption="Burn iso9660 Image" \
           --combobox="Select Burn Speed Factor" 2 4 8 10 12 16 24 32 48 --default 4 2> /dev/null)
 if-cancel-exit

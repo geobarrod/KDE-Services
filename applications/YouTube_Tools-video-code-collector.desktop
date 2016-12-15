@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=YouTube-Tools;
-Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh
+Exec=which lynx; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Video List Code Collector" --passivepopup="[Error] Please install lynx command and try again."; exit 1; else /usr/share/applications/YouTube_Tools-video-code-collector.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz
 Name=Video List Code Collector
 Name[de]=Sammler der Codes der Liste der Videos

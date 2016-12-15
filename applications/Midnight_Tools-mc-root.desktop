@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Midnight-Tools;
-Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz --noignorebutton -d konsole --new-tab -e mc
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz --noignorebutton -d konsole --new-tab -e mc;fi
 GenericName=Root
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz
 Name=Midnight Commander

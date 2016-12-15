@@ -62,6 +62,8 @@ cat > /tmp/about_kde-services << EOF
         - Clean metadata from media files.
         - Concatenate media files with same codec.
         - Encrypt directory.
+        - Volume normalize of MP3 files.
+        - Add Subtitle to MP4 File.
 
     Required dependencies:
         - android-tools
@@ -99,6 +101,7 @@ cat > /tmp/about_kde-services << EOF
         - mc
         - mkvtoolnix
         - mlocate
+        - mp3gain
         - net-tools
         - openssh-askpass
         - pdftk

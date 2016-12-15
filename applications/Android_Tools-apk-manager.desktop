@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Android-Tools;
-Exec=/usr/share/applications/Android_Tools-apk-manager.sh
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android Package Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-apk-manager.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz
 Name=Android Package Manager
 Name[de]=Verwalter der Pakete für Android

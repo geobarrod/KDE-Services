@@ -37,15 +37,13 @@ logs() {
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        rm -fr /tmp/convert*
         exit 1
     fi
 
     if [ "$FORMAT" = "" ]; then
         kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Convert Video from ($DIR/)" \
                        --passivepopup="[Canceled]   Please select video format. Try again"
-        rm -fr /tmp/convert*
-        exit 0
+        exit 1
     fi
 }
 
@@ -78,7 +76,7 @@ progressbar-close() {
     echo "Finish Convertion All Video" > /tmp/speak
 	text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 	play /tmp/speak.wav
-	rm -fr /tmp/speak* /tmp/convert*
+	rm -fr /tmp/speak*
 	exit 0
 }
 
@@ -145,28 +143,16 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
-if-cancel-exit
-
-if [ "$PRIORITY" = "Highest" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -15 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "High" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Normal" ]; then
-    true
-fi
-
 MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Profile" mobile "Mobile Phones (3GP)" \
      4K "Resolution Ultra-HD (4K)" 2K "Resolution DCI (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 360 "Resolution NHD (360p)" \
      240 "Resolution QVGA (240p)" same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV - WebM)" video2gif "Video to Animated GIF" video2images "Video to Images" \
-     images2video "Images to Video" multiplexaudio "Multiplex Audio File" customized "Customized (Advanced Users)" --geometry 260x420 2> /dev/null)
+     images2video "Images to Video" multiplexaudio "Multiplex Audio File" customized "Customized (Advanced Users)" --geometry 260x300 2> /dev/null)
 if-cancel-exit
 
 ############################### images2video ###############################
 if [ "$MODE" = "images2video" ]; then
 	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Select Image Files In Your Preferred Order" --multiple \
-			--getopenfilename "$DIR" "*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff *.BMP *.JPG *.PAM *.PBM *.PGM *.PNG *.PPM *.SGI *.TIF *.TIFF|All supported files" 2> /dev/null)
+			--getopenfilename "$DIR" "*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff *.BMP *.JPG *.PAM *.PBM *.PGM *.PNG *.PPM *.SGI *.TIF *.TIFF|*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff" 2> /dev/null)
 	if-cancel-exit
 
 	COUNT=0
@@ -216,11 +202,11 @@ fi
 ############################### multiplexaudio ###############################
 if [ "$MODE" = "multiplexaudio" ]; then
 	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
-      *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg \
-      *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|All supported files" 2> /dev/null)
+      *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm \
+      *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2> /dev/null)
 	if-cancel-exit
 	AUDIO_FILE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Select Audio File" \
-			--getopenfilename "$DIR" "*.FLAC *.flac *.M4A *.m4a *.MP2 *.mp2 *.MP3 *.mp3 *.OGG *.ogg *.WAV *.wav *.WMA *.wma|All supported files" 2> /dev/null)
+			--getopenfilename "$DIR" "*.FLAC *.flac *.M4A *.m4a *.MP2 *.mp2 *.MP3 *.mp3 *.OGG *.ogg *.WAV *.wav *.WMA *.wma|*.flac *.m4a *.mp2 *.mp3 *.ogg *.wav *.wma" 2> /dev/null)
 	if-cancel-exit
 	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Destination Video File" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
@@ -238,7 +224,7 @@ if [ "$MODE" = "multiplexaudio" ]; then
 		qdbus $DBUSREF setLabelText "Multiplexing ${AUDIO_FILE##*/} to:  ${i##*/}  [$COUNT/$(($COUNTFILES-1))]"
 		qdbus $DBUSREF Set "" value $COUNT
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -i $AUDIO_FILE -c copy -trellis 1 -sn -g 12 "$DESTINATION/${DST_FILE##*/}_AudioMultiplexed.mp4" > $LOG 2>&1
+        ffmpeg -y -i $i -i $AUDIO_FILE -c copy -trellis 1 -g 12 "$DESTINATION/${DST_FILE##*/}_AudioMultiplexed.mp4" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -247,15 +233,13 @@ if [ "$MODE" = "multiplexaudio" ]; then
 	progressbar-close
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
-      *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg \
-      *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|All supported files" 2> /dev/null)
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv \
+  *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2> /dev/null)
 if-cancel-exit
-
 ############################### video2images ###############################
 if [ "$MODE" = "video2images" ]; then
 	IMAGE_FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Image Format" bmp "BMP" jpg "JPG" pam "PAM" pbm "PBM" pgm "PGM" png "PNG" ppm "PPM" sgi "SGI" tif "TIFF" \
-				  --geometry 100x270 2> /dev/null)
+				  --geometry 100x200 2> /dev/null)
 	if-cancel-exit
 	FRAME_RATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
                 --inputbox="Enter the frame rate of the input video file")
@@ -317,7 +301,7 @@ if [ "$MODE" = "mobile" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -strict experimental -c:a aac -c:v mpeg4 -b:v 1000k -trellis 1 -sn -g 12 \
+        ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -strict experimental -c:a aac -c:v mpeg4 -b:v 1000k -c:s copy -trellis 1 -g 12 \
             "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.3gp" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
@@ -340,7 +324,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4095x2160 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4095x2160 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -352,7 +336,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 4k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 4k -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_Ultra-HD_4K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -364,7 +348,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s 4k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s 4k -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_Ultra-HD_4K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -376,7 +360,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -388,7 +372,7 @@ if [ "$MODE" = "4K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -412,7 +396,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_DCI_2K.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -424,7 +408,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 2k -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_DCI_2K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -436,7 +420,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s 2k -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_DCI_2K.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -448,7 +432,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_DCI_2K.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -460,7 +444,7 @@ if [ "$MODE" = "2K" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_DCI_2K.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -484,7 +468,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -496,7 +480,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd1080 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_Full-HD_1080p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -508,7 +492,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s hd1080 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_Full-HD_1080p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -520,7 +504,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -532,7 +516,7 @@ if [ "$MODE" = "1080" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -556,7 +540,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_HD_720p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -568,7 +552,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd720 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_HD_720p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -580,7 +564,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s hd720 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_HD_720p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -592,7 +576,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_HD_720p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -604,7 +588,7 @@ if [ "$MODE" = "720" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_HD_720p.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -628,7 +612,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_ED_480p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -640,7 +624,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd480 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_ED_480p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -652,7 +636,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s hd480 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_ED_480p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -664,7 +648,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_ED_480p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -676,7 +660,7 @@ if [ "$MODE" = "480" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_ED_480p.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -700,7 +684,7 @@ if [ "$MODE" = "360" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_NHD_360p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -712,7 +696,7 @@ if [ "$MODE" = "360" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s nhd -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_NHD_360p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -724,7 +708,7 @@ if [ "$MODE" = "360" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s nhd -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_NHD_360p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -736,7 +720,7 @@ if [ "$MODE" = "360" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_NHD_360p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -748,7 +732,7 @@ if [ "$MODE" = "360" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_NHD_360p.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -772,7 +756,7 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_240p.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -784,7 +768,7 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s qvga -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_240p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -796,7 +780,7 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s qvga -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_240p.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -808,7 +792,7 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_240p.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -820,7 +804,7 @@ if [ "$MODE" = "240" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_240p.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -844,7 +828,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_sr.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -856,7 +840,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.264_sr.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -868,7 +852,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -c:v libx265 -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -c:a copy -c:s copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_H.265_sr.mp4" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -880,7 +864,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a copy -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_sr.avi" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -892,7 +876,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v flv -b:v 1000k -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v flv -b:v 1000k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_sr.flv" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -904,7 +888,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_sr.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -916,7 +900,7 @@ if [ "$MODE" = "same" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v mpeg2video -c:a libmp3lame -b:a 192k -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v mpeg2video -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_sr.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -987,7 +971,7 @@ if [ "$MODE" = "standards" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -999,7 +983,7 @@ if [ "$MODE" = "standards" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1011,7 +995,7 @@ if [ "$MODE" = "standards" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1023,7 +1007,7 @@ if [ "$MODE" = "standards" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1035,7 +1019,7 @@ if [ "$MODE" = "standards" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
+            ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -g 12 -ac 6 \
                 "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1047,7 +1031,7 @@ if [ "$MODE" = "standards" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 -ac 6 \
                 "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1059,7 +1043,7 @@ if [ "$MODE" = "standards" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -sn -g 12 -ac 6 \
+            ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 -ac 6 \
                 "$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1085,7 +1069,7 @@ if [ "$MODE" = "web" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v flv -b:v 1000k -c:a libmp3lame -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v flv -b:v 1000k -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.flv" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1102,7 +1086,7 @@ if [ "$MODE" = "web" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-            ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -sn -g 12 \
+            ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
                 "$DESTINATION/${DST_FILE##*/}_$RESOLUTION.webm" > $LOG 2>&1
             if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)
@@ -1133,7 +1117,7 @@ if [ "$MODE" = "customized" ]; then
             BEGIN_TIME=$(date +%s)
             qdbusinsert
             DST_FILE="${i%.*}"
-             ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v $VIDEO_CODEC -c:a $AUDIO_CODEC -b:a ${AUDIO_BITRATE}k -trellis 1 -sn -g 12 \
+             ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v $VIDEO_CODEC -c:a $AUDIO_CODEC -b:a ${AUDIO_BITRATE}k -trellis 1 -g 12 \
                  "$DESTINATION/${DST_FILE##*/}_[${RESOLUTION}_${VIDEO_CODEC}_${AUDIO_CODEC}].mkv" > $LOG 2>&1
              if-ffmpeg-cancel
             FINAL_TIME=$(date +%s)

@@ -50,6 +50,7 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Clean metadata from media files.
 - Concatenate media files with same codec.
 - Encrypt directory.
+- Volume normalize of MP3 files.
 
 Required dependencies:
 
@@ -88,6 +89,7 @@ Required dependencies:
 - mc
 - mkvtoolnix
 - mlocate
+- mp3gain
 - net-tools
 - openssh-askpass
 - pdftk

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh
+Exec=which ccache gcc make pidof rpm rpmdev-setuptree setterm yum yumdownloader; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Rebuild RPM Package" --passivepopup="[Error] Please install ccache, gcc, make, pidof, rpm, rpmdev-setuptree, setterm, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
 Name=Rebuild RPM Package
 Name[de]=Um Paketdrehzahl zu Rekonstruieren

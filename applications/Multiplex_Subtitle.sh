@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2014.									#
+# For KDE-Services. 2012-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -52,27 +52,15 @@ if [ "$CODEC" != "mpeg2video" ]; then
     kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Multiplex Subtitle" --passivepopup="[Canceled]   The video file isn't MPEG-2 stream."
     rm -fr $VIDEOINFO
 else
-    PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --caption="Multiplex Subtitle" \
-             --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
-    if-cancel-exit
-    
-    if [ "$PRIORITY" = "Highest" ]; then
-        kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -15 $PID" 2> /dev/null
-    elif [ "$PRIORITY" = "High" ]; then
-        kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
-    elif [ "$PRIORITY" = "Normal" ]; then
-        true
-    fi
-    
     DIR="$(pwd)"
-    
+
     SUBTITLE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --caption="Text Based Subtitle" \
              --getopenfilename "$DIR" "*.aqt *.ass *.js *.jss *.rt *.smi *.srt *.ssa *.sub *.txt" 2> /dev/null)
     if-cancel-exit
-    
+
     FILEENCODE=$(file -b --mime-encoding $SUBTITLE|tr a-z A-Z)
     recode $FILEENCODE..UTF-8 $SUBTITLE
-    
+
     cat > $TMPFILE << EOF
 <subpictures format="NTSC">
   <stream>
@@ -89,21 +77,21 @@ else
   </stream>
 </subpictures>
 EOF
-    
+
     DESTINATION="${VIDEO%.*}_subtitled.mpg"
-    
+
     progressbar-start
     qdbusinsert
     BEGIN_TIME=$(date +%s)
-    
+
     spumux "$TMPFILE" < "$VIDEO" > "${VIDEO%.*}_subtitled.mpg" 2> $LOG
     EXIT=$?
-    
+
     if [ "$EXIT" = "0" ];then
         progressbar-close
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-        
+
         if [ "$ELAPSED_TIME" -lt "60" ]; then
             kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --title="Multiplex Subtitle" \
                            --passivepopup="[Finished]   ${VIDEO##*/}   Elapsed Time: ${ELAPSED_TIME}s"
@@ -116,7 +104,7 @@ EOF
             kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --title="Multiplex Subtitle" \
                            --passivepopup="[Finished]   ${VIDEO##*/}   Elapsed Time: ${ELAPSED_TIME}h"
         fi
-        
+
         echo "Finish Multiplexing Subtitle" > /tmp/speak
         text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
         play /tmp/speak.wav

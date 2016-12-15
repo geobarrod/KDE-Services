@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=/usr/share/applications/System_Tools-process-viewer.sh
+Exec=which htop; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Process Viewer" --passivepopup="[Error] Please install htop command and try again."; exit 1; else /usr/share/applications/System_Tools-process-viewer.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-system-process.svgz
 Name=Process Viewer
 Name[de]=Finder der Prozesse

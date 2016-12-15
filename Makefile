@@ -143,6 +143,7 @@ uninstall:
 		$(PREFIXapp)/Dropbox_Tools-service-update.desktop \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.desktop \
 		$(PREFIXapp)/DVD_Tools-d.v.d.-assembler.sh \
+		$(PREFIXapp)/ffmpeg_multifile-add-subtitle.sh \
 		$(PREFIXapp)/ffmpeg_multifile-audio-mp3-attach-cover.sh \
 		$(PREFIXapp)/ffmpeg_multifile-clean-metadata-media-file.sh \
 		$(PREFIXapp)/ffmpeg_multifile-concatenate-media-file.sh \
@@ -159,7 +160,10 @@ uninstall:
 		$(PREFIXapp)/Midnight_Tools-mc.desktop \
 		$(PREFIXapp)/Midnight_Tools-mc-root.desktop \
 		$(PREFIXapp)/MKV_Extract-subtitle.sh \
+		$(PREFIXapp)/Multimedia_Tools-add-subtitle.desktop \
 		$(PREFIXapp)/Multimedia_Tools-audio-mp3-attach-cover.desktop \
+		$(PREFIXapp)/Multimedia_Tools-audio-normalize.desktop \
+		$(PREFIXapp)/Multimedia_Tools-audio-normalize.sh \
 		$(PREFIXapp)/Multimedia_Tools-clean-metadata-media-file.desktop \
 		$(PREFIXapp)/Multimedia_Tools-concatenate-media-file.desktop \
 		$(PREFIXapp)/Multimedia_Tools-convert-video.desktop \
@@ -218,11 +222,13 @@ uninstall:
 		$(PREFIXapp)/YouTube_Tools-video-code-collector.desktop \
 		$(PREFIXapp)/YouTube_Tools-video-code-collector.sh
 
-	rm -f $(PREFIXSVGicons)/ks-android-apk-manager.svgz \
+	rm -f $(PREFIXSVGicons)/ks-add-subs.svgz \
+		$(PREFIXSVGicons)/ks-android-apk-manager.svgz \
 		$(PREFIXSVGicons)/ks-android-backup-restore.svgz \
 		$(PREFIXSVGicons)/ks-android-push-pull.svgz \
 		$(PREFIXSVGicons)/ks-android-reboot.svgz \
 		$(PREFIXSVGicons)/ks-audio-mp3-attach-cover.svgz \
+		$(PREFIXSVGicons)/ks-audio-normalize.svgz \
 		$(PREFIXSVGicons)/ks-audio-video-info.svgz \
 		$(PREFIXSVGicons)/ks-audio.svgz \
 		$(PREFIXSVGicons)/ks-checksum.svgz \

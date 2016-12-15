@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Network-Tools;
-Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-socket.svgz -d /usr/share/applications/Network_Tools-listening-sockets.sh
+Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Listening Sockets" --passivepopup="[Error] Please install ss command and try again."; exit 1; else kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-socket.svgz -d /usr/share/applications/Network_Tools-listening-sockets.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-socket.svgz
 Name=Listening Sockets
 Name[de]=Häfen die Zuhören

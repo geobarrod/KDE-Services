@@ -110,7 +110,7 @@ Name[uk]=Встановити сервіс Dropbox
 Name[zh_CN]=安装服务 Dropbox
 
 [Desktop Action UpdateService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh update_service %F
+Exec=which wget; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Update Dropbox service" --passivepopup="[Error] Please install wget command and try again."; exit 1; else /usr/share/applications/Dropbox_Tools-main.sh update_service %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
 Name=Update Dropbox service
 Name[de]=Um Dienst Dropbox zu Befördern

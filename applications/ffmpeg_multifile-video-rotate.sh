@@ -31,7 +31,6 @@ logs() {
 
 if-cancel-exit() {
     if [ "$?" != "0" ]; then
-        rm -fr /tmp/convert*
         exit 1
     fi
 }
@@ -124,21 +123,8 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --caption="Rotate Video Files" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
-if-cancel-exit
-
-if [ "$PRIORITY" = "Highest" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -15 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "High" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Normal" ]; then
-    true
-fi
-
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --caption="Rotate Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
-      *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg \
-      *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|All supported files" 2> /dev/null)
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --caption="Rotate Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v \
+  *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
@@ -213,6 +199,6 @@ progressbar-close
 echo "Finish Rotate Video Files" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
-rm -fr /tmp/speak* /tmp/convert*
+rm -fr /tmp/speak*
 
 exit 0

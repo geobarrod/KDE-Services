@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
+# For KDE-Services. 2011-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -230,26 +230,7 @@ if [ "$(id|grep -o wheel)" != "wheel" ]; then
 fi
 
 sudo-no-timeout
-
 setterm -cursor off
-
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-rebuild.svgz --caption="Build Custom Kernel" \
-    --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
-EXIT=$?
-if-cancel-exit2
-
-if [ "$PRIORITY" = "Highest" ]; then
-    sudo ionice -c 1 -n 0 -p $PID
-    sudo chrt -op 0 $PID
-    sudo renice -15 $PID
-elif [ "$PRIORITY" = "High" ]; then
-    sudo ionice -c 1 -n 0 -p $PID
-    sudo chrt -op 0 $PID
-    sudo renice -10 $PID
-elif [ "$PRIORITY" = "Normal" ]; then
-    true
-fi
-
 echo -e "\n$GREEN> Check Build Require Depends...$WHITE\n"
 
 if [ "$(yum list installed|grep -oe rpmdevtools -oe yum-utils -oe qt-devel|awk -F . '{print $1}'|sort -u|xargs)" != \

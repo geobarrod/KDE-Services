@@ -35,7 +35,7 @@ Name[zh_CN]=乘用马编加密码了目录
 Name[x-test]=xxMount Encrypted Directoryxx
 
 [Desktop Action UnmountEncryptedDir]
-Exec=fusermount -u %F > /tmp/fusermount.err 2>&1; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Unmount Encrypted Directory" --passivepopup="[Error] $(cat /tmp/fusermount.err)."; rm -f /tmp/fusermount.err; exit 1; else kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-encrypt-unmount.svgz --title="Unmount Encrypted Directory" --passivepopup="[Finished] The directory has been unmounted.";fi
+Exec=which fusermount; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Unmount Encrypted Directory" --passivepopup="[Error] Please install fusermount command and try again."; exit 1; else fusermount -u %F > /tmp/fusermount.err 2>&1; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Unmount Encrypted Directory" --passivepopup="[Error] $(cat /tmp/fusermount.err)."; rm -f /tmp/fusermount.err; exit 1; else kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-encrypt-unmount.svgz --title="Unmount Encrypted Directory" --passivepopup="[Finished] The directory has been unmounted.";fi;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-encrypt-unmount.svgz
 Name=Unmount Encrypted Directory
 Name[de]=Unmount kodierte Verzeichnis

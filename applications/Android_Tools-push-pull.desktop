@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Android-Tools;
-Exec=/usr/share/applications/Android_Tools-push-pull.sh
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android File Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-push-pull.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz
 Name=Android File Manager
 Name[de]=Verwalter der Akten für Android

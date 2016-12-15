@@ -19,7 +19,7 @@ Name[zh_CN]=Android 工具
 X-KDE-Submenu[x-test]=xxAndroid Toolsxx
 
 [Desktop Action ABM]
-Exec=/usr/share/applications/Android_Tools-backup-restore.sh %F
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android Backup Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-backup-restore.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz
 Name=Android Backup Manager
 Name[de]=Zurück Verwalter für Android
@@ -35,7 +35,7 @@ Name[zh_CN]=背面管理人为 Android
 Name[x-test]=xxAndroid Backup Managerxx
 
 [Desktop Action AFM]
-Exec=/usr/share/applications/Android_Tools-push-pull.sh %F
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android File Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-push-pull.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz
 Name=Android File Manager
 Name[de]=Verwalter der Akten für Android
@@ -51,7 +51,7 @@ Name[zh_CN]=文件的管理人为 Android
 Name[x-test]=xxAndroid File Managerxx
 
 [Desktop Action APM]
-Exec=/usr/share/applications/Android_Tools-apk-manager.sh %F
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android Package Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-apk-manager.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz
 Name=Android Package Manager
 Name[de]=Verwalter der Pakete für Android
@@ -67,7 +67,7 @@ Name[zh_CN]=包裹的管理人为 Android
 Name[x-test]=xxAndroid Package Managerxx
 
 [Desktop Action ARM]
-Exec=/usr/share/applications/Android_Tools-reboot.sh %F
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android Reboot Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-reboot.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz
 Name=Android Reboot Manager
 Name[de]=Verwalter von Mir Fängt Wieder für Android

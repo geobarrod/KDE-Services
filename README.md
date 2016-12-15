@@ -2,7 +2,7 @@ KDE-Services
 
 Description:
 
-Enables the following functionalities on the Dolphin's right click menu of KDE-4.x/5.x:
+Enables the following functionalities on the Dolphin's (File Manager) right click menu of KDE 4.x/5.x:
 
 - Convert several video formats to MPEG-1, MPEG-2, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV or WebM.
 - Extract the audio track of several video formats and convert them to MP3, MP3(432Hz), FLAC, FLAC(432Hz), OGG or OGG (432Hz).
@@ -50,6 +50,8 @@ Enables the following functionalities on the Dolphin's right click menu of KDE-4
 - Clean metadata from media files.
 - Concatenate media files with same codec.
 - Encrypt directory.
+- Volume normalize of MP3 files.
+- Add Subtitle to MP4 File.
 
 Requirements:
 
@@ -88,6 +90,7 @@ Requirements:
 - mc
 - mkvtoolnix
 - mlocate
+- mp3gain
 - net-tools
 - openssh-askpass
 - pdftk
@@ -116,3 +119,15 @@ Requirements:
 - xterm
 - youtube-dl
 - zip
+
+Install:
+
+1- $ tar -jxvf kde-services-2.1.tar.bz2
+2- $ cd kde-services-2.1
+3- $ sudo make install
+
+Uninstall:
+
+1- $ tar -jxvf kde-services-2.1.tar.bz2
+2- $ cd kde-services-2.1
+3- $ sudo make uninstall

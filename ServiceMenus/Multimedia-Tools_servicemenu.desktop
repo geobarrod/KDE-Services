@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=DVD-Assembler;convert-video;extract-audio;VideoRotate;TimeEditMediaFiles;AudioMP3AttachCover;CleanMetadataMediaFiles;ConcatenateMediaFiles;ISOBuild;DiskCloner;record-my-desktop;vlc-openfolder;
+Actions=DVD-Assembler;convert-video;AddSubMP4;AdjustVolumeLevel;extract-audio;VideoRotate;TimeEditMediaFiles;AudioMP3AttachCover;CleanMetadataMediaFiles;ConcatenateMediaFiles;ISOBuild;DiskCloner;record-my-desktop;vlc-openfolder;
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz
 Type=Service
 X-KDE-Priority=TopLevel
@@ -19,7 +19,7 @@ X-KDE-Submenu[zh_CN]=多媒体工具
 X-KDE-Submenu[x-test]=xxMultimedia Toolsxx
 
 [Desktop Action DVD-Assembler]
-Exec=/usr/share/applications/DVD_Tools-d.v.d.-assembler.sh %F
+Exec=which ffprobe dvdauthor genisoimage; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="D.V.D. Assembler" --passivepopup="[Error] Please install ffprobe, dvdauthor and genisoimage command and try again."; exit 1; else /usr/share/applications/DVD_Tools-d.v.d.-assembler.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz
 Name=D.V.D. Assembler
 Name[de]=Assembler von D.V.D.
@@ -35,7 +35,7 @@ Name[zh_CN]=组合器 D.V.D.
 Name[x-test]=xxD.V.D. Assemblerxx
 
 [Desktop Action ISOBuild]
-Exec=DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz --caption="Build iso9660 Image from Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz --title="Build iso9660 Image from Here" --passivepopup="[Finished]   $(basename %f.iso)"
+Exec=which genisoimage; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Build iso9660 Image from Here" --passivepopup="[Error] Please install genisoimage command and try again."; exit 1; else DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz --caption="Build iso9660 Image from Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz --title="Build iso9660 Image from Here" --passivepopup="[Finished]   $(basename %f.iso)";fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-mount.svgz
 Name=Build iso9660 Image from Here
 Name[de]=Bauen Sie von Hier iso9660-Bild
@@ -51,7 +51,7 @@ Name[zh_CN]=建立来自这里的图像 iso9660
 Name[x-test]=xxBuild iso9660 Image from Herexx
 
 [Desktop Action DiskCloner]
-Exec=/usr/share/applications/DiskCloner.sh %F
+Exec=which lsblk dd; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="DiskCloner" --passivepopup="[Error] Please install lsblk and dd command and try again."; exit 1; else /usr/share/applications/DiskCloner.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz
 Name=DiskCloner
 Name[de]=DiskCloner (diskette cloner)
@@ -83,7 +83,7 @@ Name[zh_CN]=转换电视的文件
 Name[x-test]=xxConvert video filesxx
 
 [Desktop Action extract-audio]
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[Extract|Convert] Audio Track" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh %F;fi
+Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[Extract|Convert] Audio Track" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz
 Name=[Extract|Convert] Audio Track
 Name[de]=[Auszug|Bekehrter] Audiofährten
@@ -209,3 +209,35 @@ Name[ru]=Сливайтесь Файлы Мультимедиа с Таким ж
 Name[uk]=Злийте Мультимедію Файлів з Тим же самий Codec
 Name[zh_CN]=用相同的 Codecs 联编文件多媒体
 Name[x-test]=xxConcatenate Media Files with Same Codecxx
+
+[Desktop Action AdjustVolumeLevel]
+Exec=which mp3gain; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Volume Normalize of MP3 Files" --passivepopup="[Error] Please install mp3gain command and try again."; exit 1; else /usr/share/applications/Multimedia_Tools-audio-normalize.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz
+Name=Volume Normalize of MP3 Files
+Name[de]=Volumen Normalisiert Sich von MP3-Akten
+Name[es]=Normalizar Volumen de Ficheros MP3
+Name[fr]=Volume Normalise de Fichiers MP3
+Name[it]=Volume Normalizza di Archivi MP3
+Name[ja]=ボリュームが MP3 ファイルについて正常化する
+Name[ko]=책이 MP3 파일의 안에서 표준화한다
+Name[pt]=Volume Normaliza de Arquivos de MP3
+Name[ru]=Объем Нормализация MP3 Файлы
+Name[uk]=Обсяг Нормалізація MP3 Файли
+Name[zh_CN]=体积 MP3 文件使常态化
+Name[x-test]=xxVolume Normalize of MP3 Filesxx
+
+[Desktop Action AddSubMP4]
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Add Subtitle to MP4 File" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-add-subtitle.sh %F;fi
+Icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz
+Name=Add Subtitle to MP4 Files
+Name[de]=Fügen Sie Untertitel MP4-Akten hinzu
+Name[es]=Agregar Subtitulo a Ficheros MP4
+Name[fr]=Ajoutez le Sous-titre aux Fichiers MP4
+Name[it]=Aggiunga Sottotitolo agli Archivi di MP4
+Name[ja]=MP4 ファイルに字幕を加えなさい
+Name[ko]=MP4 파일에서 추가 원고 부제
+Name[pt]=Acrescente Subtítulo a Arquivos de MP4
+Name[ru]=Добавьте Подзаголовок к MP4 Файлы
+Name[uk]=Додайте Подзаголовок MP4 Файли
+Name[zh_CN]=把副题加入 MP4 文件
+Name[x-test]=xxAdd Subtitle to MP4 Filexx

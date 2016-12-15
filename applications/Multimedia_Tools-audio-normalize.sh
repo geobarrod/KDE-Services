@@ -6,7 +6,7 @@
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-DESTINATION=""
+DST_FILE=""
 DIR=""
 PID="$$"
 BEGIN_TIME=""
@@ -34,11 +34,11 @@ if-cancel-exit() {
     fi
 }
 
-if-ffmpeg-cancel() {
+if-mp3gain-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Cleaning Metadata from ${i##*/}" \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Adjusting volume level of ${i##*/}" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
-        mv $LOG $DESTINATION/$LOGERROR
+        mv $LOG $DST_FILE/$LOGERROR
         continue
     fi
 }
@@ -47,7 +47,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --caption="Clean Metadata from Media Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --caption="Volume Normalize of MP3 Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -57,22 +57,22 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Cleaning Metadata from:  ${i##*/}  [$COUNT/$((COUNTFILES-1))]"
+    qdbus $DBUSREF setLabelText "Adjusting volume level of:  ${i##*/}  [$COUNT/$((COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Clean Metadata from Media Files" \
-                       --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="Volume Normalize of MP3 Files" \
+                       --passivepopup="[Finished]  $(grep -e 'Applying mp3 gain change of' -e 'No changes to' $LOG)   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Clean Metadata from Media Files" \
-                       --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="Volume Normalize of MP3 Files" \
+                       --passivepopup="[Finished]   $(grep -e 'Applying mp3 gain change of' -e 'No changes to' $LOG)   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Clean Metadata from Media Files" \
-                       --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="Volume Normalize of MP3 Files" \
+                       --passivepopup="[Finished]   $(grep -e 'Applying mp3 gain change of' -e 'No changes to' $LOG)   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
 }
@@ -122,40 +122,25 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --caption="Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
-      *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav \
-      *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
-if-cancel-exit
-
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --caption="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start
+
 for i in $FILES; do
-    logs
-    COUNT=$((++COUNT))
-    BEGIN_TIME=$(date +%s)
-    qdbusinsert
-    DST_FILE="${i%.*}"
-    if [ "$(file $i|grep -o FLAC)" == "FLAC" ]; then
-        ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.flac" > $LOG 2>&1
-        if-ffmpeg-cancel
-    elif [ "$(file $i|grep -o ID3)" == "ID3" ]; then
-        ffmpeg -y -i $i -vn -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.mp3" > $LOG 2>&1
-        if-ffmpeg-cancel
-    elif [ "$(file $i|grep -o WebM)" == "WebM" ]; then
-        ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.webm" > $LOG 2>&1
-        if-ffmpeg-cancel
-    else
-        ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.${i:${#i}-3}" > $LOG 2>&1
-        if-ffmpeg-cancel
-    fi
-    FINAL_TIME=$(date +%s)
-    ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-    elapsedtime
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        mp3gain -c -r "$i" > $LOG 2>&1
+        if-mp3gain-cancel
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
 done
 progressbar-close
-echo "Finish Cleaning Metadata from Media Files" > /tmp/speak
+echo "Finish Adjusting Volume Level Of All Files" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
 rm -fr /tmp/speak*

@@ -19,7 +19,7 @@ X-KDE-Submenu[zh_CN]=搜寻工具
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
-Exec=/usr/share/applications/Search_Tools-search-by-name.sh %F
+Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Search by Name" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-search-by-name.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
 Name=Search by Name
 Name[de]=Suche von Namen
@@ -51,7 +51,7 @@ Name[zh_CN]=为字的搜寻
 Name[x-test]=xxSearch by Stringxx
 
 [Desktop Action StatisticsSearchDB]
-Exec=/usr/share/applications/Search_Tools-statistics-search-db.sh %F
+Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Statistics Search DataBase" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-statistics-search-db.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-stats.svgz
 Name=Statistics Search DataBase
 Name[de]=Statistisch von Suchdatenbank
@@ -67,7 +67,7 @@ Name[zh_CN]=统计的搜寻数据库
 Name[x-test]=xxStatistics Search DataBasexx
 
 [Desktop Action UpdateSearchDB]
-Exec=/usr/share/applications/Search_Tools-update-search-db.sh %F
+Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else /usr/share/applications/Search_Tools-update-search-db.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-database-update.svgz
 Name=Update Search DataBase
 Name[de]=Um Suchdatenbank zu Befördern

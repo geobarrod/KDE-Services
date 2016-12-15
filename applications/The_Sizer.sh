@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2014.									#
+# For KDE-Services. 2012-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -57,16 +57,16 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}s"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}m"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}h"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]	Elapsed Time: ${ELAPSED_TIME}d"
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}d"
     fi
 }
 
@@ -114,7 +114,7 @@ DIR="$(pwd)"
 FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --caption="Source Image Files" --multiple \
       --getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.svgz *.ppm *.psd *.sgi \
       *.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.TGA \
-      *.TIF *.TIFF *.XPM|All supported files" 2> /dev/null)
+      *.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.svgz *.ppm *.psd *.sgi *.tga *.tif *.tiff *.xpm" 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)

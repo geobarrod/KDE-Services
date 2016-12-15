@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-xorg.svgz --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh
+Exec=which lspci gtf; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Xorg Configure" --passivepopup="[Error] Please install lspci and gtf command and try again."; exit 1; else kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-xorg.svgz --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-xorg.svgz
 Name=Xorg Configure
 Name[de]=Um Xorg zu Konfigurieren

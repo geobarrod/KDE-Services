@@ -1,3 +1,12 @@
+* Tue Dec 13 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-6
+- "Convert Video Files": Enhancement libx265 [H.265 or HEVC (High Efficiency Video Coding)] encoder option.
+- "MKV Extract Subtitle": Enhancement.
+- "[Extract|Convert] Audio Track": Enhancement.
+- Added new services menu: "Volume Normalize of MP3 Files" to "Multimedia Tools" submenu.
+- Added new services menu: "Add Subtitle to MP4 File" to "Multimedia Tools" submenu.
+- Makefile: Updated.
+- Happy New Year!.
+
 * Sun May 22 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-5
 - Added new services menu:
   "Encrypt Directory",

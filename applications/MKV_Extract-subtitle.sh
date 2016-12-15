@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2014.									#
+# For KDE-Services. 2012-2016.									#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
 #################################################################
 
@@ -41,31 +41,17 @@ qdbus $DBUSREF setLabelText "Extracting:  ${MKV##*/}"
 
 cd "${MKV%/*}"
 ffprobe "$MKV" 2> /tmp/mkvinfo
-grep -e Stream /tmp/mkvinfo|awk -F : '{print $1,$2}' > /tmp/mkvinfo2
+grep -e 'Subtitle' /tmp/mkvinfo|awk -F : '{print $1,$2,$3}' > /tmp/mkvinfo2
 cat /tmp/mkvinfo2|sed 's/^    //g' > /tmp/mkvinfo3
 cat /tmp/mkvinfo3|sed 's/ /_/g' > /tmp/mkvinfo4
-TID=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="MKV Extract Subtitle" \
+TID=$(kdialog --geometry 200x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="MKV Extract Subtitle" \
     --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo4 |sed 's/$/ off/g'))
 if-cancel-exit
-
-PRIORITY="$(kdialog --geometry 100x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="[Extract|Convert] Audio Track" \
-         --radiolist="Choose Scheduling Priority" Highest Highest off High High off Normal Normal on 2> /dev/null)"
-if-cancel-exit
-
-if [ "$PRIORITY" = "Highest" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -15 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "High" ]; then
-    kdesu --noignorebutton -d -c "ionice -c 1 -n 0 -p $PID && chrt -op 0 $PID && renice -10 $PID" 2> /dev/null
-elif [ "$PRIORITY" = "Normal" ]; then
-    true
-fi
 
 progressbar-start
 qdbusinsert
 BEGIN_TIME=$(date +%s)
-
-mkvextract tracks "$MKV" $TID:"${MKV%.*}.srt"
-
+mkvextract tracks "$MKV" $((TID+1)):"${MKV%.*}_$(cat -n /tmp/mkvinfo4|grep -w $TID|awk -F_ '{print $3}'|sed 's/[[:digit:]]//').srt"
 progressbar-close
 FINAL_TIME=$(date +%s)
 ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

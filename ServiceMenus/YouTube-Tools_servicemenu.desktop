@@ -19,7 +19,7 @@ X-KDE-Submenu[zh_CN]=YouTube 工具
 X-KDE-Submenu[x-test]=xxYouTube Toolsxx
 
 [Desktop Action Code-Collector]
-Exec=/usr/share/applications/YouTube_Tools-video-code-collector.sh %F
+Exec=which lynx; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Video List Code Collector" --passivepopup="[Error] Please install lynx command and try again."; exit 1; else /usr/share/applications/YouTube_Tools-video-code-collector.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz
 Name=Video List Code Collector
 Name[de]=Sammler der Codes der Liste der Videos
@@ -35,7 +35,7 @@ Name[zh_CN]=录象机的目录密码的搜集家
 Name[x-test]=xxVideo List Code Collectorxx
 
 [Desktop Action Video-Downloader]
-Exec=/usr/share/applications/YouTube_Tools-download-video.sh %F
+Exec=which youtube-dl; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Video Downloader" --passivepopup="[Error] Please install youtube-dl command and try again."; exit 1; else /usr/share/applications/YouTube_Tools-download-video.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-download-video.svgz
 Name=Video Downloader
 Name[de]=Videoentlader

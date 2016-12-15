@@ -84,7 +84,7 @@ Name[zh_CN]=产生钥匙出版
 Name[x-test]=xxPublic Key Generationxx
 
 [Desktop Action SSHfs]
-Exec=/usr/share/applications/SSH_Tools-sshfs.sh %F
+Exec=which sshfs; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Mount point to Remote Directory" --passivepopup="[Error] Please install sshfs command and try again."; exit 1; else /usr/share/applications/SSH_Tools-sshfs.sh %F;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-sshfs.svgz
 Name=Mount point to Remote Directory
 Name[de]=Um Entfernt Verzeichnis zu Montieren

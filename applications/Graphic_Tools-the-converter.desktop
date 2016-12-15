@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Graphic-Tools;
-Exec=/usr/share/applications/The_Converter.sh
+Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Image Converter" --passivepopup="[Error] Please install convert command and try again."; exit 1; else /usr/share/applications/The_Converter.sh;fi
 Icon=/usr/share/icons/hicolor/scalable/apps/ks-image.svgz
 Name=The Converter
 Name[de]=Der Konverter
