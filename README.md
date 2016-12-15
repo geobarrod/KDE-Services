@@ -122,8 +122,12 @@ Requirements:
 
 Install:
 
-$ tar -jxvf kde-services-2.1.tar.bz2; cd kde-services-2.1; sudo make install
+- $ tar -jxvf kde-services-2.1.tar.bz2
+- $ cd kde-services-2.1
+- $ sudo make install
 
 Uninstall:
 
-$ tar -jxvf kde-services-2.1.tar.bz2; cd kde-services-2.1; sudo make uninstall
+- $ tar -jxvf kde-services-2.1.tar.bz2
+- $ cd kde-services-2.1
+- $ sudo make uninstall
