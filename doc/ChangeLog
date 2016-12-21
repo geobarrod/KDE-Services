@@ -1,3 +1,7 @@
+* Tue Dec 20 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-7
+- Bugfix: The option "--caption" was eliminated in the application kdialog,
+      for what is substituted by the option"--title" in all *.sh and *.desktop files.
+
 * Tue Dec 13 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-6
 - "Convert Video Files": Enhancement libx265 [H.265 or HEVC (High Efficiency Video Coding)] encoder option.
 - "MKV Extract Subtitle": Enhancement.

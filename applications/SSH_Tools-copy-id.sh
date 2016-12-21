@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2015.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -21,10 +21,10 @@ if-cancel-exit() {
 ############ Main ############
 ##############################
 
-SERVER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-key.svgz --caption="SSH Tools - Install Public Key" \
+SERVER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-key.svgz --title="SSH Tools - Install Public Key" \
        --inputbox="Enter Hostname or IP Address" localhost.localdomain 2> /dev/null)
 if-cancel-exit
-LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-key.svgz --caption="SSH Tools - Install Public Key" --combobox="Select User" $USER root --default $USER 2> /dev/null)
+LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-key.svgz --title="SSH Tools - Install Public Key" --combobox="Select User" $USER root --default $USER 2> /dev/null)
 if-cancel-exit
 mkdir ~/.kde-services 2> /dev/null
 echo $SERVER >> ~/.kde-services/machines

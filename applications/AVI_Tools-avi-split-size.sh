@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -38,7 +38,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILE|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="AVI Split (To Size)" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="AVI Split (To Size)" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -78,7 +78,7 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-SIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="AVI Split (To Size)" --inputbox="Enter size in MBytes" 2> /dev/null)
+SIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="AVI Split (To Size)" --inputbox="Enter size in MBytes" 2> /dev/null)
 if-cancel-exit
 progressbar-start
 

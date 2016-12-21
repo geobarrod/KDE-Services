@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2012-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -11,6 +11,8 @@ PID="$$"
 BEGIN_TIME=""
 FINAL_TIME=""
 ELAPSED_TIME=""
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -24,7 +26,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="MKV Extract Subtitle" --progressbar "                               " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --title="MKV Extract Subtitle" --progressbar "                               " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -44,7 +46,7 @@ ffprobe "$MKV" 2> /tmp/mkvinfo
 grep -e 'Subtitle' /tmp/mkvinfo|awk -F : '{print $1,$2,$3}' > /tmp/mkvinfo2
 cat /tmp/mkvinfo2|sed 's/^    //g' > /tmp/mkvinfo3
 cat /tmp/mkvinfo3|sed 's/ /_/g' > /tmp/mkvinfo4
-TID=$(kdialog --geometry 200x100 --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --caption="MKV Extract Subtitle" \
+TID=$(kdialog --geometry 200x100+$((WIDTH/2-200/2))+$((HEIGHT/2-100/2)) --icon=/usr/share/icons/hicolor/scalable/apps/ks-extracting-subs.svgz --title="MKV Extract Subtitle" \
     --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo4 |sed 's/$/ off/g'))
 if-cancel-exit
 

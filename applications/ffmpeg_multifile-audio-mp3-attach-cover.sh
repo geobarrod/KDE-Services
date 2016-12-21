@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -47,7 +47,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Attach Cover to MP3 Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --title="Attach Cover to MP3 Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -122,14 +122,14 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-COVER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Picture File" \
+COVER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --title="Picture File" \
         --getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg *.svgz *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|*.bmp *.gif *.jp2 *.jpeg *.jpg *.svgz *.tif *.tiff" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2> /dev/null)
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --title="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-mp3-attach-cover.svgz --title="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start

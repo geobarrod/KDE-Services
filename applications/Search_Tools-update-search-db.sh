@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -14,7 +14,7 @@ until [ "$(pidof kdesu)" = "" ]; do
   true
 done
 
-DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-search-database-update.svgz --caption="Update Search DataBase" --progressbar "                                        " /ProgressDialog)
+DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-search-database-update.svgz --title="Update Search DataBase" --progressbar "                                        " /ProgressDialog)
 qdbus $DBUSREF setLabelText "Updating search database..."
 
 until [ "$(pidof updatedb)" = "" ]; do

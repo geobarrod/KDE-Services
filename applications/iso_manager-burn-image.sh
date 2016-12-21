@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -24,7 +24,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --caption="Burn iso9660 Image" --progressbar "                                  " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --title="Burn iso9660 Image" --progressbar "                                  " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -40,7 +40,7 @@ qdbusinsert() {
 ##############################
 
 cd "${1%/*}"
-BURNSPEED=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --caption="Burn iso9660 Image" \
+BURNSPEED=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --title="Burn iso9660 Image" \
           --combobox="Select Burn Speed Factor" 2 4 8 10 12 16 24 32 48 --default 4 2> /dev/null)
 if-cancel-exit
 progressbar-start

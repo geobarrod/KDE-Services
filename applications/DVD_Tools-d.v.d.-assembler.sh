@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -38,7 +38,7 @@ if-dvdauthor-cancel() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --caption="D.V.D. Assembler" --progressbar "			" /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --title="D.V.D. Assembler" --progressbar "			" /ProcessDialog)
 }
 
 progressbar-close() {
@@ -98,7 +98,7 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --caption="Source Video Files" --multiple \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --title="Source Video Files" --multiple \
       --getopenfilename "$DIR" "*.mp2 *.mpe *.mpeg *.mpg *.vob *.MP2 *.MPE *.MPEG *.MPG *.VOB|MPEG-2 files" 2> /dev/null)
 if-cancel-exit
 
@@ -121,10 +121,10 @@ for VIDEO in $FILES; do
     fi
 done
 
-DVD_NAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --caption="D.V.D. Assembler" --inputbox="Enter DVD name without whitespaces." 2> /dev/null)
+DVD_NAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --title="D.V.D. Assembler" --inputbox="Enter DVD name without whitespaces." 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --caption="Destination DVD" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-video.svgz --title="Destination DVD" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start

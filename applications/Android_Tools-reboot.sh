@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2016.										#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -43,7 +43,7 @@ check-device() {
 check-device
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz --caption="Android Reboot Manager" --progressbar " " 0)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz --title="Android Reboot Manager" --progressbar " " 0)
 }
 
 progressbar-close() {
@@ -73,7 +73,7 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz --caption="Android Reboot Manager" \
+OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz --title="Android Reboot Manager" \
        --combobox="Select Reboot Operation" Bootloader Recovery System --default System 2> /dev/null)
 if-cancel-exit
 

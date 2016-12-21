@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2015.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -29,7 +29,7 @@ check-stderr() {
 }
         
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --caption="Change Owner Here" --progressbar "                            " /ProgressDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --progressbar "                            " /ProgressDialog)
 }
 
 progressbar-close() {
@@ -47,7 +47,7 @@ qdbusinsert() {
 ##############################
 
 rm -f $STDERR
-OWNER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --caption="Change Owner Here" --combobox="Select Owner" $SYSUSERS --default $USER 2> /dev/null)
+OWNER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --combobox="Select Owner" $SYSUSERS --default $USER 2> /dev/null)
 
 if [ "$?" -gt "0" ]; then
     kill -9 $(pidof knotify4)
@@ -55,7 +55,7 @@ if [ "$?" -gt "0" ]; then
 fi
 
 if [ -d "$@" ]; then
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --caption="Change Owner Here" \
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" \
          --menu="Change Mode Bits (Owner-Group-Others)" 755 "755 (rwx-rx-rx)" 775 "775 (rwx-rwx-rx)" 777 "777 (rwx-rwx-rwx)" 700 "700 (rwx--)" \
          2> /dev/null)
     
@@ -64,7 +64,7 @@ if [ -d "$@" ]; then
         exit 0
     fi
     
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --caption="Change Owner Here" --yesnocancel Recursively? 2> /dev/null
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --yesnocancel Recursively? 2> /dev/null
     EXIT=$?
     
     if [ "$EXIT" = "2" ]; then
@@ -107,7 +107,7 @@ if [ -d "$@" ]; then
     fi
 fi
 
-MODE2=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --caption="Change Owner Here" --menu="Change Mode Bits (Owner-Group-Others)" 644 "644 (rw-r-r)" \
+MODE2=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --menu="Change Mode Bits (Owner-Group-Others)" 644 "644 (rw-r-r)" \
       664 "664 (rw-rw-r)" 666 "666 (rw-rw-rw)" 600 "600 (rw--)" 744 "744 (rwx-r-r)" 774 "774 (rwx-rwx-r)" 755 "755 (rwx-rx-rx)" 775 "775\
       (rwx-rwx-rx)" 777 "777 (rwx-rwx-rwx)" 700 "700 (rwx--)" 2> /dev/null)
 

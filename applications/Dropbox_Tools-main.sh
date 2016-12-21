@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -59,7 +59,7 @@ finish-update() {
 }
 
 clipboard_url() {
-    LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" \
+    LOGIN=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" \
 			--inputbox="Enter username for access via web to public Dropbox folder")
     while [ "$MATCH" != "1" ]; do
 	PASS=$(kdialog --password="Enter password for access via web to public Dropbox folder" --title="Dropbox Tools")
@@ -91,7 +91,7 @@ dropbox_not_installed() {
 
 copy() {
     if [ -f $HOME/.dropbox/host.db ]; then
-        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
         qdbus $DBUSREF setLabelText "Copying ${FILE##*/} to $DROPBOX_PATH..."
 	BEGIN_TIME=$(date +%s)
         cp -rf $FILE $DROPBOX_PATH
@@ -109,7 +109,7 @@ copy() {
 
 move() {
     if [ -f $HOME/.dropbox/host.db ]; then
-        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
         qdbus $DBUSREF setLabelText "Moving ${FILE##*/} to $DROPBOX_PATH..."
 	BEGIN_TIME=$(date +%s)
         mv -f $FILE $DROPBOX_PATH
@@ -127,7 +127,7 @@ move() {
 
 copy_pub() {
     if [ -f $HOME/.dropbox/host.db ]; then
-        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
         qdbus $DBUSREF setLabelText "Copying ${FILE##*/} to $DROPBOX_PATH/Public..."
 	BEGIN_TIME=$(date +%s)
         cp -rf $FILE $DROPBOX_PATH/Public
@@ -146,7 +146,7 @@ copy_pub() {
 
 move_pub() {
     if [ -f $HOME/.dropbox/host.db ]; then
-        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+        DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
         qdbus $DBUSREF setLabelText "Moving ${FILE##*/} to $DROPBOX_PATH/Public..."
 	BEGIN_TIME=$(date +%s)
         mv -f $FILE $DROPBOX_PATH/Public
@@ -197,7 +197,7 @@ install_service() {
 
 start_service() {
     if [ -f $HOME/.dropbox-dist/dropboxd ]; then
-	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
         qdbus $DBUSREF setLabelText "Starting Dropbox service..."
 	BEGIN_TIME=$(date +%s)
 	$DROPBOX start
@@ -215,7 +215,7 @@ start_service() {
 
 stop_service() {
     if [ -f $HOME/.dropbox-dist/dropboxd ]; then
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
     qdbus $DBUSREF setLabelText "Stoping Dropbox service..."
     BEGIN_TIME=$(date +%s)
     $DROPBOX stop
@@ -256,7 +256,7 @@ EOF
 update_service() {
     if [ -f $HOME/.dropbox-dist/dropboxd ] && [ "$(uname -m)" == "i686" ]; then
 	stop_service
-	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
 	qdbus $DBUSREF setLabelText "Updating Dropbox service..."
 	rm -fr $HOME/.dropbox-dist
 	cd $HOME
@@ -275,7 +275,7 @@ update_service() {
 	finish-update
     elif [ -f $HOME/.dropbox-dist/dropboxd ] && [ "$(uname -m)" == "x86_64" ]; then
 	stop_service
-	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --caption="Dropbox Tools" --progressbar " " /ProgressDialog)
+	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz --title="Dropbox Tools" --progressbar " " /ProgressDialog)
 	qdbus $DBUSREF setLabelText "Updating Dropbox service..."
 	rm -fr $HOME/.dropbox-dist
 	cd $HOME

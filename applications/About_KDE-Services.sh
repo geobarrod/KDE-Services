@@ -1,12 +1,14 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2013-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 VERSION=$(head -n1 /usr/share/doc/kde-services*/ChangeLog |awk '{print $10}')
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 cat > /tmp/about_kde-services << EOF
 
@@ -14,7 +16,7 @@ cat > /tmp/about_kde-services << EOF
 			        http://sourceforge.net/projects/kde-services/
 
     Description:
-        Enables the following functionalities on the Dolphin's right click menu of KDE-4.x/5.x:
+        Enables the following functionalities on the Dolphin's (File Manager) right click menu of KDE 4.x/5.x:
 
         - Convert several video formats to MPEG-1, MPEG-2, MPEG-4, AVI, VCD, SVCD, DVD, 3GP, FLV or WebM.
         - Extract the audio track of several video formats and convert them to MP3, MP3(432Hz), FLAC, FLAC(432Hz), OGG or OGG (432Hz).
@@ -147,6 +149,6 @@ cat > /tmp/about_kde-services << EOF
 
 EOF
 
-kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-menu.svgz --caption="About KDE-Services" --textbox /tmp/about_kde-services --geometry 830x600 2> /dev/null
+kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-menu.svgz --title="About KDE-Services" --textbox /tmp/about_kde-services --geometry 900x600+$((WIDTH/2-900/2))+$((HEIGHT/2-600/2)) 2> /dev/null
 rm -f /tmp/about_kde-services
 exit 0

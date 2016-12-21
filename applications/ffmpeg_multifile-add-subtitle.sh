@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -46,7 +46,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$TOTAL_ARRAY
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --caption="Add Subtitle to MP4 File" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --title="Add Subtitle to MP4 File" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -121,13 +121,13 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=($(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --caption="Video Files" --multiple --getopenfilename "$DIR" "*.MP4 *.mp4|*.mp4" 2> /dev/null))
+FILES=($(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --title="Video Files" --multiple --getopenfilename "$DIR" "*.MP4 *.mp4|*.mp4" 2> /dev/null))
 if-cancel-exit
 
-SUBS=($(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --caption="Subtitle Files" --multiple --getopenfilename "$DIR" "*.SRT *.srt|*.srt" 2> /dev/null))
+SUBS=($(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --title="Subtitle Files" --multiple --getopenfilename "$DIR" "*.SRT *.srt|*.srt" 2> /dev/null))
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-add-subs.svgz --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 ARRAY_NUMBER="0"

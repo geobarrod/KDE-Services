@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -50,7 +50,7 @@ delete-file-list() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --caption="Concatenate Media Files with Same Codec" --progressbar " " 0)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" --progressbar " " 0)
 }
 
 progressbar-close() {
@@ -122,16 +122,16 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --caption="Concatenate Media Files with Same Codec" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob \
       *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
-FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --caption="Concatenate Media Files with Same Codec" \
+FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" \
                 --inputbox="Enter filename without whitespaces for new concatenated media file" New_Concatenated_Media_File)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --caption="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 delete-file-list

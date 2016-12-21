@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2012-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -13,11 +13,11 @@ DIR="$1"
 cd "$DIR"
 
 if [ "$UID" != "0" ]; then
-    PORT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --caption="HTTP Server" \
+    PORT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --title="HTTP Server" \
          --inputbox="Enter a integer number for service port greater than 1023. Allowed range from 1024 to 65535." 8080 2> /dev/null)
     EXIT="$?"
 else
-    PORT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --caption="HTTP Server" \
+    PORT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --title="HTTP Server" \
          --inputbox="Enter a integer number for service port. Allowed range from 1 to 65535." 80 2> /dev/null)
     EXIT="$?"
 fi
@@ -56,11 +56,11 @@ if [ "$EXIT" != "0" ]; then
     fi
     
     if [ "$PORT" != "80" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --caption="HTTP Server" --yes-label Background --no-label Stop \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --title="HTTP Server" --yes-label Background --no-label Stop \
                        --warningyesno="Published \"${1##*/}\" directory. Access via web: http://$HOSTNAME:$PORT" 2> /dev/null
         EXIT="$?"
     else
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --caption="HTTP Server" --yes-label Background --no-label Stop \
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz --title="HTTP Server" --yes-label Background --no-label Stop \
                        --warningyesno="Published \"${1##*/}\" directory. Access via web: http://$HOSTNAME" 2> /dev/null
         EXIT="$?"
     fi

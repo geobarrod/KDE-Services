@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -55,7 +55,7 @@ if-adb-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --caption="Android Backup Manager" --progressbar " " 0)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --title="Android Backup Manager" --progressbar " " 0)
 }
 
 progressbar-close() {
@@ -130,12 +130,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --caption="Android Backup Manager" \
+OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --title="Android Backup Manager" \
        --combobox="Select Operation" Backup Restore --default Backup 2> /dev/null)
 if-cancel-exit
 
 if [ "$OPERATION" = "Backup" ]; then
-	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --title="Android Backup Manager" --caption="Backup File Destination" --getexistingdirectory "$DIR" 2> /dev/null)
+	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --title="Android Backup Manager - Backup File Destination" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
 	progressbar-start
 	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --title="Android Backup Manager" --passivepopup="Now unlock your device and confirm the backup operation."
@@ -148,7 +148,7 @@ if [ "$OPERATION" = "Backup" ]; then
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 	elapsedtime
 elif [ "$OPERATION" = "Restore" ]; then
-	FILE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --title="Android Backup Manager" --caption="Select Android Backup File" --getopenfilename "$DIR" "*.AB *.ab *.ABK *.abk|*.ab, *.abk" 2> /dev/null)
+	FILE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz --title="Android Backup Manager - Select Android Backup File" --getopenfilename "$DIR" "*.AB *.ab *.ABK *.abk|*.ab, *.abk" 2> /dev/null)
 	if-cancel-exit
     progressbar-start
 	qdbusinsert-restore-data

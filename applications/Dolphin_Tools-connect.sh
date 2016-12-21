@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2015.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -50,17 +50,17 @@ fi
 
 if [ -s ~/.kde-services/machines ]; then
     SERVER=$(cat ~/.kde-services/machines)
-    PROTOCOL=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --caption="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
+    PROTOCOL=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --title="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
         exit 0
     fi
     
-    DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --caption="Dolphin Tools" --combobox="Select Hostname or IP Address" $SERVER \
+    DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --title="Dolphin Tools" --combobox="Select Hostname or IP Address" $SERVER \
            --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
-        DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --caption="Dolphin Tools" \
+        DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --title="Dolphin Tools" \
                --inputbox="Enter Hostname or IP Address" localhost.localdomain --default  2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
@@ -76,7 +76,7 @@ if [ -s ~/.kde-services/machines ]; then
     
     bookmark
 else
-    DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --caption="Dolphin Tools" \
+    DIALOG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --title="Dolphin Tools" \
            --inputbox="Enter Hostname or IP Address" localhost.localdomain 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
@@ -88,7 +88,7 @@ else
     mv /tmp/machines ~/.kde-services/machines
     
     SERVER=$(cat ~/.kde-services/machines)
-    PROTOCOL=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --caption="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
+    PROTOCOL=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz --title="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
 	exit 0

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -66,7 +66,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -141,20 +141,20 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv \
 	  *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav \
 	  *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
-FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
+FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Extract|Convert] Audio Track" \
        --combobox="Choose Audio Encoder" FLAC "FLAC (432Hz)" MP3 "MP3 (432Hz)" OGG "OGG (432Hz)" --default "MP3 (432Hz)" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
     
 if [ "$FORMAT" = "MP3 (432Hz)" ]; then
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Extract|Convert] Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
     progressbar-start
@@ -179,7 +179,7 @@ if [ "$FORMAT" = "MP3 (432Hz)" ]; then
         elapsedtime
     done
 elif [ "$FORMAT" = "MP3" ]; then
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --caption="[Extract|Convert] Audio Track" \
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio.svgz --title="[Extract|Convert] Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
     progressbar-start

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -38,7 +38,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILE|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="AVI Split (By Time Range)" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="AVI Split (By Time Range)" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -78,7 +78,7 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-TIMERANGE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="AVI Split (By Time Range)" \
+TIMERANGE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="AVI Split (By Time Range)" \
           --inputbox="Enter time range in hh:mm:ss (One range: 00:10:00-00:11:00 or multi-range: 00:10:00-00:11:00,00:23:00-00:24:00)" 00:00:00-00:00:00 \
           2> /dev/null)
 if-cancel-exit

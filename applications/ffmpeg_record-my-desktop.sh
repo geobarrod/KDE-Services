@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2013.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2012-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -12,6 +12,8 @@ FILENAME=""
 VCODEC=""
 DESTINATION=""
 FFPID=""
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -31,7 +33,7 @@ if-ffmpeg-cancel() {
 }
 
 record-cancel() {
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --caption="Record My Desktop" --yes-label Stop --no-label Cancel \
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Record My Desktop" --yes-label Stop --no-label Cancel \
                    --yesno="Record My Desktop is running, saving video to $DESTINATION/$FILENAME.$VCODEC" 2> /dev/null
     
     if [ "$?" = "0" ] || [ "$?" != "0" ]; then
@@ -48,14 +50,14 @@ DIR=$1
 cd "$DIR"
 DIR=$(pwd)
 
-FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --caption="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop_$HOSTNAME" 2> /dev/null)
+FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop_$HOSTNAME" 2> /dev/null)
 if-cancel-exit
 
-VCODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --caption="Record My Desktop" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" webm "WebM" \
-       --geometry 100x100 2> /dev/null)
+VCODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Record My Desktop" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" webm "WebM" \
+       --geometry 100x100+$((WIDTH/2-100/2))+$((HEIGHT/2-100/2)) 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --caption="Destination Video" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Destination Video" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 

@@ -23,8 +23,10 @@
 
 ######### INITIALIZATION #########
 export TEXTDOMAIN=pdfktools
-KDE="--caption PDF_Tools --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz"
+KDE="--title PDF_Tools --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz"
 LOG="$(kde4-config --path tmp)pdfktools.log"
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 action=''
 kdbus='no'
@@ -57,7 +59,7 @@ error_log(){
     if [ "$?" -ne 0 ]; then
         if [ $kdbus = 'yes' ]; then qdbus $dbusRef close; fi
         kdialog $KDE --error "$1"
-        kdialog $KDE --textbox $LOG 800 600
+        kdialog $KDE --textbox $LOG --geometry 800x600+$((WIDTH/2-800/2))+$((HEIGHT/2-600/2))
         exit 1
     fi
 }
@@ -256,7 +258,7 @@ case $action in
             file=$(file -bp "$f")
             echo -e "$f\n$file\n" > "${out}"
             metadata_view_all "$f"
-            kdialog $KDE --textbox "$out" 400 250
+            kdialog $KDE --textbox "$out" --geometry 400x250+$((WIDTH/2-400/2))+$((HEIGHT/2-250/2))
             rm -f $out
         done ;;
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013.										#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2013-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -32,7 +32,7 @@ if-cancel-exit() {
 
 export $(dbus-launch)
 
-STATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --caption="System Monitor" --combobox="Choose Status" Enabled Disabled --default Enabled 2> /dev/null)
+STATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="System Monitor" --combobox="Choose Status" Enabled Disabled --default Enabled 2> /dev/null)
 if-cancel-exit
 
 if [ "$STATE" == "Enabled" ]; then
@@ -41,7 +41,7 @@ if [ "$STATE" == "Enabled" ]; then
     exit 1
   fi
 
-  SELECT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --caption="System Monitor" \
+  SELECT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="System Monitor" \
 		    --combobox="Select mode" Error Fail Warning Error+Fail Error+Warning Error+Fail+Warning Fail+Warning --default Error+Fail+Warning)
   if-cancel-exit
 

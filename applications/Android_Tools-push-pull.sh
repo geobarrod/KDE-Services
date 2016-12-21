@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -18,6 +18,8 @@ FILES=/tmp/afm.tmp
 DESTINATION=""
 KdialogPID=""
 LOG=/tmp/afm.log
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -52,7 +54,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --caption="Android File Manager" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -131,12 +133,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --caption="Android File Manager" \
+OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" \
        --combobox="Select Operation" Push Pull --default Push 2> /dev/null)
 if-cancel-exit
 
 if [ "$OPERATION" = "Push" ]; then
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" --caption="Select Files" --multiple --getopenfilename "$DIR" "*.*|*.*" 2> /dev/null)
+	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager - Select Files" --multiple --getopenfilename "$DIR" "*.*|*.*" 2> /dev/null)
 	if-cancel-exit
 	progressbar-start
 
@@ -152,11 +154,11 @@ if [ "$OPERATION" = "Push" ]; then
     done
 elif [ "$OPERATION" = "Pull" ]; then
 	adb shell ls /mnt/sdcard*/*.* > $FILES
-	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" --caption="Files Destination" --getexistingdirectory "$DIR" 2> /dev/null)
+	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager - Files Destination" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --caption="Android File Manager - $(cat $FILES|wc -l)" --textbox=$FILES --geometry 300x200 2> /dev/null &
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager - $(cat $FILES|wc -l)" --textbox=$FILES --geometry 300x200+$((WIDTH/2-300/2))+$((HEIGHT/2-200/2)) 2> /dev/null &
  	KdialogPID=$(ps aux|grep "afm.tmp"|grep -v grep|awk -F" " '{print $2}')
- 	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --caption="Android File Manager" --inputbox="Enter absolute path filenames from textbox separated by whitespace." 2> /dev/null)
+ 	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" --inputbox="Enter absolute path filenames from textbox separated by whitespace." 2> /dev/null)
  	if-cancel-exit
  	kill -9 $KdialogPID 2> /dev/null
     progressbar-start

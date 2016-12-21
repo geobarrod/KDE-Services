@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2015.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2015.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -16,6 +16,8 @@ COUNT=""
 COUNTFILES=""
 TARGETBACKUP=""
 ALL=""
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -39,7 +41,7 @@ beginning-backup() {
     COUNT="0"
     COUNTFILES=$(echo $TARGETBACKUP|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --caption="Backup Tools" --progressbar "                             " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --title="Backup Tools" --progressbar "                             " $COUNTFILES)
     BEGIN_TIME=$(date +%s)
 }
 
@@ -82,7 +84,7 @@ beginning-restore() {
     COUNT="0"
     COUNTFILES=$(echo $MODE|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --caption="Backup Tools" --progressbar "                             " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --title="Backup Tools" --progressbar "                             " $COUNTFILES)
     BEGIN_TIME=$(date +%s)
     COUNT=$((++COUNT))
 }
@@ -132,7 +134,7 @@ restore-qdbusinsert() {
 ############ Main ############
 ##############################
 
-MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --caption="Backup Tools" --combobox="Choose Mode" Backup Restore --default Backup 2> /dev/null)
+MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --title="Backup Tools" --combobox="Choose Mode" Backup Restore --default Backup 2> /dev/null)
 EXIT=$?
 if-cancel-exit
 
@@ -150,8 +152,8 @@ if [ "$MODE" = "Backup" ]; then
         $HOME/.wine \
         $HOME/.config/xmoto
     "
-    TARGETBACKUP=$(kdialog --geometry 410x350+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')/2-(410/2)))+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')/2-(350/2))) \
-		--icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --caption="Backup Standard" --separate-output --radiolist="Select For Backup" \
+    TARGETBACKUP=$(kdialog --geometry 410x350+$((WIDTH/2-410/2))+$((HEIGHT/2-350/2)) \
+		--icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --title="Backup Standard" --separate-output --radiolist="Select For Backup" \
         system "Editable Text Configuration (/etc) and Root Home (/root)" off \
         All "All Below List" off \
         $HOME/.filezilla FileZilla off \
@@ -209,8 +211,8 @@ else
         exit 0
     fi
     
-    MODE=$(kdialog --geometry 410x350+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')/2-(410/2)))+$(($(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')/2-(350/2))) \
-		--icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --caption="Restore Standard" --menu="Select For Restore" \
+    MODE=$(kdialog --geometry 410x350+$((WIDTH/2-410/2))+$((HEIGHT/2-350/2)) \
+		--icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --title="Restore Standard" --menu="Select For Restore" \
          $BACKUP/system "Editable Text Configuration (/etc) and Root Home (/root)" \
          $BACKUP/filezilla FileZilla \
          $BACKUP/firefox Firefox \
@@ -236,7 +238,7 @@ else
     
     cd $MODE
     RESTORELIST=$(ls $MODE)
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --caption="Restore Standard" --combobox="Select For Restore" $RESTORELIST 2> /dev/null)
+    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-database.svgz --title="Restore Standard" --combobox="Select For Restore" $RESTORELIST 2> /dev/null)
     EXIT=$?
     if-cancel-exit
     

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -18,6 +18,8 @@ FILES=""
 LOG=/tmp/apm.log
 MyAPKs=/tmp/my-apks
 KdialogPID=""
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -52,7 +54,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --caption="Android Package Manager" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -132,12 +134,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --caption="Android Package Manager" \
+OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" \
        --combobox="Select Operation" Install Uninstall --default Install 2> /dev/null)
 if-cancel-exit
 
 if [ "$OPERATION" = "Install" ]; then
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --caption="Select Apk Files" --title="Android Package Manager" --multiple --getopenfilename "$DIR" "*.APK *.apk|*.apk" 2> /dev/null)
+	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager - Select Apk Files" --multiple --getopenfilename "$DIR" "*.APK *.apk|*.apk" 2> /dev/null)
 	if-cancel-exit
 	progressbar-start
 
@@ -155,9 +157,9 @@ elif [ "$OPERATION" = "Uninstall" ]; then
     adb shell su -c "ls -l /data/data/" > $MyAPKs
     cat $MyAPKs|sort -k 6|awk -F" " '{print $6}' > ${MyAPKs}2
     kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz \
-			--caption="Android Package Manager - $(cat $MyAPKs|wc -l) applications" --textbox=${MyAPKs}2 --geometry 450x450 2> /dev/null &
+			--title="Android Package Manager - $(cat $MyAPKs|wc -l) applications" --textbox=${MyAPKs}2 --geometry 450x450+$((WIDTH/2-450/2))+$((HEIGHT/2-450/2)) 2> /dev/null &
 	KdialogPID=$(ps aux|grep "my-apks2"|grep -v grep|awk -F" " '{print $2}')
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --caption="Android Package Manager" --inputbox="Enter Android applications from textbox separated by whitespace." 2> /dev/null)
+	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" --inputbox="Enter Android applications from textbox separated by whitespace." 2> /dev/null)
 	if-cancel-exit
 	kill -9 $KdialogPID 2> /dev/null
     progressbar-start

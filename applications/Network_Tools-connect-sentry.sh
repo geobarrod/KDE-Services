@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -15,12 +15,12 @@ if-cancel-exit() {
     fi
 }
 
-STATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --caption="Connect Sentry" --combobox="Choose Status" Enabled Disabled --default Enabled 2> /dev/null)
+STATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --title="Connect Sentry" --combobox="Choose Status" Enabled Disabled --default Enabled 2> /dev/null)
 if-cancel-exit
 
 if [ "$STATE" = "Enabled" ]; then
     if [ "$(cat $PID 2> /dev/null)" = "$CHECKPID" ] && [ -s $PID ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --caption="Connect Sentry" --sorry="Already Running." 2> /dev/null
+        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --title="Connect Sentry" --sorry="Already Running." 2> /dev/null
         exit 0
     fi
     
@@ -30,7 +30,7 @@ if [ "$STATE" = "Enabled" ]; then
     fi
     
     SHOWPORTS=$(cat ~/.kde-services/ports|sed 's/ or sport = :/,/g'|sed 's/^sport = ://g')
-    PORTS=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --caption="Connect Sentry" \
+    PORTS=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --title="Connect Sentry" \
           --inputbox="Enter ports number separate by comma to monitor it" $SHOWPORTS 2> /dev/null)
     if-cancel-exit
     echo -n $PORTS > ~/.kde-services/ports
@@ -68,7 +68,7 @@ elif [ "$STATE" = "Disabled" ]; then
     kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-off.svgz --title="Connect Sentry" --passivepopup="[Disabled]" 2> /dev/null
 
 elif [ "$STATE" = "" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --caption="Connect Sentry" \
+    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz --title="Connect Sentry" \
                    --error="Please choose the Connect Sentry Status (Enable or Disabled)." 2> /dev/null
 fi
 

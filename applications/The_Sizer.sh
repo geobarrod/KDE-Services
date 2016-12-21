@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2012-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -41,7 +41,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --caption="Image Resizer" --progressbar "                                         " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --progressbar "                                         " $COUNTFILES)
 }
 
 progressbar-close() {
@@ -111,16 +111,16 @@ done
 
 DIR="$(pwd)"
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --caption="Source Image Files" --multiple \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Source Image Files" --multiple \
       --getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.svgz *.ppm *.psd *.sgi \
       *.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.TGA \
       *.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.svgz *.ppm *.psd *.sgi *.tga *.tif *.tiff *.xpm" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-SIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --caption="Image Resizer" --inputbox="Enter size in pixels for frame width")
+SIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz --title="Image Resizer" --inputbox="Enter size in pixels for frame width")
 if-cancel-exit
 
 BEGIN_TIME=$(date +%s)

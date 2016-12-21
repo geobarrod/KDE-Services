@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2012-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -28,7 +28,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --caption="Multiplex Subtitle" --progressbar "                                   " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --title="Multiplex Subtitle" --progressbar "                                   " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -54,7 +54,7 @@ if [ "$CODEC" != "mpeg2video" ]; then
 else
     DIR="$(pwd)"
 
-    SUBTITLE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --caption="Text Based Subtitle" \
+    SUBTITLE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-multiplexing-subs.svgz --title="Text Based Subtitle" \
              --getopenfilename "$DIR" "*.aqt *.ass *.js *.jss *.rt *.smi *.srt *.ssa *.sub *.txt" 2> /dev/null)
     if-cancel-exit
 

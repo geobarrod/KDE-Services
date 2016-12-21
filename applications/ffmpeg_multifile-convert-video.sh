@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -24,6 +24,8 @@ COUNT=""
 COUNTFILES=""
 LOG=""
 LOGERROR=""
+WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
+HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -57,7 +59,7 @@ if-ffmpeg-cancel() {
 }
 
 time-position() {
-    TIMEPOSITION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
+    TIMEPOSITION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" \
                  --inputbox="Enter time position in seconds or hh:mm:ss[.xxx]" 00:00:00.000)
     if-cancel-exit
 }
@@ -66,7 +68,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --progressbar "                                " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --progressbar "                                " $COUNTFILES)
 }
 
 progressbar-close() {
@@ -143,15 +145,15 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Profile" mobile "Mobile Phones (3GP)" \
+MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Profile" mobile "Mobile Phones (3GP)" \
      4K "Resolution Ultra-HD (4K)" 2K "Resolution DCI (2K)" 1080 "Resolution Full-HD (1080p)" 720 "Resolution HD (720p)" 480 "Resolution ED (480p)" 360 "Resolution NHD (360p)" \
      240 "Resolution QVGA (240p)" same "Same Resolution" standards "Standards (VCD - SVCD - DVD)" web "Web (FLV - WebM)" video2gif "Video to Animated GIF" video2images "Video to Images" \
-     images2video "Images to Video" multiplexaudio "Multiplex Audio File" customized "Customized (Advanced Users)" --geometry 260x300 2> /dev/null)
+     images2video "Images to Video" multiplexaudio "Multiplex Audio File" customized "Customized (Advanced Users)" --geometry 260x450+$((WIDTH/2-260/2))+$((HEIGHT/2-450/2)) 2> /dev/null)
 if-cancel-exit
 
 ############################### images2video ###############################
 if [ "$MODE" = "images2video" ]; then
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Select Image Files In Your Preferred Order" --multiple \
+	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Select Image Files In Your Preferred Order" --multiple \
 			--getopenfilename "$DIR" "*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff *.BMP *.JPG *.PAM *.PBM *.PGM *.PNG *.PPM *.SGI *.TIF *.TIFF|*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff" 2> /dev/null)
 	if-cancel-exit
 
@@ -161,16 +163,16 @@ if [ "$MODE" = "images2video" ]; then
 		cp $s /tmp/SequentialImage_$COUNT.${s:${#s}-3}
 	done
 
-	FRAME_RATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files|$(ls /tmp/SequentialImage_*|wc -w|sed -e 's/^ *//') selected images" \
+	FRAME_RATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files|$(ls /tmp/SequentialImage_*|wc -w|sed -e 's/^ *//') selected images" \
                 --inputbox="Enter the frame rate of the output video file (for 10 selected image files to 1 fps ~1800)" 1800)
 	if-cancel-exit
-	FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
+	FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" \
                 --inputbox="Enter filename without whitespaces for new video file" New_Video_File)
 	if-cancel-exit
-	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Destination Video File" --getexistingdirectory "$DIR" 2> /dev/null)
+	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Destination Video File" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
 
-	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --progressbar " " 0)
+	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --progressbar " " 0)
     LOG="/tmp/$FILENAME.log"
     LOGERROR="$FILENAME.err"
     rm -f $LOGERROR
@@ -201,14 +203,14 @@ if [ "$MODE" = "images2video" ]; then
 fi
 ############################### multiplexaudio ###############################
 if [ "$MODE" = "multiplexaudio" ]; then
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm \
       *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2> /dev/null)
 	if-cancel-exit
-	AUDIO_FILE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Select Audio File" \
+	AUDIO_FILE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Select Audio File" \
 			--getopenfilename "$DIR" "*.FLAC *.flac *.M4A *.m4a *.MP2 *.mp2 *.MP3 *.mp3 *.OGG *.ogg *.WAV *.wav *.WMA *.wma|*.flac *.m4a *.mp2 *.mp3 *.ogg *.wav *.wma" 2> /dev/null)
 	if-cancel-exit
-	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Destination Video File" --getexistingdirectory "$DIR" 2> /dev/null)
+	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Destination Video File" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
 
 	progressbar-start
@@ -233,18 +235,18 @@ if [ "$MODE" = "multiplexaudio" ]; then
 	progressbar-close
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv \
   *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2> /dev/null)
 if-cancel-exit
 ############################### video2images ###############################
 if [ "$MODE" = "video2images" ]; then
-	IMAGE_FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Image Format" bmp "BMP" jpg "JPG" pam "PAM" pbm "PBM" pgm "PGM" png "PNG" ppm "PPM" sgi "SGI" tif "TIFF" \
-				  --geometry 100x200 2> /dev/null)
+	IMAGE_FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Image Format" bmp "BMP" jpg "JPG" pam "PAM" pbm "PBM" pgm "PGM" png "PNG" ppm "PPM" sgi "SGI" tif "TIFF" \
+				  --geometry 100x200+$((WIDTH/2-100/2))+$((HEIGHT/2-200/2)) 2> /dev/null)
 	if-cancel-exit
-	FRAME_RATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
+	FRAME_RATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" \
                 --inputbox="Enter the frame rate of the input video file")
 	if-cancel-exit
-	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
+	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
 
 	progressbar-start
@@ -264,7 +266,7 @@ if [ "$MODE" = "video2images" ]; then
 fi
 ############################### video2gif ###############################
 if [ "$MODE" = "video2gif" ]; then
-	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
+	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
 
 	progressbar-start
@@ -284,13 +286,13 @@ if [ "$MODE" = "video2gif" ]; then
 	progressbar-close
 fi 
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 ############################### Mobile ###############################
 if [ "$MODE" = "mobile" ]; then
-    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
-				352x288 "CIF (352x288)" --geometry 100x165 2> /dev/null)
+    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
+				352x288 "CIF (352x288)" --geometry 100x170+$((WIDTH/2-100/2))+$((HEIGHT/2-170/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -311,8 +313,8 @@ if [ "$MODE" = "mobile" ]; then
 fi
 ############################### 4K ###############################
 if [ "$MODE" = "4K" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x190+$((WIDTH/2-100/2))+$((HEIGHT/2-190/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -383,8 +385,8 @@ if [ "$MODE" = "4K" ]; then
 fi
 ############################### 2K ###############################
 if [ "$MODE" = "2K" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x190+$((WIDTH/2-100/2))+$((HEIGHT/2-190/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -455,8 +457,8 @@ if [ "$MODE" = "2K" ]; then
 fi
 ############################### 1080p ###############################
 if [ "$MODE" = "1080" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x190+$((WIDTH/2-100/2))+$((HEIGHT/2-190/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -527,8 +529,8 @@ if [ "$MODE" = "1080" ]; then
 fi
 ############################### 720p ###############################
 if [ "$MODE" = "720" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x190+$((WIDTH/2-100/2))+$((HEIGHT/2-190/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -599,8 +601,8 @@ if [ "$MODE" = "720" ]; then
 fi
 ############################### 480p ###############################
 if [ "$MODE" = "480" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x190+$((WIDTH/2-100/2))+$((HEIGHT/2-190/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -671,8 +673,8 @@ if [ "$MODE" = "480" ]; then
 fi
 ############################### 360p ###############################
 if [ "$MODE" = "360" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x190+$((WIDTH/2-100/2))+$((HEIGHT/2-190/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -743,8 +745,8 @@ if [ "$MODE" = "360" ]; then
 fi
 ############################### 240p ###############################
 if [ "$MODE" = "240" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x185 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" mpg "MPEG-1" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x190+$((WIDTH/2-100/2))+$((HEIGHT/2-190/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -815,8 +817,8 @@ if [ "$MODE" = "240" ]; then
 fi
 ############################### same ###############################
 if [ "$MODE" = "same" ]; then
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" mpg2 "MPEG-2" mp4-h.264 \
-          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x225 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" mpg2 "MPEG-2" mp4-h.264 \
+          "MPEG-4 (H.264)" mp4-h.265 "MPEG-4 (H.265)" webm "WebM" --geometry 100x230+$((WIDTH/2-100/2))+$((HEIGHT/2-230/2)) 2> /dev/null)
     if-cancel-exit
     
     progressbar-start
@@ -911,53 +913,53 @@ if [ "$MODE" = "same" ]; then
 fi
 ############################### standards ###############################
 if [ "$MODE" = "standards" ]; then
-    STD=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
+    STD=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" \
         --menu="Choose Standard Video Resolution" vcd "VCD" vcd-700 "VCD (700 MB)" svcd "SVCD" \
-        svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x225 2> /dev/null)
+        svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" --geometry 100x230+$((WIDTH/2-100/2))+$((HEIGHT/2-230/2)) 2> /dev/null)
     if-cancel-exit
     
     if [ "$STD" = "vcd" ] || [ "$STD" = "vcd-700" ];then
-        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
+        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" \
                --combobox="Enter Video Format" film-vcd ntsc-vcd pal-vcd  --default film-vcd 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "svcd" ] || [ "$STD" = "svcd-700" ];then
-        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
+        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" \
                --combobox="Enter Video Format" film-svcd ntsc-svcd pal-svcd --default film-svcd 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "dvd" ] || [ "$STD" = "dvd-4.7" ] || [ "$STD" = "dvd-8.0" ];then
-        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" \
+        FORMAT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" \
                --combobox="Enter Video Format" film-dvd ntsc-dvd pal-dvd --default film-dvd 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "vcd-700" ];then
         time-position
-        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert To VCD (700 MB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert To VCD (700 MB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 700 MB = 734003200" 734003200 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "svcd-700" ];then
         time-position
-        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert To SVCD (700 MB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert To SVCD (700 MB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 700 MB = 734003200" 734003200 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "dvd-4.7" ];then
         time-position
-        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert To DVD (4.7 GB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert To DVD (4.7 GB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 4.4 GB = 4724464025" 4724464025 2> /dev/null)
         if-cancel-exit
     fi
     
     if [ "$STD" = "dvd-8.0" ];then
         time-position
-        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert To DVD (8.0 GB)" \
+        FILESIZE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert To DVD (8.0 GB)" \
                  --inputbox="Enter the file size limit in bytes, ex: 8.0 GB = 8589934592" 8589934592 2> /dev/null)
         if-cancel-exit
     fi
@@ -1054,11 +1056,11 @@ if [ "$MODE" = "standards" ]; then
 fi
 ############################### web ###############################
 if [ "$MODE" = "web" ]; then
-    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
+    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Resolution" 128x96 "SQCIF (128x96)" 176x144 "QCIF (176x144)" 320x240 "QVGA (320x240)" \
 				352x288 "CIF (352x288)" 640x360 "NHD (640x360)" 852x480 "ED (852x480)" 1280x720 "HD (1280x720)" 1920x1080 "Full-HD (1920x1080)" 2048x1080 "Ultra-HD 2K (2048x1080)" 4096x2160 "Ultra-HD 4K (4096x2160)" \
-				--geometry 220x290 2> /dev/null)
+				--geometry 220x290+$((WIDTH/2-220/2))+$((HEIGHT/2-290/2)) 2> /dev/null)
     if-cancel-exit
-    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" flv "FLV" webm "WebM" --geometry 100x100 2> /dev/null)
+    CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" flv "FLV" webm "WebM" --geometry 100x100+$((WIDTH/2-100/2))+$((HEIGHT/2-100/2)) 2> /dev/null)
     if-cancel-exit
     
     if [ "$CODEC" = "flv" ];then
@@ -1097,17 +1099,17 @@ if [ "$MODE" = "web" ]; then
 fi
 ############################### customized ###############################
 if [ "$MODE" = "customized" ]; then
-    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --inputbox="Enter Custom Video Resolution (ex: 852x480)" 852x480 2> /dev/null)
+    RESOLUTION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --inputbox="Enter Custom Video Resolution (ex: 852x480)" 852x480 2> /dev/null)
     if-cancel-exit
-    VIDEO_CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Video Codec" \
+    VIDEO_CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Video Codec" \
 			$(ffmpeg -encoders|grep -w 'V\.\.\.\.\.'|grep -v '= Video'|grep -v image|grep -v bitmap|grep -v gif|grep -v jpeg2000|grep -v Uncompressed\
-			|awk -F " " '{print $2,$3"_"$4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"_"$12"_"$13"_"$14"_"$15"_"$16}'|sed 's/_*$//g'|sort -k2) --geometry 600x370 2> /dev/null)
+			|awk -F " " '{print $2,$3"_"$4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"_"$12"_"$13"_"$14"_"$15"_"$16}'|sed 's/_*$//g'|sort -k2) --geometry 600x370+$((WIDTH/2-600/2))+$((HEIGHT/2-370/2)) 2> /dev/null)
     if-cancel-exit
-    AUDIO_CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --menu="Choose Audio Codec" \
+    AUDIO_CODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --menu="Choose Audio Codec" \
 				  $(ffmpeg -encoders|grep -w 'A\.\.\.\.\.'|grep -v '= Audio'|grep -v pcm|grep -v comfortnoise\
-				  |awk -F " " '{print $2,$3"_"$4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"_"$12"_"$13"_"$14"_"$15"_"$16}'|sed 's/_*$//g'|sort -k2) --geometry 600x370 2> /dev/null)
+				  |awk -F " " '{print $2,$3"_"$4"_"$5"_"$6"_"$7"_"$8"_"$9"_"$10"_"$11"_"$12"_"$13"_"$14"_"$15"_"$16}'|sed 's/_*$//g'|sort -k2) --geometry 600x370+$((WIDTH/2-600/2))+$((HEIGHT/2-370/2)) 2> /dev/null)
     if-cancel-exit
- 	AUDIO_BITRATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --caption="Convert Video Files" --inputbox="Enter Custom Audio Bitrate in kbit/s" 320 2> /dev/null)
+ 	AUDIO_BITRATE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz --title="Convert Video Files" --inputbox="Enter Custom Audio Bitrate in kbit/s" 320 2> /dev/null)
      if-cancel-exit
 
   progressbar-start

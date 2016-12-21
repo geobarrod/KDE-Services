@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -49,7 +49,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --caption="Edit Time from Media Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -124,19 +124,19 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --caption="Edit Time from Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv \
       *.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --caption="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-STIME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --caption="Edit Time from Media Files" \
+STIME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" \
                 --inputbox="Enter start cut time in hh:mm:ss format" 00:00:00)
 if-cancel-exit
 
-ETIME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --caption="Edit Time from Media Files" \
+ETIME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" \
                 --inputbox="Enter end cut time in hh:mm:ss format" 00:01:00)
 if-cancel-exit
 

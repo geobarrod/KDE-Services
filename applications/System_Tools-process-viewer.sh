@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2011-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -21,7 +21,7 @@ if-cancel-exit() {
 ############ Main ############
 ##############################
 
-SYSUSER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-system-process.svgz --caption="Process Viewer - Htop" --combobox="Choose System User" $USER root --default $USER 2> /dev/null)
+SYSUSER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-system-process.svgz --title="Process Viewer - Htop" --combobox="Choose System User" $USER root --default $USER 2> /dev/null)
 if-cancel-exit
 
 if [ "$SYSUSER" = "$USER" ]; then

@@ -1,15 +1,15 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2013.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2012-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 VCODE=""
 DBUSREF=""
 
-URL=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz --caption="Youtube Video List Code Collector" --inputbox="Enter URL YouTube videos list." \
+URL=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz --title="Youtube Video List Code Collector" --inputbox="Enter URL YouTube videos list." \
     2> /dev/null)
 
 if [ "$?" != "0" ]; then
@@ -21,7 +21,7 @@ fi
 ###################################
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz --caption="Youtube Video List Code Collector" --progressbar "           " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-youtube-video-code-collector.svgz --title="Youtube Video List Code Collector" --progressbar "           " /ProcessDialog)
 }
 
 progressbar-close() {

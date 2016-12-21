@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2014.									#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>				#
+# For KDE-Services. 2014-2016.					#
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
@@ -31,7 +31,7 @@ if-dd-error() {
   fi
 }
 progressbar-start() {
-  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --caption="DiskCloner" --progressbar " " 0)
+  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="DiskCloner" --progressbar " " 0)
 }
 
 qdbusinsert() {
@@ -69,12 +69,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-DEVICE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --caption="DiskCloner" --combobox="Select Device to Clone" "$(lsblk -po NAME,SIZE,LABEL|grep "sr[0-9]")" 2> /dev/null)
+DEVICE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="DiskCloner" --combobox="Select Device to Clone" "$(lsblk -po NAME,SIZE,LABEL|grep "sr[0-9]")" 2> /dev/null)
 if-cancel-exit
 LABEL="$(echo $DEVICE|awk -F" " '{print $3}')"
 SIZE="$(echo $DEVICE|awk -F" " '{print $2}'|awk -F. '{print $1}')"
 DEVICE=$(echo $DEVICE|awk -F" " '{print $1}')
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --caption="Destination ISO Image File" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="Destination ISO Image File" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start
