@@ -37,7 +37,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Rotting video file ${i##*/} to $ANGLE" \
+        kdialog --icon=ks-error --title="Rotting video file ${i##*/} to $ANGLE" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -48,7 +48,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --title="Rotate Video Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -64,15 +64,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --title="Rotate Video Files" \
+        kdialog --icon=ks-video-rotate --title="Rotate Video Files" \
                        --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --title="Rotate Video Files" \
+        kdialog --icon=ks-video-rotate --title="Rotate Video Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --title="Rotate Video Files" \
+        kdialog --icon=ks-video-rotate --title="Rotate Video Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -123,14 +123,14 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --title="Rotate Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v \
+FILES=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v \
   *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-video-rotate --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-ANGLE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-video-rotate.svgz --title="Rotate Video Files" \
+ANGLE=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" \
                 --combobox="Select rotation degree angle" "90 Clockwise" "180 Clockwise" "90 AntiClockwise" "180 AntiClockwise" --default "90 Clockwise")
 if-cancel-exit
 

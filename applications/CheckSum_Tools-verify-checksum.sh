@@ -26,22 +26,22 @@ finished() {
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         
         if [ "$ELAPSED_TIME" -lt "60" ]; then
-            kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="Verify $HASH CheckSum" \
+            kdialog --icon=ks-checksum --title="Verify $HASH CheckSum" \
                            --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
             
             elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-            kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="Verify $HASH CheckSum" \
+            kdialog --icon=ks-checksum --title="Verify $HASH CheckSum" \
                            --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
             
             elif [ "$ELAPSED_TIME" -gt "3599" ]; then
             ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-            kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="Verify $HASH CheckSum" \
+            kdialog --icon=ks-checksum --title="Verify $HASH CheckSum" \
                            --passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
         fi
         
     else
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Verify $HASH CheckSum" \
+        kdialog --icon=ks-error --title="Verify $HASH CheckSum" \
                        --passivepopup="[Error]   $(cat $TMP|awk -F : '{print $3}')." 2> /dev/null
     fi
     rm -f $TMP
@@ -51,7 +51,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILE|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="Verify $HASH CheckSum" --progressbar "                        " $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-checksum --title="Verify $HASH CheckSum" --progressbar "                        " $COUNTFILES)
 }
 
 qdbusinsert() {
@@ -105,7 +105,7 @@ for file in $FILE; do
 	
 	if [ "$CHECKSUMFILE" != "md5" ] && [ "$CHECKSUMFILE" != "MD5" ] && [ "$CHECKSUMFILE" != "sha1" ] && [ "$CHECKSUMFILE" != "SHA1" ] && \
 		[ "$CHECKSUMFILE" != "sha256" ] && [ "$CHECKSUMFILE" != "SHA256" ] && [ "$CHECKSUMFILE" != "sha512" ] && [ "$CHECKSUMFILE" != "SHA512" ]; then
-		kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Verify CheckSum" \
+		kdialog --icon=ks-error --title="Verify CheckSum" \
 							--passivepopup="[Canceled]   Support only this checksum files: *.md5, *.sha1, *.sha256 and *.sha512" 2> /dev/null
 		qdbus $DBUSREF close
 		exit 1

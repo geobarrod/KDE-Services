@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=KDE-Services;
 Exec=/usr/share/applications/About_KDE-Services.sh
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-menu.svgz
+Icon=ks-menu
 Name=About KDE-Services
 Name[de]=Über KDE-Services
 Name[es]=Acerca de KDE-Services

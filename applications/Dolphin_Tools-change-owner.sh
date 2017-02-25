@@ -20,7 +20,7 @@ SYSUSERS=$(awk -F : '{print $1}' /etc/passwd|sort)
 
 check-stderr() {
     if [ -s "$STDERR" ]; then
-        su -c 'kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Change Owner Directory" \
+        su -c 'kdialog --icon=ks-error --title="Change Owner Directory" \
                               --passivepopup="[Error] $(cat $STDERR)" 2> /dev/null' $USER
         rm -f $STDERR
         qdbus $DBUSREF close
@@ -29,7 +29,7 @@ check-stderr() {
 }
         
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --progressbar "                            " /ProgressDialog)
+    DBUSREF=$(kdialog --icon=ks-owner --title="Change Owner Here" --progressbar "                            " /ProgressDialog)
 }
 
 progressbar-close() {
@@ -47,7 +47,7 @@ qdbusinsert() {
 ##############################
 
 rm -f $STDERR
-OWNER=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --combobox="Select Owner" $SYSUSERS --default $USER 2> /dev/null)
+OWNER=$(kdialog --icon=ks-owner --title="Change Owner Here" --combobox="Select Owner" $SYSUSERS --default $USER 2> /dev/null)
 
 if [ "$?" -gt "0" ]; then
     kill -9 $(pidof knotify4)
@@ -55,7 +55,7 @@ if [ "$?" -gt "0" ]; then
 fi
 
 if [ -d "$@" ]; then
-    MODE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" \
+    MODE=$(kdialog --icon=ks-owner --title="Change Owner Here" \
          --menu="Change Mode Bits (Owner-Group-Others)" 755 "755 (rwx-rx-rx)" 775 "775 (rwx-rwx-rx)" 777 "777 (rwx-rwx-rwx)" 700 "700 (rwx--)" \
          2> /dev/null)
     
@@ -64,7 +64,7 @@ if [ -d "$@" ]; then
         exit 0
     fi
     
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --yesnocancel Recursively? 2> /dev/null
+    kdialog --icon=ks-owner --title="Change Owner Here" --yesnocancel Recursively? 2> /dev/null
     EXIT=$?
     
     if [ "$EXIT" = "2" ]; then
@@ -82,7 +82,7 @@ if [ -d "$@" ]; then
         chmod $MODE $@ 2>> $STDERR
         check-stderr
         progressbar-close
-        su -c 'kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Directory" \
+        su -c 'kdialog --icon=ks-owner --title="Change Owner Directory" \
                               --passivepopup="[Finished] New directory owner: ($OWNER) with mode bits: ($MODE)." 2> /dev/null' $USER
         rm -f $STDERR
         unset TARGET OWNER MODE STDERR
@@ -98,7 +98,7 @@ if [ -d "$@" ]; then
         chmod -R $MODE $@ 2>> $STDERR
         check-stderr
         progressbar-close
-        su -c 'kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Directory" \
+        su -c 'kdialog --icon=ks-owner --title="Change Owner Directory" \
                               --passivepopup="[Finished] New directory owner: ($OWNER) with mode bits: ($MODE) recursively." 2> /dev/null' $USER
         rm -f $STDERR
         unset TARGET OWNER MODE STDERR
@@ -107,7 +107,7 @@ if [ -d "$@" ]; then
     fi
 fi
 
-MODE2=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner Here" --menu="Change Mode Bits (Owner-Group-Others)" 644 "644 (rw-r-r)" \
+MODE2=$(kdialog --icon=ks-owner --title="Change Owner Here" --menu="Change Mode Bits (Owner-Group-Others)" 644 "644 (rw-r-r)" \
       664 "664 (rw-rw-r)" 666 "666 (rw-rw-rw)" 600 "600 (rw--)" 744 "744 (rwx-r-r)" 774 "774 (rwx-rwx-r)" 755 "755 (rwx-rx-rx)" 775 "775\
       (rwx-rwx-rx)" 777 "777 (rwx-rwx-rwx)" 700 "700 (rwx--)" 2> /dev/null)
 
@@ -124,7 +124,7 @@ check-stderr
 chmod $MODE2 $@ 2>> $STDERR
 check-stderr
 progressbar-close
-su -c 'kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-owner.svgz --title="Change Owner File" \
+su -c 'kdialog --icon=ks-owner --title="Change Owner File" \
                       --passivepopup="[Finished] New file owner: ($OWNER) with mode bits: ($MODE2)." 2> /dev/null' $USER
 rm -f $STDERR
 unset TARGET OWNER MODE2 STDERR

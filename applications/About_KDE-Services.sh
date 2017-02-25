@@ -1,18 +1,16 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013-2016.					#
+# For KDE-Services. 2013-2017.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
 VERSION=$(head -n1 /usr/share/doc/kde-services*/ChangeLog |awk '{print $10}')
-WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
-HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 cat > /tmp/about_kde-services << EOF
 
-			        KDE-Services, version $VERSION, (C) 2011-2016.
+			        KDE-Services, version $VERSION, (C) 2011-2017.
 			        http://sourceforge.net/projects/kde-services/
 
     Description:
@@ -149,6 +147,6 @@ cat > /tmp/about_kde-services << EOF
 
 EOF
 
-kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-menu.svgz --title="About KDE-Services" --textbox /tmp/about_kde-services --geometry 900x600+$((WIDTH/2-900/2))+$((HEIGHT/2-600/2)) 2> /dev/null
+kdialog --icon=ks-menu --title="About KDE-Services" --textbox /tmp/about_kde-services 900 600 2> /dev/null
 rm -f /tmp/about_kde-services
 exit 0

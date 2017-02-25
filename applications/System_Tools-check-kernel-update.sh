@@ -13,14 +13,14 @@ yumdownloader --url --source kernel > /dev/null 2>&1
 EXIT=$?
 
 if [ "$EXIT" != "0" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-update.svgz --title="Build Custom Kernel" \
+    kdialog --icon=ks-kernel-update --title="Build Custom Kernel" \
                    --error="No Internet Communication: You have some network problem, can't check updates." 2> /dev/null
     EXIT=6
 fi
 
 if [ "$EXIT" = "0" ]; then
     if [ "$SYSKERNELVERSION" != "$INTERNETVERSION" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-update.svgz --title="Check Kernel Update" \
+        kdialog --icon=ks-kernel-update --title="Check Kernel Update" \
                     --yesno "New version available: kernel-$INTERNETVERSION. Do you want to download it and use it?" 2> /dev/null
         EXIT=$?
     
@@ -30,7 +30,7 @@ if [ "$EXIT" = "0" ]; then
             exit 0
         fi
     else
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-kernel-update.svgz --title="Check Kernel Update" --sorry "No update available." 2> /dev/null
+        kdialog --icon=ks-kernel-update --title="Check Kernel Update" --sorry "No update available." 2> /dev/null
     fi
 fi
 

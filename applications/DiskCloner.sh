@@ -24,14 +24,14 @@ if-cancel-exit() {
 }
 if-dd-error() {
   if [ "$?" != "0" ]; then
-	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="DiskCloner" --passivepopup="[Canceled]   $(cat $STERR). Try again"
+	kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Canceled]   $(cat $STERR). Try again"
 	qdbus $DBUSREF close
 	eject
 	exit 1
   fi
 }
 progressbar-start() {
-  DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="DiskCloner" --progressbar " " 0)
+  DBUSREF=$(kdialog --icon=ks-media-optical-clone --title="DiskCloner" --progressbar " " 0)
 }
 
 qdbusinsert() {
@@ -44,15 +44,15 @@ progressbar-close() {
 
 elapsedtime() {
   if [ "$ELAPSED_TIME" -lt "60" ]; then
-	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="DiskCloner" \
+	kdialog --icon=ks-media-optical-clone --title="DiskCloner" \
 	  --passivepopup="[Finished]  $LABEL.iso   Elapsed Time: ${ELAPSED_TIME}s"
   elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
 	ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="DiskCloner" \
+	kdialog --icon=ks-media-optical-clone --title="DiskCloner" \
 	  --passivepopup="[Finished]   $LABEL.iso   Elapsed Time: ${ELAPSED_TIME}m"
   elif [ "$ELAPSED_TIME" -gt "3599" ]; then
 	ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="DiskCloner" \
+	kdialog --icon=ks-media-optical-clone --title="DiskCloner" \
 	  --passivepopup="[Finished]   $LABEL.iso   Elapsed Time: ${ELAPSED_TIME}h"
   fi
 }
@@ -69,12 +69,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-DEVICE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="DiskCloner" --combobox="Select Device to Clone" "$(lsblk -po NAME,SIZE,LABEL|grep "sr[0-9]")" 2> /dev/null)
+DEVICE=$(kdialog --icon=ks-media-optical-clone --title="DiskCloner" --combobox="Select Device to Clone" "$(lsblk -po NAME,SIZE,LABEL|grep "sr[0-9]")" 2> /dev/null)
 if-cancel-exit
 LABEL="$(echo $DEVICE|awk -F" " '{print $3}')"
 SIZE="$(echo $DEVICE|awk -F" " '{print $2}'|awk -F. '{print $1}')"
 DEVICE=$(echo $DEVICE|awk -F" " '{print $1}')
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-clone.svgz --title="Destination ISO Image File" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-media-optical-clone --title="Destination ISO Image File" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start

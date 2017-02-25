@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Dropbox-Tools;
 Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-dropbox.svgz
+Icon=ks-dropbox
 Name=Enable autostart Dropbox service
 Name[de]=Um Anfängen vom Dienst Dropbox Aufwärts zu Ermöglichen
 Name[es]=Habilitar autoarranque del servicio Dropbox

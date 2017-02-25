@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Search-Tools;
-Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else /usr/share/applications/Search_Tools-update-search-db.sh;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-database-update.svgz
+Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else /usr/share/applications/Search_Tools-update-search-db.sh;fi
+Icon=ks-search-database-update
 Name=Update Search DataBase
 Name[de]=Um Suchdatenbank zu Befördern
 Name[es]=Actualizar Base de Datos de Búsqueda

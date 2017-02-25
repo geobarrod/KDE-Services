@@ -2,13 +2,13 @@
  <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="text/abk">
     <comment>Android Backup File</comment>
-     <icon name="/usr/share/icons/hicolor/scalable/apps/ks-android-backup-restore.svgz"/>
+     <icon name="ks-android-backup-restore"/>
       <glob pattern="*.ab"/>
       <glob pattern="*.abk"/>
   </mime-type>
   <mime-type type="text/hash">
     <comment>CheckSum File</comment>
-     <icon name="/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz"/>
+     <icon name="ks-checksum"/>
       <glob pattern="*.md5"/>
       <glob pattern="*.sha1"/>
       <glob pattern="*.sha224"/>

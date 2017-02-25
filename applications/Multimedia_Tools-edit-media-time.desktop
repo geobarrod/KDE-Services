@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-edit-media-time.sh;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-edit-media-time.sh;fi
+Icon=ks-media-edit-time
 Name=Edit Time from Media Files
 Name[de]=Um Time der Akten Multimedia zu Veröffentlichen
 Name[es]=Editar Tiempo de Ficheros Multimedia

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=Root-mc;Root-mcedit;User-mc;User-mcedit;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-user.svgz
+Icon=ks-mc-user
 MimeType=all/allfiles;
 Type=Service
 X-KDE-Priority=TopLevel
@@ -20,25 +20,25 @@ X-KDE-Submenu[zh_CN]=Midnight 工具
 X-KDE-Submenu[x-test]=xxMidnight Toolsxx
 
 [Desktop Action Root-mc]
-Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz --noignorebutton -d konsole --new-tab -e mc;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-root.svgz
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else kdesu -i ks-mc-root --noignorebutton -d -c "konsole --new-tab -e mc";fi
+Icon=ks-mc-root
 Name=[Root ~]# mc
 Name[x-test]=xx[Root ~]# mcxx
 
 [Desktop Action Root-mcedit]
-Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[Root ~]# mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-mcedit-root.svgz --noignorebutton -d konsole --new-tab -e mcedit;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-mcedit-root.svgz
+Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else kdesu -i ks-mcedit-root --noignorebutton -d -c "konsole --new-tab -e mcedit";fi
+Icon=ks-mcedit-root
 Name=[Root ~]# mcedit
 Name[x-test]=xx[Root ~]# mceditxx
 
 [Desktop Action User-mc]
-Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[User ~]$ mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else konsole --new-tab -e mc;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-user.svgz
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[User ~]$ mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else konsole --new-tab -e mc;fi
+Icon=ks-mc-user
 Name=[User ~]$ mc
 Name[x-test]=xx[User ~]$ mcxx
 
 [Desktop Action User-mcedit]
-Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[User ~]$ mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else konsole --new-tab -e mcedit;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-mcedit-user.svgz
+Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[User ~]$ mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else konsole --new-tab -e mcedit;fi
+Icon=ks-mcedit-user
 Name=[User ~]$ mcedit
 Name[x-test]=xx[User ~]$ mceditxx

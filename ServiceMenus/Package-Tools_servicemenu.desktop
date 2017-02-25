@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=ShowPkgChangelog;ShowPkgInfo;_SEPARATOR_;ListPkgContent;ListPkgConfFiles;ListPkgDeps;ListPkgScripts;_SEPARATOR_;ExtractPkgFiles;_SEPARATOR_;IntegrityCheckPkg;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Icon=ks-rebuild-rpm
 MimeType=application/x-rpm;application/x-source-rpm;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -20,8 +20,8 @@ X-KDE-Submenu[zh_CN]=包裹 工具
 X-KDE-Submenu[x-test]=xxPackage Toolsxx
 
 [Desktop Action ExtractPkgFiles]
-Exec=which rpm2cpio cpio; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Extract Files Here" --passivepopup="[Error] Please install rpm2cpio and cpio command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Extract Files Here" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd $(dirname $file); mkdir $(basename -s .rpm $file); cd $(basename -s .rpm $file); rpm2cpio $file | cpio -id; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Extract Files Here" --passivepopup="[Finished]    $(basename $file)";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm2cpio cpio; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract Files Here" --passivepopup="[Error] Please install rpm2cpio and cpio command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd $(dirname $file); mkdir $(basename -s .rpm $file); cd $(basename -s .rpm $file); rpm2cpio $file | cpio -id; kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --passivepopup="[Finished]    $(basename $file)";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-rebuild-rpm
 Name=Extract Files Here
 Name[de]=Um Akten Hier zu Ziehen
 Name[es]=Extraer Ficheros Aquí
@@ -36,8 +36,8 @@ Name[zh_CN]=在这里吸取文件
 Name[x-test]=xxExtract Files Herexx
 
 [Desktop Action IntegrityCheckPkg]
-Exec=which rpm2cpio rpm; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Integrity Check" --passivepopup="[Error] Please install rpm2cpio and rpm command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; rpm2cpio $file > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps $file 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename $file)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename $file)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm2cpio rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install rpm2cpio and rpm command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-rebuild-rpm --title="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; rpm2cpio $file > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps $file 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then kdialog --icon=ks-rebuild-rpm --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename $file)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then kdialog --icon=ks-error --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename $file)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-rebuild-rpm
 Name=Integrity Check
 Name[de]=Um Integrität zu Überprüfen
 Name[es]=Comprobar Integridad
@@ -52,8 +52,8 @@ Name[zh_CN]=检查正直
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action ListPkgContent]
-Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="List Content" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qlp %f > /tmp/pkgcontent; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Package Tools - List Content - $(basename %f)" --textbox /tmp/pkgcontent 800 300; rm -f /tmp/pkgcontent;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List Content" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qlp %f > /tmp/pkgcontent; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List Content - $(basename %f)" --textbox /tmp/pkgcontent 800 300; rm -f /tmp/pkgcontent;fi
+Icon=ks-rebuild-rpm
 Name=List Content
 Name[de]=Um Inhalt Aufzuführen
 Name[es]=Listar Contenido
@@ -68,8 +68,8 @@ Name[zh_CN]=列出内容
 Name[x-test]=xxList Contentxx
 
 [Desktop Action ListPkgConfFiles]
-Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="List Configuration Files" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qcp %f > /tmp/pkgconfiles; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Package Tools - List Configuration Files - $(basename %f)" --textbox /tmp/pkgconfiles 800 300; rm -f /tmp/pkgconfiles;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List Configuration Files" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qcp %f > /tmp/pkgconfiles; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List Configuration Files - $(basename %f)" --textbox /tmp/pkgconfiles 800 300; rm -f /tmp/pkgconfiles;fi
+Icon=ks-rebuild-rpm
 Name=List Configuration Files
 Name[de]=Um Konfigurationsakten Aufzuführen
 Name[es]=Listar Ficheros de Configuración
@@ -84,8 +84,8 @@ Name[zh_CN]=列出结构文件
 Name[x-test]=xxList Configuration Filesxx
 
 [Desktop Action ListPkgDeps]
-Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="List Dependencies" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qRp %f > /tmp/pkgdeps; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Package Tools - List Dependencies - $(basename %f)" --textbox /tmp/pkgdeps 800 300; rm -f /tmp/pkgdeps;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List Dependencies" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qRp %f > /tmp/pkgdeps; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List Dependencies - $(basename %f)" --textbox /tmp/pkgdeps 800 300; rm -f /tmp/pkgdeps;fi
+Icon=ks-rebuild-rpm
 Name=List Dependencies
 Name[de]=Um Dependences Aufzuführen
 Name[es]=Listar Dependencias
@@ -100,8 +100,8 @@ Name[zh_CN]=列出依赖
 Name[x-test]=xxList Dependenciesxx
 
 [Desktop Action ListPkgScripts]
-Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="List [Ins|Unins]tallation Scripts" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qp --scripts %f > /tmp/pkgscripts; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Package Tools - List [Ins|Unins]tallation Scripts - $(basename %f)" --textbox /tmp/pkgscripts 800 300; rm -f /tmp/pkgscripts;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List [Ins|Unins]tallation Scripts" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qp --scripts %f > /tmp/pkgscripts; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List [Ins|Unins]tallation Scripts - $(basename %f)" --textbox /tmp/pkgscripts 800 300; rm -f /tmp/pkgscripts;fi
+Icon=ks-rebuild-rpm
 Name=List [Ins|Unins]tallation Scripts
 Name[de]=Um Anordnungen Davon Aufzuführen [Ins|Unins]tallation
 Name[es]=Listar Ordenes de [Ins|Desins]talación
@@ -116,8 +116,8 @@ Name[zh_CN]=列出安装的命令
 Name[x-test]=xxList [Ins|Unins]tallation Scriptsxx
 
 [Desktop Action ShowPkgChangelog]
-Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Show Changelog" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qp --changelog %f > /tmp/pkgchangelog; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Package Tools - Show Changelog - $(basename %f)" --textbox /tmp/pkgchangelog 800 300; rm -f /tmp/pkgchangelog;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Changelog" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qp --changelog %f > /tmp/pkgchangelog; kdialog --icon=ks-rebuild-rpm --title="Package Tools - Show Changelog - $(basename %f)" --textbox /tmp/pkgchangelog 800 300; rm -f /tmp/pkgchangelog;fi
+Icon=ks-rebuild-rpm
 Name=Show Changelog
 Name[de]=Um Registrierung der Änderungen zu Zeigen
 Name[es]=Mostrar Registro de Cambios
@@ -132,8 +132,8 @@ Name[zh_CN]=表示变化的登记
 Name[x-test]=xxShow Changelogxx
 
 [Desktop Action ShowPkgInfo]
-Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Show Info" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qip %f > /tmp/pkginfo; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Package Tools - Show Info - $(basename %f)" --textbox /tmp/pkginfo 800 300; rm -f /tmp/pkginfo;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz
+Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Info" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qip %f > /tmp/pkginfo; kdialog --icon=ks-rebuild-rpm --title="Package Tools - Show Info - $(basename %f)" --textbox /tmp/pkginfo 800 300; rm -f /tmp/pkginfo;fi
+Icon=ks-rebuild-rpm
 Name=Show Info
 Name[de]=Um Informationen zu Zeigen
 Name[es]=Mostrar Información

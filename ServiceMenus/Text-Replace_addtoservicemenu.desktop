@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=TextReplace;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz
+Icon=ks-text-plain
 MimeType=text/*;application/x-shellscript;application/x-desktop;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -9,8 +9,8 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action TextReplace]
-Exec=STRING1=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz --title="Text Replace" --inputbox="Enter text to replace"); if [ "$?" != "0" ];then exit 1; else STRING2=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz --title="Text Replace" --inputbox="Replace by"); if [ "$?" != "0" ];then exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz --title="Text Replace" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Replacing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sed -i -e "s;$STRING1;$STRING2;g" $file; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz --title="Text Replace" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi;fi 
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz
+Exec=STRING1=$(kdialog --icon=ks-text-plain --title="Text Replace" --inputbox="Enter text to replace"); if [ "$?" != "0" ];then exit 1; else STRING2=$(kdialog --icon=ks-text-plain --title="Text Replace" --inputbox="Replace by"); if [ "$?" != "0" ];then exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-text-plain --title="Text Replace" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Replacing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sed -i -e "s;$STRING1;$STRING2;g" $file; kdialog --icon=ks-text-plain --title="Text Replace" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi;fi 
+Icon=ks-text-plain
 Name=Text Replace
 Name[de]=Text Ersetzt
 Name[es]=Reemplazar Texto

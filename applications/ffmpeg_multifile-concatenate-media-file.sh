@@ -38,7 +38,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Concatenating $FILENAME" \
+        kdialog --icon=ks-error --title="Concatenating $FILENAME" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -50,7 +50,7 @@ delete-file-list() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" --progressbar " " 0)
+    DBUSREF=$(kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" --progressbar " " 0)
 }
 
 progressbar-close() {
@@ -63,15 +63,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" \
+        kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" \
                        --passivepopup="[Finished]  $FILENAME   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" \
+        kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" \
                        --passivepopup="[Finished]   $FILENAME   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" \
+        kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" \
                        --passivepopup="[Finished]   $FILENAME   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -122,16 +122,16 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob \
       *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
-FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Concatenate Media Files with Same Codec" \
+FILENAME=$(kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" \
                 --inputbox="Enter filename without whitespaces for new concatenated media file" New_Concatenated_Media_File)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-concatenate-media-file.svgz --title="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-concatenate-media-file --title="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 delete-file-list

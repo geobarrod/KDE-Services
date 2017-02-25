@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=SearchHere;SearchByName;SearchByString;_SEPARATOR_;StatisticsSearchDB;UpdateSearchDB;_SEPARATOR_;ModifiedFilesHere
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-string.svgz
+Icon=ks-search-string
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -19,8 +19,8 @@ X-KDE-Submenu[zh_CN]=搜寻工具
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
-Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Search by Name" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-search-by-name.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
+Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Search by Name" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-search-by-name.sh %F;fi
+Icon=ks-search-name
 Name=Search by Name
 Name[de]=Suche von Namen
 Name[es]=Búsqueda por Nombre
@@ -35,8 +35,8 @@ Name[zh_CN]=为名字的搜寻
 Name[x-test]=xxSearch by Namexx
 
 [Desktop Action SearchByString]
-Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-search-string.svgz -d /usr/share/applications/Search_Tools-search-by-string.sh %F
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-string.svgz
+Exec=kdesu -i ks-search-string -d /usr/share/applications/Search_Tools-search-by-string.sh %F
+Icon=ks-search-string
 Name=Search by String
 Name[de]=Suche um Schnur
 Name[es]=Búsqueda por Palabra
@@ -51,8 +51,8 @@ Name[zh_CN]=为字的搜寻
 Name[x-test]=xxSearch by Stringxx
 
 [Desktop Action StatisticsSearchDB]
-Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Statistics Search DataBase" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-statistics-search-db.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-stats.svgz
+Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Statistics Search DataBase" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-statistics-search-db.sh %F;fi
+Icon=ks-search-stats
 Name=Statistics Search DataBase
 Name[de]=Statistisch von Suchdatenbank
 Name[es]=Estadisticas de Base de Datos de Búsqueda
@@ -67,8 +67,8 @@ Name[zh_CN]=统计的搜寻数据库
 Name[x-test]=xxStatistics Search DataBasexx
 
 [Desktop Action UpdateSearchDB]
-Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else /usr/share/applications/Search_Tools-update-search-db.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-database-update.svgz
+Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else /usr/share/applications/Search_Tools-update-search-db.sh %F;fi
+Icon=ks-search-database-update
 Name=Update Search DataBase
 Name[de]=Um Suchdatenbank zu Befördern
 Name[es]=Actualizar Base de Datos de Búsqueda
@@ -83,8 +83,8 @@ Name[zh_CN]=升级搜寻数据库
 Name[x-test]=xxUpdate Search DataBasexx
 
 [Desktop Action SearchHere]
-Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz -d /usr/share/applications/Search_Tools-search-here.sh %F
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
+Exec=kdesu -i ks-search-name -d /usr/share/applications/Search_Tools-search-here.sh %F
+Icon=ks-search-name
 Name=Search Here
 Name[de]=Suchen Sie Hier
 Name[es]=Buscar Aquí
@@ -99,8 +99,8 @@ Name[zh_CN]=找寻这里
 Name[x-test]=xxSearch Herexx
 
 [Desktop Action ModifiedFilesHere]
-Exec=kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-search-name.svgz
+Exec=kdesu -i ks-search-name -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
+Icon=ks-search-name
 Name=Modified Files Here
 Name[de]=Modifizierte Akten Hier
 Name[es]=Archivos Modificados Aquí

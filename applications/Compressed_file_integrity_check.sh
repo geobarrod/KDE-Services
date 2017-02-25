@@ -23,7 +23,7 @@ progressbar-start() {
 	COUNT="0"
 	COUNTFILES=$(echo $FILE|wc -w)
 	COUNTFILES=$((++COUNTFILES))
-	DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-compressed-file.svgz --title="Compressed File Integrity Check" --progressbar "                        " $COUNTFILES)
+	DBUSREF=$(kdialog --icon=ks-compressed-file --title="Compressed File Integrity Check" --progressbar "                        " $COUNTFILES)
 }
 
 progressbar-close() {
@@ -39,28 +39,28 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-compressed-file.svgz --title="Compressed File Integrity Check" \
+        kdialog --icon=ks-compressed-file --title="Compressed File Integrity Check" \
                        --passivepopup="[Finished]  ${file##*/} is OK.   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-compressed-file.svgz --title="Compressed File Integrity Check" \
+        kdialog --icon=ks-compressed-file --title="Compressed File Integrity Check" \
                        --passivepopup="[Finished]   ${file##*/} is OK.   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-compressed-file.svgz --title="Compressed File Integrity Check" \
+        kdialog --icon=ks-compressed-file --title="Compressed File Integrity Check" \
                        --passivepopup="[Finished]   ${file##*/} is OK.   Elapsed Time: ${ELAPSED_TIME}h"
     fi
 }
 
 exit-check() {
 if [ "$EXIT" = "1" ]; then
-	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Compressed File Integrity Check" \
+	kdialog --icon=ks-error --title="Compressed File Integrity Check" \
 			--passivepopup="[Error]  ${file##*/}   Archive parsing failed! (Data is corrupted.)"
 	qdbus $DBUSREF close
 	exit 1
 fi
 while [ "$EXIT" = "2" ] || [ "$EXIT" = "1" ]; do
-	PWD=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-compressed-file.svgz --title="Compressed File Integrity Check" \
+	PWD=$(kdialog --icon=ks-compressed-file --title="Compressed File Integrity Check" \
 			--password="The ${file##*/} archive is encrypted, requires a password for integrity check")
 	lsar -t $file -p $PWD > /dev/null 2>&1
 	EXIT=$?

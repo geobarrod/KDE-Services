@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2017.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -18,8 +18,6 @@ FILES=/tmp/afm.tmp
 DESTINATION=""
 KdialogPID=""
 LOG=/tmp/afm.log
-WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
-HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -33,7 +31,7 @@ if-cancel-exit() {
 }
 
 if [ "$(pidof adb)" = "" ]; then
-  kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --noignorebutton -d adb start-server
+  kdesu -i ks-android-push-pull --noignorebutton -d adb start-server
   if-cancel-exit
 fi
 
@@ -41,7 +39,7 @@ SERIAL=$(adb get-serialno)
 
 check-device() {
   if [ "$SERIAL" = "unknown" ]; then
-	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android File Manager" \
+	kdialog --icon=ks-error --title="Android File Manager" \
 			--passivepopup="[Canceled]   Check if your device with Android system is connected on your PC and NOT bootloader mode. \
 			[1]-Connect your device to PC USB. [2]-Go to device Settings. [3]-Go to Developer options. [4]-Enable USB debugging option. Try again."
 	exit 1
@@ -54,7 +52,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-android-push-pull --title="Android File Manager" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -75,15 +73,15 @@ qdbusinsert-pull() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" \
+        kdialog --icon=ks-android-push-pull --title="Android File Manager" \
                        --passivepopup="[Finished]   $OPERATION ${i##*/}. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" \
+        kdialog --icon=ks-android-push-pull --title="Android File Manager" \
                        --passivepopup="[Finished]   $OPERATION ${i##*/}. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" \
+        kdialog --icon=ks-android-push-pull --title="Android File Manager" \
                        --passivepopup="[Finished]   $OPERATION ${i##*/}. $(cat $LOG)  Elapsed Time: ${ELAPSED_TIME}h"
     fi
 }
@@ -133,12 +131,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" \
+OPERATION=$(kdialog --icon=ks-android-push-pull --title="Android File Manager" \
        --combobox="Select Operation" Push Pull --default Push 2> /dev/null)
 if-cancel-exit
 
 if [ "$OPERATION" = "Push" ]; then
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager - Select Files" --multiple --getopenfilename "$DIR" "*.*|*.*" 2> /dev/null)
+	FILES=$(kdialog --icon=ks-android-push-pull --title="Android File Manager - Select Files" --multiple --getopenfilename "$DIR" "*.*|*.*" 2> /dev/null)
 	if-cancel-exit
 	progressbar-start
 
@@ -154,11 +152,11 @@ if [ "$OPERATION" = "Push" ]; then
     done
 elif [ "$OPERATION" = "Pull" ]; then
 	adb shell ls /mnt/sdcard*/*.* > $FILES
-	DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager - Files Destination" --getexistingdirectory "$DIR" 2> /dev/null)
+	DESTINATION=$(kdialog --icon=ks-android-push-pull --title="Android File Manager - Files Destination" --getexistingdirectory "$DIR" 2> /dev/null)
 	if-cancel-exit
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager - $(cat $FILES|wc -l)" --textbox=$FILES --geometry 300x200+$((WIDTH/2-300/2))+$((HEIGHT/2-200/2)) 2> /dev/null &
+    kdialog --icon=ks-android-push-pull --title="Android File Manager - $(cat $FILES|wc -l)" --textbox=$FILES 300 200 2> /dev/null &
  	KdialogPID=$(ps aux|grep "afm.tmp"|grep -v grep|awk -F" " '{print $2}')
- 	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-push-pull.svgz --title="Android File Manager" --inputbox="Enter absolute path filenames from textbox separated by whitespace." 2> /dev/null)
+ 	FILES=$(kdialog --icon=ks-android-push-pull --title="Android File Manager" --inputbox="Enter absolute path filenames from textbox separated by whitespace." 2> /dev/null)
  	if-cancel-exit
  	kill -9 $KdialogPID 2> /dev/null
     progressbar-start

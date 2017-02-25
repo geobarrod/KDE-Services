@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=MKVextractSubtitle;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
+Icon=ks-video
 MimeType=video/x-matroska;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -9,8 +9,8 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action MKVextractSubtitle]
-Exec=which mkvextract; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="MKV Extract Subtitle" --passivepopup="[Error] Please install mkvextract command and try again."; exit 1; else /usr/share/applications/MKV_Extract-subtitle.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
+Exec=which mkvextract; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MKV Extract Subtitle" --passivepopup="[Error] Please install mkvextract command and try again."; exit 1; else /usr/share/applications/MKV_Extract-subtitle.sh %F;fi
+Icon=ks-video
 Name=MKV Extract Subtitle
 Name[de]=MKV um Untertitel zu Ziehen
 Name[es]=MKV Extraer Subtítulo

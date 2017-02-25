@@ -3,6 +3,7 @@
 # Adjusted for KDE-Services integration by Geovani Barzaga Rodriguez
 # <igeo.cu@gmail.com>, 2013-01-09
 # Improved bash script code by Geovani Barzaga Rodriguez <igeo.cu@gmail.com>, 2014-03-06
+# Update by Geovani Barzaga Rodriguez <igeo.cu@gmail.com>, 2017-02-19
 
 # This file is part of PDFktools.
 # PDFktools was created by Sylvain Vidal < garion @ mailoo.org >
@@ -23,10 +24,8 @@
 
 ######### INITIALIZATION #########
 export TEXTDOMAIN=pdfktools
-KDE="--title PDF_Tools --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz"
+KDE="--title PDF_Tools --icon=ks-pdf"
 LOG="$(kde4-config --path tmp)pdfktools.log"
-WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
-HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 action=''
 kdbus='no'
@@ -59,7 +58,7 @@ error_log(){
     if [ "$?" -ne 0 ]; then
         if [ $kdbus = 'yes' ]; then qdbus $dbusRef close; fi
         kdialog $KDE --error "$1"
-        kdialog $KDE --textbox $LOG --geometry 800x600+$((WIDTH/2-800/2))+$((HEIGHT/2-600/2))
+        kdialog $KDE --textbox $LOG 800 600
         exit 1
     fi
 }
@@ -258,7 +257,7 @@ case $action in
             file=$(file -bp "$f")
             echo -e "$f\n$file\n" > "${out}"
             metadata_view_all "$f"
-            kdialog $KDE --textbox "$out" --geometry 400x250+$((WIDTH/2-400/2))+$((HEIGHT/2-250/2))
+            kdialog $KDE --textbox "$out" 400 250
             rm -f $out
         done ;;
 

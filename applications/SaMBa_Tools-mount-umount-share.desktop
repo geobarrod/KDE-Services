@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=SaMBa-Tools;
-Exec=which smbclient; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="SaMBa Shares Mounter" --passivepopup="[Error] Please install smbclient command and try again."; exit 1; else /usr/share/applications/SaMBa_Tools-mount-umount-share.sh;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-smbfs.svgz
+Exec=which smbclient; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SaMBa Shares Mounter" --passivepopup="[Error] Please install smbclient command and try again."; exit 1; else /usr/share/applications/SaMBa_Tools-mount-umount-share.sh;fi
+Icon=ks-smbfs
 Name=SaMBa Shares Mounter
 Name[de]=Verbinder SaMBa Geteilt zu Haben
 Name[es]=Montador de Compartidos SaMBa

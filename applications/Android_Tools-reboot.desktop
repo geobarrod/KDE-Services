@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Android-Tools;
-Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android Reboot Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-reboot.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-android-reboot.svgz
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Reboot Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-reboot.sh %F;fi
+Icon=ks-android-reboot
 Name=Android Reboot Manager
 Name[de]=Verwalter von Mir Fängt Wieder für Android
 Name[es]=Administrador de Reinicio para Android

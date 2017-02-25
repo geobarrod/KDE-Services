@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Graphic-Tools;
-Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else /usr/share/applications/The_Sizer.sh;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz
+Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else /usr/share/applications/The_Sizer.sh;fi
+Icon=ks-resize-image
 Name=The Sizer
 Name[de]=Der Sizer
 Name[es]=El Dimensionador

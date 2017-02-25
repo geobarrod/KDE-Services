@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2012-2016.					#
+# For KDE-Services. 2012-2017.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -12,8 +12,6 @@ FILENAME=""
 VCODEC=""
 DESTINATION=""
 FFPID=""
-WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
-HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -27,13 +25,13 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Record My Desktop" \
+        kdialog --icon=ks-error --title="Record My Desktop" \
                        --passivepopup="[Canceled] Check the path and filename not contain spaces. Try again"
     fi
 }
 
 record-cancel() {
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Record My Desktop" --yes-label Stop --no-label Cancel \
+    kdialog --icon=ks-media-tape --title="Record My Desktop" --yes-label Stop --no-label Cancel \
                    --yesno="Record My Desktop is running, saving video to $DESTINATION/$FILENAME.$VCODEC" 2> /dev/null
     
     if [ "$?" = "0" ] || [ "$?" != "0" ]; then
@@ -50,14 +48,13 @@ DIR=$1
 cd "$DIR"
 DIR=$(pwd)
 
-FILENAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop_$HOSTNAME" 2> /dev/null)
+FILENAME=$(kdialog --icon=ks-media-tape --title="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop_$HOSTNAME" 2> /dev/null)
 if-cancel-exit
 
-VCODEC=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Record My Desktop" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" webm "WebM" \
-       --geometry 100x100+$((WIDTH/2-100/2))+$((HEIGHT/2-100/2)) 2> /dev/null)
+VCODEC=$(kdialog --icon=ks-media-tape --title="Record My Desktop" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" webm "WebM" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-tape.svgz --title="Destination Video" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-media-tape --title="Destination Video" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 

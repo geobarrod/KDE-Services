@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=ExtractAllImages;_SEPARATOR_;PDFOptimizer;_SEPARATOR_;pdfcompress;_SEPARATOR_;pdfmetaview;pdfmetaedit;_SEPARATOR_;pdfmerge;pdfsplit;_SEPARATOR_;PDFinfo;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz
+Icon=ks-pdf
 MimeType=application/pdf;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -20,8 +20,8 @@ X-KDE-Submenu[zh_CN]=PDF 工具
 X-KDE-Submenu[x-test]=xxPDF Toolsxx
 
 [Desktop Action ExtractAllImages]
-Exec=which pdfimages; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Extract All Images" --passivepopup="[Error] Please install pdfimages command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting All Images:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; pdfimages -p "$file" $(ls "$file"|awk -F . '{print $1}'); kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz --title="PDF Tools - Extract all images" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz
+Exec=which pdfimages; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract All Images" --passivepopup="[Error] Please install pdfimages command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting All Images:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; pdfimages -p "$file" $(ls "$file"|awk -F . '{print $1}'); kdialog --icon=ks-pdf --title="PDF Tools - Extract all images" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-pdf
 Name=Extract All Images
 Name[de]=Um Alle Bilder zu Ziehen
 Name[es]=Extraer Todas las Imagenes
@@ -36,8 +36,8 @@ Name[zh_CN]=吸取所有的图像
 Name[x-test]=xxExtract All Imagesxx
 
 [Desktop Action PDFOptimizer]
-Exec=which pdftops; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Optimize" --passivepopup="[Error] Please install pdftops command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Optimizing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; pdftops "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_opt.${file##/*.}"; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz --title="PDF Tools - Optimizer" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz
+Exec=which pdftops; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Optimize" --passivepopup="[Error] Please install pdftops command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Optimizing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; pdftops "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_opt.${file##/*.}"; kdialog --icon=ks-pdf --title="PDF Tools - Optimizer" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-pdf
 Name=Optimize
 Name[de]=Optimierer
 Name[es]=Optimizar
@@ -52,8 +52,8 @@ Name[zh_CN]=将
 Name[x-test]=xxOptimizerxx
 
 [Desktop Action PDFinfo]
-Exec=which pdfinfo; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Information" --passivepopup="[Error] Please install pdfinfo command and try again."; exit 1; else pdfinfo %f > /tmp/pdfinfo; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz --title="PDF Tools - Info" --textbox /tmp/pdfinfo 350 350; rm -f /tmp/pdfinfo;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz
+Exec=which pdfinfo; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Information" --passivepopup="[Error] Please install pdfinfo command and try again."; exit 1; else pdfinfo %f > /tmp/pdfinfo; kdialog --icon=ks-pdf --title="PDF Tools - Info" --textbox /tmp/pdfinfo 350 350; rm -f /tmp/pdfinfo;fi
+Icon=ks-pdf
 Name=Information
 Name[de]=Informationen
 Name[es]=Información
@@ -68,8 +68,8 @@ Name[zh_CN]=数据
 Name[x-test]=xxInformationxx
 
 [Desktop Action pdfcompress]
-Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Compress" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -c %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-resize-image.svgz
+Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Compress" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -c %F;fi
+Icon=ks-resize-image
 Name=Compress
 Name[de]=Um Zusammenzupressen
 Name[es]=Comprimir
@@ -84,8 +84,8 @@ Name[zh_CN]=压缩
 Name[x-test]=xxCompressxx
 
 [Desktop Action pdfmerge]
-Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Merge Selected Files" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -m %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz
+Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Merge Selected Files" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -m %F;fi
+Icon=ks-pdf
 Name=Merge Selected Files
 Name[de]=Um die ausgewählten Akten zu vereinigen
 Name[es]=Unir los Archivos Seleccionados
@@ -100,8 +100,8 @@ Name[zh_CN]=联合挑选的文件
 Name[x-test]=xxMerge Selected Filesxx
 
 [Desktop Action pdfmetaedit]
-Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Edit Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -me %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz
+Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -me %F;fi
+Icon=ks-text-plain
 Name=Edit Metadata
 Name[de]=Um Metadatos zu Veröffentlichen
 Name[es]=Editar Metadatos
@@ -116,8 +116,8 @@ Name[zh_CN]=编辑 Metadata
 Name[x-test]=xxEdit Metadataxx
 
 [Desktop Action pdfmetaview]
-Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="View Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -mv %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-text-plain.svgz
+Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="View Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -mv %F;fi
+Icon=ks-text-plain
 Name=View Metadata
 Name[de]=Um Metadatos zu Sehen
 Name[es]=Ver Metadatos
@@ -132,8 +132,8 @@ Name[zh_CN]=视野 Metadata
 Name[x-test]=xxview Metadataxx
 
 [Desktop Action pdfsplit]
-Exec=which exiftool pdftops ps2pdf14 gs; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Split in Single Page per File" --passivepopup="[Error] Please install exiftool, pdftops, ps2pdf14 and gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -s %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-pdf.svgz
+Exec=which exiftool pdftops ps2pdf14 gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Split in Single Page per File" --passivepopup="[Error] Please install exiftool, pdftops, ps2pdf14 and gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -s %F;fi
+Icon=ks-pdf
 Name=Split in Single Page per File
 Name[de]=Um in Akten von einer Einzelnen Seite zu Schneiden
 Name[es]=Cortar en Archivos de Una Sola Página

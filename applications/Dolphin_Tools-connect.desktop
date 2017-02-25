@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Dolphin-Tools;
 Exec=/usr/share/applications/Dolphin_Tools-connect.sh
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-remote.svgz
+Icon=ks-folder-remote
 Name=Connect to
 Name[de]=Um Sich zu in Verbindung zu Setzen
 Name[es]=Conectar a

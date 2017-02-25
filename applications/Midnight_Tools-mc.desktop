@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=Midnight-Tools;
-Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="[User ~]$ mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else konsole --new-tab -e mc;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-mc-user.svgz
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[User ~]$ mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else konsole --new-tab -e mc;fi
+Icon=ks-mc-user
 Name=Midnight Commander
 Name[de]=Midnight Kommandant
 Name[es]=Comandante Midnight

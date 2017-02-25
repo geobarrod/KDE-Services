@@ -1,5 +1,9 @@
+* Sun Feb 19 2017 Geovani B. R. <igeo.cu@gmail.com> 2.1.8
+- Bugfix: The option "--geometry" was eliminated in the application kdialog (16.12 - KDE framework 5.30.0).
+- It changes the denomination of the version.
+
 * Tue Dec 20 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-7
-- Bugfix: The option "--caption" was eliminated in the application kdialog,
+- Bugfix: The option "--caption" was eliminated in the application kdialog (16.12 - KDE framework 5.26.0),
       for what is substituted by the option"--title" in all *.sh and *.desktop files.
 
 * Tue Dec 13 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-6

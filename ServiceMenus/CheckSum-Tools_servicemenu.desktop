@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;CheckSum;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
+Icon=ks-checksum
 MimeType=all/allfiles;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -20,8 +20,8 @@ X-KDE-Submenu[zh_CN]=核对和 工具
 X-KDE-Submenu[x-test]=xxCheckSum Toolsxx
 
 [Desktop Action CheckSum]
-Exec=which md5sum sha1sum sha256sum sha512sum; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Verify CheckSum" --passivepopup="[Error] Please install md5sum, sha1sum, sha256sum and sha512sum command and try again."; exit 1; else /usr/share/applications/CheckSum_Tools-verify-checksum.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
+Exec=which md5sum sha1sum sha256sum sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Verify CheckSum" --passivepopup="[Error] Please install md5sum, sha1sum, sha256sum and sha512sum command and try again."; exit 1; else /usr/share/applications/CheckSum_Tools-verify-checksum.sh %F;fi
+Icon=ks-checksum
 Name=Verify CheckSum
 Name[de]=Um CheckSum zu Verifizieren
 Name[es]=Verificar CheckSum
@@ -36,8 +36,8 @@ Name[zh_CN]=查证核对和
 Name[x-test]=xxVerify CheckSumxx
 
 [Desktop Action MD5-Sum]
-Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="MD5 (strong)" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum MD5" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; md5sum "$file" > $(ls $file).md5; sed -i "s; ${file%/*}/;*;" $(ls $file).md5; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum MD5" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
+Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5 (strong)" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum MD5" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; md5sum "$file" > $(ls $file).md5; sed -i "s; ${file%/*}/;*;" $(ls $file).md5; kdialog --icon=ks-checksum --title="CheckSum MD5" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-checksum
 Name=MD5 (strong)
 Name[de]=MD5 (stark)
 Name[es]=MD5 (fuerte)
@@ -52,8 +52,8 @@ Name[zh_CN]=MD5 (强壮的)
 Name[x-test]=xxMD5 (strong)xx
 
 [Desktop Action SHA1-Sum]
-Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum SHA1" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha1sum "$file" > $(ls $file).sha1; sed -i "s; ${file%/*}/;*;" $(ls $file).sha1; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum SHA1" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
+Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum SHA1" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha1sum "$file" > $(ls $file).sha1; sed -i "s; ${file%/*}/;*;" $(ls $file).sha1; kdialog --icon=ks-checksum --title="CheckSum SHA1" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-checksum
 Name=SHA1 (Good Strong)
 Name[de]=SHA1 (sehr stark)
 Name[es]=SHA1 (bien fuerte)
@@ -68,8 +68,8 @@ Name[zh_CN]=SHA1 (非常强壮的)
 Name[x-test]=xxSHA1 (good strong)xx
 
 [Desktop Action SHA256-Sum]
-Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum SHA256" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha256sum "$file" > $(ls $file).sha256; sed -i "s; ${file%/*}/;*;" $(ls $file).sha256; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum SHA256" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
+Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum SHA256" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha256sum "$file" > $(ls $file).sha256; sed -i "s; ${file%/*}/;*;" $(ls $file).sha256; kdialog --icon=ks-checksum --title="CheckSum SHA256" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-checksum
 Name=SHA256 (very strong)
 Name[de]=SHA256 (sehr stark)
 Name[es]=SHA256 (muy fuerte)
@@ -84,8 +84,8 @@ Name[zh_CN]=SHA256 (非常强壮的)
 Name[x-test]=xxSHA256 (very strong)xx
 
 [Desktop Action SHA512-Sum]
-Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum SHA512" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha512sum "$file" > $(ls $file).sha512; sed -i "s; ${file%/*}/;*;" $(ls $file).sha512; kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz --title="CheckSum SHA512" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-checksum.svgz
+Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum SHA512" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha512sum "$file" > $(ls $file).sha512; sed -i "s; ${file%/*}/;*;" $(ls $file).sha512; kdialog --icon=ks-checksum --title="CheckSum SHA512" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Icon=ks-checksum
 Name=SHA512 (high strong)
 Name[de]=SHA512 (super stark)
 Name[es]=SHA512 (super fuerte)

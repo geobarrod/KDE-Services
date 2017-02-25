@@ -38,7 +38,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Editing time of ${i##*/} from $STIME to $ETIME" \
+        kdialog --icon=ks-error --title="Editing time of ${i##*/} from $STIME to $ETIME" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -49,7 +49,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -65,15 +65,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" \
+        kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" \
                        --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" \
+        kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" \
+        kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -124,19 +124,19 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv \
       *.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-media-edit-time --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-STIME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" \
+STIME=$(kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" \
                 --inputbox="Enter start cut time in hh:mm:ss format" 00:00:00)
 if-cancel-exit
 
-ETIME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-edit-time.svgz --title="Edit Time from Media Files" \
+ETIME=$(kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" \
                 --inputbox="Enter end cut time in hh:mm:ss format" 00:01:00)
 if-cancel-exit
 

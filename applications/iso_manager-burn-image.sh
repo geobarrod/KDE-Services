@@ -24,7 +24,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --title="Burn iso9660 Image" --progressbar "                                  " /ProcessDialog)
+    DBUSREF=$(kdialog --icon=ks-media-optical-burn --title="Burn iso9660 Image" --progressbar "                                  " /ProcessDialog)
 }
 
 progressbar-close() {
@@ -40,7 +40,7 @@ qdbusinsert() {
 ##############################
 
 cd "${1%/*}"
-BURNSPEED=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --title="Burn iso9660 Image" \
+BURNSPEED=$(kdialog --icon=ks-media-optical-burn --title="Burn iso9660 Image" \
           --combobox="Select Burn Speed Factor" 2 4 8 10 12 16 24 32 48 --default 4 2> /dev/null)
 if-cancel-exit
 progressbar-start
@@ -53,15 +53,15 @@ FINAL_TIME=$(date +%s)
 ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 
 if [ "$ELAPSED_TIME" -lt "60" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --title="Burn iso9660 Image" \
+    kdialog --icon=ks-media-optical-burn --title="Burn iso9660 Image" \
                    --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
 elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --title="Burn iso9660 Image" \
+    kdialog --icon=ks-media-optical-burn --title="Burn iso9660 Image" \
                    --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
 elif [ "$ELAPSED_TIME" -gt "3599" ]; then
     ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-optical-burn.svgz --title="Burn iso9660 Image" \
+    kdialog --icon=ks-media-optical-burn --title="Burn iso9660 Image" \
                    --passivepopup="[Finished]   ${FILE##*/}   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
 fi
 

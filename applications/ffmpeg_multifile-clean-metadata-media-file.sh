@@ -36,7 +36,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Cleaning Metadata from ${i##*/}" \
+        kdialog --icon=ks-error --title="Cleaning Metadata from ${i##*/}" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -47,7 +47,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Clean Metadata from Media Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-media-clean-metadata --title="Clean Metadata from Media Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -63,15 +63,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Clean Metadata from Media Files" \
+        kdialog --icon=ks-media-clean-metadata --title="Clean Metadata from Media Files" \
                        --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Clean Metadata from Media Files" \
+        kdialog --icon=ks-media-clean-metadata --title="Clean Metadata from Media Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Clean Metadata from Media Files" \
+        kdialog --icon=ks-media-clean-metadata --title="Clean Metadata from Media Files" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -122,12 +122,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
+FILES=$(kdialog --icon=ks-media-clean-metadata --title="Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
       *.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav \
       *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-media-clean-metadata.svgz --title="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-media-clean-metadata --title="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start

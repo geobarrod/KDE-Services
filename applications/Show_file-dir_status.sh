@@ -1,13 +1,11 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2013-2016.					#
+# For KDE-Services. 2013-2017.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
-HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############### Main ##############
@@ -36,6 +34,6 @@ stat --printf "Time of file birth:\t %w\n" "$1" >> /tmp/show-status
 stat --printf "Time of last access:\t %x\n" "$1" >> /tmp/show-status
 stat --printf "Time of last modification: %y\n" "$1" >> /tmp/show-status
 stat --printf "Time of last change:\t %z\n" "$1" >> /tmp/show-status
-kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-info.svgz --title="Show [File|Directory] Status" --textbox /tmp/show-status --geometry 500x450+$((WIDTH/2-500/2))+$((HEIGHT/2-450/2))
+kdialog --icon=ks-info --title="Show [File|Directory] Status" --textbox /tmp/show-status 500 450 2> /dev/null
 rm -f /tmp/show-status
 exit 0

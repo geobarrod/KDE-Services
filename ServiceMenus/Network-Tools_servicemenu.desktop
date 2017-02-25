@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=ConnectSentry;HTTP-Server;ListeningSockets;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-connect-to.svgz
+Icon=ks-connect-to
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
@@ -19,8 +19,8 @@ X-KDE-Submenu[zh_CN]=网络工具
 X-KDE-Submenu[x-test]=xxNetwork Toolsxx
 
 [Desktop Action ConnectSentry]
-Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Connect Sentry" --passivepopup="[Error] Please install ss command and try again."; exit 1; else /usr/share/applications/Network_Tools-connect-sentry.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-sentry-on.svgz
+Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Connect Sentry" --passivepopup="[Error] Please install ss command and try again."; exit 1; else /usr/share/applications/Network_Tools-connect-sentry.sh %F;fi
+Icon=ks-sentry-on
 Name=Connect Sentry
 Name[de]=Wache der Verbindungen
 Name[es]=Centinela de Conexiones
@@ -35,8 +35,8 @@ Name[zh_CN]=连接的步哨
 Name[x-test]=xxConnect Sentryxx
 
 [Desktop Action HTTP-Server]
-Exec=which lsof python; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="HTTP Server" --passivepopup="[Error] Please install lsof and python command and try again."; exit 1; else kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz -d -c "/usr/share/applications/HTTP_Server.sh" %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-folder-public-web.svgz
+Exec=which lsof python; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="HTTP Server" --passivepopup="[Error] Please install lsof and python command and try again."; exit 1; else kdesu -i ks-folder-public-web -d -c "/usr/share/applications/HTTP_Server.sh" %F;fi
+Icon=ks-folder-public-web
 Name=HTTP Server
 Name[de]=HTTP Server
 Name[es]=Servidor HTTP
@@ -51,8 +51,8 @@ Name[zh_CN]=HTTP 伺候器
 Name[x-test]=xxHTTP Serverxx
 
 [Desktop Action ListeningSockets]
-Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Listening Sockets" --passivepopup="[Error] Please install ss command and try again."; exit 1; else kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-socket.svgz -d /usr/share/applications/Network_Tools-listening-sockets.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-socket.svgz
+Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Listening Sockets" --passivepopup="[Error] Please install ss command and try again."; exit 1; else kdesu -i ks-socket -d /usr/share/applications/Network_Tools-listening-sockets.sh %F;fi
+Icon=ks-socket
 Name=Listening Sockets
 Name[de]=Häfen die Zuhören
 Name[es]=Puertos Escuchando

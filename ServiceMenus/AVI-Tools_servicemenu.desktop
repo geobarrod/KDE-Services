@@ -1,6 +1,6 @@
 [Desktop Entry]
 Actions=AVIsplitSize;AVIsplitTime;
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
+Icon=ks-video
 MimeType=video/x-msvideo;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
@@ -20,8 +20,8 @@ X-KDE-Submenu[zh_CN]=AVI 工具
 X-KDE-Submenu[x-test]=xxAVI Toolsxx
 
 [Desktop Action AVIsplitSize]
-Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Split (to size)" --passivepopup="[Error] Please install avisplit command and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-size.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
+Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Split (to size)" --passivepopup="[Error] Please install avisplit command and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-size.sh %F;fi
+Icon=ks-video
 Name=Split (to size)
 Name[de]=Um zu Schneiden (um zu messen)
 Name[es]=Cortar (a medida)
@@ -36,8 +36,8 @@ Name[zh_CN]=减少 (测量)
 Name[x-test]=xxSplit (to size)xx
 
 [Desktop Action AVIsplitTime]
-Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Split (by time range)" --passivepopup="[Error] Please install avisplit command and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-time.sh %F;fi
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-video.svgz
+Exec=which avisplit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Split (by time range)" --passivepopup="[Error] Please install avisplit command and try again."; exit 1; else /usr/share/applications/AVI_Tools-avi-split-time.sh %F;fi
+Icon=ks-video
 Name=Split (by time range)
 Name[de]=Um zu Schneiden (für auswahl von zeit)
 Name[es]=Cortar (por rango de tiempo)

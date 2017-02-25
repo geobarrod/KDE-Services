@@ -28,16 +28,16 @@ ELAPSED_TIME=""
 
 elapsed-time() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}s" 2> /dev/null
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}s" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}m" 2> /dev/null
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}m" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}h" 2> /dev/null
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}h" 2> /dev/null
     elif [ "$ELAPSED_TIME" -gt "86399" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}d" 2> /dev/null
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --passivepopup="[Finished]. Compilation Time: ${ELAPSED_TIME}d" 2> /dev/null
     fi
 }
 
@@ -72,7 +72,7 @@ rpmbuild-error() {
         play /tmp/speak.wav 2> /dev/null
         rm -fr /tmp/speak*
         echo -e "\n\n$GREEN>$GREENRED Error: Building $APPNAME Package.$GREEN Try Again.$WHITE\n"
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" \
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
                        --error="[Error]: Building $APPNAME Package. See $HOME/rpmbuild/TMP/$APPNAME.err and try again." 2> /dev/null &
         mv ~/rpmbuild/TMP/$APPNAME.log ~/rpmbuild/TMP/$APPNAME.err
     fi
@@ -85,14 +85,14 @@ rpm-install-error() {
         play /tmp/speak.wav 2> /dev/null
         rm -fr /tmp/speak*
         echo -e "\n$GREEN>$GREENRED Error: Installing $APPNAME Package.$GREEN Try Again.$WHITE\n"
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" \
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
                        --error="[Error]: Installing $APPNAME Package. See debug console and try again." 2> /dev/null &
     fi
 }
 
 test-network() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" \
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
             --error="No Internet Communication: You have some network or repositories problem, can't download $APPNAME source RPM package." \
             2> /dev/null
         rm -f /tmp/package-not-exist
@@ -115,7 +115,7 @@ EOF'
 rpmmacros-no-cflags() {
     sudo yum -y --nogpgcheck reinstall qt-devel kdelibs-devel > /dev/null
     BINOPT=$(cat ~/.kde-services/rebuild-package-cflags 2> /dev/null)
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package | B.O.O.=\"$BINOPT\"" \
+    kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package | B.O.O.=\"$BINOPT\"" \
             --yesnocancel="          Do you want to reconfigure Binary Optimization Option(s) of compilation?               " 2> /dev/null
     EXIT="$?"
     
@@ -132,7 +132,7 @@ rpmmacros-no-cflags() {
     grep global_cflags ~/.rpmmacros > /dev/null 2>&1
     
     if [ "$?" != "0" ]; then
-        BINOPT=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --combobox="Choose Binary Optimization Option(s)" \
+        BINOPT=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --combobox="Choose Binary Optimization Option(s)" \
                "Ofast -ffast-math -funroll-loops" "Ofast -funroll-loops" Ofast "O3 -ffast-math -funroll-loops" "O3 -funroll-loops" \
                O3 "O2 -ffast-math -funroll-loops" "O2 -funroll-loops" O2 O1 O0 Os --default "Ofast -ffast-math -funroll-loops" 2> /dev/null)
         EXIT=$?
@@ -199,7 +199,7 @@ check-builddep() {
         cat ~/.kde-services/source-packages|xargs > /tmp/source-packages
         cat /tmp/source-packages > ~/.kde-services/source-packages
         rm -f /tmp/source-packages
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" \
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
                        --error="Can't install all the RPMs needed to build $i source RPM package. See debug console." 2> /dev/null &
         continue
     fi
@@ -207,9 +207,9 @@ check-builddep() {
 
 notify() {
     if [ "$EXIT" = "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --passivepopup="Install $APPNAME   [Finished]" 2> /dev/null
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --passivepopup="Install $APPNAME   [Finished]" 2> /dev/null
     else
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Rebuild RPM Package" --passivepopup="Install $APPNAME   [Error]: See debug console." \
+        kdialog --icon=ks-error --title="Rebuild RPM Package" --passivepopup="Install $APPNAME   [Error]: See debug console." \
                        2> /dev/null
     fi
 }
@@ -237,7 +237,7 @@ rebuild-package() {
         exit 0
     fi
     
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" \
+    kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
      --yesno "You can change Spec file(s) or Source Code in this pause. Do you want continuing with the RPM package(s) rebuilding process?" \
      2> /dev/null
     
@@ -293,7 +293,7 @@ install-package() {
         text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
         play /tmp/speak.wav 2> /dev/null
         rm -fr /tmp/speak*
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --error="No packages for install. Try Again." 2> /dev/null
+        kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --error="No packages for install. Try Again." 2> /dev/null
         exit 0
     fi
     
@@ -304,7 +304,7 @@ install-package() {
     play /tmp/speak.wav 2> /dev/null
     rm -fr /tmp/speak*
     SHOWAPPNAME=$(cat ~/rpmbuild/TMP/package.ins|xargs -n1|awk -F " " '{print $1,$1}'|sed 's/$/ off/g'|xargs)
-    INSTALLPKG=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --separate-output \
+    INSTALLPKG=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --separate-output \
                --checklist="Choose Rebuilded Package(s) For Install" All "All List" off $SHOWAPPNAME 2> /dev/null)
     EXIT="$?"
     
@@ -359,7 +359,7 @@ rm -f /tmp/source-packages /tmp/package-not-exist > /dev/null 2>&1
 echo -e "$GREEN> Running Rebuild RPM Package...$WHITE\n"
 
 if [ "$(id|grep -o wheel)" != "wheel" ]; then
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" \
+    kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
                    --sorry="Your user is not in the Administrators group (wheel), please add it. After relogin, try again." 2> /dev/null
     exit 0
 fi
@@ -392,7 +392,7 @@ rm -fr ~/rpmbuild/SPECS/* 2> /dev/null
 rm -fr ~/rpmbuild/TMP/* 2> /dev/null
 rpmdev-setuptree
 mkdir -p ~/rpmbuild/TMP > /dev/null 2>&1
-PACKAGESOURCE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --yesnocancel "Have the source RPM package?" 2> /dev/null)
+PACKAGESOURCE=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --yesnocancel "Have the source RPM package?" 2> /dev/null)
 EXIT=$?
 if-cancel-exit
 
@@ -403,20 +403,20 @@ if [ "$EXIT" = "1" ]; then
     fi
     
     SHOWAPPNAME=$(cat ~/.kde-services/source-packages|xargs -n1|awk -F " " '{print $1,$1}'|sed 's/$/ off/g'|xargs)
-    APPNAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" --separate-output \
+    APPNAME=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --separate-output \
             --checklist="Choose Compiled Application(s)" All "All List" off $SHOWAPPNAME Other Other off 2> /dev/null)
     EXIT=$?
     if-cancel-exit2
     
     if [ "$(echo $APPNAME|xargs)" = "All Other" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Rebuild RPM Package" --passivepopup="[Error]: Please select All-List or Other, not both." \
+        kdialog --icon=ks-error --title="Rebuild RPM Package" --passivepopup="[Error]: Please select All-List or Other, not both." \
                        2> /dev/null
         echo -e "$GREEN> $GREENRED$CANCELED$GREEN.$WHITE\n"
         exit 0
     fi
     
     if [ "$APPNAME" = "Other" ]; then
-        APPNAME=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package" \
+        APPNAME=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
                 --inputbox "Enter only the name of the package, you can enter multiple separated by whitespace." 2> /dev/null)
         EXIT=$?
         if-cancel-exit2
@@ -439,7 +439,7 @@ if [ "$EXIT" = "1" ]; then
         sudo yum info $i > /dev/null 2>&1
         if [ "$?" != "0" ]; then
             echo -n "$i " >> /tmp/package-not-exist
-            kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Rebuild RPM Package" \
+            kdialog --icon=ks-error --title="Rebuild RPM Package" \
                            --passivepopup="$i   [Error]: This package not exist in your Repositories." 2> /dev/null
             sed -i "s;$i;;g" ~/.kde-services/source-packages
             cat ~/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
@@ -480,7 +480,7 @@ if [ "$EXIT" = "1" ]; then
 fi
 
 if [ "$EXIT" = "0" ]; then
-    SOURCEFILE=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-rebuild-rpm.svgz --title="Rebuild RPM Package - Source RPM File" --multiple \
+    SOURCEFILE=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package - Source RPM File" --multiple \
                --getopenfilename ~/rpmbuild/SRPMS .src.rpm 2> /dev/null)
     EXIT=$?
     if-cancel-exit2

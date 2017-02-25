@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2017.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -18,8 +18,6 @@ FILES=""
 LOG=/tmp/apm.log
 MyAPKs=/tmp/my-apks
 KdialogPID=""
-WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
-HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 
 ###################################
 ############ Functions ############
@@ -33,7 +31,7 @@ if-cancel-exit() {
 }
 
 if [ "$(pidof adb)" = "" ]; then
-  kdesu -i /usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --noignorebutton -d adb start-server
+  kdesu -i ks-android-apk-manager --noignorebutton -d adb start-server
   if-cancel-exit
 fi
 
@@ -41,7 +39,7 @@ SERIAL=$(adb get-serialno)
 
 check-device() {
   if [ "$SERIAL" = "unknown" ]; then
-	kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Android Package Manager" \
+	kdialog --icon=ks-error --title="Android Package Manager" \
 			--passivepopup="[Canceled]   Check if your device with Android system is connected on your PC and NOT bootloader mode. \
 			[1]-Connect your device to PC USB. [2]-Go to device Settings. [3]-Go to Developer options. [4]-Enable USB debugging option. Try again."
 	exit 1
@@ -54,7 +52,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-android-apk-manager --title="Android Package Manager" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -75,15 +73,15 @@ qdbusinsert-uninstall() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" \
+        kdialog --icon=ks-android-apk-manager --title="Android Package Manager" \
                        --passivepopup="[Finished]   $OPERATION ${i##*/} on device $SERIAL.   $(cat $LOG|grep -v pkg).   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" \
+        kdialog --icon=ks-android-apk-manager --title="Android Package Manager" \
                        --passivepopup="[Finished]   $OPERATION ${i##*/} on device $SERIAL.   $(cat $LOG|grep -v pkg).   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" \
+        kdialog --icon=ks-android-apk-manager --title="Android Package Manager" \
                        --passivepopup="[Finished]   $OPERATION ${i##*/} on device $SERIAL.   $(cat $LOG|grep -v pkg).   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -134,12 +132,12 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-OPERATION=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" \
+OPERATION=$(kdialog --icon=ks-android-apk-manager --title="Android Package Manager" \
        --combobox="Select Operation" Install Uninstall --default Install 2> /dev/null)
 if-cancel-exit
 
 if [ "$OPERATION" = "Install" ]; then
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager - Select Apk Files" --multiple --getopenfilename "$DIR" "*.APK *.apk|*.apk" 2> /dev/null)
+	FILES=$(kdialog --icon=ks-android-apk-manager --title="Android Package Manager - Select Apk Files" --multiple --getopenfilename "$DIR" "*.APK *.apk|*.apk" 2> /dev/null)
 	if-cancel-exit
 	progressbar-start
 
@@ -156,10 +154,10 @@ if [ "$OPERATION" = "Install" ]; then
 elif [ "$OPERATION" = "Uninstall" ]; then
     adb shell su -c "ls -l /data/data/" > $MyAPKs
     cat $MyAPKs|sort -k 6|awk -F" " '{print $6}' > ${MyAPKs}2
-    kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz \
-			--title="Android Package Manager - $(cat $MyAPKs|wc -l) applications" --textbox=${MyAPKs}2 --geometry 450x450+$((WIDTH/2-450/2))+$((HEIGHT/2-450/2)) 2> /dev/null &
+    kdialog --icon=ks-android-apk-manager \
+			--title="Android Package Manager - $(cat $MyAPKs|wc -l) applications" --textbox=${MyAPKs}2 450 450 2> /dev/null &
 	KdialogPID=$(ps aux|grep "my-apks2"|grep -v grep|awk -F" " '{print $2}')
-	FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-android-apk-manager.svgz --title="Android Package Manager" --inputbox="Enter Android applications from textbox separated by whitespace." 2> /dev/null)
+	FILES=$(kdialog --icon=ks-android-apk-manager --title="Android Package Manager" --inputbox="Enter Android applications from textbox separated by whitespace." 2> /dev/null)
 	if-cancel-exit
 	kill -9 $KdialogPID 2> /dev/null
     progressbar-start

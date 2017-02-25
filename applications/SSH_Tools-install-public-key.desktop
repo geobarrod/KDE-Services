@@ -1,7 +1,7 @@
 [Desktop Entry]
 Categories=SSH-Tools;
 Exec=/usr/share/applications/SSH_Tools-copy-id.sh
-Icon=/usr/share/icons/hicolor/scalable/apps/ks-key.svgz
+Icon=ks-key
 Name=Install Public Key
 Name[de]=Schlüssel zu Installieren Veröffentlicht
 Name[es]=Instalar Llave Publica

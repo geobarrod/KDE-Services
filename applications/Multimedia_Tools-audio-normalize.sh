@@ -36,7 +36,7 @@ if-cancel-exit() {
 
 if-mp3gain-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-error.svgz --title="Adjusting volume level of ${i##*/}" \
+        kdialog --icon=ks-error --title="Adjusting volume level of ${i##*/}" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DST_FILE/$LOGERROR
         continue
@@ -47,7 +47,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="Volume Normalize of MP3 Files" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-audio-normalize --title="Volume Normalize of MP3 Files" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -63,15 +63,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="Volume Normalize of MP3 Files" \
+        kdialog --icon=ks-audio-normalize --title="Volume Normalize of MP3 Files" \
                        --passivepopup="[Finished]  $(grep -e 'Applying mp3 gain change of' -e 'No changes to' $LOG)   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="Volume Normalize of MP3 Files" \
+        kdialog --icon=ks-audio-normalize --title="Volume Normalize of MP3 Files" \
                        --passivepopup="[Finished]   $(grep -e 'Applying mp3 gain change of' -e 'No changes to' $LOG)   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="Volume Normalize of MP3 Files" \
+        kdialog --icon=ks-audio-normalize --title="Volume Normalize of MP3 Files" \
                        --passivepopup="[Finished]   $(grep -e 'Applying mp3 gain change of' -e 'No changes to' $LOG)   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -122,7 +122,7 @@ if [ "$DIR" == "/usr/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=/usr/share/icons/hicolor/scalable/apps/ks-audio-normalize.svgz --title="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2> /dev/null)
+FILES=$(kdialog --icon=ks-audio-normalize --title="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2> /dev/null)
 if-cancel-exit
 
 progressbar-start
