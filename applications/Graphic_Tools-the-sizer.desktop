@@ -3,7 +3,7 @@ Categories=Graphic-Tools;
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else /usr/share/applications/The_Sizer.sh;fi
 Icon=ks-resize-image
 Name=The Sizer
-Name[de]=Der Sizer
+Name[de]=Größenänderung
 Name[es]=El Dimensionador
 Name[fr]=Le Sizer
 Name[it]=Il Sizer

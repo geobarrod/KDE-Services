@@ -3,7 +3,7 @@ Categories=Multimedia-Tools;
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Add Subtitle to MP4 File" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-add-subtitle.sh %F;fi
 Icon=ks-add-subs
 Name=Add Subtitle to MP4 Files
-Name[de]=Fügen Sie Untertitel MP4-Akten hinzu
+Name[de]=Untertitel zu MP4s hinzufügen
 Name[es]=Agregar Subtitulo a Ficheros MP4
 Name[fr]=Ajoutez le Sous-titre aux Fichiers MP4
 Name[it]=Aggiunga Sottotitolo agli Archivi di MP4

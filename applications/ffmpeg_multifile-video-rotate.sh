@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2017.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
@@ -131,7 +131,7 @@ DESTINATION=$(kdialog --icon=ks-video-rotate --title="Destination Video Files" -
 if-cancel-exit
 
 ANGLE=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" \
-                --combobox="Select rotation degree angle" "90 Clockwise" "180 Clockwise" "90 AntiClockwise" "180 AntiClockwise" --default "90 Clockwise")
+                --combobox="Select rotation degree angle" "90 Clockwise" "90 Clockwise and Vertical Flip" "90 CounterClockwise" "90 CounterClockwise and Vertical Flip" "180 Clockwise" "Horizontal Mirror" "Vertical Mirror" --default "90 Clockwise")
 if-cancel-exit
 
 if [ "$ANGLE" = "90 Clockwise" ]; then
@@ -143,7 +143,52 @@ if [ "$ANGLE" = "90 Clockwise" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -metadata:s:v rotate="90" -c copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise.${i:${#i}-3}" > $LOG 2>&1
+        ffmpeg -y -i $i -vf "transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise.${i:${#i}-3}" > $LOG 2>&1
+        if-ffmpeg-cancel
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+elif [ "$ANGLE" = "90 Clockwise and Vertical Flip" ]; then
+    progressbar-start
+
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i -vf "transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise-VFlip.${i:${#i}-3}" > $LOG 2>&1
+        if-ffmpeg-cancel
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+elif [ "$ANGLE" = "90 CounterClockwise" ]; then
+    progressbar-start
+
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i -vf "transpose=cclock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise.${i:${#i}-3}" > $LOG 2>&1
+        if-ffmpeg-cancel
+        FINAL_TIME=$(date +%s)
+        ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+        elapsedtime
+    done
+elif [ "$ANGLE" = "90 CounterClockwise and Vertical Flip" ]; then
+    progressbar-start
+
+    for i in $FILES; do
+        logs
+        COUNT=$((++COUNT))
+        BEGIN_TIME=$(date +%s)
+        qdbusinsert
+        DST_FILE="${i%.*}"
+        ffmpeg -y -i $i -vf "transpose=cclock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise-VFlip.${i:${#i}-3}" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -158,13 +203,13 @@ elif [ "$ANGLE" = "180 Clockwise" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -metadata:s:v rotate="180" -c copy "$DESTINATION/${DST_FILE##*/}_180-Clockwise.${i:${#i}-3}" > $LOG 2>&1
+        ffmpeg -y -i $i -vf "transpose=clock,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_180-Clockwise.${i:${#i}-3}" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
     done
-elif [ "$ANGLE" = "90 AntiClockwise" ]; then
+elif [ "$ANGLE" = "Horizontal Mirror" ]; then
     progressbar-start
 
     for i in $FILES; do
@@ -173,13 +218,13 @@ elif [ "$ANGLE" = "90 AntiClockwise" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -metadata:s:v rotate="-90" -c copy "$DESTINATION/${DST_FILE##*/}_90-AntiClockwise.${i:${#i}-3}" > $LOG 2>&1
+        ffmpeg -y -i $i -vf "transpose=clock,transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_HMirror.${i:${#i}-3}" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
         elapsedtime
     done
-elif [ "$ANGLE" = "180 AntiClockwise" ]; then
+elif [ "$ANGLE" = "Vertical Mirror" ]; then
     progressbar-start
 
     for i in $FILES; do
@@ -188,7 +233,7 @@ elif [ "$ANGLE" = "180 AntiClockwise" ]; then
         BEGIN_TIME=$(date +%s)
         qdbusinsert
         DST_FILE="${i%.*}"
-        ffmpeg -y -i $i -metadata:s:v rotate="-180" -c copy "$DESTINATION/${DST_FILE##*/}_180-AntiClockwise.${i:${#i}-3}" > $LOG 2>&1
+        ffmpeg -y -i $i -vf "transpose=clock_flip,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_VMirror.${i:${#i}-3}" > $LOG 2>&1
         if-ffmpeg-cancel
         FINAL_TIME=$(date +%s)
         ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

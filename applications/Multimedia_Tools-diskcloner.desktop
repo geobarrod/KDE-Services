@@ -3,7 +3,7 @@ Categories=Multimedia-Tools;
 Exec=which lsblk dd; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Error] Please install lsblk and dd command and try again."; exit 1; else /usr/share/applications/DiskCloner.sh;fi
 Icon=ks-media-optical-clone
 Name=DiskCloner
-Name[de]=DiskCloner (diskette cloner)
+Name[de]=DiskCloner (Speicherkloner)
 Name[es]=DiskCloner (clonador de disco)
 Name[fr]=DiskCloner (cloner du disque)
 Name[it]=DiskCloner (cloner di disco)

@@ -23,7 +23,7 @@ X-KDE-Submenu[x-test]=xxPDF Toolsxx
 Exec=which pdftk; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Apply DRM + Encrypt" --passivepopup="[Error] Please install pdftk command and try again."; exit 1; else OPASSWORD=$(kdialog --icon=ks-pdf --title="PDF Tools" --password="Enter PDF owner password (DRM)"); UPASSWORD=$(kdialog --icon=ks-pdf --title="PDF Tools" --password="Enter PDF user password (Encrypt). Warning: Can't be same to owner password"); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying DRM-Encrypt:  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_DRM-Enc128b.pdf" owner_pw $OPASSWORD user_pw $UPASSWORD; qdbus $DBUSREF close; kdialog --icon=ks-pdf --title="PDF Tools - Apply DRM + Encrypt" --passivepopup="[Finished]";fi
 Icon=ks-pdf
 Name=Apply DRM + Encrypt
-Name[de]=Wenden Sie DRM an + Kodieren Sie
+Name[de]=DRM + Kodierung anwenden
 Name[es]=Aplicar DRM + Encriptación
 Name[fr]=Appliquer DRM + Chiffrement
 Name[it]=Applichi DRM + Codifichi
@@ -39,7 +39,7 @@ Name[x-test]=xxApply DRM + Encryptxx
 Exec=which pdftk; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract All Pages" --passivepopup="[Error] Please install pdftk command and try again."; exit 1; else DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting All Pages:  $(basename %f)"; pdftk %f burst output "`echo %f | perl -pe 's/\\.[^.]+$//'`_%05d.pdf"; qdbus $DBUSREF close; kdialog --icon=ks-pdf --title="PDF Tools - Extract all pages" --passivepopup="[Finished]";fi
 Icon=ks-pdf
 Name=Extract All Pages
-Name[de]=Ziehen Sie Alle Seiten
+Name[de]=Alle Seiten extrahieren
 Name[es]=Extraer Todas las Páginas
 Name[fr]=Extraire Toutes les Pages
 Name[it]=Estrarre Tutte le Pagine
@@ -55,7 +55,7 @@ Name[x-test]=xxExtract All Pagesxx
 Exec=which pdftk; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract Select Pages" --passivepopup="[Error] Please install pdftk command and try again."; exit 1; else PAGES=$(kdialog --icon=ks-pdf --title="PDF Tools" --inputbox="Enter pages number for extract (single: 1 7 12 | range: 3-12 | multi-range: 1-3 6-8 10-end)"); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Extracting Select Pages:  $(basename %f)"; pdftk %f cat $PAGES output "`echo %f | perl -pe 's/\\.[^.]+$//'`_extract-pages.pdf"; qdbus $DBUSREF close; kdialog --icon=ks-pdf --title="PDF Tools - Extract select pages" --passivepopup="[Finished]";fi
 Icon=ks-pdf
 Name=Extract Select Pages
-Name[de]=Ziehen Sie Auserlesene Seiten
+Name[de]=Ausgewählte Seiten extrahieren
 Name[es]=Extraer Páginas Seleccionadas
 Name[fr]=Extraire Pages Sélectionnées
 Name[it]=Estrarre Pagine Selezionate
@@ -71,7 +71,7 @@ Name[x-test]=xxExtract Select Pagesxx
 Exec=which pdftk; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Fixer (if possible)" --passivepopup="[Error] Please install pdftk command and try again."; exit 1; else DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Fixing:  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_fixed.pdf"; qdbus $DBUSREF close; kdialog --icon=ks-pdf --title="PDF Tools - Fixer" --passivepopup="[Finished]";fi
 Icon=ks-pdf
 Name=Fixer (if possible)
-Name[de]=Fixiermittel (falls möglich)
+Name[de]=Reparieren (falls möglich)
 Name[es]=Reparar (si es posible)
 Name[fr]=Réparer (s'il est possible)
 Name[it]=Riparare (se è possibile)
@@ -87,7 +87,7 @@ Name[x-test]=xxFixer (if possible)xx
 Exec=which pdftk; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Apply Owner Password (DRM)" --passivepopup="[Error] Please install pdftk command and try again."; exit 1; else OPASSWORD=$(kdialog --icon=ks-pdf --title="PDF Tools" --password="Enter PDF owner password (DRM)"); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying Owner Password (DRM):  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_DRM.pdf" owner_pw $OPASSWORD; qdbus $DBUSREF close; kdialog --icon=ks-pdf --title="PDF Tools - Apply Owner Password (DRM)" --passivepopup="[Finished]";fi
 Icon=ks-pdf
 Name=Apply Owner Password (DRM)
-Name[de]=Wenden Sie Besitzerpasswort (DRM)
+Name[de]=Besitzerpasswort anlegen (DRM)
 Name[es]=Aplicar Contraseña de Propiedad (DRM)
 Name[fr]=Appliquer Signe de Reconnaissance de Propriété (DRM)
 Name[it]=Applicare Contrassegno di Proprietà (DRM)
@@ -103,7 +103,7 @@ Name[x-test]=xxApply Owner Password (DRM)xx
 Exec=which pdftk; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Decrypt (DRM)" --passivepopup="[Error] Please install pdftk command and try again."; exit 1; else DPASSWORD=$(kdialog --icon=ks-pdf --title="PDF Tools" --password="Enter PDF owner (DRM) password for decrypt"); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Decrypting:  $(basename %f)"; pdftk %f input_pw $DPASSWORD output "`echo %f | perl -pe 's/\\.[^.]+$//'`_decrypted.pdf"; qdbus $DBUSREF close; kdialog --icon=ks-pdf --title="PDF Tools - Decrypt" --passivepopup="[Finished]";fi
 Icon=ks-pdf
 Name=Decrypt (DRM)
-Name[de]=(DRM) Entschlüsseln Sie
+Name[de]=(DRM) entschlüsseln
 Name[es]=Desencriptar (DRM)
 Name[fr]=Décryptez (DRM)
 Name[it]=Decripti (DRM)
@@ -119,7 +119,7 @@ Name[x-test]=xxDecrypt (DRM)xx
 Exec=which pdftk; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Apply User Password (Encrypt)" --passivepopup="[Error] Please install pdftk command and try again."; exit 1; else UPASSWORD=$(kdialog --icon=ks-pdf --title="PDF Tools" --password="Enter PDF user password (Encrypt)"); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Applying User Password (Encrypt):  $(basename %f)"; pdftk %f output "`echo %f | perl -pe 's/\\.[^.]+$//'`_Enc128b.pdf" user_pw $UPASSWORD; qdbus $DBUSREF close; kdialog --icon=ks-pdf --title="PDF Tools - Apply User Password (Encrypt)" --passivepopup="[Finished]";fi
 Icon=ks-pdf
 Name=Apply User Password (Encrypt)
-Name[de]=Wenden Sie Benutzerpasswort (Kodieren Sie)
+Name[de]=Benutzerpasswort anlegen (Verschlüsseln)
 Name[es]=Aplicar Contraseña de Usuario (Encriptar)
 Name[fr]=Appliquer Signe de Reconnaissance d'Usager (Crypter)
 Name[it]=Applichi Parola d'Ordine di Utente (Codifichi)

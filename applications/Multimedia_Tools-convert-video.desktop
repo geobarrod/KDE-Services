@@ -3,7 +3,7 @@ Categories=Multimedia-Tools;
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Convert Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-convert-video.sh;fi
 Icon=ks-video
 Name=Convert Video Files
-Name[de]=Um Videoakten zu Konvertieren
+Name[de]=Videodateien konvertieren
 Name[es]=Convertir Archivos de Video
 Name[fr]=Changer Archives de Vidéo
 Name[it]=Convertire Archivi di Video

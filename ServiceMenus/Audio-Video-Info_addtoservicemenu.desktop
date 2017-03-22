@@ -12,7 +12,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 Exec=which ffprobe; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Audio|Video] Info" --passivepopup="[Error] Please install ffprobe command and try again."; exit 1; else SERIAL=$(date +%s); for file in %F;do ffprobe $file 2> /tmp/info-$SERIAL; echo "File: ${file##*/}" >> /tmp/info2-$SERIAL; grep -e Duration -e Stream /tmp/info-$SERIAL >> /tmp/info2-$SERIAL; echo >> /tmp/info2-$SERIAL;done; kdialog --icon=ks-audio-video-info --title="[Audio|Video] Info" --textbox /tmp/info2-$SERIAL $(($(cat /tmp/info2-$SERIAL|wc -L)*7)) 140; rm -f /tmp/info*;fi
 Icon=ks-audio-video-info
 Name=[Audio|Video] Info
-Name[de]=Informationen von [Audio|Video]
+Name[de]=[Audio|Video] Info
 Name[es]=Información de [Audio|Video]
 Name[fr]=Information de [Audio|Vidéo]
 Name[it]=Informazione di [Audio|Video]

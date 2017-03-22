@@ -3,7 +3,7 @@ Categories=Multimedia-Tools;
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Clean Metadata from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-clean-metadata-media-file.sh;fi
 Icon=ks-media-clean-metadata
 Name=Clean Metadata from Media Files
-Name[de]=Um Metadatos der Akten Multimedia zu Reinigen
+Name[de]=Metadaten löschen
 Name[es]=Limpiar Metadatos de Ficheros Multimedia
 Name[fr]=Nettoyer Metadatos de Fichiers Multimédia
 Name[it]=Pulire Metadatos di Schedari Multimedia

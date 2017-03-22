@@ -7,7 +7,7 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Package Tools
-X-KDE-Submenu[de]=Pakete - Werkzeuge
+X-KDE-Submenu[de]=Paket - Werkzeuge
 X-KDE-Submenu[es]=Paquetes - Herramientas
 X-KDE-Submenu[fr]=Paquets - Outils
 X-KDE-Submenu[it]=Pacchetti - Attrezzi
@@ -23,7 +23,7 @@ X-KDE-Submenu[x-test]=xxPackage Toolsxx
 Exec=which rpm2cpio cpio; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract Files Here" --passivepopup="[Error] Please install rpm2cpio and cpio command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd $(dirname $file); mkdir $(basename -s .rpm $file); cd $(basename -s .rpm $file); rpm2cpio $file | cpio -id; kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --passivepopup="[Finished]    $(basename $file)";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-rebuild-rpm
 Name=Extract Files Here
-Name[de]=Um Akten Hier zu Ziehen
+Name[de]=Dateien hier entpacken
 Name[es]=Extraer Ficheros Aquí
 Name[fr]=Extraire Ici Fichiers
 Name[it]=Estrarre Qui Schedari
@@ -39,7 +39,7 @@ Name[x-test]=xxExtract Files Herexx
 Exec=which rpm2cpio rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install rpm2cpio and rpm command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-rebuild-rpm --title="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; rpm2cpio $file > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps $file 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then kdialog --icon=ks-rebuild-rpm --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename $file)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then kdialog --icon=ks-error --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename $file)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-rebuild-rpm
 Name=Integrity Check
-Name[de]=Um Integrität zu Überprüfen
+Name[de]=Integrität überprüfen
 Name[es]=Comprobar Integridad
 Name[fr]=Vérifier Intégrité
 Name[it]=Comprovare Integrità
@@ -55,7 +55,7 @@ Name[x-test]=xxIntegrity Checkxx
 Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List Content" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qlp %f > /tmp/pkgcontent; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List Content - $(basename %f)" --textbox /tmp/pkgcontent 800 300; rm -f /tmp/pkgcontent;fi
 Icon=ks-rebuild-rpm
 Name=List Content
-Name[de]=Um Inhalt Aufzuführen
+Name[de]=Inhalt auflisten
 Name[es]=Listar Contenido
 Name[fr]=Enregistrer Contenu
 Name[it]=Elencare Contenuto
@@ -71,7 +71,7 @@ Name[x-test]=xxList Contentxx
 Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List Configuration Files" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qcp %f > /tmp/pkgconfiles; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List Configuration Files - $(basename %f)" --textbox /tmp/pkgconfiles 800 300; rm -f /tmp/pkgconfiles;fi
 Icon=ks-rebuild-rpm
 Name=List Configuration Files
-Name[de]=Um Konfigurationsakten Aufzuführen
+Name[de]=Konfigurationsdateien auflisten
 Name[es]=Listar Ficheros de Configuración
 Name[fr]=Enregistrer Fichiers de Configuration
 Name[it]=Elencare Schedari di Configurazione
@@ -87,7 +87,7 @@ Name[x-test]=xxList Configuration Filesxx
 Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List Dependencies" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qRp %f > /tmp/pkgdeps; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List Dependencies - $(basename %f)" --textbox /tmp/pkgdeps 800 300; rm -f /tmp/pkgdeps;fi
 Icon=ks-rebuild-rpm
 Name=List Dependencies
-Name[de]=Um Dependences Aufzuführen
+Name[de]=Abhängigkeiten auflisten
 Name[es]=Listar Dependencias
 Name[fr]=Enregistrer Dépendances
 Name[it]=Elencare Dipendenze
@@ -103,7 +103,7 @@ Name[x-test]=xxList Dependenciesxx
 Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List [Ins|Unins]tallation Scripts" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qp --scripts %f > /tmp/pkgscripts; kdialog --icon=ks-rebuild-rpm --title="Package Tools - List [Ins|Unins]tallation Scripts - $(basename %f)" --textbox /tmp/pkgscripts 800 300; rm -f /tmp/pkgscripts;fi
 Icon=ks-rebuild-rpm
 Name=List [Ins|Unins]tallation Scripts
-Name[de]=Um Anordnungen Davon Aufzuführen [Ins|Unins]tallation
+Name[de]=[Ins|Unins]tallationsscripte auflisten
 Name[es]=Listar Ordenes de [Ins|Desins]talación
 Name[fr]=Enregistrer Ordres de [Ins|Unins]tallation
 Name[it]=Elencare Ordini di Installazione
@@ -119,7 +119,7 @@ Name[x-test]=xxList [Ins|Unins]tallation Scriptsxx
 Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Changelog" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qp --changelog %f > /tmp/pkgchangelog; kdialog --icon=ks-rebuild-rpm --title="Package Tools - Show Changelog - $(basename %f)" --textbox /tmp/pkgchangelog 800 300; rm -f /tmp/pkgchangelog;fi
 Icon=ks-rebuild-rpm
 Name=Show Changelog
-Name[de]=Um Registrierung der Änderungen zu Zeigen
+Name[de]=Changelog anzeigen
 Name[es]=Mostrar Registro de Cambios
 Name[fr]=Montrer Registre de Changements
 Name[it]=Mostrare Registro di Cambiamenti
@@ -135,7 +135,7 @@ Name[x-test]=xxShow Changelogxx
 Exec=which rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Info" --passivepopup="[Error] Please install rpm command and try again."; exit 1; else rpm -qip %f > /tmp/pkginfo; kdialog --icon=ks-rebuild-rpm --title="Package Tools - Show Info - $(basename %f)" --textbox /tmp/pkginfo 800 300; rm -f /tmp/pkginfo;fi
 Icon=ks-rebuild-rpm
 Name=Show Info
-Name[de]=Um Informationen zu Zeigen
+Name[de]=Info anzeigen
 Name[es]=Mostrar Información
 Name[fr]=Montrer Information
 Name[it]=Mostrare Informazione

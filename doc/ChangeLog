@@ -1,3 +1,7 @@
+* Tue Mar 21 2017 Geovani B. R. <igeo.cu@gmail.com> 2.1.9
+- "Rotate Video Files": Enhancement.
+- Fixed German translation.
+
 * Sun Feb 19 2017 Geovani B. R. <igeo.cu@gmail.com> 2.1.8
 - Bugfix: The option "--geometry" was eliminated in the application kdialog (16.12 - KDE framework 5.30.0).
 - It changes the denomination of the version.

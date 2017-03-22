@@ -22,7 +22,7 @@ X-KDE-Submenu[x-test]=xxAndroid Toolsxx
 Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Backup Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-backup-restore.sh %F;fi
 Icon=ks-android-backup-restore
 Name=Android Backup Manager
-Name[de]=Zurück Verwalter für Android
+Name[de]=Android Sicherung
 Name[es]=Administrador de Respaldo para Android
 Name[fr]=Administrateur de Dossier pour Android
 Name[it]=Amministratore di Schienale per Android
@@ -38,7 +38,7 @@ Name[x-test]=xxAndroid Backup Managerxx
 Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android File Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-push-pull.sh %F;fi
 Icon=ks-android-push-pull
 Name=Android File Manager
-Name[de]=Verwalter der Akten für Android
+Name[de]=Android Dateimanager
 Name[es]=Administrador de Ficheros para Android
 Name[fr]=Administrateur de Fichiers pour Android
 Name[it]=Amministratore di Schedari per Android
@@ -54,7 +54,7 @@ Name[x-test]=xxAndroid File Managerxx
 Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Package Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-apk-manager.sh %F;fi
 Icon=ks-android-apk-manager
 Name=Android Package Manager
-Name[de]=Verwalter der Pakete für Android
+Name[de]=Paketverwalter für Android
 Name[es]=Administrador de Paquetes para Android
 Name[fr]=Administrateur de Paquets pour Android
 Name[it]=Amministratore di Pacchetti per Android
@@ -70,7 +70,7 @@ Name[x-test]=xxAndroid Package Managerxx
 Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Reboot Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-reboot.sh %F;fi
 Icon=ks-android-reboot
 Name=Android Reboot Manager
-Name[de]=Verwalter von Mir Fängt Wieder für Android
+Name[de]=Neustartassisstent für Android
 Name[es]=Administrador de Reinicio para Android
 Name[fr]=Administrateur de je Recommence pour Android
 Name[it]=Amministratore di Ricomincio per Android

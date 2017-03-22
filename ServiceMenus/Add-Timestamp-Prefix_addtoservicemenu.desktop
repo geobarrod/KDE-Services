@@ -12,7 +12,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 Exec=COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-clock --title="Add Timestamp Prefix to [File|Dir]name" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Adding timestamp prefix to ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; echo ${file##*/} >> .add-timestamp-prefix; for i in $(cat .add-timestamp-prefix);do mv -f "$i" $(stat "$i"|grep Modify|awk '{print $2$3}'|sed 's/[-:.]//g'|sed 's/.........$//')_$(echo "${i##*/}");done;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Add Timestamp Prefix" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=ks-clock --title="Add Timestamp Prefix to [File|Dir]name" --passivepopup="[Finished]"; rm -f .add-timestamp-prefix
 Icon=ks-clock
 Name=Add Timestamp Prefix to [File|Dir]name
-Name[de]=Hinzuzufügen, stellt Datum-Stunde davon zum Namen vorein das [File|Verzeichnis]
+Name[de]=Zeitstempel hinzufügen [File|Verzeichnis]
 Name[es]=Agregar Prefijo Fecha-Hora al Nombre del [Fichero|Directorio]
 Name[fr]=Ajouter Préfixé Date-Heure au Nom du [Fichier|Directif]
 Name[it]=Aggregare Prefisso Data-Ora al Nome del [Schedario|Direttivo]

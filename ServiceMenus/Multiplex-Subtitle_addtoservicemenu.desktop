@@ -12,7 +12,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 Exec=which ffprobe recode spumux; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Multiplex Subtitle" --passivepopup="[Error] Please install ffprobe, recode and spumux command and try again."; exit 1; else /usr/share/applications/Multiplex_Subtitle.sh %F;fi
 Icon=ks-multiplexing-subs
 Name=Multiplex Subtitle
-Name[de]=Zu Mehrfachem Untertitel
+Name[de]=Mehrsprachige Untertitel
 Name[es]=Multiplexar Subtítulo
 Name[fr]=Sous-titre Multiplex
 Name[it]=Sottotitolo di Molteplice

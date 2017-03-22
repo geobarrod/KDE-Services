@@ -3,7 +3,7 @@ Categories=Multimedia-Tools;
 Exec=which mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Volume Normalize of MP3 Files" --passivepopup="[Error] Please install mp3gain command and try again."; exit 1; else /usr/share/applications/Multimedia_Tools-audio-normalize.sh %F;fi
 Icon=ks-audio-normalize
 Name=Volume Normalize of MP3 Files
-Name[de]=Volumen Normalisiert Sich von MP3-Akten
+Name[de]=Lautstärke von MP3s normalisieren
 Name[es]=Normalizar Volumen de Ficheros MP3
 Name[fr]=Volume Normalise de Fichiers MP3
 Name[it]=Volume Normalizza di Archivi MP3

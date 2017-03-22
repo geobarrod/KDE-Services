@@ -3,7 +3,7 @@ Categories=Android-Tools;
 Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android File Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-push-pull.sh %F;fi
 Icon=ks-android-push-pull
 Name=Android File Manager
-Name[de]=Verwalter der Akten für Android
+Name[de]=Android Dateimanager
 Name[es]=Administrador de Ficheros para Android
 Name[fr]=Administrateur de Fichiers pour Android
 Name[it]=Amministratore di Schedari per Android

@@ -3,7 +3,7 @@ Categories=Network-Tools;
 Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Connect Sentry" --passivepopup="[Error] Please install ss command and try again."; exit 1; else /usr/share/applications/Network_Tools-connect-sentry.sh;fi
 Icon=ks-sentry-on
 Name=Connect Sentry
-Name[de]=Wache der Verbindungen
+Name[de]=Verbindung überwachen
 Name[es]=Centinela de Conexiones
 Name[fr]=Sentinelle de Connexions
 Name[it]=Sentinella di Connessioni

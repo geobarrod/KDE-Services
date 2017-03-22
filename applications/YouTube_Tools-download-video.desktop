@@ -3,7 +3,7 @@ Categories=YouTube-Tools;
 Exec=which youtube-dl; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video Downloader" --passivepopup="[Error] Please install youtube-dl command and try again."; exit 1; else /usr/share/applications/YouTube_Tools-download-video.sh;fi
 Icon=ks-youtube-download-video
 Name=Video Downloader
-Name[de]=Videoentlader
+Name[de]=Video Downloader
 Name[es]=Descargador de Video
 Name[fr]=Déchargeur de Vidéo
 Name[it]=Scaricatore di Video

@@ -3,7 +3,7 @@ Categories=System-Tools;
 Exec=which lspci gtf; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Xorg Configure" --passivepopup="[Error] Please install lspci and gtf command and try again."; exit 1; else kdesu -i ks-xorg --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh;fi
 Icon=ks-xorg
 Name=Xorg Configure
-Name[de]=Um Xorg zu Konfigurieren
+Name[de]=Xorg konfigurieren
 Name[es]=Configurar Xorg
 Name[fr]=Configurer Xorg
 Name[it]=Configurare Xorg

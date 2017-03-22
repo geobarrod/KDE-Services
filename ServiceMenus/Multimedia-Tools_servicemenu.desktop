@@ -22,7 +22,7 @@ X-KDE-Submenu[x-test]=xxMultimedia Toolsxx
 Exec=which ffprobe dvdauthor genisoimage; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="D.V.D. Assembler" --passivepopup="[Error] Please install ffprobe, dvdauthor and genisoimage command and try again."; exit 1; else /usr/share/applications/DVD_Tools-d.v.d.-assembler.sh %F;fi
 Icon=ks-media-optical-video
 Name=D.V.D. Assembler
-Name[de]=Assembler von D.V.D.
+Name[de]=D.V.D. zusammenstellen
 Name[es]=Ensamblador de D.V.D.
 Name[fr]=Assembleur de D.V.D.
 Name[it]=Assemblatore di D.V.D.
@@ -38,7 +38,7 @@ Name[x-test]=xxD.V.D. Assemblerxx
 Exec=which genisoimage; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Build iso9660 Image from Here" --passivepopup="[Error] Please install genisoimage command and try again."; exit 1; else DBUSREF=$(kdialog --icon=ks-media-optical-mount --title="Build iso9660 Image from Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=ks-media-optical-mount --title="Build iso9660 Image from Here" --passivepopup="[Finished]   $(basename %f.iso)";fi
 Icon=ks-media-optical-mount
 Name=Build iso9660 Image from Here
-Name[de]=Bauen Sie von Hier iso9660-Bild
+Name[de]=ISO9660-Abbild hier erstellen
 Name[es]=Construir Imagen iso9660 Desde Aquí
 Name[fr]=Construire Image iso9660 Depuis Ici
 Name[it]=Costruire Immagine iso9660 Da Qui
@@ -54,7 +54,7 @@ Name[x-test]=xxBuild iso9660 Image from Herexx
 Exec=which lsblk dd; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Error] Please install lsblk and dd command and try again."; exit 1; else /usr/share/applications/DiskCloner.sh %F;fi
 Icon=ks-media-optical-clone
 Name=DiskCloner
-Name[de]=DiskCloner (diskette cloner)
+Name[de]=DiskCloner (Speicherkloner)
 Name[es]=DiskCloner (clonador de disco)
 Name[fr]=DiskCloner (cloner du disque)
 Name[it]=DiskCloner (cloner di disco)
@@ -70,7 +70,7 @@ Name[x-test]=xxDiskClonerxx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Convert Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-convert-video.sh %F;fi
 Icon=ks-video
 Name=Convert Video Files
-Name[de]=Um Videoakten zu Konvertieren
+Name[de]=Videodateien konvertieren
 Name[es]=Convertir Archivos de Video
 Name[fr]=Changer Archives de Vidéo
 Name[it]=Convertire Archivi di Video
@@ -86,7 +86,7 @@ Name[x-test]=xxConvert video filesxx
 Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Extract|Convert] Audio Track" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh %F;fi
 Icon=ks-audio
 Name=[Extract|Convert] Audio Track
-Name[de]=[Auszug|Bekehrter] Audiofährten
+Name[de]=[Extrahiere|Konvertiere] Audiospur
 Name[es]=[Extraer|Convertir] Pista de Audio
 Name[fr]=[Extrait|Converti] Pistes Sonores
 Name[it]=[Estratto|Converta] Piste di Audio
@@ -102,7 +102,7 @@ Name[x-test]=xx[Extract|Convert] Audio Trackxx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh %F;fi
 Icon=ks-media-tape
 Name=Record My Desktop (record video screen)
-Name[de]=Um Meinen Schreibtisch Aufzuzeichnen (um videobildschirm aufzuzeichnen)
+Name[de]=Desktop aufzuzeichnen (Bildschirm aufzuzeichnen)
 Name[es]=Grabar Mi Escritorio (grabar pantalla de video)
 Name[fr]=Graver Mon Bureau (graver écran de vidéo)
 Name[it]=Registrare la Mia Scrivania (registrare schermo di video)
@@ -118,7 +118,7 @@ Name[x-test]=xxRecord My Desktop (record video screen)xx
 Exec=which vlc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Play Video from Here" --passivepopup="[Error] Please install vlc command and try again."; exit 1; else vlc -f %F 2> /dev/null;fi
 Icon=vlc
 Name=Play Video from Here
-Name[de]=Spielen Sie von Hier Video
+Name[de]=Video von hier abspielen
 Name[es]=Reproducir Video Aquí
 Name[fr]=Reproduire Ici Vidéo
 Name[it]=Riprodurre Qui Video
@@ -134,7 +134,7 @@ Name[x-test]=xxPlay Video from Herexx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Rotate Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-video-rotate.sh %F;fi
 Icon=ks-video-rotate
 Name=Rotate Video Files
-Name[de]=Um Videoakten zu Drehen
+Name[de]=Video drehen
 Name[es]=Rotar Ficheros de Video
 Name[fr]=Rouler Fichiers de Vidéo
 Name[it]=Ruotare Schedari di Video
@@ -150,7 +150,7 @@ Name[x-test]=xxRotate Video Filesxx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-edit-media-time.sh %F;fi
 Icon=ks-media-edit-time
 Name=Edit Time from Media Files
-Name[de]=Um Time der Akten Multimedia zu Veröffentlichen
+Name[de]=Zeitstempel von Medien editieren
 Name[es]=Editar Tiempo de Ficheros Multimedia
 Name[fr]=Éditer Temps de Fichiers Multimédia
 Name[it]=Compili Tempo di Schedari Multimedia
@@ -166,7 +166,7 @@ Name[x-test]=xxEdit Time from Media Filesxx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Attach Cover to MP3 Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-audio-mp3-attach-cover.sh %F;fi
 Icon=ks-audio-mp3-attach-cover
 Name=Attach Cover to MP3 Files
-Name[de]=Zu Befestigen Deckte MP3 zu Akten
+Name[de]=Cover zu MP3 hinzufügen
 Name[es]=Adjuntar Cubierta a Ficheros MP3
 Name[fr]=Adjoindre Couverture aux Fichiers MP3
 Name[it]=Allegare Coperta a Schedari MP3
@@ -182,7 +182,7 @@ Name[x-test]=xxAttach Cover to MP3 Filesxx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Clean Metadata from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-clean-metadata-media-file.sh %F;fi
 Icon=ks-media-clean-metadata
 Name=Clean Metadata from Media Files
-Name[de]=Um Metadatos der Akten Multimedia zu Reinigen
+Name[de]=Metadaten löschen
 Name[es]=Limpiar Metadatos de Ficheros Multimedia
 Name[fr]=Nettoyer Metadatos de Fichiers Multimédia
 Name[it]=Pulire Metadatos di Schedari Multimedia
@@ -198,7 +198,7 @@ Name[x-test]=xxClean Metadata from Media Filesxx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Concatenate Media Files with Same Codec" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-concatenate-media-file.sh %F;fi
 Icon=ks-concatenate-media-file
 Name=Concatenate Media Files with Same Codec
-Name[de]=Sich zu Verbinden Ordnet Multimedia mit Gleichem Codecs Ein
+Name[de]=Mediendateien mit gleichem Codec zusammenführen
 Name[es]=Concatenar Ficheros Multimedia con Codecs Iguales
 Name[fr]=Enchaîner Fichiers Multimédia avec Codecs Égaux
 Name[it]=Concatenare Schedari Multimedia con Codecs Uguali
@@ -214,7 +214,7 @@ Name[x-test]=xxConcatenate Media Files with Same Codecxx
 Exec=which mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Volume Normalize of MP3 Files" --passivepopup="[Error] Please install mp3gain command and try again."; exit 1; else /usr/share/applications/Multimedia_Tools-audio-normalize.sh %F;fi
 Icon=ks-audio-normalize
 Name=Volume Normalize of MP3 Files
-Name[de]=Volumen Normalisiert Sich von MP3-Akten
+Name[de]=Lautstärke von MP3s normalisieren
 Name[es]=Normalizar Volumen de Ficheros MP3
 Name[fr]=Volume Normalise de Fichiers MP3
 Name[it]=Volume Normalizza di Archivi MP3
@@ -230,7 +230,7 @@ Name[x-test]=xxVolume Normalize of MP3 Filesxx
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Add Subtitle to MP4 File" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-add-subtitle.sh %F;fi
 Icon=ks-add-subs
 Name=Add Subtitle to MP4 Files
-Name[de]=Fügen Sie Untertitel MP4-Akten hinzu
+Name[de]=Untertitel zu MP4s hinzufügen
 Name[es]=Agregar Subtitulo a Ficheros MP4
 Name[fr]=Ajoutez le Sous-titre aux Fichiers MP4
 Name[it]=Aggiunga Sottotitolo agli Archivi di MP4

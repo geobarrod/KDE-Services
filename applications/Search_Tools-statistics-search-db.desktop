@@ -3,7 +3,7 @@ Categories=Search-Tools;
 Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Statistics Search DataBase" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-statistics-search-db.sh;fi
 Icon=ks-search-stats
 Name=Statistics Search DataBase
-Name[de]=Statistisch von Suchdatenbank
+Name[de]=Statistik der Suchdatenbank
 Name[es]=Estadisticas de Base de Datos de Búsqueda
 Name[fr]=Statistiques de Base de Données de Recherche
 Name[it]=Statistiche di Database di Ricerca

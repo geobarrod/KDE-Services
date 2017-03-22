@@ -7,7 +7,7 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Security Tools
-X-KDE-Submenu[de]=Sicherheit - Werkzeuge
+X-KDE-Submenu[de]=Sicherheitswerkzeuge
 X-KDE-Submenu[es]=Seguridad - Herramientas
 X-KDE-Submenu[fr]=Sécurité - Outils
 X-KDE-Submenu[it]=Sicurezza - Attrezzi
@@ -23,7 +23,7 @@ X-KDE-Submenu[x-test]=xxSecurity Toolsxx
 Exec=which gpg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Decrypt" --passivepopup="[Error] Please install gpg command and try again."; exit 1; else gpg --yes --passphrase "$(kdialog --title="File Decryption" --password="Enter passphrase for decrypt")" %f && if [ "$?" = "0" ]; then kdialog --icon=ks-decrypt --title="File Decryption" --passivepopup="[Finished]";fi;fi
 Icon=ks-decrypt
 Name=Decrypt
-Name[de]=Entschlüsseln Sie
+Name[de]=Entschlüsseln
 Name[es]=Desencriptar
 Name[fr]=Décryptez
 Name[it]=Decripti
@@ -39,7 +39,7 @@ Name[x-test]=xxDecryptxx
 Exec=which gpg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Encrypt" --passivepopup="[Error] Please install gpg command and try again."; exit 1; else gpg --yes -c --passphrase "$(kdialog --title="File Encryption" --password="Enter passphrase for encrypt")" %f && if [ "$?" = "0" ]; then kdialog --icon=ks-encrypt --title="File Encryption" --passivepopup="[Finished]";fi;fi
 Icon=ks-encrypt
 Name=Encrypt
-Name[de]=Kodieren Sie
+Name[de]=Verschlüsseln
 Name[es]=Encriptar
 Name[fr]=Codez
 Name[it]=Codifichi
@@ -55,7 +55,7 @@ Name[x-test]=xxEncryptxx
 Exec=which zip mailx; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Secure Send to Mailx" --passivepopup="[Error] Please install zip and mailx command and try again."; exit 1; else zip -9reP $(kdialog --icon=ks-secure-mail --title="Secure Send to Mailx" --password="Enter password for encrypt:") %f.zip %f; mailx -s "$(kdialog --icon=ks-secure-mail --title="Secure Send to Mailx" --inputbox="Message Subject:")" -a $(kdialog --icon=ks-secure-mail --title="Secure Send to Mailx" --textinputbox="Message Body:" > /tmp/mailbody) /tmp/mailbody -a %f.zip $(kdialog --icon=ks-secure-mail --title="Secure Send to Mailx" --inputbox="Mail To:\t(For send to multiples mailbox enter comma separated list of address)") <.; rm -f %f.zip /tmp/mailbody; kdialog --icon=ks-secure-mail --title="Secure Send to Mailx" --passivepopup="[Finished]";fi
 Icon=ks-secure-mail
 Name=Secure Send to Mailx
-Name[de]=Sicher Schicken Sie zu Mailx
+Name[de]=Sicher mit Mailx versenden
 Name[es]=Envío Seguro a Mailx
 Name[fr]=Sûr Envoyez à Mailx
 Name[it]=Spinta dell'onda Sicura a Mailx
@@ -71,7 +71,7 @@ Name[x-test]=xxSecure Send to Mailxxx
 Exec=which shred; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Paranoid Shredder" --passivepopup="[Error] Please install shred command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-shredder --title="Paranoid Shredder" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Shredding:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; shred -f -n 5 --random-source=/dev/urandom -u -z "$file"; kdialog --icon=ks-shredder --title="Paranoid Shredder" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-shredder
 Name=Paranoid Shredder
-Name[de]=Paranoide Zerkleinerungsmaschine
+Name[de]=Shredder für Paranoide
 Name[es]=Trituradora Paranoica
 Name[fr]=Déchiqueteuse Paranoïde
 Name[it]=Spezzettatrice Paranoica

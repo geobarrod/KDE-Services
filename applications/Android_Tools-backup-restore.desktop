@@ -3,7 +3,7 @@ Categories=Android-Tools;
 Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Backup Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-backup-restore.sh %F;fi
 Icon=ks-android-backup-restore
 Name=Android Backup Manager
-Name[de]=Zurück Verwalter für Android
+Name[de]=Android Sicherung
 Name[es]=Administrador de Respaldo para Android
 Name[fr]=Administrateur de Dossier pour Android
 Name[it]=Amministratore di Schienale per Android

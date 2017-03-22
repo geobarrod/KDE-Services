@@ -3,7 +3,7 @@ Categories=SSH-Tools;
 Exec=which sshfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount point to Remote Directory" --passivepopup="[Error] Please install sshfs command and try again."; exit 1; else /usr/share/applications/SSH_Tools-sshfs.sh;fi
 Icon=ks-sshfs
 Name=Mount point to Remote Directory
-Name[de]=Um Entfernt Verzeichnis zu Montieren
+Name[de]=Einbindeort für Remote Verzeichnis
 Name[es]=Montar Directorio Remoto
 Name[fr]=Monter Directive Lointaine
 Name[it]=Montare Direttiva Remota

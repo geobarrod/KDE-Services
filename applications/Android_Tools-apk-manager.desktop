@@ -3,7 +3,7 @@ Categories=Android-Tools;
 Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Package Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-apk-manager.sh;fi
 Icon=ks-android-apk-manager
 Name=Android Package Manager
-Name[de]=Verwalter der Pakete für Android
+Name[de]=Paketverwalter für Android
 Name[es]=Administrador de Paquetes para Android
 Name[fr]=Administrateur de Paquets pour Android
 Name[it]=Amministratore di Pacchetti per Android

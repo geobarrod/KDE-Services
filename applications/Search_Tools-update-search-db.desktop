@@ -3,7 +3,7 @@ Categories=Search-Tools;
 Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else /usr/share/applications/Search_Tools-update-search-db.sh;fi
 Icon=ks-search-database-update
 Name=Update Search DataBase
-Name[de]=Um Suchdatenbank zu Befördern
+Name[de]=Suchdatenbank erneuern
 Name[es]=Actualizar Base de Datos de Búsqueda
 Name[fr]=Actualiser Base de Données de Recherche
 Name[it]=Aggiornare Database di Ricerca

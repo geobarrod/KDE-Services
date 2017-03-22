@@ -3,7 +3,7 @@ Categories=System-Tools;
 Exec=which yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Check Kernel Update" --passivepopup="[Error] Please install yumdownloader command and try again."; exit 1; else /usr/share/applications/System_Tools-check-kernel-update.sh;fi
 Icon=ks-kernel-update
 Name=Check Kernel Update
-Name[de]=Scheck Kern Aktualisierung
+Name[de]=Kernel auf Aktualisierungen prüfen
 Name[es]=Chequear Actualización del Kernel
 Name[fr]=Vérifiez Actualisation du Kernel
 Name[it]=Controlli Aggiornamento di Nocciolo

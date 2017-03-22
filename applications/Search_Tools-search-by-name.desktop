@@ -3,7 +3,7 @@ Categories=Search-Tools;
 Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Search by Name" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-search-by-name.sh;fi
 Icon=ks-search-name
 Name=Search by Name
-Name[de]=Suche von Namen
+Name[de]=Suche nach Namen
 Name[es]=Búsqueda por Nombre
 Name[fr]=Recherche par Nom
 Name[it]=Ricerca per Nome

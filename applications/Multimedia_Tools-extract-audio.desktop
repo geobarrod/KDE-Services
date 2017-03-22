@@ -1,15 +1,15 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Extract|Convert] Audio Tracks" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh;fi
+Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Extract|Convert] Audio Track" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-extract-audio.sh;fi
 Icon=ks-audio
-Name=[Extract|Convert] Audio Tracks
-Name[de]=[Auszug|Bekehrter] Audiofährten
+Name=[Extract|Convert] Audio Track
+Name[de]=[Extrahiere|Konvertiere] Audiospur
 Name[es]=[Extraer|Convertir] Pista de Audio
-Name[fr]=[Extrait|Converti] Pistes Sonores
+Name[fr]=[Extrait|Converti] Piste Sonore
 Name[it]=[Estratto|Converta] Piste di Audio
 Name[ja]=[抜粋|コンバート]音声の痕跡
 Name[ko]=[엑스트랙트|바꾼다] 오디오 트랙
-Name[pt]=[Extrato|Converta] Rastos Auditivos
+Name[pt]=[Extrato|Converta] Rasto Auditivo
 Name[ru]=[Извлечь|Конвертировать] аудио трек
 Name[uk]=[Видобути|Конвертувати] аудіо трек
 Name[zh_CN]=[榨出物|皈依者] 声音轨道

@@ -22,7 +22,7 @@ X-KDE-Submenu[x-test]=xxSaMBa Toolsxx
 Exec=which smbclient; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SaMBa Shares Mounter" --passivepopup="[Error] Please install smbclient command and try again."; exit 1; else /usr/share/applications/SaMBa_Tools-mount-umount-share.sh %F;fi
 Icon=ks-smbfs
 Name=SaMBa Shares Mounter
-Name[de]=Verbinder SaMBa Geteilt zu Haben
+Name[de]=Gemeinsame SaMBa-Orte einbinden
 Name[es]=Montador de Compartidos SaMBa
 Name[fr]=Monteur de Partagés SaMBa
 Name[it]=Montatore di Condivisa SaMBa

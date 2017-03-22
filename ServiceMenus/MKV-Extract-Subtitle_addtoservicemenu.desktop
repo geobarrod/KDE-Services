@@ -12,7 +12,7 @@ X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 Exec=which mkvextract; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MKV Extract Subtitle" --passivepopup="[Error] Please install mkvextract command and try again."; exit 1; else /usr/share/applications/MKV_Extract-subtitle.sh %F;fi
 Icon=ks-video
 Name=MKV Extract Subtitle
-Name[de]=MKV um Untertitel zu Ziehen
+Name[de]=MKV Untertitel extrahieren
 Name[es]=MKV Extraer Subtítulo
 Name[fr]=MKV Extraire Sous-titre
 Name[it]=MKV Estrarre Sottotitolo

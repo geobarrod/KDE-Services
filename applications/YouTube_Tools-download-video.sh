@@ -205,7 +205,7 @@ download-hd() {
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
 	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 136+bestaudio -c -i -R infinite \
-			-r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
 	youtube-error
@@ -221,7 +221,7 @@ download-full-wvga(){
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
 	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 135+bestaudio -c -i -R infinite \
-			-r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
 	youtube-error
@@ -237,7 +237,7 @@ download-nhd() {
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
 	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 134+bestaudio -c -i -R infinite \
-			-r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
 	youtube-error

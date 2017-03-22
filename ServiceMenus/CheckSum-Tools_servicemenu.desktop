@@ -7,7 +7,7 @@ Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
 X-KDE-Submenu=CheckSum Tools
-X-KDE-Submenu[de]=CheckSum - Werkzeuge
+X-KDE-Submenu[de]=Prüfsummen - Werkzeuge
 X-KDE-Submenu[es]=CheckSum - Herramientas
 X-KDE-Submenu[fr]=CheckSum - Outils
 X-KDE-Submenu[it]=CheckSum - Attrezzi
@@ -23,7 +23,7 @@ X-KDE-Submenu[x-test]=xxCheckSum Toolsxx
 Exec=which md5sum sha1sum sha256sum sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Verify CheckSum" --passivepopup="[Error] Please install md5sum, sha1sum, sha256sum and sha512sum command and try again."; exit 1; else /usr/share/applications/CheckSum_Tools-verify-checksum.sh %F;fi
 Icon=ks-checksum
 Name=Verify CheckSum
-Name[de]=Um CheckSum zu Verifizieren
+Name[de]=Verifizieren der Prüfsumme
 Name[es]=Verificar CheckSum
 Name[fr]=Vérifier CheckSum
 Name[it]=Verificare CheckSum

@@ -23,7 +23,7 @@ X-KDE-Submenu[x-test]=xxPDF Toolsxx
 Exec=which pdfimages; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract All Images" --passivepopup="[Error] Please install pdfimages command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting All Images:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; pdfimages -p "$file" $(ls "$file"|awk -F . '{print $1}'); kdialog --icon=ks-pdf --title="PDF Tools - Extract all images" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-pdf
 Name=Extract All Images
-Name[de]=Um Alle Bilder zu Ziehen
+Name[de]=Alle Bilder extrahieren
 Name[es]=Extraer Todas las Imagenes
 Name[fr]=Extraire Toutes les Images
 Name[it]=Estrarre Tutte le Immagini
@@ -71,7 +71,7 @@ Name[x-test]=xxInformationxx
 Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Compress" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -c %F;fi
 Icon=ks-resize-image
 Name=Compress
-Name[de]=Um Zusammenzupressen
+Name[de]=Komprimieren
 Name[es]=Comprimir
 Name[fr]=Comprimer
 Name[it]=Comprimere
@@ -87,7 +87,7 @@ Name[x-test]=xxCompressxx
 Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Merge Selected Files" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -m %F;fi
 Icon=ks-pdf
 Name=Merge Selected Files
-Name[de]=Um die ausgewählten Akten zu vereinigen
+Name[de]=Ausgewählte Dateien zusammenführen
 Name[es]=Unir los Archivos Seleccionados
 Name[fr]=Unir les Archives Sélectionnés
 Name[it]=Unire gli Archivi Selezionati
@@ -103,7 +103,7 @@ Name[x-test]=xxMerge Selected Filesxx
 Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -me %F;fi
 Icon=ks-text-plain
 Name=Edit Metadata
-Name[de]=Um Metadatos zu Veröffentlichen
+Name[de]=Metadaten editieren
 Name[es]=Editar Metadatos
 Name[fr]=Éditer Metadatos
 Name[it]=Pubblicare Metadatos
@@ -119,7 +119,7 @@ Name[x-test]=xxEdit Metadataxx
 Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="View Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -mv %F;fi
 Icon=ks-text-plain
 Name=View Metadata
-Name[de]=Um Metadatos zu Sehen
+Name[de]=Metadaten anzeigen
 Name[es]=Ver Metadatos
 Name[fr]=Voir Metadatos
 Name[it]=Vedere Metadatos
@@ -135,7 +135,7 @@ Name[x-test]=xxview Metadataxx
 Exec=which exiftool pdftops ps2pdf14 gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Split in Single Page per File" --passivepopup="[Error] Please install exiftool, pdftops, ps2pdf14 and gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -s %F;fi
 Icon=ks-pdf
 Name=Split in Single Page per File
-Name[de]=Um in Akten von einer Einzelnen Seite zu Schneiden
+Name[de]=Seiten in jeweils eine Dateie umwandeln 
 Name[es]=Cortar en Archivos de Una Sola Página
 Name[fr]=Couper en Archives d'Une Seule Page
 Name[it]=Tagliare in Archivi di Una Sola Pagina

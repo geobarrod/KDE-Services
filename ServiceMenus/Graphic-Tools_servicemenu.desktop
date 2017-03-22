@@ -7,7 +7,7 @@ X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Graphic Tools
-X-KDE-Submenu[de]=Graphische Werkzeuge
+X-KDE-Submenu[de]=Bildwerkzeuge
 X-KDE-Submenu[es]=Graficos - Herramientas
 X-KDE-Submenu[fr]=Graphique - Outils
 X-KDE-Submenu[it]=Grafico - Attrezzi
@@ -23,7 +23,7 @@ X-KDE-Submenu[x-test]=xxGraphic Toolsxx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else /usr/share/applications/The_Sizer.sh %F;fi
 Icon=ks-resize-image
 Name=The Sizer (custom sizes)
-Name[de]=Der Sizer
+Name[de]=Größenänderung
 Name[es]=El Dimensionador
 Name[fr]=Le Sizer
 Name[it]=Il Sizer
@@ -55,7 +55,7 @@ Name[x-test]=xxThe Converterxx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 128x128" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 128 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_128p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 128x128" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=128x128 (icon)
-Name[de]=128x128 (ikone)
+Name[de]=128x128 (Symbol)
 Name[es]=128x128 (icono)
 Name[fr]=128x128 (icône)
 Name[it]=128x128 (icona)
@@ -71,7 +71,7 @@ Name[x-test]=xx128x128 (icon)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 16x16" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 16 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_16p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 16x16" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=16x16 (icon)
-Name[de]=16x16 (ikone)
+Name[de]=16x16 (Symbol)
 Name[es]=16x16 (icono)
 Name[fr]=16x16 (icône)
 Name[it]=16x16 (icona)
@@ -87,7 +87,7 @@ Name[x-test]=xx16x16 (icon)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 256x256" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 256 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_256p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 256x256" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=256x256 (icon)
-Name[de]=256x256 (ikone)
+Name[de]=256x256 (Symbol)
 Name[es]=256x256 (icono)
 Name[fr]=256x256 (icône)
 Name[it]=256x256 (icona)
@@ -103,7 +103,7 @@ Name[x-test]=xx256x256 (icon)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 32x32" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 32 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_32p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 32x32" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=32x32 (icon)
-Name[de]=32x32 (ikone)
+Name[de]=32x32 (Symbol)
 Name[es]=32x32 (icono)
 Name[fr]=32x32 (icône)
 Name[it]=32x32 (icona)
@@ -119,7 +119,7 @@ Name[x-test]=xx32x32 (icon)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 48x48" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 48 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_48p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 48x48" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=48x48 (icon)
-Name[de]=48x48 (ikone)
+Name[de]=48x48 (Symbol)
 Name[es]=48x48 (icono)
 Name[fr]=48x48 (icône)
 Name[it]=48x48 (icona)
@@ -135,7 +135,7 @@ Name[x-test]=xx48x48 (icon)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - scalable" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 512 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_512p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - scalable" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=scalable (icon)
-Name[de]=scalable (ikone)
+Name[de]=scalable (Symbol)
 Name[es]=scalable (icono)
 Name[fr]=scalable (icône)
 Name[it]=scalable (icona)
@@ -151,7 +151,7 @@ Name[x-test]=xxscalable (icon)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 64x64" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 64 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_64p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 64x64" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=64x64 (icon)
-Name[de]=64x64 (ikone)
+Name[de]=64x64 (Symbol)
 Name[es]=64x64 (icono)
 Name[fr]=64x64 (icône)
 Name[it]=64x64 (icona)
@@ -299,7 +299,7 @@ Name[x-test]=xx1440x900 (wxga)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 532x532" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 532 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_532p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 532x532" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=532x532 (passport)
-Name[de]=532x532 (pass)
+Name[de]=532x532 (Pass)
 Name[es]=532x532 (pasaporte)
 Name[fr]=532x532 (passeport)
 Name[it]=532x532 (passaporto)
@@ -315,7 +315,7 @@ Name[x-test]=xx532x532 (passport)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 414x532" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 414 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_414p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 414x532" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=414x532 (visa)
-Name[de]=414x532 (visum)
+Name[de]=414x532 (Visum)
 Name[es]=414x532 (visa)
 Name[fr]=414x532 (vise)
 Name[it]=414x532 (vista)
@@ -331,7 +331,7 @@ Name[x-test]=xx414x532 (visa)xx
 Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-resize-image --title="Image Resizer - 300x300" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Resize:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; convert -resize 300 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_300p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 300x300" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-resize-image
 Name=300x300 (carnet)
-Name[de]=300x300 (identifikationskarte)
+Name[de]=300x300 (Identifikationskarte)
 Name[es]=300x300 (carnet)
 Name[fr]=300x300 (carnet)
 Name[it]=300x300 (carnet)
