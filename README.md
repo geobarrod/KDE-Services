@@ -1,6 +1,7 @@
 KDE-Services
 
-Description:
+Description: 
+------------
 
 Enables the following functionalities on the Dolphin's (File Manager) right click menu of KDE 4.x/5.x:
 
@@ -54,6 +55,7 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 - Add Subtitle to MP4 File.
 
 Requirements:
+-------------
 
 - android-tools
 - bash
@@ -121,13 +123,19 @@ Requirements:
 - zip
 
 Install:
+--------
 
 - $ tar -jxvf kde-services-2.1.9.tar.bz2
 - $ cd kde-services-2.1.9
 - $ sudo make install
 
 Uninstall:
+----------
 
 - $ tar -jxvf kde-services-2.1.9.tar.bz2
 - $ cd kde-services-2.1.9
 - $ sudo make uninstall
+
+Screenshot
+----------
+https://github.com/geobarrod/KDE-Services/blob/master/screenshot.png
