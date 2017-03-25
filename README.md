@@ -1,5 +1,3 @@
-KDE-Services
-
 Description: 
 ------------
 
@@ -138,4 +136,4 @@ Uninstall:
 
 Screenshot
 ----------
-https://github.com/geobarrod/KDE-Services/blob/master/screenshot.png
+![kde-services](https://github.com/geobarrod/KDE-Services/blob/master/screenshot.png)
