@@ -16,7 +16,7 @@ X-KDE-Submenu[ko]=이미지 iso9660 도구
 X-KDE-Submenu[pt]=Imagem o iso9660 - Ferramentas
 X-KDE-Submenu[ru]=Инструменты iso9660
 X-KDE-Submenu[uk]=Інструменти iso9660
-X-KDE-Submenu[zh_CN]=图像 iso9660 工具
+X-KDE-Submenu[zh_CN]=ISO9660 镜像工具
 X-KDE-Submenu[x-test]=xxiso9660 Image Toolsxx
 
 [Desktop Action Burn-Image]
@@ -32,7 +32,7 @@ Name[ko]=이미지 iso9660를 태운다
 Name[pt]=Queimar Imagem o iso9660
 Name[ru]=Записать iso9660-образ
 Name[uk]=Записати iso9660-образ
-Name[zh_CN]=燃烧图像 iso9660
+Name[zh_CN]=烧录 ISO9660 镜像
 Name[x-test]=xxBurn iso9660 Imagexx
 
 [Desktop Action Insert-MD5sum]
@@ -48,7 +48,7 @@ Name[ko]=MD5sum를 삽입한다
 Name[pt]=Inserir MD5sum
 Name[ru]=Вставить контрольную сумму MD5
 Name[uk]=Вставити контрольну суму MD5
-Name[zh_CN]=插入 MD5sum
+Name[zh_CN]=插入 MD5 校验和
 Name[x-test]=xxInsert MD5sumxx
 
 [Desktop Action Integrity-Check]
@@ -64,7 +64,7 @@ Name[ko]=성실을 점검한다
 Name[pt]=Conferir Integridade
 Name[ru]=Проверить целостность
 Name[uk]=Перевірити цілісність
-Name[zh_CN]=检查正直
+Name[zh_CN]=完整性检查
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action MD5-Sum]
@@ -80,7 +80,7 @@ Name[ko]=MD5sum 이미지 iso9660를 보여준다
 Name[pt]=Mostrar Imagem de MD5sum o iso9660
 Name[ru]=Показ kонтрольная сумма MD5 iso9660-образа
 Name[uk]=Покажіть kонтрольна сума MD5 iso9660-образу
-Name[zh_CN]=表示 MD5sum 图像 iso9660
+Name[zh_CN]=查看 ISO9660 镜像 MD5 校验和
 Name[x-test]=xxShow MD5sum iso9660 Imagexx
 
 [Desktop Action SHA1-Sum]
@@ -96,7 +96,7 @@ Name[ko]=SHA1sum 이미지 iso9660를 보여준다
 Name[pt]=Mostrar Imagem de SHA1sum o iso9660
 Name[ru]=Показ kонтрольная сумма SHA1 iso9660-образа
 Name[uk]=Покажіть kонтрольна сума SHA1 iso9660-образу
-Name[zh_CN]=表示 SHA1sum 图像 iso9660
+Name[zh_CN]=查看 ISO9660 镜像 SHA1 校验和
 Name[x-test]=xxShow SHA1sum iso9660 Imagexx
 
 [Desktop Action SHA256-Sum]
@@ -112,7 +112,7 @@ Name[ko]=SHA256sum 이미지 iso9660를 보여준다
 Name[pt]=Mostrar Imagem de SHA256sum o iso9660
 Name[ru]=Показ kонтрольная сумма SHA256 iso9660-образа
 Name[uk]=Покажіть kонтрольна сума SHA256 iso9660-образу
-Name[zh_CN]=表示 SHA256sum 图像 iso9660
+Name[zh_CN]=查看 ISO9660 镜像 SHA256 校验和
 Name[x-test]=xxShow SHA256sum iso9660 Imagexx
 
 [Desktop Action SHA512-Sum]
@@ -128,7 +128,7 @@ Name[ko]=SHA512sum 이미지 iso9660를 보여준다
 Name[pt]=Mostrar Imagem de SHA512sum o iso9660
 Name[ru]=Показ kонтрольная сумма SHA512 iso9660-образа
 Name[uk]=Покажіть kонтрольна сума SHA512 iso9660-образу
-Name[zh_CN]=表示 SHA512sum 图像 iso9660
+Name[zh_CN]=查看 ISO9660 镜像 SHA512 校验和
 Name[x-test]=xxShow SHA512sum iso9660 Imagexx
 
 [Desktop Action MountCD-Image]
@@ -144,7 +144,7 @@ Name[ko]=이미지 iso9660를 세운다
 Name[pt]=Montar Imagem o iso9660
 Name[ru]=Смонтировать iso9660-образ
 Name[uk]=Змонтувати iso9660-образ
-Name[zh_CN]=装图像 iso9660
+Name[zh_CN]=挂载 ISO9660 镜像
 Name[x-test]=xxMount iso9660 Imagexx
 
 [Desktop Action UnmountCD-Image]
@@ -160,5 +160,5 @@ Name[ko]=이미지 iso9660를 해체한다
 Name[pt]=Desmontar Imagem o iso9660
 Name[ru]=Размонтировать iso9660-образ
 Name[uk]=Розмонтувати iso9660-образ
-Name[zh_CN]=解开图像 iso9660
+Name[zh_CN]=卸载 ISO9660 镜像
 Name[x-test]=xxUnmount iso9660 Imagexx

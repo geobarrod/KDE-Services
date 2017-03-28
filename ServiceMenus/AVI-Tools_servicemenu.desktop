@@ -32,7 +32,7 @@ Name[ko]=자른다 (측정에)
 Name[pt]=Cortar (medir)
 Name[ru]=Разбить (по размеру)
 Name[uk]=Розбити (за розміром)
-Name[zh_CN]=减少 (测量)
+Name[zh_CN]=按大小分隔
 Name[x-test]=xxSplit (to size)xx
 
 [Desktop Action AVIsplitTime]
@@ -48,5 +48,5 @@ Name[ko]=자른다 (시간의 범위를 위해)
 Name[pt]=Cortar (para gama de tempo)
 Name[ru]=Разбить (по временным отрезкам)
 Name[uk]=Розбити (за часовими проміжками)
-Name[zh_CN]=减少 (因为拍子排列)
+Name[zh_CN]=按时间分割
 Name[x-test]=xxSplit (by time range)xx

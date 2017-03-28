@@ -31,7 +31,7 @@ Name[ko]=접속의 위병
 Name[pt]=Sentinela de Conexões
 Name[ru]=Сторож портов
 Name[uk]=Вартовий портів
-Name[zh_CN]=连接的步哨
+Name[zh_CN]=端口连接监控器
 Name[x-test]=xxConnect Sentryxx
 
 [Desktop Action HTTP-Server]
@@ -47,7 +47,7 @@ Name[ko]=HTTP 서버
 Name[pt]=Servidor de HTTP
 Name[ru]=HTTP Сервер
 Name[uk]=HTTP Сервер
-Name[zh_CN]=HTTP 伺候器
+Name[zh_CN]=HTTP 服务
 Name[x-test]=xxHTTP Serverxx
 
 [Desktop Action ListeningSockets]
@@ -63,5 +63,5 @@ Name[ko]=듣고 있는 항구
 Name[pt]=Portos Escutando
 Name[ru]=Прослушиваемые сокеты
 Name[uk]=Сокети, що прослуховуються
-Name[zh_CN]=港口听
+Name[zh_CN]=监听 Socket 连接
 Name[x-test]=xxListening Socketsxx

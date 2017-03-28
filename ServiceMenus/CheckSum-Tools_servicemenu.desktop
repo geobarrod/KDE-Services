@@ -16,7 +16,7 @@ X-KDE-Submenu[ko]=체크섬 도구
 X-KDE-Submenu[pt]=CheckSum - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Контрольных Сумм
 X-KDE-Submenu[uk]=Інструменти Контрольних Сум
-X-KDE-Submenu[zh_CN]=核对和 工具
+X-KDE-Submenu[zh_CN]=校验和工具
 X-KDE-Submenu[x-test]=xxCheckSum Toolsxx
 
 [Desktop Action CheckSum]
@@ -32,7 +32,7 @@ Name[ko]=체크섬을 증명한다
 Name[pt]=Verificar CheckSum
 Name[ru]=Проверить контрольные суммы
 Name[uk]=Перевірити контрольні суми
-Name[zh_CN]=查证核对和
+Name[zh_CN]=验证校验和
 Name[x-test]=xxVerify CheckSumxx
 
 [Desktop Action MD5-Sum]
@@ -48,7 +48,7 @@ Name[ko]=MD5 (강한)
 Name[pt]=MD5 (forte)
 Name[ru]=MD5 (cтойкий)
 Name[uk]=MD5 (cтійкий)
-Name[zh_CN]=MD5 (强壮的)
+Name[zh_CN]=MD5 (普通强度)
 Name[x-test]=xxMD5 (strong)xx
 
 [Desktop Action SHA1-Sum]
@@ -64,7 +64,7 @@ Name[ko]=SHA1 (매우 강한)
 Name[pt]=SHA1 (muito forte)
 Name[ru]=SHA1 (xорошая cтойкость)
 Name[uk]=SHA1 (добра стійкість)
-Name[zh_CN]=SHA1 (非常强壮的)
+Name[zh_CN]=SHA1 (较高强度)
 Name[x-test]=xxSHA1 (good strong)xx
 
 [Desktop Action SHA256-Sum]
@@ -80,7 +80,7 @@ Name[ko]=SHA256 (매우 강한)
 Name[pt]=SHA256 (muito forte)
 Name[ru]=SHA256 (очень стойкий)
 Name[uk]=SHA256 (дуже стійкий)
-Name[zh_CN]=SHA256 (非常强壮的)
+Name[zh_CN]=SHA256 (高强度)
 Name[x-test]=xxSHA256 (very strong)xx
 
 [Desktop Action SHA512-Sum]
@@ -96,5 +96,5 @@ Name[ko]=SHA512 (강한 임시 고용)
 Name[pt]=SHA512 (super forte)
 Name[ru]=SHA512 (высокая стойкость)
 Name[uk]=SHA512 (висока стійкість)
-Name[zh_CN]=SHA512 (超级强壮的)
+Name[zh_CN]=SHA512 (极高强度)
 Name[x-test]=xxSHA512 (high strong)xx

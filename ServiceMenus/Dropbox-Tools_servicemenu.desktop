@@ -32,7 +32,7 @@ Name[ko]=복사한다 Dropbox
 Name[pt]=Copiar para Dropbox
 Name[ru]=Копировать в Dropbox
 Name[uk]=Копіювати до Dropbox
-Name[zh_CN]=复印 Dropbox
+Name[zh_CN]=复制到 Dropbox
 
 [Desktop Action MoveToDropbox]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh move %F
@@ -62,7 +62,7 @@ Name[ko]=Dropbox 대중을 복사하고, URL를 얻는다
 Name[pt]=Copiar o Público de Dropbox e obter URL
 Name[ru]=Копировать в Dropbox с общим доступом и получить ссылку
 Name[uk]=Копіювати до Dropbox із публічним доступом і отримати посиланяя
-Name[zh_CN]=复印 Dropbox 民众并且获得网址
+Name[zh_CN]=复制到 Dropbox 并分享
 
 [Desktop Action MoveToPublicAndGetURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh move_pub %F
@@ -77,7 +77,7 @@ Name[ko]=Dropbox 대중을 움직이고, URL를 얻는다
 Name[pt]=Se Mudar para Público de Dropbox e obter URL
 Name[ru]=Переместить в Dropbox с общим доступом и получить ссылку
 Name[uk]=Пересунути до Dropbox із публічним доступом і отримати посиланяя
-Name[zh_CN]=移动到 Dropbox 民众并且获得网址
+Name[zh_CN]=移动到 Dropbox 并分享
 
 [Desktop Action GetPublicURL]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh get_pub_url %F
@@ -92,7 +92,7 @@ Name[ko]=공공 URL를 얻는다
 Name[pt]=Obter URL pública
 Name[ru]=Получить ссылку с общим доступом
 Name[uk]=Отримати публічне посиланяя
-Name[zh_CN]=获得公众的网址
+Name[zh_CN]=获得公开链接
 
 [Desktop Action InstallService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh install_service %F
@@ -107,7 +107,7 @@ Name[ko]=서비스 Dropbox 를 구성한다
 Name[pt]=Instalar serviço Dropbox
 Name[ru]=Установить сервис Dropbox
 Name[uk]=Встановити сервіс Dropbox
-Name[zh_CN]=安装服务 Dropbox
+Name[zh_CN]=安装 Dropbox 服务
 
 [Desktop Action UpdateService]
 Exec=which wget; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Dropbox service" --passivepopup="[Error] Please install wget command and try again."; exit 1; else /usr/share/applications/Dropbox_Tools-main.sh update_service %F;fi
@@ -122,7 +122,7 @@ Name[ko]=서비스 Dropbox 를 개량한다
 Name[pt]=Atualizar serviço Dropbox
 Name[ru]=Обновить сервис Dropbox
 Name[uk]=Оновити сервіс Dropbox
-Name[zh_CN]=升级服务 Dropbox
+Name[zh_CN]=更新 Dropbox 服务
 
 [Desktop Action StartService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service %F
@@ -137,7 +137,7 @@ Name[ko]=서비스 Dropbox 를 시작한다
 Name[pt]=Começar serviço Dropbox
 Name[ru]=Запустить сервис Dropbox
 Name[uk]=Запустити сервіс Dropbox
-Name[zh_CN]=开始服务 Dropbox
+Name[zh_CN]=启动 Dropbox 服务
 
 [Desktop Action StopService]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service %F
@@ -152,7 +152,7 @@ Name[ko]=서비스 Dropbox 를 멈춘다
 Name[pt]=Parar serviço Dropbox
 Name[ru]=Остановить сервис Dropbox
 Name[uk]=Зупинити сервіс Dropbox
-Name[zh_CN]=停止服务 Dropbox
+Name[zh_CN]=停止 Dropbox 服务
 
 [Desktop Action AutoStart]
 Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service %F
@@ -167,4 +167,4 @@ Name[ko]=서비스 Dropbox 의 안에서 올라가고 있는 출발을 가능하
 Name[pt]=Habilitar começos para cima do serviço Dropbox
 Name[ru]=Автозапуск сервиса Dropbox
 Name[uk]=Автозапуск сервіса Dropbox
-Name[zh_CN]=服务 Dropbox 使开始能够增加
+Name[zh_CN]=自动启动 Dropbox 服务

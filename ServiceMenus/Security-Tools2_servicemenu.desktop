@@ -15,7 +15,7 @@ X-KDE-Submenu[ko]=안전 도구
 X-KDE-Submenu[pt]=Segurança - Ferramentas
 X-KDE-Submenu[ru]=Инструменты безопасности
 X-KDE-Submenu[uk]=Інструменти безпеки
-X-KDE-Submenu[zh_CN]=安全 工具
+X-KDE-Submenu[zh_CN]=安全工具
 X-KDE-Submenu[x-test]=xxSecurity Toolsxx
 
 [Desktop Action MountEncryptedDir]
@@ -31,7 +31,7 @@ Name[ko]=오르기는 디렉토리를 암호화했다
 Name[pt]=Montar diretório codificado
 Name[ru]=Смонтируйте Encrypted Указатель
 Name[uk]=Підніміться Encrypted Довідник
-Name[zh_CN]=乘用马编加密码了目录
+Name[zh_CN]=挂载加密目录
 Name[x-test]=xxMount Encrypted Directoryxx
 
 [Desktop Action UnmountEncryptedDir]
@@ -47,7 +47,7 @@ Name[ko]=언마운트는 디렉토리를 암호화했다
 Name[pt]=Desmontar diretório codificado
 Name[ru]=Unmount Encrypted Указатель
 Name[uk]=Unmount Encrypted Довідник
-Name[zh_CN]=不乘用马编加密码了目录
+Name[zh_CN]=卸载加密目录
 Name[x-test]=xxxUnmount Encrypted Directoryxx
 
 [Desktop Action EncryptDir]
@@ -63,5 +63,5 @@ Name[ko]=디렉토리를 암호화해라
 Name[pt]=Codificar diretório
 Name[ru]=Encrypt Указатель
 Name[uk]=Encrypt Довідник
-Name[zh_CN]=编加密码目录
+Name[zh_CN]=加密目录
 Name[x-test]=xxEncrypt Directoryxx

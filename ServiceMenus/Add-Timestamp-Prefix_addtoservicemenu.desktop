@@ -21,5 +21,5 @@ Name[ko]=더하는 것은 이름에 날짜 - 시간을 사전에 세트한다 �
 Name[pt]=Somar Prefixa Data-Hora ao Nome do [Arquivo|Diretório]
 Name[ru]=Приставить отметку времени к имени [Файла|Папки]
 Name[uk]=Приставити відмітку часу до назви [Файлу|Теки]
-Name[zh_CN]=增加预先设定日期-对 [文件|的名字小时目录]
+Name[zh_CN]=添加时间戳为[文件|目录]前缀
 Name[x-test]=xxAdd Timestamp Prefix to [File|Dir]namexx

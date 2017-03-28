@@ -16,7 +16,7 @@ X-KDE-Submenu[ko]=꾸러미 도구
 X-KDE-Submenu[pt]=Pacotes - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Архивирования
 X-KDE-Submenu[uk]=Інструменти Пакування
-X-KDE-Submenu[zh_CN]=包裹 工具
+X-KDE-Submenu[zh_CN]=软件包工具
 X-KDE-Submenu[x-test]=xxPackage Toolsxx
 
 [Desktop Action ExtractPkgFiles]
@@ -32,7 +32,7 @@ Name[ko]=파일을 여기에서 빼낸다
 Name[pt]=Extrair Arquivos Aqui
 Name[ru]=Распаковать файлы сюда
 Name[uk]=Видобути файли сюди
-Name[zh_CN]=在这里吸取文件
+Name[zh_CN]=在此提取文件
 Name[x-test]=xxExtract Files Herexx
 
 [Desktop Action IntegrityCheckPkg]
@@ -48,7 +48,7 @@ Name[ko]=성실을 점검한다
 Name[pt]=Conferir Integridade
 Name[ru]=Проверка целостности
 Name[uk]=Перевірка цілісності
-Name[zh_CN]=检查正直
+Name[zh_CN]=完整性检查
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action ListPkgContent]
@@ -64,7 +64,7 @@ Name[ko]=내용을 리스트한다
 Name[pt]=Listar Conteúdo
 Name[ru]=Список содержимого
 Name[uk]=Перелік вмісту
-Name[zh_CN]=列出内容
+Name[zh_CN]=查看内容
 Name[x-test]=xxList Contentxx
 
 [Desktop Action ListPkgConfFiles]
@@ -80,7 +80,7 @@ Name[ko]=형상 파일을 리스트한다
 Name[pt]=Listar Arquivos de Configuração
 Name[ru]=Чтобы Перечислить Конфигурацию Файлы
 Name[uk]=Вносити до списку Файли Конфігурації
-Name[zh_CN]=列出结构文件
+Name[zh_CN]=列出配置文件
 Name[x-test]=xxList Configuration Filesxx
 
 [Desktop Action ListPkgDeps]
@@ -112,7 +112,7 @@ Name[ko]=설치의 주문한 물건을 리스트한다
 Name[pt]=Listar Ordens de Instalação
 Name[ru]=Чтобы перечислить шрифты
 Name[uk]=Щоб внести до списку оригінали документа
-Name[zh_CN]=列出安装的命令
+Name[zh_CN]=显示[安装|卸载]的命令
 Name[x-test]=xxList [Ins|Unins]tallation Scriptsxx
 
 [Desktop Action ShowPkgChangelog]
@@ -128,7 +128,7 @@ Name[ko]=변경의 등록을 보여준다
 Name[pt]=Mostrar Inscrição de Mudanças
 Name[ru]=Показать Changelog
 Name[uk]=Показати Changelog
-Name[zh_CN]=表示变化的登记
+Name[zh_CN]=查看更新日志
 Name[x-test]=xxShow Changelogxx
 
 [Desktop Action ShowPkgInfo]
@@ -144,5 +144,5 @@ Name[ko]=정보를 보여준다
 Name[pt]=Mostrar Informação
 Name[ru]=Показать информацию 
 Name[uk]=Показати інформацію
-Name[zh_CN]=表示数据
+Name[zh_CN]=查看软件包信息
 Name[x-test]=xxShow Infoxx

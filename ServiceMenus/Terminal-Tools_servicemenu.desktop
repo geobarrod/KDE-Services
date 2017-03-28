@@ -16,7 +16,7 @@ X-KDE-Submenu[ko]=말단 도구
 X-KDE-Submenu[pt]=Terminal - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Терминал
 X-KDE-Submenu[uk]=Інструменти Термінал
-X-KDE-Submenu[zh_CN]=终端机 工具
+X-KDE-Submenu[zh_CN]=终端工具
 X-KDE-Submenu[x-test]=xxTerminal Toolsxx
 
 [Desktop Action ExecScript]
@@ -32,7 +32,7 @@ Name[ko]=움직이는 적용
 Name[pt]=Corra Aplicação
 Name[ru]=Запустить приложение
 Name[uk]=Запустити додаток
-Name[zh_CN]=奔跑申请
+Name[zh_CN]=运行程序
 Name[x-test]=xxRun Applicationxx
 
 [Desktop Action RootExecScript]
@@ -48,5 +48,5 @@ Name[ko]=움직이는 적용 (Root)
 Name[pt]=Corra Aplicação (Root)
 Name[ru]=Запустить приложение (Root)
 Name[uk]=Запустити додаток (Root)
-Name[zh_CN]=奔跑申请 (Root)
+Name[zh_CN]=运行程序 (Root)
 Name[x-test]=xxRun Application (Root)xx
