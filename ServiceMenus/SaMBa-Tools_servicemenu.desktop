@@ -15,7 +15,7 @@ X-KDE-Submenu[ko]=SaMBa 도구
 X-KDE-Submenu[pt]=SaMBa - Ferramentas
 X-KDE-Submenu[ru]=Инструменты SaMBa
 X-KDE-Submenu[uk]=Інструменти SaMBa
-X-KDE-Submenu[zh_CN]=SaMBa 工具
+X-KDE-Submenu[zh_CN]=Samba 工具
 X-KDE-Submenu[x-test]=xxSaMBa Toolsxx
 
 [Desktop Action SaMBa-Tools]
@@ -31,5 +31,5 @@ Name[ko]=분담했던 SaMBa 링커
 Name[pt]=Conector de ter Compartilhado SaMBa
 Name[ru]=Монтировать сетевые ресурсы SaMBa
 Name[uk]=Монтувати мережеві ресурси SaMBa
-Name[zh_CN]=分享的有的连接器 SaMBa
+Name[zh_CN]=Samba 分享挂载
 Name[x-test]=xxSamba Shares Mounterxx

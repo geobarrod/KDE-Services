@@ -15,7 +15,7 @@ X-KDE-Submenu[ko]=검색 도구
 X-KDE-Submenu[pt]=Procura - Ferramentas
 X-KDE-Submenu[ru]=Инструменты поиска
 X-KDE-Submenu[uk]=Інструменти пошуку
-X-KDE-Submenu[zh_CN]=搜寻工具
+X-KDE-Submenu[zh_CN]=搜索工具
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
@@ -31,7 +31,7 @@ Name[ko]=이름의 검색
 Name[pt]=Procure Nome
 Name[ru]=Поиск по имени
 Name[uk]=Пошук за ім’ям
-Name[zh_CN]=为名字的搜寻
+Name[zh_CN]=使用文件名搜索
 Name[x-test]=xxSearch by Namexx
 
 [Desktop Action SearchByString]
@@ -47,7 +47,7 @@ Name[ko]=단어의 검색
 Name[pt]=Procure Palavra
 Name[ru]=Поиск по содержимому
 Name[uk]=Пошук за вмістом
-Name[zh_CN]=为字的搜寻
+Name[zh_CN]=使用字符串搜索
 Name[x-test]=xxSearch by Stringxx
 
 [Desktop Action StatisticsSearchDB]
@@ -63,7 +63,7 @@ Name[ko]=검색 데이터 베이스의 안에서 통계이다
 Name[pt]=Estatístico de Banco de Dados de Procura
 Name[ru]=Статистика поисковой База данных
 Name[uk]=Статистика пошукової База даних
-Name[zh_CN]=统计的搜寻数据库
+Name[zh_CN]=统计搜索数据库
 Name[x-test]=xxStatistics Search DataBasexx
 
 [Desktop Action UpdateSearchDB]
@@ -79,7 +79,7 @@ Name[ko]=검색 데이터 베이스를 개량한다
 Name[pt]=Atualizar Banco de Dados de Procura
 Name[ru]=Обновить поисковую База данных
 Name[uk]=Оновити пошукову База даних
-Name[zh_CN]=升级搜寻数据库
+Name[zh_CN]=刷新搜索数据库
 Name[x-test]=xxUpdate Search DataBasexx
 
 [Desktop Action SearchHere]
@@ -95,7 +95,7 @@ Name[ko]=여기를 찾는다
 Name[pt]=Procurar Aqui
 Name[ru]=Искать здесь
 Name[uk]=Шукати тут
-Name[zh_CN]=找寻这里
+Name[zh_CN]=在此搜索
 Name[x-test]=xxSearch Herexx
 
 [Desktop Action ModifiedFilesHere]
@@ -111,5 +111,5 @@ Name[ko]=여기에서 수정되는 파일
 Name[pt]=Arquivos Modificaram Aqui
 Name[ru]=Изменённые файлы в этой папке
 Name[uk]=Файли що були змінені в цій теці
-Name[zh_CN]=在这里被修正的文件
+Name[zh_CN]=在此修改的文件
 Name[x-test]=xxModified Files Herexx

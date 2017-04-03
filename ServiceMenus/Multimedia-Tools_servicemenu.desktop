@@ -31,7 +31,7 @@ Name[ko]=조립하는 사람 의 D.V.D.
 Name[pt]=Montador de D.V.D.
 Name[ru]=D.V.D. Сборщик
 Name[uk]=D.V.D. Компанувальник
-Name[zh_CN]=组合器 D.V.D.
+Name[zh_CN]=DVD 生成器
 Name[x-test]=xxD.V.D. Assemblerxx
 
 [Desktop Action ISOBuild]
@@ -47,7 +47,7 @@ Name[ko]=이미지 iso9660를 여기로 만든다
 Name[pt]=Construir iso9660 de Imagem De Aqui
 Name[ru]=Собрать iso9660-образ отсюда
 Name[uk]=Зібрати iso9660-образ звідси
-Name[zh_CN]=建立来自这里的图像 iso9660
+Name[zh_CN]=在此生成 ISO9660 镜像
 Name[x-test]=xxBuild iso9660 Image from Herexx
 
 [Desktop Action DiskCloner]
@@ -63,7 +63,7 @@ Name[ko]=DiskCloner (디스크 클론)
 Name[pt]=DiskCloner (clonador de disco)
 Name[ru]=DiskCloner (Чтобы скопировать диск)
 Name[uk]=DiskCloner (Щоб скопіювати диск)
-Name[zh_CN]=DiskCloner (磁盘片复制)
+Name[zh_CN]=DiskCloner (磁盘克隆)
 Name[x-test]=xxDiskClonerxx
 
 [Desktop Action convert-video]
@@ -79,7 +79,7 @@ Name[ko]=비디오 파일을 바꾼다
 Name[pt]=Converter Arquivos Vídeos
 Name[ru]=Конвертировать файлы видео
 Name[uk]=Конвертувати файли відео
-Name[zh_CN]=转换电视的文件
+Name[zh_CN]=转换视频文件
 Name[x-test]=xxConvert video filesxx
 
 [Desktop Action extract-audio]
@@ -95,7 +95,7 @@ Name[ko]=[엑스트랙트|바꾼다] 오디오 트랙
 Name[pt]=[Extrato|Converta] Rastos Auditivos
 Name[ru]=[Извлечь|Конвертировать] аудио трек
 Name[uk]=[Видобути|Конвертувати] аудіо трек
-Name[zh_CN]=[榨出物|皈依者] 声音轨道
+Name[zh_CN]=[提取|转换]音频轨道
 Name[x-test]=xx[Extract|Convert] Audio Trackxx
 
 [Desktop Action record-my-desktop]
@@ -111,7 +111,7 @@ Name[ko]=나의 책상을 기록한다 (ＣＲＴ 표시 화면 장치를 기록
 Name[pt]=Registrar Minha Escrivaninha (registrar tela vídea)
 Name[ru]=Record My Desktop (видеозахват экрана)
 Name[uk]=Record My Desktop (відеозахоплення екрану)
-Name[zh_CN]=记录我的书桌 (记录电视的荧屏)
+Name[zh_CN]=录制我的桌面 (屏幕视频录制)
 Name[x-test]=xxRecord My Desktop (record video screen)xx
 
 [Desktop Action vlc-openfolder]
@@ -127,7 +127,7 @@ Name[ko]=비디오를 여기에서 복사한다
 Name[pt]=Reproduzir Vídeo Aqui
 Name[ru]=Проиграть видео отсюда
 Name[uk]=Програти відео звідси
-Name[zh_CN]=在这里再生录象机
+Name[zh_CN]=在此播放视频
 Name[x-test]=xxPlay Video from Herexx
 
 [Desktop Action VideoRotate]
@@ -143,7 +143,7 @@ Name[ko]=차형의 비디오 파일에
 Name[pt]=Girar Arquivos Vídeos
 Name[ru]=Вращайтесь Видео Файлы
 Name[uk]=Обертатися Вiдео Файли
-Name[zh_CN]=替换电视的文件
+Name[zh_CN]=旋转视频文件
 Name[x-test]=xxRotate Video Filesxx
 
 [Desktop Action TimeEditMediaFiles]
@@ -159,7 +159,7 @@ Name[ko]=파일 멀티미디어의 시간을 공포한다
 Name[pt]=Publicar Time de Arquivos de Multimídias
 Name[ru]=Отредактируйте Время из Мультимедиа Файлы
 Name[uk]=Відредагуйте Час з Мультимедійних Файлів
-Name[zh_CN]=出版文件多媒体的时候
+Name[zh_CN]=修改媒体文件时间
 Name[x-test]=xxEdit Time from Media Filesxx
 
 [Desktop Action AudioMP3AttachCover]
@@ -175,7 +175,7 @@ Name[ko]=붙는 것은 파일 MP3 에 커버했다
 Name[pt]=Prender Coberto a Arquivos MP3
 Name[ru]=Приложите Конверт к MP3 Файлы
 Name[uk]=Додайте Обкладинку MP3 Файли
-Name[zh_CN]=附上复盖到文件 MP3
+Name[zh_CN]=添加 MP3 文件封面图片
 Name[x-test]=xxAttach Cover to MP3 Filesxx
 
 [Desktop Action CleanMetadataMediaFiles]
@@ -191,7 +191,7 @@ Name[ko]=미디어 파일로부터의 깨끗한 미터자료
 Name[pt]=Limpar Metadatos de Arquivos de Multimídias
 Name[ru]=Чистый Metadata из Мультимедиа Файлы
 Name[uk]=Почистіть Metadata з Мультимедійних Файлів
-Name[zh_CN]=清理来自媒体文件的 Metadata
+Name[zh_CN]=清空媒体文件元数据
 Name[x-test]=xxClean Metadata from Media Filesxx
 
 [Desktop Action ConcatenateMediaFiles]
@@ -207,7 +207,7 @@ Name[ko]=파일 멀티미디어를 같은 코덱에 링크한다
 Name[pt]=Unir Arquiva Multimídias com Mesmo Codecs
 Name[ru]=Сливайтесь Файлы Мультимедиа с Таким же Codec
 Name[uk]=Злийте Мультимедію Файлів з Тим же самий Codec
-Name[zh_CN]=用相同的 Codecs 联编文件多媒体
+Name[zh_CN]=使用相同编码连接媒体文件
 Name[x-test]=xxConcatenate Media Files with Same Codecxx
 
 [Desktop Action AdjustVolumeLevel]
@@ -223,7 +223,7 @@ Name[ko]=책이 MP3 파일의 안에서 표준화한다
 Name[pt]=Volume Normaliza de Arquivos de MP3
 Name[ru]=Объем Нормализация MP3 Файлы
 Name[uk]=Обсяг Нормалізація MP3 Файли
-Name[zh_CN]=体积 MP3 文件使常态化
+Name[zh_CN]=MP3 音频音量标准化
 Name[x-test]=xxVolume Normalize of MP3 Filesxx
 
 [Desktop Action AddSubMP4]
@@ -239,5 +239,5 @@ Name[ko]=MP4 파일에서 추가 원고 부제
 Name[pt]=Acrescente Subtítulo a Arquivos de MP4
 Name[ru]=Добавьте Подзаголовок к MP4 Файлы
 Name[uk]=Додайте Подзаголовок MP4 Файли
-Name[zh_CN]=把副题加入 MP4 文件
+Name[zh_CN]=给 MP4 文件添加字幕
 Name[x-test]=xxAdd Subtitle to MP4 Filexx

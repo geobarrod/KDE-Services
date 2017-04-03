@@ -32,7 +32,7 @@ Name[ko]=모든 이미지를 빼낸다
 Name[pt]=Extrair Todas as Imagens
 Name[ru]=Извлечь все изображения
 Name[uk]=Вилучити усі зображення
-Name[zh_CN]=吸取所有的图像
+Name[zh_CN]=提取全部图像
 Name[x-test]=xxExtract All Imagesxx
 
 [Desktop Action PDFOptimizer]
@@ -48,7 +48,7 @@ Name[ko]=낙관한다
 Name[pt]=Aperfeiçoar
 Name[ru]=Оптимизатор
 Name[uk]=Оптимізатор
-Name[zh_CN]=将
+Name[zh_CN]=优化
 Name[x-test]=xxOptimizerxx
 
 [Desktop Action PDFinfo]
@@ -64,7 +64,7 @@ Name[ko]=정보
 Name[pt]=Informação
 Name[ru]=Информация
 Name[uk]=Інформація
-Name[zh_CN]=数据
+Name[zh_CN]=信息
 Name[x-test]=xxInformationxx
 
 [Desktop Action pdfcompress]
@@ -96,7 +96,7 @@ Name[ko]=선택되었던 파일을 결합시킨다
 Name[pt]=Unir os Arquivos Selecionados
 Name[ru]=Объединить выбранные файлы
 Name[uk]=З’єднати обрані файли
-Name[zh_CN]=联合挑选的文件
+Name[zh_CN]=合并所选文件
 Name[x-test]=xxMerge Selected Filesxx
 
 [Desktop Action pdfmetaedit]
@@ -112,7 +112,7 @@ Name[ko]=미터자료를 편집해라
 Name[pt]=Publicar Metadatos
 Name[ru]=Редактировать метаданные
 Name[uk]=Редагувати метадані
-Name[zh_CN]=编辑 Metadata
+Name[zh_CN]=修改元数据
 Name[x-test]=xxEdit Metadataxx
 
 [Desktop Action pdfmetaview]
@@ -128,7 +128,7 @@ Name[ko]=보기 미터자료
 Name[pt]=Veja Metadata
 Name[ru]=Просмотреть метаданные
 Name[uk]=Переглянути метадані
-Name[zh_CN]=视野 Metadata
+Name[zh_CN]=查看元数据
 Name[x-test]=xxview Metadataxx
 
 [Desktop Action pdfsplit]
@@ -144,5 +144,5 @@ Name[ko]=하나의 페이지의 파일에 끼어든다
 Name[pt]=Cortar em Arquivos de uma Única Página
 Name[ru]=Разбить постранично
 Name[uk]=Розбити посторінково
-Name[zh_CN]=插入页的文件
+Name[zh_CN]=按页分割文件
 Name[x-test]=xxSplit in Single Page per Filexx

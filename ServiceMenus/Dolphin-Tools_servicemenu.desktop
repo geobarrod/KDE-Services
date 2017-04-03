@@ -31,7 +31,7 @@ Name[ko]=이어진다
 Name[pt]=Conecte
 Name[ru]=Подключиться к
 Name[uk]=Підключитися до
-Name[zh_CN]=连接到
+Name[zh_CN]=连接至
 Name[x-test]=xxConnect toxx
 
 [Desktop Action DiskUse]
@@ -47,7 +47,7 @@ Name[ko]=익숙한 디스크의 공간
 Name[pt]=Espaço de Disco Usou
 Name[ru]=Использовние дискового пространства
 Name[uk]=Використання дискового простору
-Name[zh_CN]=二手磁盘片的空间
+Name[zh_CN]=磁盘空间占用情况
 Name[x-test]=xxDisk Space Usedxx
 
 [Desktop Action ViewMachine]
@@ -63,5 +63,5 @@ Name[ko]=등록 하인
 Name[pt]=Servidores Registrados
 Name[ru]=Зарегестрированные серверы
 Name[uk]=Зареєстровані сервери
-Name[zh_CN]=注册的仆人
+Name[zh_CN]=已注册服务器
 Name[x-test]=xxRegistered Serversxx

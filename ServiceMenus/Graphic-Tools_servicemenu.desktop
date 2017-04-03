@@ -16,7 +16,7 @@ X-KDE-Submenu[ko]=그래픽 도구
 X-KDE-Submenu[pt]=Gráfico - Ferramentas
 X-KDE-Submenu[ru]=Инструменты Графики
 X-KDE-Submenu[uk]=Інструменти Графіки
-X-KDE-Submenu[zh_CN]=图标工具
+X-KDE-Submenu[zh_CN]=图形工具
 X-KDE-Submenu[x-test]=xxGraphic Toolsxx
 
 [Desktop Action Sizer]
@@ -32,7 +32,7 @@ Name[ko]=Sizer
 Name[pt]=O Sizer
 Name[ru]=Изменение размера (настраиваемое)
 Name[uk]=Зміна розміру (власні параметри)
-Name[zh_CN]=大小测定器
+Name[zh_CN]=尺寸转换 (自定义尺寸)
 Name[x-test]=xxThe Sizer (custom sizes)xx
 
 [Desktop Action Converter]
@@ -48,7 +48,7 @@ Name[ko]=변환기
 Name[pt]=O Convertedor
 Name[ru]=Конвертер
 Name[uk]=Конвертер
-Name[zh_CN]=转换器
+Name[zh_CN]=图片转换器
 Name[x-test]=xxThe Converterxx
 
 [Desktop Action 128x128]
@@ -64,7 +64,7 @@ Name[ko]=128x128 (아이콘)
 Name[pt]=128x128 (ícone)
 Name[ru]=128x128 (Икона)
 Name[uk]=128x128 (Ікона)
-Name[zh_CN]=128x128 (圣像)
+Name[zh_CN]=128x128 (图标)
 Name[x-test]=xx128x128 (icon)xx
 
 [Desktop Action 16x16]
@@ -80,7 +80,7 @@ Name[ko]=16x16 (아이콘)
 Name[pt]=16x16 (ícone)
 Name[ru]=16x16 (Икона)
 Name[uk]=16x16 (Ікона)
-Name[zh_CN]=16x16 (圣像)
+Name[zh_CN]=16x16 (图标)
 Name[x-test]=xx16x16 (icon)xx
 
 [Desktop Action 256x256]
@@ -96,7 +96,7 @@ Name[ko]=256x256 (아이콘)
 Name[pt]=256x256 (ícone)
 Name[ru]=256x256 (Икона)
 Name[uk]=256x256 (Ікона)
-Name[zh_CN]=256x256 (圣像)
+Name[zh_CN]=256x256 (图标)
 Name[x-test]=xx256x256 (icon)xx
 
 [Desktop Action 32x32]
@@ -112,7 +112,7 @@ Name[ko]=32x32 (아이콘)
 Name[pt]=32x32 (ícone)
 Name[ru]=32x32 (Икона)
 Name[uk]=32x32 (Ікона)
-Name[zh_CN]=32x32 (圣像)
+Name[zh_CN]=32x32 (图标)
 Name[x-test]=xx32x32 (icon)xx
 
 [Desktop Action 48x48]
@@ -128,7 +128,7 @@ Name[ko]=48x48 (아이콘)
 Name[pt]=48x48 (ícone)
 Name[ru]=48x48 (Икона)
 Name[uk]=48x48 (Ікона)
-Name[zh_CN]=48x48 (圣像)
+Name[zh_CN]=48x48 (图标)
 Name[x-test]=xx48x48 (icon)xx
 
 [Desktop Action scalable]
@@ -144,7 +144,7 @@ Name[ko]=scalable (아이콘)
 Name[pt]=scalable (ícone)
 Name[ru]=scalable (Икона)
 Name[uk]=scalable (Ікона)
-Name[zh_CN]=scalable (圣像)
+Name[zh_CN]=scalable (图标)
 Name[x-test]=xxscalable (icon)xx
 
 [Desktop Action 64x64]
@@ -160,7 +160,7 @@ Name[ko]=64x64 (아이콘)
 Name[pt]=64x64 (ícone)
 Name[ru]=64x64 (Икона)
 Name[uk]=64x64 (Ікона)
-Name[zh_CN]=64x64 (圣像)
+Name[zh_CN]=64x64 (图标)
 Name[x-test]=xx64x64 (icon)xx
 
 [Desktop Action cif]
@@ -324,7 +324,7 @@ Name[ko]=414x532 (그것은 인정한다)
 Name[pt]=414x532 (aprova)
 Name[ru]=414x532 (Виза)
 Name[uk]=414x532 (Віза)
-Name[zh_CN]=414x532 (它赞同)
+Name[zh_CN]=414x532 (信用卡)
 Name[x-test]=xx414x532 (visa)xx
 
 [Desktop Action carnet]
@@ -340,5 +340,5 @@ Name[ko]=300x300 (신분 증명서)
 Name[pt]=300x300 (carteira de identidade)
 Name[ru]=300x300 (Идентификационная карточка)
 Name[uk]=300x300 (Карта ідентифікації)
-Name[zh_CN]=300x300 (识别证)
+Name[zh_CN]=300x300 (身份证)
 Name[x-test]=xx300x300 (carnet)xx

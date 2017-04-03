@@ -31,7 +31,7 @@ Name[ko]=개인전용의 커늘을 형성한다
 Name[pt]=Construir Núcleo Personalizado
 Name[ru]=Собрать собственное ядро
 Name[uk]=Зібрати власне ядро
-Name[zh_CN]=建立个人化的核心
+Name[zh_CN]=构建自定义内核
 Name[x-test]=xxBuild Custom Kernelxx
 
 [Desktop Action CheckKernelUpdate]
@@ -47,7 +47,7 @@ Name[ko]=수표 커늘 갱신
 Name[pt]=Confira Atualização de Núcleo
 Name[ru]=Проверить обновления ядра
 Name[uk]=Перевірити оновлення ядра
-Name[zh_CN]=检查核心更新
+Name[zh_CN]=检查内核更新
 Name[x-test]=xxCheck Kernel Updatexx
 
 [Desktop Action Htop]
@@ -63,7 +63,7 @@ Name[ko]=과정의 파인더
 Name[pt]=Descobridor de Processos
 Name[ru]=Обзор процессов
 Name[uk]=Перегляд процесів
-Name[zh_CN]=程序的探测器
+Name[zh_CN]=进程查看器
 Name[x-test]=xxProcess Viewerxx
 
 [Desktop Action RebuildPackage]
@@ -79,7 +79,7 @@ Name[ko]=꾸러미 RPM 를 재건한다
 Name[pt]=Reconstruir RPM de Pacote
 Name[ru]=Пересобрать пакет RPM
 Name[uk]=Перезібрати пакунок RPM
-Name[zh_CN]=重建包裹 RPM
+Name[zh_CN]=重建 RPM 软件包
 Name[x-test]=xxRebuild RPM Packagexx
 
 [Desktop Action SysInfo]
@@ -95,7 +95,7 @@ Name[ko]=체내의 정보
 Name[pt]=Informação do Sistema
 Name[ru]=Информация о системе
 Name[uk]=Інформація про систему
-Name[zh_CN]=系统的数据
+Name[zh_CN]=系统信息
 Name[x-test]=xxSystem Informationxx
 
 [Desktop Action SysMonitor]
@@ -111,7 +111,7 @@ Name[ko]=체내의 모니터
 Name[pt]=Monitor do Sistema
 Name[ru]=Системный монитор
 Name[uk]=Системний монітор
-Name[zh_CN]=系统的监视器
+Name[zh_CN]=系统监视器
 Name[x-test]=xxSystem Monitorxx
 
 [Desktop Action XorgConf]
@@ -127,5 +127,5 @@ Name[ko]=Xorg 를 형성한다
 Name[pt]=Configurar Xorg
 Name[ru]=Конфигурация Xorg
 Name[uk]=Конфігурація Xorg
-Name[zh_CN]=配置 Xorg
+Name[zh_CN]=Xorg 配置
 Name[x-test]=xxXorg Configurexx

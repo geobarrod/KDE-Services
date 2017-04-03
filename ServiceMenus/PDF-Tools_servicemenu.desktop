@@ -32,7 +32,7 @@ Name[ko]=DRM를 적용한다 암호화한다
 Name[pt]=Aplique DRM + Codifique
 Name[ru]=Задействовать DRM + Шифрование
 Name[uk]=Задіяти DRM + Шифрування
-Name[zh_CN]=应用 DRM 编加密码
+Name[zh_CN]=DRM 及加密
 Name[x-test]=xxApply DRM + Encryptxx
 
 [Desktop Action ExtractAllPages]
@@ -48,7 +48,7 @@ Name[ko]=모든 페이지를 추출한다
 Name[pt]=Extrair Todas as Páginas
 Name[ru]=Извлечь все страницы
 Name[uk]=Вилучити усі сторінки
-Name[zh_CN]=吸取所有的页
+Name[zh_CN]=提取全部页面
 Name[x-test]=xxExtract All Pagesxx
 
 [Desktop Action ExtractPages]
@@ -64,7 +64,7 @@ Name[ko]=선택되었던 페이지를 추출한다
 Name[pt]=Extrair Páginas Selecionadas
 Name[ru]=Извлечь выбранные страницы
 Name[uk]=Вилучити обрані сторінки
-Name[zh_CN]=吸取选择页
+Name[zh_CN]=提取所选页面
 Name[x-test]=xxExtract Select Pagesxx
 
 [Desktop Action PDFfix]
@@ -80,7 +80,7 @@ Name[ko]=수리한다 (만일 그것이 가능하면)
 Name[pt]=Consertar (se é possível)
 Name[ru]=Исправить (если возможно)
 Name[uk]=Виправити (якщо можливо)
-Name[zh_CN]=修理 (如果它是可能的)
+Name[zh_CN]=修复文件 (如果可行)
 Name[x-test]=xxFixer (if possible)xx
 
 [Desktop Action PDFownerPassword]
@@ -96,7 +96,7 @@ Name[ko]=자산 (DRM)의 군호를 적용한다
 Name[pt]=Aplicar Contra-senha de Propriedade (DRM)
 Name[ru]=Задействовать пароль владельца (DRM)
 Name[uk]=Задіяти пароль власника (DRM)
-Name[zh_CN]=应用财产的口令 (DRM)
+Name[zh_CN]=添加拥有者密码 (DRM)
 Name[x-test]=xxApply Owner Password (DRM)xx
 
 [Desktop Action PDFunSecure]
@@ -128,5 +128,5 @@ Name[ko]=사용자 암호 (암호화한다)를 적용해라
 Name[pt]=Aplique Contra-senha de Usuário (Codifique)
 Name[ru]=Задействовать пароль пользователя (Зашифровать)
 Name[uk]=Задіяти пароль користувача (Зашифрувати)
-Name[zh_CN]=应用使用者密码 (编加密码)
+Name[zh_CN]=添加拥有者密码 (加密)
 Name[x-test]=xxApply User Password (Encrypt)xx

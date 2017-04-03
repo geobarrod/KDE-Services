@@ -31,7 +31,7 @@ Name[ko]=관리자를 후퇴시켜라 Android
 Name[pt]=Atrás o Administrador para Android
 Name[ru]=Android Backup Менеджер
 Name[uk]=Android Backup Менеджер
-Name[zh_CN]=背面管理人为 Android
+Name[zh_CN]=Android 备份管理器
 Name[x-test]=xxAndroid Backup Managerxx
 
 [Desktop Action AFM]
@@ -47,7 +47,7 @@ Name[ko]=파일의 관리자 Android
 Name[pt]=Administrador de Arquivos para Android
 Name[ru]=Android Менеджер Файла
 Name[uk]=Android Реєструють Менеджера
-Name[zh_CN]=文件的管理人为 Android
+Name[zh_CN]=Android 文件管理器
 Name[x-test]=xxAndroid File Managerxx
 
 [Desktop Action APM]
@@ -63,7 +63,7 @@ Name[ko]=꾸러미의 관리자 Android
 Name[pt]=Administrador de Pacotes para Android
 Name[ru]=Администратор Пакетов Android
 Name[uk]=Адміністратор Пакетів Android
-Name[zh_CN]=包裹的管理人为 Android
+Name[zh_CN]=Android 应用管理器
 Name[x-test]=xxAndroid Package Managerxx
 
 [Desktop Action ARM]
@@ -79,5 +79,5 @@ Name[ko]=I재시동의 관리자 Android
 Name[pt]=Administrador de Mim Reinicia para Android
 Name[ru]=Android Reboot Менеджер
 Name[uk]=Android Reboot Менеджер
-Name[zh_CN]=我的管理人重新开始 Android
+Name[zh_CN]=Android 电源管理器
 Name[x-test]=xxAndroid Reboot Managerxx

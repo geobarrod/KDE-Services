@@ -21,5 +21,5 @@ Name[ko]=날짜를 변한다 [파일|디렉토리]
 Name[pt]=Mudar Data do [Arquivo|Diretório]
 Name[ru]=Изменить отметку времени [Файла|Папки]
 Name[uk]=Змінити відмітку часу [Файлу|Теки]
-Name[zh_CN]=改变日期的 [文件|目录]
+Name[zh_CN]=改变[文件|目录]时间戳
 Name[x-test]=xxChange Timestamp to [File|Directory]xx
