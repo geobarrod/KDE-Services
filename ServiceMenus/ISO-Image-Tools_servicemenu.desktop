@@ -1,39 +1,39 @@
 [Desktop Entry]
-Actions=MountCD-Image;UnmountCD-Image;_SEPARATOR_;Integrity-Check;Insert-MD5sum;_SEPARATOR_;MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;Burn-Image;
+Actions=MountCD-Image;UnmountCD-Image;_SEPARATOR_;Integrity-Check;Insert-MD5sum;_SEPARATOR_;MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;Burn-Image;_SEPARATOR_;ISOinfo;OpticalDriveInfo;
 Icon=ks-media-optical-mount
 MimeType=application/x-cd-image;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-StartupNotify=false
-X-KDE-Submenu=iso9660 Image Tools
-X-KDE-Submenu[de]=ISO9660 Abbild - Werkzeuge
-X-KDE-Submenu[es]=Imagen iso9660 - Herramientas
-X-KDE-Submenu[fr]=Image iso9660 - Outils
-X-KDE-Submenu[it]=Immagine iso9660 - Attrezzi
-X-KDE-Submenu[ja]=イメージ iso9660 道具
-X-KDE-Submenu[ko]=이미지 iso9660 도구
-X-KDE-Submenu[pt]=Imagem o iso9660 - Ferramentas
-X-KDE-Submenu[ru]=Инструменты iso9660
-X-KDE-Submenu[uk]=Інструменти iso9660
-X-KDE-Submenu[zh_CN]=ISO9660 镜像工具
-X-KDE-Submenu[x-test]=xxiso9660 Image Toolsxx
+X-KDE-Submenu=ISO-9660 Image Tools
+X-KDE-Submenu[de]=ISO-9660 Abbild - Werkzeuge
+X-KDE-Submenu[es]=Imagen ISO-9660 - Herramientas
+X-KDE-Submenu[fr]=Image ISO-9660 - Outils
+X-KDE-Submenu[it]=Immagine ISO-9660 - Attrezzi
+X-KDE-Submenu[ja]=イメージ ISO-9660 道具
+X-KDE-Submenu[ko]=이미지 ISO-9660 도구
+X-KDE-Submenu[pt]=Imagem o ISO-9660 - Ferramentas
+X-KDE-Submenu[ru]=Инструменты ISO-9660
+X-KDE-Submenu[uk]=Інструменти ISO-9660
+X-KDE-Submenu[zh_CN]=ISO-9660 镜像工具
+X-KDE-Submenu[x-test]=xxISO-9660 Image Toolsxx
 
 [Desktop Action Burn-Image]
-Exec=which wodim; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Burn iso9660 Image" --passivepopup="[Error] Please install wodim command and try again."; exit 1; else /usr/share/applications/iso_manager-burn-image.sh %F;fi
+Exec=which wodim; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Burn ISO-9660 Image" --passivepopup="[Error] Please install wodim command and try again."; exit 1; else /usr/share/applications/iso_manager-burn-image.sh %F;fi
 Icon=ks-media-optical-burn
-Name=Burn iso9660 Image
-Name[de]=ISO9660 Abbild brennen
-Name[es]=Quemar Imagen iso9660
-Name[fr]=Brûler Image iso9660
-Name[it]=Bruciare Immagine iso9660
-Name[ja]=イメージ iso9660 を燃やすために
-Name[ko]=이미지 iso9660를 태운다
-Name[pt]=Queimar Imagem o iso9660
-Name[ru]=Записать iso9660-образ
-Name[uk]=Записати iso9660-образ
-Name[zh_CN]=烧录 ISO9660 镜像
-Name[x-test]=xxBurn iso9660 Imagexx
+Name=Burn ISO-9660 Image
+Name[de]=ISO-9660 Abbild brennen
+Name[es]=Quemar Imagen ISO-9660
+Name[fr]=Brûler Image ISO-9660
+Name[it]=Bruciare Immagine ISO-9660
+Name[ja]=イメージ ISO-9660 を燃やすために
+Name[ko]=이미지 ISO-9660를 태운다
+Name[pt]=Queimar Imagem o ISO-9660
+Name[ru]=Записать ISO-9660-образ
+Name[uk]=Записати ISO-9660-образ
+Name[zh_CN]=烧录 ISO-9660 镜像
+Name[x-test]=xxBurn ISO-9660 Imagexx
 
 [Desktop Action Insert-MD5sum]
 Exec=which implantisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Error] Please install implantisomd5 command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Inserting:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; implantisomd5 "$file" > /tmp/insert-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity;fi
@@ -68,97 +68,129 @@ Name[zh_CN]=完整性检查
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action MD5-Sum]
-Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5sum iso9660 Image" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="MD5sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5sum ISO-9660 Image" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="MD5sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
-Name=Show MD5sum iso9660 Image
-Name[de]=MD5sum anzeigen
-Name[es]=Mostrar MD5sum Imagen iso9660
-Name[fr]=Montrer MD5sum Imagen iso9660
-Name[it]=Mostrare MD5sum Immagine iso9660
-Name[ja]=MD5sum イメージ iso9660 を示すために
-Name[ko]=MD5sum 이미지 iso9660를 보여준다
-Name[pt]=Mostrar Imagem de MD5sum o iso9660
-Name[ru]=Показ kонтрольная сумма MD5 iso9660-образа
-Name[uk]=Покажіть kонтрольна сума MD5 iso9660-образу
-Name[zh_CN]=查看 ISO9660 镜像 MD5 校验和
-Name[x-test]=xxShow MD5sum iso9660 Imagexx
+Name=Show MD5sum ISO-9660 Image
+Name[de]=MD5sum ISO-9660 Abbild anzeigen
+Name[es]=Mostrar MD5sum Imagen ISO-9660
+Name[fr]=Montrer MD5sum Imagen ISO-9660
+Name[it]=Mostrare MD5sum Immagine ISO-9660
+Name[ja]=MD5sum イメージ ISO-9660 を示すために
+Name[ko]=MD5sum 이미지 ISO-9660를 보여준다
+Name[pt]=Mostrar Imagem de MD5sum o ISO-9660
+Name[ru]=Показ kонтрольная сумма MD5 ISO-9660-образа
+Name[uk]=Покажіть kонтрольна сума MD5 ISO-9660-образу
+Name[zh_CN]=查看 ISO-9660 镜像 MD5 校验和
+Name[x-test]=xxShow MD5sum ISO-9660 Imagexx
 
 [Desktop Action SHA1-Sum]
-Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1sum iso9660 Image" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA1sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1sum ISO-9660 Image" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA1sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
-Name=Show SHA1sum iso9660 Image
-Name[de]=SHA1sum anzeigen
-Name[es]=Mostrar SHA1sum Imagen iso9660
-Name[fr]=Montrer SHA1sum Imagen iso9660
-Name[it]=Mostrare SHA1sum Immagine iso9660
-Name[ja]=SHA1sum イメージ iso9660 を示すために
-Name[ko]=SHA1sum 이미지 iso9660를 보여준다
-Name[pt]=Mostrar Imagem de SHA1sum o iso9660
-Name[ru]=Показ kонтрольная сумма SHA1 iso9660-образа
-Name[uk]=Покажіть kонтрольна сума SHA1 iso9660-образу
-Name[zh_CN]=查看 ISO9660 镜像 SHA1 校验和
-Name[x-test]=xxShow SHA1sum iso9660 Imagexx
+Name=Show SHA1sum ISO-9660 Image
+Name[de]=SHA1sum ISO-9660 Abbild anzeigen
+Name[es]=Mostrar SHA1sum Imagen ISO-9660
+Name[fr]=Montrer SHA1sum Imagen ISO-9660
+Name[it]=Mostrare SHA1sum Immagine ISO-9660
+Name[ja]=SHA1sum イメージ ISO-9660 を示すために
+Name[ko]=SHA1sum 이미지 ISO-9660를 보여준다
+Name[pt]=Mostrar Imagem de SHA1sum o ISO-9660
+Name[ru]=Показ kонтрольная сумма SHA1 ISO-9660-образа
+Name[uk]=Покажіть kонтрольна сума SHA1 ISO-9660-образу
+Name[zh_CN]=查看 ISO-9660 镜像 SHA1 校验和
+Name[x-test]=xxShow SHA1sum ISO-9660 Imagexx
 
 [Desktop Action SHA256-Sum]
-Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA256sum iso9660 Image" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA256sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA256sum ISO-9660 Image" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA256sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
-Name=Show SHA256sum iso9660 Image
-Name[de]=SHA256sum anzeigen
-Name[es]=Mostrar SHA256sum Imagen iso9660
-NName[fr]=Montrer SHA256sum Imagen iso9660
-Name[it]=Mostrare SHA256sum Immagine iso9660
-Name[ja]=SHA256sum イメージ iso9660 を示すために
-Name[ko]=SHA256sum 이미지 iso9660를 보여준다
-Name[pt]=Mostrar Imagem de SHA256sum o iso9660
-Name[ru]=Показ kонтрольная сумма SHA256 iso9660-образа
-Name[uk]=Покажіть kонтрольна сума SHA256 iso9660-образу
-Name[zh_CN]=查看 ISO9660 镜像 SHA256 校验和
-Name[x-test]=xxShow SHA256sum iso9660 Imagexx
+Name=Show SHA256sum ISO-9660 Image
+Name[de]=SHA256sum ISO-9660 Abbild anzeigen
+Name[es]=Mostrar SHA256sum Imagen ISO-9660
+NName[fr]=Montrer SHA256sum Imagen ISO-9660
+Name[it]=Mostrare SHA256sum Immagine ISO-9660
+Name[ja]=SHA256sum イメージ ISO-9660 を示すために
+Name[ko]=SHA256sum 이미지 ISO-9660를 보여준다
+Name[pt]=Mostrar Imagem de SHA256sum o ISO-9660
+Name[ru]=Показ kонтрольная сумма SHA256 ISO-9660-образа
+Name[uk]=Покажіть kонтрольна сума SHA256 ISO-9660-образу
+Name[zh_CN]=查看 ISO-9660 镜像 SHA256 校验和
+Name[x-test]=xxShow SHA256sum ISO-9660 Imagexx
 
 [Desktop Action SHA512-Sum]
-Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA512sum iso9660 Image" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA512sum iso9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA512sum ISO-9660 Image" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA512sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
-Name=Show SHA512sum iso9660 Image
-Name[de]=SHA512sum anzeigen
-Name[es]=Mostrar SHA512sum Imagen iso9660
-Name[fr]=Montrer SHA512sum Imagen iso9660
-Name[it]=Mostrare SHA512sum Immagine iso9660
-Name[ja]=SHA512sum イメージ iso9660 を示すために
-Name[ko]=SHA512sum 이미지 iso9660를 보여준다
-Name[pt]=Mostrar Imagem de SHA512sum o iso9660
-Name[ru]=Показ kонтрольная сумма SHA512 iso9660-образа
-Name[uk]=Покажіть kонтрольна сума SHA512 iso9660-образу
-Name[zh_CN]=查看 ISO9660 镜像 SHA512 校验和
-Name[x-test]=xxShow SHA512sum iso9660 Imagexx
+Name=Show SHA512sum ISO-9660 Image
+Name[de]=SHA512sum ISO-9660 Abbild anzeigen
+Name[es]=Mostrar SHA512sum Imagen ISO-9660
+Name[fr]=Montrer SHA512sum Imagen ISO-9660
+Name[it]=Mostrare SHA512sum Immagine ISO-9660
+Name[ja]=SHA512sum イメージ ISO-9660 を示すために
+Name[ko]=SHA512sum 이미지 ISO-9660를 보여준다
+Name[pt]=Mostrar Imagem de SHA512sum o ISO-9660
+Name[ru]=Показ kонтрольная сумма SHA512 ISO-9660-образа
+Name[uk]=Покажіть kонтрольна сума SHA512 ISO-9660-образу
+Name[zh_CN]=查看 ISO-9660 镜像 SHA512 校验和
+Name[x-test]=xxShow SHA512sum ISO-9660 Imagexx
 
 [Desktop Action MountCD-Image]
-Exec=which fuseiso; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount iso9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else /usr/share/applications/iso_manager-mount-image.sh %F;fi
+Exec=which fuseiso; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount ISO-9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else /usr/share/applications/iso_manager-mount-image.sh %F;fi
 Icon=ks-media-optical-mount
-Name=Mount iso9660 Image
-Name[de]=ISO9660 Abbild einbinden
-Name[es]=Montar Imagen iso9660
-Name[fr]=Monter Image iso9660
-Name[it]=Montare Immagine iso9660
-Name[ja]=イメージ iso9660 に乗るために
-Name[ko]=이미지 iso9660를 세운다
-Name[pt]=Montar Imagem o iso9660
-Name[ru]=Смонтировать iso9660-образ
-Name[uk]=Змонтувати iso9660-образ
-Name[zh_CN]=挂载 ISO9660 镜像
-Name[x-test]=xxMount iso9660 Imagexx
+Name=Mount ISO-9660 Image
+Name[de]=ISO-9660 Abbild einbinden
+Name[es]=Montar Imagen ISO-9660
+Name[fr]=Monter Image ISO-9660
+Name[it]=Montare Immagine ISO-9660
+Name[ja]=イメージ ISO-9660 に乗るために
+Name[ko]=이미지 ISO-9660를 세운다
+Name[pt]=Montar Imagem o ISO-9660
+Name[ru]=Смонтировать ISO-9660-образ
+Name[uk]=Змонтувати ISO-9660-образ
+Name[zh_CN]=挂载 ISO-9660 镜像
+Name[x-test]=xxMount ISO-9660 Imagexx
 
 [Desktop Action UnmountCD-Image]
-Exec=which fuser fusermount; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount iso9660 Image" --passivepopup="[Error] Please install fuser and fusermount command and try again."; exit 1; else fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')"; rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=ks-media-optical-umount --title="Unmount iso9660 Image" --passivepopup="[Finished] $(basename %f) unmounted.";fi
+Exec=which fuser fusermount; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount ISO-9660 Image" --passivepopup="[Error] Please install fuser and fusermount command and try again."; exit 1; else fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')"; rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=ks-media-optical-umount --title="Unmount ISO-9660 Image" --passivepopup="[Finished] $(basename %f) unmounted.";fi
 Icon=ks-media-optical-umount
-Name=Unmount iso9660 Image
-Name[de]=ISO9660 Abbild aushängen
-Name[es]=Desmontar Imagen iso9660
-Name[fr]=Démonter Image iso9660
-Name[it]=Smontare Immagine iso9660
-Name[ja]=イメージ iso9660 を分解するために
-Name[ko]=이미지 iso9660를 해체한다
-Name[pt]=Desmontar Imagem o iso9660
-Name[ru]=Размонтировать iso9660-образ
-Name[uk]=Розмонтувати iso9660-образ
-Name[zh_CN]=卸载 ISO9660 镜像
-Name[x-test]=xxUnmount iso9660 Imagexx
+Name=Unmount ISO-9660 Image
+Name[de]=ISO-9660 Abbild aushängen
+Name[es]=Desmontar Imagen ISO-9660
+Name[fr]=Démonter Image ISO-9660
+Name[it]=Smontare Immagine ISO-9660
+Name[ja]=イメージ ISO-9660 を分解するために
+Name[ko]=이미지 ISO-9660를 해체한다
+Name[pt]=Desmontar Imagem o ISO-9660
+Name[ru]=Размонтировать ISO-9660-образ
+Name[uk]=Розмонтувати ISO-9660-образ
+Name[zh_CN]=卸载 ISO-9660 镜像
+Name[x-test]=xxUnmount ISO-9660 Imagexx
+
+[Desktop Action ISOinfo]
+Exec=which iso-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show ISO-9660 Image Info" --passivepopup="[Error] Please install iso-info command and try again."; exit 1; else for file in %F;do iso-info --no-header -l $file > /tmp/iso-info; kdialog --icon=ks-media-optical-info --title="Show ISO-9660 Image Info" --textbox /tmp/iso-info 900 600 2> /dev/null; rm -fr /tmp/iso-info;done;fi
+Icon=ks-media-optical-info
+Name=Show ISO-9660 Image Info
+Name[de]=ISO-9660 Abbild info anzeigen
+Name[es]=Mostrar Información de Imagen ISO-9660
+Name[fr]=Montrez l'info d'image ISO-9660
+Name[it]=Mostrare Informazione di Immagine ISO-9660
+Name[ja]=ISO-９６６０のイメージインフォメーションを示しなさい
+Name[ko]=쇼 ISO-9660 이미지 안내
+Name[pt]=Mostrar Informação de Imagem ISO-9660
+Name[ru]=Показ ISO-9660 Образ Информация
+Name[uk]=Покажіть ISO-9660 Образ Інформація
+Name[zh_CN]=表演 ISO-9660 图像信息
+Name[x-test]=xxShow ISO-9660 Image Infoxx
+
+[Desktop Action OpticalDriveInfo]
+Exec=which cd-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Optical Drive Info" --passivepopup="[Error] Please install cd-info command and try again."; exit 1; else cd-info --no-header -ql --dvd --iso9660 > /tmp/cd-info; kdialog --icon=ks-optical-drive-info --title="Show Optical Drive Info" --textbox /tmp/cd-info 400 800 2> /dev/null; rm -fr /tmp/cd-info;%F;fi
+Icon=ks-optical-drive-info
+Name=Show Optical Drive Info
+Name[de]=Optischer Antrieb info anzeigen
+Name[es]=Mostrar Información de Unidad de Disco Óptica
+Name[fr]=Montrer Information d'Unité de Disque Optique
+Name[it]=Mostrare Informazione di Unità di Disco Ottica
+Name[ja]=視覚のドライブインフォメーションを示しなさい
+Name[ko]=광학의 운전 정보를 보여줘라
+Name[pt]=Mostrar Informação de Unidade de Óticas de Disco
+Name[ru]=Показ Информацию Единицы Оптики Диска
+Name[uk]=Покажіть Оптичний Ведуть Інформацію
+Name[zh_CN]=表示光学的驾驶数据
+Name[x-test]=xxShow Optical Drive Infoxx

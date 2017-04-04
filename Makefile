@@ -1,7 +1,7 @@
 #################################################################
 # Installing KDE-Services, to appropriate directories.		#
 # Author: Geovani Barzaga Rodriguez <igeo.cu@gmail.com>.	#
-# KDE-Services 2011-2016. GPLv3+				#
+# KDE-Services 2011-2017. GPLv3+				#
 #################################################################
 
 PREFIXmenu5=$(RPM_BUILD_ROOT)/usr/share/kservices5/ServiceMenus
@@ -266,6 +266,7 @@ uninstall:
 		$(PREFIXSVGicons)/ks-media-edit-time.svgz \
 		$(PREFIXSVGicons)/ks-media-optical-burn.svgz \
 		$(PREFIXSVGicons)/ks-media-optical-clone.svgz \
+		$(PREFIXSVGicons)/ks-media-optical-info.svgz \
 		$(PREFIXSVGicons)/ks-media-optical-integrity-check.svgz \
 		$(PREFIXSVGicons)/ks-media-optical-md5sum.svgz \
 		$(PREFIXSVGicons)/ks-media-optical-mount.svgz \
@@ -274,6 +275,7 @@ uninstall:
 		$(PREFIXSVGicons)/ks-media-tape.svgz \
 		$(PREFIXSVGicons)/ks-menu.svgz \
 		$(PREFIXSVGicons)/ks-multiplexing-subs.svgz \
+		$(PREFIXSVGicons)/ks-optical-drive-info.svgz \
 		$(PREFIXSVGicons)/ks-owner.svgz \
 		$(PREFIXSVGicons)/ks-pdf.svgz \
 		$(PREFIXSVGicons)/ks-rebuild-rpm.svgz \

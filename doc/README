@@ -84,6 +84,7 @@ Required dependencies:
 - kde-runtime
 - kernel-tools
 - konsole
+- libcdio
 - liberation-sans-fonts
 - lynx
 - mailx
@@ -122,12 +123,12 @@ Required dependencies:
 
 Install:
 
-1- $ tar -jxvf kde-services-2.1.tar.bz2
-2- $ cd kde-services-2.1
+1- $ tar -jxvf kde-services-3.0.0.tar.bz2
+2- $ cd kde-services-3.0.0
 3- $ sudo make install
 
 Uninstall:
 
-1- $ tar -jxvf kde-services-2.1.tar.bz2
-2- $ cd kde-services-2.1
+1- $ tar -jxvf kde-services-3.0.0.tar.bz2
+2- $ cd kde-services-3.0.0
 3- $ sudo make uninstall

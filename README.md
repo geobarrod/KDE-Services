@@ -84,6 +84,7 @@ Requirements:
 - kde-runtime
 - kernel-tools
 - konsole
+- libcdio
 - liberation-sans-fonts
 - lynx
 - mailx
@@ -123,15 +124,15 @@ Requirements:
 Install:
 --------
 
-- $ tar -jxvf kde-services-2.1.9.tar.bz2
-- $ cd kde-services-2.1.9
+1- $ tar -jxvf kde-services-3.0.0.tar.bz2
+2- $ cd kde-services-3.0.0
 - $ sudo make install
 
 Uninstall:
 ----------
 
-- $ tar -jxvf kde-services-2.1.9.tar.bz2
-- $ cd kde-services-2.1.9
+1- $ tar -jxvf kde-services-3.0.0.tar.bz2
+2- $ cd kde-services-3.0.0
 - $ sudo make uninstall
 
 Screenshot

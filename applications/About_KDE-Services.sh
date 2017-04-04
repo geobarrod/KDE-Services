@@ -95,6 +95,7 @@ cat > /tmp/about_kde-services << EOF
         - kde-runtime
         - kernel-tools
         - konsole
+        - libcdio
         - liberation-sans-fonts
         - lynx
         - mailx
@@ -137,11 +138,12 @@ cat > /tmp/about_kde-services << EOF
     Contributors:
       Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
       David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
-	of ​​integrating PDFktools on "PDF Tools").
+	of integrating PDFktools on "PDF Tools").
       Victor Guardiola (vguardiola) (Improved source code for "Mount ISO Image" and "Umount ISO Image"
 	services menu; fixed the problem of [dir|file]name with whitespaces).
       Vasyl V. Vercynskyj <fuckel@ukr.net> (Translations to Russian and Ukrainian languages).
       Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
+    
     License:
       GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)
 

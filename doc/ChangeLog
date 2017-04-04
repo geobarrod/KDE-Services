@@ -1,3 +1,12 @@
+* Sat Apr 01 2017 Geovani B. R. <igeo.cu@gmail.com> 3.0.0
+- Fixed Chinese translation.
+- Added new services menu:
+  "Show ISO-9660 Image Info" and "Show Optical Drive Info"
+  to "ISO-9660 Image Tools" submenu.
+- Bug in kdialog (starting from the version 16.12) --progressbar option 
+  will be fixed in the version 17.04.
+- Makefile: Updated.
+
 * Tue Mar 21 2017 Geovani B. R. <igeo.cu@gmail.com> 2.1.9
 - "Rotate Video Files": Enhancement.
 - Fixed German translation.
@@ -135,7 +144,7 @@
 - "Rebuild RPM Package": Enhancement.
 
 * Thu Jan 9 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-4
-- "Mount ISO Image" and "Umount ISO Image": Improved, fixed the problem of [dir|file]name with whitespaces.
+- "Mount ISO-9660 Image" and "Umount ISO-9660 Image": Improved, fixed the problem of [dir|file]name with whitespaces.
 - "System Monitor": Enhancement.
 - "Xorg Configure": Enhancement.
 - "Change Owner Here": Enhancement.
@@ -298,7 +307,7 @@
 
 * Thu Nov 22 2012  Geovani B. R. <igeo.cu@gmail.com> 1.5-5
 - "AVI Tools", "[Backup|Restore] Tools", "CheckSum Tools", "Check Message Digest", 
-  "Change Owner Here", "Build ISO Image From Here", "ISO Image Tools", "D.V.D. Assembler",
+  "Change Owner Here", "Build ISO-9660 Image From Here", "ISO-9660 Image Tools", "DVD Assembler",
   "MKV Extract Subtitle", "Multiplex Subtitle" and "YouTube Tools": Added GUI progress bar.
 
 * Tue Nov 20 2012  Geovani B. R. <igeo.cu@gmail.com> 1.5-4
@@ -356,12 +365,12 @@
 - Reorganization for all services toward "KDE-Services" submenu on "Application Launcher Menu"
 
 * Sun Jun 3 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-8
-- Added new services menu "Check Integrity" and "Insert MD5sum" to "ISO Image Tools" submenu.
+- Added new services menu "Check Integrity" and "Insert MD5sum" to "ISO-9660 Image Tools" submenu.
 - "Multiplex Subtitle": Enhancement.
 
 * Sun May 20 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-7
-- Added new submenu "DVD Tools" with service menu "D.V.D. Assembler" on Dolphin's right click menu. Now you can assemble
-  multiple mpeg program streams into a suitable DVD filesystem and generate the correspondent DVD ISO image.
+- Added new submenu "DVD Tools" with service menu "DVD Assembler" on Dolphin's right click menu. Now you can assemble
+  multiple mpeg program streams into a suitable DVD filesystem and generate the correspondent DVD ISO-9660 image.
 
 * Sat May 19 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-6
 - Included elapsed time in some visual notifications.
@@ -397,7 +406,7 @@
 
 * Thu Mar 29 2012  Geovani B. R. <igeo.cu@gmail.com> 1.2-7
 - "Convert Videos From Here" and "[Extract|Convert] Audio Track": Bugfix alter scheduling priority.
-- "Burn ISO Image": Now can alter scheduling priority of the service.
+- "Burn ISO-9660 Image": Now can alter scheduling priority of the service.
 
 * Fri Mar 23 2012  Geovani B. R. <igeo.cu@gmail.com> 1.2-6
 - "Rebuild RPM Package", "Build Custom Kernel", "Convert Videos From Here" and "[Extract|Convert] Audio Track":
@@ -407,12 +416,12 @@
 - "Rebuild RPM Package": Enhancement.
 
 * Fri Mar 9 2012  Geovani B. R. <igeo.cu@gmail.com> 1.2-4
-- "Samba Shares Mounter": Enhancement.
+- "SaMBa Shares Mounter": Enhancement.
 
 * Thu Mar 8 2012  Geovani B. R. <igeo.cu@gmail.com> 1.2-2
-- Added new Dolphin's right click menu "SaMBa Tools" submenu and service menu "Samba Shares Mounter": Now can mount and unmount
+- Added new Dolphin's right click menu "SaMBa Tools" submenu and service menu "SaMBa Shares Mounter": Now can mount and unmount
   samba shares on user home.
-- Added "Samba Shares Mounter" service menu to "System" submenu on Application Launcher Menu.
+- Added "SaMBa Shares Mounter" service menu to "System" submenu on Application Launcher Menu.
 - Dedicated to Woman's International Day.
 
 * Fri Mar 2 2012  Geovani B. R. <igeo.cu@gmail.com> 1.1-9
@@ -471,9 +480,9 @@
 - "Build Custom Kernel": Bugfix, error when the source RPM package is not available.
 
 * Fri Feb 10 2012  Geovani B. R. <igeo.cu@gmail.com> 1.0-4
-- "ISO Image Tools" => "Mount ISO Image": Bugfix, now if dirname, dirpath or filename contain whitespace
+- "ISO-9660 Image Tools" => "Mount ISO-9660 Image": Bugfix, now if dirname, dirpath or filename contain whitespace
   will be replaced by underscore "_" character in place until 10 levels up parent directory. After replaced,
-  reload the new path on file manager "Dolphin" and try mount ISO image again.
+  reload the new path on file manager "Dolphin" and try mount ISO-9660 image again.
 
 * Thu Feb 09 2012  Geovani B. R. <igeo.cu@gmail.com> 1.0-3
 - "Build Custom Kernel" and "Rebuild RPM Package": Enhancement.
@@ -560,7 +569,7 @@
 - Added enhancement to "Build Custom Kernel" and "Connect Sentry".
 
 * Mon Dec 19 2011 Geovani B. R. <igeo.cu@gmail.com> 0.8-1
-- Bugfix "Burn ISO Image"
+- Bugfix "Burn ISO-9660 Image"
 - Bugfix "Connect Sentry"
 
 * Fri Dec 16 2011 Geovani B. R. <igeo.cu@gmail.com> 0.7-9
@@ -599,7 +608,7 @@
   ( Now you can customize your own kernel easily, for create a system with more performance, more fast
   and more hardware support ), Check Kernel Update, Performance Analysis, Performance Benchmark
   and Process Viewer.
-- Solved not show notification if cancel speed burn on Burn ISO Image.
+- Solved not show notification if cancel speed burn on "Burn ISO-9660 Image".
 
 * Thu Dec 01 2011 Geovani B. R. <igeo.cu@gmail.com> 0.6-9
 - Added visual notifications for Dolphin Tools => Disk Space Used,
@@ -610,14 +619,14 @@
 - Added change owner and mode for file or directorys to Dolphin Tools.
 
 * Sun Nov 27 2011 Geovani B. R. <igeo.cu@gmail.com> 0.6-7
-- Added burn ISO image to ISO Image Tools.
+- Added burn ISO-9660 image to "ISO-9660 Image Tools".
 
 * Sat Nov 26 2011 Geovani B. R. <igeo.cu@gmail.com> 0.6-6
 - Creation RPM noarch package.
 - Icons are added to the visual notifications
   and the graphical interface.
 
- Copyright 2011, 2012, 2013.
+ Copyright 2011-2017.
 
  This file is free software; as a special exception the author gives
  unlimited permission to copy and/or distribute it, with or without
