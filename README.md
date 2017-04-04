@@ -126,14 +126,14 @@ Install:
 
 1- $ tar -jxvf kde-services-3.0.0.tar.bz2
 2- $ cd kde-services-3.0.0
-- $ sudo make install
+3- $ sudo make install
 
 Uninstall:
 ----------
 
 1- $ tar -jxvf kde-services-3.0.0.tar.bz2
 2- $ cd kde-services-3.0.0
-- $ sudo make uninstall
+3- $ sudo make uninstall
 
 Screenshot
 ----------
