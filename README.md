@@ -300,15 +300,15 @@ Requirements:
 Contributors:
 -------------
 
-- Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
-- David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
+- Sylvain Vidal (Author of service menu PDFktools).
+- David Baum (Service menu PDFktools bugfixer and author of the good idea
                                       of integrating PDFktools on "PDF Tools").
-- Victor Guardiola <victor.guardiola@gmail.com> (Improved source code for "Mount ISO Image"
+- Victor Guardiola (Improved source code for "Mount ISO Image"
                                                  and "Umount ISO Image" services menu;
                                                  fixed the problem of [dir|file]name with whitespaces).
-- Vasyl V. Vercynskyj <fuckel@ukr.net> (Translations to Russian and Ukrainian languages).
-- Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
-- Bruce Zhang <zttt183525594@gmail.com> (Translations to Chinese language).
+- Vasyl V. Vercynskyj (Translations to Russian and Ukrainian languages).
+- Pawan Yadav (Research for KF5 support).
+- Bruce Zhang (Translations to Chinese language).
 
 Steps for install source code from terminal:
 --------------------------------------------
