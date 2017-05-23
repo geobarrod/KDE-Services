@@ -3,18 +3,18 @@ Description:
 
 Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE [4.x|5.x].
 
-- - Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
-- "Add Timestamp Prefix to [File|Dir]name"
-- "Change Timestamp to [File|Directory]"
-- "Send by Email"
-- "[Audio|Video] Info" (it is shown only when clicked any audio/video file)
-- "Show [File|Directory] Status"
-- "Change Owner Here" (owner and permission of file/dir)
-- "Text Replace" (it is shown only when clicked any text file)
-- "Compressed File Integrity Check" (it is shown only when clicked any compressed file)
-- "MKV Extract Subtitle" (it is shown only when clicked MKV video file)
-- "Multiplex Subtitle" (only support MPEG-2 video file)(it is shown only when clicked MPG video file)
-- "[File|Dir]name Whitespace Replace" (by underscore ASCII)(it is shown when clicked an directory)
+- Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir):
+- - "Add Timestamp Prefix to [File|Dir]name"
+- - "Change Timestamp to [File|Directory]"
+- - "Send by Email"
+- - "[Audio|Video] Info" (it is shown only when clicked any audio/video file)
+- - "Show [File|Directory] Status"
+- - "Change Owner Here" (owner and permission of file/dir)
+- - "Text Replace" (it is shown only when clicked any text file)
+- - "Compressed File Integrity Check" (it is shown only when clicked any compressed file)
+- - "MKV Extract Subtitle" (it is shown only when clicked MKV video file)
+- - "Multiplex Subtitle" (only support MPEG-2 video file)(it is shown only when clicked MPG video file)
+- - "[File|Dir]name Whitespace Replace" (by underscore ASCII)(it is shown when clicked an directory)
 
 - Submenu "AVI Tools" (it is shown only when clicked AVI video file)
 - "Split (to size)"
