@@ -3,8 +3,8 @@ Description:
 
 Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE [4.x|5.x].
 
-- Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
--	"Add Timestamp Prefix to [File|Dir]name"
+- - Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
+- "Add Timestamp Prefix to [File|Dir]name"
 - "Change Timestamp to [File|Directory]"
 - "Send by Email"
 - "[Audio|Video] Info" (it is shown only when clicked any audio/video file)
