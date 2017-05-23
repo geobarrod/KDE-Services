@@ -156,7 +156,7 @@ download-ultra-hd-4k() {
 	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 266|xargs -n1|grep MiB)"
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 266+bestaudio -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 266+best -c -i -R infinite \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -172,7 +172,7 @@ download-ultra-hd-2k() {
 	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 264|xargs -n1|grep MiB)"
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 264+bestaudio -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 264+best -c -i -R infinite \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -188,7 +188,7 @@ download-full-hd() {
 	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 137|xargs -n1|grep MiB)"
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 137+bestaudio -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 137+best -c -i -R infinite \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -204,7 +204,7 @@ download-hd() {
 	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 136|xargs -n1|grep MiB)"
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 136+bestaudio -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 136+best -c -i -R infinite \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -220,7 +220,7 @@ download-full-wvga(){
 	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 135|xargs -n1|grep MiB)"
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 135+bestaudio -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 135+best -c -i -R infinite \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -236,7 +236,7 @@ download-nhd() {
 	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134|xargs -n1|grep MiB)"
 	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 134+bestaudio -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 134+best -c -i -R infinite \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?

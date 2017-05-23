@@ -54,7 +54,7 @@ Name[x-test]=xxMD5 (strong)xx
 [Desktop Action SHA1-Sum]
 Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum SHA1" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha1sum "$file" > $(ls $file).sha1; sed -i "s; ${file%/*}/;*;" $(ls $file).sha1; kdialog --icon=ks-checksum --title="CheckSum SHA1" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
 Icon=ks-checksum
-Name=SHA1 (Good Strong)
+Name=SHA1 (good strong)
 Name[de]=SHA1 (sehr stark)
 Name[es]=SHA1 (bien fuerte)
 Name[fr]=SHA1 (bien fort)
