@@ -3,7 +3,7 @@ Description:
 
 Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE [4.x|5.x].
 
-Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
+- Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
              - "Add Timestamp Prefix to [File|Dir]name"
              - "Change Timestamp to [File|Directory]"
              - "Send by Email"
@@ -16,33 +16,33 @@ Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
              - "Multiplex Subtitle" (only support MPEG-2 video file)(it is shown only when clicked MPG video file)
              - "[File|Dir]name Whitespace Replace" (by underscore ASCII)(it is shown when clicked an directory)
 
-Submenu "AVI Tools" (it is shown only when clicked AVI video file)
+- Submenu "AVI Tools" (it is shown only when clicked AVI video file)
              - "Split (to size)"
              - "Split (by time range)"
 
-Submenu "Android Tools" (it is shown when clicked an directory)
+- Submenu "Android Tools" (it is shown when clicked an directory)
              - "Android Backup Manager" (backup or restore all device applications and data)
              - "Android File Manager" (copy file/dir from/to device)
              - "Android Package Manager" (install/uninstall *.apk applications)
              - "Android Reboot Manager" (reboots the device, optionally into the bootloader or recovery program)
 
-Submenu "Backup Tools" (it is shown when clicked an directory)
+- Submenu "Backup Tools" (it is shown when clicked an directory)
              - "Standards" (backup/restore directories /etc/ and /root/ or GnuPG, FileZilla, Firefox, Chrome,
                             KDE, KDE-Services, Pidgin, SSH, Thunderbird, Wine and X-Moto user configurations)
 
-Submenu "CheckSum Tools" (it is shown when clicked any file)
+- Submenu "CheckSum Tools" (it is shown when clicked any file)
              - "MD5 (strong)"
              - "SHA1 (good strong)"
              - "SHA256 (very strong)"
              - "SHA512 (high strong)"
              - "Verify CheckSum" (checksum file *.md5/*.sha1/*.sha256/*.sha512)
 
-Submenu "Dolphin Tools" (it is shown when clicked an directory)
+- Submenu "Dolphin Tools" (it is shown when clicked an directory)
              - "Connect to" (FTP/SFTP/SMB protocol)
              - "Registered Servers" (show or edit IP/Hostname previously connected)
              - "Disk Space Used"
 
-Submenu "Dropbox Tools" (it is shown when clicked an directory)
+- Submenu "Dropbox Tools" (it is shown when clicked an directory)
              - "Copy to Dropbox"
              - "Move to Dropbox"
              - "Copy to Public Dropbox and get URL"
@@ -54,7 +54,7 @@ Submenu "Dropbox Tools" (it is shown when clicked an directory)
              - "Stop Dropbox service"
              - "Enable autostart Dropbox service"
 
-Submenu "Graphic Tools" (it is shown only when clicked any image file)
+- Submenu "Graphic Tools" (it is shown only when clicked any image file)
              - "The Converter" (from several image file formats to BMP, EPS, GIF, ICO, JPEG, JPEG 2000, PBM,
                                 PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM)
              - "The Sizer" (resize custom image frame width)
@@ -91,7 +91,7 @@ Submenu "Graphic Tools" (it is shown only when clicked any image file)
              - "7680x4800 (whuxga)"
              - "8192x4320 (8k)"
 
-Submenu "ISO-9660 Image Tools" (it is shown only when clicked ISO-9660 image file)
+- Submenu "ISO-9660 Image Tools" (it is shown only when clicked ISO-9660 image file)
              - "Mount ISO-9660 Image"
              - "Unmount ISO-9660 Image"
              - "Integrity Check"
@@ -104,13 +104,13 @@ Submenu "ISO-9660 Image Tools" (it is shown only when clicked ISO-9660 image fil
              - "Show ISO-9660 Image Info"
              - "Show Optical Drive Info"
 
-Submenu "Midnight Tools" (it is shown when clicked an directory)
+- Submenu "Midnight Tools" (it is shown when clicked an directory)
              - "[Root ~]# mc" (shell file manager GNU Midnight Commander with superuser privileges)
              - "[Root ~]# mcedit" (internal file editor of GNU Midnight Commander with superuser privileges)
              - "[User ~]$ mc" (shell file manager GNU Midnight Commander with user privileges)
              - "[User ~]$ mcedit" (internal file editor of GNU Midnight Commander with user privileges)
 
-Submenu "Multimedia Tools" (it is shown when clicked an directory)
+- Submenu "Multimedia Tools" (it is shown when clicked an directory)
              - "DVD Assembler" (with menu)
              - "Convert Video Files" (from several video file formats to MPEG-1, MPEG-2, MPEG-4, AVI,
                                       VCD, SVCD, DVD, 3GP, FLV or WebM)
@@ -128,12 +128,12 @@ Submenu "Multimedia Tools" (it is shown when clicked an directory)
              - "Record My Desktop" (record video screen)
              - "Play Video from Here" (play video files list from selected directory)
 
-Submenu "Network Tools" (it is shown when clicked an directory)
+- Submenu "Network Tools" (it is shown when clicked an directory)
              - "Connect Sentry" (show every established connection to previously selected ports)
              - "HTTP Server" (from selected directory)
              - "Listening Sockets"
 
-Submenu "PDF Tools" (it is shown only when clicked PDF file)
+- Submenu "PDF Tools" (it is shown only when clicked PDF file)
              - "Apply Owner Password (DRM)"
              - "Apply User Password (Encrypt)"
              - "Apply DRM + Encrypt"
@@ -150,7 +150,7 @@ Submenu "PDF Tools" (it is shown only when clicked PDF file)
              - "Split in Single Page per File"
              - "Information"
 
-Submenu "Package Tools" (it is shown only when clicked SRPM/RPM file)
+- Submenu "Package Tools" (it is shown only when clicked SRPM/RPM file)
              - "Show Changelog"
              - "Show Info"
              - "List Content"
@@ -160,7 +160,7 @@ Submenu "Package Tools" (it is shown only when clicked SRPM/RPM file)
              - "Extract Files Here"
              - "Integrity Check"
 
-Submenu "SSH Tools" (it is shown when clicked an directory)
+- Submenu "SSH Tools" (it is shown when clicked an directory)
              - "Public Key Generation" (1st mandatory step before connect to remote server)
              - "Install Public Key" (2nd mandatory step before connect to remote server)
              - "Connect to Remote Server"
@@ -169,11 +169,11 @@ Submenu "SSH Tools" (it is shown when clicked an directory)
                                                   in local filesystem)
              - "Registered Servers" (show or edit IP/Hostname previously connected)
 
-Submenu "SaMBa Tools" (it is shown when clicked an directory)
+- Submenu "SaMBa Tools" (it is shown when clicked an directory)
              - "SaMBa Shares Mounter" (mount/unmount remote shared directory over SMB protocol
                                        in local filesystem)
 
-Submenu "Search Tools" (it is shown when clicked an directory)
+- Submenu "Search Tools" (it is shown when clicked an directory)
              - "Search Here" (recursively starting from the selected directory)
              - "Search by Name" (file/dir name on all filesystem)
              - "Search by String" (recursively starting from the selected directory into file content)
@@ -182,20 +182,20 @@ Submenu "Search Tools" (it is shown when clicked an directory)
              - "Modified Files Here" (recursively starting from the selected directory
                                       showing all modified files for the 2nd time that is executed)
 
-Submenu "Security Tools" (it is shown when clicked an directory)
+- Submenu "Security Tools" (it is shown when clicked an directory)
              - "Mount Encrypted Directory" (mount an encrypted virtual filesystem
                                             from the selected directory)
              - "Unmount Encrypted Directory" (unmount an encrypted virtual filesystem
                                               from the selected mountpoint directory)
              - "Encrypt Directory" (create an encrypted virtual filesystem in the selected directory)
 
-Submenu "Security Tools" (it is shown when clicked any file)
+- Submenu "Security Tools" (it is shown when clicked any file)
              - "Secure Send to Mailx" (file as email attachment; need SMTP service running in localhost)
              - "Encrypt"
              - "Decrypt"
              - "Paranoid Shredder" (delete files in a very safe way)
 
-Submenu "System Tools" (it is shown when clicked an directory)
+- Submenu "System Tools" (it is shown when clicked an directory)
              - "Build Custom Kernel" (customize the system kernel easily, increasing the system performance
                                       and/or adding more hardware support, only for distros based on RHEL)
              - "Check Kernel Update" (only for distros based on RHEL)
@@ -206,11 +206,11 @@ Submenu "System Tools" (it is shown when clicked an directory)
              - "Process Viewer"
              - "Xorg Configure" (create a configuration file for X11R7 X server)
 
-Submenu "Terminal Tools" (it is shown only when clicked shell scripts/apps file)
+- Submenu "Terminal Tools" (it is shown only when clicked shell scripts/apps file)
              - "Run Application"
              - "Run Application (Root)"
 
-Submenu "YouTube Tools" (it is shown when clicked an directory)
+- Submenu "YouTube Tools" (it is shown when clicked an directory)
              - "Video Downloader"
              - "Video List Code Collector"
 
@@ -300,16 +300,16 @@ Requirements:
 Steps for install source code from terminal:
 --------------------------------------------
 
-1- tar xf kde-services-3.0.1.tar.bz2
-2- cd kde-services-3.0.1
-3- sudo make install
+- 1- tar xf kde-services-3.0.1.tar.bz2
+- 2- cd kde-services-3.0.1
+- 3- sudo make install
 
 Steps for uninstall source code from terminal:
 ----------------------------------------------
 
-1- tar xf kde-services-3.0.1.tar.bz2
-2- cd kde-services-3.0.1
-3- sudo make uninstall
+- 1- tar xf kde-services-3.0.1.tar.bz2
+- 2- cd kde-services-3.0.1
+- 3- sudo make uninstall
 
 Screenshot
 ----------
