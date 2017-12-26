@@ -117,6 +117,16 @@ cat > /tmp/about_kde-services << EOF
                                  - "Show ISO-9660 Image Info"
                                  - "Show Optical Drive Info"
 
+                    Submenu "MEGA Tools" (it is shown when clicked any file/dir)
+                                 - "Register New Account"
+                                 - "Save User Login Credentials"
+                                 - "Show Available Cloud Space"
+                                 - "Create New Remote Folder"
+                                 - "List Files Stored in Cloud"
+                                 - "Remove Files Stored in Cloud"
+                                 - "Upload Files to Cloud"
+                                 - "Synchronize [from|to] Cloud"
+
                     Submenu "Midnight Tools" (it is shown when clicked an directory)
                                  - "[Root ~]# mc" (shell file manager GNU Midnight Commander with superuser privileges)
                                  - "[Root ~]# mcedit" (internal file editor of GNU Midnight Commander with superuser privileges)
@@ -262,6 +272,7 @@ cat > /tmp/about_kde-services << EOF
                     - lynx
                     - mailx
                     - mc
+                    - megatools
                     - mkvtoolnix
                     - mlocate
                     - mp3gain
@@ -318,6 +329,8 @@ cat > /tmp/about_kde-services << EOF
                     - Vasyl V. Vercynskyj <fuckel@ukr.net> (Translations to Russian and Ukrainian languages).
                     - Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
                     - Bruce Zhang <zttt183525594@gmail.com> (Translations to Chinese language).
+                    - Daniele Scasciafratte <mte90@linux.it> (Translations to Italian language).
+                    - Manuel Tancoigne <m.tancoigne@gmail.com> (Translations to French language).
 
             License:
                     GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)

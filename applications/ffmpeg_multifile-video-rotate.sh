@@ -37,7 +37,7 @@ if-cancel-exit() {
 
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
-        kdialog --icon=ks-error --title="Rotting video file ${i##*/} to $ANGLE" \
+        kdialog --icon=ks-error --title="Rotating video file ${i##*/} to $ANGLE" \
                        --passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
         mv $LOG $DESTINATION/$LOGERROR
         continue
@@ -58,7 +58,7 @@ progressbar-close() {
 }
 
 qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Rotting video file:  ${i##*/}  [$COUNT/$((COUNTFILES-1))]"
+    qdbus $DBUSREF setLabelText "Rotating video file:  ${i##*/}  [$COUNT/$((COUNTFILES-1))]"
     qdbus $DBUSREF Set "" value $COUNT
 }
 

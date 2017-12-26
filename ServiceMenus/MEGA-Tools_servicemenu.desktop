@@ -1,0 +1,140 @@
+[Desktop Entry]
+Actions=RegisterNewAccount;SaveUserLoginCredentials;_SEPARATOR_;ShowCloudSpace;CreateRemoteFolder;ListFileStored;RemoveFileStored;UploadFile;SyncDirectoryTree;
+Icon=ks-mega
+MimeType=all/all;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+X-KDE-Submenu=MEGA Tools
+X-KDE-Submenu[de]=MEGA Werkzeuge
+X-KDE-Submenu[es]=MEGA - Herramientas
+X-KDE-Submenu[fr]=Outils MEGA
+X-KDE-Submenu[it]=MEGA - Strumenti
+X-KDE-Submenu[ja]=MEGA 道具
+X-KDE-Submenu[ko]=MEGA 도구
+X-KDE-Submenu[pt]=MEGA - Ferramentas
+X-KDE-Submenu[ru]=Инструменты MEGA
+X-KDE-Submenu[uk]=Інструменти MEGA
+X-KDE-Submenu[zh_CN]=MEGA 工具
+X-KDE-Submenu[x-test]=xxMEGA Toolsxx
+
+[Desktop Action RegisterNewAccount]
+Exec=which megareg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Register New Account" --passivepopup="[Error] Please install megareg command and try again."; exit 1; else /usr/share/applications/MEGA_Tools-main.sh register_new_account %F;fi
+Icon=ks-mega
+Name=Register New Account
+Name[de]=Neuen Account Registrieren
+Name[es]=Registrar Nueva Cuenta
+Name[fr]=Créer un nouveau compte
+Name[it]=Registra un Nuovo Account
+Name[ja]=新しいアカウントを登録する
+Name[ko]=새로운 계정 등록
+Name[pt]=Registre Nova Conta
+Name[ru]=Зарегистрировать новую учётную запись
+Name[uk]=Зареєструвати новий обліковий запис
+Name[zh_CN]=注册新帐户
+
+[Desktop Action SaveUserLoginCredentials]
+Exec=/usr/share/applications/MEGA_Tools-main.sh save_user_login_credentials %F
+Icon=ks-mega
+Name=Save User Login Credentials
+Name[de]=Benutzeranmeldeinformationen Speichern
+Name[es]=Guardar Credenciales de Inicio de Sesión
+Name[fr]=Enregistrer les informations de connexion
+Name[it]=Salva Credenziali di Accesso
+Name[ja]=ユーザーログイン資格情報を保存する
+Name[ko]=사용자 로그인 자격 증명 저장
+Name[pt]=Salvar as Credenciais de Login
+Name[ru]=Сохранить учетные данные пользователя
+Name[uk]=Зберегти облікові дані користувача
+Name[zh_CN]=保存用户登录凭证
+
+[Desktop Action ShowCloudSpace]
+Exec=which megadf; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Available Cloud Space" --passivepopup="[Error] Please install megadf command and try again."; exit 1; else /usr/share/applications/MEGA_Tools-main.sh show_cloud_space %F;fi
+Icon=ks-mega
+Name=Show Available Cloud Space
+Name[de]=Zeigen Sie Verfügbaren Cloud-Speicher
+Name[es]=Mostrar Espacio Disponible en la Nube
+Name[fr]=Afficher l'Espace Disponible dans le Cloud
+Name[it]=Mostra lo Spazio Disponibile in Cloud
+Name[ja]=利用可能な雲の空間を表示する
+Name[ko]=사용 가능한 클라우드 공간 표시
+Name[pt]=Mostrar Espaço Disponível na Nuvem
+Name[ru]=Показать свободное место в облаке
+Name[uk]=Показати вільне місце у хмарі
+Name[zh_CN]=显示可用的云空间
+
+[Desktop Action CreateRemoteFolder]
+Exec=which megamkdir; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Create New Remote Folder" --passivepopup="[Error] Please install megamkdir command and try again."; exit 1; else /usr/share/applications/MEGA_Tools-main.sh create_remote_folder %F;fi
+Icon=ks-mega
+Name=Create New Remote Folder
+Name[de]=Erstellen Sie Einen Neuen Remote-Ordner
+Name[es]=Crear Nueva Carpeta Remota
+Name[fr]=Créer un Nouveau Dossier Distant
+Name[it]=Crea Nuova Cartella Remota
+Name[ja]=新しいリモートフォルダを作成する
+Name[ko]=새 원격 폴더 만들기
+Name[pt]=Criar Nova Pasta Remota
+Name[ru]=Создать новую удаленную папку
+Name[uk]=Створити нову віддалену теку
+Name[zh_CN]=创建新的远程文件夹
+
+[Desktop Action ListFileStored]
+Exec=which megals; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="List Files Stored in Cloud" --passivepopup="[Error] Please install megals command and try again."; exit 1; else /usr/share/applications/MEGA_Tools-main.sh list_file_stored %F;fi
+Icon=ks-mega
+Name=List Files Stored in Cloud
+Name[de]=Listet Dateien auf, die in der Cloud Gespeichert Sind
+Name[es]=Listar Archivos Almacenados en la Nube
+Name[fr]=Liste des Fichiers Stockés dans le Cloud
+Name[it]=Elenco di File Salvati in Cloud
+Name[ja]=クラウドに格納されているファイルを一覧表示する
+Name[ko]=클라우드에 저장된 파일 나열
+Name[pt]=Lista de Arquivos Armazenados na Nuvem
+Name[ru]=Список файлов в облаке
+Name[uk]=Список файлів у хмарі
+Name[zh_CN]=列出存储在云中的文件
+
+[Desktop Action RemoveFileStored]
+Exec=which megarm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Remove Files Stored in Cloud" --passivepopup="[Error] Please install megarm command and try again."; exit 1; else /usr/share/applications/MEGA_Tools-main.sh remove_file_stored %F;fi
+Icon=ks-mega
+Name=Remove Files Stored in Cloud
+Name[de]=Entfernen Sie in der Cloud gespeicherte Dateien
+Name[es]=Eliminar Archivos Almacenados en la Nube
+Name[fr]=Supprimer des Fichiers Stockés dans le Cloud
+Name[it]=Rimuovi i File Salvati in Cloud
+Name[ja]=クラウドに保存されているファイルを削除する
+Name[ko]=클라우드에 저장된 파일 제거
+Name[pt]=Excluir Arquivos Armazenados na Nuvem
+Name[ru]=Удалить файлы в облаке
+Name[uk]=Видалити файли у хмарі
+Name[zh_CN]=删除存储在云中的文件
+
+[Desktop Action UploadFile]
+Exec=which megaput; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Upload Files to Cloud" --passivepopup="[Error] Please install megaput command and try again."; exit 1; else /usr/share/applications/MEGA_Tools-main.sh upload_file %F;fi
+Icon=ks-mega
+Name=Upload Files to Cloud
+Name[de]=Laden Sie Dateien in den Cloud hoch
+Name[es]=Subir Archivos al Almacenamiento en la Nube
+Name[fr]=Envoyer des Fichiers dans le Cloud
+Name[it]=Carica File su Cloud
+Name[ja]=クラウドストレージにファイルをアップロードする
+Name[ko]=클라우드 저장소에 파일 업로드
+Name[pt]=Carregar Arquivos para Armazenamento na Nuvem
+Name[ru]=Загрузить файлы в облако
+Name[uk]=Завантажити файли у хмару
+Name[zh_CN]=将文件上传到云存储
+
+[Desktop Action SyncDirectoryTree]
+Exec=which megacopy; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Synchronize [from|to] Cloud" --passivepopup="[Error] Please install megacopy command and try again."; exit 1; else /usr/share/applications/MEGA_Tools-main.sh sync_directory_tree %F;fi
+Icon=ks-mega
+Name=Synchronize [from|to] Cloud
+Name[de]=Synchronisieren Sie [von|zu] Cloud
+Name[es]=Sincronizar [desde|hacia] el Almacenamiento en la Nube
+Name[fr]=Synchroniser [à partir du|vers le] Cloud
+Name[it]=Sincronizza [da|a] Cloud
+Name[ja]=クラウドストレージを同期する
+Name[ko]=클라우드 저장소와 동기화
+Name[pt]=Sincronização [de|para] Armazenamento em Nuvem
+Name[ru]=Синхронизировать c облаком [из|в]
+Name[uk]=Синхронізувати з хмарою [з|у]
+Name[zh_CN]=同步[从|到]云存储

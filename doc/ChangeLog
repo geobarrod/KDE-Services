@@ -1,3 +1,20 @@
+* Sun Dec 24 2017 Geovani B. R. <igeo.cu@gmail.com> 3.0.2
+- Adjusted standard properties of all SVGz icons.
+- Fixed Italian translation.
+- "Dolphin Tools": Enhancement for "Disk Space Used".
+- "Rotate Video Files": Fixed progress bar typo.
+- Fixed French translation.
+- Added new submenu "MEGA Tools" on Dolphin's right click menu, with the following features:
+  > Register a new account.
+  > Save user login credentials to local environment for ServiceMenus autologin.
+  > Show available storage space.
+  > Create new remote folder.
+  > List files in Cloud stored.
+  > Remove files in Cloud stored.
+  > Upload files to Cloud.
+  > Synchronize directories tree from/to Cloud.
+- Happy New Year!.
+
 * Fri May 19 2017 Geovani B. R. <igeo.cu@gmail.com> 3.0.1
 - "CheckSum Tools": Fixed typo for "SHA1 (Good Strong)" service menu.
 - "Graphic Tools": Fixed, more coherent meaning for "scalable (icon)" service menu.

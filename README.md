@@ -104,6 +104,16 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 - > "Show ISO-9660 Image Info"
 - > "Show Optical Drive Info"
 
+- Submenu "MEGA Tools" (it is shown when clicked any file/dir)
+- > "Register New Account"
+- > "Save User Login Credentials"
+- > "Show Available Cloud Space"
+- > "Create New Remote Folder"
+- > "List Files Stored in Cloud"
+- > "Remove Files Stored in Cloud"
+- > "Upload Files to Cloud"
+- > "Synchronize [from|to] Cloud"
+
 - Submenu "Midnight Tools" (it is shown when clicked an directory):
 - > "[Root ~]# mc" (shell file manager GNU Midnight Commander with superuser privileges)
 - > "[Root ~]# mcedit" (internal file editor of GNU Midnight Commander with superuser privileges)
@@ -265,6 +275,7 @@ Requirements:
 - lynx
 - mailx
 - mc
+- megatools
 - mkvtoolnix
 - mlocate
 - mp3gain
@@ -309,19 +320,21 @@ Contributors:
 - Vasyl V. Vercynskyj (Translations to Russian and Ukrainian languages).
 - Pawan Yadav (Research for KF5 support).
 - Bruce Zhang (Translations to Chinese language).
+- Daniele Scasciafratte (Translations to Italian language).
+- Manuel Tancoigne (Translations to French language).
 
 Steps for install source code from terminal:
 --------------------------------------------
 
-- 1- tar xf kde-services-3.0.1.tar.bz2
-- 2- cd kde-services-3.0.1
+- 1- tar xf kde-services-3.0.2.tar.bz2
+- 2- cd kde-services-3.0.2
 - 3- sudo make install
 
 Steps for uninstall source code from terminal:
 ----------------------------------------------
 
-- 1- tar xf kde-services-3.0.1.tar.bz2
-- 2- cd kde-services-3.0.1
+- 1- tar xf kde-services-3.0.2.tar.bz2
+- 2- cd kde-services-3.0.2
 - 3- sudo make uninstall
 
 Screenshot

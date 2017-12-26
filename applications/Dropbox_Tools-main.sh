@@ -181,7 +181,7 @@ get_pub_url() {
 install_service() {
     BEGIN_TIME=$(date +%s)
     $DROPBOX start -i
-    $EXIT
+    EXIT=$?
     check_stderr
     FINAL_TIME=$(date +%s)
     ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

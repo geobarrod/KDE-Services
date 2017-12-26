@@ -3,10 +3,10 @@ Categories=Multimedia-Tools;
 Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh;fi
 Icon=ks-media-tape
 Name=Record My Desktop (record video screen)
-Name[de]=Desktop aufzuzeichnen (Bildschirm aufzuzeichnen)
+Name[de]=Desktop aufzuzeichnen (bildschirm aufzuzeichnen)
 Name[es]=Grabar Mi Escritorio (grabar pantalla de video)
-Name[fr]=Enregistrer le bureau (Vidéo)
-Name[it]=Registra il desktop (registra video)
+Name[fr]=Enregistrer le Bureau (vidéo)
+Name[it]=Registra la Mia Scrivania (registra schermo video)
 Name[ja]=私のデスクを記録するために (レコードビデオスクリーンに)
 Name[ko]=나의 책상을 기록한다 (ＣＲＴ 표시 화면 장치를 기록한다)
 Name[pt]=Registrar Minha Escrivaninha (registrar tela vídea)
