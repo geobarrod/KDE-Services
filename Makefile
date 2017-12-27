@@ -54,6 +54,7 @@ uninstall:
 		$(PREFIXmenu5)/Dropbox-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/Graphic-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/ISO-Image-Tools_servicemenu.desktop \
+		$(PREFIXmenu5)/MEGA-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/Midnight-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/MKV-Extract-Subtitle_addtoservicemenu.desktop \
 		$(PREFIXmenu5)/Multimedia-Tools_servicemenu.desktop \
@@ -88,6 +89,7 @@ uninstall:
 		$(PREFIXmenu)/Dropbox-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Graphic-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/ISO-Image-Tools_servicemenu.desktop \
+		$(PREFIXmenu)/MEGA-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Midnight-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/MKV-Extract-Subtitle_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Multimedia-Tools_servicemenu.desktop \
@@ -157,8 +159,9 @@ uninstall:
 		$(PREFIXapp)/HTTP_Server.sh \
 		$(PREFIXapp)/iso_manager-burn-image.sh \
 		$(PREFIXapp)/iso_manager-mount-image.sh \
-		$(PREFIXapp)/Midnight_Tools-mc.desktop \
+		$(PREFIXapp)/MEGA_Tools-main.sh \
 		$(PREFIXapp)/Midnight_Tools-mc-root.desktop \
+		$(PREFIXapp)/Midnight_Tools-mc.desktop \
 		$(PREFIXapp)/MKV_Extract-subtitle.sh \
 		$(PREFIXapp)/Multimedia_Tools-add-subtitle.desktop \
 		$(PREFIXapp)/Multimedia_Tools-audio-mp3-attach-cover.desktop \
@@ -273,6 +276,7 @@ uninstall:
 		$(PREFIXSVGicons)/ks-media-optical-umount.svgz \
 		$(PREFIXSVGicons)/ks-media-optical-video.svgz \
 		$(PREFIXSVGicons)/ks-media-tape.svgz \
+		$(PREFIXSVGicons)/ks-mega.svgz \
 		$(PREFIXSVGicons)/ks-menu.svgz \
 		$(PREFIXSVGicons)/ks-multiplexing-subs.svgz \
 		$(PREFIXSVGicons)/ks-optical-drive-info.svgz \
