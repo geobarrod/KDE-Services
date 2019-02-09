@@ -1,13 +1,14 @@
 [Desktop Entry]
-Actions=addTimestampFileModified;
+Actions=AddTimestampFileModified;
 Icon=ks-clock
 MimeType=all/all;
+ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
-X-KDE-AuthorizeAction=shell_access
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+X-KDE-StartupNotify=false
 X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
-[Desktop Action addTimestampFileModified]
+[Desktop Action AddTimestampFileModified]
 Comment=Adds the timestamp of last modified date of file
 Exec=mv "%f" "$(pwd)/$(date -r %f '+%%F')-$(basename %f)"
 Icon=ks-clock

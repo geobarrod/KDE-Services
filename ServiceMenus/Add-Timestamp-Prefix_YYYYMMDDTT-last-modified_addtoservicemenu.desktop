@@ -1,7 +1,7 @@
 [Desktop Entry]
 Actions=AddTimestamp;
 Icon=ks-clock
-MimeType=all/allfiles;inode/directory;
+MimeType=all/all;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-StartupNotify=false
