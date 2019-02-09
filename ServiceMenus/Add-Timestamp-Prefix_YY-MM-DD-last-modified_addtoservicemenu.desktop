@@ -10,6 +10,6 @@ X-KDE-Submenu=KDE-Services
 [Desktop Action addTimestampFileModified]
 Comment=Adds the timestamp of last modified date of file
 Exec=mv "%f" "$(pwd)/$(date -r %f '+%%F')-$(basename %f)"
-Icon=utilities-terminal
+Icon=ks-clock
 Name=Add Timestamp Prefix YYYY-MM-DD-... of file last modified to [File|Dir]name
 TryExec=konsole
