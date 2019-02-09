@@ -17,8 +17,9 @@ cat > /tmp/about_kde-services << EOF
                     Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE [4.x|5.x].
 
                     Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
-                                 - "Add Timestamp Prefix to [File|Dir]name"
-                                 - "Change Timestamp to [File|Directory]"
+                                 - "Add Timestamp Prefix YYYYMMDDTT... of file last modified to [File|Dir]name"
+                                 - "Add Timestamp Prefix YYYY-MM-DD-... of file last modified to [File|Dir]name"
+                                 - "Add Timestamp Prefix YYYY-MM-DD-... of today to [File|Dir]name"
                                  - "Send by Email"
                                  - "[Audio|Video] Info" (it is shown only when clicked any audio/video file)
                                  - "Show [File|Directory] Status"
@@ -305,7 +306,7 @@ cat > /tmp/about_kde-services << EOF
                     - youtube-dl
                     - zip
 
-            Author: 
+            Author:
                     Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>, Developer and Fedora RPM Maintainer.
 
             Language support:

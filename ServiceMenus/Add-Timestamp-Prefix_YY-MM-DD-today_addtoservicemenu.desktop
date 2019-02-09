@@ -1,0 +1,16 @@
+[Desktop Entry]
+Actions=AddTimestampToday;
+Icon=ks-clock
+MimeType=all/all;
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-StartupNotify=false
+X-KDE-Submenu=KDE-Services
+X-KDE-Submenu[x-test]=xxKDE-Servicesxx
+
+[Desktop Action AddTimestampToday]
+Comment=Adds the timestamp of today
+Exec=mv "%f" "$(pwd)/$(date '+%%F')-$(basename %f)"
+Icon=ks-clock
+Name=Add Timestamp Prefix YYYY-MM-DD-... of today to [File|Dir]name
+TryExec=konsole
