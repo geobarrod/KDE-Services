@@ -24,7 +24,7 @@ install:
 	mkdir -p $(PREFIXappmerge)
 	mkdir -p $(PREFIXdeskdir)
 	mkdir -p $(PREFIXdoc)
-	
+
 	cp ServiceMenus/* $(PREFIXmenu5)
 	cp servicetypes/* $(PREFIXservicetypes5)
 	cp ServiceMenus/* $(PREFIXmenu)
@@ -41,7 +41,9 @@ install:
 	xdg-desktop-menu forceupdate
 
 uninstall:
-	rm -f $(PREFIXmenu5)/Add-Timestamp-Prefix_addtoservicemenu.desktop \
+	rm -f $(PREFIXmenu5)/Add-Timestamp-Prefix_YYYYMMDDTT-last-modified_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Add-Timestamp-Prefix_YY-MM-DD-last-modified_addtoservicemenu.desktop \
+		$(PREFIXmenu5)/Add-Timestamp-Prefix_YY-MM-DD-today_addtoservicemenu.desktop \
 		$(PREFIXmenu5)/Android-Tools_servicemenu.desktop \
 		$(PREFIXmenu5)/Audio-Video-Info_addtoservicemenu.desktop \
 		$(PREFIXmenu5)/AVI-Tools_servicemenu.desktop \
@@ -76,7 +78,9 @@ uninstall:
 		$(PREFIXmenu5)/Text-Replace_addtoservicemenu.desktop \
 		$(PREFIXmenu5)/YouTube-Tools_servicemenu.desktop
 
-	rm -f $(PREFIXmenu)/Add-Timestamp-Prefix_addtoservicemenu.desktop \
+	rm -f $(PREFIXmenu)/Add-Timestamp-Prefix_YYYYMMDDTT-last-modified_addtoservicemenu.desktop \
+		$(PREFIXmenu)/Add-Timestamp-Prefix_YY-MM-DD-last-modified_addtoservicemenu.desktop \
+		$(PREFIXmenu)/Add-Timestamp-Prefix_YY-MM-DD-today_addtoservicemenu.desktop \
 		$(PREFIXmenu)/Android-Tools_servicemenu.desktop \
 		$(PREFIXmenu)/Audio-Video-Info_addtoservicemenu.desktop \
 		$(PREFIXmenu)/AVI-Tools_servicemenu.desktop \
@@ -335,4 +339,3 @@ uninstall:
 	update-mime-database /usr/share/mime > /dev/null
 	xdg-icon-resource forceupdate --theme hicolor
 	xdg-desktop-menu forceupdate
-
