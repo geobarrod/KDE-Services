@@ -10,6 +10,6 @@ X-KDE-Submenu=KDE-Services
 [Desktop Action addTimestampToday]
 Comment=Adds the timestamp of today
 Exec=mv "%f" "$(pwd)/$(date '+%%F')-$(basename %f)"
-Icon=utilities-terminal
+Icon=ks-clock
 Name=Add Timestamp Prefix YYYY-MM-DD-... of today to [File|Dir]name
 TryExec=konsole
