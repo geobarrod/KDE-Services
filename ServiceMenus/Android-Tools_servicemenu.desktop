@@ -19,7 +19,7 @@ Name[zh_CN]=Android 工具
 X-KDE-Submenu[x-test]=xxAndroid Toolsxx
 
 [Desktop Action ABM]
-Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Backup Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-backup-restore.sh %F;fi
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Backup Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else ~/.local/share/applications/Android_Tools-backup-restore.sh %F;fi
 Icon=ks-android-backup-restore
 Name=Android Backup Manager
 Name[de]=Android Sicherung
@@ -35,7 +35,7 @@ Name[zh_CN]=Android 备份管理器
 Name[x-test]=xxAndroid Backup Managerxx
 
 [Desktop Action AFM]
-Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android File Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-push-pull.sh %F;fi
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android File Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else ~/.local/share/applications/Android_Tools-push-pull.sh %F;fi
 Icon=ks-android-push-pull
 Name=Android File Manager
 Name[de]=Android Dateimanager
@@ -51,7 +51,7 @@ Name[zh_CN]=Android 文件管理器
 Name[x-test]=xxAndroid File Managerxx
 
 [Desktop Action APM]
-Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Package Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-apk-manager.sh %F;fi
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Package Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else ~/.local/share/applications/Android_Tools-apk-manager.sh %F;fi
 Icon=ks-android-apk-manager
 Name=Android Package Manager
 Name[de]=Paketverwalter für Android
@@ -67,7 +67,7 @@ Name[zh_CN]=Android 应用管理器
 Name[x-test]=xxAndroid Package Managerxx
 
 [Desktop Action ARM]
-Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Reboot Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else /usr/share/applications/Android_Tools-reboot.sh %F;fi
+Exec=which adb; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Android Reboot Manager" --passivepopup="[Error] Please install adb command and try again."; exit 1; else ~/.local/share/applications/Android_Tools-reboot.sh %F;fi
 Icon=ks-android-reboot
 Name=Android Reboot Manager
 Name[de]=Neustartassisstent für Android

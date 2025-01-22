@@ -19,7 +19,7 @@ X-KDE-Submenu[zh_CN]=YouTube 工具
 X-KDE-Submenu[x-test]=xxYouTube Toolsxx
 
 [Desktop Action Code-Collector]
-Exec=which lynx; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video List Code Collector" --passivepopup="[Error] Please install lynx command and try again."; exit 1; else /usr/share/applications/YouTube_Tools-video-code-collector.sh %F;fi
+Exec=which lynx; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video List Code Collector" --passivepopup="[Error] Please install lynx command and try again."; exit 1; else ~/.local/share/applications/YouTube_Tools-video-code-collector.sh %F;fi
 Icon=ks-youtube-video-code-collector
 Name=Video List Code Collector
 Name[de]=Video liste holen
@@ -35,7 +35,7 @@ Name[zh_CN]=视频列表编码收集
 Name[x-test]=xxVideo List Code Collectorxx
 
 [Desktop Action Video-Downloader]
-Exec=which youtube-dl; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video Downloader" --passivepopup="[Error] Please install youtube-dl command and try again."; exit 1; else /usr/share/applications/YouTube_Tools-download-video.sh %F;fi
+Exec=which youtube-dl; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video Downloader" --passivepopup="[Error] Please install youtube-dl command and try again."; exit 1; else ~/.local/share/applications/YouTube_Tools-download-video.sh %F;fi
 Icon=ks-youtube-download-video
 Name=Video Downloader
 Name[de]=Video Downloader

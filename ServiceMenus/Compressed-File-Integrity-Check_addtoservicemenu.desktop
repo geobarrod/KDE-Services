@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action CompressedFileIntegrityCheck]
-Exec=which lsar; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Compressed File Integrity Check" --passivepopup="[Error] Please install lsar command and try again."; exit 1; else /usr/share/applications/Compressed_file_integrity_check.sh %F;fi
+Exec=which lsar; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Compressed File Integrity Check" --passivepopup="[Error] Please install lsar command and try again."; exit 1; else ~/.local/share/applications/Compressed_file_integrity_check.sh %F;fi
 Icon=ks-compressed-file
 Name=Compressed File Integrity Check
 Name[de]=Komprimierte Datenintegrität prüfen

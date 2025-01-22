@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action ShowFileDirStatus]
-Exec=/usr/share/applications/Show_file-dir_status.sh
+Exec=~/.local/share/applications/Show_file-dir_status.sh
 Icon=ks-info
 Name=Show [File|Directory] Status
 Name[de]=[Datei|Verzeichnis] Status zeigen

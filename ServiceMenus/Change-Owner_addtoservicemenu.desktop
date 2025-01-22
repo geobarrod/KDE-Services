@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action ChangeOwner]
-Exec=kdesu -i ks-owner --noignorebutton -d /usr/share/applications/Dolphin_Tools-change-owner.sh %F
+Exec=kdesu -i ks-owner --noignorebutton -d ~/.local/share/applications/Dolphin_Tools-change-owner.sh %F
 Icon=ks-owner
 Name=Change Owner Here
 Name[de]=Eigentümer hier ändern

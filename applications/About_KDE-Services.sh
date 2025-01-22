@@ -1,20 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2013-2017.					#
+# For KDE-Services. 2013-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
-VERSION=$(head -n1 /usr/share/doc/kde-services*/ChangeLog |awk '{print $10}')
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+VERSION=$(head -n1 ~/.local/share/doc/kde-services*/ChangeLog |awk '{print $10}')
 
 cat > /tmp/about_kde-services << EOF
 
-                                                                      KDE-Services, version $VERSION, (C) 2011-2017.
-                                                                      http://sourceforge.net/projects/kde-services/
+                                                                                                 KDE-Services, version $VERSION, 🄯 2011-2025.
+                                                                                                          https://store.kde.org/p/998464/
+
+
+
 
             Description:
-                    Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE [4.x|5.x].
+                    Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE Plasma [5.x|6.x].
 
                     Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
                                  - "Add Timestamp Prefix to [File|Dir]name"
@@ -70,7 +73,7 @@ cat > /tmp/about_kde-services << EOF
                     Submenu "Graphic Tools" (it is shown only when clicked any image file)
                                  - "The Converter" (from several image file formats to BMP, EPS, GIF, ICO, JPEG, JPEG 2000, PBM,
                                  PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM)
-                                 - "The Sizer" (resize custom image frame width)
+                                 - "The Resizer" (customize the width of the image frame)
                                  - "16x16 (icon)"
                                  - "32x32 (icon)"
                                  - "48x48 (icon)"
@@ -237,6 +240,18 @@ cat > /tmp/about_kde-services << EOF
                                  - "Video Downloader"
                                  - "Video List Code Collector"
 
+            Language support:
+                    - Chinese
+                    - French
+                    - German
+                    - Italian
+                    - Japanese
+                    - Korean
+                    - Portuguese
+                    - Russian
+                    - Spanish
+                    - Ukrainian
+
             Required dependencies:
                     - android-tools
                     - bash
@@ -305,21 +320,6 @@ cat > /tmp/about_kde-services << EOF
                     - youtube-dl
                     - zip
 
-            Author: 
-                    Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>, Developer and Fedora RPM Maintainer.
-
-            Language support:
-                    - Chinese
-                    - French
-                    - German
-                    - Italian
-                    - Japanese
-                    - Korean
-                    - Portuguese
-                    - Russian
-                    - Spanish
-                    - Ukrainian
-
             Contributors:
                     - Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
                     - David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
@@ -332,11 +332,19 @@ cat > /tmp/about_kde-services << EOF
                     - Daniele Scasciafratte <mte90@linux.it> (Translations to Italian language).
                     - Manuel Tancoigne <m.tancoigne@gmail.com> (Translations to French language).
 
+            Author: 
+                    Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>, Developer.
+
             License:
                     GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007)
 
+            Donate:
+                    You can make a donation to support the overall efforts of the KDE-Services project author.
+                    The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+                    Thanks!
+
 EOF
 
-kdialog --icon=ks-menu --title="About KDE-Services" --textbox /tmp/about_kde-services 900 600 2> /dev/null
+kdialog --icon=ks-menu --title="About KDE-Services" --textbox /tmp/about_kde-services 888 555 2> /dev/null
 rm -f /tmp/about_kde-services
 exit 0

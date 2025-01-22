@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Dropbox-Tools;
-Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh autostart_service
 Icon=ks-dropbox
 Name=Enable autostart Dropbox service
 Name[de]=Dropbox beim Systemstart starten

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffprobe dvdauthor genisoimage; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="DVD Assembler" --passivepopup="[Error] Please install ffprobe, dvdauthor and genisoimage command and try again."; exit 1; else /usr/share/applications/DVD_Tools-d.v.d.-assembler.sh;fi
+Exec=which ffprobe dvdauthor genisoimage; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="DVD Assembler" --passivepopup="[Error] Please install ffprobe, dvdauthor and genisoimage command and try again."; exit 1; else ~/.local/share/applications/DVD_Tools-d.v.d.-assembler.sh;fi
 Icon=ks-media-optical-video
 Name=DVD Assembler
 Name[de]=DVD zusammenstellen
@@ -13,7 +13,7 @@ Name[pt]=Montador de DVD
 Name[ru]=DVD Сборщик
 Name[uk]=DVD Компанувальник
 Name[zh_CN]=DVD 生成器
-Path=/usr/share/applications
+Path=~/.local/share/applications
 StartupNotify=true
 Terminal=false
 Type=Application

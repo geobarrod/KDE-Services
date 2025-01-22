@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
 HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
 

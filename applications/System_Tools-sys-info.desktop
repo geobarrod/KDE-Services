@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=which dmidecode; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="System Information" --passivepopup="[Error] Please install dmidecode command and try again."; exit 1; else /usr/share/applications/System_Tools-sys-info.sh;fi
+Exec=which dmidecode; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="System Information" --passivepopup="[Error] Please install dmidecode command and try again."; exit 1; else ~/.local/share/applications/System_Tools-sys-info.sh;fi
 Icon=ks-hwinfo
 Name=System Information
 Name[de]=System Info

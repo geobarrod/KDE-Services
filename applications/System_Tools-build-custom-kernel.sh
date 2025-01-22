@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 GREEN='\E[32;40m'
 GREENRED='\E[32;41m'
 WHITE='\E[37;40m'
@@ -368,10 +368,10 @@ if [ "$EXIT" = "0" ]; then
     EXIT=$?
     if-cancel-exit2
     echo "-$BINOPT" > ~/.kde-services/kernel-cflags
-    sudo sed -i "s;-O2;-$BINOPT;g" Makefile
+    sudo sed -i "" "s;-O2;-$BINOPT;g" Makefile
 elif [ "$EXIT" = "1" ]; then
     BINOPT=$(cat ~/.kde-services/kernel-cflags 2> /dev/null)
-    sudo sed -i "s;-O2;$BINOPT;g" Makefile
+    sudo sed -i "" "s;-O2;$BINOPT;g" Makefile
 elif [ "$EXIT" = "2" ]; then
     if-cancel-exit
 fi

@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2012-2017.					#
+# For KDE-Services. 2012-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 DIR=""
 DISRES=$(xrandr -q|grep current|awk -F , '{print $2}'|awk '{print $2,$4}'|sed 's/ /x/')
 FILENAME=""

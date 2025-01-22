@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Dropbox-Tools;
-Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh stop_service
 Icon=ks-dropbox-off
 Name=Stop Dropbox service
 Name[de]=Dropboxdienst annhalten

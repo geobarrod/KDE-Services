@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PROTOCOL=""
 DIALOG=""
 
@@ -18,8 +18,8 @@ bookmark() {
         rm -f ~/.local/share/user-places.xbel*
     fi
     
-    sed -i "s;</xbel>;;g" ~/.local/share/user-places.xbel
-    sed -i "s;^</bookmark>;;" ~/.local/share/user-places.xbel
+    sed -i "" "s;</xbel>;;g" ~/.local/share/user-places.xbel
+    sed -i "" "s;^</bookmark>;;" ~/.local/share/user-places.xbel
     cat >> ~/.local/share/user-places.xbel << EOF
 <bookmark href="$PROTOCOL://$DIALOG/">
  <title>$(echo $PROTOCOL|tr a-z A-Z) - $DIALOG</title>

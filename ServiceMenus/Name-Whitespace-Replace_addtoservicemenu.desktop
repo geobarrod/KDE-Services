@@ -8,7 +8,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action NameWhitespaceReplace]
-Exec=/usr/share/applications/Dolphin_Tools-name-whitespace-replace.sh
+Exec=~/.local/share/applications/Dolphin_Tools-name-whitespace-replace.sh
 Icon=ks-whitespace-replace
 Name=[File|Dir]name Whitespace Replace
 Name[de]=Leerzeichen ersetzen von [Datei|Verzeichnis]

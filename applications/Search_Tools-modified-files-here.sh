@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2017.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 # What file did it modify now here?
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 TMP=/tmp/mfh
 DBUSREF=$(kdialog --icon=ks-search-name --title="Modified Files Here" --progressbar "                                       " /ProgressDialog)
 qdbus $DBUSREF setLabelText "Searching..."

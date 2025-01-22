@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Service menu for PDF Tools : script file
 # Adjusted for KDE-Services integration by Geovani Barzaga Rodriguez
 # <igeo.cu@gmail.com>, 2013-01-09
 # Improved bash script code by Geovani Barzaga Rodriguez <igeo.cu@gmail.com>, 2014-03-06
-# Update by Geovani Barzaga Rodriguez <igeo.cu@gmail.com>, 2017-02-19
+# Update by Geovani Barzaga Rodriguez <igeo.cu@gmail.com>, 2017-02-19, 2025-01-19.
 
 # This file is part of PDFktools.
 # PDFktools was created by Sylvain Vidal < garion @ mailoo.org >
@@ -25,7 +25,8 @@
 ######### INITIALIZATION #########
 export TEXTDOMAIN=pdfktools
 KDE="--title PDF_Tools --icon=ks-pdf"
-LOG="$(kde4-config --path tmp)pdfktools.log"
+TMP="/tmp/"
+LOG="${TMP}pdfktools.log"
 
 action=''
 kdbus='no'
@@ -253,7 +254,7 @@ case $action in
         for f in "$@"; do
 	    echo "$f in progress..." | tee -a $LOG
             obj="${f##*/}"
-            out="$(kde4-config --path tmp)$obj.txt"
+            out="${TMP}$obj.txt"
             file=$(file -bp "$f")
             echo -e "$f\n$file\n" > "${out}"
             metadata_view_all "$f"
@@ -277,16 +278,16 @@ case $action in
 	    init_dbus
 	    init_files_dbus
 	    qdbus $dbusRef setLabelText $"Splitting of $obj from the page $firstpage to the page $lastpage"
-            pdftops "$f" "$(kde4-config --path tmp)$obj.ps" | tee -a $LOG
+            pdftops "$f" "${TMP}$obj.ps" | tee -a $LOG
             error_log $"Error during the conversion of $obj into a PS file"
-            ps2pdf14 -dPDFSETTINGS=/prepress "$(kde4-config --path tmp)$obj.ps" "$(kde4-config --path tmp)$obj.pdf" | tee -a $LOG
+            ps2pdf14 -dPDFSETTINGS=/prepress "${TMP}$obj.ps" "${TMP}$obj.pdf" | tee -a $LOG
             error_log $"Error during the conversion of $obj into a PDF file without bookmark"
             for p in $(seq $firstpage $lastpage); do
                 out="${f%%.pdf}_$p.pdf"
-                ghostscript_pages "$(kde4-config --path tmp)$obj.pdf" $p $p | tee -a $LOG
+                ghostscript_pages "${TMP}$obj.pdf" $p $p | tee -a $LOG
                 error_log $"Error during the split of $obj"
             done
-            rm "$(kde4-config --path tmp)$obj.ps" "$(kde4-config --path tmp)$obj.pdf"
+            rm "${TMP}$obj.ps" "${TMP}$obj.pdf"
 	    qdbus $dbusRef close
         done
 	notification_dbus ;;

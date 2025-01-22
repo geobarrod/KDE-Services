@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2012-2016.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
+# For KDE-Services. 2012-2025.                                  #
+# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>              #
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 VCODE=""
-DBUSREF=""
+PB_PIDFILE="/tmp/YouTube_Tools-video-code-collector-progressbar.pid"
 
 URL=$(kdialog --icon=ks-youtube-video-code-collector --title="Youtube Video List Code Collector" --inputbox="Enter URL YouTube videos list." \
     2> /dev/null)
@@ -21,11 +21,12 @@ fi
 ###################################
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=ks-youtube-video-code-collector --title="Youtube Video List Code Collector" --progressbar "           " /ProcessDialog)
+    kdialog --icon=ks-youtube-video-code-collector --title="Youtube Video List Code Collector" --progressbar "           " /ProcessDialog)|grep -o '[[:digit:]]*' > $PB_PIDFILE
 }
 
-progressbar-close() {
-    qdbus $DBUSREF close
+progressbar-stop() {
+	kill $(cat $PB_PIDFILE)
+	rm $PB_PIDFILE
 }
 
 ##############################
@@ -40,13 +41,10 @@ mkdir -p $HOME/.kde-services
 touch $HOME/.kde-services/youtube-video-codes
 
 progressbar-start
-qdbus $DBUSREF setLabelText "Checking Availability..."
-sleep 3
-
 lynx -source "$URL"
 
 if [ "$?" != "0" ]; then
-    progressbar-close
+    progressbar-stop
     kdialog --icon=ks-error --title="Youtube Video List Code Collector" \
                    --passivepopup="[Error]   Check network connection to URL:  $URL"
     exit 0
@@ -56,12 +54,10 @@ VCODE="$(lynx -source "$URL"|grep -o "watch?v=..........."|sed -e 's/^watch?v=//
 
 if [ "$VCODE" != "" ]; then
     echo "$VCODE" > $HOME/.kde-services/youtube-video-codes
-    qdbus $DBUSREF setLabelText "Youtube video codes are captured. Launching YouTube Video Downloader..."
-    sleep 3
-    progressbar-close
-    /usr/share/applications/YouTube_Tools-download-video.sh
+    progressbar-stop
+    ~/.local/share/applications/YouTube_Tools-download-video.sh
 else
-    progressbar-close
+    progressbar-stop
     kdialog --icon=ks-warning --title="Youtube Video List Code Collector" \
                    --passivepopup="[Warning]   Not find YouTube video codes on this URL:  $URL"
 fi

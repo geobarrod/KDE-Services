@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=which gcc make ccache rpmbuild rpm yum yumdownloader yum-builddep rpmdev-setuptree; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Build Custom Kernel" --passivepopup="[Error] Please install ccache, gcc, make, rpm. rpmbuild, rpmdev-setuptree, yum-builddep, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh;fi
+Exec=which gcc make ccache rpmbuild rpm yum yumdownloader yum-builddep rpmdev-setuptree; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Build Custom Kernel" --passivepopup="[Error] Please install ccache, gcc, make, rpm. rpmbuild, rpmdev-setuptree, yum-builddep, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel" -bg black -fg white -e ~/.local/share/applications/System_Tools-build-custom-kernel.sh;fi
 Icon=ks-kernel-rebuild
 Name=Build Custom Kernel
 Name[de]=Eigenen Kernel bauen

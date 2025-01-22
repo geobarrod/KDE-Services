@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PID="/tmp/connect-sentry.pid"
 CHECKPID=$(ps -p $(cat $PID 2> /dev/null) 2> /dev/null|grep Network_Tools|awk -F " " '{print $1}')
 
@@ -34,8 +34,8 @@ if [ "$STATE" = "Enabled" ]; then
           --inputbox="Enter ports number separate by comma to monitor it" $SHOWPORTS 2> /dev/null)
     if-cancel-exit
     echo -n $PORTS > ~/.kde-services/ports
-    sed -i -e "s;,; or sport = :;g" ~/.kde-services/ports
-    sed -i -e "s;^;sport = :;g" ~/.kde-services/ports
+    sed -i "" -e "s;,; or sport = :;g" ~/.kde-services/ports
+    sed -i "" -e "s;^;sport = :;g" ~/.kde-services/ports
     echo -n > /tmp/timestamp
     echo -n > /tmp/timestamp2
     MYPORTS=$(cat ~/.kde-services/ports)

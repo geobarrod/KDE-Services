@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action MultiplexSubtitle]
-Exec=which ffprobe recode spumux; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Multiplex Subtitle" --passivepopup="[Error] Please install ffprobe, recode and spumux command and try again."; exit 1; else /usr/share/applications/Multiplex_Subtitle.sh %F;fi
+Exec=which ffprobe recode spumux; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Multiplex Subtitle" --passivepopup="[Error] Please install ffprobe, recode and spumux command and try again."; exit 1; else ~/.local/share/applications/Multiplex_Subtitle.sh %F;fi
 Icon=ks-multiplexing-subs
 Name=Multiplex Subtitle
 Name[de]=Mehrsprachige Untertitel

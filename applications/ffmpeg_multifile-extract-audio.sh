@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 DESTINATION=""
 DIR=""
 PID="$$"
@@ -66,7 +66,7 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $FILES|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=ks-audio --title="[Extract|Convert] Audio Track" --progressbar "				" $COUNTFILES)
+    DBUSREF=$(kdialog --icon=ks-audio --title="Extract|Convert Audio Track" --progressbar "				" $COUNTFILES)
 }
 
 progressbar-close() {
@@ -82,15 +82,15 @@ qdbusinsert() {
 
 elapsedtime() {
     if [ "$ELAPSED_TIME" -lt "60" ]; then
-        kdialog --icon=ks-audio --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
                        --passivepopup="[Finished]  ${i##*/}   Elapsed Time: ${ELAPSED_TIME}s"
     elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-        kdialog --icon=ks-audio --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}m"
     elif [ "$ELAPSED_TIME" -gt "3599" ]; then
         ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-        kdialog --icon=ks-audio --title="[Extract|Convert] Audio Track" \
+        kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
                        --passivepopup="[Finished]   ${i##*/}   Elapsed Time: ${ELAPSED_TIME}h"
     fi
     rm -f $LOG
@@ -137,16 +137,16 @@ done
 
 DIR="$(pwd)"
 
-if [ "$DIR" == "/usr/share/applications" ]; then
+if [ "$DIR" == "~/.local/share/applications" ]; then
     DIR="~/"
 fi
 
-FILES=$(kdialog --icon=ks-audio --title="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv \
+FILES=$(kdialog --icon=ks-audio --title="Video|Audio Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv \
 	  *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav \
 	  *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
 if-cancel-exit
 
-FORMAT=$(kdialog --icon=ks-audio --title="[Extract|Convert] Audio Track" \
+FORMAT=$(kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
        --combobox="Choose Audio Encoder" FLAC "FLAC (432Hz)" MP3 "MP3 (432Hz)" OGG "OGG (432Hz)" --default "MP3 (432Hz)" 2> /dev/null)
 if-cancel-exit
 
@@ -154,7 +154,7 @@ DESTINATION=$(kdialog --icon=ks-audio --title="Destination Audio Files" --getexi
 if-cancel-exit
     
 if [ "$FORMAT" = "MP3 (432Hz)" ]; then
-    MODE=$(kdialog --icon=ks-audio --title="[Extract|Convert] Audio Track" \
+    MODE=$(kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
     progressbar-start
@@ -179,7 +179,7 @@ if [ "$FORMAT" = "MP3 (432Hz)" ]; then
         elapsedtime
     done
 elif [ "$FORMAT" = "MP3" ]; then
-    MODE=$(kdialog --icon=ks-audio --title="[Extract|Convert] Audio Track" \
+    MODE=$(kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
      --combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
     if-cancel-exit
     progressbar-start

@@ -68,7 +68,7 @@ Name[zh_CN]=信息
 Name[x-test]=xxInformationxx
 
 [Desktop Action pdfcompress]
-Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Compress" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -c %F;fi
+Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Compress" --passivepopup="[Error] Please install gs command and try again."; exit 1; else ~/.local/share/applications/PDFktools.sh -c %F;fi
 Icon=ks-resize-image
 Name=Compress
 Name[de]=Komprimieren
@@ -84,7 +84,7 @@ Name[zh_CN]=压缩
 Name[x-test]=xxCompressxx
 
 [Desktop Action pdfmerge]
-Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Merge Selected Files" --passivepopup="[Error] Please install gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -m %F;fi
+Exec=which gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Merge Selected Files" --passivepopup="[Error] Please install gs command and try again."; exit 1; else ~/.local/share/applications/PDFktools.sh -m %F;fi
 Icon=ks-pdf
 Name=Merge Selected Files
 Name[de]=Ausgewählte Dateien zusammenführen
@@ -100,7 +100,7 @@ Name[zh_CN]=合并所选文件
 Name[x-test]=xxMerge Selected Filesxx
 
 [Desktop Action pdfmetaedit]
-Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -me %F;fi
+Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else ~/.local/share/applications/PDFktools.sh -me %F;fi
 Icon=ks-text-plain
 Name=Edit Metadata
 Name[de]=Metadaten editieren
@@ -116,7 +116,7 @@ Name[zh_CN]=修改元数据
 Name[x-test]=xxEdit Metadataxx
 
 [Desktop Action pdfmetaview]
-Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="View Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -mv %F;fi
+Exec=which exiftool; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="View Metadata" --passivepopup="[Error] Please install exiftool command and try again."; exit 1; else ~/.local/share/applications/PDFktools.sh -mv %F;fi
 Icon=ks-text-plain
 Name=View Metadata
 Name[de]=Metadaten anzeigen
@@ -132,10 +132,10 @@ Name[zh_CN]=查看元数据
 Name[x-test]=xxview Metadataxx
 
 [Desktop Action pdfsplit]
-Exec=which exiftool pdftops ps2pdf14 gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Split in Single Page per File" --passivepopup="[Error] Please install exiftool, pdftops, ps2pdf14 and gs command and try again."; exit 1; else /usr/share/applications/PDFktools.sh -s %F;fi
+Exec=which exiftool pdftops ps2pdf14 gs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Split in Single Page per File" --passivepopup="[Error] Please install exiftool, pdftops, ps2pdf14 and gs command and try again."; exit 1; else ~/.local/share/applications/PDFktools.sh -s %F;fi
 Icon=ks-pdf
 Name=Split in Single Page per File
-Name[de]=Seiten in jeweils eine Dateie umwandeln
+Name[de]=Seiten in jeweils eine Dateie umwandeln 
 Name[es]=Cortar en Archivos de Una Sola Página
 Name[fr]=Éclater Un Fichier par Page
 Name[it]=Dividi i File per Pagina

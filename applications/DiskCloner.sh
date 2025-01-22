@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2014-2016.					#
+# For KDE-Services. 2014-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 DIR=""
 DEVICE=""
 DESTINATION=""
@@ -65,7 +65,7 @@ DIR=$1
 cd "$DIR"
 DIR=$(pwd)
 
-if [ "$DIR" == "/usr/share/applications" ]; then
+if [ "$DIR" == "~/.local/share/applications" ]; then
     DIR="~/"
 fi
 

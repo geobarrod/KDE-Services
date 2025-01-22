@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2012-2017.					#
+# For KDE-Services. 2012-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 MKV="$1"
-PID="$$"
+PB_PIDFILE="/tmp/MKV-Extract-Subtitle_addtoservicemenu-progressbar.pid"
 BEGIN_TIME=""
 FINAL_TIME=""
 ELAPSED_TIME=""
@@ -24,15 +24,12 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    DBUSREF=$(kdialog --icon=ks-extracting-subs --title="MKV Extract Subtitle" --progressbar "                               " /ProcessDialog)
+    kdialog --print-winid --icon=ks-extracting-subs --title="MKV Extract Subtitle" --progressbar "Processing ${MKV##*/}..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
 }
 
-progressbar-close() {
-qdbus $DBUSREF close
-}
-
-qdbusinsert() {
-qdbus $DBUSREF setLabelText "Extracting:  ${MKV##*/}"
+progressbar-stop() {
+	kill $(cat $PB_PIDFILE)
+	rm $PB_PIDFILE
 }
 
 ##############################
@@ -42,17 +39,15 @@ qdbus $DBUSREF setLabelText "Extracting:  ${MKV##*/}"
 cd "${MKV%/*}"
 ffprobe "$MKV" 2> /tmp/mkvinfo
 grep -e 'Subtitle' /tmp/mkvinfo|awk -F : '{print $1,$2,$3}' > /tmp/mkvinfo2
-cat /tmp/mkvinfo2|sed 's/^    //g' > /tmp/mkvinfo3
-cat /tmp/mkvinfo3|sed 's/ /_/g' > /tmp/mkvinfo4
+cat /tmp/mkvinfo2|sed 's/ /_/g' > /tmp/mkvinfo3
 TID=$(kdialog --icon=ks-extracting-subs --title="MKV Extract Subtitle" \
-    --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo4 |sed 's/$/ off/g'))
+    --radiolist="Select Subtitle For Extract" $(cat -n /tmp/mkvinfo3 |sed 's/$/ off/g'))
 if-cancel-exit
 
 progressbar-start
-qdbusinsert
 BEGIN_TIME=$(date +%s)
-mkvextract tracks "$MKV" $((TID+1)):"${MKV%.*}_$(cat -n /tmp/mkvinfo4|grep -w $TID|awk -F_ '{print $3}'|sed 's/[[:digit:]]//').srt"
-progressbar-close
+mkvextract tracks "$MKV" $((TID+1)):"${MKV%.*}.srt"
+progressbar-stop
 FINAL_TIME=$(date +%s)
 ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 

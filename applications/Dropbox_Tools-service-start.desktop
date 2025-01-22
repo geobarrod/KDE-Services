@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Dropbox-Tools;
-Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh start_service
 Icon=ks-dropbox-on
 Name=Start Dropbox service
 Name[de]=Dropbox starten

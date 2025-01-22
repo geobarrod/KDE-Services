@@ -2,7 +2,7 @@ KDE-Services
 
 Description:
 ============
-Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE [4.x|5.x].
+Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE Plasma [5.x|6.x].
 
 Submenu "Actions" => "KDE-Services" (it is shown when clicked any file/dir)
              - "Add Timestamp Prefix to [File|Dir]name"
@@ -58,7 +58,7 @@ Submenu "Dropbox Tools" (it is shown when clicked an directory)
 Submenu "Graphic Tools" (it is shown only when clicked any image file)
              - "The Converter" (from several image file formats to BMP, EPS, GIF, ICO, JPEG, JPEG 2000, PBM,
                                 PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM)
-             - "The Sizer" (resize custom image frame width)
+             - "The Resizer" (customize the width of the image frame)
              - "16x16 (icon)"
              - "32x32 (icon)"
              - "48x48 (icon)"
@@ -307,14 +307,35 @@ Required dependencies:
 - youtube-dl
 - zip
 
-Steps for install source code from terminal:
-============================================
-1- tar xf kde-services-3.0.2.tar.bz2
-2- cd kde-services-3.0.2
-3- sudo make install
+Steps for install from Dolphin file manager (recommended):
+==========================================================
+1- Open Dolphin file manager.
+2- Click on Setting Menu.
+3- Select Configure.
+4- Click on Configure Dolphin.
+5- Click on Context Menu.
+6- Click on [Download New Services] button.
+7- Search for "KDE-Services".
+8- Click on [Install] button.
 
-Steps for uninstall source code from terminal:
-==============================================
-1- tar xf kde-services-3.0.2.tar.bz2
-2- cd kde-services-3.0.2
-3- sudo make uninstall
+Steps for install from Discover application explorer:
+=====================================================
+1- Open Discover application explorer.
+2- Click on Application Addons.
+3- Click on Servicemenu.
+4- Search for "KDE-Services".
+5- Click on the [Install] button.
+
+Steps for install from source code from terminal:
+=================================================
+1- servicemenuinstaller install kde-services-3.0.3.tar.gz
+
+Steps for uninstall from source code from terminal:
+===================================================
+1- servicemenuinstaller uninstall kde-services-3.0.3.tar.gz
+
+Donate
+======
+- You can make a donation to support the overall efforts of the KDE-Services project author.
+  The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+  Thanks!

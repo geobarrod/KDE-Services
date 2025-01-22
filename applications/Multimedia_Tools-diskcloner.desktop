@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which lsblk dd; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Error] Please install lsblk and dd command and try again."; exit 1; else /usr/share/applications/DiskCloner.sh;fi
+Exec=which lsblk dd; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Error] Please install lsblk and dd command and try again."; exit 1; else ~/.local/share/applications/DiskCloner.sh;fi
 Icon=ks-media-optical-clone
 Name=DiskCloner
 Name[de]=DiskCloner (speicherkloner)
@@ -13,7 +13,7 @@ Name[pt]=DiskCloner (clonador de disco)
 Name[ru]=DiskCloner (чтобы скопировать диск)
 Name[uk]=DiskCloner (щоб скопіювати диск)
 Name[zh_CN]=DiskCloner (磁盘克隆)
-Path=/usr/share/applications
+Path=~/.local/share/applications
 StartupNotify=true
 Terminal=false
 Type=Application

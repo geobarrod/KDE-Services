@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=SSH-Tools;
-Exec=which sshfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount point to Remote Directory" --passivepopup="[Error] Please install sshfs command and try again."; exit 1; else /usr/share/applications/SSH_Tools-sshfs.sh;fi
+Exec=which sshfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount point to Remote Directory" --passivepopup="[Error] Please install sshfs command and try again."; exit 1; else ~/.local/share/applications/SSH_Tools-sshfs.sh;fi
 Icon=ks-sshfs
 Name=Mount point to Remote Directory
 Name[de]=Einbindeort für Remote Verzeichnis

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=SSH-Tools;Dolphin-Tools;
-Exec=/usr/share/applications/SSH_Tools-register-machine.sh
+Exec=~/.local/share/applications/SSH_Tools-register-machine.sh
 Icon=ks-server
 Name=Registered Servers
 Name[de]=Registrierte Server

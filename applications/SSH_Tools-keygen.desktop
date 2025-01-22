@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=SSH-Tools;
-Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh
+Exec=~/.local/share/applications/SSH_Tools-ssh-keygen.sh
 Icon=ks-keygen
 Name=Public Key Generation
 Name[de]=Öffentlichen Schlüssel erstellen

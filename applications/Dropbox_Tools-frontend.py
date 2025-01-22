@@ -61,7 +61,7 @@ UNPACKING = u"Unpacking Dropbox... %d%%"
 
 PARENT_DIR = os.path.expanduser("~")
 DROPBOXD_PATH = "%s/.dropbox-dist/dropboxd" % PARENT_DIR
-DESKTOP_FILE = u"/usr/share/applications/dropbox.desktop"
+DESKTOP_FILE = u"~/.local/share/applications/dropbox.desktop"
 
 enc = locale.getpreferredencoding()
 

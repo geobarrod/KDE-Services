@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=which ccache gcc make pidof rpm rpmdev-setuptree setterm yum yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Rebuild RPM Package" --passivepopup="[Error] Please install ccache, gcc, make, pidof, rpm, rpmdev-setuptree, setterm, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh;fi
+Exec=which ccache gcc make pidof rpm rpmdev-setuptree setterm yum yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Rebuild RPM Package" --passivepopup="[Error] Please install ccache, gcc, make, pidof, rpm, rpmdev-setuptree, setterm, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package" -bg black -fg white -e ~/.local/share/applications/System_Tools-rebuild-package.sh;fi
 Icon=ks-rebuild-rpm
 Name=Rebuild RPM Package
 Name[de]=RPM Pakete erneut bauen

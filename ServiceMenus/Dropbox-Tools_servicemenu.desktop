@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=Dropbox 工具
 X-KDE-Submenu[x-test]=xxDropbox Toolsxx
 
 [Desktop Action CopyToDropbox]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh copy %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh copy %F
 Icon=ks-dropbox
 Name=Copy to Dropbox
 Name[de]=Kopiere auf Dropbox
@@ -35,7 +35,7 @@ Name[uk]=Копіювати до Dropbox
 Name[zh_CN]=复制到 Dropbox
 
 [Desktop Action MoveToDropbox]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh move %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh move %F
 Icon=ks-dropbox
 Name=Move to Dropbox
 Name[de]=Verschiebe auf Dropbox
@@ -50,7 +50,7 @@ Name[uk]=Пересунути до Dropbox
 Name[zh_CN]=移动到 Dropbox
 
 [Desktop Action CopyToPublicAndGetURL]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh copy_pub %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh copy_pub %F
 Icon=ks-dropbox
 Name=Copy to Public Dropbox and get URL
 Name[de]=Zu öffentlicher Dropbox hinzufügen und abrufen der Adresse(URL)
@@ -65,7 +65,7 @@ Name[uk]=Копіювати до Dropbox із публічним доступо�
 Name[zh_CN]=复制到 Dropbox 并分享
 
 [Desktop Action MoveToPublicAndGetURL]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh move_pub %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh move_pub %F
 Icon=ks-dropbox
 Name=Move to Public Dropbox and get URL
 Name[de]=Zu öffentlicher Dropbox verschieben und abrufen der Adresse(URL)
@@ -80,7 +80,7 @@ Name[uk]=Пересунути до Dropbox із публічним доступ�
 Name[zh_CN]=移动到 Dropbox 并分享
 
 [Desktop Action GetPublicURL]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh get_pub_url %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh get_pub_url %F
 Icon=ks-dropbox
 Name=Get public URL
 Name[de]=Abrufen der öffentlichen Adresse(URL)
@@ -95,7 +95,7 @@ Name[uk]=Отримати публічне посиланяя
 Name[zh_CN]=获得公开链接
 
 [Desktop Action InstallService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh install_service %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh install_service %F
 Icon=ks-dropbox
 Name=Install Dropbox service
 Name[de]=Dropboxdienst installieren
@@ -110,7 +110,7 @@ Name[uk]=Встановити сервіс Dropbox
 Name[zh_CN]=安装 Dropbox 服务
 
 [Desktop Action UpdateService]
-Exec=which wget; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Dropbox service" --passivepopup="[Error] Please install wget command and try again."; exit 1; else /usr/share/applications/Dropbox_Tools-main.sh update_service %F;fi
+Exec=which wget; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Dropbox service" --passivepopup="[Error] Please install wget command and try again."; exit 1; else ~/.local/share/applications/Dropbox_Tools-main.sh update_service %F;fi
 Icon=ks-dropbox
 Name=Update Dropbox service
 Name[de]=Dropbox aktualisieren
@@ -125,7 +125,7 @@ Name[uk]=Оновити сервіс Dropbox
 Name[zh_CN]=更新 Dropbox 服务
 
 [Desktop Action StartService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh start_service %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh start_service %F
 Icon=ks-dropbox-on
 Name=Start Dropbox service
 Name[de]=Dropbox starten
@@ -140,7 +140,7 @@ Name[uk]=Запустити сервіс Dropbox
 Name[zh_CN]=启动 Dropbox 服务
 
 [Desktop Action StopService]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh stop_service %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh stop_service %F
 Icon=ks-dropbox-off
 Name=Stop Dropbox service
 Name[de]=Dropboxdienst annhalten
@@ -155,7 +155,7 @@ Name[uk]=Зупинити сервіс Dropbox
 Name[zh_CN]=停止 Dropbox 服务
 
 [Desktop Action AutoStart]
-Exec=/usr/share/applications/Dropbox_Tools-main.sh autostart_service %F
+Exec=~/.local/share/applications/Dropbox_Tools-main.sh autostart_service %F
 Icon=ks-dropbox
 Name=Enable autostart Dropbox service
 Name[de]=Dropbox beim Systemstart starten

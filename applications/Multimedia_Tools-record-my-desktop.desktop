@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_record-my-desktop.sh;fi
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Record My Desktop" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else ~/.local/share/applications/ffmpeg_record-my-desktop.sh;fi
 Icon=ks-media-tape
 Name=Record My Desktop (record video screen)
 Name[de]=Desktop aufzuzeichnen (bildschirm aufzuzeichnen)

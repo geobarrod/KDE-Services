@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=ISO-9660 镜像工具
 X-KDE-Submenu[x-test]=xxISO-9660 Image Toolsxx
 
 [Desktop Action Burn-Image]
-Exec=which wodim; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Burn ISO-9660 Image" --passivepopup="[Error] Please install wodim command and try again."; exit 1; else /usr/share/applications/iso_manager-burn-image.sh %F;fi
+Exec=which wodim; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Burn ISO-9660 Image" --passivepopup="[Error] Please install wodim command and try again."; exit 1; else ~/.local/share/applications/iso_manager-burn-image.sh %F;fi
 Icon=ks-media-optical-burn
 Name=Burn ISO-9660 Image
 Name[de]=ISO-9660 Abbild brennen
@@ -132,7 +132,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 SHA512 校验和
 Name[x-test]=xxShow SHA512sum ISO-9660 Imagexx
 
 [Desktop Action MountCD-Image]
-Exec=which fuseiso; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount ISO-9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else /usr/share/applications/iso_manager-mount-image.sh %F;fi
+Exec=which fuseiso; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount ISO-9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else ~/.local/share/applications/iso_manager-mount-image.sh %F;fi
 Icon=ks-media-optical-mount
 Name=Mount ISO-9660 Image
 Name[de]=ISO-9660 Abbild einbinden

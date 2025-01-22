@@ -19,7 +19,7 @@ X-KDE-Submenu[zh_CN]=搜索工具
 X-KDE-Submenu[x-test]=xxSearch Toolsxx
 
 [Desktop Action SearchByName]
-Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Search by Name" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-search-by-name.sh %F;fi
+Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Search by Name" --passivepopup="[Error] Please install locate command and try again."; exit 1; else ~/.local/share/applications/Search_Tools-search-by-name.sh %F;fi
 Icon=ks-search-name
 Name=Search by Name
 Name[de]=Suche nach Namen
@@ -35,7 +35,7 @@ Name[zh_CN]=使用文件名搜索
 Name[x-test]=xxSearch by Namexx
 
 [Desktop Action SearchByString]
-Exec=kdesu -i ks-search-string -d /usr/share/applications/Search_Tools-search-by-string.sh %F
+Exec=kdesu -i ks-search-string -d ~/.local/share/applications/Search_Tools-search-by-string.sh %F
 Icon=ks-search-string
 Name=Search by String
 Name[de]=Suche nach Ausdruck
@@ -51,7 +51,7 @@ Name[zh_CN]=使用字符串搜索
 Name[x-test]=xxSearch by Stringxx
 
 [Desktop Action StatisticsSearchDB]
-Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Statistics Search DataBase" --passivepopup="[Error] Please install locate command and try again."; exit 1; else /usr/share/applications/Search_Tools-statistics-search-db.sh %F;fi
+Exec=which locate; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Statistics Search DataBase" --passivepopup="[Error] Please install locate command and try again."; exit 1; else ~/.local/share/applications/Search_Tools-statistics-search-db.sh %F;fi
 Icon=ks-search-stats
 Name=Statistics Search DataBase
 Name[de]=Statistik der Suchdatenbank
@@ -67,7 +67,7 @@ Name[zh_CN]=统计搜索数据库
 Name[x-test]=xxStatistics Search DataBasexx
 
 [Desktop Action UpdateSearchDB]
-Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else /usr/share/applications/Search_Tools-update-search-db.sh %F;fi
+Exec=which updatedb pidof; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Search DataBase" --passivepopup="[Error] Please install updatedb and pidof command and try again."; exit 1; else ~/.local/share/applications/Search_Tools-update-search-db.sh %F;fi
 Icon=ks-search-database-update
 Name=Update Search DataBase
 Name[de]=Suchdatenbank erneuern
@@ -83,7 +83,7 @@ Name[zh_CN]=刷新搜索数据库
 Name[x-test]=xxUpdate Search DataBasexx
 
 [Desktop Action SearchHere]
-Exec=kdesu -i ks-search-name -d /usr/share/applications/Search_Tools-search-here.sh %F
+Exec=kdesu -i ks-search-name -d ~/.local/share/applications/Search_Tools-search-here.sh %F
 Icon=ks-search-name
 Name=Search Here
 Name[de]=Hier suchen
@@ -99,7 +99,7 @@ Name[zh_CN]=在此搜索
 Name[x-test]=xxSearch Herexx
 
 [Desktop Action ModifiedFilesHere]
-Exec=kdesu -i ks-search-name -d /usr/share/applications/Search_Tools-modified-files-here.sh %F
+Exec=kdesu -i ks-search-name -d ~/.local/share/applications/Search_Tools-modified-files-here.sh %F
 Icon=ks-search-name
 Name=Modified Files Here
 Name[de]=Modifizierte Dateien Hier

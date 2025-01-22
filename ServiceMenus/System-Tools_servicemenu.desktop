@@ -19,7 +19,7 @@ X-KDE-Submenu[zh_CN]=系统工具
 X-KDE-Submenu[x-test]=xxSystem Toolsxx
 
 [Desktop Action BuildKernel]
-Exec=which gcc make ccache rpmbuild rpm yum yumdownloader yum-builddep rpmdev-setuptree; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Build Custom Kernel" --passivepopup="[Error] Please install ccache, gcc, make, rpm. rpmbuild, rpmdev-setuptree, yum-builddep, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh %F;fi
+Exec=which gcc make ccache rpmbuild rpm yum yumdownloader yum-builddep rpmdev-setuptree; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Build Custom Kernel" --passivepopup="[Error] Please install ccache, gcc, make, rpm. rpmbuild, rpmdev-setuptree, yum-builddep, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Build Custom Kernel - Start time $(date +%H"h":%M"m")" -bg black -fg white -e ~/.local/share/applications/System_Tools-build-custom-kernel.sh %F;fi
 Icon=ks-kernel-rebuild
 Name=Build Custom Kernel
 Name[de]=Eigenen Kernel bauen
@@ -35,7 +35,7 @@ Name[zh_CN]=构建自定义内核
 Name[x-test]=xxBuild Custom Kernelxx
 
 [Desktop Action CheckKernelUpdate]
-Exec=which yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Check Kernel Update" --passivepopup="[Error] Please install yumdownloader command and try again."; exit 1; else /usr/share/applications/System_Tools-check-kernel-update.sh %F;fi
+Exec=which yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Check Kernel Update" --passivepopup="[Error] Please install yumdownloader command and try again."; exit 1; else ~/.local/share/applications/System_Tools-check-kernel-update.sh %F;fi
 Icon=ks-kernel-update
 Name=Check Kernel Update
 Name[de]=Kernel auf Aktualisierungen prüfen
@@ -51,7 +51,7 @@ Name[zh_CN]=检查内核更新
 Name[x-test]=xxCheck Kernel Updatexx
 
 [Desktop Action Htop]
-Exec=which htop; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Process Viewer" --passivepopup="[Error] Please install htop command and try again."; exit 1; else /usr/share/applications/System_Tools-process-viewer.sh %F;fi
+Exec=which htop; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Process Viewer" --passivepopup="[Error] Please install htop command and try again."; exit 1; else ~/.local/share/applications/System_Tools-process-viewer.sh %F;fi
 Icon=ks-system-process
 Name=Process Viewer
 Name[de]=Prozesse anzeigen
@@ -67,7 +67,7 @@ Name[zh_CN]=进程查看器
 Name[x-test]=xxProcess Viewerxx
 
 [Desktop Action RebuildPackage]
-Exec=which ccache gcc make pidof rpm rpmdev-setuptree setterm yum yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Rebuild RPM Package" --passivepopup="[Error] Please install ccache, gcc, make, pidof, rpm, rpmdev-setuptree, setterm, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package - Start time $(date +%H"h":%M"m")" -bg black -fg white -e /usr/share/applications/System_Tools-rebuild-package.sh %F;fi
+Exec=which ccache gcc make pidof rpm rpmdev-setuptree setterm yum yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Rebuild RPM Package" --passivepopup="[Error] Please install ccache, gcc, make, pidof, rpm, rpmdev-setuptree, setterm, yum and yumdownloader command and try again."; exit 1; else xterm -hold -si -s -sl 1000000 -sb -T "Rebuild RPM Package - Start time $(date +%H"h":%M"m")" -bg black -fg white -e ~/.local/share/applications/System_Tools-rebuild-package.sh %F;fi
 Icon=ks-rebuild-rpm
 Name=Rebuild RPM Package
 Name[de]=RPM Pakete erneut bauen
@@ -83,7 +83,7 @@ Name[zh_CN]=重建 RPM 软件包
 Name[x-test]=xxRebuild RPM Packagexx
 
 [Desktop Action SysInfo]
-Exec=which dmidecode; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="System Information" --passivepopup="[Error] Please install dmidecode command and try again."; exit 1; else /usr/share/applications/System_Tools-sys-info.sh %F;fi
+Exec=which dmidecode; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="System Information" --passivepopup="[Error] Please install dmidecode command and try again."; exit 1; else ~/.local/share/applications/System_Tools-sys-info.sh %F;fi
 Icon=ks-hwinfo
 Name=System Information
 Name[de]=System Info
@@ -99,7 +99,7 @@ Name[zh_CN]=系统信息
 Name[x-test]=xxSystem Informationxx
 
 [Desktop Action SysMonitor]
-Exec=kdesu -i ks-error --noignorebutton -d /usr/share/applications/System_Tools-system-monitor.sh %F
+Exec=kdesu -i ks-error --noignorebutton -d ~/.local/share/applications/System_Tools-system-monitor.sh %F
 Icon=ks-error
 Name=System Monitor
 Name[de]=Systemüberwachung
@@ -115,7 +115,7 @@ Name[zh_CN]=系统监视器
 Name[x-test]=xxSystem Monitorxx
 
 [Desktop Action XorgConf]
-Exec=which lspci gtf; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Xorg Configure" --passivepopup="[Error] Please install lspci and gtf command and try again."; exit 1; else kdesu -i ks-xorg --noignorebutton -d /usr/share/applications/System_Tools-Xorg-configure.sh %F;fi
+Exec=which lspci gtf; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Xorg Configure" --passivepopup="[Error] Please install lspci and gtf command and try again."; exit 1; else kdesu -i ks-xorg --noignorebutton -d ~/.local/share/applications/System_Tools-Xorg-configure.sh %F;fi
 Icon=ks-xorg
 Name=Xorg Configure
 Name[de]=Xorg konfigurieren

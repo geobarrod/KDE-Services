@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 
 SYSKERNELVERSION=$(uname -r|sed 's/.fc.*$//')
 INTERNETVERSION=$(yumdownloader --url --source kernel|grep kernel|grep -v "No source RPM found"|sed 's/^.*kernel-//'|sed 's/.fc...src.rpm$//')
@@ -25,7 +25,7 @@ if [ "$EXIT" = "0" ]; then
         EXIT=$?
     
         if [ "$EXIT" = "0" ]; then
-            xterm -T "Build Custom Kernel" -bg black -fg white -e /usr/share/applications/System_Tools-build-custom-kernel.sh &
+            xterm -T "Build Custom Kernel" -bg black -fg white -e ~/.local/share/applications/System_Tools-build-custom-kernel.sh &
         else
             exit 0
         fi

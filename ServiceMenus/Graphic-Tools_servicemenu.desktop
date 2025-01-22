@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=图形工具
 X-KDE-Submenu[x-test]=xxGraphic Toolsxx
 
 [Desktop Action Sizer]
-Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else /usr/share/applications/The_Sizer.sh %F;fi
+Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else ~/.local/share/applications/The_Sizer.sh %F;fi
 Icon=ks-resize-image
 Name=The Sizer (custom sizes)
 Name[de]=Größenänderung
@@ -36,7 +36,7 @@ Name[zh_CN]=尺寸转换 (自定义尺寸)
 Name[x-test]=xxThe Sizer (custom sizes)xx
 
 [Desktop Action Converter]
-Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Converter" --passivepopup="[Error] Please install convert command and try again."; exit 1; else /usr/share/applications/The_Converter.sh %F;fi
+Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Converter" --passivepopup="[Error] Please install convert command and try again."; exit 1; else ~/.local/share/applications/The_Converter.sh %F;fi
 Icon=ks-image
 Name=The Converter
 Name[de]=Der Konverter

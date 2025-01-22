@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=SSH 工具
 X-KDE-Submenu[x-test]=xxSSH Toolsxx
 
 [Desktop Action SCP]
-Exec=xterm -T "Send to Remote Server" -bg black -fg white -e /usr/share/applications/SSH_Tools-scp.sh %f
+Exec=xterm -T "Send to Remote Server" -bg black -fg white -e ~/.local/share/applications/SSH_Tools-scp.sh %f
 Icon=ks-terminal
 Name=Send to Remote Server
 Name[de]=Zu Remote Server senden
@@ -36,7 +36,7 @@ Name[zh_CN]=发送至远程服务器
 Name[x-test]=xxSend to Remote Serverxx
 
 [Desktop Action SSH]
-Exec=/usr/share/applications/SSH_Tools-connect.sh %F
+Exec=~/.local/share/applications/SSH_Tools-connect.sh %F
 Icon=ks-connect-to
 Name=Connect to Remote Server
 Name[de]=Mit Remote Server verbinden
@@ -52,7 +52,7 @@ Name[zh_CN]=连接远程服务器
 Name[x-test]=xxConnect to Remote Serverxx
 
 [Desktop Action SSH-copy-id]
-Exec=/usr/share/applications/SSH_Tools-copy-id.sh %F
+Exec=~/.local/share/applications/SSH_Tools-copy-id.sh %F
 Icon=ks-key
 Name=Install Public Key
 Name[de]=Öffentlichen Schlüssel installieren
@@ -68,7 +68,7 @@ Name[zh_CN]=安装公钥
 Name[x-test]=xxInstall Public Keyxx
 
 [Desktop Action SSH-keygen]
-Exec=/usr/share/applications/SSH_Tools-ssh-keygen.sh %F
+Exec=~/.local/share/applications/SSH_Tools-ssh-keygen.sh %F
 Icon=ks-keygen
 Name=Public Key Generation
 Name[de]=Öffentlichen Schlüssel erstellen
@@ -84,7 +84,7 @@ Name[zh_CN]=公钥生成
 Name[x-test]=xxPublic Key Generationxx
 
 [Desktop Action SSHfs]
-Exec=which sshfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount point to Remote Directory" --passivepopup="[Error] Please install sshfs command and try again."; exit 1; else /usr/share/applications/SSH_Tools-sshfs.sh %F;fi
+Exec=which sshfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount point to Remote Directory" --passivepopup="[Error] Please install sshfs command and try again."; exit 1; else ~/.local/share/applications/SSH_Tools-sshfs.sh %F;fi
 Icon=ks-sshfs
 Name=Mount point to Remote Directory
 Name[de]=Einbindeort für Remote Verzeichnis
@@ -100,7 +100,7 @@ Name[zh_CN]=挂载远程目录
 Name[x-test]=xxMount point to Remote Directoryxx
 
 [Desktop Action ViewMachine]
-Exec=/usr/share/applications/SSH_Tools-register-machine.sh %F
+Exec=~/.local/share/applications/SSH_Tools-register-machine.sh %F
 Icon=ks-server
 Name=Registered Servers
 Name[de]=Registrierte Server

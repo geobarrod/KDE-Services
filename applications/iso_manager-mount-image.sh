@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2012-2017.					#
+# For KDE-Services. 2012-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 # Improved by Victor Guardiola (vguardiola) Jan 5 2014		#
 # 	-Fixed the problem of [dir|file]name with whitespaces.	#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 MOUNTEXIT=""
 
 ##############################

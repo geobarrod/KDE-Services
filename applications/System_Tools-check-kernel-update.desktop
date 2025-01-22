@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=which yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Check Kernel Update" --passivepopup="[Error] Please install yumdownloader command and try again."; exit 1; else /usr/share/applications/System_Tools-check-kernel-update.sh;fi
+Exec=which yumdownloader; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Check Kernel Update" --passivepopup="[Error] Please install yumdownloader command and try again."; exit 1; else ~/.local/share/applications/System_Tools-check-kernel-update.sh;fi
 Icon=ks-kernel-update
 Name=Check Kernel Update
 Name[de]=Kernel auf Aktualisierungen prüfen

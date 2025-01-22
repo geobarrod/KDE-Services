@@ -19,7 +19,7 @@ X-KDE-Submenu[zh_CN]=备份工具
 X-KDE-Submenu[x-test]=xxBackup Toolsxx
 
 [Desktop Action Backup-Restore-Standards]
-Exec=/usr/share/applications/Backup_Tools-standard.sh %F
+Exec=~/.local/share/applications/Backup_Tools-standard.sh %F
 Icon=ks-database
 Name=Standards
 Name[de]=Standard

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Attach Cover to MP3 Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-audio-mp3-attach-cover.sh;fi
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Attach Cover to MP3 Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else ~/.local/share/applications/ffmpeg_multifile-audio-mp3-attach-cover.sh;fi
 Icon=ks-audio-mp3-attach-cover
 Name=Attach Cover to MP3 Files
 Name[de]=Cover zu MP3 hinzufügen
@@ -13,7 +13,7 @@ Name[pt]=Prender Coberto a Arquivos MP3
 Name[ru]=Приложите Конверт к MP3 Файлы
 Name[uk]=Додайте Обкладинку MP3 Файли
 Name[zh_CN]=添加封面到 MP3 文件
-Path=/usr/share/applications
+Path=~/.local/share/applications
 StartupNotify=true
 Terminal=false
 Type=Application

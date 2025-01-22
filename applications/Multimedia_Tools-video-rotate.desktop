@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Rotate Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else /usr/share/applications/ffmpeg_multifile-video-rotate.sh;fi
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Rotate Video Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else ~/.local/share/applications/ffmpeg_multifile-video-rotate.sh;fi
 Icon=ks-video-rotate
 Name=Rotate Video Files
 Name[de]=Video drehen
@@ -13,7 +13,7 @@ Name[pt]=Girar Arquivos Vídeos
 Name[ru]=Вращайтесь Видео Файлы
 Name[uk]=Обертатися Вiдео Файли
 Name[zh_CN]=旋转视频文件
-Path=/usr/share/applications
+Path=~/.local/share/applications
 StartupNotify=true
 Terminal=false
 Type=Application

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Dropbox-Tools;
-Exec=which wget; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Dropbox service" --passivepopup="[Error] Please install wget command and try again."; exit 1; else /usr/share/applications/Dropbox_Tools-main.sh update_service %F;fi
+Exec=which wget; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Update Dropbox service" --passivepopup="[Error] Please install wget command and try again."; exit 1; else ~/.local/share/applications/Dropbox_Tools-main.sh update_service %F;fi
 Icon=ks-dropbox
 Name=Update Dropbox service
 Name[de]=Dropbox aktualisieren

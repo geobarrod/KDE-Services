@@ -1,3 +1,25 @@
+* Sat Jan 21 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.3
+- NOTE: If you have installed the version 3.0.2 it is mandatory
+	to uninstall it before installing this new version.
+- Removed KDE 4.x support.
+- Added support for Plasma (KDE) [5.x|6.x].
+- The recommended method to install is through of Dolphin file manager:
+	Open Menu => Configure => Configure Dolphin => Context Menu
+	=> Download New Services => Search for "KDE-Services" => click on the [Install] button.
+- Also the Discover application explorer can install it under Application Addons => Servicemenu
+	=> Search for "KDE-Services" => click on the [Install] button.
+- Another method is from terminal with servicemenuinstaller command:
+	servicemenuinstaller install kde-services-3.1.0.tar.gz
+	servicemenuinstaller uninstall kde-services-3.1.0.tar.gz
+- Fixed German translation.
+- "Add Timestamp Prefix To [File|Dir]name": Enhancement readability of date and time.
+- "YouTube Tools": Enhancement for "Video Downloader" that allows, via the "Get Another Resolutions" option,
+	to download non-standard video resolution formats when the search for standard formats fails.
+- You can make a donation to support the overall efforts of the KDE-Services project author.
+	The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+	Thanks!
+- Happy New Year!.
+
 * Sun Dec 24 2017 Geovani B. R. <igeo.cu@gmail.com> 3.0.2
 - Adjusted standard properties of all SVGz icons.
 - Fixed Italian translation.
@@ -648,7 +670,7 @@
 - Icons are added to the visual notifications
   and the graphical interface.
 
- Copyright 2011-2017.
+ Copyright 2011-2025.
 
  This file is free software; as a special exception the author gives
  unlimited permission to copy and/or distribute it, with or without

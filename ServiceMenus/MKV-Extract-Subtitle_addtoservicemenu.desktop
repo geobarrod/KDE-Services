@@ -9,7 +9,7 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action MKVextractSubtitle]
-Exec=which mkvextract; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MKV Extract Subtitle" --passivepopup="[Error] Please install mkvextract command and try again."; exit 1; else /usr/share/applications/MKV_Extract-subtitle.sh %F;fi
+Exec=which mkvextract; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MKV Extract Subtitle" --passivepopup="[Error] Please install mkvextract command and try again."; exit 1; else for mkv in %F;do ~/.local/share/applications/MKV_Extract-subtitle.sh $mkv;done;fi
 Icon=ks-video
 Name=MKV Extract Subtitle
 Name[de]=MKV Untertitel extrahieren

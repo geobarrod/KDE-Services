@@ -1,13 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2011-2016.					#
+# For KDE-Services. 2011-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 DBUSREF=""
-DROPBOX="/usr/share/applications/Dropbox_Tools-frontend.py"
+DROPBOX="~/.local/share/applications/Dropbox_Tools-frontend.py"
 DROPBOX_PATH="$(tail -n1 $HOME/.dropbox/host.db|base64 -d)"
 FILE="$2"
 EXIT=""

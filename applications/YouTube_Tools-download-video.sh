@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #################################################################
-# For KDE-Services. 2012-2017.					#
+# For KDE-Services. 2012-2025.					#
 # By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
 #################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/$USER/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 DIR=""
 VCODE=""
 DESTINATION=""
@@ -23,19 +23,14 @@ COUNT=""
 COUNTFILES=""
 FILENAME=""
 SIZE=""
-WEIGHT=""
 INIT_TIME=""
 LAST_TIME=""
 TOTAL_TIME=""
+PB_PIDFILE="/tmp/YouTube_Tools-download-video-progressbar.pid"
 
 ###################################
 ############ Functions ############
 ###################################
-
-attempt-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Downloading:  $FILENAME $VID MPEG-4 $SIZE $WEIGHT  [$COUNT/$(($COUNTFILES-1))] Reattempt: $ATTEMPT"
-    qdbus $DBUSREF Set "" value $COUNT
-}
 
 if-cancel-exit() {
     if [ "$?" != "0" ];then
@@ -46,46 +41,24 @@ if-cancel-exit() {
 youtube-error() {
     if [ "$EXIT" != "0" ];then
         kdialog --icon=ks-error --title="Download YouTube Video" \
-                       --passivepopup="[Error]   $FILENAME $VID MPEG-4 $SIZE $WEIGHT   Check network connection or YouTube Video Code."
+                       --passivepopup="[Error]   $FILENAME $VID MPEG-4 $SIZE   Check network connection or YouTube Video Code."
         echo "$VID" >> !!!_YouTube-Video-Code.err
-        sed -i 's/hyphen//' !!!_YouTube-Video-Code.err
-        
+        sed -i "" 's/hyphen//' !!!_YouTube-Video-Code.err
+
         for ATTEMPT in {1..10}; do
-            attempt-qdbusinsert
             $PROGRAM
             EXIT=$?
-            
+
             if [ "$EXIT" = "0" ];then
-                sed -i "s;$VID;;g" !!!_YouTube-Video-Code.err
-                
+                sed -i "" "s;$VID;;g" !!!_YouTube-Video-Code.err
+
                 if [ "$(wc -w !!!_YouTube-Video-Code.err|awk '{print $1}')" = "0" ];then
                     rm -f !!!_YouTube-Video-Code.err
                 fi
             fi
         done
-    
-        continue
-    fi
-}
 
-finished() {
-    if [ "$EXIT" = "0" ];then
-        if [ "$ELAPSED_TIME" -lt "60" ];then
-            kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE $WEIGHT   Elapsed Time: ${ELAPSED_TIME}s"
-        elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ];then
-            ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-            kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE $WEIGHT   Elapsed Time: ${ELAPSED_TIME}m"
-        elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ];then
-            ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-            kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE $WEIGHT   Elapsed Time: ${ELAPSED_TIME}h"
-        elif [ "$ELAPSED_TIME" -gt "86399" ]; then
-            ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-            kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
-                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE $WEIGHT   Elapsed Time: ${ELAPSED_TIME}d"
-        fi
+        continue
     fi
 }
 
@@ -93,28 +66,33 @@ progressbar-start() {
     COUNT="0"
     COUNTFILES=$(echo $VCODE|wc -w)
     COUNTFILES=$((++COUNTFILES))
-    DBUSREF=$(kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" --progressbar "                      " $COUNTFILES)
+    kdialog --print-winid --icon=ks-youtube-download-video --title="Download YouTube Video" --progressbar "Downloading..." $COUNTFILES|grep -o '[[:digit:]]*' > $PB_PIDFILE
 }
 
-progressbar-close() {
-    qdbus $DBUSREF Set "" value $COUNTFILES
-    sleep 1
-    qdbus $DBUSREF close
+progressbar-stop() {
+	kill $(cat $PB_PIDFILE)
+	rm $PB_PIDFILE
 }
 
-checking-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Checking Availability:  $VID  [$COUNT/$(($COUNTFILES-1))]"
-    qdbus $DBUSREF Set "" value $COUNT
-}
-
-size-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Checking Frame Size:  $VID  [$COUNT/$(($COUNTFILES-1))]"
-    qdbus $DBUSREF Set "" value $COUNT
-}
-
-download-qdbusinsert() {
-    qdbus $DBUSREF setLabelText "Downloading:  $FILENAME $VID MPEG-4 $SIZE $WEIGHT  [$COUNT/$(($COUNTFILES-1))]"
-    qdbus $DBUSREF Set "" value $COUNT
+finished() {
+    if [ "$EXIT" = "0" ];then
+        if [ "$ELAPSED_TIME" -lt "60" ];then
+    	    kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE   Elapsed Time: ${ELAPSED_TIME}s"
+        elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ];then
+            ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
+    	    kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE   Elapsed Time: ${ELAPSED_TIME}m"
+        elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ];then
+            ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
+    	   kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE   Elapsed Time: ${ELAPSED_TIME}h"
+        elif [ "$ELAPSED_TIME" -gt "86399" ]; then
+            ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
+    	    kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+                           --passivepopup="[Finished]   $FILENAME $VID MPEG-4 $SIZE   Elapsed Time: ${ELAPSED_TIME}d"
+        fi
+    fi
 }
 
 ##############################
@@ -128,21 +106,21 @@ DIR=$(pwd)
 mkdir -p $HOME/.kde-services
 touch $HOME/.kde-services/youtube-video-codes
 touch $HOME/.kde-services/youtube-download-rate-limit
-sed -i 's/^-/hyphen-/' $HOME/.kde-services/youtube-video-codes
+sed -i "" 's/^-/hyphen-/' $HOME/.kde-services/youtube-video-codes
 rm -f !!!_YouTube-Video-Code.err
 
 VCODE=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-    --inputbox="Enter YouTube Video Code(s) separated by whitespace. By example in this URL: http://www.youtube.com/watch?v=twepYLbAhNo, \
-    the Code is twepYLbAhNo." "$(cat $HOME/.kde-services/youtube-video-codes)" 2> /dev/null)
+    --inputbox="Enter YouTube Video Code(s) separated by whitespace. By example in this URL: https://www.youtube.com/watch?v=DY-_o8z2ZFQ,\
+    the Code is: DY-_o8z2ZFQ" "$(cat $HOME/.kde-services/youtube-video-codes)" 2> /dev/null)
 if-cancel-exit
 echo $VCODE > $HOME/.kde-services/youtube-video-codes
-sed -i 's/hyphen//g' $HOME/.kde-services/youtube-video-codes
+sed -i "" 's/hyphen//g' $HOME/.kde-services/youtube-video-codes
 
 DESTINATION=$(kdialog --icon=ks-youtube-download-video --title="Destination YouTube Video(s)" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
 QUALITY=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-        --radiolist="Select Video Quality" 3840x2160 "Ultra HD (4K)" on 2560x1440 "Ultra HD (2K)" off 1920x1080 "Full HD (1080p)" off 1280x720 "HD (720p)" off 854x480 "Full WVGA (480p)" off 640x360 "NHD (360p)" off 2> /dev/null)
+        --radiolist="Select Video Quality" 7680x4320 "Ultra HD (8K)" on 3840x2160 "Ultra HD (4K)" off 2560x1440 "Ultra HD (2K)" off 1920x1080 "Full HD (1080p)" off 1280x720 "HD (720p)" off 854x480 "Full WVGA (480p)" off 640x360 "nHD (360p)" off 426x240 "WQVGA (240p)" off 256x144 "YT144 (144p)" off GAR "Get Another Resolutions" off 2> /dev/null)
 if-cancel-exit
 
 RATE_LIMIT=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
@@ -150,13 +128,25 @@ RATE_LIMIT=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Dow
 if-cancel-exit
 echo $RATE_LIMIT > $HOME/.kde-services/youtube-download-rate-limit
 
+download-ultra-hd-8k() {
+	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
+	SIZE="Ultra_HD_(8K)_4320p"
+	BEGIN_TIME=$(date +%s)
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=4320]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID|"
+	$PROGRAM
+	EXIT=$?
+	youtube-error
+	FINAL_TIME=$(date +%s)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+	finished
+}
+
 download-ultra-hd-4k() {
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
 	SIZE="Ultra_HD_(4K)_2160p"
-	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 266|xargs -n1|grep MiB)"
-	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 266+best -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=2160]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -169,10 +159,8 @@ download-ultra-hd-4k() {
 download-ultra-hd-2k() {
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
 	SIZE="Ultra_HD_(2K)_1440p"
-	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 264|xargs -n1|grep MiB)"
-	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 264+best -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=1440]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -185,10 +173,8 @@ download-ultra-hd-2k() {
 download-full-hd() {
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
 	SIZE="Full_HD_1080p"
-	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 137|xargs -n1|grep MiB)"
-	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 137+best -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=1080]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -201,10 +187,8 @@ download-full-hd() {
 download-hd() {
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
 	SIZE="HD_720p"
-	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 136|xargs -n1|grep MiB)"
-	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 136+best -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=720]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -217,10 +201,8 @@ download-hd() {
 download-full-wvga(){
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
 	SIZE="Full_WVGA_480p"
-	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 135|xargs -n1|grep MiB)"
-	download-qdbusinsert
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 135+best -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=480]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -232,11 +214,55 @@ download-full-wvga(){
 
 download-nhd() {
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
-	SIZE="NHD_360p"
-	WEIGHT="$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134|xargs -n1|grep MiB)"
-	download-qdbusinsert
+	SIZE="nHD_360p"
 	BEGIN_TIME=$(date +%s)
-	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -f 134+best -c -i -R infinite \
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=360]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
+	$PROGRAM
+	EXIT=$?
+	youtube-error
+	FINAL_TIME=$(date +%s)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+	finished
+}
+
+download-wqvga() {
+	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
+	SIZE="WQVGA_240p"
+	BEGIN_TIME=$(date +%s)
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=240]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
+	$PROGRAM
+	EXIT=$?
+	youtube-error
+	FINAL_TIME=$(date +%s)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+	finished
+}
+
+download-yt144() {
+	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
+	SIZE="YT_144p"
+	BEGIN_TIME=$(date +%s)
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=144]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
+	$PROGRAM
+	EXIT=$?
+	youtube-error
+	FINAL_TIME=$(date +%s)
+	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+	finished
+}
+
+get-another-resolutions() {
+        QUALITY=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
+        --radiolist="Select Video Quality" $(youtube-dl -F $VID 2>&1|grep -w "video only"|grep -vE "WARNING|webm"|grep -wE "144p|240p|360p|480p|720p|1080p|1440p|2160p|4320p"|grep -w "av01"|awk -F " " '{print $3,$3$5$6$5$2,"off"}'))
+	if-cancel-exit
+	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
+	FORMAT="$(echo $QUALITY|awk -Fx '{print $2}')"
+	SIZE="${FORMAT}p"
+	BEGIN_TIME=$(date +%s)
+	PROGRAM="youtube-dl -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_$SIZE.%\(ext\)s" -S "codec:h264" -f bv[ext=mp4][height=${FORMAT}]+ba[ext=m4a] -c -i -R infinite --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$PROGRAM
 	EXIT=$?
@@ -248,121 +274,191 @@ download-nhd() {
 
 cd $DESTINATION
 INIT_TIME=$(date +%s)
-
 progressbar-start
-
 VCODE=$(echo $VCODE|sed 's/hyphen//g')
 
 for VID in $VCODE; do
     COUNT=$((++COUNT))
-    checking-qdbusinsert
     PROGRAM="youtube-dl -F http://www.youtube.com/watch?v=$VID"
     $PROGRAM
     EXIT=$?
     youtube-error
 done
 
-if [ "$QUALITY" = "3840x2160" ];then
+if [ "$QUALITY" == "7680x4320" ];then
     COUNT="0"
-    
+
     for VID in $VCODE; do
         COUNT=$((++COUNT))
-        size-qdbusinsert
-        
-        if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 266)" ]];then
+
+        if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 571)" ]];then
+			download-ultra-hd-8k
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 401)" ]];then
 			download-ultra-hd-4k
-		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 264)" ]];then
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 400)" ]];then
 			download-ultra-hd-2k
-		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 137)" ]];then
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 399)" ]];then
 			download-full-hd
-		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 136)" ]];then
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 398)" ]];then
 			download-hd
-		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 135)" ]];then
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 397)" ]];then
 			download-full-wvga
-        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
+	        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 396)" ]];then
 			download-nhd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 395)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
         fi
     done
-elif [ "$QUALITY" = "2560x1440" ];then
+elif [ "$QUALITY" == "3840x2160" ];then
     COUNT="0"
-    
+
     for VID in $VCODE; do
         COUNT=$((++COUNT))
-        size-qdbusinsert
-        
-        if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 264)" ]];then
+
+        if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 401)" ]];then
+			download-ultra-hd-4k
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 400)" ]];then
 			download-ultra-hd-2k
-		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 137)" ]];then
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 399)" ]];then
 			download-full-hd
-		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 136)" ]];then
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 398)" ]];then
 			download-hd
-		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 135)" ]];then
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 397)" ]];then
 			download-full-wvga
-        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
+	        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 396)" ]];then
 			download-nhd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 395)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
         fi
     done
-elif [ "$QUALITY" = "1920x1080" ];then
+elif [ "$QUALITY" == "2560x1440" ];then
     COUNT="0"
-    
+
     for VID in $VCODE; do
         COUNT=$((++COUNT))
-        size-qdbusinsert
-        
+
+        if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 400)" ]];then
+			download-ultra-hd-2k
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 399)" ]];then
+			download-full-hd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 398)" ]];then
+			download-hd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 397)" ]];then
+			download-full-wvga
+    		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 396)" ]];then
+			download-nhd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 395)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
+        fi
+    done
+elif [ "$QUALITY" == "1920x1080" ];then
+    COUNT="0"
+
+    for VID in $VCODE; do
+        COUNT=$((++COUNT))
+
         if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 137)" ]];then
 			download-full-hd
-        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 136)" ]];then
+	        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 136)" ]];then
 			download-hd
 		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 135)" ]];then
 			download-full-wvga
-        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
+    		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
 			download-nhd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 395)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
         fi
     done
-elif [ "$QUALITY" = "1280x720" ];then
+elif [ "$QUALITY" == "1280x720)" ];then
     COUNT="0"
-    
+
     for VID in $VCODE; do
         COUNT=$((++COUNT))
-        size-qdbusinsert
-        
+
         if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 136)" ]];then
 			download-hd
 		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 135)" ]];then
 			download-full-wvga
-        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
+	        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
 			download-nhd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 395)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
         fi
     done
-elif [ "$QUALITY" = "854x480" ];then
+elif [ "$QUALITY" == "854x480" ];then
     COUNT="0"
-    
+
     for VID in $VCODE; do
         COUNT=$((++COUNT))
-        size-qdbusinsert
-        
+
 		if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 135)" ]];then
 			download-full-wvga
-        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
+	        elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
 			download-nhd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 395)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
         fi
     done
-elif [ "$QUALITY" = "640x360" ];then
+elif [ "$QUALITY" == "640x360" ];then
     COUNT="0"
-    
+
     for VID in $VCODE; do
         COUNT=$((++COUNT))
-        size-qdbusinsert
-        
+
         if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 134)" ]];then
 			download-nhd
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 395)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
         fi
+    done
+elif [ "$QUALITY" == "426x240" ];then
+    COUNT="0"
+
+    for VID in $VCODE; do
+        COUNT=$((++COUNT))
+
+        if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 133)" ]];then
+			download-wqvga
+		elif [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 394)" ]];then
+			download-yt144
+        fi
+    done
+elif [ "$QUALITY" == "256x144" ];then
+    COUNT="0"
+
+    for VID in $VCODE; do
+        COUNT=$((++COUNT))
+
+        if [[ "$(youtube-dl -F http://www.youtube.com/watch?v=$VID|grep -w 160)" ]];then
+			download-yt144
+        fi
+    done
+elif [ "$QUALITY" == "GAR" ];then
+    COUNT="0"
+
+    for VID in $VCODE; do
+        COUNT=$((++COUNT))
+	get-another-resolutions
     done
 fi
 
 LAST_TIME=$(date +%s)
 TOTAL_TIME=$((LAST_TIME-INIT_TIME))
-progressbar-close
+progressbar-stop
 
 if [ "$TOTAL_TIME" -lt "60" ];then
     kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
