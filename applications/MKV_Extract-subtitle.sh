@@ -7,10 +7,10 @@
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 MKV="$1"
-PB_PIDFILE="/tmp/MKV-Extract-Subtitle_addtoservicemenu-progressbar.pid"
 BEGIN_TIME=""
 FINAL_TIME=""
 ELAPSED_TIME=""
+PB_PIDFILE="$(mktemp)"
 
 ###################################
 ############ Functions ############
@@ -24,7 +24,7 @@ if-cancel-exit() {
 }
 
 progressbar-start() {
-    kdialog --print-winid --icon=ks-extracting-subs --title="MKV Extract Subtitle" --progressbar "Processing ${MKV##*/}..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
+    kdialog --icon=ks-extracting-subs --title="MKV Extract Subtitle" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
 }
 
 progressbar-stop() {

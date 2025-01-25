@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=SearchHere;SearchByName;SearchByString;_SEPARATOR_;StatisticsSearchDB;UpdateSearchDB;_SEPARATOR_;ModifiedFilesHere
+Actions=SearchHere;SearchByName;SearchByString;StatisticsSearchDB;UpdateSearchDB;ModifiedFilesHere
 Icon=ks-search-string
 Type=Service
 X-KDE-Priority=TopLevel

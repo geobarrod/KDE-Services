@@ -136,7 +136,7 @@ EOF
 
 SCREEN_FREQ=$(echo $SCREEN $FREQ|sed 's/x/ /')
 MODELINE=$(gtf $SCREEN_FREQ|grep -v "#"|sed "s;_$FREQ.00;;")
-sed -i "" "s;# Modeline;$(echo $MODELINE);" /tmp/xorg-configure
+sed -i "s;# Modeline;$(echo $MODELINE);" /tmp/xorg-configure
 mv -f /tmp/xorg-configure /etc/X11/xorg.conf
 
 kdialog --icon=ks-xorg --title="Xorg Configure: ${VGA#*: }" --msgbox="You must restart X-Windows session for the changes to be applied."  2> /dev/null

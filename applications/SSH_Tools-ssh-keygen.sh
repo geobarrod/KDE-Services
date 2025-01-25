@@ -6,15 +6,16 @@
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+KDESU="/usr/local/lib/libexec/*/kdesu"
 
 ###################################
 ############ Functions ############
 ###################################
 
 if-cancel-exit() {
-    if [ "$?" != "0" ]; then
-        exit 1
-    fi
+	if [ "$?" != "0" ]; then
+		exit 1
+	fi
 }
 
 ##############################
@@ -25,11 +26,11 @@ LOGIN=$(kdialog --icon=ks-keygen --title="SSH Tools - Public Key Generation" --c
 if-cancel-exit
 
 if [ "$LOGIN" = "$USER" ]; then
-    xterm -si -s -sl 1000000 -sb -T "SSH Tools - Public Key Generation For $LOGIN" -bg black -fg white -e ssh-keygen
-    kdialog --icon=ks-keygen --title="SSH Tools" --passivepopup="[Finished]   Public Key Generation For $LOGIN"
+	xterm -si -s -sl 1000000 -sb -T "SSH Tools - Public Key Generation For $LOGIN" -bg black -fg white -e ssh-keygen
+	kdialog --icon=ks-keygen --title="SSH Tools" --passivepopup="[Finished]   Public Key Generation For $LOGIN"
 elif [ "$LOGIN" = "root" ]; then
-    kdesu --noignorebutton -d xterm -si -s -sl 1000000 -sb -T "SSH Tools - Public Key Generation For $LOGIN" -bg black -fg white -e ssh-keygen
-    if-cancel-exit
-    kdialog --icon=ks-keygen --title="SSH Tools" --passivepopup="[Finished]   Public Key Generation For $LOGIN"
+	$KDESU --noignorebutton -d xterm -si -s -sl 1000000 -sb -T "SSH Tools - Public Key Generation For $LOGIN" -bg black -fg white -e ssh-keygen
+	if-cancel-exit
+	kdialog --icon=ks-keygen --title="SSH Tools" --passivepopup="[Finished]   Public Key Generation For $LOGIN"
 fi
 exit 0

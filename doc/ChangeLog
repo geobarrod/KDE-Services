@@ -1,8 +1,15 @@
+* Sat Jan 25 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.4
+- Fixed execution permission of services from right click context menu.
+- Fixed zombie execution of progress bar of some menu services.
+- You can make a donation to support the overall efforts of the KDE-Services project author.
+	The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+	Thanks!
+
 * Sat Jan 21 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.3
 - NOTE: If you have installed the version 3.0.2 it is mandatory
 	to uninstall it before installing this new version.
 - Removed KDE 4.x support.
-- Added support for Plasma (KDE) [5.x|6.x].
+- Added support for KDE Plasma [5.x|6.x].
 - The recommended method to install is through of Dolphin file manager:
 	Open Menu => Configure => Configure Dolphin => Context Menu
 	=> Download New Services => Search for "KDE-Services" => click on the [Install] button.

@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=CopyToDropbox;MoveToDropbox;_SEPARATOR_;CopyToPublicAndGetURL;MoveToPublicAndGetURL;_SEPARATOR_;GetPublicURL;_SEPARATOR_;InstallService;UpdateService;_SEPARATOR_;StartService;StopService;_SEPARATOR_;AutoStart;
+Actions=CopyToDropbox;MoveToDropbox;CopyToPublicAndGetURL;MoveToPublicAndGetURL;GetPublicURL;InstallService;UpdateService;StartService;StopService;AutoStart;
 Icon=ks-dropbox
 MimeType=all/all;
 ServiceTypes=KonqPopupMenu/Plugin

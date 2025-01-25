@@ -35,7 +35,7 @@ Name[zh_CN]=DVD 生成器
 Name[x-test]=xxDVD Assemblerxx
 
 [Desktop Action ISOBuild]
-Exec=which genisoimage; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Build ISO-9660 Image from Here" --passivepopup="[Error] Please install genisoimage command and try again."; exit 1; else DBUSREF=$(kdialog --icon=ks-media-optical-mount --title="Build ISO-9660 Image from Here" --progressbar "\t\t\t\t\t\t\t" /ProgressDialog); qdbus $DBUSREF setLabelText "Building:  $(basename %f.iso)"; genisoimage -R -J -o %f.iso %f; qdbus $DBUSREF close; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=ks-media-optical-mount --title="Build ISO-9660 Image from Here" --passivepopup="[Finished]   $(basename %f.iso)";fi
+Exec=which genisoimage; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Build ISO-9660 Image from Here" --passivepopup="[Error] Please install genisoimage command and try again."; exit 1; else kdialog --icon=ks-media-optical-mount --title="Build ISO-9660 Image from Here" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; genisoimage -R -J -o %f.iso %f; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Build Image" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=ks-media-optical-mount --title="Build ISO-9660 Image from Here" --passivepopup="[Finished]   $(basename %f.iso)";fi
 Icon=ks-media-optical-mount
 Name=Build ISO-9660 Image from Here
 Name[de]=ISO-9660 Abbild hier erstellen

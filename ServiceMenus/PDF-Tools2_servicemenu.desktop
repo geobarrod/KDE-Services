@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=ExtractAllImages;_SEPARATOR_;PDFOptimizer;_SEPARATOR_;pdfcompress;_SEPARATOR_;pdfmetaview;pdfmetaedit;_SEPARATOR_;pdfmerge;pdfsplit;_SEPARATOR_;PDFinfo;
+Actions=ExtractAllImages;PDFOptimizer;pdfcompress;pdfmetaview;pdfmetaedit;pdfmerge;pdfsplit;PDFinfo;
 Icon=ks-pdf
 MimeType=application/pdf;
 ServiceTypes=KonqPopupMenu/Plugin
@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=PDF 工具
 X-KDE-Submenu[x-test]=xxPDF Toolsxx
 
 [Desktop Action ExtractAllImages]
-Exec=which pdfimages; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract All Images" --passivepopup="[Error] Please install pdfimages command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting All Images:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; pdfimages -p "$file" $(ls "$file"|awk -F . '{print $1}'); kdialog --icon=ks-pdf --title="PDF Tools - Extract all images" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which pdfimages; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract All Images" --passivepopup="[Error] Please install pdfimages command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-pdf --title="PDF Tools" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; pdfimages -p "$file" $(ls "$file"|awk -F . '{print $1}'); kdialog --icon=ks-pdf --title="PDF Tools - Extract all images" --passivepopup="[Finished]   ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-pdf
 Name=Extract All Images
 Name[de]=Alle Bilder extrahieren
@@ -36,7 +36,7 @@ Name[zh_CN]=提取全部图像
 Name[x-test]=xxExtract All Imagesxx
 
 [Desktop Action PDFOptimizer]
-Exec=which pdftops; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Optimize" --passivepopup="[Error] Please install pdftops command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-pdf --title="PDF Tools" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Optimizing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; pdftops "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_opt.${file##/*.}"; kdialog --icon=ks-pdf --title="PDF Tools - Optimizer" --passivepopup="[Finished]   ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which pdftops; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Optimize" --passivepopup="[Error] Please install pdftops command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-pdf --title="PDF Tools" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do pdftops "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_opt.${file##/*.}"; kdialog --icon=ks-pdf --title="PDF Tools - Optimizer" --passivepopup="[Finished]   ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-pdf
 Name=Optimize
 Name[de]=Optimierer

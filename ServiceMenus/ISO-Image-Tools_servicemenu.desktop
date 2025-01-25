@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=MountCD-Image;UnmountCD-Image;_SEPARATOR_;Integrity-Check;Insert-MD5sum;_SEPARATOR_;MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;Burn-Image;_SEPARATOR_;ISOinfo;OpticalDriveInfo;
+Actions=MountCD-Image;UnmountCD-Image;Integrity-Check;Insert-MD5sum;MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;Burn-Image;ISOinfo;OpticalDriveInfo;
 Icon=ks-media-optical-mount
 MimeType=application/x-cd-image;
 ServiceTypes=KonqPopupMenu/Plugin
@@ -36,7 +36,7 @@ Name[zh_CN]=烧录 ISO-9660 镜像
 Name[x-test]=xxBurn ISO-9660 Imagexx
 
 [Desktop Action Insert-MD5sum]
-Exec=which implantisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Error] Please install implantisomd5 command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Inserting:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; implantisomd5 "$file" > /tmp/insert-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity;fi
+Exec=which implantisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Error] Please install implantisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; implantisomd5 "$file" > /tmp/insert-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity;fi
 Icon=ks-media-optical-md5sum
 Name=Insert MD5sum
 Name[de]=MD5sum anfügen
@@ -52,7 +52,7 @@ Name[zh_CN]=插入 MD5 校验和
 Name[x-test]=xxInsert MD5sumxx
 
 [Desktop Action Integrity-Check]
-Exec=which checkisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install checkisomd5 command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; checkisomd5 "$file" > /tmp/check-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";else kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";fi;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity;fi
+Exec=which checkisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install checkisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; checkisomd5 "$file" > /tmp/check-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";else kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity;fi
 Icon=ks-media-optical-integrity-check
 Name=Integrity Check
 Name[de]=Integritätsscheck
@@ -68,7 +68,7 @@ Name[zh_CN]=完整性检查
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action MD5-Sum]
-Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5sum ISO-9660 Image" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="MD5sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5sum ISO-9660 Image" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="MD5sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
 Name=Show MD5sum ISO-9660 Image
 Name[de]=MD5sum ISO-9660 Abbild anzeigen
@@ -84,7 +84,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 MD5 校验和
 Name[x-test]=xxShow MD5sum ISO-9660 Imagexx
 
 [Desktop Action SHA1-Sum]
-Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1sum ISO-9660 Image" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA1sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1sum ISO-9660 Image" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA1sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
 Name=Show SHA1sum ISO-9660 Image
 Name[de]=SHA1sum ISO-9660 Abbild anzeigen
@@ -100,7 +100,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 SHA1 校验和
 Name[x-test]=xxShow SHA1sum ISO-9660 Imagexx
 
 [Desktop Action SHA256-Sum]
-Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA256sum ISO-9660 Image" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA256sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA256sum ISO-9660 Image" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA256sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
 Name=Show SHA256sum ISO-9660 Image
 Name[de]=SHA256sum ISO-9660 Abbild anzeigen
@@ -116,7 +116,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 SHA256 校验和
 Name[x-test]=xxShow SHA256sum ISO-9660 Imagexx
 
 [Desktop Action SHA512-Sum]
-Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA512sum ISO-9660 Image" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="SHA512sum ISO-9660 Image" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file);done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA512sum ISO-9660 Image" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA512sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
 Icon=ks-checksum
 Name=Show SHA512sum ISO-9660 Image
 Name[de]=SHA512sum ISO-9660 Abbild anzeigen

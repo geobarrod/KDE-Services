@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=RegisterNewAccount;SaveUserLoginCredentials;_SEPARATOR_;ShowCloudSpace;CreateRemoteFolder;ListFileStored;RemoveFileStored;UploadFile;SyncDirectoryTree;
+Actions=RegisterNewAccount;SaveUserLoginCredentials;ShowCloudSpace;CreateRemoteFolder;ListFileStored;RemoveFileStored;UploadFile;SyncDirectoryTree;
 Icon=ks-mega
 MimeType=all/all;
 ServiceTypes=KonqPopupMenu/Plugin

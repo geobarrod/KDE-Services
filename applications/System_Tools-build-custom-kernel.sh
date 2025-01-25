@@ -368,10 +368,10 @@ if [ "$EXIT" = "0" ]; then
     EXIT=$?
     if-cancel-exit2
     echo "-$BINOPT" > ~/.kde-services/kernel-cflags
-    sudo sed -i "" "s;-O2;-$BINOPT;g" Makefile
+    sudo sed -i "s;-O2;-$BINOPT;g" Makefile
 elif [ "$EXIT" = "1" ]; then
     BINOPT=$(cat ~/.kde-services/kernel-cflags 2> /dev/null)
-    sudo sed -i "" "s;-O2;$BINOPT;g" Makefile
+    sudo sed -i "s;-O2;$BINOPT;g" Makefile
 elif [ "$EXIT" = "2" ]; then
     if-cancel-exit
 fi

@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=ShowPkgChangelog;ShowPkgInfo;_SEPARATOR_;ListPkgContent;ListPkgConfFiles;ListPkgDeps;ListPkgScripts;_SEPARATOR_;ExtractPkgFiles;_SEPARATOR_;IntegrityCheckPkg;
+Actions=ShowPkgChangelog;ShowPkgInfo;ListPkgContent;ListPkgConfFiles;ListPkgDeps;ListPkgScripts;ExtractPkgFiles;IntegrityCheckPkg;
 Icon=ks-rebuild-rpm
 MimeType=application/x-rpm;application/x-source-rpm;
 ServiceTypes=KonqPopupMenu/Plugin
@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=软件包工具
 X-KDE-Submenu[x-test]=xxPackage Toolsxx
 
 [Desktop Action ExtractPkgFiles]
-Exec=which rpm2cpio cpio; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract Files Here" --passivepopup="[Error] Please install rpm2cpio and cpio command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Extracting:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd $(dirname $file); mkdir $(basename -s .rpm $file); cd $(basename -s .rpm $file); rpm2cpio $file | cpio -id; kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --passivepopup="[Finished]    $(basename $file)";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which rpm2cpio cpio; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract Files Here" --passivepopup="[Error] Please install rpm2cpio and cpio command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd $(dirname $file); mkdir $(basename -s .rpm $file); cd $(basename -s .rpm $file); rpm2cpio $file | cpio -id; kdialog --icon=ks-rebuild-rpm --title="Extract Files Here" --passivepopup="[Finished]    $(basename $file)";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-rebuild-rpm
 Name=Extract Files Here
 Name[de]=Dateien hier entpacken
@@ -36,7 +36,7 @@ Name[zh_CN]=在此提取文件
 Name[x-test]=xxExtract Files Herexx
 
 [Desktop Action IntegrityCheckPkg]
-Exec=which rpm2cpio rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install rpm2cpio and rpm command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-rebuild-rpm --title="Integrity Check" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Checking:  $(basename $file)  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; rpm2cpio $file > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps $file 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then kdialog --icon=ks-rebuild-rpm --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename $file)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then kdialog --icon=ks-error --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename $file)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg;done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which rpm2cpio rpm; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install rpm2cpio and rpm command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-rebuild-rpm --title="Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do rpm2cpio $file > /dev/null; EXIT1=$?; rpm -Vp --nosignature --nofiles --nodeps $file 2> /tmp/integritychkpkg; EXIT2=$?; if [ "$EXIT1" = "0" ] && [ "$EXIT2" = "0" ]; then kdialog --icon=ks-rebuild-rpm --title="Package Tools - Integrity Check" --passivepopup="[OK]   $(basename $file)"; elif [ "$EXIT1" != "0" ] || [ "$EXIT2" != "0" ]; then kdialog --icon=ks-error --title="Package Tools - Integrity Check" --passivepopup="[ERROR]   $(basename $file)   $(cat /tmp/integritychkpkg)";fi; rm -f /tmp/integritychkpkg;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-rebuild-rpm
 Name=Integrity Check
 Name[de]=Integrität überprüfen

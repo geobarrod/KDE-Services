@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=MountEncryptedDir;UnmountEncryptedDir;_SEPARATOR_;EncryptDir;
+Actions=MountEncryptedDir;UnmountEncryptedDir;EncryptDir;
 Icon=ks-encrypt
 Type=Service
 X-KDE-Priority=TopLevel
@@ -51,7 +51,7 @@ Name[zh_CN]=卸载加密目录
 Name[x-test]=xxxUnmount Encrypted Directoryxx
 
 [Desktop Action EncryptDir]
-Exec=which encfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Encrypt Directory" --passivepopup="[Error] Please install encfs command and try again."; exit 1; else mkdir %F_encfs && encfs --standard --extpass=/usr/libexec/openssh/ssh-askpass %F %F_encfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Encrypt Directory" --passivepopup="[Error] The command encfs closed unexpectedly."; exit 1; else DBUSREF=$(kdialog --icon=ks-folder-encrypt --title="Encrypt Directory" --progressbar " " /ProgressDialog); qdbus $DBUSREF setLabelText "Encrypting %F..."; mv %F/* %F_encfs && fusermount -u %F_encfs && rm -fr %F_encfs && mv %F %F_encfs; qdbus $DBUSREF close; echo "Finish Encrypt Directory" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=ks-folder-encrypt --title="Encrypt Directory" --passivepopup="[Finished] The directory has been encrypted.";fi;fi
+Exec=which encfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Encrypt Directory" --passivepopup="[Error] Please install encfs command and try again."; exit 1; else mkdir %F_encfs && encfs --standard --extpass=/usr/libexec/openssh/ssh-askpass %F %F_encfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Encrypt Directory" --passivepopup="[Error] The command encfs closed unexpectedly."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-folder-encrypt --title="Encrypt Directory" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; mv %F/* %F_encfs && fusermount -u %F_encfs && rm -fr %F_encfs && mv %F %F_encfs; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Encrypt Directory" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; kdialog --icon=ks-folder-encrypt --title="Encrypt Directory" --passivepopup="[Finished] The directory has been encrypted.";fi;fi
 Icon=ks-folder-encrypt
 Name=Encrypt Directory
 Name[de]=Verzeichnis verschlüsseln

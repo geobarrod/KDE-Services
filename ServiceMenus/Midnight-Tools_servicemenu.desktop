@@ -20,13 +20,13 @@ X-KDE-Submenu[zh_CN]=Midnight 工具
 X-KDE-Submenu[x-test]=xxMidnight Toolsxx
 
 [Desktop Action Root-mc]
-Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else kdesu -i ks-mc-root --noignorebutton -d -c "konsole --new-tab -e mc";fi
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-mc-root --noignorebutton -d -c "konsole --new-tab -e mc";fi
 Icon=ks-mc-root
 Name=[Root ~]# mc
 Name[x-test]=xx[Root ~]# mcxx
 
 [Desktop Action Root-mcedit]
-Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else kdesu -i ks-mcedit-root --noignorebutton -d -c "konsole --new-tab -e mcedit";fi
+Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-mcedit-root --noignorebutton -d -c "konsole --new-tab -e mcedit";fi
 Icon=ks-mcedit-root
 Name=[Root ~]# mcedit
 Name[x-test]=xx[Root ~]# mceditxx

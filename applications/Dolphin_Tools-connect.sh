@@ -18,8 +18,8 @@ bookmark() {
         rm -f ~/.local/share/user-places.xbel*
     fi
     
-    sed -i "" "s;</xbel>;;g" ~/.local/share/user-places.xbel
-    sed -i "" "s;^</bookmark>;;" ~/.local/share/user-places.xbel
+    sed -i "s;</xbel>;;g" ~/.local/share/user-places.xbel
+    sed -i "s;^</bookmark>;;" ~/.local/share/user-places.xbel
     cat >> ~/.local/share/user-places.xbel << EOF
 <bookmark href="$PROTOCOL://$DIALOG/">
  <title>$(echo $PROTOCOL|tr a-z A-Z) - $DIALOG</title>

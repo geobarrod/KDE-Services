@@ -6,27 +6,28 @@
 #################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+KDESU="/usr/local/lib/libexec/*/kdesu"
+PB_PIDFILE="$(mktemp)"
 
-kdesu --noignorebutton -d updatedb & 2> /dev/null
+$KDESU --noignorebutton -d updatedb & 2> /dev/null
 
 until [ "$(pidof kdesu)" = "" ]; do
-  sleep 1
-  true
+	sleep 1
+	true
 done
 
-DBUSREF=$(kdialog --icon=ks-search-database-update --title="Update Search DataBase" --progressbar "                                        " /ProgressDialog)
-qdbus $DBUSREF setLabelText "Updating search database..."
+kdialog --icon=ks-search-database-update --title="Update Search DataBase" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
 
 until [ "$(pidof updatedb)" = "" ]; do
-  sleep 1
-  true
+	sleep 1
+	true
 done
 
-qdbus $DBUSREF close
+kill $(cat $PB_PIDFILE)
+rm $PB_PIDFILE
 echo  "Finish Update Search Database" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav 2> /dev/null
 rm -f /tmp/speak*
 kdialog --icon=ks-search-database-update --title="Update Search DataBase" --passivepopup="Finished" 2> /dev/null
-
 exit 0

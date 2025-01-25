@@ -7,7 +7,6 @@
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 MEGARC="$HOME/.megarc"
-DBUSREF=""
 EXIT=""
 STDOUT=""
 STDERR=""
@@ -18,26 +17,24 @@ LINK=""
 FILES=""
 SELECT_FILES=""
 DIR="$2"
+PB_PIDFILE="$(mktemp)"
 
 ###################################
 ############ Functions ############
 ###################################
 
 progressbar_start() {
-	DBUSREF=$(kdialog --icon=ks-mega --title="MEGA Tools" --progressbar " " 0)
+	kdialog --icon=ks-mega --title="MEGA Tools" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
 }
 
-qdbusinsert() {
-	qdbus $DBUSREF setLabelText "Running your request..."
-}
-
-progressbar_close() {
-	qdbus $DBUSREF close
+progressbar_stop() {
+	kill $(cat $PB_PIDFILE)
+	rm $PB_PIDFILE
 }
 
 check_stderr() {
 	if [ "$EXIT" != "0" ]; then
-		qdbus $DBUSREF close
+		progressbar_stop
 		if [[ "$(cat $STDERR|grep -ow EEXIST)" ]]; then
 			kdialog --icon=ks-error --title="MEGA Tools" --passivepopup="[ERROR]   Registration failed: Email '$EMAIL' already registered, try again."
 		elif [[ "$(cat $STDERR|grep -ow "Couldn't resolve host name")" ]]; then
@@ -92,20 +89,20 @@ EOF
 	fi
 	chmod 600 $MEGARC
 	progressbar_start
-	qdbusinsert
+
 	megareg --register --email $EMAIL --name "$NAME" --password "$PASS" > $STDOUT 2> $STDERR
 	EXIT=$?
 	check_stderr
-	progressbar_close
+	progressbar_stop
 	LINK=$(kdialog --icon=ks-mega --title="Register New Account" --inputbox="Registration email was sent to $EMAIL. Enter the registration link from the 'MEGA Signup' email or if you prefer to confirm the registration request from the email press the cancel button")
 	EXIT=$?
 	check_cancel
 	progressbar_start
-	qdbusinsert
+
 	megareg --verify $(cat $STDOUT|grep megareg|awk '{print $3}') $LINK > $STDOUT 2> $STDERR
 	EXIT=$?
 	check_stderr
-	progressbar_close
+	progressbar_stop
 	kdialog --icon=ks-mega --title="Register New Account" --passivepopup="[Finished]   $(cat $STDOUT). User login credentials saved in $MEGARC file."
 	rm -f $STDOUT $STDERR
 	exit 0
@@ -139,9 +136,9 @@ EOF
 	fi
 	chmod 600 $MEGARC
 	progressbar_start
-	qdbusinsert
+
 	FREESPACE=$(megadf -h --free|xargs)
-	progressbar_close
+	progressbar_stop
 	kdialog --icon=ks-mega --title="Save User Login Credentials" --passivepopup="[Finished]   Available free space in the cloud: $FREESPACE. User login credentials saved in $MEGARC file."
 	exit 0
 }
@@ -149,12 +146,12 @@ EOF
 show_cloud_space() {
 	STDERR=/tmp/megadf.stderr
 	progressbar_start
-	qdbusinsert
+
 	megadf 2> $STDERR
 	EXIT=$?
 	check_stderr
 	SPACE=$(megadf -h|xargs)
-	progressbar_close
+	progressbar_stop
 	kdialog --icon=ks-mega --title="Show Available Cloud Space" --passivepopup="[Finished]   Available space in the cloud: $SPACE."
 	rm -f $STDERR
 	exit 0
@@ -166,11 +163,11 @@ create_remote_folder() {
 	EXIT=$?
 	check_cancel
 	progressbar_start
-	qdbusinsert
+
 	megamkdir /Root/$FOLDER 2> $STDERR
 	EXIT=$?
 	check_stderr
-	progressbar_close
+	progressbar_stop
 	kdialog --icon=ks-mega --title="Create New Remote Folder" --passivepopup="[Finished]   The new folder '$FOLDER' has been successfully created."
 	rm -f $STDERR
 	exit 0
@@ -180,12 +177,12 @@ list_file_stored() {
 	STDOUT=/tmp/megals.stdout
 	STDERR=/tmp/megals.stderr
 	progressbar_start
-	qdbusinsert
+
 	megals -ehl --reload 2> $STDERR
 	EXIT=$?
 	check_stderr
 	megals -ehl --reload|grep https:|awk '{print $1,$5,$6,$7,$8,$9}' > $STDOUT
-	progressbar_close
+	progressbar_stop
 	kdialog --icon=ks-mega --title="You have $(cat $STDOUT|grep https:|wc -l|xargs) Files Stored in Cloud" --textbox=$STDOUT 770 450
 	rm -f $STDOUT $STDERR
 	exit 0
@@ -194,27 +191,27 @@ list_file_stored() {
 remove_file_stored() {
 	STDERR=/tmp/megarm.stderr
 	progressbar_start
-	qdbusinsert
+
 	FILES=$(megals --reload|grep 'Root\/'|sed 's/^\/Root\///g'|awk '{print $1,$1}'|sed 's/$/ off/g'|xargs)
-	progressbar_close
+	progressbar_stop
 	SELECT_FILES=$(kdialog --icon=ks-mega --title="Remove Files Stored in Cloud" --separate-output --checklist="Select Files to Remove" All "All List" off $FILES)
 	EXIT=$?
 	check_stderr
 	if [ "$SELECT_FILES" == "All" ]; then
 		progressbar_start
-		qdbusinsert
+
 		megarm --reload $(megals --reload|grep 'Root\/') 2> $STDERR
 		EXIT=$?
-		progressbar_close
+		progressbar_stop
 		check_stderr
 		kdialog --icon=ks-mega --title="Remove Files Stored in Cloud" --passivepopup="[Finished]   The entire list has been successfully removed."
 	else
 		REMOVE_FILES=$(echo $SELECT_FILES|sed -e 's/^/\/Root\//g' -e 's/ / \/Root\//g')
 		progressbar_start
-		qdbusinsert
+
 		megarm --reload $REMOVE_FILES 2> $STDERR
 		EXIT=$?
-		progressbar_close
+		progressbar_stop
 		check_stderr
 		kdialog --icon=ks-mega --title="Remove Files Stored in Cloud" --passivepopup="[Finished]   The selected file(s) has been successfully removed."
 	fi
@@ -228,22 +225,22 @@ upload_file() {
 	EXIT=$?
 	check_cancel
 	progressbar_start
-	qdbusinsert
+
 	REMOTE_DIR=$(megals --reload 2> $STDERR|grep '\/Root'|awk '{print $1,$1}'|sed 's/$/ off/g'|xargs)
 	if [ -s "$STDERR" ]; then
 		EXIT=1
-		progressbar_close
+		progressbar_stop
 		check_stderr
 	fi
-	progressbar_close
+	progressbar_stop
 	SELECT_REMOTE_PATH=$(kdialog --icon=ks-mega --title="Select Remote Path" --radiolist="Select Directory" $REMOTE_DIR)
 	EXIT=$?
 	check_cancel
 	progressbar_start
-	qdbusinsert
+
 	megaput --reload --path $SELECT_REMOTE_PATH $FILES 2> $STDERR
 	EXIT=$?
-	progressbar_close
+	progressbar_stop
 	check_stderr
 	kdialog --icon=ks-mega --title="Upload Files to Cloud" --passivepopup="[Finished]   The selected file(s) has been successfully uploaded."
 	rm -f $STDERR
@@ -261,10 +258,10 @@ sync_directory_tree()  {
 		EXIT=$?
 		check_cancel
 		progressbar_start
-		qdbusinsert
+
 		megacopy --reload --local $SRC_DIR --remote /Root 2> $STDERR
 		EXIT=$?
-		progressbar_close
+		progressbar_stop
 		check_stderr
 		kdialog --icon=ks-mega --title="Synchronize Directory Tree to Cloud" --passivepopup="[Finished]   The synchronization has been successfully."
 		rm -f $STDERR
@@ -274,10 +271,10 @@ sync_directory_tree()  {
 		EXIT=$?
 		check_cancel
 		progressbar_start
-		qdbusinsert
+
 		megacopy --reload --local $DST_DIR --remote /Root --download 2> $STDERR
 		EXIT=$?
-		progressbar_close
+		progressbar_stop
 		check_stderr
 		kdialog --icon=ks-mega --title="Synchronize Directory Tree from Cloud" --passivepopup="[Finished]   The synchronization has been successfully."
 		rm -f $STDERR

@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=sendto-mailx;_SEPARATOR_;Encrypt;Decrypt;_SEPARATOR_;shredder;
+Actions=sendto-mailx;Encrypt;Decrypt;shredder;
 Icon=ks-encrypt
 MimeType=all/allfiles;
 ServiceTypes=KonqPopupMenu/Plugin
@@ -68,7 +68,7 @@ Name[zh_CN]=通过邮件安全发送
 Name[x-test]=xxSecure Send to Mailxxx
 
 [Desktop Action shredder]
-Exec=which shred; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Paranoid Shredder" --passivepopup="[Error] Please install shred command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-shredder --title="Paranoid Shredder" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Shredding:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; shred -f -n 5 --random-source=/dev/urandom -u -z "$file"; kdialog --icon=ks-shredder --title="Paranoid Shredder" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which shred; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Paranoid Shredder" --passivepopup="[Error] Please install shred command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-shredder --title="Paranoid Shredder" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; shred -f -n 5 --random-source=/dev/urandom -u -z "$file"; kdialog --icon=ks-shredder --title="Paranoid Shredder" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-shredder
 Name=Paranoid Shredder
 Name[de]=Shredder für Paranoide

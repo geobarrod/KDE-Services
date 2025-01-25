@@ -1,5 +1,5 @@
 [Desktop Entry]
-Actions=MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;_SEPARATOR_;CheckSum;
+Actions=MD5-Sum;SHA1-Sum;SHA256-Sum;SHA512-Sum;CheckSum;
 Icon=ks-checksum
 MimeType=all/allfiles;
 ServiceTypes=KonqPopupMenu/Plugin
@@ -36,7 +36,7 @@ Name[zh_CN]=验证校验和
 Name[x-test]=xxVerify CheckSumxx
 
 [Desktop Action MD5-Sum]
-Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5 (strong)" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum MD5" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; md5sum "$file" > $(ls $file).md5; sed -i "" "s; ${file%/*}/;*;" $(ls $file).md5; kdialog --icon=ks-checksum --title="CheckSum MD5" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5 (strong)" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="CheckSum MD5" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; md5sum "$file" > $(ls $file).md5; sed -i "s; ${file%/*}/;*;" $(ls $file).md5; kdialog --icon=ks-checksum --title="CheckSum MD5" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-checksum
 Name=MD5 (strong)
 Name[de]=MD5 (stark)
@@ -52,7 +52,7 @@ Name[zh_CN]=MD5 (普通强度)
 Name[x-test]=xxMD5 (strong)xx
 
 [Desktop Action SHA1-Sum]
-Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum SHA1" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha1sum "$file" > $(ls $file).sha1; sed -i "" "s; ${file%/*}/;*;" $(ls $file).sha1; kdialog --icon=ks-checksum --title="CheckSum SHA1" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="CheckSum SHA1" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; sha1sum "$file" > $(ls $file).sha1; sed -i "s; ${file%/*}/;*;" $(ls $file).sha1; kdialog --icon=ks-checksum --title="CheckSum SHA1" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-checksum
 Name=SHA1 (good strong)
 Name[de]=SHA1 (sehr stark)
@@ -68,7 +68,7 @@ Name[zh_CN]=SHA1 (较高强度)
 Name[x-test]=xxSHA1 (good strong)xx
 
 [Desktop Action SHA256-Sum]
-Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum SHA256" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha256sum "$file" > $(ls $file).sha256; sed -i "" "s; ${file%/*}/;*;" $(ls $file).sha256; kdialog --icon=ks-checksum --title="CheckSum SHA256" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="CheckSum SHA256" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; sha256sum "$file" > $(ls $file).sha256; sed -i "s; ${file%/*}/;*;" $(ls $file).sha256; kdialog --icon=ks-checksum --title="CheckSum SHA256" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-checksum
 Name=SHA256 (very strong)
 Name[de]=SHA256 (sehr stark)
@@ -84,7 +84,7 @@ Name[zh_CN]=SHA256 (高强度)
 Name[x-test]=xxSHA256 (very strong)xx
 
 [Desktop Action SHA512-Sum]
-Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else COUNT="0"; COUNTFILES=$(echo %F|wc -w); COUNTFILES=$((++COUNTFILES)); DBUSREF=$(kdialog --icon=ks-checksum --title="CheckSum SHA512" --progressbar "\t\t\t\t\t\t\t" $COUNTFILES); for file in %F;do COUNT=$((++COUNT)); qdbus $DBUSREF setLabelText "Computing:  ${file##*/}  [$COUNT/$((COUNTFILES-1))]"; qdbus $DBUSREF Set "" value $COUNT; cd ${file%/*}; sha512sum "$file" > $(ls $file).sha512; sed -i "" "s; ${file%/*}/;*;" $(ls $file).sha512; kdialog --icon=ks-checksum --title="CheckSum SHA512" --passivepopup="[Finished]    ${file##*/}";done; qdbus $DBUSREF Set "" value $COUNTFILES; sleep 1; qdbus $DBUSREF close;fi
+Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1 (Good Strong)" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="CheckSum SHA512" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; sha512sum "$file" > $(ls $file).sha512; sed -i "s; ${file%/*}/;*;" $(ls $file).sha512; kdialog --icon=ks-checksum --title="CheckSum SHA512" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-checksum
 Name=SHA512 (high strong)
 Name[de]=SHA512 (super stark)

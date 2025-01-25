@@ -99,7 +99,7 @@ Name[zh_CN]=系统信息
 Name[x-test]=xxSystem Informationxx
 
 [Desktop Action SysMonitor]
-Exec=kdesu -i ks-error --noignorebutton -d ~/.local/share/applications/System_Tools-system-monitor.sh %F
+Exec=KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-error --noignorebutton -d ~/.local/share/applications/System_Tools-system-monitor.sh %F
 Icon=ks-error
 Name=System Monitor
 Name[de]=Systemüberwachung
@@ -115,7 +115,7 @@ Name[zh_CN]=系统监视器
 Name[x-test]=xxSystem Monitorxx
 
 [Desktop Action XorgConf]
-Exec=which lspci gtf; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Xorg Configure" --passivepopup="[Error] Please install lspci and gtf command and try again."; exit 1; else kdesu -i ks-xorg --noignorebutton -d ~/.local/share/applications/System_Tools-Xorg-configure.sh %F;fi
+Exec=which lspci gtf; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Xorg Configure" --passivepopup="[Error] Please install lspci and gtf command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-xorg --noignorebutton -d ~/.local/share/applications/System_Tools-Xorg-configure.sh %F;fi
 Icon=ks-xorg
 Name=Xorg Configure
 Name[de]=Xorg konfigurieren
