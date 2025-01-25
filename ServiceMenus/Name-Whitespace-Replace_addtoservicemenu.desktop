@@ -1,8 +1,9 @@
 [Desktop Entry]
 Actions=NameWhitespaceReplace;
 Icon=ks-whitespace-replace
+MimeType=all/allfiles;inode/directory;
+ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
 X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
