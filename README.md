@@ -3,35 +3,35 @@ Description:
 
 Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE Plasma [5.x|6.x].
 
-- Submenu **Actions** => **KDE-Services** (it is shown when right-right-clicked any file/dir):
+- Submenu **Actions** => **KDE-Services** (it is shown when right-clicked any file/dir):
 	* **Add Timestamp Prefix to [File|Dir]name**
 	* **Change Timestamp to [File|Directory]**
 	* **Send by Email**
-	* **[Audio|Video] Info** (it is shown only when right-right-clicked any audio/video file).
+	* **[Audio|Video] Info** (it is shown only when right-clicked any audio/video file).
 	* **Show [File|Directory] Status**
 	* **Change Owner Here** (owner and permission of file/dir).
-	* **Text Replace** (it is shown only when right-right-clicked any text file).
-	* **Compressed File Integrity Check** (it is shown only when right-right-clicked any compressed file).
-	* **MKV Extract Subtitle** (it is shown only when right-right-clicked MKV video file).
-	* **Multiplex Subtitle** (only support MPEG-2 video file)(it is shown only when right-right-clicked MPG video file).
-	* **[File|Dir]name Whitespace Replace** (by underscore ASCII)(it is shown when right-right-clicked an directory).
+	* **Text Replace** (it is shown only when right-clicked any text file).
+	* **Compressed File Integrity Check** (it is shown only when right-clicked any compressed file).
+	* **MKV Extract Subtitle** (it is shown only when right-clicked MKV video file).
+	* **Multiplex Subtitle** (only support MPEG-2 video file)(it is shown only when right-clicked MPG video file).
+	* **[File|Dir]name Whitespace Replace** (by underscore ASCII)(it is shown when right-clicked an directory).
 
-- Submenu **AVI Tools** (it is shown only when right-right-clicked AVI video file):
+- Submenu **AVI Tools** (it is shown only when right-clicked AVI video file):
 	* **Split (to size)**
 	* **Split (by time range)**
 
-- Submenu **Android Tools** (it is shown when right-right-clicked an directory):
+- Submenu **Android Tools** (it is shown when right-clicked an directory):
 	* **Android Backup Manager** (backup or restore all device applications and data).
 	* **Android File Manager** (copy file/dir from/to device).
 	* **Android Package Manager** (install/uninstall *.apk applications).
 	* **Android Reboot Manager** (reboots the device, optionally into the bootloader or recovery program).
 
-- Submenu **Backup Tools** (it is shown when right-right-clicked an directory):
+- Submenu **Backup Tools** (it is shown when right-clicked an directory):
 	* **Standards** (backup/restore directories /etc/ and /root/ or aMule, AnyDesk, Audacity, Chrome, GnuPG,
 			HPLip, I2P, JDownloader, FileZilla, Firefox, KDE, KDE-Services, Pidgin, SSH, Thunderbird,
 			Tmux, Wine and general user configurations).
 
-- Submenu **CheckSum Tools** (it is shown when right-right-clicked any file):
+- Submenu **CheckSum Tools** (it is shown when right-clicked any file):
 	* **MD5 (strong)**.
 	* **SHA1 (good strong)**.
 	* **SHA256 (very strong)**.
