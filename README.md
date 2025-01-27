@@ -127,7 +127,7 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 					VCD, SVCD, DVD, 3GP, FLV or WebM).
 	* **Add Subtitle to MP4 Files**
 	* **Volume Normalize of MP3 Files**
-	* **[Extract|Convert] Audio Track** (from several audio file formats to MP3, MP3(432Hz),
+	* **Extract|Convert Audio Track** (from several audio file formats to MP3, MP3(432Hz),
 						FLAC, FLAC 432Hz, OGG or OGG 432Hz).
 	* **Rotate Video Files**
 	* **Edit Time from Media Files**
