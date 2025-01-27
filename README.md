@@ -32,10 +32,10 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 			Tmux, Wine and general user configurations).
 
 - Submenu **CheckSum Tools** (it is shown when right-right-clicked any file):
-	* **MD5 (strong)**
-	* **SHA1 (good strong)**
-	* **SHA256 (very strong)**
-	* **SHA512 (high strong)**
+	* **MD5 (strong)**.
+	* **SHA1 (good strong)**.
+	* **SHA256 (very strong)**.
+	* **SHA512 (high strong)**.
 	* **Verify CheckSum** (checksum file *.md5/*.sha1/*.sha256/*.sha512).
 
 - Submenu **Dolphin Tools** (it is shown when right-clicked an directory):
