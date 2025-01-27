@@ -28,8 +28,8 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 
 - Submenu **Backup Tools** (it is shown when right-clicked an directory):
 	* **Standards** (backup/restore directories /etc/ and /root/ or aMule, AnyDesk, Audacity, Chrome, GnuPG,
-			HPLip, I2P, JDownloader, FileZilla, Firefox, KDE, KDE-Services, Pidgin, SSH, Thunderbird,
-			Tmux, Wine and general user configurations).
+		       HPLip, I2P, JDownloader, FileZilla, Firefox, KDE, KDE-Services, Pidgin, SSH, Thunderbird,
+								    Tmux, Wine and general user configurations).
 
 - Submenu **CheckSum Tools** (it is shown when right-clicked any file):
 	* **MD5 (strong)**
@@ -124,11 +124,11 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 - Submenu **Multimedia Tools** (it is shown when right-clicked an directory):
 	* **DVD Assembler** (with menu).
 	* **Convert Video Files** (from several video file formats to MPEG-1, MPEG-2, MPEG-4, AVI,
-					VCD, SVCD, DVD, 3GP, FLV or WebM).
+								VCD, SVCD, DVD, 3GP, FLV or WebM).
 	* **Add Subtitle to MP4 Files**
 	* **Volume Normalize of MP3 Files**
 	* **Extract|Convert Audio Track** (from several audio file formats to MP3, MP3(432Hz),
-						FLAC, FLAC 432Hz, OGG or OGG 432Hz).
+							  FLAC, FLAC 432Hz, OGG or OGG 432Hz).
 	* **Rotate Video Files**
 	* **Edit Time from Media Files**
 	* **Attach Cover to MP3 Files**
@@ -177,12 +177,12 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 	* **Connect to Remote Server**
 	* **Send to Remote Server** (only file support).
 	* **Mount point to Remote Directory** (mount/unmount remote directory over SSH protocol
-						in local filesystem).
+									  in local filesystem).
 	* **Registered Servers** (show or edit IP/Hostname previously connected).
 
 - Submenu **SaMBa Tools** (it is shown when right-clicked an directory):
 	* **SaMBa Shares Mounter** (mount/unmount remote shared directory over SMB protocol
-					in local filesystem).
+								       in local filesystem).
 
 - Submenu **Search Tools** (it is shown when right-clicked an directory):
 	* **Search Here** (recursively starting from the selected directory).
@@ -191,13 +191,13 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 	* **Statistics Search DataBase**
 	* **Update Search DataBase**
 	* **Modified Files Here** (recursively starting from the selected directory
-					showing all modified files for the 2nd time that is executed).
+		     showing all modified files for the 2nd time that is executed).
 
 - Submenu **Security Tools** (it is shown when right-clicked an directory):
 	* **Mount Encrypted Directory** (mount an encrypted virtual filesystem
-	                               from the selected directory).
+						  from the selected directory).
 	* **Unmount Encrypted Directory** (unmount an encrypted virtual filesystem
-	                                 from the selected mountpoint directory).
+					   from the selected mountpoint directory).
 	* **Encrypt Directory** (create an encrypted virtual filesystem in the selected directory).
 
 - Submenu **Security Tools** (it is shown when right-clicked any file):
@@ -208,10 +208,10 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 
 - Submenu **System Tools** (it is shown when right-clicked an directory):
 	* **Build Custom Kernel** (customize the system kernel easily, increasing the system performance
-					and/or adding more hardware support, only for distros based on RHEL).
+				    and/or adding more hardware support, only for distros based on RHEL).
 	* **Check Kernel Update** (only for distros based on RHEL).
 	* **Rebuild RPM Package** (customize applications easily, increasing the application performance
-					and/or adding more support, only for distros based on RHEL).
+					     and/or adding more support, only for distros based on RHEL).
 	* **System Information**
 	* **System Monitor** (show system log fail/error events when they happen).
 	* **Process Viewer**
@@ -314,10 +314,9 @@ Contributors:
 
 - Sylvain Vidal (Author of service menu PDFktools).
 - David Baum (Service menu PDFktools bugfixer and author of the good idea
-		of integrating PDFktools on **PDF Tools**).
-- Victor Guardiola (Improved source code for **Mount ISO Image**
-			and **Umount ISO Image** services menu;
-			fixed the problem of [dir|file]name with whitespaces).
+				of integrating PDFktools on **PDF Tools**).
+- Victor Guardiola (Improved source code for **Mount ISO Image** and **Umount ISO Image**
+		    services menu; fixed the problem of [dir|file]name with whitespaces).
 - Vasyl V. Vercynskyj (Translations to Russian and Ukrainian languages).
 - Pawan Yadav (Research for KF5 support).
 - Bruce Zhang (Translations to Chinese language).
