@@ -44,8 +44,8 @@ cat > /tmp/about_kde-services << EOF
 
                     Submenu "Backup Tools" (it is shown when clicked an directory).
                                  - "Standards" (backup/restore directories /etc/ and /root/ or aMule, AnyDesk, Audacity, Chrome, GnuPG,
-                                                HPLip, I2P, JDownloader, FileZilla, Firefox, KDE, KDE-Services, Pidgin, SSH, Thunderbird,
-                                                Tmux, Wine and general user configurations).
+                                                                      HPLip, I2P, JDownloader, FileZilla, Firefox, KDE, KDE-Services, Pidgin, SSH, Thunderbird,
+                                                                                                                                                     Tmux, Wine and general user configurations).
 
                     Submenu "CheckSum Tools" (it is shown when clicked any file).
                                  - "MD5 (strong)"
@@ -73,7 +73,7 @@ cat > /tmp/about_kde-services << EOF
 
                     Submenu "Graphic Tools" (it is shown only when clicked any image file).
                                  - "The Converter" (from several image file formats to BMP, EPS, GIF, ICO, JPEG, JPEG 2000, PBM,
-                                                                                       PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM).
+                                                                                                                               PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM).
                                  - "The Resizer" (customize the width of the image frame).
                                  - "16x16 (icon)"
                                  - "32x32 (icon)"
@@ -140,11 +140,11 @@ cat > /tmp/about_kde-services << EOF
                     Submenu "Multimedia Tools" (it is shown when clicked an directory).
                                  - "DVD Assembler" (with menu).
                                  - "Convert Video Files" (from several video file formats to MPEG-1, MPEG-2, MPEG-4, AVI,
-                                 VCD, SVCD, DVD, 3GP, FLV or WebM).
+                                                                                                                                       VCD, SVCD, DVD, 3GP, FLV or WebM).
                                  - "Add Subtitle to MP4 Files"
                                  - "Volume Normalize of MP3 Files"
                                  - "Extract|Convert Audio Track" (from several audio file formats to MP3, MP3(432Hz),
-                                 FLAC, FLAC 432Hz, OGG or OGG 432Hz).
+                                                                                                                           FLAC, FLAC 432Hz, OGG or OGG 432Hz).
                                  - "Rotate Video Files"
                                  - "Edit Time from Media Files"
                                  - "Attach Cover to MP3 Files"
@@ -193,12 +193,12 @@ cat > /tmp/about_kde-services << EOF
                                  - "Connect to Remote Server"
                                  - "Send to Remote Server" (only file support).
                                  - "Mount point to Remote Directory" (mount/unmount remote directory over SSH protocol
-                                 in local filesystem).
+                                                                                                                                                                                 in local filesystem).
                                  - "Registered Servers" (show or edit IP/Hostname previously connected).
 
                     Submenu "SaMBa Tools" (it is shown when clicked an directory).
                                  - "SaMBa Shares Mounter" (mount/unmount remote shared directory over SMB protocol
-                                 in local filesystem).
+                                                                                                                                                                             in local filesystem).
 
                     Submenu "Search Tools" (it is shown when clicked an directory).
                                  - "Search Here" (recursively starting from the selected directory).
@@ -207,13 +207,13 @@ cat > /tmp/about_kde-services << EOF
                                  - "Statistics Search DataBase"
                                  - "Update Search DataBase"
                                  - "Modified Files Here" (recursively starting from the selected directory
-                                 showing all modified files for the 2nd time that is executed).
+                                                     showing all modified files for the 2nd time that is executed).
 
                     Submenu "Security Tools" (it is shown when clicked an directory).
                                  - "Mount Encrypted Directory" (mount an encrypted virtual filesystem
-                                 from the selected directory).
+                                                                                                                     from the selected directory).
                                  - "Unmount Encrypted Directory" (unmount an encrypted virtual filesystem
-                                 from the selected mountpoint directory).
+                                                                                                       from the selected mountpoint directory).
                                  - "Encrypt Directory" (create an encrypted virtual filesystem in the selected directory).
 
                     Submenu "Security Tools" (it is shown when clicked any file).
@@ -224,10 +224,10 @@ cat > /tmp/about_kde-services << EOF
 
                     Submenu "System Tools" (it is shown when clicked an directory).
                                  - "Build Custom Kernel" (customize the system kernel easily, increasing the system performance
-                                 and/or adding more hardware support, only for distros based on RHEL).
+                                                                               and/or adding more hardware support, only for distros based on RHEL).
                                  - "Check Kernel Update" (only for distros based on RHEL).
                                  - "Rebuild RPM Package" (customize applications easily, increasing the application performance
-                                 and/or adding more support, only for distros based on RHEL).
+                                                                                                   and/or adding more support, only for distros based on RHEL).
                                  - "System Information"
                                  - "System Monitor" (show system log fail/error events when they happen).
                                  - "Process Viewer"
@@ -324,9 +324,9 @@ cat > /tmp/about_kde-services << EOF
             Contributors:
                     - Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
                     - David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
-                    of integrating PDFktools on "PDF Tools").
-                    - Victor Guardiola <victor.guardiola@gmail.com> (Improved source code for "Mount ISO Image"
-                    and "Umount ISO Image" services menu; fixed the problem of [dir|file]name with whitespaces).
+                                                                                                                                                  of integrating PDFktools on "PDF Tools").
+                    - Victor Guardiola <victor.guardiola@gmail.com> (Improved source code for "Mount ISO Image" and "Umount ISO Image"
+                                                                                                                           services menu; fixed the problem of [dir|file]name with whitespaces).
                     - Vasyl V. Vercynskyj <fuckel@ukr.net> (Translations to Russian and Ukrainian languages).
                     - Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
                     - Bruce Zhang <zttt183525594@gmail.com> (Translations to Chinese language).
