@@ -43,8 +43,9 @@ cat > /tmp/about_kde-services << EOF
                                  - "Android Reboot Manager" (reboots the device, optionally into the bootloader or recovery program).
 
                     Submenu "Backup Tools" (it is shown when clicked an directory).
-                                 - "Standards" (backup/restore directories /etc/ and /root/ or GnuPG, FileZilla, Firefox, Chrome,
-						KDE, KDE-Services, Pidgin, SSH, Thunderbird, Wine and X-Moto user configurations).
+                                 - "Standards" (backup/restore directories /etc/ and /root/ or aMule, AnyDesk, Audacity, Chrome, GnuPG,
+                                                HPLip, I2P, JDownloader, FileZilla, Firefox, KDE, KDE-Services, Pidgin, SSH, Thunderbird,
+                                                Tmux, Wine and general user configurations).
 
                     Submenu "CheckSum Tools" (it is shown when clicked any file).
                                  - "MD5 (strong)"
@@ -72,7 +73,7 @@ cat > /tmp/about_kde-services << EOF
 
                     Submenu "Graphic Tools" (it is shown only when clicked any image file).
                                  - "The Converter" (from several image file formats to BMP, EPS, GIF, ICO, JPEG, JPEG 2000, PBM,
-											PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM).
+                                                                                       PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM).
                                  - "The Resizer" (customize the width of the image frame).
                                  - "16x16 (icon)"
                                  - "32x32 (icon)"
@@ -340,7 +341,8 @@ cat > /tmp/about_kde-services << EOF
 
             Donate:
                     You can make a donation to support the overall efforts of the KDE-Services project author.
-                    The receiver's information can be found following https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
+                    The receiver's information can be found following:
+                        https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
                     Thanks!
 
 EOF
