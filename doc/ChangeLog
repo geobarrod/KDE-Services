@@ -1,3 +1,9 @@
+* Tue Jan 28 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.5
+- Fixed mime types of some service menus not being displayed in KDE Plasma 6.
+- You can make a donation to support the overall efforts of the KDE-Services project author.
+	The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+	Thanks!
+
 * Sat Jan 25 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.4
 - Fixed execution permission of services from right click context menu.
 - Fixed zombie execution of progress bar of some menu services.

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=ABM;AFM;APM;ARM;
 Icon=ks-android-apk-manager
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

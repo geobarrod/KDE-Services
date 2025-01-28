@@ -1,7 +1,7 @@
 [Desktop Entry]
 Actions=NameWhitespaceReplace;
 Icon=ks-whitespace-replace
-MimeType=all/allfiles;inode/directory;
+MimeType=inode/directory;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-StartupNotify=false

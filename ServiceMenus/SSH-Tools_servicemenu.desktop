@@ -1,7 +1,7 @@
 [Desktop Entry]
 Actions=SSH-keygen;SSH-copy-id;SSH;SCP;SSHfs;ViewMachine;
 Icon=ks-sshfs
-MimeType=all/allfiles;
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

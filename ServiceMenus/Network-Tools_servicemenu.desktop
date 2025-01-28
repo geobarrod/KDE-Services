@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=ConnectSentry;HTTP-Server;ListeningSockets;
 Icon=ks-connect-to
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

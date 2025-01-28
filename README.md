@@ -347,12 +347,12 @@ Steps for install from Discover application explorer:
 Steps for install from source code in the terminal:
 ---------------------------------------------------
 
-1. servicemenuinstaller install kde-services-3.0.4.tar.gz
+1. servicemenuinstaller install kde-services-3.0.5.tar.gz
 
 Steps for uninstall from source code in the terminal:
 -----------------------------------------------------
 
-1. servicemenuinstaller uninstall kde-services-3.0.4.tar.gz
+1. servicemenuinstaller uninstall kde-services-3.0.5.tar.gz
 
 Screenshot
 ----------

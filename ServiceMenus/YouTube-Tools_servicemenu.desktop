@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=Video-Downloader;Code-Collector;
 Icon=ks-youtube-download-video
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

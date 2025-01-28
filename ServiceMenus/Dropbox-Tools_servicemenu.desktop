@@ -1,7 +1,7 @@
 [Desktop Entry]
 Actions=CopyToDropbox;MoveToDropbox;CopyToPublicAndGetURL;MoveToPublicAndGetURL;GetPublicURL;InstallService;UpdateService;StartService;StopService;AutoStart;
 Icon=ks-dropbox
-MimeType=all/all;
+MimeType=inode/directory;
 ServiceTypes=KonqPopupMenu/Plugin
 Type=Service
 X-KDE-Priority=TopLevel

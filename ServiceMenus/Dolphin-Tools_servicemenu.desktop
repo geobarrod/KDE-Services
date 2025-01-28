@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=Connect;ViewMachine;DiskUse;
 Icon=ks-dolphin-file-manager
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

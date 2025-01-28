@@ -1,7 +1,7 @@
 [Desktop Entry]
 Actions=Root-mc;Root-mcedit;User-mc;User-mcedit;
 Icon=ks-mc-user
-MimeType=all/allfiles;
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

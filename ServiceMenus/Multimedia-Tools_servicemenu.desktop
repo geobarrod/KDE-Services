@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=DVD-Assembler;convert-video;AddSubMP4;AdjustVolumeLevel;extract-audio;VideoRotate;TimeEditMediaFiles;AudioMP3AttachCover;CleanMetadataMediaFiles;ConcatenateMediaFiles;ISOBuild;DiskCloner;record-my-desktop;vlc-openfolder;
 Icon=ks-media-optical-video
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

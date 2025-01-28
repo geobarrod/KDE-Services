@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=BuildKernel;CheckKernelUpdate;RebuildPackage;SysInfo;SysMonitor;Htop;XorgConf;
 Icon=ks-hwinfo
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

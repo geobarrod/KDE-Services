@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=Backup-Restore-Standards;
 Icon=ks-database
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

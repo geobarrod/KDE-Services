@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=SearchHere;SearchByName;SearchByString;StatisticsSearchDB;UpdateSearchDB;ModifiedFilesHere
 Icon=ks-search-string
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory

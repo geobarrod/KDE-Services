@@ -1,6 +1,7 @@
 [Desktop Entry]
 Actions=MountEncryptedDir;UnmountEncryptedDir;EncryptDir;
 Icon=ks-encrypt
+MimeType=inode/directory;
 Type=Service
 X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
