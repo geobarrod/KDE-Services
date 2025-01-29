@@ -33,7 +33,10 @@ PB_PIDFILE="$(mktemp)"
 
 if-cancel-exit() {
 	if [ "$?" != "0" ];then
-		exit 0
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="Download YouTube Video" --passivepopup="[Canceled]"
+		exit 1
 	fi
 }
 
@@ -111,14 +114,14 @@ sed -i 's/hyphen//g' $HOME/.kde-services/youtube-video-codes
 DESTINATION=$(kdialog --icon=ks-youtube-download-video --title="Destination YouTube Video(s)" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
-QUALITY=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--radiolist="Select Video Quality" 7680x4320 "Ultra HD (8K)" on 3840x2160 "Ultra HD (4K)" off 2560x1440 "Ultra HD (2K)" off 1920x1080 "Full HD (1080p)" off 1280x720 "HD (720p)" off 854x480 "Full WVGA (480p)" off 640x360 "nHD (360p)" off 426x240 "WQVGA (240p)" off 256x144 "YT144 (144p)" off GAR "Get Another Resolutions" off 2> /dev/null)
-if-cancel-exit
-
 RATE_LIMIT=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
 		--inputbox="Enter Download Rate Limit (e.g. 50K or 4.2M)" $(cat $HOME/.kde-services/youtube-download-rate-limit) 2> /dev/null)
 if-cancel-exit
 echo $RATE_LIMIT > $HOME/.kde-services/youtube-download-rate-limit
+
+QUALITY=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
+		--radiolist="Select Video Quality" 7680x4320 "Ultra HD (8K)" on 3840x2160 "Ultra HD (4K)" off 2560x1440 "Ultra HD (2K)" off 1920x1080 "Full HD (1080p)" off 1280x720 "HD (720p)" off 854x480 "Full WVGA (480p)" off 640x360 "nHD (360p)" off 426x240 "WQVGA (240p)" off 256x144 "YT144 (144p)" off GAR "Get Another Resolutions" off 2> /dev/null)
+if-cancel-exit
 
 download-ultra-hd-8k() {
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
@@ -248,7 +251,7 @@ download-yt144() {
 
 get-another-resolutions() {
 	QUALITY=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-			--radiolist="Select Video Quality" $(youtube-dl -F $VID 2>&1|grep -w "video only"|grep -vE "WARNING|webm"|grep -wE "144p|240p|360p|480p|720p|1080p|1440p|2160p|4320p"|grep -w "av01"|awk -F " " '{print $3,$3$5$6$5$2,"off"}'))
+			--radiolist="Select Video Quality" $(youtube-dl -F $VID 2>&1|grep -w "video only"|grep -vE "WARNING|webm"|grep -wE "144p|240p|360p|480p|720p|1080p|1440p|2160p|4320p"|awk -F " " '{print $3,$3$5$6$5$2,"off"}'))
 	if-cancel-exit
 	FILENAME="$(youtube-dl -e http://www.youtube.com/watch?v=$VID)"
 	FORMAT="$(echo $QUALITY|awk -Fx '{print $2}')"

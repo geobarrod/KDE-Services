@@ -26,7 +26,7 @@ if-cancel-exit() {
 if-ffmpeg-cancel() {
     if [ "$?" != "0" ]; then
         kdialog --icon=ks-error --title="Record My Desktop" \
-                       --passivepopup="[Canceled] Check the path and filename not contain spaces. Try again"
+                       --passivepopup="[Canceled] Check the path and filename not contain whitespace. Try again"
     fi
 }
 

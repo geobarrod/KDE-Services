@@ -18,6 +18,9 @@ PB_PIDFILE="$(mktemp)"
 
 if-cancel-exit() {
 	if [ "$?" != "0" ]; then
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="AVI Split (To Size)" --passivepopup="[Canceled]"
 		exit 1
 	fi
 }
@@ -25,7 +28,7 @@ if-cancel-exit() {
 if-avisplit-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="AVI Split (To Size)" \
-			--passivepopup="[Canceled]   Check the path and filename not contain spaces. Check video format errors. Try again"
+			--passivepopup="[Canceled]   Check the path and filename not contain whitespace. Check video format errors. Try again"
 		exit 1
 	fi
 }

@@ -25,6 +25,9 @@ PB_PIDFILE="$(mktemp)"
 if-cancel-exit() {
 	if [ "$?" != "0" ]; then
 		kill -9 $KdialogPID 2> /dev/null
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="Android File Manager" --passivepopup="[Canceled]"
 		exit 1
 	fi
 }

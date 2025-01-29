@@ -21,15 +21,15 @@ PB_PIDFILE="$(mktemp)"
 ###################################
 
 if-cancel-exit() {
-	if [ "$EXIT" != "0" ]; then
+	if [ "$?" != "0" ]; then
 		kill $(cat $PB_PIDFILE)
 		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="Backup Tools" --passivepopup="[Canceled]"
 		exit 1
 	fi
-    
+
 	if [ "$MODE" = "" ]; then
-		kdialog --icon=ks-error --title="Backup Tools" \
-			--passivepopup="[Canceled]   Please, select item. Try again" 2> /dev/null
+		kdialog --icon=ks-error --title="Backup Tools" --passivepopup="[Canceled]   Please, select item. Try again" 2> /dev/null
 		kill $(cat $PB_PIDFILE)
 		rm $PB_PIDFILE
 		exit 1

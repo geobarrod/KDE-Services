@@ -29,6 +29,9 @@ logs() {
 
 if-cancel-exit() {
 	if [ "$?" != "0" ]; then
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="Extract|Convert Audio Track" --passivepopup="[Canceled]"
 		exit 1
 	fi
 }

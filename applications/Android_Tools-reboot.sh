@@ -19,7 +19,10 @@ PB_PIDFILE="$(mktemp)"
 
 if-cancel-exit() {
 	if [ "$?" != "0" ]; then
-		  exit 1
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="Android Reboot Manager" --passivepopup="[Canceled]"
+		exit 1
 	fi
 }
 

@@ -23,7 +23,8 @@ if-cancel-exit() {
 	if [ "$?" != "0" ]; then
 		kill $(cat $PB_PIDFILE)
 		rm $PB_PIDFILE
-		exit 0
+		kdialog --icon=ks-error --title="Image Converter" --passivepopup="[Canceled]"
+		exit 1
 	fi
 }
 

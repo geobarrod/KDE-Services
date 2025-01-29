@@ -52,7 +52,7 @@ Name[zh_CN]=HTTP 服务
 Name[x-test]=xxHTTP Serverxx
 
 [Desktop Action ListeningSockets]
-Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Listening Sockets" --passivepopup="[Error] Please install ss command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-socket -d ~/.local/share/applications/Network_Tools-listening-sockets.sh %F;fi
+Exec=which ss; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Listening Sockets" --passivepopup="[Error] Please install ss command and try again."; exit 1; else ~/.local/share/applications/Network_Tools-listening-sockets.sh %F;fi
 Icon=ks-socket
 Name=Listening Sockets
 Name[de]=Listening Sockets

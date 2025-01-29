@@ -35,9 +35,14 @@ logs() {
 
 if-cancel-exit() {
 	if [ "$?" != "0" ]; then
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="Convert Video Files" --passivepopup="[Canceled]"
 		exit 1
 	fi
 	if [ "$FORMAT" = "" ]; then
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
 		kdialog --icon=ks-error --title="Convert Video from ($DIR/)" \
 			--passivepopup="[Canceled]   Please select video format. Try again"
 		exit 1

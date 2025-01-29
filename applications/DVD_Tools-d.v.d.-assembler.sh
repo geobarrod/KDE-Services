@@ -25,12 +25,17 @@ PB_PIDFILE="$(mktemp)"
 if-cancel-exit() {
 	if [ "$?" != "0" ]; then
 		rm -fr $VIDEOINFO
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="DVD Assembler" --passivepopup="[Canceled]"
 		exit 1
 	fi
 }
 
 if-dvdauthor-cancel() {
 	if [ "$?" != "0" ]; then
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
 		kdialog --icon=ks-error --title="DVD Assembler ($DVD_NAME)" \
 			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check video format errors. Try again"
 		exit 1

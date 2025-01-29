@@ -1,15 +1,23 @@
+* Tue Jan 29 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.6
+- Fixed from "Network Tools" => "Listening Sockets" service menu.
+- Fixed "Get Another Resolutions" option from "YouTube Tools" => "Video Downloader" service menu.
+- Now when the execution of some menu services is cancelled, a notification is generated.
+🎔 You can make a donation to support the overall efforts of the KDE-Services project author.
+    The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+     Thanks!
+
 * Tue Jan 28 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.5
 - Fixed mime types of some service menus not being displayed in KDE Plasma 6.
-- You can make a donation to support the overall efforts of the KDE-Services project author.
-	The information can be found in the "DONATE" file inside the "doc" directory of the source code.
-	Thanks!
+🎔 You can make a donation to support the overall efforts of the KDE-Services project author.
+    The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+     Thanks!
 
 * Sat Jan 25 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.4
 - Fixed execution permission of services from right click context menu.
 - Fixed zombie execution of progress bar of some menu services.
-- You can make a donation to support the overall efforts of the KDE-Services project author.
-	The information can be found in the "DONATE" file inside the "doc" directory of the source code.
-	Thanks!
+🎔 You can make a donation to support the overall efforts of the KDE-Services project author.
+    The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+     Thanks!
 
 * Sat Jan 21 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.3
 - NOTE: If you have installed the version 3.0.2 it is mandatory
@@ -28,9 +36,9 @@
 - "Add Timestamp Prefix To [File|Dir]name": Enhancement readability of date and time.
 - "YouTube Tools": Enhancement for "Video Downloader" that allows, via the "Get Another Resolutions" option,
 	to download non-standard video resolution formats when the search for standard formats fails.
-- You can make a donation to support the overall efforts of the KDE-Services project author.
-	The information can be found in the "DONATE" file inside the "doc" directory of the source code.
-	Thanks!
+🎔 You can make a donation to support the overall efforts of the KDE-Services project author.
+    The information can be found in the "DONATE" file inside the "doc" directory of the source code.
+     Thanks!
 - Happy New Year!.
 
 * Sun Dec 24 2017 Geovani B. R. <igeo.cu@gmail.com> 3.0.2

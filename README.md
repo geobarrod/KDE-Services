@@ -347,12 +347,12 @@ Steps for install from Discover application explorer:
 Steps for install from source code in the terminal:
 ---------------------------------------------------
 
-1. servicemenuinstaller install kde-services-3.0.5.tar.gz
+1. servicemenuinstaller install kde-services-3.0.6.tar.gz
 
 Steps for uninstall from source code in the terminal:
 -----------------------------------------------------
 
-1. servicemenuinstaller uninstall kde-services-3.0.5.tar.gz
+1. servicemenuinstaller uninstall kde-services-3.0.6.tar.gz
 
 Screenshot
 ----------
@@ -361,6 +361,6 @@ Screenshot
 Donate
 ------
 
-- You can make a donation to support the overall efforts of the KDE-Services project author.
-- The receiver's information can be found following: [DONATE](https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE "DONATE")
-- Thanks!
+🎔 You can make a donation to support the overall efforts of the KDE-Services project author.
+    The receiver's information can be found following: [DONATE](https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE "DONATE")
+     Thanks!

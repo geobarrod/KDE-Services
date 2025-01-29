@@ -20,6 +20,9 @@ PB_PIDFILE="$(mktemp)"
 
 if-cancel-exit() {
 	if [ "$?" != "0" ] || [ "$DEVICE" == "" ]; then
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Canceled]"
 		exit 1
 	fi
 }
@@ -28,6 +31,9 @@ if-dd-error() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Canceled]   $(cat $STERR). Try again"
 		eject
+		kill $(cat $PB_PIDFILE)
+		rm $PB_PIDFILE
+		kdialog --icon=ks-error --title="DiskCloner" --passivepopup="[Canceled]"
 		exit 1
 	fi
 }

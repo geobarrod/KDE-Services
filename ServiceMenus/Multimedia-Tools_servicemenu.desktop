@@ -84,7 +84,7 @@ Name[zh_CN]=转换视频文件
 Name[x-test]=xxConvert video filesxx
 
 [Desktop Action extract-audio]
-Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Extract|Convert] Audio Track" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else ~/.local/share/applications/ffmpeg_multifile-extract-audio.sh %F;fi
+Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract|Convert Audio Track" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else ~/.local/share/applications/ffmpeg_multifile-extract-audio.sh %F;fi
 Icon=ks-audio
 Name=[Extract|Convert] Audio Track
 Name[de]=[Extrahiere|Konvertiere] Audiospur
