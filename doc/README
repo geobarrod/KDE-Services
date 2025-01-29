@@ -335,9 +335,9 @@ Steps for uninstall from source code in the terminal:
 =====================================================
 1- servicemenuinstaller uninstall kde-services-3.0.6.tar.gz
 
-Donate
-======
-🎔 You can make a donation to support the overall efforts of the KDE-Services project author.
-    The receiver's information can be found following:
-     https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
-      Thanks!
+Donate 🎔
+=========
+- You can make a donation to support the overall efforts of the KDE-Services project author.
+- The receiver's information can be found following:
+   https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
+- Thanks!

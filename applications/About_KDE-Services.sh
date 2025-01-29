@@ -339,11 +339,11 @@ cat > /tmp/about_kde-services << EOF
             License:
                     GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007).
 
-            Donate:
-                    You can make a donation to support the overall efforts of the KDE-Services project author.
-                    The receiver's information can be found following:
+            Donate 🎔:
+                      You can make a donation to support the overall efforts of the KDE-Services project author.
+                      The receiver's information can be found following:
                         https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
-                    Thanks!
+                      Thanks!
 
 EOF
 
