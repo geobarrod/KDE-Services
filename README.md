@@ -316,7 +316,7 @@ Contributors:
 - David Baum (Service menu PDFktools bugfixer and author of the good idea
 				of integrating PDFktools on **PDF Tools**).
 - Victor Guardiola (Improved source code for **Mount ISO Image** and **Umount ISO Image**
-		    services menu; fixed the problem of [dir|file]name with whitespaces).
+		    services menu; fixed the problem of [dir|file]name with whitespace).
 - Vasyl V. Vercynskyj (Translations to Russian and Ukrainian languages).
 - Pawan Yadav (Research for KF5 support).
 - Bruce Zhang (Translations to Chinese language).
@@ -347,12 +347,12 @@ Steps for install from Discover application explorer:
 Steps for install from source code in the terminal:
 ---------------------------------------------------
 
-1. servicemenuinstaller install kde-services-3.0.6.tar.gz
+1. servicemenuinstaller install kde-services-3.0.7.tar.gz
 
 Steps for uninstall from source code in the terminal:
 -----------------------------------------------------
 
-1. servicemenuinstaller uninstall kde-services-3.0.6.tar.gz
+1. servicemenuinstaller uninstall kde-services-3.0.7.tar.gz
 
 Screenshot
 ----------

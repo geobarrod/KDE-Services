@@ -1,17 +1,32 @@
 #!/usr/bin/env bash
-
-#################################################################
-# For KDE-Services. 2013-2025.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
-#################################################################
+########################################################################
+# This program is free software; you can redistribute it and/or modify #
+# it under the terms of the GNU General Public License as published by #
+# the Free Software Foundation; either version 3 of the License, or    #
+# (at your option) any later version.                                  #
+#                                                                      #
+# This program is distributed in the hope that it will be useful,      #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of       #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        #
+# GNU General Public License for more details.                         #
+#                                                                      #
+# You should have received a copy of the GNU General Public License    #
+# along with this program; if not, write to the Free Software          #
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,           #
+# MA 02110-1301, USA.                                                  #
+#                                                                      #
+#                                                                      #
+# KDE-Services ⚙ 2013-2025.                                            #
+# Author: Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.   #
+########################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 VERSION=$(head -n1 ~/.local/share/doc/kde-services*/ChangeLog |awk '{print $10}').
 
 cat > /tmp/about_kde-services << EOF
 
-                                                                                                 KDE-Services, version $VERSION, 🄯 2011-2025.
-                                                                                                          https://store.kde.org/p/998464/
+                                                                                                ⚙ KDE-Services, version $VERSION, 🄯 2011-2025.
+                                                                                                           https://store.kde.org/p/998464/
 
 
 
@@ -326,7 +341,7 @@ cat > /tmp/about_kde-services << EOF
                     - David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
                                                                                                                                                   of integrating PDFktools on "PDF Tools").
                     - Victor Guardiola <victor.guardiola@gmail.com> (Improved source code for "Mount ISO Image" and "Umount ISO Image"
-                                                                                                                           services menu; fixed the problem of [dir|file]name with whitespaces).
+                                                                                                                           services menu; fixed the problem of [dir|file]name with whitespace).
                     - Vasyl V. Vercynskyj <fuckel@ukr.net> (Translations to Russian and Ukrainian languages).
                     - Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
                     - Bruce Zhang <zttt183525594@gmail.com> (Translations to Chinese language).
@@ -339,11 +354,26 @@ cat > /tmp/about_kde-services << EOF
             License:
                     GPLv3+ (GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007).
 
+                    This program is free software; you can redistribute it and/or modify
+                    it under the terms of the GNU General Public License as published by
+                    the Free Software Foundation; either version 3 of the License, or
+                    (at your option) any later version.
+
+                    This program is distributed in the hope that it will be useful,
+                    but WITHOUT ANY WARRANTY; without even the implied warranty of
+                    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                    GNU General Public License for more details.
+
+                    You should have received a copy of the GNU General Public License
+                    along with this program; if not, write to the Free Software
+                    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+                    MA 02110-1301, USA.
+
             Donate 🎔:
                       You can make a donation to support the overall efforts of the KDE-Services project author.
-                      The receiver's information can be found following:
+                       The receiver's information can be found following:
                         https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
-                      Thanks!
+                         Thanks!
 
 EOF
 

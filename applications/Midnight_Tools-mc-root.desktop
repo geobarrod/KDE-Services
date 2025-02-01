@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Midnight-Tools;
-Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-mc-root --noignorebutton -d -c "konsole --new-tab -e mc";fi
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else KDESU="kdesu"; $KDESU -i ks-mc-root --noignorebutton -d -c "konsole --new-tab -e mc";fi
 GenericName=Root
 Icon=ks-mc-root
 Name=Midnight Commander

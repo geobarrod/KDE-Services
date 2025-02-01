@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=System-Tools;
-Exec=KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-error --noignorebutton -d ~/.local/share/applications/System_Tools-system-monitor.sh
+Exec=KDESU="kdesu"; $KDESU -i ks-error --noignorebutton -d ~/.local/share/applications/System_Tools-system-monitor.sh
 Icon=ks-error
 Name=System Monitor
 Name[de]=Systemüberwachung

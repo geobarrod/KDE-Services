@@ -1,10 +1,10 @@
 [Desktop Entry]
 Actions=Root-mc;Root-mcedit;User-mc;User-mcedit;
 Icon=ks-mc-user
-MimeType=inode/directory;
+MimeType=all/all;
 Type=Service
 X-KDE-Priority=TopLevel
-X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin,all/all
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Midnight Tools
 X-KDE-Submenu[de]=Midnight Werkzeuge
@@ -20,25 +20,25 @@ X-KDE-Submenu[zh_CN]=Midnight 工具
 X-KDE-Submenu[x-test]=xxMidnight Toolsxx
 
 [Desktop Action Root-mc]
-Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-mc-root --noignorebutton -d -c "konsole --new-tab -e mc";fi
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else KDESU="kdesu"; $KDESU -i ks-mc-root --noignorebutton -d -c "konsole --new-tab -e mc" %F;fi
 Icon=ks-mc-root
 Name=[Root ~]# mc
 Name[x-test]=xx[Root ~]# mcxx
 
 [Desktop Action Root-mcedit]
-Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-mcedit-root --noignorebutton -d -c "konsole --new-tab -e mcedit";fi
+Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[Root ~]# mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else KDESU="kdesu"; $KDESU -i ks-mcedit-root --noignorebutton -d -c "konsole --new-tab -e mcedit" %F;fi
 Icon=ks-mcedit-root
 Name=[Root ~]# mcedit
 Name[x-test]=xx[Root ~]# mceditxx
 
 [Desktop Action User-mc]
-Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[User ~]$ mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else konsole --new-tab -e mc;fi
+Exec=which mc; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[User ~]$ mc" --passivepopup="[Error] Please install mc command and try again."; exit 1; else konsole --new-tab -e mc %F;fi
 Icon=ks-mc-user
 Name=[User ~]$ mc
 Name[x-test]=xx[User ~]$ mcxx
 
 [Desktop Action User-mcedit]
-Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[User ~]$ mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else konsole --new-tab -e mcedit;fi
+Exec=which mcedit; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="[User ~]$ mcedit" --passivepopup="[Error] Please install mcedit command and try again."; exit 1; else konsole --new-tab -e mcedit %F;fi
 Icon=ks-mcedit-user
 Name=[User ~]$ mcedit
 Name[x-test]=xx[User ~]$ mceditxx

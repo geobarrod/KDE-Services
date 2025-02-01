@@ -36,7 +36,7 @@ Name[zh_CN]=端口连接监控器
 Name[x-test]=xxConnect Sentryxx
 
 [Desktop Action HTTP-Server]
-Exec=which lsof python; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="HTTP Server" --passivepopup="[Error] Please install lsof and python command and try again."; exit 1; else KDESU="/usr/local/lib/libexec/*/kdesu"; $KDESU -i ks-folder-public-web -d -c "~/.local/share/applications/HTTP_Server.sh" %F;fi
+Exec=which lsof python; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="HTTP Server" --passivepopup="[Error] Please install lsof and python command and try again."; exit 1; else KDESU="kdesu"; $KDESU -i ks-folder-public-web -d ~/.local/share/applications/HTTP_Server.sh %F;fi
 Icon=ks-folder-public-web
 Name=HTTP Server
 Name[de]=HTTP Server

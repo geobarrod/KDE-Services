@@ -1,14 +1,34 @@
 #!/usr/bin/env bash
-
-#################################################################
-# For KDE-Services. 2012-2025.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
-#################################################################
+########################################################################
+# This program is free software; you can redistribute it and/or modify #
+# it under the terms of the GNU General Public License as published by #
+# the Free Software Foundation; either version 3 of the License, or    #
+# (at your option) any later version.                                  #
+#                                                                      #
+# This program is distributed in the hope that it will be useful,      #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of       #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        #
+# GNU General Public License for more details.                         #
+#                                                                      #
+# You should have received a copy of the GNU General Public License    #
+# along with this program; if not, write to the Free Software          #
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,           #
+# MA 02110-1301, USA.                                                  #
+#                                                                      #
+#                                                                      #
+# KDE-Services ⚙ 2012-2025.                                            #
+# Author: Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.   #
+########################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 HOST=""
+SHARE=""
+USERNAME=""
+PASSWD=""
 VIEW_SHARE=""
-KDESU="/usr/local/lib/libexec/*/kdesu"
+OPTION=""
+SERVER=""
+KDESU="kdesu"
 
 ###################################
 ############ Functions ############
@@ -53,14 +73,14 @@ mount_share() {
 			--password="Enter SaMBa Password For $USERNAME" 2> /dev/null)
 		if-cancel-exit
 		mkdir -p $HOME/SaMBa-Shares/$HOST-$SHARE 2> /dev/null
-		$KDESU -d --noignorebutton 2> /dev/null mount -t cifs -o username=$USERNAME,password=$PASSWD //$HOST/$SHARE $HOME/SaMBa-Shares/$HOST-$SHARE
+		$KDESU -i ks-smbf --noignorebutton -d -c "mount -t cifs -o username=$USERNAME,password=$PASSWD //$HOST/$SHARE $HOME/SaMBa-Shares/$HOST-$SHARE"
 		check_stderr
 		kdialog --icon=ks-smbfs --title="SaMBa Shares Mounter" \
 			--passivepopup="[Finished] //$HOST/$SHARE mounted on $HOME/SaMBa-Shares/$HOST-$SHARE." 2> /dev/null
 		exit 0
 	else
 		mkdir -p $HOME/SaMBa-Shares/$HOST-$SHARE 2> /dev/null
-		$KDESU -d --noignorebutton 2> /dev/null mount -t cifs -o guest //$HOST/$SHARE $HOME/SaMBa-Shares/$HOST-$SHARE
+		$KDESU -i ks-smbf --noignorebutton -d -c "mount -t cifs -o guest //$HOST/$SHARE $HOME/SaMBa-Shares/$HOST-$SHARE"
 		check_stderr
 		kdialog --icon=ks-smbfs --title="SaMBa Shares Mounter" \
 			--passivepopup="[Finished] //$HOST/$SHARE mounted on $HOME/SaMBa-Shares/$HOST-$SHARE." 2> /dev/null
@@ -109,7 +129,7 @@ elif [ "$OPTION" = "Unmount SaMBa Share Directory" ]; then
 		--combobox="Select Mounted SaMBa Share Directory" $VIEW_SHARE \
 		--default $(echo $(mount|grep -w cifs|awk -F " " '{print $3}')|xargs -n1 2> /dev/null|head -n1) 2> /dev/null)
 	if-cancel-exit
-	$KDESU -d --noignorebutton 2> /dev/null umount $SHARE && rm -fr $SHARE
+	$KDESU -i ks-smbf --noignorebutton -d -c "umount $SHARE && rm -fr $SHARE"
 	kdialog --icon=ks-smbfs --title="SaMBa Shares Mounter" --passivepopup="[Finished] $SHARE Unmounted." 2> /dev/null
 	VIEW_SHARE=$(mount|grep -w cifs|awk -F " " '{print $3}')
 	if [ "$VIEW_SHARE" = "" ]; then

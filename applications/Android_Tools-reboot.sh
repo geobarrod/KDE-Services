@@ -1,16 +1,31 @@
 #!/usr/bin/env bash
-
-#################################################################
-# For KDE-Services. 2016-2025.					#
-# By Geovani Barzaga Rodriguez <igeo.cu@gmail.com>		#
-#################################################################
+########################################################################
+# This program is free software; you can redistribute it and/or modify #
+# it under the terms of the GNU General Public License as published by #
+# the Free Software Foundation; either version 3 of the License, or    #
+# (at your option) any later version.                                  #
+#                                                                      #
+# This program is distributed in the hope that it will be useful,      #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of       #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        #
+# GNU General Public License for more details.                         #
+#                                                                      #
+# You should have received a copy of the GNU General Public License    #
+# along with this program; if not, write to the Free Software          #
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,           #
+# MA 02110-1301, USA.                                                  #
+#                                                                      #
+#                                                                      #
+# KDE-Services ⚙ 2016-2025.                                            #
+# Author: Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.   #
+########################################################################
 
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 BEGIN_TIME=""
 FINAL_TIME=""
 ELAPSED_TIME=""
 OPERATION=""
-KDESU="/usr/local/lib/libexec/*/kdesu"
+KDESU="kdesu"
 PB_PIDFILE="$(mktemp)"
 
 ###################################
@@ -27,7 +42,7 @@ if-cancel-exit() {
 }
 
 if [ "$(pidof adb)" = "" ]; then
-	$KDESU -i ks-android-reboot --noignorebutton -d adb start-server
+	$KDESU -i ks-android-reboot --noignorebutton -d -c "adb start-server"
 	if-cancel-exit
 fi
 
@@ -84,7 +99,7 @@ if [ "$OPERATION" = "System" ]; then
 	if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "device" ] || [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "recovery" ]; then
 		adb reboot
 	elif [ "$(fastboot devices|awk -F" " '{print $3}')" = "fastboot" ]; then
-		$KDESU -i ks-android-reboot --noignorebutton -d fastboot reboot
+		$KDESU -i ks-android-reboot --noignorebutton -d -c "fastboot reboot"
 		if-cancel-exit
 	fi
 	FINAL_TIME=$(date +%s)
@@ -96,7 +111,7 @@ elif [ "$OPERATION" = "Bootloader" ]; then
 	if [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "device" ] || [ "$(adb devices|grep -v List|awk -F" " '{print $2}'|head -n1)" = "recovery" ]; then
 		adb reboot bootloader
 	elif [ "$(fastboot devices|awk -F" " '{print $3}')" = "fastboot" ]; then
-		$KDESU -i ks-android-reboot --noignorebutton -d fastboot reboot-bootloader
+		$KDESU -i ks-android-reboot --noignorebutton -d -c "fastboot reboot-bootloader"
 		if-cancel-exit
 	fi
 	FINAL_TIME=$(date +%s)
