@@ -148,7 +148,7 @@ Name[zh_CN]=挂载 ISO-9660 镜像
 Name[x-test]=xxMount ISO-9660 Imagexx
 
 [Desktop Action UnmountCD-Image]
-Exec=which fuser fusermount; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount ISO-9660 Image" --passivepopup="[Error] Please install fuser and fusermount command and try again."; exit 1; else fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')"; rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=ks-media-optical-umount --title="Unmount ISO-9660 Image" --passivepopup="[Finished] $(basename %f) unmounted.";fi
+Exec=which fuser fusermount; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount ISO-9660 Image" --passivepopup="[Error] Please install fuser and fusermount command and try again."; exit 1; else fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')" && rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=ks-media-optical-umount --title="Unmount ISO-9660 Image" --passivepopup="[Finished] $(basename %f) unmounted.";fi
 Icon=ks-media-optical-umount
 Name=Unmount ISO-9660 Image
 Name[de]=ISO-9660 Abbild aushängen
