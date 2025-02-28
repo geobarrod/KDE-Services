@@ -327,3 +327,4 @@ case "$1" in
 	upload_file) upload_file ;;
 	sync_directory_tree) sync_directory_tree ;;
 esac
+

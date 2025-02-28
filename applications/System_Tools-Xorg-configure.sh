@@ -168,3 +168,4 @@ mv -f /tmp/xorg-configure /etc/X11/xorg.conf
 
 kdialog --icon=ks-xorg --title="Xorg Configure: ${VGA#*: }" --msgbox="You must restart X-Windows session for the changes to be applied."  2> /dev/null
 exit 0
+

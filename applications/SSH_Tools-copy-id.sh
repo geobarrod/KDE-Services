@@ -62,3 +62,4 @@ if-cancel-exit
 kdialog --icon=ks-key --title="SSH Tools" --passivepopup="[Finished]   Install Public Key on $SERVER"
 
 exit 0
+

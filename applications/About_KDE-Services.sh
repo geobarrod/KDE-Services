@@ -404,3 +404,4 @@ EOF
 kdialog --icon=ks-menu --title="About KDE-Services" --textbox /tmp/about_kde-services 888 555 2> /dev/null
 rm -f /tmp/about_kde-services
 exit 0
+

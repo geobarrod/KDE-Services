@@ -100,3 +100,4 @@ elif [ "$OPTION" = "Umount Remote Directory" ]; then
         fusermount -zu $HOST && rm -rf $HOST
         kdialog --icon=ks-sshfs --title="SSH Tools - Mount point to Remote Directory" --passivepopup="[Finished]" 2> /dev/null
 fi
+

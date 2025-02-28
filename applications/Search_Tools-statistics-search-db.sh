@@ -39,3 +39,4 @@ kdialog --icon=ks-search-stats --title="Statistics Search DataBase" --textbox /t
 rm -f /tmp/StatisticsLocateDB
 
 exit 0
+

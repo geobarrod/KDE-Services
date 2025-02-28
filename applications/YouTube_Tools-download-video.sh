@@ -292,3 +292,4 @@ play /tmp/speak.wav
 rm -fr /tmp/speak*
 rm $LOG
 exit 0
+

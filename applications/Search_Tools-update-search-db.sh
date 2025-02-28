@@ -59,3 +59,4 @@ rm -f /tmp/speak*
 kdialog --icon=ks-search-database-update --title="Update Search DataBase" --passivepopup="Finished" 2> /dev/null
 
 exit 0
+

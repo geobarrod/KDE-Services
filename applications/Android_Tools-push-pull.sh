@@ -190,3 +190,4 @@ text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
 rm -f /tmp/speak* $LOG
 exit 0
+

@@ -141,3 +141,4 @@ rm -f $STDERR
 unset TARGET OWNER MODE2 STDERR
 kill -9 $(pidof knotify4)
 exit 0
+

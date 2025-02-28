@@ -50,3 +50,4 @@ kdialog --icon=ks-search-string --title="Search by String: $(cat $TMP|wc -l) mat
 rm -f $TMP
 
 exit 0
+
