@@ -97,4 +97,3 @@ play /tmp/speak.wav 2> /dev/null
 rm -fr /tmp/speak*
 rm -f burn_image.log
 exit 0
-

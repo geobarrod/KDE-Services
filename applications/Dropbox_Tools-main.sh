@@ -345,4 +345,3 @@ case "$1" in
 	autostart_service) autostart_service ;;
 	update_service) update_service ;;
 esac
-

@@ -294,4 +294,3 @@ case $action in
         done
 	notification_dbus ;;
 esac
-

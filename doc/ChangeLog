@@ -1,3 +1,6 @@
+* Fri Feb 28 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.8
+- Preparing updates for the next release version.
+
 * Fri Jan 31 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.7
 - Fixed from "Network Tools" => "HTTP Server" service menu.
 - Added GPL license notice to the top of all shell script files.

@@ -100,4 +100,3 @@ elif [ "$STATE" = "" ]; then
 fi
 
 exit 0
-

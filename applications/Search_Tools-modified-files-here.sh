@@ -45,4 +45,3 @@ kdialog --icon=ks-search-name --title="Modified Files Here: $(cat $TMP|wc -l) en
 rm -f $TMP
 
 exit 0
-

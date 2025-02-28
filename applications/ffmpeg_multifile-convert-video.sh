@@ -1067,4 +1067,3 @@ if [ "$MODE" = "customized" ]; then
 fi
 
 progressbar-stop
-

@@ -65,4 +65,3 @@ kdialog --icon=ks-info --title="Show [File|Directory] Status" --textbox /tmp/sho
 rm -f /tmp/show-status
 
 exit 0
-

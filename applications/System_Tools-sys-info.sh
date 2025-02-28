@@ -96,4 +96,3 @@ elif [ "$SYSINFO" = "System" ]; then
 fi
 
 exit 0
-

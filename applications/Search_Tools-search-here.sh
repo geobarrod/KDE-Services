@@ -49,4 +49,3 @@ kdialog --icon=ks-search-name --title="Search Here: $(cat $TMP|wc -l) matching e
 rm -f $TMP
 
 exit 0
-
