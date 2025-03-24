@@ -11,3 +11,5 @@ Contributors:
 - Bruce Zhang <zttt183525594@gmail.com> (Translations to Chinese language).
 - Daniele Scasciafratte <mte90@linux.it> (Translations to Italian language).
 - Manuel Tancoigne <m.tancoigne@gmail.com> (Translations to French language).
+- Gabriel Fontenelle <contato@gabrielfontenelle.com> (Fix a problem with unmounting image
+						      removing directory not created by fuseiso).
