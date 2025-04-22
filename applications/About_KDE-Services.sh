@@ -360,6 +360,7 @@ cat > /tmp/about_kde-services << EOF
                     - Daniele Scasciafratte <mte90@linux.it> (Translations to Italian language).
                     - Manuel Tancoigne <m.tancoigne@gmail.com> (Translations to French language).
                     - Gabriel Fontenelle <contato@gabrielfontenelle.com> (Fix a problem with unmounting image removing directory not created by fuseiso).
+                    - Mateus Cruz <mateushenriquedacc@gmail.com> (Translations to Brazilian Portuguese and Portuguese).
 
             Author: 
                     Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>, Developer.
