@@ -124,34 +124,34 @@ cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
 	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
-	's/ /_/g')" 2> /dev/null
+	's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
-	"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
-	|sed 's/ /_/g')" 2> /dev/null
+	|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
 cd ./
 
 for i in *; do
-	mv "$i" "${i// /_}" 2> /dev/null
+	mv "$i" "${i// /_}" 2>/dev/null
 done
 
 DIR="$(pwd)"
@@ -162,19 +162,19 @@ fi
 
 FILES=$(kdialog --icon=ks-audio --title="Video|Audio Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv \
 		*.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav \
-		*.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
+		*.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2>/dev/null)
 if-cancel-exit
 
 FORMAT=$(kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
-		--combobox="Choose Audio Encoder" FLAC "FLAC (432Hz)" MP3 "MP3 (432Hz)" OGG "OGG (432Hz)" --default "MP3 (432Hz)" 2> /dev/null)
+		--combobox="Choose Audio Encoder" FLAC "FLAC (432Hz)" MP3 "MP3 (432Hz)" OGG "OGG (432Hz)" --default "MP3 (432Hz)" 2>/dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=ks-audio --title="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-audio --title="Destination Audio Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
     
 if [ "$FORMAT" = "MP3 (432Hz)" ]; then
 	MODE=$(kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
-			--combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
+			--combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2>/dev/null)
 	if-cancel-exit
 	progressbar-start
 
@@ -182,13 +182,13 @@ if [ "$FORMAT" = "MP3 (432Hz)" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i "/tmp/${DST_FILE##*/}_$MODE.wav" > $LOG 2>&1
+		ffmpeg -y -i $i "/tmp/${DST_FILE##*/}_$MODE.wav" &> $LOG
 		if-ffmpeg-cancel
-		sox "/tmp/${DST_FILE##*/}_$MODE.wav" "/tmp/${DST_FILE##*/}_${MODE}_432Hz.wav" pitch -31 > $LOG 2>&1
+		sox "/tmp/${DST_FILE##*/}_$MODE.wav" "/tmp/${DST_FILE##*/}_${MODE}_432Hz.wav" pitch -31 &> $LOG
 		if-sox-cancel
-		ffmpeg -y -i "/tmp/${DST_FILE##*/}_${MODE}_432Hz.wav" -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_${MODE}_432Hz.mp3" > $LOG 2>&1
+		ffmpeg -y -i "/tmp/${DST_FILE##*/}_${MODE}_432Hz.wav" -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_${MODE}_432Hz.mp3" &> $LOG
 		if-ffmpeg-cancel
-		mp3gain -c -r "$DESTINATION/${DST_FILE##*/}_${MODE}_432Hz.mp3" > $LOG 2>&1
+		mp3gain -c -r "$DESTINATION/${DST_FILE##*/}_${MODE}_432Hz.mp3" &> $LOG
 		if-mp3gain-cancel
 		rm -f /tmp/${DST_FILE##*/}_${MODE}*.wav
 		FINAL_TIME=$(date +%s)
@@ -197,7 +197,7 @@ if [ "$FORMAT" = "MP3 (432Hz)" ]; then
 	done
 elif [ "$FORMAT" = "MP3" ]; then
 	MODE=$(kdialog --icon=ks-audio --title="Extract|Convert Audio Track" \
-			--combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2> /dev/null)
+			--combobox="Choose Audio Bitrate in b/s" 320k 256k 192k 128k 64k --default 320k 2>/dev/null)
 	if-cancel-exit
 	progressbar-start
 
@@ -205,9 +205,9 @@ elif [ "$FORMAT" = "MP3" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
+		ffmpeg -y -i $i -c:a libmp3lame -b:a $MODE "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" &> $LOG
 		if-ffmpeg-cancel
-		mp3gain -c -r "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" > $LOG 2>&1
+		mp3gain -c -r "$DESTINATION/${DST_FILE##*/}_$MODE.mp3" &> $LOG
 		if-mp3gain-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -220,11 +220,11 @@ elif [ "$FORMAT" = "FLAC (432Hz)" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i "/tmp/${DST_FILE##*/}.wav" > $LOG 2>&1
+		ffmpeg -y -i $i "/tmp/${DST_FILE##*/}.wav" &> $LOG
 		if-ffmpeg-cancel
-		sox "/tmp/${DST_FILE##*/}.wav" "/tmp/${DST_FILE##*/}_432Hz.wav" pitch -31 > $LOG 2>&1
+		sox "/tmp/${DST_FILE##*/}.wav" "/tmp/${DST_FILE##*/}_432Hz.wav" pitch -31 &> $LOG
 		if-sox-cancel
-		ffmpeg -y -i "/tmp/${DST_FILE##*/}_432Hz.wav" -c:a flac "$DESTINATION/${DST_FILE##*/}_432Hz.flac" > $LOG 2>&1
+		ffmpeg -y -i "/tmp/${DST_FILE##*/}_432Hz.wav" -c:a flac "$DESTINATION/${DST_FILE##*/}_432Hz.flac" &> $LOG
 		if-ffmpeg-cancel
 		rm -f /tmp/${DST_FILE##*/}*.wav
 		FINAL_TIME=$(date +%s)
@@ -238,7 +238,7 @@ elif [ "$FORMAT" = "FLAC" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -c:a flac "$DESTINATION/${DST_FILE##*/}.flac" > $LOG 2>&1
+		ffmpeg -y -i $i -c:a flac "$DESTINATION/${DST_FILE##*/}.flac" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -251,11 +251,11 @@ elif [ "$FORMAT" = "OGG (432Hz)" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i "/tmp/${DST_FILE##*/}.wav" > $LOG 2>&1
+		ffmpeg -y -i $i "/tmp/${DST_FILE##*/}.wav" &> $LOG
 		if-ffmpeg-cancel
-		sox "/tmp/${DST_FILE##*/}.wav" "/tmp/${DST_FILE##*/}_432Hz.wav" pitch -31 > $LOG 2>&1
+		sox "/tmp/${DST_FILE##*/}.wav" "/tmp/${DST_FILE##*/}_432Hz.wav" pitch -31 &> $LOG
 		if-sox-cancel
-		ffmpeg -y -i "/tmp/${DST_FILE##*/}_432Hz.wav" "$DESTINATION/${DST_FILE##*/}_432Hz.ogg" > $LOG 2>&1
+		ffmpeg -y -i "/tmp/${DST_FILE##*/}_432Hz.wav" "$DESTINATION/${DST_FILE##*/}_432Hz.ogg" &> $LOG
 		if-ffmpeg-cancel
 		rm -f /tmp/${DST_FILE##*/}*.wav
 		FINAL_TIME=$(date +%s)
@@ -269,7 +269,7 @@ elif [ "$FORMAT" = "OGG" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i "$DESTINATION/${DST_FILE##*/}.ogg" > $LOG 2>&1
+		ffmpeg -y -i $i "$DESTINATION/${DST_FILE##*/}.ogg" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

@@ -106,34 +106,34 @@ cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
 	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
-	's/ /_/g')" 2> /dev/null
+	's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
-	"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+	"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
-	|sed 's/ /_/g')" 2> /dev/null
+	|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
 cd ./
 
 for i in *; do
-	mv "$i" "${i// /_}" 2> /dev/null
+	mv "$i" "${i// /_}" 2>/dev/null
 done
 
 DIR="$(pwd)"
@@ -143,10 +143,10 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 fi
 
 FILES=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v \
-		*.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2> /dev/null)
+		*.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2>/dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=ks-video-rotate --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-video-rotate --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
 
 ANGLE=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" \
@@ -160,7 +160,7 @@ if [ "$ANGLE" = "90 Clockwise" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -vf "transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -173,7 +173,7 @@ elif [ "$ANGLE" = "90 Clockwise and Vertical Flip" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise-VFlip.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -vf "transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise-VFlip.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -186,7 +186,7 @@ elif [ "$ANGLE" = "90 CounterClockwise" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=cclock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -vf "transpose=cclock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -199,7 +199,7 @@ elif [ "$ANGLE" = "90 CounterClockwise and Vertical Flip" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=cclock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise-VFlip.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -vf "transpose=cclock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise-VFlip.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -212,7 +212,7 @@ elif [ "$ANGLE" = "180 Clockwise" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_180-Clockwise.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_180-Clockwise.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -225,7 +225,7 @@ elif [ "$ANGLE" = "Horizontal Mirror" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_HMirror.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_HMirror.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -238,7 +238,7 @@ elif [ "$ANGLE" = "Vertical Mirror" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock_flip,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_VMirror.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -vf "transpose=clock_flip,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_VMirror.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

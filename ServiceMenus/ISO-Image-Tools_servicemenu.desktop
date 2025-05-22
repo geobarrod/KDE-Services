@@ -38,7 +38,7 @@ Name[zh_CN]=烧录 ISO-9660 镜像
 Name[x-test]=xxBurn ISO-9660 Imagexx
 
 [Desktop Action Insert-MD5sum]
-Exec=which implantisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Error] Please install implantisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; implantisomd5 "$file" > /tmp/insert-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity;fi
+Exec=which implantisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Error] Please install implantisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; implantisomd5 "$file" &> /tmp/insert-integrity; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity;fi
 Icon=ks-media-optical-md5sum
 Name=Insert MD5sum
 Name[de]=MD5sum anfügen
@@ -54,7 +54,7 @@ Name[zh_CN]=插入 MD5 校验和
 Name[x-test]=xxInsert MD5sumxx
 
 [Desktop Action Integrity-Check]
-Exec=which checkisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install checkisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; checkisomd5 "$file" > /tmp/check-integrity 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";else kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity;fi
+Exec=which checkisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install checkisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; checkisomd5 "$file" &> /tmp/check-integrity; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";else kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity;fi
 Icon=ks-media-optical-integrity-check
 Name=Integrity Check
 Name[de]=Integritätsscheck
@@ -172,7 +172,7 @@ Name[zh_CN]=卸载 ISO-9660 镜像
 Name[x-test]=xxUnmount ISO-9660 Imagexx
 
 [Desktop Action ISOinfo]
-Exec=which iso-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show ISO-9660 Image Info" --passivepopup="[Error] Please install iso-info command and try again."; exit 1; else for file in %F;do iso-info --no-header -l $file > /tmp/iso-info; kdialog --icon=ks-media-optical-info --title="Show ISO-9660 Image Info" --textbox /tmp/iso-info 900 600 2> /dev/null; rm -fr /tmp/iso-info;done;fi
+Exec=which iso-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show ISO-9660 Image Info" --passivepopup="[Error] Please install iso-info command and try again."; exit 1; else for file in %F;do iso-info --no-header -l $file > /tmp/iso-info; kdialog --icon=ks-media-optical-info --title="Show ISO-9660 Image Info" --textbox /tmp/iso-info 900 600 2>/dev/null; rm -fr /tmp/iso-info;done;fi
 Icon=ks-media-optical-info
 Name=Show ISO-9660 Image Info
 Name[de]=ISO-9660 Abbild info anzeigen
@@ -188,7 +188,7 @@ Name[zh_CN]=表演 ISO-9660 图像信息
 Name[x-test]=xxShow ISO-9660 Image Infoxx
 
 [Desktop Action OpticalDriveInfo]
-Exec=which cd-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Optical Drive Info" --passivepopup="[Error] Please install cd-info command and try again."; exit 1; else cd-info --no-header -ql --dvd --iso9660 > /tmp/cd-info; kdialog --icon=ks-optical-drive-info --title="Show Optical Drive Info" --textbox /tmp/cd-info 400 800 2> /dev/null; rm -fr /tmp/cd-info;%F;fi
+Exec=which cd-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Optical Drive Info" --passivepopup="[Error] Please install cd-info command and try again."; exit 1; else cd-info --no-header -ql --dvd --iso9660 > /tmp/cd-info; kdialog --icon=ks-optical-drive-info --title="Show Optical Drive Info" --textbox /tmp/cd-info 400 800 2>/dev/null; rm -fr /tmp/cd-info;%F;fi
 Icon=ks-optical-drive-info
 Name=Show Optical Drive Info
 Name[de]=Optischer Antrieb info anzeigen

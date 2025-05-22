@@ -51,19 +51,19 @@ finished() {
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
 		if [ "$ELAPSED_TIME" -lt "60" ]; then
 			kdialog --icon=ks-checksum --title="Verify $HASH CheckSum" \
-				--passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
+				--passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}s" 2>/dev/null
 		elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
 			ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
 			kdialog --icon=ks-checksum --title="Verify $HASH CheckSum" \
-				--passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
+				--passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}m" 2>/dev/null
 		elif [ "$ELAPSED_TIME" -gt "3599" ]; then
 			ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
 			kdialog --icon=ks-checksum --title="Verify $HASH CheckSum" \
-				--passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
+				--passivepopup="[Finished]   $(cat $TMP).   Elapsed Time: ${ELAPSED_TIME}h" 2>/dev/null
 		fi
 	else
 		kdialog --icon=ks-error --title="Verify $HASH CheckSum" \
-			--passivepopup="[Error]   $(cat $TMP|awk -F : '{print $3}')." 2> /dev/null
+			--passivepopup="[Error]   $(cat $TMP|awk -F : '{print $3}')." 2>/dev/null
 	fi
 	rm -f $TMP
 }
@@ -87,34 +87,34 @@ for file in $FILE; do
 	cd "${file%/*}"
 	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
 		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
-		sed 's/ /_/g')" 2> /dev/null
+		sed 's/ /_/g')" 2>/dev/null
 	cd ./
 	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 	cd ./
 	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 	cd ./
 	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-		"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+		"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 	cd ./
 	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname \
-		"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+		"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
 	cd ./
 	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
-		sed 's/ /_/g')" 2> /dev/null
+		sed 's/ /_/g')" 2>/dev/null
 	cd ./
-	mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
+	mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
 	cd ./
-	mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
+	mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
 	cd ./
-	mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
+	mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
 	cd ./
-	mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+	mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
 	cd ./
 
 	for i in *; do
-		mv "$i" "${i// /_}" 2> /dev/null
+		mv "$i" "${i// /_}" 2>/dev/null
 	done
 
 	DIR="$(pwd)"
@@ -123,7 +123,7 @@ for file in $FILE; do
 	if [ "$CHECKSUMFILE" != "md5" ] && [ "$CHECKSUMFILE" != "MD5" ] && [ "$CHECKSUMFILE" != "sha1" ] && [ "$CHECKSUMFILE" != "SHA1" ] && \
 		[ "$CHECKSUMFILE" != "sha256" ] && [ "$CHECKSUMFILE" != "SHA256" ] && [ "$CHECKSUMFILE" != "sha512" ] && [ "$CHECKSUMFILE" != "SHA512" ]; then
 		kdialog --icon=ks-error --title="Verify CheckSum" \
-			--passivepopup="[Canceled]   Support only this checksum files: *.md5, *.sha1, *.sha256 and *.sha512" 2> /dev/null
+			--passivepopup="[Canceled]   Support only this checksum files: *.md5, *.sha1, *.sha256 and *.sha512" 2>/dev/null
 		progressbar-stop
 		exit 1
 	fi
@@ -131,22 +131,22 @@ for file in $FILE; do
 	if [ "$CHECKSUMFILE" = "md5" ] || [ "$CHECKSUMFILE" = "MD5" ]; then
 		HASH=$(echo md5|tr a-z A-Z)
 		BEGIN_TIME=$(date +%s)
-		md5sum -c "$file" > $TMP 2>&1
+		md5sum -c "$file" &> $TMP
 		finished
 	elif [ "$CHECKSUMFILE" = "sha1" ] || [ "$CHECKSUMFILE" = "SHA1" ]; then
 		HASH=$(echo sha1|tr a-z A-Z)
 		BEGIN_TIME=$(date +%s)
-		sha1sum -c "$file" > $TMP 2>&1
+		sha1sum -c "$file" &> $TMP
 		finished
 	elif [ "$CHECKSUMFILE" = "sha256" ] || [ "$CHECKSUMFILE" = "SHA256" ]; then
 		HASH=$(echo sha256|tr a-z A-Z)
 		BEGIN_TIME=$(date +%s)
-		sha256sum -c "$file" > $TMP 2>&1
+		sha256sum -c "$file" &> $TMP
 		finished
 	elif [ "$CHECKSUMFILE" = "sha512" ] || [ "$CHECKSUMFILE" = "SHA512" ]; then
 		HASH=$(echo sha512|tr a-z A-Z)
 		BEGIN_TIME=$(date +%s)
-		sha512sum -c "$file" > $TMP 2>&1
+		sha512sum -c "$file" &> $TMP
 		finished
 	fi
 done

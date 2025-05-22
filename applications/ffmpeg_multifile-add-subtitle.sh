@@ -104,34 +104,34 @@ cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
     "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
-    's/ /_/g')" 2> /dev/null
+    's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
-    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
-    |sed 's/ /_/g')" 2> /dev/null
+    |sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
 cd ./
 
 for i in *; do
-	mv "$i" "${i// /_}" 2> /dev/null
+	mv "$i" "${i// /_}" 2>/dev/null
 done
 
 DIR="$(pwd)"
@@ -140,13 +140,13 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
-FILES=($(kdialog --icon=ks-add-subs --title="Video Files" --multiple --getopenfilename "$DIR" "*.MP4 *.mp4|*.mp4" 2> /dev/null))
+FILES=($(kdialog --icon=ks-add-subs --title="Video Files" --multiple --getopenfilename "$DIR" "*.MP4 *.mp4|*.mp4" 2>/dev/null))
 if-cancel-exit
 
-SUBS=($(kdialog --icon=ks-add-subs --title="Subtitle Files" --multiple --getopenfilename "$DIR" "*.SRT *.srt|*.srt" 2> /dev/null))
+SUBS=($(kdialog --icon=ks-add-subs --title="Subtitle Files" --multiple --getopenfilename "$DIR" "*.SRT *.srt|*.srt" 2>/dev/null))
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=ks-add-subs --title="Destination Video Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-add-subs --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
 
 ARRAY_NUMBER="0"
@@ -157,7 +157,7 @@ while [ "$ARRAY_NUMBER" -lt "$TOTAL_ARRAY" ]; do
 	logs
 	BEGIN_TIME=$(date +%s)
 	DST_FILE="${FILES[$ARRAY_NUMBER]%.*}"
-	ffmpeg -y -i ${FILES[$ARRAY_NUMBER]} -sub_charenc $(file -i ${SUBS[$ARRAY_NUMBER]}|xargs -n1|grep charset=|awk -F= '{print $2}') -i ${SUBS[$ARRAY_NUMBER]} -c copy -c:s mov_text "$DESTINATION/${DST_FILE##*/}_Subtitled.mp4" > $LOG 2>&1
+	ffmpeg -y -i ${FILES[$ARRAY_NUMBER]} -sub_charenc $(file -i ${SUBS[$ARRAY_NUMBER]}|xargs -n1|grep charset=|awk -F= '{print $2}') -i ${SUBS[$ARRAY_NUMBER]} -c copy -c:s mov_text "$DESTINATION/${DST_FILE##*/}_Subtitled.mp4" &> $LOG
 	if-ffmpeg-cancel
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

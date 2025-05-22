@@ -56,7 +56,7 @@ if-cancel-exit() {
 	fi
 
 	if [ "$MODE" = "" ]; then
-		kdialog --icon=ks-error --title="Backup Tools" --passivepopup="[Canceled]   Please, select item. Try again" 2> /dev/null
+		kdialog --icon=ks-error --title="Backup Tools" --passivepopup="[Canceled]   Please, select item. Try again" 2>/dev/null
 		kill $(cat $PB_PIDFILE)
 		rm $PB_PIDFILE
 		exit 1
@@ -75,23 +75,23 @@ finished-backup() {
 	rm $PB_PIDFILE
 	if [ "$ELAPSED_TIME" -lt "60" ]; then
 		kdialog --icon=ks-database --title="Backup:   Saved on $HOME/Backups/" \
-			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
+			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}s" 2>/dev/null
 	elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
 		ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
 		kdialog --icon=ks-database --title="Backup:   Saved on $HOME/Backups/" \
-			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
+			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}m" 2>/dev/null
 	elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
 		ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
 		kdialog --icon=ks-database --title="Backup:   Saved on $HOME/Backups/" \
-			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
+			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}h" 2>/dev/null
 	elif [ "$ELAPSED_TIME" -gt "86399" ]; then
 		ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
 		kdialog --icon=ks-database --title="Backup:   Saved on $HOME/Backups/" \
-			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}d" 2> /dev/null
+			--passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}d" 2>/dev/null
 	fi
 	echo "Finished All Backup" > /tmp/speak
 	text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
-	play /tmp/speak.wav 2> /dev/null
+	play /tmp/speak.wav 2>/dev/null
 	rm -fr /tmp/speak*
 	exit 0
 }
@@ -107,20 +107,20 @@ finished-restore() {
 	kill $(cat $PB_PIDFILE)
 	rm $PB_PIDFILE
 	if [ "$ELAPSED_TIME" -lt "60" ]; then
-		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}s" 2> /dev/null
+		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}s" 2>/dev/null
 	elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ]; then
 		ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}m" 2> /dev/null
+		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}m" 2>/dev/null
 	elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ]; then
 		ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}h" 2> /dev/null
+		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}h" 2>/dev/null
 	elif [ "$ELAPSED_TIME" -gt "86399" ]; then
 		ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}d" 2> /dev/null
+		kdialog --icon=ks-database --title="Restore:   $MODE" --passivepopup="[Finished]   Elapsed Time: ${ELAPSED_TIME}d" 2>/dev/null
 	fi
 	echo "Finished All Restore" > /tmp/speak
 	text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
-	play /tmp/speak.wav 2> /dev/null
+	play /tmp/speak.wav 2>/dev/null
 	rm -fr /tmp/speak*
 	exit 0
 }
@@ -129,12 +129,12 @@ finished-restore() {
 ############ Main ############
 ##############################
 
-MODE=$(kdialog --icon=ks-database --title="Backup Tools" --combobox="Choose Mode" Backup Restore --default Backup 2> /dev/null)
+MODE=$(kdialog --icon=ks-database --title="Backup Tools" --combobox="Choose Mode" Backup Restore --default Backup 2>/dev/null)
 EXIT=$?
 if-cancel-exit
 
 if [ "$MODE" = "Backup" ]; then
-	mkdir $BACKUP > /dev/null 2>&1
+	mkdir $BACKUP &>/dev/null
 	ALL="$HOME/.aMule \
 	$HOME/.anydesk \
 	$HOME/.audacity-data \
@@ -172,13 +172,13 @@ if [ "$MODE" = "Backup" ]; then
 	$HOME/.thunderbird Thunderbird off \
 	$HOME/.tmux TMUX off \
 	$HOME/.wine Wine off \
-	--geometry 445 110 2> /dev/null)
+	--geometry 445 110 2>/dev/null)
 	EXIT=$?
 	if-cancel-exit
 	if [ "$TARGETBACKUP" = "system" ]; then
 		beginning-backup
 		for i in $TARGETBACKUP; do
-			mkdir $BACKUP/${i##*/} > /dev/null 2>&1
+			mkdir $BACKUP/${i##*/} &>/dev/null
 			$KDESU --noignorebutton -d -c "tar -JcPpf $BACKUP/${i##*/}/${i##*/}-backup-$(date +%d-%m-%Y_%H-%M).tar.xz /etc/ /opt/local/etc/ /root/ /usr/local/etc/"
 			EXIT=$?
 			if-cancel-exit
@@ -189,14 +189,14 @@ if [ "$MODE" = "Backup" ]; then
 		TARGETBACKUP=$ALL
 		beginning-backup
 		for i in $ALL; do
-			mkdir $BACKUP/$(echo ${i##*/}|sed 's/^\.//') > /dev/null 2>&1
+			mkdir $BACKUP/$(echo ${i##*/}|sed 's/^\.//') &>/dev/null
 			tar -JcPpf $BACKUP/$(echo ${i##*/}|sed 's/^\.//')/$(echo ${i##*/}|sed 's/^\.//')-backup-$(date +%d-%m-%Y_%H-%M).tar.xz $i
 		done
 		finished-backup
 else
 	beginning-backup
 	for i in $TARGETBACKUP; do
-		mkdir $BACKUP/$(echo ${i##*/}|sed 's/^\.//') > /dev/null 2>&1
+		mkdir $BACKUP/$(echo ${i##*/}|sed 's/^\.//') &>/dev/null
 		tar -JcPpf $BACKUP/$(echo ${i##*/}|sed 's/^\.//')/$(echo ${i##*/}|sed 's/^\.//')-backup-$(date +%d-%m-%Y_%H-%M).tar.xz $i
 	done
 	finished-backup
@@ -204,7 +204,7 @@ else
 else        
 	if [ ! -d $BACKUP ]; then
 		kdialog --icon=ks-error --title="Restore Standard" --passivepopup="[Canceled]   Backup Not Found: Please, first create \
-			backup or paste your Backups directory on $HOME. Try again" 2> /dev/null
+			backup or paste your Backups directory on $HOME. Try again" 2>/dev/null
 		exit 0
 	fi
     
@@ -227,29 +227,29 @@ else
 		$BACKUP/thunderbird Thunderbird \
 		$BACKUP/tmux TMUX \
 		$BACKUP/wine Wine \
-		--geometry 445 110 2> /dev/null)
+		--geometry 445 110 2>/dev/null)
 		EXIT=$?
 		if-cancel-exit
 	if [ ! -d $MODE ]; then
 		kdialog --icon=ks-error --title="Restore Standard" \
-			--passivepopup="[Canceled]   Backup Not Found: Please, first create backup or paste your backup on $MODE. Try again" 2> /dev/null
+			--passivepopup="[Canceled]   Backup Not Found: Please, first create backup or paste your backup on $MODE. Try again" 2>/dev/null
 		exit 1
 	fi
 	cd $MODE
 	RESTORELIST=$(ls $MODE)
-	MODE=$(kdialog --icon=ks-database --title="Restore Standard" --combobox="Select For Restore" $RESTORELIST 2> /dev/null)
+	MODE=$(kdialog --icon=ks-database --title="Restore Standard" --combobox="Select For Restore" $RESTORELIST 2>/dev/null)
 	EXIT=$?
 	if-cancel-exit
 	if [ "$PWD" = "$BACKUP/system" ]; then
 		beginning-restore
-		$KDESU --noignorebutton -d -c "rm -fr /etc/ /opt/local/etc/ /root/ /usr/local/etc/ && tar -JxPpf $MODE > /dev/null 2>&1"
+		$KDESU --noignorebutton -d -c "rm -fr /etc/ /opt/local/etc/ /root/ /usr/local/etc/ && tar -JxPpf $MODE &>/dev/null"
 		EXIT=$?
 		if-cancel-exit
 		finished-restore
 	fi
 	beginning-restore
-	rm -fr $(tar -tf $MODE 2> /dev/null|head -n1)
-	tar -JxPpf $MODE > /dev/null 2>&1
+	rm -fr $(tar -tf $MODE 2>/dev/null|head -n1)
+	tar -JxPpf $MODE &>/dev/null
 	chown $USER:$USER $HOME
 	finished-restore
 fi

@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=安全工具
 X-KDE-Submenu[x-test]=xxSecurity Toolsxx
 
 [Desktop Action MountEncryptedDir]
-Exec=which encfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount Encrypted Directory" --passivepopup="[Error] Please install encfs command and try again."; exit 1; else MOUNTPOINT=$(kdialog --icon=ks-folder-encrypt-mount --title="[Select|Create] directory for mount point" --getexistingdirectory "$PWD"); if [ "$?" != "0" ];then exit 1; else encfs -i 2 --extpass=ssh-askpass %F $MOUNTPOINT > /tmp/encfs.err 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount Encrypted Directory" --passivepopup="$(cat /tmp/encfs.err). Try again."; rm -f /tmp/encfs.err; exit 1; else kdialog --icon=ks-folder-encrypt-mount --title="Mount Encrypted Directory" --passivepopup="[Finished] The directory has been mounted.";fi;fi;fi
+Exec=which encfs; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount Encrypted Directory" --passivepopup="[Error] Please install encfs command and try again."; exit 1; else MOUNTPOINT=$(kdialog --icon=ks-folder-encrypt-mount --title="[Select|Create] directory for mount point" --getexistingdirectory "$PWD"); if [ "$?" != "0" ];then exit 1; else encfs -i 2 --extpass=ssh-askpass %F $MOUNTPOINT &> /tmp/encfs.err; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount Encrypted Directory" --passivepopup="$(cat /tmp/encfs.err). Try again."; rm -f /tmp/encfs.err; exit 1; else kdialog --icon=ks-folder-encrypt-mount --title="Mount Encrypted Directory" --passivepopup="[Finished] The directory has been mounted.";fi;fi;fi
 Icon=ks-folder-encrypt-mount
 Name=Mount Encrypted Directory
 Name[de]=Verschlüsseltes Verzeichnis einbinden
@@ -37,7 +37,7 @@ Name[zh_CN]=挂载加密目录
 Name[x-test]=xxMount Encrypted Directoryxx
 
 [Desktop Action UnmountEncryptedDir]
-Exec=which fusermount; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount Encrypted Directory" --passivepopup="[Error] Please install fusermount command and try again."; exit 1; else fusermount -u %F > /tmp/fusermount.err 2>&1; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount Encrypted Directory" --passivepopup="[Error] $(cat /tmp/fusermount.err)."; rm -f /tmp/fusermount.err; exit 1; else kdialog --icon=ks-folder-encrypt-unmount --title="Unmount Encrypted Directory" --passivepopup="[Finished] The directory has been unmounted.";fi;fi
+Exec=which fusermount; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount Encrypted Directory" --passivepopup="[Error] Please install fusermount command and try again."; exit 1; else fusermount -u %F &> /tmp/fusermount.err; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount Encrypted Directory" --passivepopup="[Error] $(cat /tmp/fusermount.err)."; rm -f /tmp/fusermount.err; exit 1; else kdialog --icon=ks-folder-encrypt-unmount --title="Unmount Encrypted Directory" --passivepopup="[Finished] The directory has been unmounted.";fi;fi
 Icon=ks-folder-encrypt-unmount
 Name=Unmount Encrypted Directory
 Name[de]=Verschlüsseltes Verzeichnis auswerfen

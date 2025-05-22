@@ -105,34 +105,34 @@ cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
     "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
-    's/ /_/g')" 2> /dev/null
+    's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
-    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
-    |sed 's/ /_/g')" 2> /dev/null
+    |sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
 cd ./
 
 for i in *; do
-	mv "$i" "${i// /_}" 2> /dev/null
+	mv "$i" "${i// /_}" 2>/dev/null
 done
 
 DIR="$(pwd)"
@@ -142,13 +142,13 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 fi
 
 COVER=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Picture File" \
-		--getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff" 2> /dev/null)
+		--getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff" 2>/dev/null)
 if-cancel-exit
 
-FILES=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2> /dev/null)
+FILES=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2>/dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Destination Audio Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Destination Audio Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
 
 progressbar-start
@@ -156,7 +156,7 @@ for i in $FILES; do
 	logs
 	BEGIN_TIME=$(date +%s)
 	DST_FILE="${i%.*}"
-	ffmpeg -y -i $i -i $COVER -c copy -map 0 -map 1 -metadata:s:v title="Album Cover Art" -metadata:s:v comment="Cover Art (Front)" "$DESTINATION/${DST_FILE##*/}_CoverArt.mp3" > $LOG 2>&1
+	ffmpeg -y -i $i -i $COVER -c copy -map 0 -map 1 -metadata:s:v title="Album Cover Art" -metadata:s:v comment="Cover Art (Front)" "$DESTINATION/${DST_FILE##*/}_CoverArt.mp3" &> $LOG
 	if-ffmpeg-cancel
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

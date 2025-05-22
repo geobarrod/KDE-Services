@@ -36,19 +36,19 @@ PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 SYSKERNELVERSION=$(uname -r|sed 's/.fc.*$//')
 INTERNETVERSION=$(yumdownloader --url --source kernel|grep kernel|grep -v "No source RPM found"|sed 's/^.*kernel-//'|sed 's/.fc...src.rpm$//')
 
-yumdownloader --url --source kernel > /dev/null 2>&1
+yumdownloader --url --source kernel &>/dev/null
 EXIT=$?
 
 if [ "$EXIT" != "0" ]; then
         kdialog --icon=ks-kernel-update --title="Build Custom Kernel" \
-                --error="No Internet Communication: You have some network problem, can't check updates." 2> /dev/null
+                --error="No Internet Communication: You have some network problem, can't check updates." 2>/dev/null
         EXIT=6
 fi
 
 if [ "$EXIT" = "0" ]; then
         if [ "$SYSKERNELVERSION" != "$INTERNETVERSION" ]; then
                 kdialog --icon=ks-kernel-update --title="Check Kernel Update" \
-                        --yesno "New version available: kernel-$INTERNETVERSION. Do you want to download it and use it?" 2> /dev/null
+                        --yesno "New version available: kernel-$INTERNETVERSION. Do you want to download it and use it?" 2>/dev/null
                 EXIT=$?
         
                 if [ "$EXIT" = "0" ]; then
@@ -57,7 +57,7 @@ if [ "$EXIT" = "0" ]; then
                         exit 1
                 fi
         else
-                kdialog --icon=ks-kernel-update --title="Check Kernel Update" --sorry "No update available." 2> /dev/null
+                kdialog --icon=ks-kernel-update --title="Check Kernel Update" --sorry "No update available." 2>/dev/null
         fi
 fi
 

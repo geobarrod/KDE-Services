@@ -131,7 +131,7 @@ progressbar_percent() {
 		PERCENT=$(cat $LOG|grep '%'|tail -n1|cut -f1 -d '%'|cut -f1 -d '.'|sed 's@^.* @@')
 		STATS=$(cat $LOG|grep '%'|tail -n1|awk -F " " '{print $3,$4,$5,$6,$7,$8}')
 		qdbus6 $DBUSREF setLabelText "Downloading ${FILE_TMP} $STATS"
-		qdbus6 $DBUSREF Set "" 'value' $PERCENT 2> /dev/null
+		qdbus6 $DBUSREF Set "" 'value' $PERCENT 2>/dev/null
 	done
 	FILE_TMP=""
 	while [ -z "$FILE_TMP" ];do
@@ -149,7 +149,7 @@ progressbar_percent() {
 		PERCENT=$(cat $LOG|grep '%'|tail -n1|cut -f1 -d '%'|cut -f1 -d '.'|sed 's@^.* @@')
 		STATS=$(cat $LOG|grep '%'|tail -n1|awk -F " " '{print $3,$4,$5,$6,$7,$8}')
 		qdbus6 $DBUSREF setLabelText "Downloading ${FILE_TMP} $STATS"
-		qdbus6 $DBUSREF Set "" 'value' $PERCENT 2> /dev/null
+		qdbus6 $DBUSREF Set "" 'value' $PERCENT 2>/dev/null
 	done
 }
 
@@ -200,17 +200,17 @@ touch $HOME/.kde-services/youtube-download-rate-limit
 rm -f !_YouTube-Video-Code.err
 
 VCODE=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--inputbox="Enter YouTube video code(s) separated by whitespace. By example in this URL: https://www.youtube.com/watch?v=DY-_o8z2ZFQ, the code is: DY-_o8z2ZFQ" -- "$(cat $HOME/.kde-services/youtube-video-codes)" 2> /dev/null)
+		--inputbox="Enter YouTube video code(s) separated by whitespace. By example in this URL: https://www.youtube.com/watch?v=DY-_o8z2ZFQ, the code is: DY-_o8z2ZFQ" -- "$(cat $HOME/.kde-services/youtube-video-codes)" 2>/dev/null)
 EXIT=$?
 if_cancel_exit
 echo $VCODE > $HOME/.kde-services/youtube-video-codes
 
-DESTINATION=$(kdialog --icon=ks-youtube-download-video --title="Destination YouTube Video(s)" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-youtube-download-video --title="Destination YouTube Video(s)" --getexistingdirectory "$DIR" 2>/dev/null)
 EXIT=$?
 if_cancel_exit
 
 RATE_LIMIT=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--inputbox="Enter download rate limit, example: 50K (= 50Kbps) or 5.5M (= 5.5Mbps)." $(cat $HOME/.kde-services/youtube-download-rate-limit) 2> /dev/null)
+		--inputbox="Enter download rate limit, example: 50K (= 50Kbps) or 5.5M (= 5.5Mbps)." $(cat $HOME/.kde-services/youtube-download-rate-limit) 2>/dev/null)
 EXIT=$?
 if_cancel_exit
 echo $RATE_LIMIT > $HOME/.kde-services/youtube-download-rate-limit
@@ -218,15 +218,15 @@ echo $RATE_LIMIT > $HOME/.kde-services/youtube-download-rate-limit
 progressbar_start
 
 VR=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-			--radiolist="Select Video Resolution" $(yt-dlp -F -- $VCODE 2>&1 \
-			|grep -w "video only"|grep -vE "WARNING|webm"|grep -wE "144p|240p|360p|480p|720p|1080p|1440p|2160p|4320p" \
+			--radiolist="Select Video Resolution" $(yt-dlp -F -- $VCODE \
+			|& grep -w "video only"|grep -vE "WARNING|webm"|grep -wE "144p|240p|360p|480p|720p|1080p|1440p|2160p|4320p" \
 			|awk -F " " '{print $3,$3$5$6$5$2,"off"}'))
 EXIT=$?
 if_cancel_exit
 
 checking_audio_availability
 AUDIO_LANG=[language=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--radiolist="Select Audio Language" default Default on $(yt-dlp -F -- $VCODE 2>&1|grep -w "audio only"|grep -vE "WARNING|drc"|grep -w m4a|awk -F " " '{print $16,$16$6$17$6$14$6$7$6$2,"off"}'|sed -e 's/,//g' -e 's/\[//g' -e 's/\]//g'))]
+		--radiolist="Select Audio Language" default Default on $(yt-dlp -F -- $VCODE|& grep -w "audio only"|grep -vE "WARNING|drc"|grep -w m4a|awk -F " " '{print $16,$16$6$17$6$14$6$7$6$2,"off"}'|sed -e 's/,//g' -e 's/\[//g' -e 's/\]//g'))]
 EXIT=$?
 if_cancel_exit
 AUDIO_LANG=$(echo "${AUDIO_LANG}"|grep -vE "default|medium")

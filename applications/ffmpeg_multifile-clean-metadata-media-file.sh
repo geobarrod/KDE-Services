@@ -105,34 +105,34 @@ cd "$DIR"
 
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
     "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
-    's/ /_/g')" 2> /dev/null
+    's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
-    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
+    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
 mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
-    |sed 's/ /_/g')" 2> /dev/null
+    |sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
+mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
 cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
+mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
 cd ./
 
 for i in *; do
-	mv "$i" "${i// /_}" 2> /dev/null
+	mv "$i" "${i// /_}" 2>/dev/null
 done
 
 DIR="$(pwd)"
@@ -143,10 +143,10 @@ fi
 
 FILES=$(kdialog --icon=ks-media-clean-metadata --title="Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
 	*.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob *.WAV *.wav \
-	*.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2> /dev/null)
+	*.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2>/dev/null)
 if-cancel-exit
 
-DESTINATION=$(kdialog --icon=ks-media-clean-metadata --title="Destination Media Files" --getexistingdirectory "$DIR" 2> /dev/null)
+DESTINATION=$(kdialog --icon=ks-media-clean-metadata --title="Destination Media Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
 
 progressbar-start
@@ -155,16 +155,16 @@ for i in $FILES; do
 	BEGIN_TIME=$(date +%s)
 	DST_FILE="${i%.*}"
 	if [ "$(file $i|grep -o FLAC)" == "FLAC" ]; then
-		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.flac" > $LOG 2>&1
+		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.flac" &> $LOG
 		if-ffmpeg-cancel
 	elif [ "$(file $i|grep -o ID3)" == "ID3" ]; then
-		ffmpeg -y -i $i -vn -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.mp3" > $LOG 2>&1
+		ffmpeg -y -i $i -vn -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.mp3" &> $LOG
 		if-ffmpeg-cancel
 	elif [ "$(file $i|grep -o WebM)" == "WebM" ]; then
-		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.webm" > $LOG 2>&1
+		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.webm" &> $LOG
 		if-ffmpeg-cancel
 	else
-		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.${i:${#i}-3}" > $LOG 2>&1
+		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.${i:${#i}-3}" &> $LOG
 		if-ffmpeg-cancel
 	fi
 	FINAL_TIME=$(date +%s)
