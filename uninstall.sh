@@ -199,6 +199,8 @@ rm -f ${PREFIXapp}/About_KDE-Services.desktop \
 		${PREFIXapp}/The_Resizer.sh \
 		${PREFIXapp}/YouTube_Tools-download-video.desktop \
 		${PREFIXapp}/YouTube_Tools-download-video.sh \
+		${PREFIXapp}/YouTube_Tools-download-video-list.desktop \
+		${PREFIXapp}/YouTube_Tools-download-video-list.sh \
 		${PREFIXapp}/YouTube_Tools-video-code-collector.desktop \
 		${PREFIXapp}/YouTube_Tools-video-code-collector.sh
 

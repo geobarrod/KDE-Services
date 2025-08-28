@@ -1,0 +1,19 @@
+[Desktop Entry]
+Categories=YouTube-Tools;
+Exec=which youtube-dl; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video List Downloader" --passivepopup="[Error] Please install youtube-dl command and try again."; exit 1; else ~/.local/share/applications/YouTube_Tools-download-video-list.sh;fi
+Icon=ks-youtube-download-video
+Name=Video List Downloader
+Name[de]=Videolisten Downloader
+Name[es]=Descargador de Lista de Videos
+Name[fr]=Téléchargeur de Listes de Vidéos
+Name[it]=Scaricatore di Elenchi Video
+Name[ja]=ビデオリストダウンローダー
+Name[ko]=비디오 목록 다운로더
+Name[pt]=Descarregador de Listas de Vídeos
+Name[ru]=Загрузчик списка видео
+Name[uk]=Завантажувач списку відео
+Name[zh_CN]=视频列表下载器
+StartupNotify=true
+Terminal=false
+Type=Application
+X-KDE-SubstituteUID=false

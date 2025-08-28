@@ -306,7 +306,7 @@ Requirements:
 - xorg-x11-server-utils
 - xorg-x11-server-Xorg
 - xterm
-- youtube-dl
+- yt-dlp
 - zip
 
 Contributors:

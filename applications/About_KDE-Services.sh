@@ -267,6 +267,7 @@ cat > /tmp/about_kde-services << EOF
                     Submenu "YouTube Tools" (it is shown when right-clicked an directory).
                                  - "Video Downloader"
                                  - "Video List Code Collector"
+                                 - "Video List Downloader"
 
             Language support:
                     - Chinese
