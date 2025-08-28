@@ -224,6 +224,7 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 - Submenu **YouTube Tools** (it is shown when right-clicked an directory):
 	* **Video Downloader**
 	* **Video List Code Collector**
+	* **Video List Downloader**
 
 Language support:
 -----------------
@@ -322,6 +323,7 @@ Contributors:
 - Bruce Zhang (Translations to Chinese language).
 - Daniele Scasciafratte (Translations to Italian language).
 - Manuel Tancoigne (Translations to French language).
+- Mateus Cruz (Translations to Brazilian Portuguese and Portuguese).
 
 Steps for install from Dolphin file manager (recommended):
 ----------------------------------------------------------
