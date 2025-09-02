@@ -363,6 +363,6 @@ Screenshot
 Donate 🎔
 ---------
 
-- You can make a donation to support the overall efforts of the KDE-Services project author.
-- The receiver's information can be found following: [DONATE](https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE "DONATE")
+- You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
+- The information can be found following: [DONATE](https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE "DONATE")
 - Thanks!
