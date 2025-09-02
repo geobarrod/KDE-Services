@@ -1,14 +1,17 @@
-* Fri Feb 28 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.8
-- Preparing updates for the next release version.
+* Tue Sep  02 2025 Geovani B. R. latest (current development)
+- The license is changed to BSD 3-Clause.
+- "YouTube Tools": Added new services menu "Video List Downloader".
+- Fixed Portuguese translations.
+
+🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
+    The information can be found following:
+     https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
+      Thanks!
 
 * Fri Jan 31 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.7
 - Fixed from "Network Tools" => "HTTP Server" service menu.
 - Added GPL license notice to the top of all shell script files.
 - Fixed the path to the "kdesu" command in some services menu that require superuser privileges.
-🎔 You can make a donation to support the overall efforts of the KDE-Services project author.
-    The receiver's information can be found following:
-     https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
-      Thanks!
 
 * Wed Jan 29 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.6
 - Fixed from "Network Tools" => "Listening Sockets" service menu.
