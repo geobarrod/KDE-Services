@@ -1,4 +1,4 @@
-* Tue Sep  02 2025 Geovani B. R. latest (current development)
+* Tue Sep  02 2025 Geovani B. R. <igeo.cu@gmail.com> latest (current development)
 - The license is changed to BSD 3-Clause.
 - "YouTube Tools": Added new services menu "Video List Downloader".
 - Fixed Portuguese translations.
@@ -6,7 +6,7 @@
 🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
     The information can be found following:
      https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
-      Thanks!
+      Thanks very much!
 
 * Fri Jan 31 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.7
 - Fixed from "Network Tools" => "HTTP Server" service menu.
