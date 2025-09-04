@@ -62,7 +62,6 @@ progressbar_percent() {
 			FILE_TMP=$(cat $LOG|grep "Destination:.*"|cut -f 2 -d ':'|tail -n1|xargs)
 			FILE_STATUS=$(cat $LOG|grep -ow "has already been downloaded")
 			if [ "$FILE_STATUS" == "has already been downloaded" ];then
-				#kill -9 $YTDLPID
 				kdialog --icon=ks-error --title="YouTube Download Video List" \
 					--passivepopup "CANCELED: $FILE_TMP has already been downloaded"
 				break

@@ -117,12 +117,11 @@ progressbar_percent() {
 		FILE_STATUS=""
 		while [ -z "$FILE_TMP" ];do
 			sleep 0.5
-			FILE_TMP=$(cat $LOG|grep "download.*Destination:.*f6.*.mp4"|cut -f 2 -d ':'|xargs)
+			FILE_TMP=$(cat $LOG|grep "Destination:.*"|cut -f 2 -d ':'|tail -n1|xargs)
 			FILE_STATUS=$(cat $LOG|grep -ow "has already been downloaded")
 			if [ "$FILE_STATUS" == "has already been downloaded" ];then
-				kill -9 $YTDLPID
-				kdialog --icon=ks-error --title="Download YouTube Video" \
-					--passivepopup "CANCELED: ${FILENAME} [$FORMAT] has already been downloaded"
+				kdialog --icon=ks-error --title="YouTube Download Video List" \
+					--passivepopup "CANCELED: $FILE_TMP has already been downloaded"
 				break
 			fi
 		done
@@ -131,25 +130,7 @@ progressbar_percent() {
 			sleep 0.5
 			PERCENT=$(cat $LOG|grep '%'|tail -n1|cut -f1 -d '%'|cut -f1 -d '.'|sed 's@^.* @@')
 			STATS=$(cat $LOG|grep '%'|tail -n1|awk -F " " '{print $3,$4,$5,$6,$7,$8,$9,$10,$11}')
-			qdbus6 $DBUSREF setLabelText "Downloading ${FILE_TMP} $STATS"
-			qdbus6 $DBUSREF Set "" 'value' $PERCENT 2>/dev/null
-		done
-		FILE_TMP=""
-		while [ -z "$FILE_TMP" ];do
-			sleep 0.5
-			FILE_TMP=$(cat $LOG|grep "download.*Destination:.*f2.*.mp4"|cut -f 2 -d ':'|xargs)
-			FILE_STATUS=$(cat $LOG|grep -ow "has already been downloaded")
-			if [ "$FILE_STATUS" == "has already been downloaded" ];then
-				kill -9 $YTDLPID
-				break
-			fi
-		done
-		PERCENT=0
-		while [ $PERCENT -lt 100 ];do
-			sleep 0.5
-			PERCENT=$(cat $LOG|grep '%'|tail -n1|cut -f1 -d '%'|cut -f1 -d '.'|sed 's@^.* @@')
-			STATS=$(cat $LOG|grep '%'|tail -n1|awk -F " " '{print $3,$4,$5,$6,$7,$8,$9,$10,$11}')
-			qdbus6 $DBUSREF setLabelText "Downloading ${FILE_TMP} $STATS"
+			qdbus6 $DBUSREF setLabelText "Downloading $FILE_TMP $STATS"
 			qdbus6 $DBUSREF Set "" 'value' $PERCENT 2>/dev/null
 		done
 	done
