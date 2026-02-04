@@ -324,6 +324,7 @@ Contributors:
 - Daniele Scasciafratte (Translations to Italian language).
 - Manuel Tancoigne (Translations to French language).
 - Mateus Cruz (Translations to Brazilian Portuguese and Portuguese).
+- ookatuk (Translations to Japanese language and fix of the translation display of the **Android Tools** submenu).
 
 Steps for install from Dolphin file manager (recommended):
 ----------------------------------------------------------
