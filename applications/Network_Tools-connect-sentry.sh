@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2011-2025.                                                       #
+# KDE-Services ⚙ 2011-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
-# Copyright (c) 2025, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
+# Copyright (c) 2026, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
 #                                                                                 #
 # Redistribution and use in source and binary forms, with or without              #
 # modification, are permitted provided that the following conditions are met:     #
@@ -61,8 +61,8 @@ if [ "$STATE" = "Enabled" ]; then
                         --inputbox="Enter ports number separate by comma to monitor it" $SHOWPORTS 2>/dev/null)
         if-cancel-exit
         echo -n $PORTS > ~/.kde-services/ports
-        sed -i -e "s;,; or sport = :;g" ~/.kde-services/ports
-        sed -i -e "s;^;sport = :;g" ~/.kde-services/ports
+        sed -i "" -e "s;,; or sport = :;g" ~/.kde-services/ports
+        sed -i "" -e "s;^;sport = :;g" ~/.kde-services/ports
         echo -n > /tmp/timestamp
         echo -n > /tmp/timestamp2
         MYPORTS=$(cat ~/.kde-services/ports)

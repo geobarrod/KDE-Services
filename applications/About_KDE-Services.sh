@@ -2769,6 +2769,7 @@ $msg_description_block
     - Manuel Tancoigne <m.tancoigne@gmail.com> (Translations to French language).
     - Gabriel Fontenelle <contato@gabrielfontenelle.com> (Fix a problem with unmounting image removing directory not created by fuseiso).
     - Mateus Cruz <mateushenriquedacc@gmail.com> (Translations to Brazilian Portuguese and Portuguese).
+    - ookatuk (Translations to Japanese language and fix of the translation display of the "Android Tools" submenu).
 
     $msg_author
     - Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>, Developer.

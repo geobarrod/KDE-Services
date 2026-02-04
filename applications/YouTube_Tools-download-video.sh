@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2012-2025.                                                       #
+# KDE-Services ⚙ 2012-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
-# Copyright (c) 2025, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
+# Copyright (c) 2026, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
 #                                                                                 #
 # Redistribution and use in source and binary forms, with or without              #
 # modification, are permitted provided that the following conditions are met:     #
@@ -173,6 +173,7 @@ finished() {
 ############ Main ############
 ##############################
 
+trap 'rm -f "$LOG"; [ -n "$DBUSREF" ] && qdbus6 "$DBUSREF" close 2>/dev/null' INT TERM EXIT
 DIR=$1
 cd "$DIR"
 DIR=$(pwd)
@@ -234,7 +235,7 @@ for VID in $VCODE;do
 	BEGIN_TIME=$(date +%s)
 	LOG=$(mktemp)
 	YTDLP="yt-dlp -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_[${FORMAT}].%\(ext\)s" \
-			-f wv[height=${FH}]+wa -c -i \
+			-f bv[height=${FH}]+ba -c -i \
 			-R infinite --newline --progress --embed-chapters --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$YTDLP > $LOG &
