@@ -7,16 +7,16 @@ X-KDE-Priority=TopLevel
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin,inode/directory
 X-KDE-StartupNotify=false
 X-KDE-Submenu=Android Tools
-Name[de]=Android - Werkzeuge
-Name[es]=Android - Herramientas
-Name[fr]=Outils Android
-Name[it]=Android - Strumenti
-Name[ja]=Android ツール
-Name[ko]=Android 도구
-Name[pt]=Android - Ferramentas
-Name[ru]=Инструменты Android
-Name[uk]=Інструменти Android
-Name[zh_CN]=Android 工具
+X-KDE-Submenu[de]=Android - Werkzeuge
+X-KDE-Submenu[es]=Android - Herramientas
+X-KDE-Submenu[fr]=Outils Android
+X-KDE-Submenu[it]=Android - Strumenti
+X-KDE-Submenu[ja]=Android ツール
+X-KDE-Submenu[ko]=Android 도구
+X-KDE-Submenu[pt]=Android - Ferramentas
+X-KDE-Submenu[ru]=Инструменты Android
+X-KDE-Submenu[uk]=Інструменти Android
+X-KDE-Submenu[zh_CN]=Android 工具
 X-KDE-Submenu[x-test]=xxAndroid Toolsxx
 
 [Desktop Action ABM]
