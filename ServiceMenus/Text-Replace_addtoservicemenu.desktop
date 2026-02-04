@@ -9,14 +9,14 @@ X-KDE-Submenu=KDE-Services
 X-KDE-Submenu[x-test]=xxKDE-Servicesxx
 
 [Desktop Action TextReplace]
-Exec=STRING1=$(kdialog --icon=ks-text-plain --title="Text Replace" --inputbox="Enter text to replace"); if [ "$?" != "0" ];then exit 1; else STRING2=$(kdialog --icon=ks-text-plain --title="Text Replace" --inputbox="Replace by"); if [ "$?" != "0" ];then exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-text-plain --title="Text Replace" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; sed -i -e "s;$STRING1;$STRING2;g" $file; kdialog --icon=ks-text-plain --title="Text Replace" --passivepopup="[Finished]   ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi;fi 
+Exec=STRING1=$(kdialog --icon=ks-text-plain --title="Text Replace" --inputbox="Enter text to replace"); if [ "$?" != "0" ];then exit 1; else STRING2=$(kdialog --icon=ks-text-plain --title="Text Replace" --inputbox="Replace by"); if [ "$?" != "0" ];then exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-text-plain --title="Text Replace" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; sed -i -e "s;$STRING1;$STRING2;g" $file; kdialog --icon=ks-text-plain --title="Text Replace" --passivepopup="[Finished]   ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Text Replace" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi;fi
 Icon=ks-text-plain
 Name=Text Replace
 Name[de]=Text ersetzen
 Name[es]=Reemplazar Texto
 Name[fr]=Remplacer du Texte
 Name[it]=Sostituisci Testo
-Name[ja]=テキストを置き換えるために
+Name[ja]=テキストを置換
 Name[ko]=본문을 바꾼다
 Name[pt]=Substituir Texto
 Name[ru]=Заменить текст
