@@ -235,7 +235,7 @@ for VID in $VCODE;do
 	BEGIN_TIME=$(date +%s)
 	LOG=$(mktemp)
 	YTDLP="yt-dlp -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_[${FORMAT}].%\(ext\)s" \
-			-f wv[height=${FH}]+wa -c -i \
+			-f bv[height=${FH}]+ba -c -i \
 			-R infinite --newline --progress --embed-chapters --windows-filenames --restrict-filenames \
 			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
 	$YTDLP > $LOG &
