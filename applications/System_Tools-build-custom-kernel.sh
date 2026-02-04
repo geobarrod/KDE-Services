@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2011-2025.                                                       #
+# KDE-Services ⚙ 2011-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
-# Copyright (c) 2025, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
+# Copyright (c) 2026, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
 #                                                                                 #
 # Redistribution and use in source and binary forms, with or without              #
 # modification, are permitted provided that the following conditions are met:     #
@@ -392,10 +392,10 @@ if [ "$EXIT" = "0" ]; then
         EXIT=$?
         if-cancel-exit2
         echo "-$BINOPT" > ~/.kde-services/kernel-cflags
-        sudo sed -i "s;-O2;-$BINOPT;g" Makefile
+        sudo sed -i "" "s;-O2;-$BINOPT;g" Makefile
 elif [ "$EXIT" = "1" ]; then
         BINOPT=$(cat ~/.kde-services/kernel-cflags 2>/dev/null)
-        sudo sed -i "s;-O2;$BINOPT;g" Makefile
+        sudo sed -i "" "s;-O2;$BINOPT;g" Makefile
 elif [ "$EXIT" = "2" ]; then
         if-cancel-exit
 fi
