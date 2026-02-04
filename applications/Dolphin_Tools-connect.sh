@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2011-2025.                                                       #
+# KDE-Services ⚙ 2011-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
-# Copyright (c) 2025, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
+# Copyright (c) 2026, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
 #                                                                                 #
 # Redistribution and use in source and binary forms, with or without              #
 # modification, are permitted provided that the following conditions are met:     #
@@ -45,8 +45,8 @@ bookmark() {
         rm -f ~/.local/share/user-places.xbel*
     fi
     
-    sed -i "s;</xbel>;;g" ~/.local/share/user-places.xbel
-    sed -i "s;^</bookmark>;;" ~/.local/share/user-places.xbel
+    sed -i "" "s;</xbel>;;g" ~/.local/share/user-places.xbel
+    sed -i "" "s;^</bookmark>;;" ~/.local/share/user-places.xbel
     cat >> ~/.local/share/user-places.xbel << EOF
 <bookmark href="$PROTOCOL://$DIALOG/">
  <title>$(echo $PROTOCOL|tr a-z A-Z) - $DIALOG</title>

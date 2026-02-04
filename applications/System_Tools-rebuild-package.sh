@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2011-2025.                                                       #
+# KDE-Services ⚙ 2011-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
-# Copyright (c) 2025, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
+# Copyright (c) 2026, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.  #
 #                                                                                 #
 # Redistribution and use in source and binary forms, with or without              #
 # modification, are permitted provided that the following conditions are met:     #
@@ -172,18 +172,18 @@ rpmmacros-no-cflags() {
                 echo -e "\n%optflags\t\t-$BINOPT" >> ~/.rpmmacros
                 echo -e "%__global_cflags\t-$BINOPT -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector \
                         --param=ssp-buffer-size=4 %{_hardened_cflags}" >> ~/.rpmmacros
-                sudo sed -i "s;-O2;-$BINOPT;g" ~/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
+                sudo sed -i "" "s;-O2;-$BINOPT;g" ~/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
         
                 if [ "$(uname -m)" = "i686" ]; then
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/common/gcc-base.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/common/gcc-base.conf &>/dev/null
                 elif [ "$(uname -m)" = "x86_64" ]; then
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/common/gcc-base.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/common/gcc-base.conf &>/dev/null
                 fi
         
                 mkdir ~/.kde-services &>/dev/null
@@ -194,7 +194,7 @@ rpmmacros-no-cflags() {
     
         if [ "$?" != "0" ]; then
                 BINOPT=$(cat ~/.kde-services/rebuild-package-cflags 2>/dev/null)
-                sudo sed -i "s;-O2;$BINOPT;g" ~/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
+                sudo sed -i "" "s;-O2;$BINOPT;g" ~/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
         fi
     
         grep fast-math /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
@@ -203,15 +203,15 @@ rpmmacros-no-cflags() {
                 BINOPT=$(cat ~/.kde-services/rebuild-package-cflags 2>/dev/null)
         
                 if [ "$(uname -m)" = "i686" ]; then
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/common/gcc-base.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/common/gcc-base.conf &>/dev/null
                 else
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
-                        sudo sed -i "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/common/gcc-base.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-32/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/linux-g++-64/qmake.conf &>/dev/null
+                        sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib64/qt4/mkspecs/common/gcc-base.conf &>/dev/null
                 fi
         fi
 }
@@ -219,7 +219,7 @@ rpmmacros-no-cflags() {
 check-builddep() {
         if [ "$?" != "0" ]; then
                 echo -e "\n$GREEN>$GREENRED Error: Installing Build Depends Package For $i.$GREEN$WHITE\n"
-                sed -i "s;$i;;g" ~/.kde-services/source-packages
+                sed -i "" "s;$i;;g" ~/.kde-services/source-packages
                 cat ~/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
                 cat /tmp/source-packages > ~/.kde-services/source-packages
                 cat ~/.kde-services/source-packages|xargs > /tmp/source-packages
@@ -464,7 +464,7 @@ if [ "$EXIT" = "1" ]; then
                         echo -n "$i " >> /tmp/package-not-exist
                         kdialog --icon=ks-error --title="Rebuild RPM Package" \
                                 --passivepopup="$i   [Error]: This package not exist in your Repositories." 2>/dev/null
-                        sed -i "s;$i;;g" ~/.kde-services/source-packages
+                        sed -i "" "s;$i;;g" ~/.kde-services/source-packages
                         cat ~/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
                         cat /tmp/source-packages > ~/.kde-services/source-packages
                         cat ~/.kde-services/source-packages|xargs > /tmp/source-packages
