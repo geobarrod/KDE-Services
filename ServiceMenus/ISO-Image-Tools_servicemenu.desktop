@@ -21,7 +21,7 @@ X-KDE-Submenu[zh_CN]=ISO-9660 镜像工具
 X-KDE-Submenu[x-test]=xxISO-9660 Image Toolsxx
 
 [Desktop Action Burn-Image]
-Exec=which wodim; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Burn ISO-9660 Image" --passivepopup="[Error] Please install wodim command and try again."; exit 1; else ~/.local/share/applications/iso_manager-burn-image.sh %F;fi
+Exec=which wodim; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Burn ISO-9660 Image" --passivepopup="[Error] Please install wodim command and try again."; exit 1; else ~/.local/share/applications/iso_manager-burn-image.sh %F; fi
 Icon=ks-media-optical-burn
 Name=Burn ISO-9660 Image
 Name[de]=ISO-9660 Abbild brennen
@@ -38,7 +38,7 @@ Name[zh_CN]=烧录 ISO-9660 镜像
 Name[x-test]=xxBurn ISO-9660 Imagexx
 
 [Desktop Action Insert-MD5sum]
-Exec=which implantisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Error] Please install implantisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; implantisomd5 "$file" &> /tmp/insert-integrity; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)";else kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity;fi
+Exec=which implantisomd5; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Error] Please install implantisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F; do cd ${file%/*}; implantisomd5 "$file" &> /tmp/insert-integrity; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Insert MD5sum" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/insert-integrity)"; else kdialog --icon=ks-media-optical-md5sum --title="Insert MD5sum" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/insert-integrity)"; fi; done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Insert Check Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/insert-integrity; fi
 Icon=ks-media-optical-md5sum
 Name=Insert MD5sum
 Name[de]=MD5sum anfügen
@@ -54,7 +54,7 @@ Name[zh_CN]=插入 MD5 校验和
 Name[x-test]=xxInsert MD5sumxx
 
 [Desktop Action Integrity-Check]
-Exec=which checkisomd5; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install checkisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; checkisomd5 "$file" &> /tmp/check-integrity; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";else kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)";fi;done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity;fi
+Exec=which checkisomd5; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Error] Please install checkisomd5 command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F; do cd ${file%/*}; checkisomd5 "$file" &> /tmp/check-integrity; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Integrity Check" --passivepopup="[Canceled]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)"; else kdialog --icon=ks-media-optical-integrity-check --title="Integrity Check" --passivepopup="[Finished]   ${file##*/}   $(cat /tmp/check-integrity|grep -v Press)"; fi; done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish Integrity Check" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak* /tmp/check-integrity; fi
 Icon=ks-media-optical-integrity-check
 Name=Integrity Check
 Name[de]=Integritätsscheck
@@ -70,7 +70,7 @@ Name[zh_CN]=完整性检查
 Name[x-test]=xxIntegrity Checkxx
 
 [Desktop Action MD5-Sum]
-Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5sum ISO-9660 Image" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="MD5sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which md5sum; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="MD5sum ISO-9660 Image" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="MD5sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F; do cd ${file%/*}; kdialog --icon=ks-checksum --title="MD5sum ${file##*/}" --passivepopup=$(md5sum $file); done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish MD5 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; fi
 Icon=ks-checksum
 Name=Show MD5sum ISO-9660 Image
 Name[de]=MD5sum ISO-9660 Abbild anzeigen
@@ -87,7 +87,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 MD5 校验和
 Name[x-test]=xxShow MD5sum ISO-9660 Imagexx
 
 [Desktop Action SHA1-Sum]
-Exec=which sha1sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA1sum ISO-9660 Image" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA1sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha1sum; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="SHA1sum ISO-9660 Image" --passivepopup="[Error] Please install sha1sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA1sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F; do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA1sum ${file##*/}" --passivepopup=$(sha1sum $file); done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA1 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; fi
 Icon=ks-checksum
 Name=Show SHA1sum ISO-9660 Image
 Name[de]=SHA1sum ISO-9660 Abbild anzeigen
@@ -104,7 +104,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 SHA1 校验和
 Name[x-test]=xxShow SHA1sum ISO-9660 Imagexx
 
 [Desktop Action SHA256-Sum]
-Exec=which sha256sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA256sum ISO-9660 Image" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA256sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha256sum; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="SHA256sum ISO-9660 Image" --passivepopup="[Error] Please install sha256sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA256sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F; do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA256sum ${file##*/}" --passivepopup=$(sha256sum $file); done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA256 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; fi
 Icon=ks-checksum
 Name=Show SHA256sum ISO-9660 Image
 Name[de]=SHA256sum ISO-9660 Abbild anzeigen
@@ -121,7 +121,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 SHA256 校验和
 Name[x-test]=xxShow SHA256sum ISO-9660 Imagexx
 
 [Desktop Action SHA512-Sum]
-Exec=which sha512sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="SHA512sum ISO-9660 Image" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA512sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file);done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*;fi
+Exec=which sha512sum; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="SHA512sum ISO-9660 Image" --passivepopup="[Error] Please install sha512sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="SHA512sum ISO-9660 Image" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F; do cd ${file%/*}; kdialog --icon=ks-checksum --title="SHA512sum ${file##*/}" --passivepopup=$(sha512sum $file); done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE; echo "Finish SHA512 Sum" > /tmp/speak; text2wave -F 48000 -o /tmp/speak.wav /tmp/speak; play /tmp/speak.wav; rm -fr /tmp/speak*; fi
 Icon=ks-checksum
 Name=Show SHA512sum ISO-9660 Image
 Name[de]=SHA512sum ISO-9660 Abbild anzeigen
@@ -138,7 +138,7 @@ Name[zh_CN]=查看 ISO-9660 镜像 SHA512 校验和
 Name[x-test]=xxShow SHA512sum ISO-9660 Imagexx
 
 [Desktop Action MountCD-Image]
-Exec=which fuseiso; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Mount ISO-9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else ~/.local/share/applications/iso_manager-mount-image.sh %F;fi
+Exec=which fuseiso; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Mount ISO-9660 Image" --passivepopup="[Error] Please install fuseiso command and try again."; exit 1; else ~/.local/share/applications/iso_manager-mount-image.sh %F; fi
 Icon=ks-media-optical-mount
 Name=Mount ISO-9660 Image
 Name[de]=ISO-9660 Abbild einbinden
@@ -155,7 +155,7 @@ Name[zh_CN]=挂载 ISO-9660 镜像
 Name[x-test]=xxMount ISO-9660 Imagexx
 
 [Desktop Action UnmountCD-Image]
-Exec=which fuser fusermount; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Unmount ISO-9660 Image" --passivepopup="[Error] Please install fuser and fusermount command and try again."; exit 1; else fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')" && rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=ks-media-optical-umount --title="Unmount ISO-9660 Image" --passivepopup="[Finished] $(basename %f) unmounted.";fi
+Exec=which fuser fusermount; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Unmount ISO-9660 Image" --passivepopup="[Error] Please install fuser and fusermount command and try again."; exit 1; else fuser -k %f; fusermount -u "$(ls "%f"|sed 's/.iso$//')" && rm -fr "$(ls "%f"|sed 's/.iso$//')"; kdialog --icon=ks-media-optical-umount --title="Unmount ISO-9660 Image" --passivepopup="[Finished] $(basename %f) unmounted."; fi
 Icon=ks-media-optical-umount
 Name=Unmount ISO-9660 Image
 Name[de]=ISO-9660 Abbild aushängen
@@ -172,7 +172,7 @@ Name[zh_CN]=卸载 ISO-9660 镜像
 Name[x-test]=xxUnmount ISO-9660 Imagexx
 
 [Desktop Action ISOinfo]
-Exec=which iso-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show ISO-9660 Image Info" --passivepopup="[Error] Please install iso-info command and try again."; exit 1; else for file in %F;do iso-info --no-header -l $file > /tmp/iso-info; kdialog --icon=ks-media-optical-info --title="Show ISO-9660 Image Info" --textbox /tmp/iso-info 900 600 2>/dev/null; rm -fr /tmp/iso-info;done;fi
+Exec=which iso-info; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Show ISO-9660 Image Info" --passivepopup="[Error] Please install iso-info command and try again."; exit 1; else for file in %F; do iso-info --no-header -l $file > /tmp/iso-info; kdialog --icon=ks-media-optical-info --title="Show ISO-9660 Image Info" --textbox /tmp/iso-info 900 600 2>/dev/null; rm -fr /tmp/iso-info; done; fi
 Icon=ks-media-optical-info
 Name=Show ISO-9660 Image Info
 Name[de]=ISO-9660 Abbild info anzeigen
@@ -188,7 +188,7 @@ Name[zh_CN]=表演 ISO-9660 图像信息
 Name[x-test]=xxShow ISO-9660 Image Infoxx
 
 [Desktop Action OpticalDriveInfo]
-Exec=which cd-info; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Show Optical Drive Info" --passivepopup="[Error] Please install cd-info command and try again."; exit 1; else cd-info --no-header -ql --dvd --iso9660 > /tmp/cd-info; kdialog --icon=ks-optical-drive-info --title="Show Optical Drive Info" --textbox /tmp/cd-info 400 800 2>/dev/null; rm -fr /tmp/cd-info;%F;fi
+Exec=which cd-info; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Show Optical Drive Info" --passivepopup="[Error] Please install cd-info command and try again."; exit 1; else cd-info --no-header -ql --dvd --iso9660 > /tmp/cd-info; kdialog --icon=ks-optical-drive-info --title="Show Optical Drive Info" --textbox /tmp/cd-info 400 800 2>/dev/null; rm -fr /tmp/cd-info; %F; fi
 Icon=ks-optical-drive-info
 Name=Show Optical Drive Info
 Name[de]=Optischer Antrieb info anzeigen
@@ -204,8 +204,7 @@ Name[zh_CN]=表示光学的驾驶数据
 Name[x-test]=xxShow Optical Drive Infoxx
 
 [Desktop Action Test-Boot-With-BIOS]
-Exec=which qemu-system-x86_64; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Test-Boot (Custom)" --passivepopup="[Error] Please install QEMU."; exit 1; else MEM=$(kdialog --title "Memory Setting" --inputbox "Enter the memory capacity to be allocated (MiB):" "2048"); if [ "$?" == "0" ]; then if [ -n "${MEM//[0-9]/}" ]; then kdialog --error "Numbers only!"; exit 1; fi; KVM_OPTS=""; [ -e /dev/kvm ] && KVM_OPTS="-enable-kvm"; qemu-system-x86_64 $KVM_OPTS -m $MEM -cdrom %f -boot d -cpu host; fi; fi
-
+Exec=which qemu-system-x86_64; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Test-Boot ISO-9660 (QEMU BIOS)" --passivepopup="[Error] Please install QEMU."; exit 1; else MEM=$(kdialog --title "Memory Setting" --inputbox "Enter the memory capacity to be allocated (MiB):" "2048"); if [ "$?" == "0" ]; then if [ -n "${MEM//[0-9]/}" ]; then kdialog --error "Numbers only!"; exit 1; fi; KVM_OPTS=""; [ -e /dev/kvm ] && KVM_OPTS="-enable-kvm"; qemu-system-x86_64 $KVM_OPTS -m $MEM -cdrom %f -boot d -cpu host; fi; fi
 Icon=ks-play-test-boot
 Name=Test-Boot ISO-9660 (QEMU BIOS)
 Name[ja]=ISO-9660 をテスト起動 (QEMU BIOS)
@@ -220,8 +219,7 @@ Name[uk]=Test-Boot образу ISO-9660 (QEMU BIOS)
 Name[zh_CN]=ISO-9660 测试启动 (QEMU BIOS)
 
 [Desktop Action Test-Boot-With-UEFI]
-CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "x64|ovmf" | grep -viE "ia32|sec" | sort -r | head -n 1); VARS_SRC=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_VARS*.fd" 2>/dev/null | grep -iE "x64|ovmf" | grep -viE "ia32|sec" | sort -r | head -n 1); if [ -z "$CODE" ] || [ -z "$VARS_SRC" ]; then CODE=$(kdialog --title "OVMF CODE file" --getopenfilename "/usr/share" "OVMF_CODE*.fd"); [ -z "$CODE" ] && exit 1; VARS_SRC=$(kdialog --title "OVMF VARS file" --getopenfilename "/usr/share" "OVMF_VARS*.fd"); [ -z "$VARS_SRC" ] && exit 1; fi; MEM=$(kdialog --title "Memory Setting" --inputbox "Enter memory (MiB):" "4096"); if [ $? -ne 0 ] || [ -z "$MEM" ] || [ -n "${MEM//[0-9]/}" ]; then exit 1; fi; VARS_TMP=$(mktemp /tmp/ovmf_vars.XXXXXX.fd); cp "$VARS_SRC" "$VARS_TMP"; if [ "$?" = "0" ]; then qemu-system-x86_64 -enable-kvm -m "$MEM" -cpu host -drive if=pflash,format=raw,readonly=on,file="$CODE" -drive if=pflash,format=raw,file="$VARS_TMP" -cdrom "%f" -boot d; rm -f "$VARS_TMP"; fi
-
+Exec=which qemu-system-x86_64; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Test-Boot ISO-9660 (QEMU UEFI)" --passivepopup="[Error] Please install QEMU."; exit 1; else CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "x64|ovmf" | grep -viE "ia32|sec" | sort -r | head -n 1); VARS_SRC=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_VARS*.fd" 2>/dev/null | grep -iE "x64|ovmf" | grep -viE "ia32|sec" | sort -r | head -n 1); if [ -z "$CODE" ] || [ -z "$VARS_SRC" ]; then CODE=$(kdialog --title "OVMF CODE file" --getopenfilename "/usr/share" "OVMF_CODE*.fd"); [ -z "$CODE" ] && exit 1; VARS_SRC=$(kdialog --title "OVMF VARS file" --getopenfilename "/usr/share" "OVMF_VARS*.fd"); [ -z "$VARS_SRC" ] && exit 1; fi; MEM=$(kdialog --title "Memory Setting" --inputbox "Enter memory (MiB):" "4096"); if [ $? -ne 0 ] || [ -z "$MEM" ] || [ -n "${MEM//[0-9]/}" ]; then exit 1; fi; VARS_TMP=$(mktemp /tmp/ovmf_vars.XXXXXX.fd); cp "$VARS_SRC" "$VARS_TMP"; if [ "$?" = "0" ]; then qemu-system-x86_64 -enable-kvm -m "$MEM" -cpu host -drive if=pflash,format=raw,readonly=on,file="$CODE" -drive if=pflash,format=raw,file="$VARS_TMP" -cdrom "%f" -boot d; rm -f "$VARS_TMP"; fi
 Icon=ks-play-test-boot
 Name=Test-Boot ISO-9660 (QEMU UEFI)
 Name[ja]=ISO-9660 をテスト起動 (QEMU UEFI)
@@ -236,8 +234,7 @@ Name[uk]=Test-Boot образу ISO-9660 (QEMU UEFI)
 Name[zh_CN]=ISO-9660 测试启动 (QEMU UEFI)
 
 [Desktop Action Test-Boot-With-UEFI-And-Secure-Boot]
-CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | sort -r | grep -iE "sec|ms" | head -n 1); [ -z "$CODE" ] && CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | head -n 1); VARS_SRC=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share -maxdepth 5 -name "OVMF_VARS*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | grep -v sec | head -n 1); if [ -z "$CODE" ] || [ -z "$VARS_SRC" ]; then CODE=$(kdialog --title "OVMF CODE file" --getopenfilename "/usr/share" "OVMF_CODE*.fd"); [ -z "$CODE" ] && exit 1; VARS_SRC=$(kdialog --title "OVMF VARS file" --getopenfilename "/usr/share" "OVMF_VARS*.fd"); [ -z "$VARS_SRC" ] && exit 1; fi; MEM=$(kdialog --title "Memory Setting" --inputbox "Enter memory (MiB):" "4096"); if [ $? -ne 0 ] || [ -z "$MEM" ] || [ -n "${MEM//[0-9]/}" ]; then exit 1; fi; VARS_TMP=$(mktemp /tmp/ovmf_vars.XXXXXX.fd); cp "$VARS_SRC" "$VARS_TMP"; SEC_OPTS=""; echo "$CODE" | grep -iqE "sec|ms" && SEC_OPTS="-global driver=cfi.pflash01,property=secure,value=on"; qemu-system-x86_64 -enable-kvm -m "$MEM" -cpu host $SEC_OPTS -drive if=pflash,format=raw,readonly=on,file="$CODE" -drive if=pflash,format=raw,file="$VARS_TMP" -cdrom "%f" -boot d; rm -f "$VARS_TMP"
-
+Exec=which qemu-system-x86_64; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Test-Boot ISO-9660 (QEMU UEFI, Secure boot)" --passivepopup="[Error] Please install QEMU."; exit 1; else CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | sort -r | grep -iE "sec|ms" | head -n 1); [ -z "$CODE" ] && CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | head -n 1); VARS_SRC=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share -maxdepth 5 -name "OVMF_VARS*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | grep -v sec | head -n 1); if [ -z "$CODE" ] || [ -z "$VARS_SRC" ]; then CODE=$(kdialog --title "OVMF CODE file" --getopenfilename "/usr/share" "OVMF_CODE*.fd"); [ -z "$CODE" ] && exit 1; VARS_SRC=$(kdialog --title "OVMF VARS file" --getopenfilename "/usr/share" "OVMF_VARS*.fd"); [ -z "$VARS_SRC" ] && exit 1; fi; MEM=$(kdialog --title "Memory Setting" --inputbox "Enter memory (MiB):" "4096"); if [ $? -ne 0 ] || [ -z "$MEM" ] || [ -n "${MEM//[0-9]/}" ]; then exit 1; fi; VARS_TMP=$(mktemp /tmp/ovmf_vars.XXXXXX.fd); cp "$VARS_SRC" "$VARS_TMP"; SEC_OPTS=""; echo "$CODE" | grep -iqE "sec|ms" && SEC_OPTS="-global driver=cfi.pflash01,property=secure,value=on"; qemu-system-x86_64 -enable-kvm -m "$MEM" -cpu host $SEC_OPTS -drive if=pflash,format=raw,readonly=on,file="$CODE" -drive if=pflash,format=raw,file="$VARS_TMP" -cdrom "%f" -boot d; rm -f "$VARS_TMP"; fi
 Icon=ks-play-test-boot
 Name=Test-Boot ISO-9660 (QEMU UEFI, Secure boot)
 Name[ja]=ISO-9660 をテスト起動 (QEMU UEFI, Secure boot)

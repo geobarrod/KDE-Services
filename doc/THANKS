@@ -14,4 +14,5 @@ Contributors:
 - Gabriel Fontenelle <contato@gabrielfontenelle.com> (Fix a problem with unmounting image
 						      removing directory not created by fuseiso).
 - Mateus Cruz <mateushenriquedacc@gmail.com> (Translations to Brazilian Portuguese and Portuguese).
-- ookatuk (Translations to Japanese language and fix of the translation display of the "Android Tools" submenu).
+- ookatuk (Translations to Japanese language; fix of the translation display of the "Android Tools" submenu
+           and add boot testing actions for UEFI/Secure Boot and legacy BIOS to "ISO-9660 Image Tools" submenu).
