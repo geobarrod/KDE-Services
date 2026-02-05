@@ -254,6 +254,7 @@ Required dependencies:
 - diffutils
 - dmidecode
 - dvdauthor
+- edk2-*
 - festival
 - ffmpeg
 - file
@@ -293,6 +294,7 @@ Required dependencies:
 - procps
 - psmisc
 - pv
+- qemu
 - recode
 - samba-client
 - sed
@@ -333,11 +335,11 @@ Steps for install from Discover application explorer:
 
 Steps for install from source code in the terminal:
 ===================================================
-1- servicemenuinstaller install kde-services-3.0.7.tar.gz
+1- servicemenuinstaller install kde-services-3.0.8.tar.gz
 
 Steps for uninstall from source code in the terminal:
 =====================================================
-1- servicemenuinstaller uninstall kde-services-3.0.7.tar.gz
+1- servicemenuinstaller uninstall kde-services-3.0.8.tar.gz
 
 Donate 🎔
 =========

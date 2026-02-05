@@ -1,8 +1,8 @@
-* Wed Feb 05 2026 Geovani B. R. <igeo.cu@gmail.com> latest (current development)
+* Wed Feb 05 2026 Geovani B. R. <igeo.cu@gmail.com> 3.0.8
 - Fixed Japanese translations.
 - Fix of the translation display of the "Android Tools" submenu.
-- "ISO-9660 Image Tools": Add features to test a ISO LiveOS with QEMU (UEFI/Secure Boot and legacy BIOS support).
-- "YouTube Tools": Improved the "Video Downloader" service menu.
+- "ISO-9660 Image Tools": Add servicemenus for test ISO Live OS with QEMU.
+- "YouTube Tools": Improved the "Video Downloader" servicemenu.
 
 🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
     The information can be found following:
@@ -11,21 +11,21 @@
 
 * Tue Sep 02 2025 Geovani B. R. <igeo.cu@gmail.com> latest (current development)
 - The license is changed to BSD 3-Clause.
-- "YouTube Tools": Added new services menu "Video List Downloader".
+- "YouTube Tools": Added new servicemenu "Video List Downloader".
 - Fixed Portuguese translations.
 
 * Fri Jan 31 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.7
-- Fixed from "Network Tools" => "HTTP Server" service menu.
+- Fixed from "Network Tools" => "HTTP Server" servicemenu.
 - Added GPL license notice to the top of all shell script files.
-- Fixed the path to the "kdesu" command in some services menu that require superuser privileges.
+- Fixed the path to the "kdesu" command in some servicemenus that require superuser privileges.
 
 * Wed Jan 29 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.6
-- Fixed from "Network Tools" => "Listening Sockets" service menu.
-- Fixed "Get Another Resolutions" option from "YouTube Tools" => "Video Downloader" service menu.
+- Fixed from "Network Tools" => "Listening Sockets" servicemenu.
+- Fixed "Get Another Resolutions" option from "YouTube Tools" => "Video Downloader" servicemenu.
 - Now when the execution of some menu services is cancelled, a notification is generated.
 
 * Tue Jan 28 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.5
-- Fixed mime types of some service menus not being displayed in KDE Plasma 6.
+- Fixed mime types of some servicemenus not being displayed in KDE Plasma 6.
 
 * Sat Jan 25 2025 Geovani B. R. <igeo.cu@gmail.com> 3.0.4
 - Fixed execution permission of services from right click context menu.
@@ -68,13 +68,13 @@
 - Happy New Year!.
 
 * Fri May 19 2017 Geovani B. R. <igeo.cu@gmail.com> 3.0.1
-- "CheckSum Tools": Fixed typo for "SHA1 (Good Strong)" service menu.
-- "Graphic Tools": Fixed, more coherent meaning for "scalable (icon)" service menu.
+- "CheckSum Tools": Fixed typo for "SHA1 (Good Strong)" servicemenu.
+- "Graphic Tools": Fixed, more coherent meaning for "scalable (icon)" servicemenu.
 - "YouTube Tools": Enhancement for "Video Downloader".
 
 * Sat Apr 01 2017 Geovani B. R. <igeo.cu@gmail.com> 3.0.0
 - Fixed Chinese translation.
-- Added new services menu:
+- Added new servicemenus:
   "Show ISO-9660 Image Info" and "Show Optical Drive Info"
   to "ISO-9660 Image Tools" submenu.
 - Bug in kdialog (starting from the version 16.12) --progressbar option 
@@ -97,13 +97,13 @@
 - "Convert Video Files": Enhancement libx265 [H.265 or HEVC (High Efficiency Video Coding)] encoder option.
 - "MKV Extract Subtitle": Enhancement.
 - "[Extract|Convert] Audio Track": Enhancement.
-- Added new services menu: "Volume Normalize of MP3 Files" to "Multimedia Tools" submenu.
-- Added new services menu: "Add Subtitle to MP4 File" to "Multimedia Tools" submenu.
+- Added new servicemenu: "Volume Normalize of MP3 Files" to "Multimedia Tools" submenu.
+- Added new servicemenu: "Add Subtitle to MP4 File" to "Multimedia Tools" submenu.
 - Makefile: Updated.
 - Happy New Year!.
 
 * Sun May 22 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-5
-- Added new services menu:
+- Added new servicemenus:
   "Encrypt Directory",
   "Mount Encrypted Directory" and
   "Unmount Encrypted Directory"
@@ -120,7 +120,7 @@
 
 * Tue Apr 05 2016 Geovani B. R. <igeo.cu@gmail.com> 2.1-3
 - "[Extract|Convert] Audio Track": Enhancement. Added MP3(432Hz) and FLAC(432Hz) options.
-- Added new services menu:
+- Added new servicemenus:
   "Rotate Video Files",
   "Edit Time from Media Files",
   "Attach Cover to MP3 Files",
@@ -152,7 +152,7 @@
 - Dedicated to Mother's Day.
 
 * Tue Apr 21 2015  Geovani B. R. <igeo.cu@gmail.com> 2.0-7
-- Enhancement: Added batch processing of files for several service menu on Dolphin's right click.
+- Enhancement: Added batch processing of files for several servicemenu on Dolphin's right click.
 - Makefile: Updated.
 
 * Wed Jan 21 2015  Geovani B. R. <igeo.cu@gmail.com> 2.0-6
@@ -163,7 +163,7 @@
 - "YouTube Tools": Bugfix.
 - "PDF Tools" warning: Package "libgcj" removed from the repositories of Fedora 21 distro,
   a required dependence by the "pdftk" (which also was eliminated) package.
-  Not will view the following services menu:
+  Not will view the following servicemenus:
 	- "Apply DRM + Encrypt"
 	- "Apply Owner Password (DRM)"
 	- "Apply User Password (Encrypt)"
@@ -181,7 +181,7 @@
 - "Compressed File Integrity Check": Improved.
 
 * Fri Oct 31 2014  Geovani B. R. <igeo.cu@gmail.com> 2.0-2
-- Added new service menu "Compressed File Integrity Check" on Dolphin's right click menu.
+- Added new servicemenu "Compressed File Integrity Check" on Dolphin's right click menu.
 - Makefile: Updated.
 
 * Tue Oct 22 2014  Geovani B. R. <igeo.cu@gmail.com> 2.0-1
@@ -198,10 +198,10 @@
 - Makefile: Updated.
 
 * Wed Aug 27 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-8
-- Added new service menu "DiskCloner" to "Multimedia Tools" submenu.
+- Added new servicemenu "DiskCloner" to "Multimedia Tools" submenu.
 - "Convert Video Files": Added support for WebM video format and 360p video resolution.
 - "Record My Desktop": Bugfix.
-- Enhancement services menu languages translation ES, RU and UK.
+- Enhancement servicemenus languages translation ES, RU and UK.
 - Makefile: Updated.
 
 * Mon Jul 21 2014  Geovani B. R. <igeo.cu@gmail.com> 1.9-7
@@ -234,7 +234,7 @@
 * Mon Dec 16 2013  Geovani B. R. <igeo.cu@gmail.com> 1.9-3
 - Bugfix some dialogs box screen position geometry.
 - "Search Tools": Bugfix Cancel button.
-- Added new service menu "System Monitor" to "System Tools" submenu.
+- Added new servicemenu "System Monitor" to "System Tools" submenu.
 - Makefile: Updated.
 - and Happy New Year!.
 
@@ -262,11 +262,11 @@
   > Enable autostart Dropbox service.
 
 * Mon Aug 05 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-8
-- Added new service menu "Modified Files Here" to "Search Tools" submenu.
+- Added new servicemenu "Modified Files Here" to "Search Tools" submenu.
 - Makefile: Updated.
 
 * Sat Aug 03 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-7
-- Added new service menu "Search Here" to "Search Tools" submenu.
+- Added new servicemenu "Search Here" to "Search Tools" submenu.
 - Makefile: Updated.
 
 * Sun Jul 14 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-6
@@ -276,12 +276,12 @@
 
 * Mon Jun 24 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-5
 - Trying to change the iconography.
-- Added new service menu "Xorg Configure" to "System Tools" submenu.
+- Added new servicemenu "Xorg Configure" to "System Tools" submenu.
 - "The Converter": Added convert to PDF.
 - Makefile: Enhancement.
 
 * Wed Apr 17 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-4
-- Added new services menu "Change Timestamp To [File|Directory]" and "Show [File|Directory] Status" on "Actions" submenu
+- Added new servicemenus "Change Timestamp To [File|Directory]" and "Show [File|Directory] Status" on "Actions" submenu
   for Dolphin's right click menu.
 - Makefile: Enhancement.
 
@@ -290,8 +290,8 @@
 
 * Tue Mar 19 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-2
 - Renamed "Image Resizer" submenu by "Graphic Tools" on Dolphin's right click menu.
-- Added new service menu "The Converter" to "Graphic Tools" submenu on Dolphin's right click menu.
-- Added new "Graphic Tools" submenu on "KDE-Services" submenu with "The Converter" and "The Sizer" services menu.
+- Added new servicemenu "The Converter" to "Graphic Tools" submenu on Dolphin's right click menu.
+- Added new "Graphic Tools" submenu on "KDE-Services" submenu with "The Converter" and "The Sizer" servicemenus.
 - Makefile: Enhancement.
 
 * Thu Mar 07 2013  Geovani B. R. <igeo.cu@gmail.com> 1.8-1
@@ -315,7 +315,7 @@
 
 * Sun Jan 13 2013  Geovani B. R. <igeo.cu@gmail.com> 1.7-5
 - "Convert Videos From Here" and "[Extract|Convert] Audio Track": Enhancement, If will fail, a log error is generated in place.
-- Some services menu moved from "Actions" submenu to more appropriate submenu.
+- Some servicemenus moved from "Actions" submenu to more appropriate submenu.
 - Renamed "GPG Tools" by "Security Tools".
 - "SSH Tools": Improved.
 - Added "About KDE-Services" on "KDE-Services" submenu of "Application Launcher Menu".
@@ -356,7 +356,7 @@
 - "Rebuild RPM Package": Enhancement, now will not install unnecessary *.noarch.rpm packages.
 - "PDF Tools": GUI Enhancement.
 - "Image Resizer": Bugfix, the image file source overwrited after converting it.
-- Added new service menu  "The Sizer" to "Actions" submenu on Dolphin's right click menu.
+- Added new servicemenu  "The Sizer" to "Actions" submenu on Dolphin's right click menu.
 
 * Sun Dec 02 2012  Geovani B. R. <igeo.cu@gmail.com> 1.6-2
 - "HTTP Server", "Build Custom Kernel" and "Rebuild RPM Package": Enhancement.
@@ -366,7 +366,7 @@
 - "Image Resizer": Enhancement.
 
 * Sun Nov 25 2012  Geovani B. R. <igeo.cu@gmail.com> 1.5-9
-- Added new service menu "HTTP Server" to "Actions" submenu on Dolphin's right click menu.
+- Added new servicemenu "HTTP Server" to "Actions" submenu on Dolphin's right click menu.
 - Added new submenu "Image Resizer" on Dolphin's right click menu.
 
 * Sat Nov 24 2012  Geovani B. R. <igeo.cu@gmail.com> 1.5-8
@@ -391,8 +391,8 @@
 - YouTube Tools "Video Downloader": Enhancement.
 
 * Wed Nov 14 2012  Geovani B. R. <igeo.cu@gmail.com> 1.5-2
-- Added new service menu "Add Timestamp Prefix To [File|Dir]name" to "Actions" submenu on Dolphin's right click menu.
-- Added new service menu "Paranoid Shredder"  to "Actions" submenu on Dolphin's right click menu. 1th step: overwrite the specified
+- Added new servicemenu "Add Timestamp Prefix To [File|Dir]name" to "Actions" submenu on Dolphin's right click menu.
+- Added new servicemenu "Paranoid Shredder"  to "Actions" submenu on Dolphin's right click menu. 1th step: overwrite the specified
   file(s) repeatedly with /dev/urandom, 2th step: rename file(s) and 3th step: delete file(s). This procedure avoids any
   attempt of recover the data.
   If filename contain whitespace will be replaced by underscore "_" character in place, please reload "Paranoid Shredder".
@@ -407,29 +407,29 @@
 - YouTube Tools "Video Downloader": Enhancement.
 
 * Wed Oct 31 2012  Geovani B. R. <igeo.cu@gmail.com> 1.4-7
-- Added new service menu "Secure Send To Mailx" to "Actions" submenu on Dolphin's right click menu.
+- Added new servicemenu "Secure Send To Mailx" to "Actions" submenu on Dolphin's right click menu.
   Secure send file or directory to Mailx as email attachment. (Need SMTP service running in LocalHost)
 
 * Mon Oct 29 2012  Geovani B. R. <igeo.cu@gmail.com> 1.4-6
-- Added new service menu "Code Collector" to "YouTube Tools" submenu on "KDE-Services" submenu
+- Added new servicemenu "Code Collector" to "YouTube Tools" submenu on "KDE-Services" submenu
 - and Dolphin's right click menu.
 
 * Tue Oct 16 2012  Geovani B. R. <igeo.cu@gmail.com> 1.4-5
 - Enhancement "Konsole" submenu.
-- Added new submenu "GPG Tools" with services menu "Encrypt" and "Decrypt" on Dolphin's right click menu.
+- Added new submenu "GPG Tools" with servicemenus "Encrypt" and "Decrypt" on Dolphin's right click menu.
 - Updated "Convert Video From Here" services.
 
 * Thu Oct 11 2012  Geovani B. R. <igeo.cu@gmail.com> 1.4-4
 - Bugfix for "Build Custom Kernel" and "Rebuild RPM Package"
-- Added new service menu "System Information" to "System Tools" submenu on "KDE-Services" submenu
+- Added new servicemenu "System Information" to "System Tools" submenu on "KDE-Services" submenu
   and Dolphin's right click menu.
 
 * Fri Sep 28 2012  Geovani B. R. <igeo.cu@gmail.com> 1.4-3
-- Added new services menu "Convert Video From Here" and "[Extract|Convert] Audio Track" to "Multimedia Tools" submenu
+- Added new servicemenus "Convert Video From Here" and "[Extract|Convert] Audio Track" to "Multimedia Tools" submenu
   on "KDE-Services" submenu.
 
 * Sun Jul 29 2012  Geovani B. R. <igeo.cu@gmail.com> 1.4-2
-- Added new submenu "Multimedia Tools" with service menu "Record My Desktop" on "KDE-Services" submenu
+- Added new submenu "Multimedia Tools" with servicemenu "Record My Desktop" on "KDE-Services" submenu
   and Dolphin's right click menu.
 
 * Mon Jul 9 2012  Geovani B. R. <igeo.cu@gmail.com> 1.4-1
@@ -439,11 +439,11 @@
 - Reorganization for all services toward "KDE-Services" submenu on "Application Launcher Menu"
 
 * Sun Jun 3 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-8
-- Added new services menu "Check Integrity" and "Insert MD5sum" to "ISO-9660 Image Tools" submenu.
+- Added new servicemenus "Check Integrity" and "Insert MD5sum" to "ISO-9660 Image Tools" submenu.
 - "Multiplex Subtitle": Enhancement.
 
 * Sun May 20 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-7
-- Added new submenu "DVD Tools" with service menu "DVD Assembler" on Dolphin's right click menu. Now you can assemble
+- Added new submenu "DVD Tools" with servicemenu "DVD Assembler" on Dolphin's right click menu. Now you can assemble
   multiple mpeg program streams into a suitable DVD filesystem and generate the correspondent DVD ISO-9660 image.
 
 * Sat May 19 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-6
@@ -453,18 +453,18 @@
 - "YouTube-Tools: Video Downloader": Enhancement.
 
 * Sat May 5 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-4
-- Added new service menu "Multiplex Subtitle" on submenu "Actions" for Dolphin's right click menu. Enabled only
+- Added new servicemenu "Multiplex Subtitle" on submenu "Actions" for Dolphin's right click menu. Enabled only
   for MPEG-2 video files.
 - "Convert Videos From Here": Bugfix, disabled optimizations for multicore CPUs because some videos flicker.
 - "Convert Videos From Here": Enhancement.
 
 * Fri May 4 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-3
 - "MKV Extract Subtitle": Bugfix
-- Added new submenu "YouTube Tools" on Dolphin's right click menu and new service menu "YouTube-Tools: Video Downloader"
+- Added new submenu "YouTube Tools" on Dolphin's right click menu and new servicemenu "YouTube-Tools: Video Downloader"
   on submenu "Internet" of "Application Launcher Menu".
 
 * Thu May 3 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-2
-- Added new service menu "MKV Extract Subtitle" on submenu "Actions" for Dolphin's right click menu. Enabled only
+- Added new servicemenu "MKV Extract Subtitle" on submenu "Actions" for Dolphin's right click menu. Enabled only
   for MKV video files.
 
 * Fri Apr 27 2012  Geovani B. R. <igeo.cu@gmail.com> 1.3-1
@@ -472,7 +472,7 @@
 
 * Mon Apr 16 2012  Geovani B. R. <igeo.cu@gmail.com> 1.2-9
 - "SSH-Tools: Mountpoint To Remote Directory": Enhancement.
-- "[Backup|Restore] Tools: Standards": Enhancement. Added service menu on submenu Utilities
+- "[Backup|Restore] Tools: Standards": Enhancement. Added servicemenu on submenu Utilities
   of Application Launcher Menu.
 
 * Thu Mar 29 2012  Geovani B. R. <igeo.cu@gmail.com> 1.2-8
@@ -493,16 +493,16 @@
 - "SaMBa Shares Mounter": Enhancement.
 
 * Thu Mar 8 2012  Geovani B. R. <igeo.cu@gmail.com> 1.2-2
-- Added new Dolphin's right click menu "SaMBa Tools" submenu and service menu "SaMBa Shares Mounter": Now can mount and unmount
+- Added new Dolphin's right click menu "SaMBa Tools" submenu and servicemenu "SaMBa Shares Mounter": Now can mount and unmount
   samba shares on user home.
-- Added "SaMBa Shares Mounter" service menu to "System" submenu on Application Launcher Menu.
+- Added "SaMBa Shares Mounter" servicemenu to "System" submenu on Application Launcher Menu.
 - Dedicated to Woman's International Day.
 
 * Fri Mar 2 2012  Geovani B. R. <igeo.cu@gmail.com> 1.1-9
 - "Check Message Digest": Enhancement.
 
 * Fri Mar 2 2012  Geovani B. R. <igeo.cu@gmail.com> 1.1-8
-- Added new Dolphin's right click service menu to "Actions" submenu: "Check Message Digest", now can check md5, sha1, sha256
+- Added new Dolphin's right click servicemenu to "Actions" submenu: "Check Message Digest", now can check md5, sha1, sha256
   and sha512 message digest read sums from the checksum file (support: *.md5, *.sha1, *.sha256 and *.sha512)
   and check them.
 
@@ -620,14 +620,14 @@
   Now can choose destination folder for converted files.
 
 * Fri Dec 30 2011 Geovani B. R. <igeo.cu@gmail.com> 0.8-6
-- Added new Dolphin's right click service menu to "Actions" submenu: "[File|Dir]name Whitespace Replace".
+- Added new Dolphin's right click servicemenu to "Actions" submenu: "[File|Dir]name Whitespace Replace".
   Allow replace all [file|dir]name whitespace by underscore "_" character in place.
   If dirname or dirpath contain whitespace will be replaced until 10 levels up parent
   directory. After replaced, reload the new path on file manager "Dolphin".
 
 * Thu Dec 29 2011 Geovani B. R. <igeo.cu@gmail.com> 0.8-5
-- Added new Dolphin's right click services menu to "Actions" submenu: "[Extract|Convert] Audio Track"
-  and "Convert Videos From Here". Both services menu replace all submenus for the conversion
+- Added new Dolphin's right click servicemenus to "Actions" submenu: "[Extract|Convert] Audio Track"
+  and "Convert Videos From Here". Both servicemenus replace all submenus for the conversion
   and extraction of audio|video tracks.
  
 * Mon Dec 26 2011 Geovani B. R. <igeo.cu@gmail.com> 0.8-4
@@ -648,8 +648,8 @@
 
 * Fri Dec 16 2011 Geovani B. R. <igeo.cu@gmail.com> 0.7-9
 - Added new Dolphin's right click menu "Network Tools" submenu, include: Connect Sentry, Listening Sockets.
-- Added "Network Tools" services menu submenu to "Internet" submenu on Application Launcher Menu.
-- Added "Rebuild RPM Package" service menu to submenu "System" to submenu on Application Launcher Menu.
+- Added "Network Tools" submenu to "Internet" submenu on Application Launcher Menu.
+- Added "Rebuild RPM Package" servicemenu to submenu "System" to submenu on Application Launcher Menu.
 
 * Wed Dec 14 2011 Geovani B. R. <igeo.cu@gmail.com> 0.7-8
 - Added audio notification to "System Tools" => "Rebuild RPM Package".
@@ -672,7 +672,7 @@
 - Added enhancement to "Build Custom Kernel", "Check Kernel Update" and "Rebuild RPM Package"
 
 * Fri Dec 09 2011 Geovani B. R. <igeo.cu@gmail.com> 0.7-3
-- Added "Rebuild RPM Package" service menu to Dolphin's right click menu "System Tools" submenu.
+- Added "Rebuild RPM Package" servicemenu to Dolphin's right click menu "System Tools" submenu.
 
 * Thu Dec 08 2011 Geovani B. R. <igeo.cu@gmail.com> 0.7-2
 - Added Dolphin's right click menu "System Tools" submenu to "System" submenu on Application Launcher Menu.

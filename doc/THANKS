@@ -1,10 +1,10 @@
 Contributors:
 =============
-- Sylvain Vidal <garion@mailoo.org> (Author of service menu PDFktools).
+- Sylvain Vidal <garion@mailoo.org> (Author of servicemenu PDFktools).
 - David Baum <david.baum@naraesk.eu> (Service menu PDFktools bugfixer and author of the good idea
                                       of ​​integrating PDFktools on "PDF Tools").
 - Victor Guardiola <victor.guardiola@gmail.com> (Improved source code for "Mount ISO Image"
-                                                 and "Umount ISO Image" services menu;
+                                                 and "Umount ISO Image" servicemenus;
                                                  fixed the problem of [dir|file]name with whitespaces).
 - Vasyl V. Vercynskyj <fuckel@ukr.net> (Translations to Russian and Ukrainian languages).
 - Pawan Yadav <pawanyadav@gmail.com> (Research for KF5 support).
@@ -15,4 +15,4 @@ Contributors:
 						      removing directory not created by fuseiso).
 - Mateus Cruz <mateushenriquedacc@gmail.com> (Translations to Brazilian Portuguese and Portuguese).
 - ookatuk (Translations to Japanese language; fix of the translation display of the "Android Tools" submenu
-           and add boot testing actions for UEFI/Secure Boot and legacy BIOS to "ISO-9660 Image Tools" submenu).
+           and add to "ISO-9660 Image Tools" submenu servicemenus for test ISO Live OS with QEMU).

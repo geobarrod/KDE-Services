@@ -104,6 +104,9 @@ Enables the following functionalities on the Dolphin's (File Manager) right clic
 	* **Burn ISO-9660 Image**
 	* **Show ISO-9660 Image Info**
 	* **Show Optical Drive Info**
+	* **Test-Boot ISO-9660 (QEMU BIOS)**
+	* **Test-Boot ISO-9660 (QEMU UEFI)**
+	* **Test-Boot ISO-9660 (QEMU UEFI, Secure boot)**
 
 - Submenu **MEGA Tools** (it is shown when right-clicked any file/dir).
 	* **Register New Account**
@@ -252,6 +255,7 @@ Requirements:
 - diffutils
 - dmidecode
 - dvdauthor
+- edk2-*
 - festival
 - ffmpeg
 - file
@@ -291,6 +295,7 @@ Requirements:
 - procps
 - psmisc
 - pv
+- qemu
 - recode
 - samba-client
 - sed
@@ -313,18 +318,19 @@ Requirements:
 Contributors:
 -------------
 
-- Sylvain Vidal (Author of service menu PDFktools).
+- Sylvain Vidal (Author of servicemenu PDFktools).
 - David Baum (Service menu PDFktools bugfixer and author of the good idea
 				of integrating PDFktools on **PDF Tools**).
 - Victor Guardiola (Improved source code for **Mount ISO Image** and **Umount ISO Image**
-		    services menu; fixed the problem of [dir|file]name with whitespace).
+		    servicemenus; fixed the problem of [dir|file]name with whitespace).
 - Vasyl V. Vercynskyj (Translations to Russian and Ukrainian languages).
 - Pawan Yadav (Research for KF5 support).
 - Bruce Zhang (Translations to Chinese language).
 - Daniele Scasciafratte (Translations to Italian language).
 - Manuel Tancoigne (Translations to French language).
 - Mateus Cruz (Translations to Brazilian Portuguese and Portuguese).
-- ookatuk (Translations to Japanese language and fix of the translation display of the **Android Tools** submenu).
+- ookatuk (Translations to Japanese language, fix of the translation display of the **Android Tools** submenu
+           and add to **ISO-9660 Image Tools** submenu servicemenus for test ISO Live OS with QEMU).
 
 Steps for install from Dolphin file manager (recommended):
 ----------------------------------------------------------
@@ -350,12 +356,12 @@ Steps for install from Discover application explorer:
 Steps for install from source code in the terminal:
 ---------------------------------------------------
 
-1. servicemenuinstaller install kde-services-3.0.7.tar.gz
+1. servicemenuinstaller install kde-services-3.0.8.tar.gz
 
 Steps for uninstall from source code in the terminal:
 -----------------------------------------------------
 
-1. servicemenuinstaller uninstall kde-services-3.0.7.tar.gz
+1. servicemenuinstaller uninstall kde-services-3.0.8.tar.gz
 
 Screenshot
 ----------
