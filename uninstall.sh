@@ -289,6 +289,7 @@ rm -f ${PREFIXSVGicons}/ks-add-subs.svgz \
 		${PREFIXSVGicons}/ks-optical-drive-info.svgz \
 		${PREFIXSVGicons}/ks-owner.svgz \
 		${PREFIXSVGicons}/ks-pdf.svgz \
+		${PREFIXSVGicons}/ks-play-test-boot.svgz \
 		${PREFIXSVGicons}/ks-rebuild-rpm.svgz \
 		${PREFIXSVGicons}/ks-resize-image.svgz \
 		${PREFIXSVGicons}/ks-search-database-update.svgz \
@@ -315,8 +316,7 @@ rm -f ${PREFIXSVGicons}/ks-add-subs.svgz \
 		${PREFIXSVGicons}/ks-whitespace-replace.svgz \
 		${PREFIXSVGicons}/ks-xorg.svgz \
 		${PREFIXSVGicons}/ks-youtube-download-video.svgz \
-		${PREFIXSVGicons}/ks-youtube-video-code-collector.svgz \
-		${PREFIXSVGicons}/ks-play-test-boot.svgz
+		${PREFIXSVGicons}/ks-youtube-video-code-collector.svgz
 
 rm -f ${PREFIXmime}/kde-services.xml \
 		~/.local/share/mime/packages/kde-services.xml
