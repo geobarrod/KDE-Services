@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2012-2025.
+# KDE-Services ⚙ 2012-2026.
 #
 # BSD 3-Clause License
 #
-# Copyright (c) 2025, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.
+# Copyright (c) 2026, Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -189,6 +189,9 @@ msg_description_block=$(cat << 'EOF_DESC'
     - "Burn ISO-9660 Image"
     - "Show ISO-9660 Image Info"
     - "Show Optical Drive Info"
+    - "Test-Boot ISO-9660 (QEMU BIOS)"
+    - "Test-Boot ISO-9660 (QEMU UEFI)"
+    - "Test-Boot ISO-9660 (QEMU UEFI, Secure boot)"
 
     Submenu "MEGA Tools" (it is shown when right-clicked any file/dir).
     - "Register New Account"
@@ -433,6 +436,9 @@ Submenú "ISO-9660 Image Tools" (ISO-9660 镜像工具) (仅在 ISO-9660 镜像�
 - "刻录 ISO-9660 镜像"
 - "显示 ISO-9660 镜像信息"
 - "显示光驱信息"
+- "ISO-9660 测试启动 (QEMU BIOS)"
+- "ISO-9660 测试启动 (QEMU UEFI)"
+- "ISO-9660 测试启动 (QEMU UEFI, Secure boot)"
 
 Submenú "MEGA Tools" (MEGA 工具) (在任何文件/目录上右键单击时显示).
 - "注册新账户"
@@ -665,6 +671,9 @@ Sous-menu "Outils d'Image ISO-9660" (affiché uniquement lors du clic droit sur 
 - "Graver l'Image ISO-9660"
 - "Afficher les Infos de l'Image ISO-9660"
 - "Afficher les Infos du Lecteur Optique"
+- "Test-Boot de l'image ISO-9660 (QEMU BIOS)"
+- "Test-Boot de l'image ISO-9660 (QEMU UEFI)"
+- "Test-Boot de l'image ISO-9660 (QEMU UEFI, Secure boot)"
 
 Sous-menu "Outils MEGA" (affiché lors du clic droit sur n'importe quel fichier/répertoire).
 - "Enregistrer un Nouveau Compte"
@@ -899,6 +908,9 @@ Untermenü "ISO-9660 Image Tools" (ISO-9660-Image-Werkzeuge) (wird nur beim Rech
 - "ISO-9660-Image brennen"
 - "ISO-9660-Image-Info anzeigen"
 - "Info zum optischen Laufwerk anzeigen"
+- "ISO-9660 Test-Boot (QEMU BIOS)"
+- "ISO-9660 Test-Boot (QEMU UEFI)"
+- "ISO-9660 Test-Boot (QEMU UEFI, Secure boot)"
 
 Untermenü "MEGA Tools" (MEGA-Werkzeuge) (wird beim Rechtsklick auf eine beliebige Datei/ein beliebiges Verzeichnis angezeigt).
 - "Neues Konto registrieren"
@@ -1133,6 +1145,9 @@ Sottomenu "Strumenti Immagine ISO-9660" (mostrato solo al clic destro su file im
 - "Masterizza Immagine ISO-9660"
 - "Mostra Info Immagine ISO-9660"
 - "Mostra Info Unità Ottica"
+- "Test-Boot di immagine ISO-9660 (QEMU BIOS)"
+- "Test-Boot di immagine ISO-9660 (QEMU UEFI)"
+- "Test-Boot di immagine ISO-9660 (QEMU UEFI, Secure boot)"
 
 Sottomenu "Strumenti MEGA" (mostrato al clic destro su qualsiasi file/directory).
 - "Registra Nuovo Account"
@@ -1367,6 +1382,9 @@ EOF_DESC_IT
 - "ISO-9660 イメージを書き込み"
 - "ISO-9660 イメージ情報を表示"
 - "光ディスクドライブ情報を表示"
+- "ISO-9660 をテスト起動 (QEMU BIOS)"
+- "ISO-9660 をテスト起動 (QEMU UEFI)"
+- "ISO-9660 をテスト起動 (QEMU UEFI, Secure boot)"
 
 サブメニュー "MEGA ツール" (任意のファイル/ディレクトリを右クリックしたときに表示されます)。
 - "新しいアカウントを登録"
@@ -1601,6 +1619,9 @@ EOF_DESC_JA
 - "ISO-9660 이미지 굽기"
 - "ISO-9660 이미지 정보 표시"
 - "광학 드라이브 정보 표시"
+- ""
+- ""
+- ""
 
 서브메뉴 "MEGA 도구" (모든 파일/디렉토리를 마우스 오른쪽 버튼으로 클릭할 때 표시됨).
 - "새 계정 등록"
@@ -1835,6 +1856,9 @@ Submenu "Ferramentas de Imagem ISO-9660" (mostrado apenas ao clicar com o botão
 - "Gravar Imagem ISO-9660"
 - "Mostrar Informações da Imagem ISO-9660"
 - "Mostrar Informações da Unidade Óptica"
+- ""
+- ""
+- ""
 
 Submenu "Ferramentas MEGA" (mostrado ao clicar com o botão direito em qualquer arquivo/diretório).
 - "Registrar Nova Conta"
@@ -2069,6 +2093,9 @@ EOF_DESC_PT
 - "Записать образ ISO-9660"
 - "Показать информацию об образе ISO-9660"
 - "Показать информацию об оптическом приводе"
+- ""
+- ""
+- ""
 
 Подменю "Инструменты MEGA" (отображается при нажатии правой кнопки мыши на любом файле/каталоге).
 - "Зарегистрировать новую учетную запись"
@@ -2303,6 +2330,9 @@ EOF_DESC_RU
         - "Grabar Imagen ISO-9660"
         - "Mostrar Información de Imagen ISO-9660"
         - "Mostrar Información de Unidad Óptica"
+        - ""
+        - ""
+        - ""
 
         Submenú "Herramientas MEGA" (se muestra al hacer clic derecho en cualquier archivo/directorio).
         - "Registrar Nueva Cuenta"
@@ -2537,6 +2567,9 @@ EOF_DESC_ES
 - "Записати образ ISO-9660"
 - "Показати інформацію про образ ISO-9660"
 - "Показати інформацію про оптичний привід"
+- ""
+- ""
+- ""
 
 Підменю "Інструменти MEGA" (відображається при натисканні правою кнопкою миші на будь-якому файлі/каталозі).
 - "Зареєструвати новий обліковий запис"
@@ -2769,7 +2802,8 @@ $msg_description_block
     - Manuel Tancoigne <m.tancoigne@gmail.com> (Translations to French language).
     - Gabriel Fontenelle <contato@gabrielfontenelle.com> (Fix a problem with unmounting image removing directory not created by fuseiso).
     - Mateus Cruz <mateushenriquedacc@gmail.com> (Translations to Brazilian Portuguese and Portuguese).
-    - ookatuk (Translations to Japanese language and fix of the translation display of the "Android Tools" submenu).
+    - ookatuk (Translations to Japanese language; fix of the translation display of the "Android Tools" submenu
+      and add boot testing actions for UEFI/Secure Boot and legacy BIOS to "ISO-9660 Image Tools" submenu).
 
     $msg_author
     - Geovani Barzaga Rodriguez (geobarrod) <igeo.cu@gmail.com>, Developer.

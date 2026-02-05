@@ -105,6 +105,9 @@ Submenu "ISO-9660 Image Tools" (it is shown only when right-clicked ISO-9660 ima
              - "Burn ISO-9660 Image"
              - "Show ISO-9660 Image Info"
              - "Show Optical Drive Info"
+             - "Test-Boot ISO-9660 (QEMU BIOS)"
+             - "Test-Boot ISO-9660 (QEMU UEFI)"
+             - "Test-Boot ISO-9660 (QEMU UEFI, Secure boot)"
 
 Submenu "MEGA Tools" (it is shown when right-clicked any file/dir).
              - "Register New Account"

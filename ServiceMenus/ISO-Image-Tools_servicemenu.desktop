@@ -207,43 +207,46 @@ Name[x-test]=xxShow Optical Drive Infoxx
 Exec=which qemu-system-x86_64; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Test-Boot ISO-9660 (QEMU BIOS)" --passivepopup="[Error] Please install QEMU."; exit 1; else MEM=$(kdialog --title "Memory Setting" --inputbox "Enter the memory capacity to be allocated (MiB):" "2048"); if [ "$?" == "0" ]; then if [ -n "${MEM//[0-9]/}" ]; then kdialog --error "Numbers only!"; exit 1; fi; KVM_OPTS=""; [ -e /dev/kvm ] && KVM_OPTS="-enable-kvm"; qemu-system-x86_64 $KVM_OPTS -m $MEM -cdrom %f -boot d -cpu host; fi; fi
 Icon=ks-play-test-boot
 Name=Test-Boot ISO-9660 (QEMU BIOS)
-Name[ja]=ISO-9660 をテスト起動 (QEMU BIOS)
 Name[de]=ISO-9660 Test-Boot (QEMU BIOS)
 Name[es]=Test-Boot de imagen ISO-9660 (QEMU BIOS)
 Name[fr]=Test-Boot de l'image ISO-9660 (QEMU BIOS)
 Name[it]=Test-Boot di immagine ISO-9660 (QEMU BIOS)
+Name[ja]=ISO-9660 をテスト起動 (QEMU BIOS)
 Name[ko]=ISO-9660 테스트 부팅 (QEMU BIOS)
 Name[pt]=Test-Boot de imagem ISO-9660 (QEMU BIOS)
 Name[ru]=Test-Boot образа ISO-9660 (QEMU BIOS)
 Name[uk]=Test-Boot образу ISO-9660 (QEMU BIOS)
 Name[zh_CN]=ISO-9660 测试启动 (QEMU BIOS)
+Name[x-test]=xxTest-Boot ISO-9660 (QEMU BIOS)xx
 
 [Desktop Action Test-Boot-With-UEFI]
 Exec=which qemu-system-x86_64; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Test-Boot ISO-9660 (QEMU UEFI)" --passivepopup="[Error] Please install QEMU."; exit 1; else CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "x64|ovmf" | grep -viE "ia32|sec" | sort -r | head -n 1); VARS_SRC=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_VARS*.fd" 2>/dev/null | grep -iE "x64|ovmf" | grep -viE "ia32|sec" | sort -r | head -n 1); if [ -z "$CODE" ] || [ -z "$VARS_SRC" ]; then CODE=$(kdialog --title "OVMF CODE file" --getopenfilename "/usr/share" "OVMF_CODE*.fd"); [ -z "$CODE" ] && exit 1; VARS_SRC=$(kdialog --title "OVMF VARS file" --getopenfilename "/usr/share" "OVMF_VARS*.fd"); [ -z "$VARS_SRC" ] && exit 1; fi; MEM=$(kdialog --title "Memory Setting" --inputbox "Enter memory (MiB):" "4096"); if [ $? -ne 0 ] || [ -z "$MEM" ] || [ -n "${MEM//[0-9]/}" ]; then exit 1; fi; VARS_TMP=$(mktemp /tmp/ovmf_vars.XXXXXX.fd); cp "$VARS_SRC" "$VARS_TMP"; if [ "$?" = "0" ]; then qemu-system-x86_64 -enable-kvm -m "$MEM" -cpu host -drive if=pflash,format=raw,readonly=on,file="$CODE" -drive if=pflash,format=raw,file="$VARS_TMP" -cdrom "%f" -boot d; rm -f "$VARS_TMP"; fi
 Icon=ks-play-test-boot
 Name=Test-Boot ISO-9660 (QEMU UEFI)
-Name[ja]=ISO-9660 をテスト起動 (QEMU UEFI)
 Name[de]=ISO-9660 Test-Boot (QEMU UEFI)
 Name[es]=Test-Boot de imagen ISO-9660 (QEMU UEFI)
 Name[fr]=Test-Boot de l'image ISO-9660 (QEMU UEFI)
 Name[it]=Test-Boot di immagine ISO-9660 (QEMU UEFI)
+Name[ja]=ISO-9660 をテスト起動 (QEMU UEFI)
 Name[ko]=ISO-9660 테스트 부팅 (QEMU UEFI)
 Name[pt]=Test-Boot de imagen ISO-9660 (QEMU UEFI)
 Name[ru]=Test-Boot образа ISO-9660 (QEMU UEFI)
 Name[uk]=Test-Boot образу ISO-9660 (QEMU UEFI)
 Name[zh_CN]=ISO-9660 测试启动 (QEMU UEFI)
+Name[x-test]=xxTest-Boot ISO-9660 (QEMU UEFI)xx
 
 [Desktop Action Test-Boot-With-UEFI-And-Secure-Boot]
 Exec=which qemu-system-x86_64; if [ "$?" != "0" ]; then kdialog --icon=ks-error --title="Test-Boot ISO-9660 (QEMU UEFI, Secure boot)" --passivepopup="[Error] Please install QEMU."; exit 1; else CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | sort -r | grep -iE "sec|ms" | head -n 1); [ -z "$CODE" ] && CODE=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share /usr/local/share /usr/lib -maxdepth 5 -name "OVMF_CODE*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | head -n 1); VARS_SRC=$(find /usr/share/edk2/ovmf /usr/share/OVMF /usr/share/qemu /usr/share -maxdepth 5 -name "OVMF_VARS*.fd" 2>/dev/null | grep -iE "ovmf|x64" | grep -vi "ia32" | grep -v sec | head -n 1); if [ -z "$CODE" ] || [ -z "$VARS_SRC" ]; then CODE=$(kdialog --title "OVMF CODE file" --getopenfilename "/usr/share" "OVMF_CODE*.fd"); [ -z "$CODE" ] && exit 1; VARS_SRC=$(kdialog --title "OVMF VARS file" --getopenfilename "/usr/share" "OVMF_VARS*.fd"); [ -z "$VARS_SRC" ] && exit 1; fi; MEM=$(kdialog --title "Memory Setting" --inputbox "Enter memory (MiB):" "4096"); if [ $? -ne 0 ] || [ -z "$MEM" ] || [ -n "${MEM//[0-9]/}" ]; then exit 1; fi; VARS_TMP=$(mktemp /tmp/ovmf_vars.XXXXXX.fd); cp "$VARS_SRC" "$VARS_TMP"; SEC_OPTS=""; echo "$CODE" | grep -iqE "sec|ms" && SEC_OPTS="-global driver=cfi.pflash01,property=secure,value=on"; qemu-system-x86_64 -enable-kvm -m "$MEM" -cpu host $SEC_OPTS -drive if=pflash,format=raw,readonly=on,file="$CODE" -drive if=pflash,format=raw,file="$VARS_TMP" -cdrom "%f" -boot d; rm -f "$VARS_TMP"; fi
 Icon=ks-play-test-boot
 Name=Test-Boot ISO-9660 (QEMU UEFI, Secure boot)
-Name[ja]=ISO-9660 をテスト起動 (QEMU UEFI, Secure boot)
 Name[de]=ISO-9660 Test-Boot (QEMU UEFI, Secure boot)
 Name[es]=Test-Boot de imagen ISO-9660 (QEMU UEFI, Secure boot)
 Name[fr]=Test-Boot de l'image ISO-9660 (QEMU UEFI, Secure boot)
 Name[it]=Test-Boot di immagine ISO-9660 (QEMU UEFI, Secure boot)
+Name[ja]=ISO-9660 をテスト起動 (QEMU UEFI, Secure boot)
 Name[ko]=ISO-9660 테스트 부팅 (QEMU UEFI, Secure boot)
 Name[pt]=Test-Boot de imagen ISO-9660 (QEMU UEFI, Secure boot)
 Name[ru]=Test-Boot образа ISO-9660 (QEMU UEFI, Secure boot)
 Name[uk]=Test-Boot образу ISO-9660 (QEMU UEFI, Secure boot)
 Name[zh_CN]=ISO-9660 测试启动 (QEMU UEFI, Secure boot)
+Name[x-test]=xxTest-Boot ISO-9660 (QEMU UEFI, Secure boot)xx
