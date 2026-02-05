@@ -1,7 +1,7 @@
 Description: 
 ------------
 
-Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE Plasma [5.x|6.x].
+Enables the following functionalities on the Dolphin's (File Manager) right click contextual menu on KDE Plasma 6.
 
 - Submenu **Actions** => **KDE-Services** (it is shown when right-clicked any file/dir):
 	* **Add Timestamp Prefix to [File|Dir]name**

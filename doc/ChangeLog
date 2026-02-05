@@ -3,6 +3,7 @@
 - Fix of the translation display of the "Android Tools" submenu.
 - "ISO-9660 Image Tools": Add servicemenus for test ISO Live OS with QEMU.
 - "YouTube Tools": Improved the "Video Downloader" servicemenu.
+- Ends support for KDE Plasma 5.
 
 🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
     The information can be found following:

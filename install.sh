@@ -32,7 +32,6 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PREFIXmenu5=~/.local/share/kservices5/ServiceMenus
 PREFIXmenu6=~/.local/share/kio/servicemenus
 PREFIXservicetypes5=~/.local/share/kservicetypes5
 PREFIXapp=~/.local/share/applications
@@ -42,11 +41,7 @@ PREFIXappmerge=~/.config/kdedefaults/menus/applications-merged
 PREFIXdeskdir=~/.local/share/desktop-directories
 PREFIXdoc=~/.local/share/doc/kde-services
 
-if [ "$KDE_SESSION_VERSION" == "5" ]; then
-	mkdir -p ${PREFIXmenu5}
-elif [ "$KDE_SESSION_VERSION" == "6" ]; then
-	mkdir -p ${PREFIXmenu6}
-fi
+mkdir -p ${PREFIXmenu6}
 mkdir -p ${PREFIXservicetypes5}
 mkdir -p ${PREFIXapp}
 mkdir -p ${PREFIXSVGicons}
@@ -55,11 +50,7 @@ mkdir -p ${PREFIXappmerge}
 mkdir -p ${PREFIXdeskdir}
 mkdir -p ${PREFIXdoc}
 
-if [ "$KDE_SESSION_VERSION" == "5" ]; then
-	cp ServiceMenus/* ${PREFIXmenu5}
-elif [ "$KDE_SESSION_VERSION" == "6" ]; then
-	cp ServiceMenus/* ${PREFIXmenu6}
-fi
+cp ServiceMenus/* ${PREFIXmenu6}
 cp servicetypes/* ${PREFIXservicetypes5}
 cp applications/* ${PREFIXapp}
 cp scalable/apps/* ${PREFIXSVGicons}
