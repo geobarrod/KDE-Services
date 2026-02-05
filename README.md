@@ -330,7 +330,7 @@ Contributors:
 - Manuel Tancoigne (Translations to French language).
 - Mateus Cruz (Translations to Brazilian Portuguese and Portuguese).
 - ookatuk (Translations to Japanese language, fix of the translation display of the **Android Tools** submenu
-           and add to **ISO-9660 Image Tools** submenu servicemenus for test ISO Live OS with QEMU).
+  and addition to the **ISO-9660 Image Tools** submenu of servicemenus to test the ISO image of a live OS with QEMU).
 
 Steps for install from Dolphin file manager (recommended):
 ----------------------------------------------------------
