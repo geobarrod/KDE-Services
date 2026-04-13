@@ -33,6 +33,7 @@
 ###################################################################################
 
 DBUSREF=""
+DIR=""
 LOG=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 YTDLPID=""
@@ -85,7 +86,11 @@ progressbar_percent() {
 trap 'rm -f "$LOG"; [ -n "$DBUSREF" ] && qdbus6 "$DBUSREF" close 2>/dev/null' INT TERM EXIT
 DIR=$1
 cd "$DIR"
-DIR=$(pwd)
+DIR="$(pwd)"
+
+if [ "$DIR" == "~/.local/share/applications" ]; then
+	DIR="~/"
+fi
 
 mkdir -p $HOME/.kde-services
 touch $HOME/.kde-services/youtube-video-list

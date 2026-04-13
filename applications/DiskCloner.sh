@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2014-2025.                                                       #
+# KDE-Services ⚙ 2014-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
@@ -95,7 +95,7 @@ elapsedtime() {
 
 DIR=$1
 cd "$DIR"
-DIR=$(pwd)
+DIR="$(pwd)"
 
 if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"

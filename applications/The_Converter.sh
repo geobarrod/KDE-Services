@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2013-2025.                                                       #
+# KDE-Services ⚙ 2013-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
@@ -94,40 +94,11 @@ elapsedtime() {
 
 DIR="${1%/*}"
 cd "$DIR"
-
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
-	sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname \
-	"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
-	sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
-cd ./
-
-for i in *; do
-	mv "$i" "${i// /_}" 2> /dev/null
-done
-
 DIR="$(pwd)"
+
+if [ "$DIR" == "~/.local/share/applications" ]; then
+	DIR="~/"
+fi
 
 FILES=$(kdialog --icon=ks-image --title="Source Image Files" --multiple \
 		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.svg \
@@ -148,97 +119,97 @@ progressbar-start
 if [ "$FORMAT" = "BMP" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.bmp"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.bmp"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "EPS" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.eps"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.eps"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "GIF" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.gif"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.gif"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "ICO" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white -resize 128 "$DESTINATION/${DST_FILE##*/}.ico"
+		magick -quality 100 -resize 128 $i "$DESTINATION/${DST_FILE##*/}.ico"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "JPEG" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.jpg"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.jpg"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "JPEG 2000" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 75 "$DESTINATION/${DST_FILE##*/}.jp2"
+		magick -quality 75 $i "$DESTINATION/${DST_FILE##*/}.jp2"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "PBM" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.pbm"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.pbm"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "PDF" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.pdf"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.pdf"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "PGM" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.pgm"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.pgm"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "PNG" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.png"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "PPM" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 "$DESTINATION/${DST_FILE##*/}.ppm"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.ppm"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "PSD" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.psd"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.psd"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "SGI" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.sgi"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.sgi"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "TGA" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.tga"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.tga"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "TIFF" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.tif"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.tif"
 		if-convert-cancel
 	done
 elif [ "$FORMAT" = "XPM" ]; then
 	for i in $FILES; do
 		DST_FILE="${i%.*}"
-		convert $i -quality 100 -transparent white "$DESTINATION/${DST_FILE##*/}.xpm"
+		magick -quality 100 $i "$DESTINATION/${DST_FILE##*/}.xpm"
 		if-convert-cancel
 	done
 fi

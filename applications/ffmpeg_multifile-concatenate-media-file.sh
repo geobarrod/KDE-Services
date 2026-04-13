@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2011-2025.                                                       #
+# KDE-Services ⚙ 2011-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
@@ -108,39 +108,6 @@ elapsedtime() {
 
 DIR=$1
 cd "$DIR"
-
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|sed\
-    's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-    "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname\
-    "$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"\
-    |sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
-cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
-cd ./
-
-for i in *; do
-	mv "$i" "${i// /_}" 2>/dev/null
-done
-
 DIR="$(pwd)"
 
 if [ "$DIR" == "~/.local/share/applications" ]; then

@@ -60,38 +60,38 @@ Submenu "Graphic Tools" (it is shown only when right-clicked any image file).
              - "The Converter" (from several image file formats to BMP, EPS, GIF, ICO, JPEG, JPEG 2000, PBM,
                                                                    PDF, PGM,PNG,PPM,PSD,SGI,TGA,TIFF or XPM).
              - "The Resizer" (customize the width of the image frame).
-             - "16x16 (icon)"
-             - "32x32 (icon)"
-             - "48x48 (icon)"
-             - "64x64 (icon)"
-             - "128x128 (icon)"
-             - "256x256 (icon)"
-             - "300x300 (carnet)"
-             - "320x240 (qvga)"
-             - "352x288 (cif)"
-             - "414x532 (visa)"
-             - "480x320 (hvga)"
-             - "512x512 (icon)"
-             - "532x532 (passport)"
-             - "640x480 (vga)"
-             - "720x480 (ntsc)"
-             - "800x600 (svga)"
-             - "960x540 (qhd)"
-             - "1024x768 (xga)"
-             - "1280x1024 (sxga)"
-             - "1366x768 (wxga)"
-             - "1440x900 (wxga)"
-             - "1600x1200 (uxga)"
-             - "1920x1200 (wuxga)"
-             - "2048x1080 (2k)"
-             - "2560x2048 (qsxga)"
-             - "3200x2048 (wqsxga)"
-             - "3840x2400 (wquxga)"
-             - "4096x2160 (4k)"
-             - "5120x4096 (hsxga)"
-             - "6400x4096 (whsxga)"
-             - "7680x4800 (whuxga)"
-             - "8192x4320 (8k)"
+             - "16x16 (Icon)"
+             - "32x32 (Icon)"
+             - "48x48 (Icon)"
+             - "64x64 (Icon)"
+             - "128x128 (Icon)"
+             - "256x256 (Icon)"
+             - "300x300 (ID card)"
+             - "320x240 (QVGA)"
+             - "352x288 (CIF)"
+             - "414X532 (visa)"
+             - "480X320 (HVGA)"
+             - "512X512 (Icon)"
+             - "532X532 (Passport)"
+             - "640X480 (VGA)"
+             - "720X480 (NTSC)"
+             - "800X600 (SVGA)"
+             - "960X540 (QHD)"
+             - "1024X768 (XGA)"
+             - "1280X1024 (SXGA)"
+             - "1366X768 (WXGA)"
+             - "1440X900 (WXGA)"
+             - "1600X1200 (UXGA)"
+             - "1920X1200 (WUXGA)"
+             - "2048X1080 (2K)"
+             - "2560X2048 (QSXGA)"
+             - "3200X2048 (WQSXGA)"
+             - "3840X2400 (WQUXGA)"
+             - "4096X2160 (4K)"
+             - "5120X4096 (HSXGA)"
+             - "6400X4096 (WHSXGA)"
+             - "7680X4800 (WHUXGA)"
+             - "8192X4320 (8K)"
 
 Submenu "ISO-9660 Image Tools" (it is shown only when right-clicked ISO-9660 image file).
              - "Mount ISO-9660 Image"
@@ -335,11 +335,11 @@ Steps for install from Discover application explorer:
 
 Steps for install from source code in the terminal:
 ===================================================
-1- servicemenuinstaller install kde-services-3.0.8.tar.gz
+1- servicemenuinstaller install kde-services-3.0.9.tar.gz
 
 Steps for uninstall from source code in the terminal:
 =====================================================
-1- servicemenuinstaller uninstall kde-services-3.0.8.tar.gz
+1- servicemenuinstaller uninstall kde-services-3.0.9.tar.gz
 
 Donate 🎔
 =========

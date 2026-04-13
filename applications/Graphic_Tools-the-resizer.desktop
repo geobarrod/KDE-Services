@@ -1,18 +1,18 @@
 [Desktop Entry]
 Categories=Graphic-Tools;
-Exec=which convert; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install convert command and try again."; exit 1; else ~/.local/share/applications/The_Resizer.sh;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else ~/.local/share/applications/The_Resizer.sh;fi
 Icon=ks-resize-image
 Name=The Resizer
 Name[de]=Der Resizer
 Name[es]=El Redimensionador
-Name[fr]=Le Redimensionneur (tailles personnalisées)
+Name[fr]=Le Redimensionneur
 Name[it]=Il Ridimensionatore
 Name[ja]=画像サイズ変更
 Name[ko]=리사이저
 Name[pt]=O Redimensionador
 Name[pt_BR]=Redimensionar
-Name[ru]=Изменение размера (настраиваемое)
-Name[uk]=Зміна розміру (власні параметри)
+Name[ru]=Изменение размера
+Name[uk]=Зміна розміру
 Name[zh_CN]=调整器
 StartupNotify=true
 Terminal=false

@@ -1,3 +1,13 @@
+* Mon Apr 13 2026 Geovani B. R. <igeo.cu@gmail.com> 3.0.9
+- "Multimedia Tools": Fix missing variable in "Build ISO-9660 Image from Here" servicemenu.
+- Removed the automatic renaming of whitespace by underscore "_" character
+  in directory and file names, which was previously handled transparently
+  when running certain servicemenus.
+  From now on, whitespace replacement must be performed manually using
+  the menu service "[File|Dir]name Whitespace Replace" whenever an error occurs
+  due to whitespace in the absolute path.
+- "Graphic Tools": Enhancement of all its servicemenus.
+
 * Wed Feb 05 2026 Geovani B. R. <igeo.cu@gmail.com> 3.0.8
 - Fixed Japanese translations.
 - Fix of the translation display of the "Android Tools" submenu.

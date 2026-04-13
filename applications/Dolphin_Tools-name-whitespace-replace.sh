@@ -70,4 +70,4 @@ for i in *; do
     mv "$i" "${i// /_}" 2> /dev/null
 done
 
-DIR="$(pwd)"
+exit 0

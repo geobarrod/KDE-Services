@@ -33,6 +33,7 @@
 ###################################################################################
 
 DBUSREF=""
+DIR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 VCODE=""
 
@@ -59,9 +60,13 @@ progressbar_stop() {
 ##############################
 
 DIR=$1
-cd "$DIR"
-DIR=$(pwd)
+DIR="$(pwd)"
 
+if [ "$DIR" == "~/.local/share/applications" ]; then
+	DIR="~/"
+fi
+
+cd "$DIR"
 mkdir -p $HOME/.kde-services
 touch $HOME/.kde-services/youtube-video-codes
 

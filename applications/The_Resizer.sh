@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2012-2025.                                                       #
+# KDE-Services ⚙ 2012-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
@@ -94,40 +94,11 @@ elapsedtime() {
 
 DIR="${1%/*}"
 cd "$DIR"
-
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
-	sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-	"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname \
-	"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
-	sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2> /dev/null
-cd ./
-mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2> /dev/null
-cd ./
-
-for i in *; do
-	mv "$i" "${i// /_}" 2> /dev/null
-done
-
 DIR="$(pwd)"
+
+if [ "$DIR" == "~/.local/share/applications" ]; then
+	DIR="~/"
+fi
 
 FILES=$(kdialog --icon=ks-resize-image --title="Source Image Files" --multiple \
 		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi \
@@ -146,7 +117,7 @@ progressbar-start
 
 for i in $FILES; do
 	DST_FILE="${i%.*}"
-	convert -resize $SIZE "$i" "$DESTINATION/${DST_FILE##*/}_${SIZE}p.${i:${#i}-3}"
+	magick -resize $SIZE "$i" "$DESTINATION/${DST_FILE##*/}_${SIZE}p.${i:${#i}-3}"
 	if-convert-cancel
 done
 
