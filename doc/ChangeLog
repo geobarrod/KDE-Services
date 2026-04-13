@@ -4,7 +4,7 @@
   in directory and file names, which was previously handled transparently
   when running certain servicemenus.
   From now on, whitespace replacement must be performed manually using
-  the menu service "[File|Dir]name Whitespace Replace" whenever an error occurs
+  the servicemenu "[File|Dir]name Whitespace Replace" whenever an error occurs
   due to whitespace in the absolute path.
 - "Graphic Tools": Enhancement of all its servicemenus.
 
