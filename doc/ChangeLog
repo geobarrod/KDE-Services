@@ -8,17 +8,17 @@
   due to whitespace in the absolute path.
 - "Graphic Tools": Enhancement of all its servicemenus.
 
+🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
+    The information can be found following:
+     https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
+      Thanks very much!
+
 * Wed Feb 05 2026 Geovani B. R. <igeo.cu@gmail.com> 3.0.8
 - Fixed Japanese translations.
 - Fix of the translation display of the "Android Tools" submenu.
 - "ISO-9660 Image Tools": Add servicemenus for test ISO Live OS with QEMU.
 - "YouTube Tools": Improved the "Video Downloader" servicemenu.
 - Ends support for KDE Plasma 5.
-
-🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
-    The information can be found following:
-     https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
-      Thanks very much!
 
 * Tue Sep 02 2025 Geovani B. R. <igeo.cu@gmail.com> latest (current development)
 - The license is changed to BSD 3-Clause.
