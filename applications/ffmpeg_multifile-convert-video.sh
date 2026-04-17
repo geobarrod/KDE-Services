@@ -219,9 +219,7 @@ FILES=$(kdialog --icon=ks-video --title="Source Video Files" --multiple --getope
 		*.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2>/dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed 's/ (?=\S)/\\ /g')
 FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg4|mpeg|mpg|ogv|vob|webm|wmv)\s/\.\1\n/gi')
-FILES=$(echo "$FILES" | sed 's/ $//g')
 
 ############################### video2images ###############################
 if [ "$MODE" = "video2images" ]; then

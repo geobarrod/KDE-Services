@@ -83,7 +83,7 @@ progressbar-stop() {
 
 progressbar-start
 
-for file in $FILE; do
+for file in "$FILE"; do
 	cd "${file%/*}"
 
 	DIR="$(pwd)"
