@@ -166,7 +166,7 @@ if [ "$MODE" = "images2video" ]; then
 	ffmpeg -y -f image2 -i /tmp/SequentialImage_%d.${SEQFILE:${#SEQFILE}-3} -r $FRAME_RATE "$DESTINATION/$FILENAME.mp4" &> $LOG
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Converting sequential images to $FILENAME.mp4" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi

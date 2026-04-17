@@ -65,7 +65,7 @@ if-cancel-exit() {
 if-mp3gain-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Adjusting volume level of ${i##*/}" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DST_FILE/$LOGERROR
 		continue
 	fi
@@ -108,8 +108,12 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
+IFS=$'\n'
+
 FILES=$(kdialog --icon=ks-audio-normalize --title="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2>/dev/null)
 if-cancel-exit
+
+FILES=$(echo "$FILES" | sed -E 's/\.(mp3)\s/\.\1\n/gi' | sed 's/ $//g')
 
 progressbar-start
 

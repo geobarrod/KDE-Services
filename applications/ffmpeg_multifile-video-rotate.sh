@@ -66,7 +66,7 @@ if-cancel-exit() {
 if-ffmpeg-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Rotating video file ${i##*/} to $ANGLE" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi
@@ -109,9 +109,13 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
+IFS=$'\n'
+
 FILES=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v \
 		*.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2>/dev/null)
 if-cancel-exit
+
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg|mpeg4|mpg|ogv|vob|webm|wmv)\s/\.\1\n/gi' | sed 's/ $//g')
 
 DESTINATION=$(kdialog --icon=ks-video-rotate --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit

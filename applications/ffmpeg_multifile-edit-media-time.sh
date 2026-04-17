@@ -67,7 +67,7 @@ if-cancel-exit() {
 if-ffmpeg-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Editing time of ${i##*/} from $STIME to $ETIME" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi
@@ -110,10 +110,14 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
+IFS=$'\n'
+
 FILES=$(kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
 		*.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv \
 		*.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2>/dev/null)
 if-cancel-exit
+
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov|mp3|mp4|mpeg|mpeg4|mpg|ogg|ogv|vob|wav|webm|wma|wmv)\s/\.\1\n/gi' | sed 's/ $//g')
 
 DESTINATION=$(kdialog --icon=ks-media-edit-time --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit

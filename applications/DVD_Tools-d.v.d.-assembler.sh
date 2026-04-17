@@ -64,7 +64,7 @@ if-dvdauthor-cancel() {
 		kill $(cat $PB_PIDFILE)
 		rm $PB_PIDFILE
 		kdialog --icon=ks-error --title="DVD Assembler ($DVD_NAME)" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check video format errors. Try again"
+			--passivepopup="[Canceled]   Check video format errors. Try again"
 		exit 1
 	fi
 }

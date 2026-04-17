@@ -65,7 +65,7 @@ if-cancel-exit() {
 if-ffmpeg-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Attaching ${COVER##*/} to ${i##*/}" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi
@@ -112,8 +112,12 @@ COVER=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Picture File" \
 		--getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff" 2>/dev/null)
 if-cancel-exit
 
+IFS=$'\n'
+
 FILES=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2>/dev/null)
 if-cancel-exit
+
+FILES=$(echo "$FILES" | sed -E 's/\.(mp3)\s/\.\1\n/gi' | sed 's/ $//g')
 
 DESTINATION=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Destination Audio Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
