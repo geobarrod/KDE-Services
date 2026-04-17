@@ -44,6 +44,8 @@ PB_PIDFILE="$(mktemp)"
 ############# Functions ###########
 ###################################
 
+IFS=$'\n'
+
 progressbar-start() {
 	kdialog --icon=ks-compressed-file --title="Compressed File Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
 }
@@ -71,7 +73,7 @@ elapsedtime() {
 exit-check() {
 	if [ "$EXIT" = "1" ]; then
 		kdialog --icon=ks-error --title="Compressed File Integrity Check" \
-			--passivepopup="[Error]  ${file##*/}   Archive parsing failed! (Data is corrupted.)"
+			--passivepopup="[Error]  ${file##*/}   Archive parsing failed! Please ensure only one file is selected! (Data is corrupted.)"
 		exit 1
 	fi
 	while [ "$EXIT" = "2" ] || [ "$EXIT" = "1" ]; do
@@ -90,38 +92,6 @@ progressbar-start
 
 for file in $FILE; do
 	cd "${file%/*}"
-
-	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")")" \
-		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")"|\
-		sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")")" "$(dirname \
-		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")")" "$(dirname "$(dirname \
-		"$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")"|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")")" "$(dirname "$(dirname "$(dirname \
-		"$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")"|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(dirname \
-		"$(pwd|grep " ")")")")")"|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")")" "$(dirname "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")"|\
-		sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")")" "$(dirname "$(dirname "$(dirname "$(pwd|grep " ")")")"|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(dirname "$(pwd|grep " ")")")" "$(dirname "$(dirname "$(pwd|grep " ")")"|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(dirname "$(pwd|grep " ")")" "$(dirname "$(pwd|grep " ")"|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-	mv "$(pwd|grep " ")" "$(pwd|grep " "|sed 's/ /_/g')" 2>/dev/null
-	cd ./
-
-	for i in *; do
-		mv "$i" "${i// /_}" 2>/dev/null
-	done
 
 	DIR="$(pwd)"
 

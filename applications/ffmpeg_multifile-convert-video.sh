@@ -54,6 +54,8 @@ TIMEPOSITION=""
 ############ Functions ############
 ###################################
 
+IFS=$'\n'
+
 logs() {
 	LOG="/tmp/${i##*/}.log"
 	LOGERROR="${i##*/}.err"
@@ -216,6 +218,11 @@ fi
 FILES=$(kdialog --icon=ks-video --title="Source Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv \
 		*.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2>/dev/null)
 if-cancel-exit
+
+FILES=$(echo "$FILES" | sed 's/ (?=\S)/\\ /g')
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg4|mpeg|mpg|ogv|vob|webm|wmv)\s/\.\1\n/gi')
+FILES=$(echo "$FILES" | sed 's/ $//g')
+
 ############################### video2images ###############################
 if [ "$MODE" = "video2images" ]; then
 	IMAGE_FORMAT=$(kdialog --icon=ks-video --title="Convert Video Files" --menu="Choose Image Format" bmp "BMP" jpg "JPG" pam "PAM" pbm "PBM" pgm "PGM" png "PNG" ppm "PPM" sgi "SGI" tif "TIFF" 2>/dev/null)
