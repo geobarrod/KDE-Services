@@ -96,7 +96,7 @@ FILES=$(kdialog --icon=ks-media-optical-video --title="Source Video Files" --mul
 		--getopenfilename "$DIR" "*.mp2 *.mpe *.mpeg *.mpg *.vob *.MP2 *.MPE *.MPEG *.MPG *.VOB|MPEG-2 files" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(mp2|mpe|mpeg|mpg|vob)\s/\.\1\n/gi')
+FILES=$(echo "$FILES" | sed -E 's/\.(mp2|mpe|mpeg|mpg|vob)\s/\.\1\n/gi' | sed 's/ $//g')
 
 for VIDEO in $FILES; do
 	ffprobe "$VIDEO" 2> $VIDEOINFO
