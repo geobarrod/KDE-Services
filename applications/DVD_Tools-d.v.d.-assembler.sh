@@ -40,6 +40,7 @@ DVD_NAME=""
 ELAPSED_TIME=""
 FILES=""
 FINAL_TIME=""
+IFS=$'\n'
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PB_PIDFILE="$(mktemp)"
 PID="$$"
@@ -90,13 +91,12 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
-IFS=$'\n'
-
 FILES=$(kdialog --icon=ks-media-optical-video --title="Source Video Files" --multiple \
 		--getopenfilename "$DIR" "*.mp2 *.mpe *.mpeg *.mpg *.vob *.MP2 *.MPE *.MPEG *.MPG *.VOB|MPEG-2 files" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(mp2|mpe|mpeg|mpg|vob)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(mp2|mpe|mpeg|mpg|vob)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 for VIDEO in $FILES; do
 	ffprobe "$VIDEO" 2> $VIDEOINFO
@@ -126,8 +126,6 @@ BEGIN_TIME=$(date +%s)
 
 dvdauthor -tf $FILES -O "$DESTINATION/$DVD_NAME"
 if-dvdauthor-cancel
-
-unset IFS
 
 genisoimage -R -J -o "$DESTINATION/$DVD_NAME.iso" "$DESTINATION/$DVD_NAME"
 
