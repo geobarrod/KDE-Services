@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2014-2025.                                                       #
+# KDE-Services ⚙ 2014-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
@@ -37,14 +37,13 @@ ELAPSED_TIME=""
 EXIT=""
 FILE=$@
 FINAL_TIME=""
+IFS=$'\n'
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PB_PIDFILE="$(mktemp)"
 
 ###################################
 ############# Functions ###########
 ###################################
-
-IFS=$'\n'
 
 progressbar-start() {
 	kdialog --icon=ks-compressed-file --title="Compressed File Integrity Check" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
@@ -73,7 +72,7 @@ elapsedtime() {
 exit-check() {
 	if [ "$EXIT" = "1" ]; then
 		kdialog --icon=ks-error --title="Compressed File Integrity Check" \
-			--passivepopup="[Error]  ${file##*/}   Archive parsing failed! Please ensure only one file is selected! (Data is corrupted.)"
+			--passivepopup="[Error]  ${file##*/}   Archive parsing failed! (Data is corrupted.)"
 		exit 1
 	fi
 	while [ "$EXIT" = "2" ] || [ "$EXIT" = "1" ]; do
@@ -90,11 +89,12 @@ exit-check() {
 
 progressbar-start
 
+FILE=$(echo "$FILE" | sed -E 's/\.(7z|bcpio|bz|bz2|cab|cpio|cpio\.gz|deb|gz|iso|jar|lha|lzh|lzma|rar|rpm|sp|srpm|sv4cpio|sv4crc|tar|tar\.bz|tar\.bz2|tar\.gz|tar\.lzma|tar\.xz|tar\.Z|xz|Z|zip)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
+
 for file in $FILE; do
 	cd "${file%/*}"
-
 	DIR="$(pwd)"
-
 	BEGIN_TIME=$(date +%s)
 	lsar -t $file &>/dev/null
 	EXIT=$?
