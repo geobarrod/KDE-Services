@@ -37,12 +37,11 @@ DESTINATION=""
 DIR=""
 ELAPSED_TIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PB_PIDFILE="$(mktemp)"
-
-IFS=$'\n'
 
 ###################################
 ############ Functions ############
@@ -112,12 +111,14 @@ fi
 FILES=($(kdialog --icon=ks-add-subs --title="Video Files" --multiple --getopenfilename "$DIR" "*.MP4 *.mp4|*.mp4" 2>/dev/null))
 if-cancel-exit
 
-mapfile -t FILES <<< "$(echo "$FILES" | sed -E 's/\.(mp4)\s/\.\1\n/gi' | sed 's/ $//g')"
+mapfile -t FILES <<< "$(echo "$FILES" | sed -E 's/\.(mp4)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')"
 
 SUBS=($(kdialog --icon=ks-add-subs --title="Subtitle Files" --multiple --getopenfilename "$DIR" "*.SRT *.srt|*.srt" 2>/dev/null))
 if-cancel-exit
 
-mapfile -t SUBS <<< "$(echo "$SUBS" | sed -E 's/\.(srt)\s/\.\1\n/gi' | sed 's/ $//g')"
+mapfile -t SUBS <<< "$(echo "$SUBS" | sed -E 's/\.(srt)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')"
 
 DESTINATION=$(kdialog --icon=ks-add-subs --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
