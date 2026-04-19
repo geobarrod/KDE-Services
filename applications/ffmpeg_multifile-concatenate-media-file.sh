@@ -124,7 +124,7 @@ FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov
 /gI' | sed 's/[[:space:]]*$//')
 
 FILENAME=$(kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" \
-			--inputbox="Enter filename for new concatenated media file" New_Concatenated_Media_File)
+			--inputbox="Enter filename for new concatenated media file" New Concatenated Media File)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=ks-concatenate-media-file --title="Destination Media Files" --getexistingdirectory "$DIR" 2>/dev/null)
