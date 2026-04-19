@@ -39,6 +39,7 @@ ELAPSED_TIME=""
 FILES=""
 FINAL_TIME=""
 FORMAT=""
+IFS=$'\n'
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PB_PIDFILE="$(mktemp)"
 
@@ -100,15 +101,14 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
-IFS=$'\n'
-
 FILES=$(kdialog --icon=ks-image --title="Source Image Files" --multiple \
 		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.svg \
 		*.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.SVG *.TGA \
 		*.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.svg *.tga *.tif *.tiff *.xpm" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|ppm|psd|sgi|svg|tga|tif|tiff|xpm)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|ppm|psd|sgi|svg|tga|tif|tiff|xpm)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 DESTINATION=$(kdialog --icon=ks-image --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
