@@ -84,10 +84,7 @@ progressbar-stop() {
 
 progressbar-start
 
-FILE=$(echo "$FILE" | sed -E 's/\.(md5|sha1|sha256|sha512)[[:space:]]+/\.\1\
-/gI' | sed 's/[[:space:]]*$//')
-
-for file in $FILE; do
+for file in "$FILE"; do
 	cd "${file%/*}"
 	DIR="$(pwd)"
 	CHECKSUMFILE=${file##*.}
