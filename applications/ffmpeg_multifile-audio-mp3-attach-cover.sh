@@ -37,6 +37,7 @@ DESTINATION=""
 DIR=""
 ELAPSED_TIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -112,12 +113,11 @@ COVER=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Picture File" \
 		--getopenfilename "$DIR" "*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff *.BMP *.GIF *.JP2 *.JPEG *.JPG *.PNG *.TIF *.TIFF|*.bmp *.gif *.jp2 *.jpeg *.jpg * *.tif *.tiff" 2>/dev/null)
 if-cancel-exit
 
-IFS=$'\n'
-
 FILES=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Audio MP3 Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2>/dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(mp3)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(mp3)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 DESTINATION=$(kdialog --icon=ks-audio-mp3-attach-cover --title="Destination Audio Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
