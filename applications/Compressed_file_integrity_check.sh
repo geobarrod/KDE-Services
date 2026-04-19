@@ -89,10 +89,7 @@ exit-check() {
 
 progressbar-start
 
-FILE=$(echo "$FILE" | sed -E 's/\.(7z|bcpio|bz|bz2|cab|cpio|cpio\.gz|deb|gz|iso|jar|lha|lzh|lzma|rar|rpm|sp|srpm|sv4cpio|sv4crc|tar|tar\.bz|tar\.bz2|tar\.gz|tar\.lzma|tar\.xz|tar\.Z|xz|Z|zip)[[:space:]]+/\.\1\
-/gI' | sed 's/[[:space:]]*$//')
-
-for file in $FILE; do
+for file in "$FILE"; do
 	cd "${file%/*}"
 	DIR="$(pwd)"
 	BEGIN_TIME=$(date +%s)
