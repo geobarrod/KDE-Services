@@ -155,7 +155,7 @@ if [ "$MODE" = "images2video" ]; then
 			--inputbox="Enter the frame rate of the output video file (for 10 selected image files to 1 fps ~1800)" 1800)
 	if-cancel-exit
 	FILENAME=$(kdialog --icon=ks-video --title="Convert Video Files" \
-			--inputbox="Enter filename without whitespaces for new video file" "New images to video")
+			--inputbox="Enter filename without whitespaces for new video file" "New Images to Video")
 	if-cancel-exit
 	DESTINATION=$(kdialog --icon=ks-video --title="Destination Video File" --getexistingdirectory "$DIR" 2>/dev/null)
 	if-cancel-exit
