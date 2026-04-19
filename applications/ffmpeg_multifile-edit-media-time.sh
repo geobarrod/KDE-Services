@@ -38,6 +38,7 @@ DIR=""
 ELAPSED_TIME=""
 ETIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -110,14 +111,13 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
-IFS=$'\n'
-
 FILES=$(kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
 		*.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv \
 		*.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2>/dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov|mp3|mp4|mpeg|mpeg4|mpg|ogg|ogv|vob|wav|webm|wma|wmv)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov|mp3|mp4|mpeg|mpeg4|mpg|ogg|ogv|vob|wav|webm|wma|wmv)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 DESTINATION=$(kdialog --icon=ks-media-edit-time --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
@@ -135,7 +135,7 @@ for i in $FILES; do
 	logs
 	BEGIN_TIME=$(date +%s)
 	DST_FILE="${i%.*}"
-	ffmpeg -y -i $i -ss $STIME -to $ETIME -c copy "$DESTINATION/${DST_FILE##*/}_Time-$STIME-$ETIME-Edited.${i:${#i}-3}" &> $LOG
+	ffmpeg -y -i $i -ss $STIME -to $ETIME -c copy "$DESTINATION/${DST_FILE##*/} (Time $STIME-$ETIME Edited).${i##*.}" &> $LOG
 	if-ffmpeg-cancel
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
