@@ -38,6 +38,7 @@ DIR=""
 ELAPSED_TIME=""
 FILES=""
 FINAL_TIME=""
+IFS=$'\n'
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PB_PIDFILE="$(mktemp)"
 SIZE=""
@@ -100,15 +101,14 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
-IFS=$'\n'
-
 FILES=$(kdialog --icon=ks-resize-image --title="Source Image Files" --multiple \
 		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi \
 		*.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.TGA \
 		*.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.tga *.tif *.tiff *.xpm" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|ppm|psd|sgi|tga|tif|tiff|xpm)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|ppm|psd|sgi|tga|tif|tiff|xpm)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 DESTINATION=$(kdialog --icon=ks-resize-image --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
@@ -121,7 +121,7 @@ progressbar-start
 
 for i in $FILES; do
 	DST_FILE="${i%.*}"
-	magick $i -resize $SIZE "$DESTINATION/${DST_FILE##*/}_${SIZE}p.${i:${#i}-3}"
+	magick $i -resize $SIZE "$DESTINATION/${DST_FILE##*/} (${SIZE}p).${i##*.}"
 	if-convert-cancel
 done
 
