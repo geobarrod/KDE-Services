@@ -39,6 +39,7 @@ ELAPSED_TIME=""
 FILE_LIST="/tmp/ConcatenateMediaFilesSameCodec"
 FILENAME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -114,14 +115,13 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
-IFS=$'\n'
-
 FILES=$(kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \
 	*.dat *.DV *.dv *.FLAC *.flac *.FLV *.flv *.M2V *.m2v *.M4A *.m4a *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP3 *.mp3 *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGG *.ogg *.OGV *.ogv *.VOB *.vob \
 	*.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2>/dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov|mp3|mp4|mpeg|mpeg4|mpg|ogg|ogv|vob|wav|webm|wma|wmv)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov|mp3|mp4|mpeg|mpeg4|mpg|ogg|ogv|vob|wav|webm|wma|wmv)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 FILENAME=$(kdialog --icon=ks-concatenate-media-file --title="Concatenate Media Files with Same Codec" \
 			--inputbox="Enter filename for new concatenated media file" New_Concatenated_Media_File)
