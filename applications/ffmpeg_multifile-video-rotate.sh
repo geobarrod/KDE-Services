@@ -38,6 +38,7 @@ DESTINATION=""
 DIR=""
 ELAPSED_TIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -109,13 +110,12 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
 fi
 
-IFS=$'\n'
-
 FILES=$(kdialog --icon=ks-video-rotate --title="Rotate Video Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT *.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v \
 		*.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2>/dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg|mpeg4|mpg|ogv|vob|webm|wmv)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg|mpeg4|mpg|ogv|vob|webm|wmv)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 DESTINATION=$(kdialog --icon=ks-video-rotate --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
@@ -131,7 +131,7 @@ if [ "$ANGLE" = "90 Clockwise" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -vf "transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/} (90 CW).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -144,7 +144,7 @@ elif [ "$ANGLE" = "90 Clockwise and Vertical Flip" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-Clockwise-VFlip.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -vf "transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/} (90 CW-VF).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -157,7 +157,7 @@ elif [ "$ANGLE" = "90 CounterClockwise" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=cclock" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -vf "transpose=cclock" -c:a copy "$DESTINATION/${DST_FILE##*/} (90 CCW).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -170,7 +170,7 @@ elif [ "$ANGLE" = "90 CounterClockwise and Vertical Flip" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=cclock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_90-CounterClockwise-VFlip.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -vf "transpose=cclock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/} (90 CCW-VF).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -183,7 +183,7 @@ elif [ "$ANGLE" = "180 Clockwise" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_180-Clockwise.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/} (180 CW).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -196,7 +196,7 @@ elif [ "$ANGLE" = "Horizontal Mirror" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/}_HMirror.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -vf "transpose=clock,transpose=clock_flip" -c:a copy "$DESTINATION/${DST_FILE##*/} (HM).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -209,7 +209,7 @@ elif [ "$ANGLE" = "Vertical Mirror" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -vf "transpose=clock_flip,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/}_VMirror.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -vf "transpose=clock_flip,transpose=clock" -c:a copy "$DESTINATION/${DST_FILE##*/} (VM).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
