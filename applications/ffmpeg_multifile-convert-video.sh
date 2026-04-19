@@ -41,6 +41,7 @@ FILES=""
 FILESIZE=""
 FINAL_TIME=""
 FORMAT="0"
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -49,8 +50,6 @@ PID="$$"
 RESOLUTION=""
 STD=""
 TIMEPOSITION=""
-
-IFS=$'\n'
 
 ###################################
 ############ Functions ############
@@ -143,16 +142,20 @@ if [ "$MODE" = "images2video" ]; then
 	FILES=$(kdialog --icon=ks-video --title="Select Image Files In Your Preferred Order" --multiple \
 			--getopenfilename "$DIR" "*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff *.BMP *.JPG *.PAM *.PBM *.PGM *.PNG *.PPM *.SGI *.TIF *.TIFF|*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff" 2>/dev/null)
 	if-cancel-exit
+	FILES=$(echo "$FILES" | sed -E 's/\.(bmp|jpg|pam|pbm|pgm|png|ppm|sgi|tif|tiff)[[:space:]]+/\.\1\
+	/gI' | sed 's/[[:space:]]*$//')
 
+	COUNT=0
 	for s in $FILES; do
-		cp $s /tmp/SequentialImage_$COUNT.${s:${#s}-3}
+		cp $s /tmp/SequentialImage_${COUNT}.${s##*.}
+		COUNT=$((COUNT+1))
 	done
 
 	FRAME_RATE=$(kdialog --icon=ks-video --title="Convert Video Files|$(ls /tmp/SequentialImage_*|wc -w|sed -e 's/^ *//') selected images" \
 			--inputbox="Enter the frame rate of the output video file (for 10 selected image files to 1 fps ~1800)" 1800)
 	if-cancel-exit
 	FILENAME=$(kdialog --icon=ks-video --title="Convert Video Files" \
-			--inputbox="Enter filename without whitespaces for new video file" New_Video_File)
+			--inputbox="Enter filename without whitespaces for new video file" "New images to video")
 	if-cancel-exit
 	DESTINATION=$(kdialog --icon=ks-video --title="Destination Video File" --getexistingdirectory "$DIR" 2>/dev/null)
 	if-cancel-exit
@@ -162,11 +165,11 @@ if [ "$MODE" = "images2video" ]; then
 	LOGERROR="$FILENAME.err"
 	rm -f $LOGERROR
 	BEGIN_TIME=$(date +%s)
-	SEQFILE=$(ls /tmp/SequentialImage_1.*)
-	ffmpeg -y -f image2 -i /tmp/SequentialImage_%d.${SEQFILE:${#SEQFILE}-3} -r $FRAME_RATE "$DESTINATION/$FILENAME.mp4" &> $LOG
+	SEQFILE=$(ls /tmp/SequentialImage_0.*)
+	ffmpeg -y -f image2 -i /tmp/SequentialImage_%d.${SEQFILE##*.} -r $FRAME_RATE "$DESTINATION/$FILENAME.mp4" &> $LOG
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Converting sequential images to $FILENAME.mp4" \
-			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi
@@ -190,9 +193,15 @@ if [ "$MODE" = "multiplexaudio" ]; then
 			*.dat *.DV *.dv *.FLV *.flv *.M2V *.m2v *.M4V *.m4v *.MKV *.mkv *.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm \
 			*.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2>/dev/null)
 	if-cancel-exit
+	FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg4|mpeg|mpg|ogv|vob|webm|wmv)[[:space:]]+/\.\1\
+	/gI' | sed 's/[[:space:]]*$//')
+
 	AUDIO_FILE=$(kdialog --icon=ks-video --title="Select Audio File" \
 			--getopenfilename "$DIR" "*.FLAC *.flac *.M4A *.m4a *.MP2 *.mp2 *.MP3 *.mp3 *.OGG *.ogg *.WAV *.wav *.WMA *.wma|*.flac *.m4a *.mp2 *.mp3 *.ogg *.wav *.wma" 2>/dev/null)
 	if-cancel-exit
+	AUDIO_FILE=$(echo "$AUDIO_FILE" | sed -E 's/\.(flac|m4a|mp2|mp3|ogg|wav|wma)[[:space:]]+/\.\1\
+	/gI' | sed 's/[[:space:]]*$//')
+
 	DESTINATION=$(kdialog --icon=ks-video --title="Destination Video File" --getexistingdirectory "$DIR" 2>/dev/null)
 	if-cancel-exit
 
@@ -206,7 +215,7 @@ if [ "$MODE" = "multiplexaudio" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -i $AUDIO_FILE -c copy -trellis 1 -g 12 "$DESTINATION/${DST_FILE##*/}_AudioMultiplexed.mp4" &> $LOG
+		ffmpeg -y -i $i -i $AUDIO_FILE -c copy -trellis 1 -g 12 "$DESTINATION/${DST_FILE##*/} (ma).mp4" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -219,7 +228,8 @@ FILES=$(kdialog --icon=ks-video --title="Source Video Files" --multiple --getope
 		*.MOV *.mov *.MP4 *.mp4 *.MPEG *.mpeg *.MPEG4 *.mpeg4 *.MPG *.mpg *.OGV *.ogv *.VOB *.vob *.WEBM *.webm *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flv *.m2v *.m4v *.mkv *.mov *.mp4 *.mpeg *.mpeg4 *.mpg *.ogv *.vob *.webm *.wmv" 2>/dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg4|mpeg|mpg|ogv|vob|webm|wmv)\s/\.\1\n/gi' | sed 's/ $//g')
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flv|m2v|m4v|mkv|mov|mp4|mpeg4|mpeg|mpg|ogv|vob|webm|wmv)[[:space:]]+/\.\1\
+	/gI' | sed 's/[[:space:]]*$//')
 
 ############################### video2images ###############################
 if [ "$MODE" = "video2images" ]; then
@@ -236,7 +246,7 @@ if [ "$MODE" = "video2images" ]; then
 		logs
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
-		ffmpeg -y -i $i -r $FRAME_RATE "$DESTINATION/${DST_FILE##*/}_%d.$IMAGE_FORMAT" &> $LOG
+		ffmpeg -y -i $i -r $FRAME_RATE "$DESTINATION/${DST_FILE##*/} %d.$IMAGE_FORMAT" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -279,7 +289,7 @@ if [ "$MODE" = "mobile" ]; then
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
 		ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -strict experimental -c:a aac -c:v mpeg4 -b:v 1000k -c:s copy -trellis 1 -g 12 \
-			"$DESTINATION/${DST_FILE##*/}_$RESOLUTION.3gp" &> $LOG
+			"$DESTINATION/${DST_FILE##*/} ($RESOLUTION).3gp" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -300,7 +310,7 @@ if [ "$MODE" = "4K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4095x2160 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (Ultra-HD 4K).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -311,7 +321,7 @@ if [ "$MODE" = "4K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 4k -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_Ultra-HD_4K.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 Ultra-HD 4K).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -322,7 +332,7 @@ if [ "$MODE" = "4K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s 4k -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_Ultra-HD_4K.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 Ultra-HD 4K).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -333,7 +343,7 @@ if [ "$MODE" = "4K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (Ultra-HD 4K).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -344,7 +354,7 @@ if [ "$MODE" = "4K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s 4k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_Ultra-HD_4K.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (Ultra-HD 4K).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -366,7 +376,7 @@ if [ "$MODE" = "2K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_DCI_2K.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (DCI 2K).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -377,7 +387,7 @@ if [ "$MODE" = "2K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s 2k -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_DCI_2K.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 DCI 2K).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -388,7 +398,7 @@ if [ "$MODE" = "2K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s 2k -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_DCI_2K.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 DCI 2K).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -399,7 +409,7 @@ if [ "$MODE" = "2K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_DCI_2K.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (DCI 2K).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -410,7 +420,7 @@ if [ "$MODE" = "2K" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s 2k -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_DCI_2K.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (DCI 2K).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -432,7 +442,7 @@ if [ "$MODE" = "1080" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (Full-HD 1080p).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -443,7 +453,7 @@ if [ "$MODE" = "1080" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd1080 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_Full-HD_1080p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 Full-HD 1080p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -454,7 +464,7 @@ if [ "$MODE" = "1080" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s hd1080 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_Full-HD_1080p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 Full-HD 1080p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -465,7 +475,7 @@ if [ "$MODE" = "1080" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (Full-HD 1080p).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -476,7 +486,7 @@ if [ "$MODE" = "1080" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd1080 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_Full-HD_1080p.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (Full-HD 1080p).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -498,7 +508,7 @@ if [ "$MODE" = "720" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_HD_720p.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (HD 720p).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -509,7 +519,7 @@ if [ "$MODE" = "720" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd720 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_HD_720p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 HD 720p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -520,7 +530,7 @@ if [ "$MODE" = "720" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s hd720 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_HD_720p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 HD 720p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -531,7 +541,7 @@ if [ "$MODE" = "720" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_HD_720p.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (HD 720p).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -542,7 +552,7 @@ if [ "$MODE" = "720" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd720 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_HD_720p.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (HD 720p).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -564,7 +574,7 @@ if [ "$MODE" = "480" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_ED_480p.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (ED 480p).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -575,7 +585,7 @@ if [ "$MODE" = "480" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s hd480 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_ED_480p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 ED 480p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -586,7 +596,7 @@ if [ "$MODE" = "480" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s hd480 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_ED_480p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 ED 480p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -597,7 +607,7 @@ if [ "$MODE" = "480" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_ED_480p.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (ED 480p).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -608,7 +618,7 @@ if [ "$MODE" = "480" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s hd480 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_ED_480p.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (ED 480p).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -630,7 +640,7 @@ if [ "$MODE" = "360" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_NHD_360p.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (NHD 360p).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -641,7 +651,7 @@ if [ "$MODE" = "360" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s nhd -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_NHD_360p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 NHD 360p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -652,7 +662,7 @@ if [ "$MODE" = "360" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s nhd -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_NHD_360p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 NHD 360p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -663,7 +673,7 @@ if [ "$MODE" = "360" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_NHD_360p.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (NHD 360p).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -674,7 +684,7 @@ if [ "$MODE" = "360" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s nhd -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_NHD_360p.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (NHD 360p).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -696,7 +706,7 @@ if [ "$MODE" = "240" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_240p.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (240p).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -707,7 +717,7 @@ if [ "$MODE" = "240" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -s qvga -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_240p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 240p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -718,7 +728,7 @@ if [ "$MODE" = "240" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -s qvga -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_240p.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 240p).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -729,7 +739,7 @@ if [ "$MODE" = "240" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_240p.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (240p).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -740,7 +750,7 @@ if [ "$MODE" = "240" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s qvga -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_240p.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (240p).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -762,7 +772,7 @@ if [ "$MODE" = "same" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_sr.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (sr).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -773,7 +783,7 @@ if [ "$MODE" = "same" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx264 -q:v 0 -mbd 2 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.264_sr.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.264 sr).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -784,7 +794,7 @@ if [ "$MODE" = "same" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -c:v libx265 -q:v 0 -crf 23 -mbd 2 -c:a copy -c:s copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_H.265_sr.mp4" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (H.265 sr).mp4" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -795,7 +805,7 @@ if [ "$MODE" = "same" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -c:a copy -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_sr.avi" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (sr).avi" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -806,7 +816,7 @@ if [ "$MODE" = "same" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v flv -b:v 1000k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_sr.flv" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (sr).flv" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -817,7 +827,7 @@ if [ "$MODE" = "same" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_sr.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (sr).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -828,7 +838,7 @@ if [ "$MODE" = "same" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -c:v mpeg2video -c:a libmp3lame -b:a 320k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_sr.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} (sr).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -897,7 +907,7 @@ if [ "$MODE" = "standards" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($FORMAT).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -908,7 +918,7 @@ if [ "$MODE" = "standards" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($FORMAT).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -919,7 +929,7 @@ if [ "$MODE" = "standards" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($FORMAT).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -930,7 +940,7 @@ if [ "$MODE" = "standards" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($FORMAT).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -941,7 +951,7 @@ if [ "$MODE" = "standards" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -target $FORMAT -mbd 2 -trellis 1 -g 12 -ac 6 \
-				"$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($FORMAT).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -952,7 +962,7 @@ if [ "$MODE" = "standards" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 -ac 6 \
-				"$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($FORMAT).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -963,7 +973,7 @@ if [ "$MODE" = "standards" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -target $FORMAT -ss $TIMEPOSITION -fs $FILESIZE -mbd 2 -trellis 1 -g 12 -ac 6 \
-				"$DESTINATION/${DST_FILE##*/}_$FORMAT.mpg" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($FORMAT).mpg" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -986,7 +996,7 @@ if [ "$MODE" = "web" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v flv -b:v 1000k -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_$RESOLUTION.flv" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($RESOLUTION).flv" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -1001,7 +1011,7 @@ if [ "$MODE" = "web" ]; then
 			BEGIN_TIME=$(date +%s)
 			DST_FILE="${i%.*}"
 			ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v libvpx -b:v 1000k -c:a libvorbis -trellis 1 -g 12 \
-				"$DESTINATION/${DST_FILE##*/}_$RESOLUTION.webm" &> $LOG
+				"$DESTINATION/${DST_FILE##*/} ($RESOLUTION).webm" &> $LOG
 			if-ffmpeg-cancel
 			FINAL_TIME=$(date +%s)
 			ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
@@ -1030,7 +1040,7 @@ if [ "$MODE" = "customized" ]; then
 		BEGIN_TIME=$(date +%s)
 		DST_FILE="${i%.*}"
 		ffmpeg -y -i $i -q:v 0 -mbd 2 -s $RESOLUTION -c:v $VIDEO_CODEC -c:a $AUDIO_CODEC -b:a ${AUDIO_BITRATE}k -trellis 1 -g 12 \
-			"$DESTINATION/${DST_FILE##*/}_[${RESOLUTION}_${VIDEO_CODEC}_${AUDIO_CODEC}].mkv" &> $LOG
+			"$DESTINATION/${DST_FILE##*/} (${RESOLUTION} ${VIDEO_CODEC} ${AUDIO_CODEC}).mkv" &> $LOG
 		if-ffmpeg-cancel
 		FINAL_TIME=$(date +%s)
 		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
