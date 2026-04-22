@@ -36,7 +36,7 @@ Name[zh_CN]=验证校验和
 Name[x-test]=xxVerify CheckSumxx
 
 [Desktop Action MD5-Sum]
-Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5 (strong)" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="CheckSum MD5" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; md5sum "$file" > $(ls $file).md5; sed -i "" "s; ${file%/*}/;*;" $(ls $file).md5; kdialog --icon=ks-checksum --title="CheckSum MD5" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which md5sum; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="MD5 (strong)" --passivepopup="[Error] Please install md5sum command and try again."; exit 1; else IFS=$'\n'; PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-checksum --title="CheckSum MD5" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; md5sum "$file" > $(ls $file).md5; sed -i "" "s; ${file%/*}/;*;" $(ls $file).md5; kdialog --icon=ks-checksum --title="CheckSum MD5" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-checksum
 Name=MD5 (strong)
 Name[de]=MD5 (stark)
