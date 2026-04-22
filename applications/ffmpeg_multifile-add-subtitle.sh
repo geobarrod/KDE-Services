@@ -37,6 +37,7 @@ DESTINATION=""
 DIR=""
 ELAPSED_TIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -64,7 +65,7 @@ if-cancel-exit() {
 if-ffmpeg-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Adding ${SUBS[$ARRAY_NUMBER]##*/} to ${FILES[$ARRAY_NUMBER]##*/}" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi
@@ -110,8 +111,14 @@ fi
 FILES=($(kdialog --icon=ks-add-subs --title="Video Files" --multiple --getopenfilename "$DIR" "*.MP4 *.mp4|*.mp4" 2>/dev/null))
 if-cancel-exit
 
+mapfile -t FILES <<< "$(echo "$FILES" | sed -E 's/\.(mp4)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')"
+
 SUBS=($(kdialog --icon=ks-add-subs --title="Subtitle Files" --multiple --getopenfilename "$DIR" "*.SRT *.srt|*.srt" 2>/dev/null))
 if-cancel-exit
+
+mapfile -t SUBS <<< "$(echo "$SUBS" | sed -E 's/\.(srt)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')"
 
 DESTINATION=$(kdialog --icon=ks-add-subs --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit

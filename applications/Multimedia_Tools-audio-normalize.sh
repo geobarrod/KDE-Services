@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###################################################################################
-# KDE-Services ⚙ 2011-2025.                                                       #
+# KDE-Services ⚙ 2011-2026.                                                       #
 #                                                                                 #
 # BSD 3-Clause License                                                            #
 #                                                                                 #
@@ -37,6 +37,7 @@ DIR=""
 DST_FILE=""
 ELAPSED_TIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -65,7 +66,7 @@ if-cancel-exit() {
 if-mp3gain-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Adjusting volume level of ${i##*/}" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DST_FILE/$LOGERROR
 		continue
 	fi
@@ -110,6 +111,9 @@ fi
 
 FILES=$(kdialog --icon=ks-audio-normalize --title="[Video|Audio] Files" --multiple --getopenfilename "$DIR" "*.MP3 *.mp3|*.mp3" 2>/dev/null)
 if-cancel-exit
+
+FILES=$(echo "$FILES" | sed -E 's/\.(mp3)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
 
 progressbar-start
 

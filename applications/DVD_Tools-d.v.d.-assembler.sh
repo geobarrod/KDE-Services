@@ -40,6 +40,7 @@ DVD_NAME=""
 ELAPSED_TIME=""
 FILES=""
 FINAL_TIME=""
+IFS=$'\n'
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PB_PIDFILE="$(mktemp)"
 PID="$$"
@@ -64,7 +65,7 @@ if-dvdauthor-cancel() {
 		kill $(cat $PB_PIDFILE)
 		rm $PB_PIDFILE
 		kdialog --icon=ks-error --title="DVD Assembler ($DVD_NAME)" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check video format errors. Try again"
+			--passivepopup="[Canceled]   Check video format errors. Try again"
 		exit 1
 	fi
 }
@@ -94,6 +95,9 @@ FILES=$(kdialog --icon=ks-media-optical-video --title="Source Video Files" --mul
 		--getopenfilename "$DIR" "*.mp2 *.mpe *.mpeg *.mpg *.vob *.MP2 *.MPE *.MPEG *.MPG *.VOB|MPEG-2 files" 2> /dev/null)
 if-cancel-exit
 
+FILES=$(echo "$FILES" | sed -E 's/\.(mp2|mpe|mpeg|mpg|vob)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
+
 for VIDEO in $FILES; do
 	ffprobe "$VIDEO" 2> $VIDEOINFO
 	CODEC=$(grep -o mpeg2video $VIDEOINFO)
@@ -120,12 +124,12 @@ progressbar-start
 
 BEGIN_TIME=$(date +%s)
 
-dvdauthor -tf $FILES -O $DESTINATION/$DVD_NAME
+dvdauthor -tf $FILES -O "$DESTINATION/$DVD_NAME"
 if-dvdauthor-cancel
 
-genisoimage -R -J -o $DESTINATION/$DVD_NAME.iso $DESTINATION/$DVD_NAME
+genisoimage -R -J -o "$DESTINATION/$DVD_NAME.iso" "$DESTINATION/$DVD_NAME"
 
-rm -fr $DESTINATION/$DVD_NAME
+rm -fr "$DESTINATION/$DVD_NAME"
 progressbar-stop
 
 FINAL_TIME=$(date +%s)

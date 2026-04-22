@@ -38,6 +38,7 @@ DIR=""
 ELAPSED_TIME=""
 FILES=""
 FINAL_TIME=""
+IFS=$'\n'
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
 PB_PIDFILE="$(mktemp)"
 SIZE=""
@@ -106,6 +107,9 @@ FILES=$(kdialog --icon=ks-resize-image --title="Source Image Files" --multiple \
 		*.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.tga *.tif *.tiff *.xpm" 2> /dev/null)
 if-cancel-exit
 
+FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|ppm|psd|sgi|tga|tif|tiff|xpm)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
+
 DESTINATION=$(kdialog --icon=ks-resize-image --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
 if-cancel-exit
 
@@ -117,7 +121,7 @@ progressbar-start
 
 for i in $FILES; do
 	DST_FILE="${i%.*}"
-	magick -resize $SIZE "$i" "$DESTINATION/${DST_FILE##*/}_${SIZE}p.${i:${#i}-3}"
+	magick $i -resize $SIZE "$DESTINATION/${DST_FILE##*/} (${SIZE}p).${i##*.}"
 	if-convert-cancel
 done
 

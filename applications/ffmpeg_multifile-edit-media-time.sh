@@ -38,6 +38,7 @@ DIR=""
 ELAPSED_TIME=""
 ETIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -67,7 +68,7 @@ if-cancel-exit() {
 if-ffmpeg-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Editing time of ${i##*/} from $STIME to $ETIME" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi
@@ -115,6 +116,9 @@ FILES=$(kdialog --icon=ks-media-edit-time --title="Edit Time from Media Files" -
 		*.VOB *.vob *.WAV *.wav *.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpeg *.mpeg4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2>/dev/null)
 if-cancel-exit
 
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov|mp3|mp4|mpeg|mpeg4|mpg|ogg|ogv|vob|wav|webm|wma|wmv)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
+
 DESTINATION=$(kdialog --icon=ks-media-edit-time --title="Destination Video Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
 
@@ -131,7 +135,7 @@ for i in $FILES; do
 	logs
 	BEGIN_TIME=$(date +%s)
 	DST_FILE="${i%.*}"
-	ffmpeg -y -i $i -ss $STIME -to $ETIME -c copy "$DESTINATION/${DST_FILE##*/}_Time-$STIME-$ETIME-Edited.${i:${#i}-3}" &> $LOG
+	ffmpeg -y -i $i -ss $STIME -to $ETIME -c copy "$DESTINATION/${DST_FILE##*/} (Time $STIME-$ETIME Edited).${i##*.}" &> $LOG
 	if-ffmpeg-cancel
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

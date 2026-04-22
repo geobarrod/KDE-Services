@@ -37,6 +37,7 @@ DESTINATION=""
 DIR=""
 ELAPSED_TIME=""
 FINAL_TIME=""
+IFS=$'\n'
 LOG=""
 LOGERROR=""
 PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
@@ -65,7 +66,7 @@ if-cancel-exit() {
 if-ffmpeg-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Cleaning Metadata from ${i##*/}" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi
@@ -113,6 +114,9 @@ FILES=$(kdialog --icon=ks-media-clean-metadata --title="Media Files" --multiple 
 	*.WEBM *.webm *.WMA *.wma *.WMV *.wmv|*.3gp *.avi *.dat *.dv *.flac *.flv *.m2v *.m4a *.m4v *.mkv *.mov *.mp3 *.mp4 *.mpg *.ogg *.ogv *.vob *.wav *.webm *.wma *.wmv" 2>/dev/null)
 if-cancel-exit
 
+FILES=$(echo "$FILES" | sed -E 's/\.(3gp|avi|dat|dv|flac|flv|m2v|m4a|m4v|mkv|mov|mp3|mp4|mpg|ogg|ogv|vob|wav|webm|wma|wmv)[[:space:]]+/\.\1\
+/gI' | sed 's/[[:space:]]*$//')
+
 DESTINATION=$(kdialog --icon=ks-media-clean-metadata --title="Destination Media Files" --getexistingdirectory "$DIR" 2>/dev/null)
 if-cancel-exit
 
@@ -122,16 +126,16 @@ for i in $FILES; do
 	BEGIN_TIME=$(date +%s)
 	DST_FILE="${i%.*}"
 	if [ "$(file $i|grep -o FLAC)" == "FLAC" ]; then
-		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.flac" &> $LOG
+		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/} (cm).flac" &> $LOG
 		if-ffmpeg-cancel
 	elif [ "$(file $i|grep -o ID3)" == "ID3" ]; then
-		ffmpeg -y -i $i -vn -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.mp3" &> $LOG
+		ffmpeg -y -i $i -vn -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/} (cm).mp3" &> $LOG
 		if-ffmpeg-cancel
 	elif [ "$(file $i|grep -o WebM)" == "WebM" ]; then
-		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.webm" &> $LOG
+		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/} (cm).webm" &> $LOG
 		if-ffmpeg-cancel
 	else
-		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/}_CleanMetadata.${i:${#i}-3}" &> $LOG
+		ffmpeg -y -i $i -map_metadata -1 -c copy "$DESTINATION/${DST_FILE##*/} (cm).${i##*.}" &> $LOG
 		if-ffmpeg-cancel
 	fi
 	FINAL_TIME=$(date +%s)
