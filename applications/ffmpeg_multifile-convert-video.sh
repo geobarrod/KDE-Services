@@ -125,7 +125,6 @@ elapsedtime() {
 
 DIR=$1
 cd "$DIR"
-DIR="$(pwd)"
 
 if [ "$DIR" == "~/.local/share/applications" ]; then
 	DIR="~/"
