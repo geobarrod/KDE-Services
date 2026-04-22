@@ -102,12 +102,12 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 fi
 
 FILES=$(kdialog --icon=ks-image --title="Source Image Files" --multiple \
-		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.svg \
+		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi *.svg \
 		*.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.SVG *.TGA \
-		*.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.svg *.tga *.tif *.tiff *.xpm" 2> /dev/null)
+		*.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi *.svg *.tga *.tif *.tiff *.xpm" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|ppm|psd|sgi|svg|tga|tif|tiff|xpm)[[:space:]]+/\.\1\
+FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|png|ppm|psd|sgi|svg|tga|tif|tiff|xpm)[[:space:]]+/\.\1\
 /gI' | sed 's/[[:space:]]*$//')
 
 DESTINATION=$(kdialog --icon=ks-image --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)

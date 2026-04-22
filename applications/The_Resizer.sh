@@ -60,7 +60,7 @@ if-convert-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Image Resizer" \
 			--passivepopup="[Canceled]   "${i##*/}"                                             \
-			Check the path and filename not contain whitespaces. Check image format errors. Check if the file format support resize to $SIZE pixels. Try again."
+			Check image format errors. Check if the file format support resize to $SIZE pixels. Try again."
 		continue
 	fi
 }
@@ -102,12 +102,12 @@ if [ "$DIR" == "~/.local/share/applications" ]; then
 fi
 
 FILES=$(kdialog --icon=ks-resize-image --title="Source Image Files" --multiple \
-		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi \
+		--getopenfilename "$DIR" "*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi \
 		*.tga *.tif *.tiff *.xpm *.BMP *.EPS *.GIF *.ICO *.JP2 *.JPEG *.JPG *.PBM *.PGM *.PNG *.PPM *.PSD *.SGI *.TGA \
-		*.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm * *.ppm *.psd *.sgi *.tga *.tif *.tiff *.xpm" 2> /dev/null)
+		*.TIF *.TIFF *.XPM|*.bmp *.eps *.gif *.ico *.jp2 *.jpeg *.jpg *.pbm *.pgm *.png *.ppm *.psd *.sgi *.tga *.tif *.tiff *.xpm" 2> /dev/null)
 if-cancel-exit
 
-FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|ppm|psd|sgi|tga|tif|tiff|xpm)[[:space:]]+/\.\1\
+FILES=$(echo "$FILES" | sed -E 's/\.(bmp|eps|gif|ico|jp2|jpeg|jpg|pbm|pgm|png|ppm|psd|sgi|tga|tif|tiff|xpm)[[:space:]]+/\.\1\
 /gI' | sed 's/[[:space:]]*$//')
 
 DESTINATION=$(kdialog --icon=ks-resize-image --title="Destination Image Files" --getexistingdirectory "$DIR" 2> /dev/null)
