@@ -123,11 +123,13 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-DIR=$1
-cd "$DIR"
-
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+DIR="$(pwd)"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
 fi
 
 MODE=$(kdialog --icon=ks-video --title="Convert Video Files" --menu="Choose Profile" mobile "Mobile Phones (3GP)" \
