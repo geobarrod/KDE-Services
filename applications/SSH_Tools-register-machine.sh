@@ -33,7 +33,7 @@
 ###################################################################################
 
 HEIGHT=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $2}')
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 WIDTH=$(xrandr |grep '*'|awk -F " " '{print $1}'|awk -Fx '{print $1}')
 
 ###################################
@@ -54,18 +54,18 @@ MODE=$(kdialog --icon=ks-server --title="SSH Tools - Registered Servers" --combo
 if-cancel-exit
 
 if [ "$MODE" = "View" ]; then
-        if [ -s ~/.kde-services/machines ]; then
-                kdialog --icon=ks-server --title="SSH Tools - Registered Servers" --textbox ~/.kde-services/machines 2> /dev/null
+        if [ -s $HOME/.kde-services/machines ]; then
+                kdialog --icon=ks-server --title="SSH Tools - Registered Servers" --textbox $HOME/.kde-services/machines 2> /dev/null
         else
                 kdialog --icon=ks-server --title="Registered Servers" \
                         --sorry="No Find Servers: First Public Key Generation and Install Public Key in Remote Servers" 2> /dev/null
         exit 1
         fi
 elif [ "$MODE" = "Edit" ]; then
-        mkdir ~/.kde-services
-        touch ~/.kde-services/machines
+        mkdir $HOME/.kde-services
+        touch $HOME/.kde-services/machines
         kdialog --icon=ks-server --title="SSH Tools - Registered Servers" \
-                --textinputbox="Edit a Hostname or IP address per line" "$(cat ~/.kde-services/machines|sort -u)" > ~/.kde-services/machines 2> /dev/null
+                --textinputbox="Edit a Hostname or IP address per line" "$(cat $HOME/.kde-services/machines|sort -u)" > $HOME/.kde-services/machines 2> /dev/null
 fi
 
 exit 0

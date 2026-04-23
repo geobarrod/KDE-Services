@@ -32,14 +32,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PREFIXmenu6=~/.local/share/kio/servicemenus
-PREFIXservicetypes5=~/.local/share/kservicetypes5
-PREFIXapp=~/.local/share/applications
-PREFIXSVGicons=~/.local/share/icons/hicolor/scalable/apps
-PREFIXmime=~/.local/share/mime/text
-PREFIXappmerge=~/.config/kdedefaults/menus/applications-merged
-PREFIXdeskdir=~/.local/share/desktop-directories
-PREFIXdoc=~/.local/share/doc/kde-services
+PREFIXmenu6=$HOME/.local/share/kio/servicemenus
+PREFIXservicetypes5=$HOME/.local/share/kservicetypes5
+PREFIXapp=$HOME/.local/share/applications
+PREFIXSVGicons=$HOME/.local/share/icons/hicolor/scalable/apps
+PREFIXmime=$HOME/.local/share/mime/text
+PREFIXappmerge=$HOME/.config/kdedefaults/menus/applications-merged
+PREFIXdeskdir=$HOME/.local/share/desktop-directories
+PREFIXdoc=$HOME/.local/share/doc/kde-services
 
 mkdir -p ${PREFIXmenu6}
 mkdir -p ${PREFIXservicetypes5}
@@ -60,6 +60,6 @@ cp desktop-directories/* ${PREFIXdeskdir}
 cp doc/* ${PREFIXdoc}
 
 xdg-mime install --novendor ${PREFIXmime}/kde-services.xml
-update-mime-database ~/.local/share/mime > /dev/null
+update-mime-database $HOME/.local/share/mime > /dev/null
 xdg-icon-resource forceupdate --theme hicolor
 xdg-desktop-menu forceupdate

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else ~/.local/share/applications/ffmpeg_multifile-edit-media-time.sh;fi
+Exec=which ffmpeg; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Edit Time from Media Files" --passivepopup="[Error] Please install ffmpeg command and try again."; exit 1; else $HOME/.local/share/applications/ffmpeg_multifile-edit-media-time.sh;fi
 Icon=ks-media-edit-time
 Name=Edit Time from Media Files
 Name[de]=Zeitstempel von Medien editieren
@@ -14,7 +14,7 @@ Name[pt_BR]=Editar Duração de Arquivos de Multimídia
 Name[ru]=Отредактируйте Время из Мультимедиа Файлы
 Name[uk]=Відредагуйте Час з Мультимедійних Файлів
 Name[zh_CN]=修改媒体文件时间
-Path=~/.local/share/applications
+Path=$HOME/.local/share/applications
 StartupNotify=true
 Terminal=false
 Type=Application

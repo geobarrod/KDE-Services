@@ -35,7 +35,7 @@
 DBUSREF=""
 DIR=""
 LOG=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 YTDLPID=""
 
 ###################################
@@ -84,12 +84,14 @@ progressbar_percent() {
 ##############################
 
 trap 'rm -f "$LOG"; [ -n "$DBUSREF" ] && qdbus6 "$DBUSREF" close 2>/dev/null' INT TERM EXIT
-DIR=$1
-cd "$DIR"
-DIR="$(pwd)"
 
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+DIR="$(pwd)"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
 fi
 
 mkdir -p $HOME/.kde-services
@@ -119,7 +121,6 @@ if [ "$?" != "0" ];then
 fi
 
 cd $DESTINATION
-
 INIT_TIME=$(date +%s)
 LOG=$(mktemp)
 yt-dlp -o %\(upload_date\)s_%\(title\)s_\(%\(id\)s\).%\(ext\)s \

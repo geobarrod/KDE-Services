@@ -34,7 +34,7 @@
 
 HOST=""
 LOGIN=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 SERVER=""
 
 ###################################
@@ -51,10 +51,10 @@ if-cancel-exit() {
 ############ Main ############
 ##############################
 
-if [ -s ~/.kde-services/machines ]; then
-        SERVER=$(cat ~/.kde-services/machines)
+if [ -s $HOME/.kde-services/machines ]; then
+        SERVER=$(cat $HOME/.kde-services/machines)
         HOST=$(kdialog --icon=ks-connect-to --title="SSH Tools - Connect to" --combobox="Select Hostname or IP Address" $SERVER \
-                        --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
+                        --default $(head -n1 $HOME/.kde-services/machines) 2> /dev/null)
         if-cancel-exit
         LOGIN=$(kdialog --icon=ks-connect-to --title="SSH Tools - Connect to $HOST" --combobox="Select User" $USER root --default $USER 2> /dev/null)
         if-cancel-exit

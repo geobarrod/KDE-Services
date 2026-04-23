@@ -36,7 +36,7 @@ HOST=""
 LOGIN=""
 MOUNTPOINT=""
 OPTION=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 SERVER=""
 
 ###################################
@@ -50,9 +50,9 @@ if-cancel-exit() {
 }
 
 connect() {
-        echo $HOST >> ~/.kde-services/machines
-        sort -u ~/.kde-services/machines > /tmp/machines
-        mv /tmp/machines ~/.kde-services/machines
+        echo $HOST >> $HOME/.kde-services/machines
+        sort -u $HOME/.kde-services/machines > /tmp/machines
+        mv /tmp/machines $HOME/.kde-services/machines
         mkdir $HOME/$HOST 2> /dev/null
         sshfs -o reconnect $LOGIN@$HOST:/ $HOME/$HOST
         dolphin --title="SSH Tools - $HOST" $HOME/$HOST 2> /dev/null
@@ -63,9 +63,9 @@ connect() {
 ############ Main ############
 ##############################
 
-if [ ! -s ~/.kde-services/machines ]; then
-        mkdir ~/.kde-services 2> /dev/null
-        echo localhost > ~/.kde-services/machines 2> /dev/null
+if [ ! -s $HOME/.kde-services/machines ]; then
+        mkdir $HOME/.kde-services 2> /dev/null
+        echo localhost > $HOME/.kde-services/machines 2> /dev/null
 fi
 
 OPTION=$(kdialog --icon=ks-sshfs --title="SSH Tools - Mount point to Remote Directory" \
@@ -73,12 +73,12 @@ OPTION=$(kdialog --icon=ks-sshfs --title="SSH Tools - Mount point to Remote Dire
 if-cancel-exit
 
 if [ "$OPTION" = "Mount Remote Directory" ]; then
-        SERVER=$(cat ~/.kde-services/machines)
+        SERVER=$(cat $HOME/.kde-services/machines)
         LOGIN=$(kdialog --icon=ks-sshfs --title="SSH Tools - Mount point to Remote Directory" --combobox="Select User" $USER root \
                         --default $USER 2> /dev/null)
         if-cancel-exit
         HOST=$(kdialog --icon=ks-sshfs --title="SSH Tools - Mount point to Remote Directory" --combobox="Select Hostname or IP Address" $SERVER  \
-                        --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
+                        --default $(head -n1 $HOME/.kde-services/machines) 2> /dev/null)
         if [ "$?" -gt "0" ]; then
                 HOST=$(kdialog --icon=ks-sshfs --title="SSH Tools - Mount point to Remote Directory" \
                                 --inputbox="Enter Hostname or IP Address" localhost.localdomain  2> /dev/null)

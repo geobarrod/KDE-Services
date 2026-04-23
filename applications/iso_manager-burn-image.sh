@@ -36,7 +36,7 @@ BEGIN_TIME=""
 ELAPSED_TIME=""
 FILE="$1"
 FINAL_TIME=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 PID="$$"
 

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Backup-Tools;
-Exec=~/.local/share/applications/Backup_Tools-standard.sh
+Exec=$HOME/.local/share/applications/Backup_Tools-standard.sh
 Icon=ks-database
 Name=Standards
 Name[de]=Standard

@@ -32,7 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 
 locate -S > /tmp/StatisticsLocateDB
 kdialog --icon=ks-search-stats --title="Statistics Search DataBase" --textbox /tmp/StatisticsLocateDB 400 160 2> /dev/null

@@ -45,7 +45,7 @@ INTERNETVERSION=""
 LOCALVERSION=""
 NOTEXIST=""
 PACKAGESOURCE=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PID="$$"
 WHITE='\E[37;40m'
 
@@ -70,11 +70,11 @@ elapsed-time() {
 
 if-cancel-exit() {
         if [ "$EXIT" = "2" ]; then
-                rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-                rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-                rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-                rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-                rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
                 kill -9 $(pidof xterm|awk -F " " '{print $1}') &>/dev/null
                 exit 1
         fi
@@ -82,11 +82,11 @@ if-cancel-exit() {
 
 if-cancel-exit2() {
         if [ "$EXIT" = "1" ]; then
-                rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-                rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-                rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-                rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-                rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
                 kill -9 $(pidof xterm|awk -F " " '{print $1}') &>/dev/null
                 exit 1
         fi
@@ -101,7 +101,7 @@ rpmbuild-error() {
                 echo -e "\n\n$GREEN>$GREENRED Error: Building $APPNAME Package.$GREEN Try Again.$WHITE\n"
                 kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
                         --error="[Error]: Building $APPNAME Package. See $HOME/rpmbuild/TMP/$APPNAME.err and try again." 2>/dev/null &
-                mv ~/rpmbuild/TMP/$APPNAME.log ~/rpmbuild/TMP/$APPNAME.err
+                mv $HOME/rpmbuild/TMP/$APPNAME.log $HOME/rpmbuild/TMP/$APPNAME.err
         fi
 }
 
@@ -141,22 +141,22 @@ EOF'
 
 rpmmacros-no-cflags() {
         sudo yum -y --nogpgcheck reinstall qt-devel kdelibs-devel >/dev/null
-        BINOPT=$(cat ~/.kde-services/rebuild-package-cflags 2>/dev/null)
+        BINOPT=$(cat $HOME/.kde-services/rebuild-package-cflags 2>/dev/null)
         kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package | B.O.O.=\"$BINOPT\"" \
                 --yesnocancel="          Do you want to reconfigure Binary Optimization Option(s) of compilation?               " 2>/dev/null
         EXIT="$?"
         
         if [ "$EXIT" = "0" ]; then
-                cat ~/.rpmmacros|grep -v optflags|grep -v global_cflags > ~/.rpmmacros.tmp
-                cat ~/.rpmmacros.tmp > ~/.rpmmacros
-                rm -f ~/.rpmmacros.tmp
+                cat $HOME/.rpmmacros|grep -v optflags|grep -v global_cflags > $HOME/.rpmmacros.tmp
+                cat $HOME/.rpmmacros.tmp > $HOME/.rpmmacros
+                rm -f $HOME/.rpmmacros.tmp
         elif [ "$EXIT" = "1" ]; then
                 BINOPT="-O2"
         elif [ "$EXIT" = "2" ]; then
                 if-cancel-exit
         fi
         
-        grep global_cflags ~/.rpmmacros &>/dev/null
+        grep global_cflags $HOME/.rpmmacros &>/dev/null
     
         if [ "$?" != "0" ]; then
                 BINOPT=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --combobox="Choose Binary Optimization Option(s)" \
@@ -169,10 +169,10 @@ rpmmacros-no-cflags() {
                         BINOPT="O2"
                 fi
         
-                echo -e "\n%optflags\t\t-$BINOPT" >> ~/.rpmmacros
+                echo -e "\n%optflags\t\t-$BINOPT" >> $HOME/.rpmmacros
                 echo -e "%__global_cflags\t-$BINOPT -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector \
-                        --param=ssp-buffer-size=4 %{_hardened_cflags}" >> ~/.rpmmacros
-                sudo sed -i "" "s;-O2;-$BINOPT;g" ~/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
+                        --param=ssp-buffer-size=4 %{_hardened_cflags}" >> $HOME/.rpmmacros
+                sudo sed -i "" "s;-O2;-$BINOPT;g" $HOME/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
         
                 if [ "$(uname -m)" = "i686" ]; then
                         sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
@@ -186,21 +186,21 @@ rpmmacros-no-cflags() {
                         sudo sed -i "" "s;-O2;-$BINOPT;g" /usr/lib64/qt4/mkspecs/common/gcc-base.conf &>/dev/null
                 fi
         
-                mkdir ~/.kde-services &>/dev/null
-                echo "-$BINOPT" > ~/.kde-services/rebuild-package-cflags
+                mkdir $HOME/.kde-services &>/dev/null
+                echo "-$BINOPT" > $HOME/.kde-services/rebuild-package-cflags
         fi
     
-        grep fast-math ~/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
+        grep fast-math $HOME/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
     
         if [ "$?" != "0" ]; then
-                BINOPT=$(cat ~/.kde-services/rebuild-package-cflags 2>/dev/null)
-                sudo sed -i "" "s;-O2;$BINOPT;g" ~/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
+                BINOPT=$(cat $HOME/.kde-services/rebuild-package-cflags 2>/dev/null)
+                sudo sed -i "" "s;-O2;$BINOPT;g" $HOME/.local/share/kde4/apps/cmake/modules/FindKDE4Internal.cmake &>/dev/null
         fi
     
         grep fast-math /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
     
         if [ "$?" != "0" ]; then
-                BINOPT=$(cat ~/.kde-services/rebuild-package-cflags 2>/dev/null)
+                BINOPT=$(cat $HOME/.kde-services/rebuild-package-cflags 2>/dev/null)
         
                 if [ "$(uname -m)" = "i686" ]; then
                         sudo sed -i "" "s;-O2;$BINOPT;g" /usr/lib/qt4/mkspecs/linux-g++/qmake.conf &>/dev/null
@@ -219,11 +219,11 @@ rpmmacros-no-cflags() {
 check-builddep() {
         if [ "$?" != "0" ]; then
                 echo -e "\n$GREEN>$GREENRED Error: Installing Build Depends Package For $i.$GREEN$WHITE\n"
-                sed -i "" "s;$i;;g" ~/.kde-services/source-packages
-                cat ~/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
-                cat /tmp/source-packages > ~/.kde-services/source-packages
-                cat ~/.kde-services/source-packages|xargs > /tmp/source-packages
-                cat /tmp/source-packages > ~/.kde-services/source-packages
+                sed -i "" "s;$i;;g" $HOME/.kde-services/source-packages
+                cat $HOME/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
+                cat /tmp/source-packages > $HOME/.kde-services/source-packages
+                cat $HOME/.kde-services/source-packages|xargs > /tmp/source-packages
+                cat /tmp/source-packages > $HOME/.kde-services/source-packages
                 rm -f /tmp/source-packages
                 kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" \
                         --error="Can't install all the RPMs needed to build $i source RPM package. See debug console." 2>/dev/null &
@@ -248,7 +248,7 @@ finished() {
 }
 
 rebuild-package() {
-        cd ~/rpmbuild/SPECS
+        cd $HOME/rpmbuild/SPECS
         ls *.spec &>/dev/null
     
         if [ "$?" != "0" ]; then
@@ -266,11 +266,11 @@ rebuild-package() {
                 --yesno "You can change Spec file(s) or Source Code in this pause. Do you want continuing with the RPM package(s) rebuilding process?" 2>/dev/null
 
         if [ "$?" = "1" ]; then
-                rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-                rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-                rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-                rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-                rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
                 kill -9 $(pidof xterm|awk -F " " '{print $1}') &>/dev/null
                 exit 1
         fi
@@ -281,9 +281,9 @@ rebuild-package() {
                 APPNAME=$(ls $i|awk -F . '{print $1}')
                 echo -e "\n\n$GREEN> Rebuild $APPNAME RPM Package...$WHITE\n"
                 ccache -M 2 >/dev/null
-                touch ~/rpmbuild/TMP/$APPNAME.log
-                tail -fn0 ~/rpmbuild/TMP/$APPNAME.log|pv -cN "stdout+stderr data" -bt >/dev/null &
-                QA_RPATHS=$[ 0x0001|0x0002|0x0004|0x0008|0x0010|0x0020 ] rpmbuild --clean --rmsource --rmspec -bb $i &> ~/rpmbuild/TMP/$APPNAME.log
+                touch $HOME/rpmbuild/TMP/$APPNAME.log
+                tail -fn0 $HOME/rpmbuild/TMP/$APPNAME.log|pv -cN "stdout+stderr data" -bt >/dev/null &
+                QA_RPATHS=$[ 0x0001|0x0002|0x0004|0x0008|0x0010|0x0020 ] rpmbuild --clean --rmsource --rmspec -bb $i &> $HOME/rpmbuild/TMP/$APPNAME.log
                 rpmbuild-error
                 kill -9 $(pidof -x pv) &>/dev/null
                 kill -9 $(pidof -x pv) &>/dev/null
@@ -295,7 +295,7 @@ rebuild-package() {
 }
 
 install-package() {
-        cd ~/rpmbuild/TMP
+        cd $HOME/rpmbuild/TMP
 
         for i in $(ls *.err 2>/dev/null|awk -F . '{print $1}'); do
                 echo -e "$GREEN- Nothing to do for $GREENRED$i.$WHITE\n"
@@ -322,18 +322,18 @@ install-package() {
         fi
 
         mv -f package.tmp package.ins
-        cd ~/rpmbuild/RPMS/$(uname -m)
+        cd $HOME/rpmbuild/RPMS/$(uname -m)
         echo "Choose Rebuilded Package For Install." > /tmp/speak
         text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
         play /tmp/speak.wav 2>/dev/null
         rm -fr /tmp/speak*
-        SHOWAPPNAME=$(cat ~/rpmbuild/TMP/package.ins|xargs -n1|awk -F " " '{print $1,$1}'|sed 's/$/ off/g'|xargs)
+        SHOWAPPNAME=$(cat $HOME/rpmbuild/TMP/package.ins|xargs -n1|awk -F " " '{print $1,$1}'|sed 's/$/ off/g'|xargs)
         INSTALLPKG=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --separate-output \
                                 --checklist="Choose Rebuilded Package(s) For Install" All "All List" off $SHOWAPPNAME 2>/dev/null)
         EXIT="$?"
 
         if [ "$EXIT" = "1" ] || [ "$INSTALLPKG" = "" ]; then
-                rm -f $(cat ~/rpmbuild/TMP/package.del 2>/dev/null) ~/rpmbuild/TMP/*.log ~/rpmbuild/TMP/*.ins ~/rpmbuild/TMP/*.del
+                rm -f $(cat $HOME/rpmbuild/TMP/package.del 2>/dev/null) $HOME/rpmbuild/TMP/*.log $HOME/rpmbuild/TMP/*.ins $HOME/rpmbuild/TMP/*.del
                 finished
                 echo -e "\n\n$GREEN> Check RPM package(s) at the following path $HOME/rpmbuild/RPMS/$(uname -m)/$WHITE\n"
                 echo -e "$GREEN>($(date +%H"h":%M"m")) Finished.$WHITE\n"
@@ -341,7 +341,7 @@ install-package() {
         elif [ "$INSTALLPKG" = "All" ]; then
                 echo -e "\n\n$GREEN> Installing RPM Packages...$WHITE\n"
 
-                for i in $(cat ~/rpmbuild/TMP/package.ins 2>/dev/null); do
+                for i in $(cat $HOME/rpmbuild/TMP/package.ins 2>/dev/null); do
                         APPNAME=${i##*/}
                         sudo rpm -Uvh --force $i
                         EXIT=$?
@@ -349,7 +349,7 @@ install-package() {
                         notify
                 done
 
-                rm -f $(cat ~/rpmbuild/TMP/package.del 2>/dev/null) ~/rpmbuild/TMP/*.log ~/rpmbuild/TMP/*.ins ~/rpmbuild/TMP/*.del
+                rm -f $(cat $HOME/rpmbuild/TMP/package.del 2>/dev/null) $HOME/rpmbuild/TMP/*.log $HOME/rpmbuild/TMP/*.ins $HOME/rpmbuild/TMP/*.del
                 finished
                 echo -e "\n\n$GREEN> Check RPM package(s) at the following path $HOME/rpmbuild/RPMS/$(uname -m)/$WHITE\n"
                 echo -e "$GREEN>($(date +%H"h":%M"m")) Finished.$WHITE\n"
@@ -357,9 +357,9 @@ install-package() {
         elif [ "$INSTALLPKG" != "" ]; then
                 echo -e "\n\n$GREEN> Installing RPM Packages...$WHITE\n"
                 INSTALLPKG=$(echo "$INSTALLPKG"|sed "s;All;;")
-                echo $INSTALLPKG|xargs -n1 > ~/rpmbuild/TMP/package.ins
+                echo $INSTALLPKG|xargs -n1 > $HOME/rpmbuild/TMP/package.ins
         
-                for i in $(cat ~/rpmbuild/TMP/package.ins 2>/dev/null); do
+                for i in $(cat $HOME/rpmbuild/TMP/package.ins 2>/dev/null); do
                         APPNAME=${i##*/}
                         sudo rpm -Uvh --force $i
                         EXIT=$?
@@ -367,7 +367,7 @@ install-package() {
                         notify
                 done
         
-                rm -f $(cat ~/rpmbuild/TMP/package.del 2>/dev/null) ~/rpmbuild/TMP/*.log ~/rpmbuild/TMP/*.ins ~/rpmbuild/TMP/*.del
+                rm -f $(cat $HOME/rpmbuild/TMP/package.del 2>/dev/null) $HOME/rpmbuild/TMP/*.log $HOME/rpmbuild/TMP/*.ins $HOME/rpmbuild/TMP/*.del
                 finished
                 echo -e "\n\n$GREEN> Check RPM package(s) at the following path $HOME/rpmbuild/RPMS/$(uname -m)/$WHITE\n"
                 echo -e "$GREEN>($(date +%H"h":%M"m")) Finished.$WHITE\n"
@@ -409,24 +409,24 @@ sudo ln -fs /usr/bin/ccache /usr/local/bin/cc
 sudo ln -fs /usr/bin/ccache /usr/local/bin/c++
 rpmmacros-no-cflags
 echo -e "$GREEN> Cleaning $HOME/rpmbuild Tree...$WHITE\n"
-rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
 rpmdev-setuptree
-mkdir -p ~/rpmbuild/TMP &>/dev/null
+mkdir -p $HOME/rpmbuild/TMP &>/dev/null
 PACKAGESOURCE=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --yesnocancel "Have the source RPM package?" 2>/dev/null)
 EXIT=$?
 if-cancel-exit
 
 if [ "$EXIT" = "1" ]; then
-        if [ ! -s ~/.kde-services/source-packages ]; then
-                mkdir ~/.kde-services 2>/dev/null
-                echo "kate" > ~/.kde-services/source-packages
+        if [ ! -s $HOME/.kde-services/source-packages ]; then
+                mkdir $HOME/.kde-services 2>/dev/null
+                echo "kate" > $HOME/.kde-services/source-packages
         fi
 
-        SHOWAPPNAME=$(cat ~/.kde-services/source-packages|xargs -n1|awk -F " " '{print $1,$1}'|sed 's/$/ off/g'|xargs)
+        SHOWAPPNAME=$(cat $HOME/.kde-services/source-packages|xargs -n1|awk -F " " '{print $1,$1}'|sed 's/$/ off/g'|xargs)
         APPNAME=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package" --separate-output \
             --checklist="Choose Compiled Application(s)" All "All List" off $SHOWAPPNAME Other Other off 2>/dev/null)
         EXIT=$?
@@ -446,14 +446,14 @@ if [ "$EXIT" = "1" ]; then
         fi
     
         if [ "$APPNAME" = "All" ] || [ "$APPNAME" = "" ]; then
-                APPNAME=$(cat ~/.kde-services/source-packages)
+                APPNAME=$(cat $HOME/.kde-services/source-packages)
         fi
     
-        echo "$APPNAME"|xargs >> ~/.kde-services/source-packages
-        cat ~/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
-        cat /tmp/source-packages > ~/.kde-services/source-packages
-        cat ~/.kde-services/source-packages|xargs > /tmp/source-packages
-        cat /tmp/source-packages > ~/.kde-services/source-packages
+        echo "$APPNAME"|xargs >> $HOME/.kde-services/source-packages
+        cat $HOME/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
+        cat /tmp/source-packages > $HOME/.kde-services/source-packages
+        cat $HOME/.kde-services/source-packages|xargs > /tmp/source-packages
+        cat /tmp/source-packages > $HOME/.kde-services/source-packages
         echo -n "$APPNAME" > /tmp/source-packages
         APPNAME=$(cat /tmp/source-packages)
         rm -f /tmp/source-packages
@@ -464,11 +464,11 @@ if [ "$EXIT" = "1" ]; then
                         echo -n "$i " >> /tmp/package-not-exist
                         kdialog --icon=ks-error --title="Rebuild RPM Package" \
                                 --passivepopup="$i   [Error]: This package not exist in your Repositories." 2>/dev/null
-                        sed -i "" "s;$i;;g" ~/.kde-services/source-packages
-                        cat ~/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
-                        cat /tmp/source-packages > ~/.kde-services/source-packages
-                        cat ~/.kde-services/source-packages|xargs > /tmp/source-packages
-                        cat /tmp/source-packages > ~/.kde-services/source-packages
+                        sed -i "" "s;$i;;g" $HOME/.kde-services/source-packages
+                        cat $HOME/.kde-services/source-packages|xargs -n1|sort -u > /tmp/source-packages
+                        cat /tmp/source-packages > $HOME/.kde-services/source-packages
+                        cat $HOME/.kde-services/source-packages|xargs > /tmp/source-packages
+                        cat /tmp/source-packages > $HOME/.kde-services/source-packages
                         rm -f /tmp/source-packages
                         APPNAME=$(echo "$APPNAME"|sed "s/$i//g"|xargs -n1|sort -u)
                         APPNAME=$(echo "$APPNAME"|xargs)
@@ -476,7 +476,7 @@ if [ "$EXIT" = "1" ]; then
         done
 
         NOTEXIST=$(cat /tmp/package-not-exist 2>/dev/null)
-        cd ~/rpmbuild/SRPMS
+        cd $HOME/rpmbuild/SRPMS
 
         for i in $APPNAME; do
                 LOCALVERSION=$(ls $i* 2>/dev/null|sed "s/^.*$i-//"|sed 's/.fc...src.rpm$//')
@@ -504,7 +504,7 @@ fi
 
 if [ "$EXIT" = "0" ]; then
         SOURCEFILE=$(kdialog --icon=ks-rebuild-rpm --title="Rebuild RPM Package - Source RPM File" --multiple \
-                                --getopenfilename ~/rpmbuild/SRPMS .src.rpm 2>/dev/null)
+                                --getopenfilename $HOME/rpmbuild/SRPMS .src.rpm 2>/dev/null)
         EXIT=$?
         if-cancel-exit2
 

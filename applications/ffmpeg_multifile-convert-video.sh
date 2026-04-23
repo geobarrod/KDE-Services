@@ -44,7 +44,7 @@ FORMAT="0"
 IFS=$'\n'
 LOG=""
 LOGERROR=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 PID="$$"
 RESOLUTION=""
@@ -124,6 +124,7 @@ elapsedtime() {
 ##############################
 
 DIR="$(pwd)"
+
 if [ "$DIR" == "$HOME/.local/share/applications" ]; then
 	DIR="$HOME"
 	cd "$DIR"
@@ -156,7 +157,7 @@ if [ "$MODE" = "images2video" ]; then
 			--inputbox="Enter the frame rate of the output video file (for 10 selected image files to 1 fps ~1800)" 1800)
 	if-cancel-exit
 	FILENAME=$(kdialog --icon=ks-video --title="Convert Video Files" \
-			--inputbox="Enter filename without whitespaces for new video file" "New Images to Video")
+			--inputbox="Enter filename for new video file" "New Images to Video")
 	if-cancel-exit
 	DESTINATION=$(kdialog --icon=ks-video --title="Destination Video File" --getexistingdirectory "$DIR" 2>/dev/null)
 	if-cancel-exit
@@ -170,7 +171,7 @@ if [ "$MODE" = "images2video" ]; then
 	ffmpeg -y -f image2 -i /tmp/SequentialImage_%d.${SEQFILE##*.} -r $FRAME_RATE "$DESTINATION/$FILENAME.mp4" &> $LOG
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="Converting sequential images to $FILENAME.mp4" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespaces. Check error log $LOGERROR. Try again"
+			--passivepopup="[Canceled]   Check error log $LOGERROR. Try again"
 		mv $LOG $DESTINATION/$LOGERROR
 		continue
 	fi

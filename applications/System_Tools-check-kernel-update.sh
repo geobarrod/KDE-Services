@@ -32,7 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 SYSKERNELVERSION=$(uname -r|sed 's/.fc.*$//')
 INTERNETVERSION=$(yumdownloader --url --source kernel|grep kernel|grep -v "No source RPM found"|sed 's/^.*kernel-//'|sed 's/.fc...src.rpm$//')
 
@@ -52,7 +52,7 @@ if [ "$EXIT" = "0" ]; then
                 EXIT=$?
         
                 if [ "$EXIT" = "0" ]; then
-                        xterm -T "Build Custom Kernel" -bg black -fg white -e ~/.local/share/applications/System_Tools-build-custom-kernel.sh &
+                        xterm -T "Build Custom Kernel" -bg black -fg white -e $HOME/.local/share/applications/System_Tools-build-custom-kernel.sh &
                 else
                         exit 1
                 fi

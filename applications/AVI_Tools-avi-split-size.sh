@@ -36,7 +36,8 @@ BEGIN_TIME=""
 ELAPSED_TIME=""
 FILE="$@"
 FINAL_TIME=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+IFS=$'\n'
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 
 ###################################
@@ -55,7 +56,7 @@ if-cancel-exit() {
 if-avisplit-cancel() {
 	if [ "$?" != "0" ]; then
 		kdialog --icon=ks-error --title="AVI Split (To Size)" \
-			--passivepopup="[Canceled]   Check the path and filename not contain whitespace. Check video format errors. Try again"
+			--passivepopup="[Canceled]   Check video format errors. Try again"
 		exit 1
 	fi
 }
@@ -96,9 +97,9 @@ SIZE=$(kdialog --icon=ks-video --title="AVI Split (To Size)" --inputbox="Enter s
 if-cancel-exit
 progressbar-start
 
-for file in $FILE; do
+for file in "$FILE"; do
 	BEGIN_TIME=$(date +%s)
-	avisplit -s $SIZE -i "$file" -o "${file%.*}_Size-Edited.avi"
+	avisplit -s $SIZE -i "$file" -o "${file%.*} (ebs).avi"
 	if-avisplit-cancel
 	FINAL_TIME=$(date +%s)
 	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))

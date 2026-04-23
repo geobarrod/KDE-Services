@@ -32,7 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 
 ###################################
 ############ Functions ############
@@ -53,10 +53,10 @@ SERVER=$(kdialog --icon=ks-key --title="SSH Tools - Install Public Key" \
 if-cancel-exit
 LOGIN=$(kdialog --icon=ks-key --title="SSH Tools - Install Public Key" --combobox="Select User" $USER root --default $USER 2> /dev/null)
 if-cancel-exit
-mkdir ~/.kde-services 2> /dev/null
-echo $SERVER >> ~/.kde-services/machines
-sort -u ~/.kde-services/machines > /tmp/machines
-mv /tmp/machines ~/.kde-services/machines
+mkdir $HOME/.kde-services 2> /dev/null
+echo $SERVER >> $HOME/.kde-services/machines
+sort -u $HOME/.kde-services/machines > /tmp/machines
+mv /tmp/machines $HOME/.kde-services/machines
 xterm -si -s -sl 1000000 -sb -T "SSH Tools - Install Public Key on $SERVER" -bg black -fg white -e "ssh-copy-id -i $LOGIN@$SERVER"
 if-cancel-exit
 kdialog --icon=ks-key --title="SSH Tools" --passivepopup="[Finished]   Install Public Key on $SERVER"

@@ -32,14 +32,14 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PREFIXmenu6=~/.local/share/kio/servicemenus
-PREFIXservicetypes5=~/.local/share/kservicetypes5
-PREFIXapp=~/.local/share/applications
-PREFIXSVGicons=~/.local/share/icons/hicolor/scalable/apps
-PREFIXmime=~/.local/share/mime/text
-PREFIXappmerge=~/.config/kdedefaults/menus/applications-merged
-PREFIXdeskdir=~/.local/share/desktop-directories
-PREFIXdoc=~/.local/share/doc/kde-services
+PREFIXmenu6=$HOME/.local/share/kio/servicemenus
+PREFIXservicetypes5=$HOME/.local/share/kservicetypes5
+PREFIXapp=$HOME/.local/share/applications
+PREFIXSVGicons=$HOME/.local/share/icons/hicolor/scalable/apps
+PREFIXmime=$HOME/.local/share/mime/text
+PREFIXappmerge=$HOME/.config/kdedefaults/menus/applications-merged
+PREFIXdeskdir=$HOME/.local/share/desktop-directories
+PREFIXdoc=$HOME/.local/share/doc/kde-services
 
 rm -f ${PREFIXmenu6}/Add-Timestamp-Prefix_addtoservicemenu.desktop \
 	${PREFIXmenu6}/Android-Tools_servicemenu.desktop \
@@ -281,7 +281,7 @@ rm -f ${PREFIXSVGicons}/ks-add-subs.svgz \
 	${PREFIXSVGicons}/ks-youtube-video-code-collector.svgz
 
 rm -f ${PREFIXmime}/kde-services.xml \
-	~/.local/share/mime/packages/kde-services.xml
+	$HOME/.local/share/mime/packages/kde-services.xml
 
 rm -f ${PREFIXappmerge}/kde-services.menu
 
@@ -302,6 +302,6 @@ rm -f ${PREFIXdeskdir}/KDE-Services.directory \
 
 rm -fr ${PREFIXdoc}
 
-update-mime-database ~/.local/share/mime > /dev/null
+update-mime-database $HOME/.local/share/mime > /dev/null
 xdg-icon-resource forceupdate --theme hicolor
 xdg-desktop-menu forceupdate

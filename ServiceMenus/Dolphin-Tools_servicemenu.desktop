@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=Dolphin 工具
 X-KDE-Submenu[x-test]=xxDolphin Toolsxx
 
 [Desktop Action Connect]
-Exec=~/.local/share/applications/Dolphin_Tools-connect.sh %F
+Exec=$HOME/.local/share/applications/Dolphin_Tools-connect.sh %F
 Icon=ks-folder-remote
 Name=Connect to
 Name[de]=Verbinde mit
@@ -37,7 +37,7 @@ Name[zh_CN]=连接至
 Name[x-test]=xxConnect toxx
 
 [Desktop Action DiskUse]
-Exec=~/.local/share/applications/Dolphin_Tools-disk-use.sh %F
+Exec=$HOME/.local/share/applications/Dolphin_Tools-disk-use.sh %F
 Icon=ks-disk-space-used
 Name=Disk Space Used
 Name[de]=Belegter Speicherplatz
@@ -54,7 +54,7 @@ Name[zh_CN]=磁盘空间占用情况
 Name[x-test]=xxDisk Space Usedxx
 
 [Desktop Action ViewMachine]
-Exec=~/.local/share/applications/SSH_Tools-register-machine.sh %F
+Exec=$HOME/.local/share/applications/SSH_Tools-register-machine.sh %F
 Icon=ks-server
 Name=Registered Servers
 Name[de]=Registrierte Server

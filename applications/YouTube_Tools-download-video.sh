@@ -50,7 +50,7 @@ FORMAT=""
 INIT_TIME=""
 LAST_TIME=""
 LOG=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 RATE_LIMIT=""
 SUB_LANG=""
 TOTAL_TIME=""
@@ -174,12 +174,14 @@ finished() {
 ##############################
 
 trap 'rm -f "$LOG"; [ -n "$DBUSREF" ] && qdbus6 "$DBUSREF" close 2>/dev/null' INT TERM EXIT
-DIR=$1
-cd "$DIR"
-DIR="$(pwd)"
 
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+DIR="$(pwd)"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
 fi
 
 mkdir -p $HOME/.kde-services

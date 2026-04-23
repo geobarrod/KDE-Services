@@ -34,7 +34,7 @@
 
 HOST=""
 LOGIN=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PATHSEND=""
 SERVER=""
 
@@ -52,15 +52,15 @@ if-cancel-exit() {
 ############ Main ############
 ##############################
 
-if [ -s ~/.kde-services/machines ]; then
-        SERVER=$(cat ~/.kde-services/machines)
+if [ -s $HOME/.kde-services/machines ]; then
+        SERVER=$(cat $HOME/.kde-services/machines)
         HOST=$(kdialog --icon=ks-terminal --title="SSH Tools - Send To" --combobox="Select Hostname or IP Address" $SERVER \
-                        --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
+                        --default $(head -n1 $HOME/.kde-services/machines) 2> /dev/null)
         if-cancel-exit
         LOGIN=$(kdialog --icon=ks-terminal --title="SSH Tools - Send To $HOST" --combobox="Select User" $USER root \
                         --default $USER 2> /dev/null)
         if-cancel-exit
-        PATHSEND=$(kdialog --icon=ks-terminal --title="SSH Tools - Send To $HOST" --inputbox="Enter Path To Send" ~/ 2> /dev/null)
+        PATHSEND=$(kdialog --icon=ks-terminal --title="SSH Tools - Send To $HOST" --inputbox="Enter Path To Send" $HOME/ 2> /dev/null)
         if-cancel-exit
         scp -2pr "$1" $LOGIN@$HOST:$PATHSEND
         echo "Finish Send To Remote Server" > /tmp/speak

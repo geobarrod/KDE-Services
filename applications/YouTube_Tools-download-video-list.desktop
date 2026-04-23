@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=YouTube-Tools;
-Exec=which youtube-dl; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video List Downloader" --passivepopup="[Error] Please install youtube-dl command and try again."; exit 1; else ~/.local/share/applications/YouTube_Tools-download-video-list.sh;fi
+Exec=which youtube-dl; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Video List Downloader" --passivepopup="[Error] Please install youtube-dl command and try again."; exit 1; else $HOME/.local/share/applications/YouTube_Tools-download-video-list.sh;fi
 Icon=ks-youtube-download-video
 Name=Video List Downloader
 Name[de]=Videolisten Downloader

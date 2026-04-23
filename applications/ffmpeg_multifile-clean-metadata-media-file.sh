@@ -40,7 +40,7 @@ FINAL_TIME=""
 IFS=$'\n'
 LOG=""
 LOGERROR=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 PID="$$"
 
@@ -101,12 +101,13 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-DIR=$1
-cd "$DIR"
 DIR="$(pwd)"
-
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
 fi
 
 FILES=$(kdialog --icon=ks-media-clean-metadata --title="Media Files" --multiple --getopenfilename "$DIR" "*.3GP *.3gp *.AVI *.avi *.DAT \

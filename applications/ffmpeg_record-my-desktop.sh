@@ -37,7 +37,8 @@ DIR=""
 DISRES=$(xrandr -q|grep current|awk -F , '{print $2}'|awk '{print $2,$4}'|sed 's/ /x/')
 FFPID=""
 FILENAME=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+IFS=$'\n'
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 VCODEC=""
 
 ###################################
@@ -71,11 +72,16 @@ record-cancel() {
 ############ Main ############
 ##############################
 
-DIR=$1
-cd "$DIR"
-DIR=$(pwd)
+DIR="$(pwd)"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
+fi
 
-FILENAME=$(kdialog --icon=ks-media-tape --title="Record My Desktop" --inputbox="Enter Video Filename" "RecordMyDesktop_$HOSTNAME" 2> /dev/null)
+FILENAME=$(kdialog --icon=ks-media-tape --title="Record My Desktop" --inputbox="Enter Video Filename" "Record My Desktop" 2> /dev/null)
 if-cancel-exit
 
 VCODEC=$(kdialog --icon=ks-media-tape --title="Record My Desktop" --menu="Choose Video Codec" avi "AVI" flv "FLV" mpg "MPEG-1" webm "WebM" 2> /dev/null)

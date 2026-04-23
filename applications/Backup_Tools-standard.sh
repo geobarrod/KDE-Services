@@ -39,7 +39,7 @@ ELAPSED_TIME=""
 FINAL_TIME=""
 KDESU="kdesu"
 MODE="0"
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 TARGETBACKUP=""
 
@@ -158,7 +158,7 @@ if [ "$MODE" = "Backup" ]; then
 	$HOME/.aMule aMule off \
 	$HOME/.anydesk AnyDesk off \
 	$HOME/.audacity-data Audacity off \
-	$HOME/.config "General User Configuration (~/.config)" off \
+	$HOME/.config "General User Configuration ($HOME/.config)" off \
 	$HOME/.config/google-chrome "Google Chrome" off \
 	$HOME/.gnupg GnuPG off \
 	$HOME/.hplip "HPLip" off \

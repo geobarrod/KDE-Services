@@ -33,7 +33,7 @@
 ###################################################################################
 
 DIALOG=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PROTOCOL=""
 
 ###################################
@@ -41,13 +41,13 @@ PROTOCOL=""
 ###################################
 
 bookmark() {
-    if [ "$(grep -o "<ID>" ~/.local/share/user-places.xbel|wc -l)" == "0" ]; then
-        rm -f ~/.local/share/user-places.xbel*
+    if [ "$(grep -o "<ID>" $HOME/.local/share/user-places.xbel|wc -l)" == "0" ]; then
+        rm -f $HOME/.local/share/user-places.xbel*
     fi
-    
-    sed -i "" "s;</xbel>;;g" ~/.local/share/user-places.xbel
-    sed -i "" "s;^</bookmark>;;" ~/.local/share/user-places.xbel
-    cat >> ~/.local/share/user-places.xbel << EOF
+
+    sed -i "" "s;</xbel>;;g" $HOME/.local/share/user-places.xbel
+    sed -i "" "s;^</bookmark>;;" $HOME/.local/share/user-places.xbel
+    cat >> $HOME/.local/share/user-places.xbel << EOF
 <bookmark href="$PROTOCOL://$DIALOG/">
  <title>$(echo $PROTOCOL|tr a-z A-Z) - $DIALOG</title>
  <bookmark href="$PROTOCOL://$DIALOG/">
@@ -70,13 +70,13 @@ EOF
 ############ Main ############
 ##############################
 
-if [ ! -s ~/.kde-services/machines ] || [ $(cat ~/.kde-services/machines|wc -w) == "0" ]; then
-    mkdir ~/.kde-services 2> /dev/null
-    echo localhost > ~/.kde-services/machines 2> /dev/null
+if [ ! -s $HOME/.kde-services/machines ] || [ $(cat $HOME/.kde-services/machines|wc -w) == "0" ]; then
+    mkdir $HOME/.kde-services 2> /dev/null
+    echo localhost > $HOME/.kde-services/machines 2> /dev/null
 fi
 
-if [ -s ~/.kde-services/machines ]; then
-    SERVER=$(cat ~/.kde-services/machines)
+if [ -s $HOME/.kde-services/machines ]; then
+    SERVER=$(cat $HOME/.kde-services/machines)
     PROTOCOL=$(kdialog --icon=ks-folder-remote --title="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
@@ -84,7 +84,7 @@ if [ -s ~/.kde-services/machines ]; then
     fi
     
     DIALOG=$(kdialog --icon=ks-folder-remote --title="Dolphin Tools" --combobox="Select Hostname or IP Address" $SERVER \
-           --default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
+           --default $(head -n1 $HOME/.kde-services/machines) 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then
         DIALOG=$(kdialog --icon=ks-folder-remote --title="Dolphin Tools" \
@@ -94,9 +94,9 @@ if [ -s ~/.kde-services/machines ]; then
         exit 0
     fi
     
-    echo $DIALOG >> ~/.kde-services/machines
-    sort -u ~/.kde-services/machines > /tmp/machines
-    mv /tmp/machines ~/.kde-services/machines
+    echo $DIALOG >> $HOME/.kde-services/machines
+    sort -u $HOME/.kde-services/machines > /tmp/machines
+    mv /tmp/machines $HOME/.kde-services/machines
     
     bookmark
     fi
@@ -110,11 +110,11 @@ else
 	exit 0
     fi
     
-    echo $DIALOG >> ~/.kde-services/machines
-    sort -u ~/.kde-services/machines > /tmp/machines
-    mv /tmp/machines ~/.kde-services/machines
+    echo $DIALOG >> $HOME/.kde-services/machines
+    sort -u $HOME/.kde-services/machines > /tmp/machines
+    mv /tmp/machines $HOME/.kde-services/machines
     
-    SERVER=$(cat ~/.kde-services/machines)
+    SERVER=$(cat $HOME/.kde-services/machines)
     PROTOCOL=$(kdialog --icon=ks-folder-remote --title="Dolphin Tools" --combobox="Select Protocol" ftp sftp smb --default ftp 2> /dev/null)
     
     if [ "$?" -gt "0" ]; then

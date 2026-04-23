@@ -1,5 +1,11 @@
 * Wed Apr 22 2026 Geovani B. R. <igeo.cu@gmail.com> 3.1.0
 - Fix whitespace handling in absolute paths for certain servicemenus.
+- Compatibility improved by standardizing the $HOME variable to avoid inconsistencies.
+
+🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
+    The information can be found following:
+     https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
+      Thanks very much!
 
 * Mon Apr 13 2026 Geovani B. R. <igeo.cu@gmail.com> 3.0.9
 - "Multimedia Tools": Fix missing variable in "Build ISO-9660 Image from Here" servicemenu.
@@ -10,11 +16,6 @@
   the servicemenu "[File|Dir]name Whitespace Replace" whenever an error occurs
   due to whitespace in the absolute path.
 - "Graphic Tools": Enhancement of all its servicemenus.
-
-🎔 You can buy a mobile recharge to support the overall efforts of the KDE-Services project author.
-    The information can be found following:
-     https://raw.githubusercontent.com/geobarrod/KDE-Services/refs/heads/master/doc/DONATE
-      Thanks very much!
 
 * Wed Feb 05 2026 Geovani B. R. <igeo.cu@gmail.com> 3.0.8
 - Fixed Japanese translations.
@@ -579,7 +580,7 @@
 - "Build Custom Kernel": Bugfix and Enhancement.
 
 * Thu Feb 02 2012  Geovani B. R. <igeo.cu@gmail.com> 1.0-1
-- "Rebuild RPM Package": Bugfix, the rebuild stops when the list ( ~/.kde-services/source-packages )
+- "Rebuild RPM Package": Bugfix, the rebuild stops when the list ( $HOME/.kde-services/source-packages )
   of RPM sources is empty.
 
 * Wed Feb 01 2012  Geovani B. R. <igeo.cu@gmail.com> 0.9-9
@@ -587,7 +588,7 @@
 
 * Tue Jan 31 2012  Geovani B. R. <igeo.cu@gmail.com> 0.9-8
 - Enhancement "Build Custom Kernel": Now can choose binary performance for kernel compilation;
-  the selected performance save to ~/kde-services/kernel-cflags.
+  the selected performance save to $HOME/kde-services/kernel-cflags.
 - Change debug console look for "Build Custom Kernel" and "Rebuild RPM Package".
 
 * Wed Jan 25 2012  Geovani B. R. <igeo.cu@gmail.com> 0.9-7
@@ -622,7 +623,7 @@
 * Tue Jan 10 2012  Geovani B. R. <igeo.cu@gmail.com> 0.8-9
 - Bugfix on "Build Custom Kernel"
 - Added enhancement to "Rebuild RPM Package": Now save source RPM packages filename
-  for next rebuilds on ~/.kde-services/source-packages.
+  for next rebuilds on $HOME/.kde-services/source-packages.
 
 * Mon Jan 09 2012  Geovani B. R. <igeo.cu@gmail.com> 0.8-8
 - Added enhancement to "Build Custom Kernel": less compilation time, disabled Backports.
@@ -649,11 +650,11 @@
 
 * Sat Dec 24 2011 Geovani B. R. <igeo.cu@gmail.com> 0.8-3
 - Added enhancement to "Rebuild RPM Package" on debug console and send all standard I/O streams
-  to log file on ~/rpmbuild/TMP/ for performance and more comfortable debug.
+  to log file on $HOME/rpmbuild/TMP/ for performance and more comfortable debug.
 
 * Tue Dec 20 2011 Geovani B. R. <igeo.cu@gmail.com> 0.8-2
 - Performance for "Build Custom Kernel" and "Rebuild RPM Package", maximize binary performance added
-  to ~/.rpmmacros "-ffast-math -funroll-loops" to "optflags" and "__global_cflags".
+  to $HOME/.rpmmacros "-ffast-math -funroll-loops" to "optflags" and "__global_cflags".
 - Added enhancement to "Build Custom Kernel" and "Connect Sentry".
 
 * Mon Dec 19 2011 Geovani B. R. <igeo.cu@gmail.com> 0.8-1
@@ -679,7 +680,7 @@
 - Added visual enhancement to "Build Custom Kernel" and "Rebuild RPM Package" debug console.
 - Now "Build Custom Kernel" and "Rebuild RPM Package" wait for you to exit.
 - Now sudo session and password never expires.
-- All sources RPM package download to ~/rpmbuild/SRPMS/.
+- All sources RPM package download to $HOME/rpmbuild/SRPMS/.
 
 * Sat Dec 10 2011 Geovani B. R. <igeo.cu@gmail.com> 0.7-4
 - Fixed uninstall kde-services and the development tools core rpm packages after use "Build Custom Kernel"

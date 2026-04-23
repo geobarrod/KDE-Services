@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Volume Normalize of MP3 Files" --passivepopup="[Error] Please install mp3gain command and try again."; exit 1; else ~/.local/share/applications/Multimedia_Tools-audio-normalize.sh %F;fi
+Exec=which mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Volume Normalize of MP3 Files" --passivepopup="[Error] Please install mp3gain command and try again."; exit 1; else $HOME/.local/share/applications/Multimedia_Tools-audio-normalize.sh %F;fi
 Icon=ks-audio-normalize
 Name=Volume Normalize of MP3 Files
 Name[de]=Lautstärke von MP3s normalisieren
@@ -14,7 +14,7 @@ Name[pt_BR]=Normalizar Volume de Arquivos de MP3
 Name[ru]=Объем Нормализация MP3 Файлы
 Name[uk]=Обсяг Нормалізація MP3 Файли
 Name[zh_CN]=MP3 文件音量标准化
-Path=~/.local/share/applications
+Path=$HOME/.local/share/applications
 StartupNotify=true
 Terminal=false
 Type=Application

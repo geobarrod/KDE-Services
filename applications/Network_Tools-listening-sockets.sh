@@ -32,7 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 TMP="/tmp/sockets"
 
 ss -ntuap|grep -v ::|grep -E "LISTEN|UNCONN"|sort -t: -nk2|awk -F " " -v OFS='\t' '{print $1,$5}' > $TMP

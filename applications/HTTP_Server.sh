@@ -34,7 +34,7 @@
 
 DIR="$1"
 EXIT=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PID=""
 
 cd "$DIR"

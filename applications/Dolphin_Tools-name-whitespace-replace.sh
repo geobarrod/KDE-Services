@@ -33,7 +33,7 @@
 ###################################################################################
 
 DIR=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 
 DIR=$1
 cd "$DIR"

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Multimedia-Tools;
-Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract|Convert Audio Track" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else ~/.local/share/applications/ffmpeg_multifile-extract-audio.sh;fi
+Exec=which ffmpeg sox mp3gain; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Extract|Convert Audio Track" --passivepopup="[Error] Please install ffmpeg, sox and mp3gain command and try again."; exit 1; else $HOME/.local/share/applications/ffmpeg_multifile-extract-audio.sh;fi
 Icon=ks-audio
 Name=Extract|Convert Audio Track
 Name[de]=Extrahiere|Konvertiere Audiospur
@@ -14,7 +14,7 @@ Name[pt_BR]=Extrair|Converter Faixa de Áudio
 Name[ru]=Извлечь|Конвертировать аудио трек
 Name[uk]=Видобути|Конвертувати аудіо трек
 Name[zh_CN]=提取|转换 音频轨道
-Path=~/
+Path=$HOME/.local/share/applications
 StartupNotify=true
 Terminal=false
 Type=Application

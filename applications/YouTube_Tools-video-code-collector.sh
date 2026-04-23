@@ -34,7 +34,7 @@
 
 DBUSREF=""
 DIR=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 VCODE=""
 
 URL=$(kdialog --icon=ks-youtube-video-code-collector --title="YouTube Video List Code Collector" --inputbox="Enter URL of YouTube videos list." 2> /dev/null)
@@ -59,14 +59,15 @@ progressbar_stop() {
 ############ Main ############
 ##############################
 
-DIR=$1
 DIR="$(pwd)"
-
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
 fi
 
-cd "$DIR"
 mkdir -p $HOME/.kde-services
 touch $HOME/.kde-services/youtube-video-codes
 
@@ -85,7 +86,7 @@ VCODE="$(lynx -source "$URL"|grep -o "watch?v=..........."|sed -e 's/^watch?v=//
 if [ "$VCODE" != "" ]; then
 	echo "$VCODE" > $HOME/.kde-services/youtube-video-codes
 	progressbar_stop
-	~/.local/share/applications/YouTube_Tools-download-video.sh
+	$HOME/.local/share/applications/YouTube_Tools-download-video.sh
 else
 	progressbar_stop
 	kdialog --icon=ks-warning --title="YouTube Video List Code Collector" \

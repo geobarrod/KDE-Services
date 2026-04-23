@@ -20,7 +20,7 @@ X-KDE-Submenu[zh_CN]=图形工具
 X-KDE-Submenu[x-test]=xxGraphic Toolsxx
 
 [Desktop Action Resizer]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else ~/.local/share/applications/The_Resizer.sh %F;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else $HOME/.local/share/applications/The_Resizer.sh %F;fi
 Icon=ks-resize-image
 Name=The Resizer
 Name[de]=Der Resizer
@@ -37,7 +37,7 @@ Name[zh_CN]=调整器
 Name[x-test]=xxThe Resizerxx
 
 [Desktop Action Converter]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Converter" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else ~/.local/share/applications/The_Converter.sh %F;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Converter" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else $HOME/.local/share/applications/The_Converter.sh %F;fi
 Icon=ks-image
 Name=The Converter
 Name[de]=Der Konverter

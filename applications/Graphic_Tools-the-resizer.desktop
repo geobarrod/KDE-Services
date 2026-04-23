@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=Graphic-Tools;
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else ~/.local/share/applications/The_Resizer.sh;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else $HOME/.local/share/applications/The_Resizer.sh;fi
 Icon=ks-resize-image
 Name=The Resizer
 Name[de]=Der Resizer

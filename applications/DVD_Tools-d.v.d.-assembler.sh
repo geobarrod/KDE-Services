@@ -41,7 +41,7 @@ ELAPSED_TIME=""
 FILES=""
 FINAL_TIME=""
 IFS=$'\n'
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 PID="$$"
 VIDEOINFO=/tmp/video.inf
@@ -83,12 +83,13 @@ progressbar-stop() {
 ############ Main ############
 ##############################
 
-DIR=$1
-cd "$DIR"
 DIR="$(pwd)"
-
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
 fi
 
 FILES=$(kdialog --icon=ks-media-optical-video --title="Source Video Files" --multiple \
@@ -114,7 +115,7 @@ for VIDEO in $FILES; do
 	fi
 done
 
-DVD_NAME=$(kdialog --icon=ks-media-optical-video --title="DVD Assembler" --inputbox="Enter DVD name without whitespaces." 2> /dev/null)
+DVD_NAME=$(kdialog --icon=ks-media-optical-video --title="DVD Assembler" --inputbox="Enter DVD name" 2> /dev/null)
 if-cancel-exit
 
 DESTINATION=$(kdialog --icon=ks-media-optical-video --title="Destination DVD" --getexistingdirectory "$DIR" 2> /dev/null)

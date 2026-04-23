@@ -35,7 +35,7 @@
 MODE=""
 MODE2=""
 OWNER=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 STDERR="/tmp/change-owner-here"
 SYSUSERS=$(awk -F : '{print $1}' /etc/passwd|sort)

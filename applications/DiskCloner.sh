@@ -36,7 +36,7 @@ DESTINATION=""
 DEVICE=""
 DIR=""
 LABEL=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 SIZE=""
 STERR=/tmp/dd.err
@@ -93,12 +93,13 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-DIR=$1
-cd "$DIR"
 DIR="$(pwd)"
-
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="$1"
+	cd "$DIR"
 fi
 
 DEVICE=$(kdialog --icon=ks-media-optical-clone --title="DiskCloner" --combobox="Select Device to Clone" "$(lsblk -po NAME,SIZE,LABEL|grep "sr[0-9]")" 2> /dev/null)

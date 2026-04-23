@@ -32,7 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PID="/tmp/connect-sentry.pid"
 CHECKPID=$(ps -p $(cat $PID 2>/dev/null) 2>/dev/null|grep Network_Tools|awk -F " " '{print $1}')
 
@@ -51,21 +51,21 @@ if [ "$STATE" = "Enabled" ]; then
                 exit 1
         fi
 
-        if [ ! -s ~/.kde-services/ports ]; then
-                mkdir -p ~/.kde-services 2>/dev/null
-                echo -n > ~/.kde-services/ports
+        if [ ! -s $HOME/.kde-services/ports ]; then
+                mkdir -p $HOME/.kde-services 2>/dev/null
+                echo -n > $HOME/.kde-services/ports
         fi
     
-        SHOWPORTS=$(cat ~/.kde-services/ports|sed 's/ or sport = :/,/g'|sed 's/^sport = ://g')
+        SHOWPORTS=$(cat $HOME/.kde-services/ports|sed 's/ or sport = :/,/g'|sed 's/^sport = ://g')
         PORTS=$(kdialog --icon=ks-sentry-on --title="Connect Sentry" \
                         --inputbox="Enter ports number separate by comma to monitor it" $SHOWPORTS 2>/dev/null)
         if-cancel-exit
-        echo -n $PORTS > ~/.kde-services/ports
-        sed -i "" -e "s;,; or sport = :;g" ~/.kde-services/ports
-        sed -i "" -e "s;^;sport = :;g" ~/.kde-services/ports
+        echo -n $PORTS > $HOME/.kde-services/ports
+        sed -i "" -e "s;,; or sport = :;g" $HOME/.kde-services/ports
+        sed -i "" -e "s;^;sport = :;g" $HOME/.kde-services/ports
         echo -n > /tmp/timestamp
         echo -n > /tmp/timestamp2
-        MYPORTS=$(cat ~/.kde-services/ports)
+        MYPORTS=$(cat $HOME/.kde-services/ports)
         ss -tno state established "( $MYPORTS )" &>/dev/null
 
         if [ "$?" != "0" ]; then

@@ -43,7 +43,7 @@ INTERNETVERSION=""
 KERNELFILE=""
 KERNELSOURCEPATH=""
 KERNELVERSION=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PID="$$"
 WHITE='\E[37;40m'
 
@@ -68,11 +68,11 @@ elapsed-time() {
 
 if-cancel-exit() {
         if [ "$EXIT" = "2" ]; then
-                rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-                rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-                rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-                rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-                rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
                 kill -9 $(pidof xterm|awk -F " " '{print $1}') &>/dev/null
                 exit 1
         fi
@@ -80,11 +80,11 @@ if-cancel-exit() {
 
 if-cancel-exit2() {
         if [ "$EXIT" = "1" ]; then
-                rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-                rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-                rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-                rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-                rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
                 kill -9 $(pidof xterm|awk -F " " '{print $1}') &>/dev/null
                 exit 1
         fi
@@ -96,11 +96,11 @@ before-compile() {
         2>/dev/null
         
         if [ "$?" = "1" ]; then
-                rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-                rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-                rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-                rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-                rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+                rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
                 kill -9 $(pidof xterm|awk -F " " '{print $1}') &>/dev/null
                 exit 1
         fi
@@ -108,7 +108,7 @@ before-compile() {
 
 rpmbuild-error() {
         if [ "$?" != "0" ]; then
-                mv ~/rpmbuild/TMP/kernel.log ~/rpmbuild/TMP/kernel.err
+                mv $HOME/rpmbuild/TMP/kernel.log $HOME/rpmbuild/TMP/kernel.err
                 kill -9 $(pidof -x tail) &>/dev/null
                 kill -9 $(pidof -x tail) &>/dev/null
                 echo -e "\n$GREEN>$GREENRED Error:$GREEN See $HOME/rpmbuild/TMP/kernel.err. Try Again.$WHITE\n"
@@ -130,27 +130,27 @@ make-config-kernel() {
 
 save-config-i686() {
         echo -e "\n$GREEN> Saving Kernel Config File In $HOME...$WHITE\n"
-        cp .config ~/rpmbuild/SOURCES/config-$(uname -m)-PAE
-        cp .config ~/kernel-config-$(uname -m)-PAE_$(date +%d-%m-%Y_%H-%M-%S)
+        cp .config $HOME/rpmbuild/SOURCES/config-$(uname -m)-PAE
+        cp .config $HOME/kernel-config-$(uname -m)-PAE_$(date +%d-%m-%Y_%H-%M-%S)
 }
 
 save-config-x86_64() {
         echo -e "\n$GREEN> Saving Kernel Config File In $HOME...$WHITE\n"
-        cp .config ~/rpmbuild/SOURCES/config-$(uname -m)-generic
-        cp .config ~/kernel-config-$(uname -m)-generic_$(date +%d-%m-%Y_%H-%M-%S)
+        cp .config $HOME/rpmbuild/SOURCES/config-$(uname -m)-generic
+        cp .config $HOME/kernel-config-$(uname -m)-generic_$(date +%d-%m-%Y_%H-%M-%S)
 }
 
 compile-i686() {
         before-compile
-        cd ~/rpmbuild/SPECS
+        cd $HOME/rpmbuild/SPECS
         ccache -M 2 >/dev/null
-        rm -fr ~/rpmbuild/RPMS/$(uname -m)/kernel-*.rpm
+        rm -fr $HOME/rpmbuild/RPMS/$(uname -m)/kernel-*.rpm
         echo -e "\n$GREEN> Building Kernel For $(uname -m) Arch...$GREEN$WHITE\n"
         BEGIN_TIME=$(date +%s)
-        touch ~/rpmbuild/TMP/kernel.log
-        tail -fn0 ~/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt >/dev/null &
+        touch $HOME/rpmbuild/TMP/kernel.log
+        tail -fn0 $HOME/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt >/dev/null &
         rpmbuild -bb --quiet --with paeonly --without debug --without debuginfo --without backports --target=$(uname -m) --clean --rmsource \
-                --rmspec kernel.spec &>> ~/rpmbuild/TMP/kernel.log
+                --rmspec kernel.spec &>> $HOME/rpmbuild/TMP/kernel.log
         rpmbuild-error
         kill -9 $(pidof -x tail) &>/dev/null
         kill -9 $(pidof -x tail) &>/dev/null
@@ -161,15 +161,15 @@ compile-i686() {
 
 compile-x86_64() {
         before-compile
-        cd ~/rpmbuild/SPECS
+        cd $HOME/rpmbuild/SPECS
         ccache -M 2 >/dev/null
-        rm -fr ~/rpmbuild/RPMS/$(uname -m)/kernel-*.rpm
+        rm -fr $HOME/rpmbuild/RPMS/$(uname -m)/kernel-*.rpm
         echo -e "\n$GREEN> Building Kernel For $(uname -m) Arch...$GREEN$WHITE\n"
         BEGIN_TIME=$(date +%s)
-        touch ~/rpmbuild/TMP/kernel.log
-        tail -fn0 ~/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt >/dev/null &
+        touch $HOME/rpmbuild/TMP/kernel.log
+        tail -fn0 $HOME/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt >/dev/null &
         rpmbuild -bb --quiet --with baseonly --without debug --without debuginfo --without backports --target=$(uname -m) --clean --rmsource \
-                --rmspec kernel.spec &>> ~/rpmbuild/TMP/kernel.log
+                --rmspec kernel.spec &>> $HOME/rpmbuild/TMP/kernel.log
         rpmbuild-error
         kill -9 $(pidof -x tail) &>/dev/null
         kill -9 $(pidof -x tail) &>/dev/null
@@ -276,20 +276,20 @@ sudo ln -fs /usr/bin/ccache /usr/local/bin/cc
 sudo ln -fs /usr/bin/ccache /usr/local/bin/c++
 
 echo -e "$GREEN> Cleaning $HOME/rpmbuild Tree...$WHITE\n"
-rm -fr ~/rpmbuild/BUILD/* 2>/dev/null
-rm -fr ~/rpmbuild/BUILDROOT/* 2>/dev/null
-rm -fr ~/rpmbuild/SOURCES/* 2>/dev/null
-rm -fr ~/rpmbuild/SPECS/* 2>/dev/null
-rm -fr ~/rpmbuild/TMP/* 2>/dev/null
+rm -fr $HOME/rpmbuild/BUILD/* 2>/dev/null
+rm -fr $HOME/rpmbuild/BUILDROOT/* 2>/dev/null
+rm -fr $HOME/rpmbuild/SOURCES/* 2>/dev/null
+rm -fr $HOME/rpmbuild/SPECS/* 2>/dev/null
+rm -fr $HOME/rpmbuild/TMP/* 2>/dev/null
 rpmdev-setuptree
-mkdir -p ~/rpmbuild/TMP &>/dev/null
+mkdir -p $HOME/rpmbuild/TMP &>/dev/null
 
 KERNELSOURCE=$(kdialog --icon=ks-kernel-rebuild --title="Build Custom Kernel" --yesnocancel "Have the kernel source RPM package?" 2>/dev/null)
 EXIT=$?
 if-cancel-exit
 
 if [ "$EXIT" = "1" ]; then
-        cd ~/rpmbuild/SRPMS
+        cd $HOME/rpmbuild/SRPMS
         echo -e "$GREEN> Downloading Kernel Source RPM Packages...$WHITE\n"
         yumdownloader --source kernel
         test-network
@@ -305,7 +305,7 @@ fi
 
 if [ "$EXIT" = "0" ]; then
         KERNELSOURCEPATH=$(kdialog --icon=ks-kernel-rebuild --title="Kernel Source RPM File" \
-                                        --getopenfilename ~/rpmbuild/SRPMS kernel-*.src.rpm 2>/dev/null)
+                                        --getopenfilename $HOME/rpmbuild/SRPMS kernel-*.src.rpm 2>/dev/null)
         EXIT=$?
         if-cancel-exit2
         sudo chown $USER:$USER $KERNELSOURCEPATH
@@ -362,45 +362,45 @@ if [ "$EXIT" = "0" ]; then
         fi
 fi
 
-cd ~/rpmbuild/SPECS
+cd $HOME/rpmbuild/SPECS
 
-touch ~/rpmbuild/TMP/kernel.log
-tail -fn0 ~/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt >/dev/null &
-rpmbuild --quiet -bp --target=$(uname -m) kernel.spec > ~/rpmbuild/TMP/kernel.log
+touch $HOME/rpmbuild/TMP/kernel.log
+tail -fn0 $HOME/rpmbuild/TMP/kernel.log|pv -cN "stderr data" -bt >/dev/null &
+rpmbuild --quiet -bp --target=$(uname -m) kernel.spec > $HOME/rpmbuild/TMP/kernel.log
 rpmbuild-error
 kill -9 $(pidof -x tail) &>/dev/null
 kill -9 $(pidof -x tail) &>/dev/null
 
-cd ~/rpmbuild/BUILD/kernel-*/vanilla-*/
+cd $HOME/rpmbuild/BUILD/kernel-*/vanilla-*/
 
-if [ ! -s ~/.kde-services/kernel-cflags ]; then
-        mkdir ~/.kde-services &>/dev/null
-        echo "-O2" > ~/.kde-services/kernel-cflags
+if [ ! -s $HOME/.kde-services/kernel-cflags ]; then
+        mkdir $HOME/.kde-services &>/dev/null
+        echo "-O2" > $HOME/.kde-services/kernel-cflags
 fi
 
-BINOPT=$(cat ~/.kde-services/kernel-cflags 2>/dev/null)
+BINOPT=$(cat $HOME/.kde-services/kernel-cflags 2>/dev/null)
 
 kdialog --icon=ks-kernel-rebuild --title="Build Custom Kernel | B.O.O.=\"$BINOPT\"" \
         --yesnocancel="          Do you want to reconfigure Binary Optimization Option(s) of compilation?               " 2>/dev/null
 EXIT="$?"
 
 if [ "$EXIT" = "0" ]; then
-        mkdir ~/.kde-services &>/dev/null
+        mkdir $HOME/.kde-services &>/dev/null
         BINOPT=$(kdialog --icon=ks-kernel-rebuild --title="Build Custom Kernel" --combobox="Choose Binary Optimization Option(s)" \
                         "Ofast -ffast-math -funroll-loops" "Ofast -funroll-loops" Ofast "O3 -ffast-math -funroll-loops" "O3 -funroll-loops" \
                         O3 "O2 -ffast-math -funroll-loops" "O2 -funroll-loops" O2 O1 O0 Os --default "Ofast -ffast-math -funroll-loops" 2>/dev/null)
         EXIT=$?
         if-cancel-exit2
-        echo "-$BINOPT" > ~/.kde-services/kernel-cflags
+        echo "-$BINOPT" > $HOME/.kde-services/kernel-cflags
         sudo sed -i "" "s;-O2;-$BINOPT;g" Makefile
 elif [ "$EXIT" = "1" ]; then
-        BINOPT=$(cat ~/.kde-services/kernel-cflags 2>/dev/null)
+        BINOPT=$(cat $HOME/.kde-services/kernel-cflags 2>/dev/null)
         sudo sed -i "" "s;-O2;$BINOPT;g" Makefile
 elif [ "$EXIT" = "2" ]; then
         if-cancel-exit
 fi
 
-cd ~/rpmbuild/BUILD/kernel-*/linux-*/
+cd $HOME/rpmbuild/BUILD/kernel-*/linux-*/
 
 kdialog --icon=ks-kernel-rebuild --title="Build Custom Kernel" --yesnocancel "Have the kernel config file?" 2>/dev/null
 EXIT=$?
@@ -425,12 +425,12 @@ if [ "$EXIT" = "1" ]; then
 fi
 
 if [ "$EXIT" = "0" ]; then
-        KERNELCONFIG=$(kdialog --icon=ks-kernel-rebuild --title="Kernel Config File" --getopenfilename ~/ 2>/dev/null)
+        KERNELCONFIG=$(kdialog --icon=ks-kernel-rebuild --title="Kernel Config File" --getopenfilename $HOME/ 2>/dev/null)
     
         if [ "$(uname -m)" = "i686" ]; then
-                cp $KERNELCONFIG ~/rpmbuild/SOURCES/config-$(uname -m)-PAE
+                cp $KERNELCONFIG $HOME/rpmbuild/SOURCES/config-$(uname -m)-PAE
         else
-                cp $KERNELCONFIG ~/rpmbuild/SOURCES/config-$(uname -m)-generic
+                cp $KERNELCONFIG $HOME/rpmbuild/SOURCES/config-$(uname -m)-generic
         fi
     
         cp $KERNELCONFIG .config

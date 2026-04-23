@@ -40,7 +40,7 @@ FILES=""
 FINAL_TIME=""
 FORMAT=""
 IFS=$'\n'
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 
 ###################################
@@ -93,12 +93,13 @@ elapsedtime() {
 ############ Main ############
 ##############################
 
-DIR="${1%/*}"
-cd "$DIR"
 DIR="$(pwd)"
-
-if [ "$DIR" == "~/.local/share/applications" ]; then
-	DIR="~/"
+if [ "$DIR" == "$HOME/.local/share/applications" ]; then
+	DIR="$HOME"
+	cd "$DIR"
+else
+	DIR="${1%/*}"
+	cd "$DIR"
 fi
 
 FILES=$(kdialog --icon=ks-image --title="Source Image Files" --multiple \

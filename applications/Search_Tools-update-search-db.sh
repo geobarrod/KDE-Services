@@ -33,7 +33,7 @@
 ###################################################################################
 
 KDESU="kdesu"
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 
 $KDESU -i ks-search-database-update --noignorebutton -d updatedb &

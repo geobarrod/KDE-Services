@@ -36,7 +36,7 @@ HOST=""
 KDESU="kdesu"
 OPTION=""
 PASSWD=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 SERVER=""
 SHARE=""
 USERNAME=""
@@ -104,9 +104,9 @@ mount_share() {
 ############ Main ############
 ##############################
 
-if [ ! -s ~/.kde-services/machines ]; then
-	mkdir ~/.kde-services 2> /dev/null
-	echo localhost > ~/.kde-services/machines 2> /dev/null
+if [ ! -s $HOME/.kde-services/machines ]; then
+	mkdir $HOME/.kde-services 2> /dev/null
+	echo localhost > $HOME/.kde-services/machines 2> /dev/null
 fi
 OPTION=$(kdialog --icon=ks-smbfs --title="SaMBa Shares Mounter" \
 	--combobox="Select Option" "Mount SaMBa Share Directory" "Unmount SaMBa Share Directory" --default "Mount SaMBa Share Directory" 2> /dev/null)
@@ -115,17 +115,17 @@ if [ "$OPTION" = "" ]; then
 	kdialog --icon=ks-error --title="SaMBa Shares Mounter" --passivepopup="[Error] Please select one option. Try again." 2> /dev/null
 	exit 0
 elif [ "$OPTION" = "Mount SaMBa Share Directory" ]; then
-	SERVER=$(cat ~/.kde-services/machines)
+	SERVER=$(cat $HOME/.kde-services/machines)
 	HOST=$(kdialog --icon=ks-smbfs --title="SaMBa Shares Mounter" --combobox="Select Hostname or IP Address" $SERVER \
-		--default $(head -n1 ~/.kde-services/machines) 2> /dev/null)
+		--default $(head -n1 $HOME/.kde-services/machines) 2> /dev/null)
 
 	if [ "$?" != "0" ]; then
 		HOST=$(kdialog --icon=ks-smbfs --title="SaMBa Shares Mounter" \
 			--inputbox="Enter Hostname or IP Address" localhost.localdomain 2> /dev/null)
 		if-cancel-exit
-		echo $HOST >> ~/.kde-services/machines
-		sort -u ~/.kde-services/machines > /tmp/machines
-		cat /tmp/machines > ~/.kde-services/machines
+		echo $HOST >> $HOME/.kde-services/machines
+		sort -u $HOME/.kde-services/machines > /tmp/machines
+		cat /tmp/machines > $HOME/.kde-services/machines
 		rm -f /tmp/machines
 		mount_share
 	fi

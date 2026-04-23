@@ -1,6 +1,6 @@
 [Desktop Entry]
 Categories=SSH-Tools;
-Exec=~/.local/share/applications/SSH_Tools-copy-id.sh
+Exec=$HOME/.local/share/applications/SSH_Tools-copy-id.sh
 Icon=ks-key
 Name=Install Public Key
 Name[de]=Öffentlichen Schlüssel installieren

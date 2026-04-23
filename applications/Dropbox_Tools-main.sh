@@ -34,7 +34,7 @@
 
 BEGIN_TIME=""
 DROPBOX_PATH="$(tail -n1 $HOME/.dropbox/host.db|base64 -d)"
-DROPBOX="~/.local/share/applications/Dropbox_Tools-frontend.py"
+DROPBOX="$HOME/.local/share/applications/Dropbox_Tools-frontend.py"
 ELAPSED_TIME=""
 ET=""
 EXIT=""
@@ -44,7 +44,7 @@ LOGIN=""
 MATCH=0
 PASS=""
 PASS2=""
-PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:~/bin
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin
 PB_PIDFILE="$(mktemp)"
 STRONGPASS=$(tr -dc a-z0-9 < /dev/urandom|head -c128|sed 's/[^ ]\+/\L\u&/g'|tr -d '\n'|xargs)
 
