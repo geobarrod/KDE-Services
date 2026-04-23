@@ -144,6 +144,7 @@ if [ "$MODE" = "images2video" ]; then
 	FILES=$(kdialog --icon=ks-video --title="Select Image Files In Your Preferred Order" --multiple \
 			--getopenfilename "$DIR" "*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff *.BMP *.JPG *.PAM *.PBM *.PGM *.PNG *.PPM *.SGI *.TIF *.TIFF|*.bmp *.jpg *.pam *.pbm *.pgm *.png *.ppm *.sgi *.tif *.tiff" 2>/dev/null)
 	if_cancel_exit
+
 	FILES=$(echo "$FILES" | sed -E 's/\.(bmp|jpg|pam|pbm|pgm|png|ppm|sgi|tif|tiff)[[:space:]]+/\.\1\
 	/gI' | sed 's/[[:space:]]*$//')
 
@@ -156,13 +157,16 @@ if [ "$MODE" = "images2video" ]; then
 	FRAME_RATE=$(kdialog --icon=ks-video --title="Convert Video Files|$(ls /tmp/SequentialImage_*|wc -w|sed -e 's/^ *//') selected images" \
 			--inputbox="Enter the frame rate of the output video file (for 10 selected image files to 1 fps ~1800)" 1800)
 	if_cancel_exit
+
 	FILENAME=$(kdialog --icon=ks-video --title="Convert Video Files" \
 			--inputbox="Enter filename for new video file" "New Images to Video")
 	if_cancel_exit
+
 	DESTINATION=$(kdialog --icon=ks-video --title="Destination Video File" --getexistingdirectory "$DIR" 2>/dev/null)
 	if_cancel_exit
 
-	kdialog --icon=ks-video --title="Convert Video Files" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE
+	progressbar_start
+
 	LOG="/tmp/$FILENAME.log"
 	LOGERROR="$FILENAME.err"
 	rm -f $LOGERROR
@@ -858,7 +862,7 @@ if [ "$MODE" = "standards" ]; then
 	STD=$(kdialog --icon=ks-video --title="Convert Video Files" \
 		--menu="Choose Standard Video Resolution" vcd "VCD" vcd-700 "VCD (700 MB)" svcd "SVCD" \
 		svcd-700 "SVCD (700 MB)" dvd "DVD" dvd-4.7 "DVD (4.7 GB)" dvd-8.0 "DVD (8.0 GB)" 2>/dev/null)
-	if_cancel_exit
+		if_cancel_exit
 
 	if [ "$STD" = "vcd" ] || [ "$STD" = "vcd-700" ];then
 		FORMAT=$(kdialog --icon=ks-video --title="Convert Video Files" \
