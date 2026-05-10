@@ -335,11 +335,23 @@ Steps for install from Discover application explorer:
 
 Steps for install from source code in the terminal:
 ===================================================
-1- servicemenuinstaller install kde-services-3.0.9.tar.gz
+Option A:
+1- servicemenuinstaller install kde-services-3.1.0.tar.gz
+
+Option B:
+1- tar xf kde-services-3.1.0.tar.gz
+2- cd kde-services-3.1.0
+3- make install
 
 Steps for uninstall from source code in the terminal:
 =====================================================
-1- servicemenuinstaller uninstall kde-services-3.0.9.tar.gz
+Option A:
+1- servicemenuinstaller uninstall kde-services-3.1.0.tar.gz
+
+Option B:
+1- tar xf kde-services-3.1.0.tar.gz
+2- cd kde-services-3.1.0
+3- make uninstall
 
 Donate 🎔
 =========

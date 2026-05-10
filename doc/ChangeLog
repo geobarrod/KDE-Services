@@ -1,4 +1,4 @@
-* Wed Apr 22 2026 Geovani B. R. <igeo.cu@gmail.com> 3.1.0
+* Sun May 10 2026 Geovani B. R. <igeo.cu@gmail.com> 3.1.0
 - Fix whitespace handling in absolute paths for certain servicemenus.
 - Compatibility improved by standardizing the $HOME variable to avoid inconsistencies.
 
