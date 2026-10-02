@@ -32,6 +32,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.            #
 ###################################################################################
 
+AQ=""
 ATTEMPT=""
 AUDIO_LANG=""
 BEGIN_TIME=""
@@ -68,7 +69,7 @@ if_cancel_exit() {
 	if [ "$EXIT" != "0" ];then
 		kill -9 $YTDLPID
 		qdbus6 $DBUSREF close
-		kdialog --icon=ks-error --title="Download YouTube Video" --passivepopup="CANCELED"
+		kdialog --icon=ks-error --title="YouTube Downloader" --passivepopup="CANCELED"
 		exit 1
 	fi
 }
@@ -79,16 +80,16 @@ download_reattempt() {
 
 ytdlp_error() {
 	if [ "$EXIT" != "0" ];then
-		kdialog --icon=ks-error --title="Download YouTube Video" \
-			--passivepopup="ERROR: Downloading ${FILENAME} [$FORMAT]. Please check your network connection or the validity of the YouTube video code."
-		echo "$VID" >> !_YouTube-Video-Code.err
+		kdialog --icon=ks-error --title="YouTube Downloader" \
+			--passivepopup="ERROR: Downloading ${FILENAME} [$FORMAT]. Please check your network connection or the validity of the YouTube media code."
+		echo "$VID" >> !_YouTube-Media-Code.err
 		for ATTEMPT in {1..10};do
 			download_reattempt
 			$YTDLP
 			EXIT=$?
 			if [ "$EXIT" = "0" ];then
-				if [ "$(wc -w !_YouTube-Video-Code.err|awk '{print $1}')" = "0" ];then
-					rm -f !_YouTube-Video-Code.err
+				if [ "$(wc -w !_YouTube-Media-Code.err|awk '{print $1}')" = "0" ];then
+					rm -f !_YouTube-Media-Code.err
 				fi
 			fi
 		done
@@ -100,7 +101,7 @@ progressbar_start() {
 	COUNT="0"
 	COUNTFILES=$(echo $VCODE|wc -w)
 	COUNTFILES=$((++COUNTFILES))
-	DBUSREF=$(kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" --progressbar "Getting all available video resolutions…" 1 100)
+	DBUSREF=$(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" --progressbar "Getting all available media…" 1 100)
 	qdbus6 $DBUSREF showCancelButton false
 	sleep 1
 }
@@ -120,7 +121,7 @@ progressbar_percent() {
 			FILE_TMP=$(cat $LOG|grep "Destination:.*"|cut -f 2 -d ':'|tail -n1|xargs)
 			FILE_STATUS=$(cat $LOG|grep -ow "has already been downloaded")
 			if [ "$FILE_STATUS" == "has already been downloaded" ];then
-				kdialog --icon=ks-error --title="YouTube Download Video List" \
+				kdialog --icon=ks-error --title="YouTube Download Media List" \
 					--passivepopup "CANCELED: $FILE_TMP has already been downloaded"
 				break
 			fi
@@ -137,36 +138,119 @@ progressbar_percent() {
 }
 
 checking_audio_availability() {
-	qdbus6 $DBUSREF setLabelText "Checking audio availability…"
+	qdbus6 $DBUSREF setLabelText "Checking audio language availability…"
 }
 
 checking_subtitle_availability() {
-	qdbus6 $DBUSREF setLabelText "Checking subtitle availability…"
+	qdbus6 $DBUSREF setLabelText "Checking subtitle language availability…"
 }
 
-downloading_video() {
+downloading() {
 	qdbus6 $DBUSREF setLabelText "Downloading ${FILENAME} [$FORMAT] [$COUNT/$(($COUNTFILES-1))]"
 }
 
 finished() {
 	if [ "$EXIT" = "0" ];then
 		if [ "$ELAPSED_TIME" -lt "60" ];then
-			kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+			kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
 				--passivepopup="Download completed ${FILENAME} [$FORMAT] in ${ELAPSED_TIME}s"
 		elif [ "$ELAPSED_TIME" -gt "59" ] && [ "$ELAPSED_TIME" -lt "3600" ];then
 			ELAPSED_TIME=$(echo "$ELAPSED_TIME/60"|bc -l|sed 's/...................$//')
-			kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+			kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
 				--passivepopup="Download completed ${FILENAME} [$FORMAT] in ${ELAPSED_TIME}m"
 		elif [ "$ELAPSED_TIME" -gt "3599" ] && [ "$ELAPSED_TIME" -lt "86400" ];then
 			ELAPSED_TIME=$(echo "$ELAPSED_TIME/3600"|bc -l|sed 's/...................$//')
-			kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+			kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
 				--passivepopup="Download completed ${FILENAME} [$FORMAT] in ${ELAPSED_TIME}h"
 		elif [ "$ELAPSED_TIME" -gt "86399" ]; then
 			ELAPSED_TIME=$(echo "$ELAPSED_TIME/86400"|bc -l|sed 's/...................$//')
-			kdialog --icon=ks-youtube-download-video --title="Download YouTube Video" \
+			kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
 				--passivepopup="Download completed ${FILENAME} [$FORMAT] in ${ELAPSED_TIME}d"
 		fi
 	fi
+}
+
+downloading_audio() {
+	AQ=$(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+			--radiolist="Select Audio Quality" $(yt-dlp -F -- $VCODE|& grep -w "audio only"|grep -vE "m3u8|WARNING|webm" \
+			|awk -F " " '{print $1,$3$6$7$6$2$16,"off"}'))
+	EXIT=$?
+	if_cancel_exit
+
+	qdbus6 $DBUSREF setLabelText "Downloading audio…"
+	cd $DESTINATION
+	INIT_TIME=$(date +%s)
+	COUNT="0"
+	for VID in $VCODE;do
+		COUNT=$((++COUNT))
+		FILENAME="$(yt-dlp -e http://www.youtube.com/watch?v=$VID)"
+		FORMAT="$(echo $AQ|awk -F " " '{print $1}')"
+		downloading
+		BEGIN_TIME=$(date +%s)
+		LOG=$(mktemp)
+		YTDLP="yt-dlp -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\).%\(ext\)s" \
+			-f $FORMAT -c -i -R infinite --newline --progress --embed-chapters --windows-filenames --restrict-filenames \
+			-r $RATE_LIMIT http://www.youtube.com/watch?v=$VID"
+		$YTDLP > $LOG &
+		YTDLPID=$!
+		EXIT=$?
+		ytdlp_error
+		progressbar_percent
+		rm $LOG
+		FINAL_TIME=$(date +%s)
+		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+		finished
+	done
+}
+
+downloading_video() {
+	VR=$(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+			--radiolist="Select Video Resolution" $(yt-dlp -F -- $VCODE \
+			|& grep -w "video only"|grep -vE "WARNING|webm"|grep -E "144|240|360|480|720|1080|1440|2160|4320" \
+			|awk -F " " '{print $3,$3$5$6,$7$5$2,"off"}'|sort -nuk1,1|sed -e 's/~ /~/g' -e 's/KiB.*k/KiB/g' -e 's/MiB.*k/MiB/g'))
+	EXIT=$?
+	if_cancel_exit
+
+	checking_audio_availability
+	AUDIO_LANG=[language=$(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+			--radiolist="Select Audio Language" $(yt-dlp -F -- $VCODE|& grep -w "audio only"|grep -vE "WARNING|drc"|grep -w m4a|awk -F " " '{print $16,$16$6$17$6$14$6$7$6$2,"off"}'|sed -e 's/,//g' -e 's/\[//g' -e 's/\]//g'))]
+	EXIT=$?
+	if_cancel_exit
+	AUDIO_LANG=$(echo "${AUDIO_LANG}"|grep -vE "default|medium")
+
+#	checking_subtitle_availability
+#	SUB_LANG="--embed-subs --sub-langs $(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+#			--radiolist="Select Subtitle Language" $(yt-dlp --list-subs -- $VCODE|sed -ne '/Available subtitles for/,$p'|grep -vE "Available|Language"|awk -F " " '{print $1,$2,"off"}'))"
+#	EXIT=$?
+#	if_cancel_exit
+#	SUB_LANG="$(echo "${SUB_LANG}"|grep -vE "default")"
+
+	qdbus6 $DBUSREF setLabelText "Downloading video…"
+	cd $DESTINATION
+	INIT_TIME=$(date +%s)
+	COUNT="0"
+	for VID in $VCODE;do
+		COUNT=$((++COUNT))
+		FILENAME="$(yt-dlp -e http://www.youtube.com/watch?v=$VID)"
+		FH="$(echo $VR|awk -Fx '{print $2}')"
+		FORMAT="${FH}p"
+		downloading
+		BEGIN_TIME=$(date +%s)
+		LOG=$(mktemp)
+		YTDLP="yt-dlp -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_[${FORMAT}].%\(ext\)s" \
+			-f bv[height=${FH}]+ba${AUDIO_LANG} \
+			-c -i -R infinite --newline --progress --embed-chapters --windows-filenames --restrict-filenames \
+			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
+		$YTDLP > $LOG &
+		YTDLPID=$!
+		EXIT=$?
+		ytdlp_error
+		progressbar_percent
+		rm $LOG
+		FINAL_TIME=$(date +%s)
+		ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
+		finished
+	done
 }
 
 ##############################
@@ -185,21 +269,21 @@ else
 fi
 
 mkdir -p $HOME/.kde-services
-touch $HOME/.kde-services/youtube-video-codes
+touch $HOME/.kde-services/youtube-media-codes
 touch $HOME/.kde-services/youtube-download-rate-limit
-rm -f !_YouTube-Video-Code.err
+rm -f !_YouTube-Media-Code.err
 
-VCODE=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--inputbox="Enter YouTube video code(s) separated by whitespace. By example in this URL: https://www.youtube.com/watch?v=DY-_o8z2ZFQ, the code is: DY-_o8z2ZFQ" -- "$(cat $HOME/.kde-services/youtube-video-codes)" 2>/dev/null)
+VCODE=$(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+		--inputbox="Enter YouTube media code(s) separated by whitespace. By example in this URL: https://www.youtube.com/watch?v=DY-_o8z2ZFQ, the code is: DY-_o8z2ZFQ" -- "$(cat $HOME/.kde-services/youtube-media-codes)" 2>/dev/null)
 EXIT=$?
 if_cancel_exit
-echo $VCODE > $HOME/.kde-services/youtube-video-codes
+echo $VCODE > $HOME/.kde-services/youtube-media-codes
 
-DESTINATION=$(kdialog --icon=ks-youtube-download-video --title="Destination YouTube Video(s)" --getexistingdirectory "$DIR" 2>/dev/null)
+DESTINATION=$(kdialog --icon=ks-youtube-download-video --title="Destination YouTube Media" --getexistingdirectory "$DIR" 2>/dev/null)
 EXIT=$?
 if_cancel_exit
 
-RATE_LIMIT=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
+RATE_LIMIT=$(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
 		--inputbox="Enter download rate limit, example: 50K (= 50Kbps) or 5.5M (= 5.5Mbps)." $(cat $HOME/.kde-services/youtube-download-rate-limit) 2>/dev/null)
 EXIT=$?
 if_cancel_exit
@@ -207,76 +291,47 @@ echo $RATE_LIMIT > $HOME/.kde-services/youtube-download-rate-limit
 
 progressbar_start
 
-VR=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-			--radiolist="Select Video Resolution" $(yt-dlp -F -- $VCODE \
-			|& grep -w "video only"|grep -vE "WARNING|webm"|grep -E "144|240|360|480|720|1080|1440|2160|4320" \
-			|awk -F " " '{print $3,$3$5$6,$7$5$2,"off"}'|sort -nuk1,1|sed -e 's/~ /~/g' -e 's/KiB.*k/KiB/g' -e 's/MiB.*k/MiB/g'))
+CHOICE=$(kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+    --radiolist "Select The Type Of Download" \
+    audio "Download audio only" on \
+    video "Download full video" off 2>/dev/null)
+
 EXIT=$?
 if_cancel_exit
 
-#checking_audio_availability
-#AUDIO_LANG=[language=$(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-#		--radiolist="Select Audio Language" default Default on $(yt-dlp -F -- $VCODE|& grep -w "audio only"|grep -vE "WARNING|drc"|grep -w m4a|awk -F " " '{print $16,$16$6$17$6$14$6$7$6$2,"off"}'|sed -e 's/,//g' -e 's/\[//g' -e 's/\]//g'))]
-#EXIT=$?
-#if_cancel_exit
-#AUDIO_LANG=$(echo "${AUDIO_LANG}"|grep -vE "default|medium")
-
-#checking_subtitle_availability
-#SUB_LANG="--embed-subs --sub-langs $(kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-#		--radiolist="Select Subtitle Language" default Default on $(yt-dlp --list-subs -- $VCODE|sed -ne '/Available subtitles for/,$p'|grep -vE "Available|Language"|awk -F " " '{print $1,$2,"off"}'))"
-#EXIT=$?
-#if_cancel_exit
-#SUB_LANG="$(echo "${SUB_LANG}"|grep -vE "default")"
-
-qdbus6 $DBUSREF setLabelText "Downloading video…"
-cd $DESTINATION
-INIT_TIME=$(date +%s)
-COUNT="0"
-for VID in $VCODE;do
-	COUNT=$((++COUNT))
-	FILENAME="$(yt-dlp -e http://www.youtube.com/watch?v=$VID)"
-	FH="$(echo $VR|awk -Fx '{print $2}')"
-	FORMAT="${FH}p"
-	downloading_video
-	BEGIN_TIME=$(date +%s)
-	LOG=$(mktemp)
-	YTDLP="yt-dlp -o "%\(upload_date\)s_%\(title\)s_\(%\(id\)s\)_[${FORMAT}].%\(ext\)s" \
-			-f bv[height=${FH}]+ba -c -i \
-			-R infinite --newline --progress --embed-chapters --windows-filenames --restrict-filenames \
-			-r $RATE_LIMIT --merge-output-format mp4 http://www.youtube.com/watch?v=$VID"
-	$YTDLP > $LOG &
-	YTDLPID=$!
-	EXIT=$?
-	ytdlp_error
-	progressbar_percent
-	rm $LOG
-	FINAL_TIME=$(date +%s)
-	ELAPSED_TIME=$((FINAL_TIME-BEGIN_TIME))
-	finished
-done
+case "$CHOICE" in
+    audio)
+	qdbus6 $DBUSREF setLabelText "Downloading audio…"
+        downloading_audio
+        ;;
+    video)
+	qdbus6 $DBUSREF setLabelText "Downloading video…"
+        downloading_video
+        ;;
+esac
 
 LAST_TIME=$(date +%s)
 TOTAL_TIME=$((LAST_TIME-INIT_TIME))
 progressbar_stop
 
 if [ "$TOTAL_TIME" -lt "60" ];then
-	kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--msgbox="The YouTube video(s) download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}s" &
+	kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+		--msgbox="The YouTube media download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}s" &
 elif [ "$TOTAL_TIME" -gt "59" ] && [ "$TOTAL_TIME" -lt "3600" ];then
 	TOTAL_TIME=$(echo "$TOTAL_TIME/60"|bc -l|sed 's/...................$//')
-	kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--msgbox="The YouTube video(s) download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}m" &
+	kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+		--msgbox="The YouTube media download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}m" &
 elif [ "$TOTAL_TIME" -gt "3599" ] && [ "$TOTAL_TIME" -lt "86400" ];then
 	TOTAL_TIME=$(echo "$TOTAL_TIME/3600"|bc -l|sed 's/...................$//')
-	kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--msgbox="The YouTube video(s) download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}h" &
+	kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+		--msgbox="The YouTube media download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}h" &
 elif [ "$TOTAL_TIME" -gt "86399" ]; then
 	TOTAL_TIME=$(echo "$TOTAL_TIME/86400"|bc -l|sed 's/...................$//')
-	kdialog --icon=ks-youtube-download-video --title="YouTube Video Downloader" \
-		--msgbox="The YouTube video(s) download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}d" &
+	kdialog --icon=ks-youtube-download-video --title="YouTube Downloader" \
+		--msgbox="The YouTube media download to finished on ${DESTINATION##*/} directory.   Total time: ${TOTAL_TIME}d" &
 fi
 
-echo "The YouTube videos download finished" > /tmp/speak
+echo "The YouTube media download finished" > /tmp/speak
 text2wave -F 48000 -o /tmp/speak.wav /tmp/speak
 play /tmp/speak.wav
 rm -fr /tmp/speak*

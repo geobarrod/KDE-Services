@@ -54,7 +54,7 @@ Name[zh_CN]=图片转换器
 Name[x-test]=xxThe Converterxx
 
 [Desktop Action 128x128]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 128x128" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 128 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_128p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 128x128" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 128x128" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 128 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (128p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 128x128" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=128x128 (Icon)
 Name[de]=128x128 (Symbol)
@@ -70,7 +70,7 @@ Name[zh_CN]=128x128 (图标)
 Name[x-test]=xx128x128 (Icon)xx
 
 [Desktop Action 16x16]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 16x16" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 16 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_16p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 16x16" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 16x16" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 16 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (16p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 16x16" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=16x16 (Icon)
 Name[de]=16x16 (Symbol)
@@ -86,7 +86,7 @@ Name[zh_CN]=16x16 (图标)
 Name[x-test]=xx16x16 (Icon)xx
 
 [Desktop Action 256x256]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 256x256" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 256 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_256p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 256x256" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 256x256" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 256 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (256p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 256x256" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=256x256 (Icon)
 Name[de]=256x256 (Symbol)
@@ -102,7 +102,7 @@ Name[zh_CN]=256x256 (图标)
 Name[x-test]=xx256x256 (Icon)xx
 
 [Desktop Action 32x32]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 32x32" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 32 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_32p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 32x32" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 32x32" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 32 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (32p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 32x32" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=32x32 (Icon)
 Name[de]=32x32 (Symbol)
@@ -118,7 +118,7 @@ Name[zh_CN]=32x32 (图标)
 Name[x-test]=xx32x32 (Icon)xx
 
 [Desktop Action 48x48]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 48x48" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 48 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_48p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 48x48" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 48x48" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 48 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (48p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 48x48" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=48x48 (Icon)
 Name[de]=48x48 (Symbol)
@@ -134,7 +134,7 @@ Name[zh_CN]=48x48 (图标)
 Name[x-test]=xx48x48 (Icon)xx
 
 [Desktop Action 512x512]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 512x512" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 512 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_512p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 512x512" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 512x512" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 512 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (512p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 512x512" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=512x512 (Icon)
 Name[de]=512x512 (Symbol)
@@ -150,7 +150,7 @@ Name[zh_CN]=512x512 (图标)
 Name[x-test]=xx512x512 (Icon)xx
 
 [Desktop Action 64x64]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 64x64" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 64 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_64p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 64x64" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 64x64" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 64 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (64p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 64x64" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=64x64 (Icon)
 Name[de]=64x64 (Symbol)
@@ -166,139 +166,139 @@ Name[zh_CN]=64x64 (图标)
 Name[x-test]=xx64x64 (Icon)xx
 
 [Desktop Action cif]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 352x288" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 352 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_352p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 352x288" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 352x288" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 352 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (352p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 352x288" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=352x288 (CIF)
 Name[x-test]=xx352x288 (CIF)xx
 
 [Desktop Action hsxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 5120x4096" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 5120 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_5120p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 5120x4096" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 5120x4096" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 5120 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (5120p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 5120x4096" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=5120x4096 (HSXGA)
 Name[x-test]=xx5120x4096 (HSXGA)xx
 
 [Desktop Action qsxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 2560x2048" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 2560 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_2560p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 2560x2048" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 2560x2048" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 2560 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (2560p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 2560x2048" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=2560x2048 (QSXGA)
 Name[x-test]=xx2560x2048 (QSXGA)xx
 
 [Desktop Action qvga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 320x240" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 320 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_320p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 320x240" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 320x240" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 320 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (320p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 320x240" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=320x240 (QVGA)
 Name[x-test]=xx320x240 (QVGA)xx
 
 [Desktop Action 2k]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 2048x1080" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 2048 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_2048p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 2048x1080" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 2048x1080" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 2048 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (2048p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 2048x1080" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=2048x1080 (2K)
 Name[x-test]=xx2048x1080 (2K)xx
 
 [Desktop Action svga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 800x600" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 800 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_800p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 800x600" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 800x600" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 800 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (800p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 800x600" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=800x600 (SVGA)
 Name[x-test]=xx800x600 (SVGA)xx
 
 [Desktop Action sxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1280x1024" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 1280 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_1280p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1280x1024" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1280x1024" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 1280 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (1280p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1280x1024" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=1280x1024 (SXGA)
 Name[x-test]=xx1280x1024 (SXGA)xx
 
 [Desktop Action uxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1600x1200" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 1600 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_1600p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1600x1200" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1600x1200" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 1600 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (1600p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1600x1200" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=1600x1200 (UXGA)
 Name[x-test]=xx1600x1200 (UXGA)xx
 
 [Desktop Action vga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 640x480" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 640 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_640p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 640x480" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 640x480" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 640 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (640p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 640x480" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=640x480 (VGA)
 Name[x-test]=xx640x480 (VGA)xx
 
 [Desktop Action whsxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 6400x4096" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 6400 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_6400p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 6400x4096" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 6400x4096" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 6400 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (6400p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 6400x4096" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=6400x4096 (WHSXGA)
 Name[x-test]=xx6400x4096 (WHSXGA)xx
 
 [Desktop Action whuxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 7680x4800" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 7680 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_7680p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 7680x4800" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 7680x4800" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 7680 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (7680p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 7680x4800" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=7680x4800 (WHUXGA)
 Name[x-test]=xx7680x4800 (WHUXGA)xx
 
 [Desktop Action wqsxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 3200x2048" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 3200 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_3200p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 3200x2048" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 3200x2048" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 3200 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (3200p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 3200x2048" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=3200x2048 (WQSXGA)
 Name[x-test]=xx3200x2048 (WQSXGA)xx
 
 [Desktop Action wquxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 3840x2400" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 3840 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_3840p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 3840x2400" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 3840x2400" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 3840 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (3840p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 3840x2400" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=3840x2400 (WQUXGA)
 Name[x-test]=xx3840x2400 (WQUXGA)xx
 
 [Desktop Action wuxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1920x1200" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 1920 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_1920p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1920x1200" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1920x1200" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 1920 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (1920p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1920x1200" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=1920x1200 (WUXGA)
 Name[x-test]=xx1920x1200 (WUXGA)xx
 
 [Desktop Action wxga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1366x768" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 1366 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_1366p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1366x768" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1366x768" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 1366 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (1366p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1366x768" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=1366x768 (WXGA)
 Name[x-test]=xx1366x768 (WXGA)xx
 
 [Desktop Action xga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1024x768" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 1024 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_1024p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1024x768" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1024x768" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 1024 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (1024p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1024x768" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=1024x768 (XGA)
 Name[x-test]=xx1024x768 (XGA)xx
 
 [Desktop Action hvga]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 480x320" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 480 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_480p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 480x320" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 480x320" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 480 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (480p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 480x320" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=480x320 (HVGA)
 Name[x-test]=xx480x320 (HVGA)xx
 
 [Desktop Action ntsc]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 720x480" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 720 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_720p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 720x480" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 720x480" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 720 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (720p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 720x480" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=720x480 (NTSC)
 Name[x-test]=xx720x480 (NTSC)xx
 
 [Desktop Action qhd]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 960x540" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 960 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_960p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 960x540" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 960x540" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 960 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (960p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 960x540" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=960x540 (QHD)
 Name[x-test]=xx960x540 (QHD)xx
 
 [Desktop Action 4k]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 4096x2160" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 4096 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_4096p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 4096x2160" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 4096x2160" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 4096 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (4096p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 4096x2160" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=4096x2160 (4K)
 Name[x-test]=xx4096x2160 (4K)xx
 
 [Desktop Action 8k]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 8192x4320" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 8192 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_8192p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 8192x4320" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 8192x4320" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 8192 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (8192p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 8192x4320" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=8192x4320 (8K)
 Name[x-test]=xx8192x4320 (8K)xx
 
 [Desktop Action wxga2]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1440x900" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 1440 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_1440p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1440x900" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 1440x900" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 1440 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (1440p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 1440x900" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=1440x900 (WXGA)
 Name[x-test]=xx1440x900 (WXGA)xx
 
 [Desktop Action passport]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 532x532" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 532 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_532p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 532x532" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 532x532" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 532 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (532p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 532x532" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=532x532 (Passport)
 Name[de]=532x532 (Pass)
@@ -314,7 +314,7 @@ Name[zh_CN]=532x532 (护照)
 Name[x-test]=xx532x532 (Passport)xx
 
 [Desktop Action visa]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 414x532" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 414 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_414p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 414x532" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 414x532" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 414 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (414p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 414x532" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=414x532 (visa)
 Name[de]=414x532 (visum)
@@ -330,7 +330,7 @@ Name[zh_CN]=414x532 (信用卡)
 Name[x-test]=xx414x532 (visa)xx
 
 [Desktop Action carnet]
-Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 300x300" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick -resize 300 "$file" "$(echo ${file##*/}|sed "s/.${file##/*.}//")_300p.${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 300x300" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
+Exec=which magick; if [ "$?" != "0" ];then kdialog --icon=ks-error --title="Image Resizer" --passivepopup="[Error] Please install ImageMagick and try again."; exit 1; else PB_PIDFILE="$(mktemp)"; kdialog --icon=ks-resize-image --title="Image Resizer - 300x300" --print-winid --progressbar "$(date) - Processing..." /ProcessDialog|grep -o '[[:digit:]]*' > $PB_PIDFILE; for file in %F;do cd ${file%/*}; magick "$file" -resize 300 "$(echo ${file##*/}|sed "s/.${file##/*.}//") (300p).${file##/*.}"; kdialog --icon=ks-resize-image --title="Image Resizer - 300x300" --passivepopup="[Finished]    ${file##*/}";done; kill $(cat $PB_PIDFILE); rm $PB_PIDFILE;fi
 Icon=ks-resize-image
 Name=300x300 (ID card)
 Name[de]=300x300 (Personalausweis)
